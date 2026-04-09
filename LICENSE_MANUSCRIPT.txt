@@ -1,0 +1,6 @@
+© 2026 Seth Tenenbaum
+
+Manuscript text and figures are licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0).
+Full license: https://creativecommons.org/licenses/by/4.0/
+
+Applies to: manuscript/paper_a_primary_unesco.tex, manuscript/paper_a_primary_unesco.pdf, and all files in manuscript/figures/.

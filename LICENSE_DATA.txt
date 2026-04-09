@@ -1,0 +1,4 @@
+UNESCO World Heritage Centre XML (included here): © UNESCO.
+Redistributed in this repository for non-commercial research purposes; users must comply with UNESCO terms: https://whc.unesco.org/en/syndication/
+
+Wikidata extracts included here are released under CC0 1.0 Universal.

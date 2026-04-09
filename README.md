@@ -106,6 +106,9 @@ gerizim-paper-a/
 ├── requirements.txt          # Python dependencies
 ├── Makefile                  # Reproduce all results with `make all`
 ├── LICENSE                   # MIT License (code)
+├── LICENSE_MANUSCRIPT.txt    # CC BY 4.0 (manuscript text and figures)
+├── LICENSE_DATA.txt          # Data licensing notes (UNESCO, Wikidata)
+├── LICENSE_NOTES.md          # Detailed licensing breakdown
 └── README.md                 # This file
 ```
 
@@ -208,10 +211,14 @@ manuscripts are complete.
 
 ## License
 
+© 2026 Seth Tenenbaum.
+
 - **Code:** MIT License (see `LICENSE`)
-- **Manuscript text and figures:** CC BY 4.0
+- **Manuscript text and figures:** CC BY 4.0 (see `LICENSE_MANUSCRIPT.txt`)
 - **Data:** UNESCO XML is © UNESCO; redistributed for research under fair use.
-  Wikidata extracts are CC0.
+  Wikidata extracts are CC0. (see `LICENSE_DATA.txt`)
+
+See `LICENSE_NOTES.md` for the full per-file breakdown.
 
 ## Citation
 
