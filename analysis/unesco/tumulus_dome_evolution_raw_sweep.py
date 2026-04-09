@@ -1,0 +1,403 @@
+"""
+tumulus_dome_evolution_raw_sweep.py
+=====================================
+Raw positive keyword sweep for the hemispherical mound-evolution corpus.
+
+Like tumulus_dome_evolution_test.py (Test 2b) but performs NO context
+validation and NO disambiguation.  Any Cultural/Mixed site whose full text
+(name + short_description + extended OUV text) contains one or more of the
+mound/stupa/dome FORM_KEYWORDS is included outright.
+
+PURPOSE
+-------
+Provides a version of the evolution test that is maximally resistant to
+accusations of exploratory bias from the context-filtering step.
+
+  - Raw sweep is the primary confirmatory version (Test 2b).
+  - Context-validated version (tumulus_dome_evolution_test.py) is retained as
+    an Exploratory cross-check: it should yield a similar or stronger signal
+    because context-filtering removes false-positive keyword hits.
+
+USAGE
+-----
+    cd /path/to/gerizim-analysis
+    python3 analysis/unesco/tumulus_dome_evolution_raw_sweep.py
+    python3 analysis/unesco/tumulus_dome_evolution_raw_sweep.py --audit
+
+OUTPUT
+------
+    Console table with per-stage statistics and binomial tests for the raw
+    (over-inclusive) population.
+"""
+
+import re
+import sys
+import numpy as np
+from pathlib import Path
+from scipy.stats import binomtest, fisher_exact, chisquare
+
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from data.unesco_corpus import load_corpus
+from lib.beru import (
+    GERIZIM, BERU, TIER_APLUS, TIER_A_MAX,
+    P_NULL_AP, P_NULL_A,
+    deviation as _beru_dev, tier_label, is_aplus, is_a_or_better,
+)
+from lib.stats import significance_label as sig
+
+# ── Keyword lists (mirror tumulus_dome_evolution_test.py exactly) ─────────────
+# Mound family — always unambiguous in the mound-evolution context
+MOUND_KEYWORDS = ["tumulus", "tumuli", "barrow", "barrows", "kofun", "mound"]
+
+# Stupa family — unambiguous monumental spherical architecture
+STUPA_KEYWORDS = ["stupa", "stupas", "dagoba", "chorten"]
+
+# Dome family — includes words that are ambiguous in isolation; we skip
+# context-checking here intentionally (raw sweep).
+DOME_KEYWORDS = ["tholos", "dome", "domed", "domes", "spherical"]
+
+ALL_KEYWORDS = MOUND_KEYWORDS + STUPA_KEYWORDS + DOME_KEYWORDS
+
+# Compile word-boundary regexes
+KEYWORD_RES = {
+    kw: re.compile(r"\b" + re.escape(kw) + r"\b", re.IGNORECASE)
+    for kw in ALL_KEYWORDS
+}
+
+# ── Stage classification ──────────────────────────────────────────────────────
+def classify_stage(matched_kws: list) -> set:
+    stages = set()
+    for kw in matched_kws:
+        if kw in MOUND_KEYWORDS:
+            stages.add("mound")
+        elif kw in STUPA_KEYWORDS:
+            stages.add("stupa")
+        elif kw in DOME_KEYWORDS:
+            stages.add("dome")
+    return stages
+
+# ── Date extraction (same regexes as validated version) ──────────────────────
+BCE_RE           = re.compile(r"(\d{3,4})\s*(?:BCE|BC|B\.C\.E?\.?)", re.IGNORECASE)
+CE_RE            = re.compile(r"(\d{1,4})\s*(?:CE|AD|A\.D\.)",        re.IGNORECASE)
+CENTURY_BCE_RE   = re.compile(r"(\d{1,2})(?:st|nd|rd|th)\s*(?:century|c\.?)\s*(?:BCE|BC)", re.IGNORECASE)
+CENTURY_CE_RE    = re.compile(r"(\d{1,2})(?:st|nd|rd|th)\s*(?:century|c\.?)\s*(?:CE|AD)",  re.IGNORECASE)
+MILLENNIUM_BCE_RE = re.compile(r"(\d{1,2})(?:st|nd|rd|th)\s*millennium\s*(?:BCE|BC)", re.IGNORECASE)
+
+def _ord(n: str) -> str:
+    return {"1": "st", "2": "nd", "3": "rd"}.get(n, "th")
+
+def extract_earliest_date(text: str):
+    dates = []
+    for m in BCE_RE.finditer(text):
+        dates.append((-int(m.group(1)), f"{m.group(1)} BCE"))
+    for m in MILLENNIUM_BCE_RE.finditer(text):
+        n = m.group(1)
+        dates.append((-int(n) * 1000, f"{n}{_ord(n)} millennium BCE"))
+    for m in CENTURY_BCE_RE.finditer(text):
+        n = m.group(1)
+        dates.append((-int(n) * 100, f"{n}{_ord(n)} c. BCE"))
+    for m in CE_RE.finditer(text):
+        yr = int(m.group(1))
+        if yr < 50:
+            continue
+        dates.append((yr, f"{yr} CE"))
+    for m in CENTURY_CE_RE.finditer(text):
+        n = m.group(1)
+        dates.append((int(n) * 100, f"{n}{_ord(n)} c. CE"))
+    if dates:
+        dates.sort(key=lambda x: x[0])
+        return dates[0]
+    return None, None
+
+# ── Load corpus — raw sweep, no validation ────────────────────────────────────
+corpus = load_corpus()
+
+selected   = []   # all raw matches
+dome_only  = []   # dome/stupa stage only (no mound kw)
+mound_only = []   # mound stage only (no dome/stupa kw)
+overlap    = []   # both mound and dome/stupa kw
+
+for site_obj in corpus:
+    if site_obj.category == "Natural":
+        continue
+    if not site_obj.has_coords:
+        continue
+
+    full = site_obj.full_text  # already lowercased
+
+    matched_kws = [kw for kw in ALL_KEYWORDS if KEYWORD_RES[kw].search(full)]
+    if not matched_kws:
+        continue
+
+    stages = classify_stage(matched_kws)
+    dev    = _beru_dev(site_obj.longitude)
+    tier   = tier_label(dev)
+    date_yr, date_label = extract_earliest_date(
+        (site_obj.short_description or "") + " " + (site_obj.extended_description or "")
+    )
+
+    entry = {
+        "name":       site_obj.site,
+        "lon":        site_obj.longitude,
+        "dev":        dev,
+        "dev_km":     dev * BERU * 111.0,
+        "tier":       tier,
+        "ap":         is_aplus(tier),
+        "stages":     stages,
+        "keywords":   matched_kws,
+        "date_yr":    date_yr,
+        "date_label": date_label,
+    }
+
+    selected.append(entry)
+    has_mound       = "mound" in stages
+    has_dome_stupa  = "dome" in stages or "stupa" in stages
+
+    if has_mound and has_dome_stupa:
+        overlap.append(entry)
+    elif has_mound:
+        mound_only.append(entry)
+    else:
+        dome_only.append(entry)
+
+# ── Stats ─────────────────────────────────────────────────────────────────────
+N    = len(selected)
+n_ap = sum(1 for e in selected if e["ap"])
+n_a  = sum(1 for e in selected if is_a_or_better(e["tier"]))
+n_b  = sum(1 for e in selected if e["tier"] == "B")
+n_c  = sum(1 for e in selected if e["tier"] == "C")
+
+bt_ap = binomtest(n_ap, N, P_NULL_AP, alternative="greater")
+bt_a  = binomtest(n_a,  N, P_NULL_A,  alternative="greater")
+
+enr_ap = (n_ap / N) / P_NULL_AP if N else 0
+enr_a  = (n_a  / N) / P_NULL_A  if N else 0
+
+obs_bins = [0] * 5
+for e in selected:
+    obs_bins[min(int(e["dev"] / 0.010), 4)] += 1
+_, chi_p = chisquare(obs_bins, f_exp=[N / 5.0] * 5)
+
+# Anchor sweep
+sweep  = np.arange(34.0, 37.001, 0.001)
+cnt_Ap = np.array([
+    sum(1 for e in selected
+        if abs(abs(e["lon"] - a) / BERU - round(abs(e["lon"] - a) / BERU * 10) / 10) <= TIER_APLUS)
+    for a in sweep
+])
+pctile = float(np.mean(cnt_Ap <= n_ap)) * 100
+
+# Stage sub-stats
+def stage_stats(entries, stage_name):
+    ns  = len(entries)
+    nap = sum(1 for e in entries if e["ap"])
+    na  = sum(1 for e in entries if is_a_or_better(e["tier"]))
+    p   = binomtest(nap, ns, P_NULL_AP, alternative="greater").pvalue if ns > 0 else 1.0
+    enr = (nap / ns) / P_NULL_AP if ns > 0 else 0
+    return ns, nap, na, p, enr
+
+# ── Print ─────────────────────────────────────────────────────────────────────
+SEP  = "=" * 100
+SEP2 = "─" * 100
+
+print()
+print(SEP)
+print("  UNESCO WHC — HEMISPHERICAL MOUND EVOLUTION  (RAW KEYWORD SWEEP, no context validation)")
+print("  Test 2b primary confirmatory version")
+print(f"  Keywords: mound={MOUND_KEYWORDS}  stupa={STUPA_KEYWORDS}  dome={DOME_KEYWORDS}")
+print(f"  Anchor: Gerizim {GERIZIM}°E  |  BERU = {BERU}°  |  "
+      f"Tier-A+ ≤ {TIER_APLUS} beru (≤ {TIER_APLUS*BERU*111:.0f} km)")
+print(f"  H₀: longitudes uniform w.r.t. 0.1-beru harmonics  |  H₁: rate > geometric null")
+print(f"  Population: N={N}  ({len(dome_only)} dome/stupa-only, "
+      f"{len(mound_only)} mound-only, {len(overlap)} overlap)")
+print(SEP)
+
+# ── Per-site table ────────────────────────────────────────────────────────────
+print()
+print(SEP2)
+print(f"  {'Site':<52}  {'Lon':>8}  {'Dev':>7}  {'km':>6}  T    Stages       Keywords")
+print(SEP2)
+for e in sorted(selected, key=lambda x: x["dev"]):
+    mark   = " ◀◀ A+" if e["ap"] else (" ◀ A" if e["tier"] == "A" else "")
+    stages = "+".join(sorted(e["stages"]))
+    kw_str = ", ".join(e["keywords"])[:38]
+    print(f"  {e['name']:<52}  {e['lon']:>8.4f}  {e['dev']:>7.5f}  "
+          f"{e['dev_km']:>6.1f}  {e['tier']}{mark:<7}  {stages:<12}  [{kw_str}]")
+
+# ── Combined stats ────────────────────────────────────────────────────────────
+print()
+print(SEP)
+print("  STATISTICAL RESULTS — COMBINED HEMISPHERICAL POPULATION (RAW)")
+print(SEP)
+print()
+print(f"  {'Metric':<45}  {'Obs':>5}  {'Exp(H₀)':>9}  {'Enrich':>7}  {'p':>8}  Sig")
+print(f"  {'-'*85}")
+print(f"  {'Tier-A+  (≤0.002 beru, ≤6.7 km)  ◀ PRIMARY':<45}  {n_ap:>5}  "
+      f"{N*P_NULL_AP:>9.2f}  {enr_ap:>6.2f}×  {bt_ap.pvalue:>8.4f}  {sig(bt_ap.pvalue)}")
+print(f"  {'Tier-A   (≤0.010 beru, ≤33 km)':<45}  {n_a:>5}  "
+      f"{N*P_NULL_A:>9.2f}  {enr_a:>6.2f}×  {bt_a.pvalue:>8.4f}  {sig(bt_a.pvalue)}")
+print(f"  {'Tier-B   (≤0.050 beru)':<45}  {n_b:>5}")
+print(f"  {'Tier-C   (>0.050 beru)':<45}  {n_c:>5}")
+print(f"  {'χ²-uniform (5 bins, df=4)':<45}  {'':>5}  {'':>9}  {'':>7}  {chi_p:>8.4f}  {sig(chi_p)}")
+print(f"  {'Anchor sweep percentile (34–37°E)':<45}  {n_ap:>5}  {'':>9}  {'':>7}  "
+      f"{'':>8}  {pctile:.0f}th pctile")
+
+# ── By evolutionary stage ─────────────────────────────────────────────────────
+print()
+print(SEP)
+print("  BY EVOLUTIONARY STAGE")
+print(SEP)
+print()
+print(f"  {'Stage':<35}  {'N':>5}  {'A+':>4}  {'A':>4}  {'Enrich':>7}  {'p (A+)':>8}  Sig")
+print(f"  {'-'*75}")
+
+for stage_name, stage_kws in [
+    ("Mound (tumulus/tumuli/barrow/kofun)", MOUND_KEYWORDS),
+    ("Stupa (stupa/stupas/dagoba/chorten)", STUPA_KEYWORDS),
+    ("Dome  (tholos/dome/domed/spherical)", DOME_KEYWORDS),
+]:
+    entries = [e for e in selected if any(kw in e["keywords"] for kw in stage_kws)]
+    ns, nap, na, p_s, enr = stage_stats(entries, stage_name)
+    rate_str = f"{100*nap/ns:.1f}%" if ns > 0 else "—"
+    print(f"  {stage_name:<35}  {ns:>5}  {nap:>4}  {na:>4}  {enr:>6.2f}×  {p_s:>8.4f}  {sig(p_s)}")
+
+# ── Incremental contribution of mound keywords ────────────────────────────────
+print()
+print(SEP)
+print("  INCREMENTAL CONTRIBUTION OF MOUND KEYWORDS")
+print(SEP)
+print()
+N_do = len(dome_only)
+N_mo = len(mound_only)
+N_ov = len(overlap)
+n_do_ap = sum(1 for e in dome_only  if e["ap"])
+n_mo_ap = sum(1 for e in mound_only if e["ap"])
+n_ov_ap = sum(1 for e in overlap    if e["ap"])
+
+print(f"  Dome/stupa-only (equivalent to Test 2 raw):  N={N_do:>4},  A+={n_do_ap}")
+print(f"  Mound-only (unique to evolution test):       N={N_mo:>4},  A+={n_mo_ap}")
+print(f"  Overlap (both mound + dome/stupa kw):        N={N_ov:>4},  A+={n_ov_ap}")
+print(f"  Combined total:                              N={N:>4},  A+={n_ap}")
+
+if N_mo > 0:
+    p_mo = binomtest(n_mo_ap, N_mo, P_NULL_AP, alternative="greater").pvalue
+    enr_mo = (n_mo_ap / N_mo) / P_NULL_AP
+    print(f"\n  Mound-only binomial: {n_mo_ap}/{N_mo} = {100*n_mo_ap/N_mo:.1f}%,  "
+          f"{enr_mo:.2f}× vs null,  p = {p_mo:.4f}  {sig(p_mo)}")
+
+if N_mo > 0 and N_do > 0:
+    t2_non_ap = N_do - n_do_ap
+    mo_non_ap = N_mo - n_mo_ap
+    _, p_fish = fisher_exact([[n_mo_ap, mo_non_ap], [n_do_ap, t2_non_ap]], alternative="two-sided")
+    print(f"  Fisher exact (mound-only vs dome-only A+ rate): p = {p_fish:.4f}  {sig(p_fish)}")
+
+# ── Tier-A+ hits ──────────────────────────────────────────────────────────────
+print()
+print(SEP)
+print(f"  ALL TIER-A+ HITS  ({n_ap})")
+print(SEP)
+print()
+for e in sorted([e for e in selected if e["ap"]], key=lambda x: x["dev"]):
+    stages = "+".join(sorted(e["stages"]))
+    kws    = ", ".join(e["keywords"])
+    date_s = e["date_label"] or "?"
+    print(f"  {e['dev_km']:>5.1f} km  {e['name']:<52}  [{stages:<11}]  kw={kws}  ~{date_s}")
+
+# ── Chronological breakdown ───────────────────────────────────────────────────
+print()
+print(SEP)
+print("  CHRONOLOGICAL BREAKDOWN")
+print(SEP)
+dated  = [(e, e["date_yr"]) for e in selected if e["date_yr"] is not None]
+eras   = [
+    ("Deep antiquity (pre-1000 BCE)",  lambda y: y < -1000),
+    ("Classical (1000 BCE – 1 CE)",    lambda y: -1000 <= y < 1),
+    ("Late antiquity (1–500 CE)",      lambda y: 1 <= y < 500),
+    ("Medieval (500–1500 CE)",         lambda y: 500 <= y < 1500),
+    ("Early modern (1500–1800 CE)",    lambda y: 1500 <= y < 1800),
+    ("Modern (post-1800 CE)",          lambda y: y >= 1800),
+]
+print()
+print(f"  {'Era':<35}  {'N':>4}  {'A+':>4}  {'Rate':>6}  Stages")
+print(f"  {'─'*70}")
+for era_name, era_fn in eras:
+    ee     = [e for e, y in dated if era_fn(y)]
+    n_e    = len(ee)
+    n_e_ap = sum(1 for e in ee if e["ap"])
+    stg    = ", ".join(sorted({s for e in ee for s in e["stages"]}))
+    rate   = f"{100*n_e_ap/n_e:.1f}%" if n_e > 0 else "—"
+    print(f"  {era_name:<35}  {n_e:>4}  {n_e_ap:>4}  {rate:>6}  {stg}")
+
+# ── Comparison vs context-validated version ───────────────────────────────────
+print()
+print(SEP)
+print("  COMPARISON: RAW SWEEP (Test 2b primary) vs CONTEXT-VALIDATED (Exploratory)")
+print(SEP)
+print()
+print(f"  {'':35}  {'Raw sweep':>12}  {'Validated':>12}")
+print(f"  {'─'*62}")
+print(f"  {'N (population)':<35}  {N:>12}  {'104':>12}")
+print(f"  {'n A+ hits':<35}  {n_ap:>12}  {'13':>12}")
+print(f"  {'A+ rate':<35}  {100*n_ap/N:>11.1f}%  {'12.5%':>12}")
+print(f"  {'Binomial p (A+)':<35}  {bt_ap.pvalue:>12.4f}  {'0.0003':>12}")
+print(f"  {'Enrichment vs 4% null':<35}  {enr_ap:>11.2f}×  {'3.12×':>12}")
+print(f"  {'Anchor pctile (A+)':<35}  {pctile:>11.0f}th  ")
+
+# ── Audit ─────────────────────────────────────────────────────────────────────
+if "--audit" in sys.argv:
+    print()
+    print(SEP)
+    print(f"  FULL AUDIT — ALL {N} SITES")
+    print(SEP)
+    print()
+    for e in sorted(selected, key=lambda x: x["dev"]):
+        stages = "+".join(sorted(e["stages"]))
+        kws    = ", ".join(e["keywords"])
+        date_s = e["date_label"] or "?"
+        print(f"  [{e['tier']:>3}] {e['dev_km']:>6.1f} km  {e['name']:<50}  "
+              f"[{stages:<12}]  kw={kws}  ~{date_s}")
+
+# ── LaTeX macros ──────────────────────────────────────────────────────────────
+print()
+print(SEP)
+print("  LATEX MACROS  (raw sweep — Test 2b primary)")
+print(SEP)
+print()
+
+n_mound_stage    = sum(1 for e in selected if "mound" in e["stages"])
+n_stupa_stage    = sum(1 for e in selected if "stupa" in e["stages"])
+n_dome_stage     = sum(1 for e in selected if "dome"  in e["stages"])
+n_mound_stage_ap = sum(1 for e in selected if "mound" in e["stages"] and e["ap"])
+n_stupa_stage_ap = sum(1 for e in selected if "stupa" in e["stages"] and e["ap"])
+n_dome_stage_ap  = sum(1 for e in selected if "dome"  in e["stages"] and e["ap"])
+
+p_mound_stage = binomtest(n_mound_stage_ap, n_mound_stage, P_NULL_AP, "greater").pvalue if n_mound_stage else 1.0
+p_stupa_stage = binomtest(n_stupa_stage_ap, n_stupa_stage, P_NULL_AP, "greater").pvalue if n_stupa_stage else 1.0
+p_dome_stage  = binomtest(n_dome_stage_ap,  n_dome_stage,  P_NULL_AP, "greater").pvalue if n_dome_stage  else 1.0
+
+macros = {
+    "NevoTotal":       N,
+    "NevoAp":          n_ap,
+    "evoApRate":       f"{100*n_ap/N:.1f}",
+    "evoEnrichAp":     f"{enr_ap:.2f}",
+    "pEvoAp":          f"{bt_ap.pvalue:.4f}",
+    "NevoA":           n_a,
+    "evoARate":        f"{100*n_a/N:.1f}",
+    "evoEnrichA":      f"{enr_a:.2f}",
+    "pEvoA":           f"{bt_a.pvalue:.4f}",
+    "NevoMound":       n_mound_stage,
+    "NevoMoundAp":     n_mound_stage_ap,
+    "pEvoMound":       f"{p_mound_stage:.4f}",
+    "NevoStupa":       n_stupa_stage,
+    "NevoStupaAp":     n_stupa_stage_ap,
+    "pEvoStupa":       f"{p_stupa_stage:.4f}",
+    "NevoDome":        n_dome_stage,
+    "NevoDomeAp":      n_dome_stage_ap,
+    "pEvoDome":        f"{p_dome_stage:.4f}",
+    "NevoMoundOnly":   len(mound_only),
+    "NevoMoundOnlyAp": n_mo_ap,
+    "NevoOverlap":     len(overlap),
+}
+
+for k, v in macros.items():
+    print(f"  \\newcommand{{\\{k}}}{{{v}}}")

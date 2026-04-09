@@ -1,0 +1,268 @@
+{
+  "anchors": {
+    "gerizim": {
+      "longitude": 35.269,
+      "label": "Mount Gerizim",
+      "note": "UNESCO tentative list (ref. 5706), DMS E35 16 08 = 35.2689°E, rounded to 35.269°E"
+    },
+    "jerusalem": {
+      "longitude": 35.2317,
+      "label": "Jerusalem (Old City)",
+      "note": "UNESCO XML coordinate — Temple Mount, 35.2317°E"
+    },
+    "megiddo": {
+      "longitude": 35.184,
+      "label": "Tel Megiddo",
+      "note": "Bronze Age Canaanite city, 35.184°E"
+    },
+    "meru": {
+      "longitude": 36.75,
+      "label": "Mount Meru",
+      "note": "Axis mundi of Hindu-Buddhist cosmography; Mt Meru, Tanzania, 36.75°E. Grid spacing 3° = 0.1 beru, same as Gerizim grid."
+    }
+  },
+  "notable_anchors": {
+    "note": "Historical/archaeological anchors used in global comparison tables. All coordinates in decimal degrees East.",
+    "Gerizim (35.269°E)":    35.269,
+    "Jerusalem (35.2317°E)":  35.2317,
+    "Mecca (39.826°E)":      39.826,
+    "Giza (31.134°E)":       31.134,
+    "Babylon (44.421°E)":    44.421,
+    "Persepolis (52.890°E)": 52.890,
+    "Greenwich (0.000°E)":    0.000,
+    "Ujjain (75.784°E)":     75.784,
+    "Baghdad (44.366°E)":    44.366,
+    "Damascus (36.335°E)":   36.335,
+    "Rome (12.453°E)":       12.453,
+    "Athens (23.726°E)":     23.726,
+    "Alexandria (29.918°E)": 29.918,
+    "Angkor Wat (103.867°E)":103.867,
+    "Beijing (116.397°E)":   116.397,
+    "Varanasi (82.997°E)":   82.997
+  },
+  "levant_landmarks": {
+    "note": "Key Levant sites used in local anchor-sweep comparison (34–37°E corridor).",
+    "Gerizim":       35.269,
+    "Jerusalem":     35.2317,
+    "Tel Megiddo":   35.184,
+    "Nablus":        35.261,
+    "Mount Ebal":    35.280,
+    "Bethlehem":     35.207,
+    "Jericho":       35.444,
+    "Dead Sea center":35.515,
+    "Mount Nebo":    35.725,
+    "Damascus":      36.335,
+    "Tyre":          35.196
+  },
+  "units": {
+    "beru": {
+      "degrees": 30.0,
+      "metres": 10692.0,
+      "note": "1 beru = 30° of arc, attested in MUL.APIN (c. 1000 BCE). Linear value from Powell (1990) RlA Vol.7."
+    },
+    "nindanu": {
+      "metres": 5.94,
+      "per_beru": 1800,
+      "note": "1 nindānu = 1/1800 beru = 5.94 m. Powell (1990)."
+    },
+    "geodetic_dhanus": {
+      "metres": 46.2494,
+      "derivation": "Gerizim–Lumbini great-circle arc / 99950 = 46.2494 m",
+      "thom_megalithic_yard_multiple": 56,
+      "thom_my_metres": 0.8296,
+      "thom_my_56x_metres": 46.4576,
+      "thom_my_deviation_pct": 0.45,
+      "note": "56 × Thom Megalithic Yard = 46.4576 m; Geodetic Dhanus = 46.2494 m; deviation 0.45%"
+    },
+    "megalithic_yard": {
+      "metres": 0.8296,
+      "source": "Thom (1967) Megalithic Sites in Britain",
+      "note": "Thom MY = 0.8296 m (2.72 ft). Unit recovered statistically from stone circle diameters."
+    },
+    "royal_cubit": {
+      "metres": 0.5236,
+      "note": "Egyptian Royal Cubit = 0.5236 m (28 fingers of 18.7 mm each)"
+    },
+    "harmonic_step": 0.1,
+    "km_per_degree": 111.0,
+    "earth_radius_km": 6371.0
+  },
+  "tiers": {
+    "A++": {
+      "max_deviation_beru": 0.0002,
+      "approx_km": 0.67,
+      "note": "Extremely close to a harmonic"
+    },
+    "A+": {
+      "max_deviation_beru": 0.002,
+      "approx_km": 6.7,
+      "note": "Primary threshold for significance testing"
+    },
+    "A": {
+      "max_deviation_beru": 0.010,
+      "approx_km": 33,
+      "note": "Secondary threshold"
+    },
+    "B": {
+      "max_deviation_beru": 0.050,
+      "approx_km": 167,
+      "note": "Baseline window for null rate calculation"
+    }
+  },
+  "null_rates": {
+    "note": "Geometric null rates: tier width / baseline window width",
+    "tier_aplus": 0.04,
+    "tier_a": 0.20
+  },
+  "arc_test": {
+    "note": "Parameters for Framework 2 / 4 / 5 great-circle arc tests (PART XX).",      "gerizim_lat": 32.212,
+      "gerizim_lon": 35.269,
+    "tolerance_standard_beru": 0.01,
+    "tolerance_ultra_beru": 0.002,
+    "null_rate_standard": 0.02,
+    "null_rate_ultra": 0.004,
+    "min_distance_km": 200,
+    "note_tolerance": "±0.01 beru absolute = ±107 m arc window (P₀=0.02). Derived from Powell rod ±0.3% mfg tolerance."
+  },
+  "quantum_unit_test": {
+    "note": "Parameters for Framework 3 Thom-style quantum unit test.",
+    "trial_unit_min_m": 30.0,
+    "trial_unit_max_m": 60.0,
+    "trial_unit_step_m": 0.01,
+    "residual_bin_width": 0.025,
+    "hit_bin_max": 0.025,
+    "note_method": "r = (dim / unit) mod 0.5 mapped to [0,0.25]. KS test against uniform null."
+  },
+  "anchor_sweep": {
+    "levant": {
+      "start_longitude": 34.0,
+      "end_longitude": 37.0,
+      "step": 0.001,
+      "local_window_steps": 20,
+      "note": "Levant sweep range for anchor sensitivity analysis"
+    },
+    "global": {
+      "start_longitude": 0.0,
+      "end_longitude": 360.0,
+      "step": 0.01,
+      "note": "Full-circle sweep for global anchor uniqueness audit"
+    }
+  },
+  "simulation": {
+    "n_permutations": 100000,
+    "random_seed": 42,
+    "kde_bandwidth": 0.05,
+    "note": "Parameters for permutation / bootstrap / KDE null models"
+  },
+  "temporal_cohorts": {
+    "founding_canon": [1978, 1984],
+    "pre_2000": [1978, 1999],
+    "post_2000": [2000, 2025],
+    "note": "Inscription-year cohort boundaries"
+  },
+  "keywords": {
+    "note": "All keyword lists used for site classification. Scripts must load these from config — no hardcoded keyword lists in analysis/ or lib/.",
+    "dome_forms": {
+      "unambiguous": ["stupa", "stupas", "tholos"],
+      "ambiguous": ["dome", "domed", "domes", "spherical"],
+      "note": "Morphological keywords for domed/spherical monumental architecture. 4 roots, 7 inflected forms. Unambiguous = always include; ambiguous = require architectural context sentence. Keywords chorten, dagoba, reliquary tower, hemispherical, cupola, rotunda were tested but removed: chorten/dagoba are valid synonyms but were not pre-specified; reliquary tower is a distinct form; hemispherical/cupola/rotunda overlap with context-validation patterns and inflate the corpus beyond the pre-registered design."
+    },
+    "founding_capital": {
+      "unambiguous": [
+        "first capital", "imperial capital", "royal capital",
+        "ceremonial capital", "ancient capital", "colonial capital",
+        "seat of power", "seat of government",
+        "earliest settlement", "first settlement"
+      ],
+      "ambiguous": [
+        "capital of", "seat of the",
+        "administrative centre", "administrative center",
+        "trading capital", "political capital",
+        "founding of"
+      ],
+      "note": "Unambiguous = always a founding capital. Ambiguous = require sentence-level context confirming a political entity (kingdom, empire, state). 'founded in' removed — too broad (matches any old city)."
+    },
+    "sacred_origin": {
+      "unambiguous": [
+        "holy city", "sacred city",
+        "founding of a religion", "founding sanctuary",
+        "mother church", "holiest", "sacred origin", "religious origin"
+      ],
+      "ambiguous": [
+        "birthplace of", "birth of",
+        "place of pilgrimage", "pilgrimage centre", "pilgrimage center",
+        "pilgrimage site", "origin of", "sacred site"
+      ],
+      "note": "Unambiguous = inherently sacred/religious. Ambiguous = require sentence-level context confirming a religious tradition, deity, or sacred practice rather than a secular idea, person, or art movement."
+    },
+    "founding_monument": {
+      "unambiguous": [
+        "first of its kind", "earliest example",
+        "oldest example", "earliest surviving",
+        "first example"
+      ],
+      "ambiguous": [
+        "prototype", "model for",
+        "which inspired", "culminating in"
+      ],
+      "note": "Unambiguous = unequivocally the first/oldest of a type. Ambiguous = require sentence-level context confirming a built monument that originated or defined a tradition. Dropped: 'masterpiece of', 'pioneering', 'finest example', 'most outstanding example', 'supreme example' — these are generic UNESCO praise applied to any impressive site, not evidence of founding/prototype status."
+    },
+    "founding_axis": {
+      "unambiguous": [
+        "silk road", "great wall",
+        "imperial road", "founding avenue", "monumental axis"
+      ],
+      "ambiguous": [
+        "trade route", "defensive wall",
+        "great road", "oldest road", "most important road"
+      ],
+      "regex_unambiguous": [
+        "\\boldest.{0,20}road",
+        "\\bmost important.{0,20}road"
+      ],
+      "note": "Unambiguous = a named major route/fortification system. Ambiguous = require sentence-level context confirming a major transcontinental route or imperial frontier. regex_unambiguous = regex patterns that are accepted without context validation."
+    },
+    "ancient_landscape": {
+      "unambiguous": [
+        "oldest continuous", "ancient landscape",
+        "continuous landscape"
+      ],
+      "ambiguous": [
+        "cultural landscape",
+        "age-old", "oldest surviving"
+      ],
+      "note": "Unambiguous = explicitly ancient/continuous. Ambiguous = require sentence-level context confirming antiquity or long-term continuity (millennia, centuries, traditional agriculture), not a modern designed landscape."
+    },
+    "religion_sets": {
+      "Buddhism":       ["buddha", "buddhist", "buddhism", "lumbini", "ashoka", "stupa", "bodhi", "nirvana"],
+      "Christianity":   ["christian", "cathedral", "church", "apostle", "biblical", "byzantine", "crusader", "orthodox"],
+      "Islam":          ["islam", "mosque", "muslim", "sufi", "ottoman", "caliphate", "madrasa", "mihrab", "quran"],
+      "Judaism":        ["jewish", "judaism", "synagogue", "hebrew", "israelite"],
+      "Hinduism":       ["hindu", "brahman", "vedic", "shiva", "vishnu", "ganges"],
+      "Zoroastrianism": ["zoroastrian", "sassanid", "sasanian", "fire temple"]
+    },
+    "buddhist_heritage": {
+      "note": "Regex patterns (case-insensitive) for UNESCO Buddhist Heritage thematic scope.",
+      "patterns": [
+        "\\bbuddhis[tm]", "\\bbuddha\\b", "\\bstupa\\b", "\\bdagoba\\b",
+        "\\bvihara\\b", "\\bpagoda\\b", "\\bchorten\\b", "\\bprang\\b",
+        "\\bborobudur\\b", "\\blumbini\\b", "\\bajanta\\b", "\\bellora\\b",
+        "\\bmogao\\b", "\\byungang\\b", "\\blongmen\\b", "\\bbagan\\b",
+        "\\bpyu\\b", "\\banuradhapura\\b", "\\bkandy\\b", "\\bdambulla\\b",
+        "\\bsanchi\\b", "\\bnalanda\\b", "\\bbodh gaya\\b", "\\bmahabodhi\\b",
+        "\\bhoryu\\b", "\\bhoryuji\\b", "\\bnara\\b", "\\bnikko\\b",
+        "\\bhiraizumi\\b", "\\bsansa\\b", "\\bbulguksa\\b", "\\bseokguram\\b",
+        "\\bgyeongju\\b", "\\bbaekje\\b", "\\bsukhothai\\b", "\\bayutthaya\\b",
+        "\\bsi thep\\b", "\\bluang prabang\\b", "\\bpotala\\b", "\\bchengde\\b",
+        "\\bwutai\\b", "\\bdengfeng\\b", "\\btaxila\\b", "\\btakht-i-bahi\\b",
+        "\\bpaharpur\\b", "\\bsambor prei kuk\\b", "\\bangkor\\b",
+        "\\bprambanan\\b", "\\byogyakarta\\b", "\\bphu phrabat\\b",
+        "\\bbamiyan\\b", "\\bmerv\\b", "\\bkaesong\\b", "\\bkathmandu\\b",
+        "\\bhaeinsa\\b", "\\bnamhansanseong\\b",
+        "\\bkyoto\\b.*\\btemple", "\\bkii mountain\\b", "\\bfujisan\\b",
+        "\\bsilk road", "\\bplain of jars\\b", "\\bcosmological axis\\b",
+        "\\bxanadu\\b", "\\bancient merv\\b", "\\bkhuttal\\b"
+      ]
+    }
+  }
+}

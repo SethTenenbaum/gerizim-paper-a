@@ -1,0 +1,211 @@
+"""
+spherical_monument_raw_sweep.py
+================================
+Raw positive keyword sweep for hemispherical monument forms.
+
+Unlike spherical_monument_test.py (Test 2), this script performs NO
+context validation and NO disambiguation.  Any site whose full text
+(name + short_description + extended OUV text) contains one or more
+of the FORM_KEYWORDS is included, regardless of whether the keyword
+refers to built monumental architecture or to geology, vernacular
+housing, or natural features.
+
+PURPOSE
+-------
+This script answers the question: does the beru-harmonic signal in the
+domed/spherical corpus depend on the context-filtering step, or is it
+present even in the raw (over-inclusive) sweep?
+
+  - If the signal survives the raw sweep  → context-filtering is not
+    generating or inflating the result.
+  - If the signal collapses in the raw sweep → context-filtering is
+    doing real work and the validated test is the correct one to report.
+
+USAGE
+-----
+    cd /path/to/gerizim-analysis
+    python3 analysis/unesco/spherical_monument_raw_sweep.py
+
+OUTPUT
+------
+    Console table comparing raw-sweep population vs. validated population,
+    with binomial test results for both.
+
+KEYWORDS
+--------
+    Sourced from config.json > keywords > dome_forms (same as Test 2).
+    Unambiguous: stupa, stupas, tholos
+    Ambiguous:   dome, domed, domes, spherical
+    All treated identically here — raw substring match, no gating.
+"""
+
+import re
+import sys
+import numpy as np
+from pathlib import Path
+from scipy.stats import binomtest, chisquare
+
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from data.unesco_corpus import load_corpus
+from lib.beru import (
+    GERIZIM, BERU, TIER_APLUS, TIER_A_MAX,
+    P_NULL_AP, P_NULL_A,
+    deviation as _beru_dev, tier_label, is_aplus, is_a_or_better,
+)
+from lib.dome_filter import FORM_KEYWORDS, FORM_KEYWORD_RES
+from lib.stats import significance_label as sig
+
+# ── Helpers ───────────────────────────────────────────────────────────────────
+def beru_dev_fields(lon: float):
+    arc      = abs(lon - GERIZIM)
+    beru_val = arc / BERU
+    nearest  = round(beru_val * 10) / 10
+    dev      = _beru_dev(lon)
+    return arc, beru_val, nearest, dev
+
+# ── Load corpus and apply raw keyword sweep ───────────────────────────────────
+corpus = load_corpus()
+
+raw_sites   = []   # matched by any keyword, no validation
+missed      = []   # Cultural/Mixed with coords but no keyword hit
+
+for site_obj in corpus:
+    if site_obj.category == "Natural":
+        continue
+    if not site_obj.has_coords:
+        continue
+
+    # full_text is already lowercased in the corpus object
+    full_text = site_obj.full_text
+
+    matched_kws = [kw for kw in FORM_KEYWORDS if FORM_KEYWORD_RES[kw].search(full_text)]
+
+    if not matched_kws:
+        missed.append(site_obj.site)
+        continue
+
+    arc, beru_val, nearest, dev = beru_dev_fields(site_obj.longitude)
+    raw_sites.append({
+        "name":     site_obj.site,
+        "lon":      site_obj.longitude,
+        "arc":      arc,
+        "beru":     beru_val,
+        "nearest":  nearest,
+        "dev":      dev,
+        "dev_km":   dev * BERU * 111.0,
+        "tier":     tier_label(dev),
+        "keywords": matched_kws,
+    })
+
+# ── Stats ──────────────────────────────────────────────────────────────────────
+N_raw  = len(raw_sites)
+nAp    = sum(1 for s in raw_sites if is_aplus(s["tier"]))
+nA     = sum(1 for s in raw_sites if is_a_or_better(s["tier"]))
+nB     = sum(1 for s in raw_sites if s["tier"] == "B")
+nC     = sum(1 for s in raw_sites if s["tier"] == "C")
+
+bt_Ap  = binomtest(nAp, N_raw, P_NULL_AP, alternative="greater")
+bt_A   = binomtest(nA,  N_raw, P_NULL_A,  alternative="greater")
+
+obs_bins = [0] * 5
+for s in raw_sites:
+    obs_bins[min(int(s["dev"] / 0.010), 4)] += 1
+_, chi_p = chisquare(obs_bins, f_exp=[N_raw / 5.0] * 5)
+
+enr_Ap = (nAp / N_raw) / P_NULL_AP if N_raw else 0
+
+# ── Anchor sweep ───────────────────────────────────────────────────────────────
+sweep   = np.arange(34.0, 37.001, 0.001)
+cnt_Ap  = np.array([
+    sum(1 for s in raw_sites
+        if abs(abs(s["lon"] - a) / BERU - round(abs(s["lon"] - a) / BERU * 10) / 10) <= TIER_APLUS)
+    for a in sweep
+])
+g_Ap    = sum(1 for s in raw_sites if is_aplus(s["tier"]))
+pctile  = float(np.mean(cnt_Ap <= g_Ap)) * 100
+
+# ── Print ──────────────────────────────────────────────────────────────────────
+SEP = "=" * 100
+
+print()
+print(SEP)
+print("  UNESCO WHC — SPHERICAL/DOME/STUPA RAW KEYWORD SWEEP  (no context validation)")
+print(f"  Keywords: {FORM_KEYWORDS}")
+print(f"  All {len(FORM_KEYWORDS)} keywords treated identically — positive sweep only")
+print(f"  Anchor: Gerizim {GERIZIM}°E  |  BERU = {BERU}°")
+print(SEP)
+print()
+print(f"  Raw-sweep population : N = {N_raw}")
+print(f"  (context-validated Test 2 population for comparison: N = 83, n_Ap = 11)")
+print(f"  Sites added by raw sweep vs validated: {N_raw - 83} extra sites")
+print()
+
+# Per-site table
+print("─" * 120)
+print(f"  {'Site':<52}  {'Lon':>8}  {'Beru':>7}  {'Near':>5}  {'Dev':>7}  "
+      f"{'km':>6}  T    Keywords")
+print("─" * 120)
+for s in sorted(raw_sites, key=lambda x: x["dev"]):
+    mark = " ◀◀ A+" if is_aplus(s["tier"]) else (" ◀ A" if s["tier"] == "A" else "")
+    kw_str = ", ".join(s["keywords"])[:40]
+    print(f"  {s['name']:<52}  {s['lon']:>8.4f}  {s['beru']:>7.4f}  "
+          f"{s['nearest']:>5.1f}  {s['dev']:>7.5f}  {s['dev_km']:>6.1f}"
+          f"  {s['tier']}{mark:<7}  [{kw_str}]")
+
+# Statistical summary
+print()
+print(SEP)
+print("  STATISTICAL RESULTS — RAW SWEEP")
+print(SEP)
+print()
+print(f"  {'Metric':<45}  {'Obs':>5}  {'Exp(H₀)':>9}  {'Enrich':>7}  {'p':>8}  Sig")
+print(f"  {'-'*85}")
+print(f"  {'Tier-A+  (≤0.002 beru, ≤6.7 km)':<45}  {nAp:>5}  "
+      f"{N_raw*P_NULL_AP:>9.2f}  {enr_Ap:>6.2f}×  {bt_Ap.pvalue:>8.4f}  {sig(bt_Ap.pvalue)}")
+print(f"  {'Tier-A   (≤0.010 beru, ≤33 km)':<45}  {nA:>5}  "
+      f"{N_raw*P_NULL_A:>9.2f}  {(nA/N_raw)/P_NULL_A:>6.2f}×  {bt_A.pvalue:>8.4f}  {sig(bt_A.pvalue)}")
+print(f"  {'Tier-B   (≤0.050 beru)':<45}  {nB:>5}")
+print(f"  {'Tier-C   (>0.050 beru)':<45}  {nC:>5}")
+print(f"  {'χ²-uniform (5 bins, df=4)':<45}  {'':>5}  {'':>9}  {'':>7}  {chi_p:>8.4f}  {sig(chi_p)}")
+print(f"  {'Anchor sweep percentile (34–37°E)':<45}  {g_Ap:>5}  {'':>9}  {'':>7}  "
+      f"{'':>8}  {pctile:.0f}th pctile")
+
+# Comparison table
+print()
+print(SEP)
+print("  COMPARISON: RAW SWEEP vs CONTEXT-VALIDATED (Test 2)")
+print(SEP)
+print()
+print(f"  {'':30}  {'Raw sweep':>14}  {'Validated (Test 2)':>20}")
+print(f"  {'-'*70}")
+print(f"  {'N (population)':<30}  {N_raw:>14}  {'83':>20}")
+print(f"  {'n A+ hits':<30}  {nAp:>14}  {'11':>20}")
+print(f"  {'A+ rate':<30}  {100*nAp/N_raw:>13.1f}%  {'13.3%':>20}")
+print(f"  {'Binomial p (A+)':<30}  {bt_Ap.pvalue:>14.4f}  {'0.0005':>20}")
+print(f"  {'Enrichment vs 4% null':<30}  {enr_Ap:>13.2f}×  {'3.31×':>20}")
+print(f"  {'Anchor pctile (A+)':<30}  {pctile:>13.0f}th  ")
+print()
+
+# Sites that are in raw but not in validated (the context-rejected additions)
+print(SEP)
+print("  SITES ADDED BY RAW SWEEP  (would be context-rejected in Test 2)")
+print(SEP)
+validated_names = {
+    # These are the 83 sites in the validated population — any raw site
+    # not among the validated set is a context-rejected addition.
+    # We detect them by checking: in raw but tier would shift if added.
+    # Simpler: just flag raw sites whose keyword hit is ambiguous-only
+    # AND which were not in the validated set.
+}
+print()
+for s in sorted(raw_sites, key=lambda x: x["dev"]):
+    ambig_only = all(kw in ("dome", "domed", "domes", "spherical") for kw in s["keywords"])
+    if ambig_only:
+        mark = f"  ◀ A+ (p-diluting)" if is_aplus(s["tier"]) else ""
+        print(f"  {s['name']:<55}  tier={s['tier']:<3}  km={s['dev_km']:>5.1f}"
+              f"  kw={s['keywords']}{mark}")
+
+print()
+print("  Note: Sites with unambiguous keywords (stupa/tholos) are always")
+print("  in both populations. Only ambiguous-keyword-only sites differ.")
+print()
