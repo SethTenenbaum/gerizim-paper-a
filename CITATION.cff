@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+message: "If you use this code or data, please cite it as below."
+type: software
+title: "Longitude Quantization in the UNESCO World Heritage Corpus: Domes, Stupas, and the Babylonian Beru — Code and Data"
+authors:
+  - family-names: Tenenbaum
+    given-names: Seth
+    orcid: "https://orcid.org/0009-0008-5797-2498"
+    email: sethtenenbaum1@gmail.com
+    affiliation: Independent Scholar
+version: "1.0.0"
+date-released: "2026-04-09"
+license: MIT
+repository-code: "https://github.com/SethTenenbaum/gerizim-paper-a"
+abstract: >
+  Analysis code and data for "Longitude Quantization in the UNESCO World
+  Heritage Corpus: Domes, Stupas, and the Babylonian Beru". Tests whether
+  domed and spherical UNESCO World Heritage monuments cluster non-randomly
+  on integer-multiple longitudes of the Babylonian beru (30°) measured from
+  Mount Gerizim (35.269°E). Includes 26 analysis scripts, shared library,
+  UNESCO WHC XML corpus (1,248 sites), and Wikidata control dataset.
+keywords:
+  - UNESCO World Heritage
+  - longitude quantization
+  - Babylonian beru
+  - geodetic analysis
+  - spherical monuments
+  - stupa
+  - Mount Gerizim
+  - archaeoastronomy
+  - statistical archaeology
+references:
+  - type: dataset
+    title: "UNESCO World Heritage List (XML export)"
+    authors:
+      - name: "UNESCO World Heritage Centre"
+    url: "https://whc.unesco.org/en/list/xml"
+    license: "other-at"
