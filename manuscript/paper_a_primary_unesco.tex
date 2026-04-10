@@ -49,6 +49,15 @@
 %  KEY NUMBERS — Paper A (Primary UNESCO Analysis: Tests 1, 2, 2b, 3, 4)
 % ══════════════════════════════════════════════════════════════════════════════
 \newcommand{\NwhcTotal}{1248}
+% Geodesic / latitude-sensitivity check (analysis/global/geodesic_sensitivity.py)
+% Angular criterion is conservative relative to a fixed physical-km threshold.
+% All values produced by running: python3 analysis/global/geodesic_sensitivity.py
+\newcommand{\GeodesicApCurrent}{56}       % A+ count under angular criterion
+\newcommand{\GeodesicApPhysical}{70}      % A+ count under 6.7-km geodesic threshold
+\newcommand{\GeodesicDropOut}{0}          % angular A+ sites that exceed 6.7 km physically
+\newcommand{\GeodesicGainIn}{14}          % non-A+ sites within 6.7 km physically
+\newcommand{\GeodesicThresholdKm}{6.7}    % physical km threshold used in geodesic check
+\newcommand{\GeodesicKmPerDegAtSixty}{55.7} % east-west km per degree at 60°N
 % UNESCO domed/spherical monument test — RAW SWEEP (analysis/unesco/spherical_monument_raw_sweep.py)
 % PRIMARY confirmatory version (Test 2). No context validation — maximally pre-specified.
 % Context-validated version (spherical_monument_test.py) is Exploratory (Test 2x): robustness check.
@@ -1010,8 +1019,26 @@ For a site at longitude $\lambda$, the beru-distance is
 $B = |\lambda - \GerizimLon| / 30$ and the beru-deviation from the
 nearest 0.1-beru harmonic is
 $\delta = |B - \operatorname{round}(B, 0.1)|$.
-Longitude differences are in angular measure, and no
-cosine-of-latitude correction is applied.
+Longitude differences are in angular measure; the tier classification
+is therefore a fixed angular criterion, not a fixed physical radius.
+The kilometre labels reported alongside tier thresholds
+(e.g.\ $\lesssim 6.7$~km for Tier-A+) are approximate equatorial
+equivalents computed as $\delta \times 30 \times 111$~km/\textdegree{} and
+become smaller at higher latitudes: a site at 60\textdegree{}N that
+satisfies $\delta \leq 0.002$~beru is physically within
+$\sim\GeodesicKmPerDegAtSixty / 111 \times 6.7 \approx 3.4$~km
+east-west of the harmonic.
+This makes the angular criterion \emph{conservative} relative to a
+fixed physical-km threshold at high latitudes.
+A geodesic sensitivity check (east-west haversine distances) confirms
+this: \GeodesicDropOut{} of the \GeodesicApCurrent{} current A+ sites
+would be removed under a strict \GeodesicThresholdKm~km physical
+threshold, while \GeodesicGainIn{} additional high-latitude sites
+would qualify, increasing the A+ count to \GeodesicApPhysical{} and
+strengthening all primary results.
+No correction for latitude is therefore applied; the reported km
+figures are equatorial approximations provided for descriptive
+context only.
 The geometric null for Tier-A+ is $2 \times 0.002 / 0.1 = 4\%$.
 A Gaussian KDE fitted to the observed longitude distribution produces
 $\simKDEMean \pm \simKDEStd$ expected A+ out of \NclusterTotal{} sites
@@ -1077,12 +1104,14 @@ frozen before any beru values were computed. The corpus was not
 compiled by the author and cannot be modified.
 
 \begin{itemize}
-  \item \textbf{Tier A++}: $\delta \leq 0.0002$~beru ($\leq 0.67$~km).
+  \item \textbf{Tier A++}: $\delta \leq 0.0002$~beru ($\lesssim 0.67$~km at equator).
     $P_0 = 0.4\%$. Exploratory; reported descriptively.
-  \item \textbf{Tier A+}: $\delta \leq 0.002$~beru ($\leq 6.7$~km).
+  \item \textbf{Tier A+}: $\delta \leq 0.002$~beru ($\lesssim 6.7$~km at equator).
     $P_0 = 4\%$. Primary test threshold.\footnote{$2 \times 0.002 / 0.1 = 4\%$:
-    window width divided by harmonic spacing.}
-  \item \textbf{Tier A}: $\delta \leq 0.010$~beru ($\leq 33$~km).
+    window width divided by harmonic spacing. Km labels are equatorial
+    approximations; see \S\ref{sec:methods} for the latitude-sensitivity
+    discussion.}
+  \item \textbf{Tier A}: $\delta \leq 0.010$~beru ($\lesssim 33$~km at equator).
     $P_0 = 20\%$.
   \item \textbf{Tier B}: $\delta \leq 0.050$~beru.
 \end{itemize}
@@ -2534,7 +2563,6 @@ on Earth.
 There is no obvious natural or geographic mechanism by which
 cities and monuments across three continents and three millennia would
 cluster at 3\textdegree{} longitude intervals measured from the Levant.
-Volcanoes erupt where tectonic plates meet, not at beru intervals.
 The sites on this grid are where people chose to build their most
 important things.
 
@@ -2624,9 +2652,15 @@ UNESCO coordinate file, reproducible with any anchor at the correct phase.
 
 \textbf{Working assessment.}
 The global 3\textdegree{} periodic structure anchored to the Levantine
-corridor, combined with unit sensitivity and morphological specificity,
-constitutes a coherent pattern consistent with a 0.1-beru harmonic grid
-originating near 35\textdegree{}E.
+corridor, together with morphological specificity (dome enrichment
+surviving all three simulation nulls) and cluster asymmetry (A+-bearing
+harmonics hosting $\clusterHarmonicRatio\times$ more total sites,
+permutation $p = \clusterPermP$), constitutes a coherent pattern
+consistent with a 0.1-beru harmonic grid originating near 35\textdegree{}E.
+The unit sensitivity sweep and global anchor sweep are two views of
+the same underlying 3\textdegree{} periodic structure
+(\S\ref{sec:metrology_basis}) and are counted as a single observation,
+not as additional independent lines of evidence.
 The geographic-concentration alternative remains viable because the
 distribution of civilizations and the distribution of beru harmonics
 from the Levant are not independent.
@@ -2666,15 +2700,17 @@ The monuments on this grid are where human societies chose, across
 thousands of years and dozens of independent cultures, to build the
 things they cared about most.
 
-The unit-sensitivity collapse and the dome sub-population surviving
-all three simulation nulls are the two findings most resistant to a
-purely geographic account.
-Geographic concentration does not predict sensitivity at $\pm 0.3\%$
-angular precision, and domed forms show enrichment well above what
-the geographic distribution of their regions predicts.
-The geographic-concentration hypothesis cannot be excluded on this
-corpus alone, but it must explain both of these observations to
-stand as the complete account.
+The dome sub-population surviving all three simulation nulls and the
+cluster asymmetry result (A+-bearing harmonics hosting
+$\clusterHarmonicRatio\times$ more total sites) are the two findings
+most resistant to a purely geographic account.
+Geographic concentration does not predict morphological specificity
+confined to domed forms, and it does not predict harmonic-node
+clustering of the surrounding corpus at the observed ratio.
+The 3\textdegree{} periodicity and unit sensitivity are a single
+observation — two views of the same structure — and together establish
+that the spacing matches a pre-specified metrological unit at
+sub-percent precision, a property no known curation model predicts.
 
 Independent replication using a non-UNESCO heritage corpus, together
 with textual or archaeological evidence of beru-based geographic
