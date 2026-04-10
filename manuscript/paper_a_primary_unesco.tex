@@ -694,56 +694,36 @@ Data: UNESCO XML \textcopyright~UNESCO (research use); Wikidata extracts: CC0.
 \begin{abstract}
 Whether any spatial regularity in the placement of ancient monumental
 sites reflects shared metrological knowledge, rather than independent
-local practice or statistical coincidence, is a question that has
-resisted rigorous evaluation, largely because prior studies rely on
-investigator-selected site lists.
+local practice, is a question that has resisted rigorous evaluation,
+largely because prior studies rely on investigator-selected site lists.
 This study tests the longitudinal distribution of UNESCO World Heritage
 Cultural and Mixed sites ($N = \NclusterTotal$) against the angular
 interval attested in Babylonian astronomical records, the \textit{beru}
 (30\textdegree{} of arc, MUL.APIN, c.~1000~BCE), with Mount Gerizim
 (\GerizimLon\textdegree{}E) as a pre-specified anchor.
 
-The central finding is a global 3\textdegree{} periodic structure in
-the UNESCO longitude distribution---the $x.18$\textdegree{}E signal---in
-which every longitude of the form $x.18$\textdegree{}E produces a
-maximum Tier-A+ count, all 120 such anchors yielding identically high
-scores across the full 0--360\textdegree{} sweep.
-This 3\textdegree{} spacing is exactly 0.1~beru, the smallest
-integer sub-division of the Babylonian beru angular unit.
-The $x.18$\textdegree{}E phase is anchored $\sim$8~km from
-Mount Gerizim, the historically attested \textit{tabbur ha-aretz}
-(``navel of the earth'') of Samaritan geographic tradition,
-and within the same $\sim$35\textdegree{}E Levantine corridor as
-Jerusalem.
-Under a beru-alignment hypothesis, this structure is the expected
-signature of a globe-spanning surveying system:
-a 3\textdegree{} harmonic grid anchored to a Levantine origin point
-would produce exactly the observed pattern in any
-sufficiently large corpus of sites placed with reference to that grid.
-An alternative explanation---that the pattern arises from geographic
-concentration of heritage sites in a belt of Eurasian longitudes that
-happen to cluster near the $x.18$\textdegree{} phase---cannot be
-excluded on the basis of the UNESCO corpus alone, since the
-distribution of world civilizations and the distribution of beru
-harmonics are not independent under the beru-alignment hypothesis.
-Distinguishing these interpretations requires an independent non-UNESCO corpus.
+The UNESCO longitude distribution contains a global 3\textdegree{}
+periodic structure in which every longitude of the form
+$x.18$\textdegree{}E yields the maximum Tier-A+ count (alignment
+$\leq$6.7~km from a harmonic node).  This 3\textdegree{} spacing
+equals 0.1~beru, and its phase is anchored within $\sim$8~km of
+Mount Gerizim and within the same $\sim$35\textdegree{}E corridor as
+Jerusalem.  Domed and spherical monuments ($N = \NcircTotal$) show
+12.2\% Tier-A+ alignment ($p_\mathrm{adj} = \pAdjTestTwo$,
+permutation $Z = \simDomePermZ$, $p = \simDomePermP$), and $\pm 0.3\%$
+shifts from the canonical spacing collapse significance in both the
+dome sub-population and the full corpus simultaneously.  A+-bearing
+harmonics host $\clusterHarmonicRatio\times$ more total sites than
+non-A+ harmonics (permutation $p = \clusterPermP$), and the A+ rate
+is concentrated in the earliest UNESCO inscription cohorts.
 
-Supporting this interpretation, the 3\textdegree{} spacing is the
-\emph{only} tested interval producing joint significance in both the
-domed/spherical monument sub-population and the full corpus, and
-$\pm 0.3\%$ shifts from the canonical value collapse significance in
-both populations simultaneously---a property not predicted by any
-model of unstructured geographic concentration.
-Domed and spherical monuments show 12.2\% Tier-A+ alignment
-($\leq$6.7~km from a 0.1-beru harmonic; $p_\mathrm{adj} = \pAdjTestTwo$,
-permutation $Z = \simDomePermZ$, $p = \simDomePermP$);
-all dome A+ sites fall within the $x.18$\textdegree{}E phase window,
-consistent with domed monuments being among the site classes most
-faithfully placed on the beru grid.
-Cluster asymmetry (A+-bearing harmonics host $\clusterHarmonicRatio\times$
-more total sites than non-A+ harmonics; permutation $p = \clusterPermP$)
-and a temporal gradient concentrated in the earliest inscription
-cohorts provide independent convergent evidence.
+The most parsimonious single-cause account of the unit sensitivity,
+morphological specificity, and temporal gradient taken jointly is a
+0.1-beru harmonic grid originating near 35\textdegree{}E.  However,
+an alternative in which these patterns arise from geographic
+concentration of Eurasian civilizations at longitude bands coincidentally
+aligned with the beru phase cannot be excluded using the UNESCO corpus
+alone; distinguishing the two requires independent replication.
 All data, code, and random seeds are publicly archived
 (\S\ref{sec:methods}).
 \end{abstract}
@@ -775,31 +755,28 @@ transformed beyond recognition
 Whether any of these orientations reflects shared metrological
 knowledge transmitted across the ancient world, including
 standardized angular divisions attested in early astronomical
-traditions, rather than independent local practice, is a question
-that has proven resistant to rigorous evaluation, primarily because
+traditions, rather than independent local practice, remains
+difficult to evaluate rigorously, primarily because
 most attempts to answer it rely on site lists assembled by the same
 investigators who proposed the hypothesis.
 
-The resulting methodological impasse is structural.
+The resulting methodological impasse is well documented.
 Most prior studies of spatial regularity at ancient sites rely
 on small, investigator-selected samples and unconstrained geometric
 degrees of freedom, making it difficult to distinguish genuine
 structure from post-hoc patterning
 \citep{williamson1983leylines,freeman1976,kendall1974}.
 Selection bias and the flexibility to choose reference frames,
-intervals, and thresholds after inspecting the data have rightly
-drawn sustained methodological criticism
+intervals, and thresholds after inspecting the data have drawn
+sustained methodological criticism
 \citep{kendall1974,ruggles1999astronomy}.
-What has been lacking is a test conducted against a large, externally
+What has been lacking is a test against a large, externally
 curated site corpus, with the hypothesis, test statistic, and
 reference frame all fixed before the data are examined.
 
-More broadly, methodological critiques in this literature, particularly
-concerning selection bias and post-hoc geometric flexibility, have largely
-functioned as diagnostic tools for rejecting spurious claims rather than
-as the basis for constructive, pre-specified tests.
-This study builds on those critiques by incorporating them directly into
-the design of a reproducible statistical framework.
+This study applies those methodological critiques constructively,
+incorporating them into the design of a reproducible statistical
+framework.
 We test whether the longitudinal distribution of UNESCO World Heritage
 Cultural and Mixed sites exhibits statistically detectable departures
 from null expectation consistent with a fixed angular interval
@@ -813,17 +790,17 @@ curated, externally fixed, and was not compiled by the author.
 It cannot be modified to suit any hypothesis, and its global
 coverage makes geographic sampling bias tractable through simulation.
 
-A pre-specified statistical framework is applied to the full corpus,
+We apply a pre-specified statistical framework to the full corpus,
 permitting reproducible evaluation of spatial patterning under
 controlled conditions (\S\ref{sec:methods}).
-The interpretive framework distinguishes three classes of explanation
+We distinguish three classes of explanation
 for any observed pattern (metrological transmission, latent geographic
-structure, and statistical artifact), which are evaluated in the
+structure, and statistical artifact), evaluated in the
 Discussion (\S\ref{sec:framework}, \S\ref{sec:discussion}).
 
-The monument classes examined here, including mounds, stupas, and domed
-structures, are widely interpreted as encoding cosmological and
-metrological concepts across the historical record, and form the
+The monument classes examined here (mounds, stupas, and domed
+structures) are widely interpreted as encoding cosmological and
+metrological concepts across the historical record and form the
 primary empirical focus of the morphological sub-tests
 (\S\ref{sec:methodscircular}, \S\ref{sec:methodsevolution}).
 Whether these specific form classes exhibit disproportionate spatial
@@ -832,18 +809,10 @@ typological question.
 
 Known sources of UNESCO selection bias produce geographic
 \emph{clustering}, but not regularly spaced longitudinal periodicity.
-The two are distinct phenomena, and the observed signal persists under
-permutation tests and morphological sub-filtering.
 The analysis identifies statistically significant departures from null
-expectation but does not, on its own, constitute direct evidence of
-knowledge transmission or deliberate coordination.
-Its contribution is to demonstrate that these regularities are unlikely
-to arise from random or geographically constrained processes, and are
-instead more consistent with structured mechanisms, potentially
-including cultural transmission, while remaining agnostic about any
-single causal account.
-The three competing classes of explanation that structure the Discussion
-are introduced in \S\ref{sec:framework}.
+expectation and evaluates three competing classes of explanation
+(\S\ref{sec:framework}): metrological transmission, latent geographic
+structure, and unmodeled statistical artifact.
 
 %──────────────────────────────────────────────────────────────────────────────
 \section{Background}
@@ -856,7 +825,7 @@ are introduced in \S\ref{sec:framework}.
 The \textit{beru} (30\textdegree{} of arc) is attested in the MUL.APIN
 cuneiform compendium \citep{hunger2019mul,watson2011writing}, the composition of which is
 dated on broad grounds to the late second or early first millennium~BCE.
-The unit divided the ecliptic into twelve equal segments and served for
+In this system, the unit divided the ecliptic into twelve equal segments and served for
 both stellar and terrestrial angular measurement.
 The terrestrial use is attested explicitly in MUL.APIN~II~ii~43--iii~15
 (the ``shadow-length'' table), which converts beru of daylight into
@@ -909,29 +878,25 @@ properties; Aveni \citep{aveni2001skywatchers,aveni2003archaeoastronomy}
 and Neugebauer \citep{neugebauer1975history} supply the broader
 disciplinary framework.
 
-The present study inherits this tradition but departs from it in
-several respects.
+The present study builds on this tradition but departs from it in
+three respects.
 First, the site list is externally curated (the UNESCO World Heritage
-List), eliminating the selection bias that undermines many
+List), eliminating the selection bias that has undermined many
 archaeoastronomical claims.
 Second, the test is one-dimensional (longitude only), yielding a
-well-defined geometric null expectation (4\%) that requires no free
+well-defined geometric null expectation (4\%) with no free
 parameters.
 Third, the analysis is fully computational and publicly archived,
 permitting exact reproduction
 \citep{tenenbaum2026audit}.
 
-\subsection{Distinction from Ley-Line Studies}
-
-Ley-line hypotheses \citep{watkins1925} have been criticized for
-post-hoc site selection, unconstrained geometric degrees of freedom,
-and the absence of well-defined null models
-\citep{williamson1983leylines,hutton1991pagan,kendall1974}.
-This study avoids all three problems. The site list is frozen before
-analysis (the UNESCO registry, not compiled by the author), the test
-statistic is pre-specified, and the geometric null is analytically
-derived.
-The distinction is structural, not rhetorical.
+Prior investigations of ley-line hypotheses
+\citep{watkins1925,williamson1983leylines,hutton1991pagan}
+were rightly criticized for post-hoc site selection and unconstrained
+geometric degrees of freedom \citep{kendall1974}.
+The present design avoids all three problems: the site list is frozen
+before analysis, the test statistic is pre-specified, and the
+geometric null is analytically derived.
 
 \subsection{The Anchor: Mount Gerizim}
 \label{sec:anchor}
@@ -973,7 +938,7 @@ around the full 360\textdegree{} sweep score identically at the maximum,
 and they account for virtually all anchors matching the Levantine corridor's
 count.
 This clustering is itself part of the evidence: the global grid hypothesis
-predicts exactly this---a set of equally high-scoring anchors spaced
+predicts exactly this: a set of equally high-scoring anchors spaced
 precisely 0.1~beru (3\textdegree{}) apart around the globe.
 The percentile ranking is therefore not the most informative single
 statistic; the decisive observation is the global periodicity of the
@@ -1000,7 +965,7 @@ listed here in order of their explanatory scope.
 (1)~\textbf{Metrological transmission:} a 3\textdegree{} (0.1-beru)
 angular reference system anchored near the Levant was transmitted
 through trade, imperial administration, or religious networks, and
-was used---deliberately or by inherited convention---in the placement
+was used, whether deliberately or by inherited convention, in the placement
 of major monumental foundations worldwide.
 Under this reading the $x.18$\textdegree{}E periodic structure is not
 a confound but the central predicted signature: a global grid anchored
@@ -1016,7 +981,7 @@ the alternatives below.
 
 (2)~\textbf{Latent geographic structure:} the 3\textdegree{} periodicity
 reflects underlying spatial patterns in where civilizations built
-monumental architecture---specifically, that major Eurasian sites
+monumental architecture, specifically that major Eurasian sites
 cluster in longitude bands that happen to align with the $x.18$\textdegree{}
 phase.
 This explanation cannot be fully excluded using the UNESCO corpus alone,
@@ -1034,7 +999,7 @@ data; what is debated is its cause.
 A pure artifact account must also explain why significance is
 unit-sensitive at $\pm 0.3\%$ precision, why the signal is morphologically
 concentrated in domed forms, and why it is strongest in the oldest
-inscription cohorts---none of which are predicted by any known curation
+inscription cohorts, none of which are predicted by any known curation
 or geocoding artifact.
 
 Adjudicating between these three classes at the level of historical
@@ -1076,9 +1041,9 @@ permutation, bootstrap, and KDE-smoothed null, which preserve the
 empirical longitude distribution and do not assume i.i.d.\ sampling.
 Where simulation and binomial p-values diverge, the simulation figure
 takes precedence.
-Binomial p-values should be read as convenient approximations that
-assume uniform longitude spacing. This assumption is violated by the
-UNESCO corpus, and the simulation models exist precisely to relax it.
+Binomial p-values are best understood as convenient approximations that
+assume uniform longitude spacing. Because this assumption is violated by the
+UNESCO corpus, the simulation models are designed to relax it.
 
 \subsection{Metrological Basis for the 0.1-Beru Spacing}
 \label{sec:metrology_basis}
@@ -2019,7 +1984,7 @@ observed A+ count (\anchorSweepGlobalMax{} in Sweep~B,
 \anchorSweepGlobalMaxA{} in Sweep~A).
 No other phase produces this uniformly elevated score across the full sweep.
 The spacing between consecutive $x.18$\textdegree{}E anchors is
-exactly 3\textdegree{} --- precisely 0.1~beru, the pre-specified
+exactly 3\textdegree{}, precisely 0.1~beru, the pre-specified
 harmonic interval, and the smallest integer sub-division of the
 Babylonian beru unit.
 
@@ -2152,7 +2117,7 @@ a site-dense Eurasian longitude strip and the dome enrichment is
 a by-product of where domed forms are built.
 Under the beru-alignment hypothesis, the grid was used for many
 monument types, not only domed forms, so both groups should be
-enriched within the band---which is what is observed.
+enriched within the band, which is what is observed.
 Neither reading is excluded; the morphological specificity of the
 dome signal (3.06$\times$ vs.\ 1.38$\times$ for the full corpus)
 is attributable under both interpretations to the geographic
@@ -2165,8 +2130,8 @@ grid; all dome A+ sites fall within the predicted phase window;
 both dome and non-dome sites in the band are enriched, as expected
 if the grid spans monument types.
 The same evidence is also consistent with geographic concentration.
-The unit-sensitivity result (\S\ref{sec:metrology})---$\pm 0.3\%$
-collapses joint significance---remains the finding most resistant
+The unit-sensitivity result (\S\ref{sec:metrology}), in which $\pm 0.3\%$
+collapses joint significance, remains the finding most resistant
 to any geographic concentration account, since no known model of
 site density predicts angular sensitivity at sub-percent precision.
 
@@ -2487,8 +2452,8 @@ anchor will cluster at the $x.18$\textdegree{} phase by construction,
 and the grid spans monument types.
 The geographic-concentration alternative is equally consistent
 with this finding.
-The unit-sensitivity result (\S\ref{sec:metrology})---where
-$\pm 0.3\%$ shifts collapse joint significance---is the observation
+The unit-sensitivity result (\S\ref{sec:metrology}), in which
+$\pm 0.3\%$ shifts collapse joint significance, is the observation
 most resistant to either alternative, since no known geographic
 concentration model predicts sensitivity at sub-percent angular
 precision.
@@ -2566,11 +2531,9 @@ corridor and whose spacing matches the pre-specified metrological
 unit at sub-percent precision.
 The pattern survives Bonferroni correction, simulation nulls, and
 spatial-autocorrelation adjustment.
-The results do not, by themselves, constitute proof of intentional
-placement or metrological transmission.
-A statistical test can identify regularity but cannot determine
-whether it arose from deliberate surveying, cultural transmission,
-latent geographic structure, or some combination.
+A statistical test can identify such regularities but cannot, by itself,
+determine whether they arose from deliberate surveying, cultural
+transmission, latent geographic structure, or some combination.
 The argument for metrological transmission rests on the failure of
 the alternatives to account for the unit sensitivity, morphological
 specificity, and temporal gradient taken jointly.
@@ -2655,39 +2618,32 @@ not as a historical claim.
 
 \subsection{Conclusion}
 
-The primary result of this study is a global 3\textdegree{} periodic
-structure in the UNESCO World Heritage longitude distribution:
-every anchor of the form $x.18$\textdegree{}E, all 120 such anchors
-around the full 360\textdegree{} of longitude, yields the maximum
-observed A+ count.
-The phase of this signal is anchored within $\sim$8~km of Mount Gerizim,
-the historically attested Levantine geographic-centrality reference point
-chosen on substantive grounds before the data were examined.
-The 3\textdegree{} spacing is exactly 0.1~beru, the pre-specified smallest
-integer sub-division of the Babylonian beru unit, and sub-percent shifts
-($\pm 0.3\%$) from this canonical value collapse significance in both
-the full corpus and the dome sub-population simultaneously.
+This study documents a global 3\textdegree{} periodic structure in the
+UNESCO World Heritage longitude distribution, in which all 120 anchors
+of the form $x.18$\textdegree{}E yield the maximum observed A+ count.
+The phase of this structure is anchored within $\sim$8~km of the
+pre-specified Levantine reference point, and the 3\textdegree{} spacing
+corresponds exactly to 0.1~beru, the smallest integer sub-division of
+the Babylonian beru unit.  Sub-percent shifts ($\pm 0.3\%$) from this
+canonical value collapse significance in both the full corpus and the
+dome sub-population.
 
-Under the beru-alignment hypothesis, this global periodicity is the
-predicted signature of a surveying grid anchored to the Levantine
-corridor: a 0.1-beru harmonic system originating near 35\textdegree{}E
-would produce exactly the observed pattern in any large corpus of sites
-placed with reference to that grid.
-The geographic-concentration alternative cannot be excluded on the
-UNESCO corpus alone, because the distribution of civilizations and
-the distribution of beru harmonics are not independent under
-the beru-alignment hypothesis itself.
+Three lines of convergent evidence constrain the interpretation.
+First, the unit-sensitivity collapse is not predicted by any model of
+geographic density.  Second, the signal is concentrated in the oldest
+UNESCO inscription cohorts.  Third, domed and spherical monuments
+show the highest enrichment of any morphological class tested.
+Together these observations favor a metrological explanation over
+random or geographically structured alternatives, but the
+geographic-concentration hypothesis cannot be excluded using the UNESCO
+corpus alone.
 
-The unit-sensitivity collapse, the temporal concentration in the oldest
-inscription cohorts, and the morphological specificity of the dome
-signal provide convergent evidence that the pattern is not a generic
-property of European geographic density.
-Together they define a quantitative basis for investigation that prior
-archaeoastronomical studies, which relied on investigator-selected
-site lists and unconstrained geometric degrees of freedom, could not
-provide.
+Independent replication using a non-UNESCO heritage corpus, along with
+textual or archaeological evidence of beru-based geographic practice,
+would provide the most direct tests.  This study offers a reproducible
+quantitative basis for such investigation.
 
-\subsubsection*{What would constitute confirmation?}
+\subsubsection*{Criteria for confirmation}
 
 Independent replication using a non-UNESCO heritage corpus assembled
 without reference to this hypothesis would provide the most direct
@@ -2700,9 +2656,9 @@ sub-divisions; or
 (c)~textual evidence from intermediary traditions (Hellenistic,
 Sanskrit, or Islamic geographic sources) referencing a
 Levantine-centered angular reference frame.
-Without such independent evidence, the pattern is a global statistical
-regularity whose most parsimonious account is metrological, but which
-awaits historical explanation.
+Absent such independent evidence, the pattern documented here is a
+global statistical regularity whose most parsimonious account is
+metrological but which awaits historical explanation.
 
 All data, code, and random seeds are publicly archived at
 \url{https://github.com/SethTenenbaum/gerizim-paper-a}.
@@ -2932,8 +2888,8 @@ of structural orientations in skyscape archaeology.
 \bibitem[Tenenbaum(2026)]{tenenbaum2026audit}
 Tenenbaum, S. (2026).
 Gerizim Paper~A: code and data repository (v1.0.0).
-Zenodo. DOI: 10.5281/zenodo.XXXXXXX (to be assigned).
 GitHub: \url{https://github.com/SethTenenbaum/gerizim-paper-a}.
+Zenodo DOI: to be assigned upon archival deposit.
 
 \bibitem[Thom(1964)]{thom1964}
 Thom, A. (1964).
@@ -2986,18 +2942,12 @@ This research received no external funding.
 
 \section*{Software and AI Disclosure}
 All analyses were performed in Python~3 with NumPy, SciPy, and pandas.
-Claude (Anthropic) was used for assistance with manuscript drafting,
-prose editing, and statistical methodology review.
-GitHub Copilot (Microsoft) was used for code autocompletion during
-development of the analysis pipeline.
-The analysis pipeline was validated by the author; all results are
-generated reproducibly from the provided code and dataset.
+Claude (Anthropic) assisted with manuscript drafting and prose editing.
+GitHub Copilot (Microsoft) assisted with code autocompletion.
 All scientific conclusions, hypothesis design, keyword-list decisions,
 and analytical choices are solely the author's.
-No AI tool selected the hypothesis, chose the anchor, defined tier
-thresholds, or determined which results to report.
-The complete analysis code history is available in the public Git
-repository at
+The complete analysis pipeline and its version history are available
+in the public repository at
 \url{https://github.com/SethTenenbaum/gerizim-paper-a}.
 
 \end{document}
