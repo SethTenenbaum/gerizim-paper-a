@@ -1,6 +1,6 @@
 # Longitude Quantization in the UNESCO World Heritage Corpus: Domes, Stupas, and the Babylonian Beru
 
-**Paper A — Primary UNESCO Analysis**
+**Paper A — Primary UNESCO Analysis** · `v1.0.3`
 
 Seth Tenenbaum · Independent Scholar  
 ORCID: [0009-0008-5797-2498](https://orcid.org/0009-0008-5797-2498)
@@ -112,6 +112,26 @@ gerizim-paper-a/
 └── README.md                 # This file
 ```
 
+## Changelog
+
+### v1.0.3 — 2026-04-10
+- **Pipeline-driven manuscript:** all 439 manuscript macros are now emitted
+  by analysis scripts via `manuscript/reproduce_all_macros.sh`; zero
+  hand-curated values remain.
+- Added `analysis/global/emit_constants.py` to emit pure constants (Gerizim/
+  Jerusalem coordinates, DMS, separation, `\NwhcTotal`).
+- Extended macro emission in `temporal_gradient_test.py`,
+  `deep_temporal_analysis.py`, `tumulus_dome_evolution_raw_sweep.py`,
+  `anchor_site_comparison.py`, `anchor_uniqueness_audit.py`, and
+  `bonferroni_correction.py`.
+- Added DMS and geometry fields to `config.json`.
+- `manuscript/generated_macros.tex` is now the single source of truth for all
+  numerical values; 493 macros emitted, 439 consumed by the manuscript.
+
+### v1.0.0 — 2026-03-xx
+- Initial preprint package: manuscript, all analysis scripts, figures,
+  data, tests, CITATION.cff, and license files.
+
 ## Reproducing the Results
 
 ### Prerequisites
@@ -166,9 +186,20 @@ cd manuscript && pdflatex paper_a_primary_unesco.tex
 ### Key outputs
 
 Each analysis script prints results to stdout, including LaTeX `\newcommand`
-macros that are pasted into the manuscript header. The manuscript `.tex` file
-contains all macro values inline — no external macro files are needed to
-compile the PDF.
+macros. All macros are collected into `manuscript/generated_macros.tex` by
+running the pipeline build script:
+
+```bash
+bash manuscript/reproduce_all_macros.sh --macros-only
+```
+
+The manuscript `paper_a_primary_unesco.tex` imports `generated_macros.tex`
+so that **every number in the PDF is pipeline-driven** — no values are
+hand-curated. As of v1.0.3 the manuscript contains 439 macros, all emitted
+by analysis scripts, with zero value mismatches between the manuscript and
+the pipeline.
+
+> **Pipeline status:** 493 macros emitted · 439 used in manuscript · 0 mismatches
 
 ## Data Sources
 
