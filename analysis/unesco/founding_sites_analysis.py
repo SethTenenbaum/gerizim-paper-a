@@ -203,4 +203,49 @@ print(f"""
 # ── 4. Top 10 most precise hits ───────────────────────────────────────────────
 print_top_sites(aplus_sites, n=10)
 
+# ── LaTeX macros (GROUP 5 thematic + GROUP 6 keyword enrichment) ──────────────
+total_ap = len(aplus_sites)
+counts = {c: len(by_cat.get(c, [])) for c in PRIORITY}
+founding_n = sum(counts.get(c, 0) for c in "FSMX")
+
+# Keyword enrichment: founding keyword matches in corpus
+from lib.founding_filter import classify_text
+def _has_founding_kw(text):
+    cats = classify_text(text)
+    return any(c in cats for c in "FSMX")
+
+n_found_kw_all = sum(1 for s in sites if _has_founding_kw(s["text"]))
+n_found_kw_ap  = sum(1 for s in aplus_sites if _has_founding_kw(s["text"]))
+n_found_kw_nonap = n_found_kw_all - n_found_kw_ap
+n_nonap = len(sites) - total_ap
+
+found_kw_base_rate = 100 * n_found_kw_all / len(sites) if sites else 0
+found_kw_ap_rate   = 100 * n_found_kw_ap / total_ap if total_ap else 0
+found_kw_nonap_rate = 100 * n_found_kw_nonap / n_nonap if n_nonap else 0
+
+ct_kw = [[n_found_kw_ap, total_ap - n_found_kw_ap],
+         [n_found_kw_nonap, n_nonap - n_found_kw_nonap]]
+or_kw, p_kw = fisher_exact(ct_kw, alternative="greater")
+
+print("  % LaTeX macros (GROUP 5 thematic — founding_sites_analysis.py):")
+print(f"  \\newcommand{{\\NthematicTotal}}{{{total_ap}}}                 % total A+ sites")
+print(f"  \\newcommand{{\\NthematicFounding}}{{{founding_n}}}             % A+ with founding/origin theme")
+print(f"  \\newcommand{{\\thematicFoundingPct}}{{{100*founding_n/max(total_ap,1):.0f}}}          % % of A+ with founding theme")
+print(f"  \\newcommand{{\\NthematicCapital}}{{{counts.get('F', 0)}}}             % founding/capital theme count")
+print(f"  \\newcommand{{\\NthematicMonument}}{{{counts.get('M', 0)}}}             % monument theme count")
+print(f"  \\newcommand{{\\NthematicSacred}}{{{counts.get('S', 0)}}}              % sacred/religious theme count")
+print(f"  \\newcommand{{\\NthematicAxis}}{{{counts.get('X', 0)}}}              % cosmic axis theme count")
+print(f"  \\newcommand{{\\NthematicLandscape}}{{{counts.get('L', 0)}}}           % sacred landscape theme count")
+print(f"  \\newcommand{{\\NthematicUnclassified}}{{{counts.get('?', 0)}}}         % unclassified A+ sites")
+
+print("  % LaTeX macros (GROUP 6 — founding keyword enrichment):")
+print(f"  \\newcommand{{\\NfoundKwAll}}{{{n_found_kw_all}}}                % corpus sites with founding keyword")
+print(f"  \\newcommand{{\\foundKwBaseRate}}{{{found_kw_base_rate:.1f}}}          % base rate, founding keyword (%)")
+print(f"  \\newcommand{{\\NfoundKwAp}}{{{n_found_kw_ap}}}             % A+ sites with founding keyword")
+print(f"  \\newcommand{{\\foundKwApRate}}{{{found_kw_ap_rate:.1f}}}          % founding keyword rate in A+ (%)")
+print(f"  \\newcommand{{\\NfoundKwNonAp}}{{{n_found_kw_nonap}}}           % non-A+ sites with founding keyword")
+print(f"  \\newcommand{{\\foundKwNonApRate}}{{{found_kw_nonap_rate:.1f}}}        % founding keyword rate in non-A+ (%)")
+print(f"  \\newcommand{{\\foundKwFisherOR}}{{{or_kw:.2f}}}          % Fisher OR, A+ vs non-A+ founding keyword")
+print(f"  \\newcommand{{\\pFoundKwFisher}}{{{p_kw:.3f}}}         % p-value, Fisher test founding keyword")
+
 

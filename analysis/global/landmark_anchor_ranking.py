@@ -115,6 +115,11 @@ gerizim_rank_noart = int(np.sum(non_art_ap >= gerizim_temple_ap))
 print(f"\n  Gerizim rank excluding x.18° artifact sites: #{gerizim_rank_noart} of {len(non_artifact)}")
 print(f"  (top {100*gerizim_rank_noart/len(non_artifact):.1f}%)")
 
+# ── LaTeX macros (GROUP 13) ───────────────────────────────────────────────────
+print("  % LaTeX macros (GROUP 13):")
+print(f"  \\newcommand{{\\GerizimTempleAp}}{{{gerizim_temple_ap}}}          % A+ count at Gerizim Temple anchor")
+print(f"  \\newcommand{{\\GerizimTempleRank}}{{{gerizim_rank}}}          % rank of Gerizim Temple among all landmarks")
+
 print(f"\n{'='*110}")
 print("  DONE — landmark_anchor_ranking.py")
 print(f"{'='*110}")

@@ -342,3 +342,22 @@ print(f"""
   Fisher exact (one-tailed):  OR = {ft_OR_ap:.2f},  p = {ft_p_ap:.4f}  {sig(ft_p_ap)}
   Proportion z-test (corridor > non-corridor): z = {z_stat:.2f},  p = {p_z_one_tailed:.4f}  {sig(p_z_one_tailed)}
 """)
+
+# ── LaTeX macros (GROUP 15) ───────────────────────────────────────────────────
+# Jerusalem corridor occupancy
+jer_hits, _ = corridor_occupancy(35.2317, all_sites, n_harmonics=17)
+
+print("  % LaTeX macros (GROUP 15):")
+print(f"  \\newcommand{{\\corridorPrecN}}{{{N_HARMONICS}}}            % harmonics tested in corridor precision")
+print(f"  \\newcommand{{\\corridorPrecHits}}{{{n_hits}}}           % harmonics with corridor hit")
+print(f"  \\newcommand{{\\corridorPrecApp}}{{{n_app}}}            % A++ hits in corridor precision test")
+print(f"  \\newcommand{{\\corridorPrecApOnly}}{{{n_hits - n_app}}}         % A+-only hits (not A++) in corridor")
+print(f"  \\newcommand{{\\pCorridorBinom}}{{{bt.pvalue:.1e}}}       % p-value, corridor binomial test")
+print(f"  \\newcommand{{\\pCorridorFisher}}{{{p_fisher:.1e}}}       % p-value, corridor Fisher test")
+print(f"  \\newcommand{{\\corridorAppOR}}{{{ft_OR:.2f}}}           % Fisher OR, A++ vs A+ in corridor")
+print(f"  \\newcommand{{\\pCorridorAppFisher}}{{{ft_p:.4f}}}       % p-value, A++ Fisher test in corridor")
+print(f"  \\newcommand{{\\corridorMeanDevKm}}{{{corr_mean * BERU * 111:.2f}}}        % mean deviation within corridor (km)")
+print(f"  \\newcommand{{\\corridorGlobalMeanKm}}{{{global_mean * BERU * 111:.2f}}}      % mean deviation global (km)")
+print(f"  \\newcommand{{\\corridorPrecRatio}}{{{global_mean / max(corr_mean, 1e-10):.2f}}}        % precision ratio, global/corridor deviation")
+print(f"  \\newcommand{{\\pCorridorMW}}{{{mw_p:.3f}}}           % p-value, Mann-Whitney corridor precision")
+print(f"  \\newcommand{{\\corridorJeruHits}}{{{jer_hits}}}          % corridor hits with Jerusalem anchor")

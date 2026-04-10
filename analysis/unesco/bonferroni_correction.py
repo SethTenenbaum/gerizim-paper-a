@@ -182,7 +182,7 @@ for tid, lbl, raw_p, p_adj, survives, macro, _ in results:
     status = "SURVIVES" if survives else "ns"
     print(f"  % Test {tid} — {lbl}")
     print(f"  %   {raw_p} × {K} = {p_adj_rounded:.4f}  [{status}]")
-    print(f"  \\newcommand{{\\pAdjTest{macro}}}{{{p_adj_3}}}")
+    print(f"  \\newcommand{{\\pAdjTest{macro}}}{{{p_adj_3}}}  % Bonferroni-adj p, Test {tid} ({lbl})")
     print()
 
 print(SEP)

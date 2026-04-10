@@ -34,6 +34,62 @@ echo "  Date: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
 echo "═══════════════════════════════════════════════════════════════════"
 echo ""
 
+# ── --macros-only: run all scripts, collect only \newcommand lines ────────────
+if [ "${1:-}" = "--macros-only" ]; then
+    OUT_FILE="manuscript/generated_macros.tex"
+    echo "% Generated macros — $(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$OUT_FILE"
+    echo "% Source: bash manuscript/reproduce_all_macros.sh --macros-only" >> "$OUT_FILE"
+    echo "" >> "$OUT_FILE"
+
+    # Run each group's script(s), capturing only \newcommand lines
+    SCRIPTS=(
+        analysis/unesco/spherical_monument_raw_sweep.py
+        analysis/unesco/cluster_asymmetry_test.py
+        analysis/unesco/harmonic_density_attractor_test.py
+        analysis/unesco/unesco_buddhist_heritage_test.py
+        analysis/unesco/origin_sites_test.py
+        analysis/unesco/founding_sites_analysis.py
+        analysis/unesco/sacred_origin_test.py
+        analysis/unesco/meta_keyword_test.py
+        analysis/unesco/temporal_gradient_test.py
+        analysis/unesco/deep_temporal_analysis.py
+        analysis/global/anchor_uniqueness_audit.py
+        analysis/unesco/verify_x18_periodicity.py
+        analysis/global/peak_geography_audit.py
+        analysis/global/landmark_anchor_ranking.py
+        analysis/global/global_corridor_comparison.py
+        analysis/global/corridor_precision_test.py
+        analysis/global/anchor_site_comparison.py
+        analysis/unesco/spatial_independence_test.py
+        analysis/unesco/regional_temporal_gradient.py
+        analysis/unesco/fdr_multiple_comparisons.py
+        analysis/unesco/tumulus_dome_evolution_raw_sweep.py
+        analysis/unesco/bonferroni_correction.py
+        analysis/global/wikidata_p1435_control_analysis.py
+        analysis/global/dome_periodicity_audit.py
+        analysis/unesco/simulation_null_model.py
+        analysis/americas/americas_harmonic_depletion_audit.py
+    )
+
+    for s in "${SCRIPTS[@]}"; do
+        echo "Running $s ..."
+        echo "% --- $s" >> "$OUT_FILE"
+        if [ -f "$s" ]; then
+            python3 "$s" 2>&1 | grep '\\newcommand' >> "$OUT_FILE" || true
+        else
+            echo "% SKIPPED — not found" >> "$OUT_FILE"
+        fi
+        echo "" >> "$OUT_FILE"
+    done
+
+    n_macros=$(grep -c '\\newcommand' "$OUT_FILE" || true)
+    echo ""
+    echo "═══════════════════════════════════════════════════════════════════"
+    echo "  Wrote $n_macros \\newcommand lines to $OUT_FILE"
+    echo "═══════════════════════════════════════════════════════════════════"
+    exit 0
+fi
+
 # ── Data prerequisites ────────────────────────────────────────────────────────
 echo "Checking data prerequisites..."
 if [ ! -f "data/store/unesco/unesco.xml" ]; then

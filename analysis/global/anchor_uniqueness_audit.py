@@ -246,3 +246,21 @@ print(f"""
   The corridor result is anchor-invariant within the 3.5 km window.
   Global max: {global_max_B} (Jerusalem corpus) vs {global_max_A} (Gerizim corpus) — difference = {delta_global:+d}
 """)
+
+# ── LaTeX macros (GROUP 11) ───────────────────────────────────────────────────
+print("  % LaTeX macros (GROUP 11):")
+print(f"  \\newcommand{{\\anchorSweepNanchors}}{{{n_anchors}}}          % number of anchor points in sweep")
+print(f"  \\newcommand{{\\anchorSweepApMean}}{{{np.mean(ap_A):.1f}}}           % mean A+ count across all anchors")
+print(f"  \\newcommand{{\\anchorSweepApStd}}{{{np.std(ap_A):.1f}}}            % std A+ count across all anchors")
+print(f"  \\newcommand{{\\anchorSweepGlobalMax}}{{{global_max_B}}}           % global max A+/A combined at any anchor")
+print(f"  \\newcommand{{\\anchorSweepGlobalMaxA}}{{{global_max_A}}}           % global max A at any anchor")
+print(f"  \\newcommand{{\\GerizimSweepApp}}{{{ger_app}}}             % Gerizim A++ in sweep")
+print(f"  \\newcommand{{\\GerizimSweepAp}}{{{ger_ap}}}              % Gerizim A+ in sweep")
+print(f"  \\newcommand{{\\GerizimSweepA}}{{{ger_a}}}             % Gerizim A in sweep")
+print(f"  \\newcommand{{\\anchorSweepPctile}}{{{pctile_ger:.1f}}}          % Gerizim percentile in A+ anchor sweep")
+print(f"  \\newcommand{{\\anchorSweepGeApPct}}{{{pct_above_ger:.2f}}}          % % of anchors beating Gerizim A+")
+print(f"  \\newcommand{{\\JerusalemSweepApp}}{{{jer_app}}}           % Jerusalem A++ in sweep")
+print(f"  \\newcommand{{\\JerusalemSweepAp}}{{{jer_ap}}}            % Jerusalem A+ in sweep")
+print(f"  \\newcommand{{\\JerusalemSweepA}}{{{jer_a}}}           % Jerusalem A in sweep")
+print(f"  \\newcommand{{\\JerusalemSweepPctile}}{{{pctile_jer:.1f}}}        % Jerusalem percentile in A+ anchor sweep")
+print(f"  \\newcommand{{\\anchorSweepJerApPct}}{{{pct_above_jer:.2f}}}          % % of anchors beating Jerusalem A+")

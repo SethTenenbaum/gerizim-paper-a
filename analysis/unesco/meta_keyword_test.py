@@ -316,3 +316,9 @@ print(f"""
   all possible keyword searches — which is meaningful even after this correction.
   If it's > 50%, the result is unremarkable.
 """)
+
+# ── LaTeX macros (GROUP 8) ────────────────────────────────────────────────────
+print("  % LaTeX macros (GROUP 8):")
+print(f"  \\newcommand{{\\NmetaKeywords}}{{{len(results)}}}          % total keyword permutations tested")
+print(f"  \\newcommand{{\\NmetaBeatingChi}}{{{int(n_beat_chi)}}}           % keywords beating Gerizim chi-sq")
+print(f"  \\newcommand{{\\metaBeatingChiPct}}{{{pct_chi:.1f}}}         % % of keywords beating Gerizim chi-sq")

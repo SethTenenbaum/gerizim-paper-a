@@ -375,29 +375,24 @@ p_mound_stage = binomtest(n_mound_stage_ap, n_mound_stage, P_NULL_AP, "greater")
 p_stupa_stage = binomtest(n_stupa_stage_ap, n_stupa_stage, P_NULL_AP, "greater").pvalue if n_stupa_stage else 1.0
 p_dome_stage  = binomtest(n_dome_stage_ap,  n_dome_stage,  P_NULL_AP, "greater").pvalue if n_dome_stage  else 1.0
 
-macros = {
-    "NevoTotal":       N,
-    "NevoAp":          n_ap,
-    "evoApRate":       f"{100*n_ap/N:.1f}",
-    "evoEnrichAp":     f"{enr_ap:.2f}",
-    "pEvoAp":          f"{bt_ap.pvalue:.4f}",
-    "NevoA":           n_a,
-    "evoARate":        f"{100*n_a/N:.1f}",
-    "evoEnrichA":      f"{enr_a:.2f}",
-    "pEvoA":           f"{bt_a.pvalue:.4f}",
-    "NevoMound":       n_mound_stage,
-    "NevoMoundAp":     n_mound_stage_ap,
-    "pEvoMound":       f"{p_mound_stage:.4f}",
-    "NevoStupa":       n_stupa_stage,
-    "NevoStupaAp":     n_stupa_stage_ap,
-    "pEvoStupa":       f"{p_stupa_stage:.4f}",
-    "NevoDome":        n_dome_stage,
-    "NevoDomeAp":      n_dome_stage_ap,
-    "pEvoDome":        f"{p_dome_stage:.4f}",
-    "NevoMoundOnly":   len(mound_only),
-    "NevoMoundOnlyAp": n_mo_ap,
-    "NevoOverlap":     len(overlap),
-}
-
-for k, v in macros.items():
-    print(f"  \\newcommand{{\\{k}}}{{{v}}}")
+print(f"  \\newcommand{{\\NevoTotal}}{{{N}}}            % total dome-evolution corpus")
+print(f"  \\newcommand{{\\NevoAp}}{{{n_ap}}}             % A+ sites in dome-evolution corpus")
+print(f"  \\newcommand{{\\evoApRate}}{{{100*n_ap/N:.1f}}}           % A+ rate, dome-evolution corpus (%)")
+print(f"  \\newcommand{{\\evoEnrichAp}}{{{enr_ap:.2f}}}          % enrichment ratio, A+ in dome corpus")
+print(f"  \\newcommand{{\\pEvoAp}}{{{bt_ap.pvalue:.4f}}}          % p-value, A+ binomial (dome corpus)")
+print(f"  \\newcommand{{\\NevoA}}{{{n_a}}}             % Tier-A sites in dome-evolution corpus")
+print(f"  \\newcommand{{\\evoARate}}{{{100*n_a/N:.1f}}}           % A rate, dome-evolution corpus (%)")
+print(f"  \\newcommand{{\\evoEnrichA}}{{{enr_a:.2f}}}           % enrichment ratio, A in dome corpus")
+print(f"  \\newcommand{{\\pEvoA}}{{{bt_a.pvalue:.4f}}}          % p-value, A binomial (dome corpus)")
+print(f"  \\newcommand{{\\NevoMound}}{{{n_mound_stage}}}           % sites with mound stage")
+print(f"  \\newcommand{{\\NevoMoundAp}}{{{n_mound_stage_ap}}}            % A+ sites with mound stage")
+print(f"  \\newcommand{{\\pEvoMound}}{{{p_mound_stage:.4f}}}          % p-value, A+ binomial in mound stage")
+print(f"  \\newcommand{{\\NevoStupa}}{{{n_stupa_stage}}}            % sites with stupa stage")
+print(f"  \\newcommand{{\\NevoStupaAp}}{{{n_stupa_stage_ap}}}             % A+ sites with stupa stage")
+print(f"  \\newcommand{{\\pEvoStupa}}{{{p_stupa_stage:.4f}}}          % p-value, A+ binomial in stupa stage")
+print(f"  \\newcommand{{\\NevoDome}}{{{n_dome_stage}}}            % sites with dome stage")
+print(f"  \\newcommand{{\\NevoDomeAp}}{{{n_dome_stage_ap}}}             % A+ sites with dome stage")
+print(f"  \\newcommand{{\\pEvoDome}}{{{p_dome_stage:.4f}}}          % p-value, A+ binomial in dome stage")
+print(f"  \\newcommand{{\\NevoMoundOnly}}{{{len(mound_only)}}}          % mound-only sites (no later dome/stupa)")
+print(f"  \\newcommand{{\\NevoMoundOnlyAp}}{{{n_mo_ap}}}           % A+ in mound-only sites")
+print(f"  \\newcommand{{\\NevoOverlap}}{{{len(overlap)}}}            % sites with both mound and dome/stupa stages")

@@ -1,0 +1,420 @@
+% Generated macros — 2026-04-10T03:14:53Z
+% Source: bash manuscript/reproduce_all_macros.sh --macros-only
+
+% --- analysis/unesco/spherical_monument_raw_sweep.py
+  \newcommand{\NcircTotal}{90}           % raw-sweep population size
+  \newcommand{\NcircValidated}{83}             % context-validated population (Test 2)
+  \newcommand{\NcircKeywords}{7}               % number of dome-form keywords
+  \newcommand{\NcircExcluded}{0}               % excluded (natural/no-coord)
+  \newcommand{\NcircContextRejected}{7}               % added by raw sweep vs validated
+  \newcommand{\NcircTierAp}{11}             % Tier-A+ hits (raw sweep)
+  \newcommand{\NcircTierA}{29}             % Tier-A hits (raw sweep)
+  \newcommand{\NcircTierB}{61}             % Tier-B hits (raw sweep)
+  \newcommand{\NcircTierC}{0}               % Tier-C hits (raw sweep)
+  \newcommand{\pCircAp}{0.0009}          % p-value, A+ binomial (raw sweep)
+  \newcommand{\pCircA}{0.0043}          % p-value, A  binomial (raw sweep)
+  \newcommand{\pCircChi}{0.0732}          % chi-sq uniform, 5 bins, df=4 (raw sweep)
+  \newcommand{\GerizimPctileAp}{100}            % anchor-sweep percentile, A+ (raw sweep)
+  \newcommand{\GerizimPctileA}{100}            % anchor-sweep percentile, A  (raw sweep)
+  \newcommand{\circEnrichAp}{3.06}           % enrichment ratio, A+
+  \newcommand{\circEnrichA}{1.61}           % enrichment ratio, A
+  \newcommand{\circMeanDev}{0.0220}        % mean beru deviation (raw sweep)
+
+% --- analysis/unesco/cluster_asymmetry_test.py
+  \newcommand{\NclusterTotal}{1011}          % full Cultural/Mixed corpus
+  \newcommand{\NclusterAp}{56}              % Tier-A+ sites
+  \newcommand{\clusterApRate}{5.5}           % A+ rate (%)
+  \newcommand{\clusterApBinom}{0.0103}        % binomial p, A+
+  \newcommand{\clusterApMean}{6.77}          % mean cluster size, A+ sites
+  \newcommand{\clusterNonApMean}{5.08}          % mean cluster size, non-A+ sites
+  \newcommand{\clusterRatio}{1.33}           % A+/non-A+ cluster size ratio
+  \newcommand{\clusterMWp}{0.0182}        % Mann-Whitney p (site-level)
+  \newcommand{\clusterPermP}{0.0033}        % permutation p (site-level)
+  \newcommand{\clusterPermZ}{2.82}          % permutation Z-score
+  \newcommand{\NclusterApHarmonics}{28}              % harmonics with ≥1 A+ site
+  \newcommand{\NclusterNonApHarmonics}{27}              % harmonics with 0 A+ sites
+  \newcommand{\clusterHarmonicApMean}{29.4}          % mean UNESCO sites/harmonic (A+ harmonics)
+  \newcommand{\clusterHarmonicNonApMean}{7.0}           % mean UNESCO sites/harmonic (non-A+ harmonics)
+  \newcommand{\clusterHarmonicRatio}{4.19}           % harmonic-level density ratio
+  \newcommand{\clusterHarmonicMWp}{0.0000}        % Mann-Whitney p (harmonic-level)
+  \newcommand{\NclusterNodeAp}{26}              % node-side A+ sites (phase-split)
+  \newcommand{\NclusterAntiAp}{23}              % anti-side A+ sites (phase-split)
+  \newcommand{\clusterNodeApMean}{9.85}          % mean cluster size, node-side A+
+  \newcommand{\clusterAntiApMean}{5.83}          % mean cluster size, anti-side A+
+  \newcommand{\clusterNodeNonApMean}{8.16}          % mean cluster size, node-side non-A+
+  \newcommand{\clusterAntiNonApMean}{7.23}          % mean cluster size, anti-side non-A+
+  \newcommand{\clusterNodeVsAntiApRatio}{1.69}           % node A+ / anti A+ cluster ratio
+  \newcommand{\clusterNodeVsAntiApMWp}{0.0238}        % Mann-Whitney p, node A+ > anti A+
+  \newcommand{\clusterNodeAllMean}{8.25}          % mean cluster size, all node-side
+  \newcommand{\clusterAntiAllMean}{7.17}          % mean cluster size, all anti-side
+  \newcommand{\clusterNodeVsAntiAllMWp}{0.0075}        % Mann-Whitney p, all node > all anti
+
+% --- analysis/unesco/harmonic_density_attractor_test.py
+  \newcommand{\attractorApMeanN}{6.77}           % mean 0.3° neighbours, A+ sites
+  \newcommand{\attractorNonApMeanN}{5.08}           % mean 0.3° neighbours, non-A+ sites
+  \newcommand{\attractorMWp}{0.0182}        % Mann-Whitney p, A+ > non-A+ at 0.3°
+  \newcommand{\attractorMWpWide}{0.0595}        % Mann-Whitney p, A+ > non-A+ at 1.0°
+  \newcommand{\attractorSpearmanRho}{-0.108}          % Spearman rho, dev vs 0.3° density
+  \newcommand{\attractorSpearmanP}{0.00061}       % Spearman p-value
+  \newcommand{\attractorHarmonicRatio}{4.19}           % A+ harmonic / non-A+ harmonic density ratio
+  \newcommand{\attractorHarmonicMWp}{0.0000}        % Mann-Whitney p, harmonic-level density
+  \newcommand{\attractorEUMWp}{0.0224}        % Mann-Whitney p, Europe-only sub-analysis
+  \newcommand{\NaraKyotoMaxDist}{34.2}          % max pairwise distance (km), Nara/Kyoto cluster
+
+% --- analysis/unesco/unesco_buddhist_heritage_test.py
+  \newcommand{\NbudTotal}{95}              % total UNESCO Buddhist heritage sites
+  \newcommand{\NbudTierAp}{4}               % Tier-A+ Buddhist sites
+  \newcommand{\budApRate}{4.2}            % A+ rate (%)
+  \newcommand{\pBudAp}{0.5299}         % p-value, A+ binomial
+  \newcommand{\budApEnrich}{1.05}           % A+ enrichment ratio
+  \newcommand{\NbudTierA}{24}              % Tier-A Buddhist sites
+  \newcommand{\budARate}{25.3}           % A rate (%)
+  \newcommand{\pBudA}{0.1256}         % p-value, A binomial
+  \newcommand{\budAEnrich}{1.26}           % A enrichment ratio
+  \newcommand{\NbudMauryan}{39}              % Mauryan-lineage sub-group N
+  \newcommand{\NbudMauryanAp}{3}               % Mauryan-lineage A+
+  \newcommand{\budMauryanApRate}{7.7}            % Mauryan A+ rate (%)
+  \newcommand{\NbudEastAsian}{36}              % East Asian sub-group N
+  \newcommand{\NbudEastAsianAp}{0}               % East Asian A+
+  \newcommand{\NbudSilkRoad}{6}               % Silk Road sub-group N
+  \newcommand{\NbudSilkRoadAp}{1}               % Silk Road A+
+  \newcommand{\budSilkRoadApRate}{16.7}           % Silk Road A+ rate (%)
+  \newcommand{\NbudAntiEligible}{56}              % anti-node-eligible Buddhist sites
+  \newcommand{\NbudAntiAp}{4}               % anti-node A+ Buddhist sites
+  \newcommand{\budAntiApRate}{7.1}            % anti-node A+ rate (%)
+  \newcommand{\pBudAntiAp}{0.1854}         % p-value, anti-node A+ binomial
+  \newcommand{\NbudAntiA}{24}              % anti-node Tier-A Buddhist sites
+  \newcommand{\budAntiARate}{42.9}           % anti-node A rate (%)
+  \newcommand{\pBudAntiA}{0.0001}         % p-value, anti-node A binomial
+  \newcommand{\budNodeApRate}{10.3}           % node-side A+ rate (%)
+  \newcommand{\budFisherOR}{1.49}           % Fisher OR, node vs anti-node
+  \newcommand{\budFisherP}{0.4288}         % Fisher p, node vs anti-node
+  \newcommand{\budMauryanFisherOR}{\infty}          % Fisher OR, Mauryan node vs anti-node
+  \newcommand{\budMauryanFisherP}{0.1060}         % Fisher p, Mauryan node vs anti-node
+  \newcommand{\NaraAntiDev}{0.00051}      % Nara anti-node deviation (beru)
+  \newcommand{\NaraAntiKm}{1.7}            % Nara anti-node deviation (km)
+  \newcommand{\KyotoAntiDev}{0.00129}      % Kyoto anti-node deviation (beru)
+  \newcommand{\KyotoAntiKm}{4.3}            % Kyoto anti-node deviation (km)
+  \newcommand{\HoryuAntiDev}{0.00116}      % Hōryū-ji anti-node deviation (beru)
+  \newcommand{\HoryuAntiKm}{3.9}            % Hōryū-ji anti-node deviation (km)
+  \newcommand{\SulaimanAntiDev}{0.00046}      % Sulaiman-Too anti-node deviation (beru)
+  \newcommand{\SulaimanAntiKm}{1.5}            % Sulaiman-Too anti-node deviation (km)
+
+% --- analysis/unesco/origin_sites_test.py
+  \newcommand{\NoriginCorpus}{1011}          % full Cultural/Mixed corpus
+  \newcommand{\NoriginAp}{56}              % full-corpus A+ count
+  \newcommand{\originApRate}{5.5}            % full-corpus A+ rate (%)
+  \newcommand{\pOriginAll}{0.0103}         % p-value, full-corpus A+ binomial
+  \newcommand{\originEnrichAll}{1.38}           % enrichment ratio, full corpus
+  \newcommand{\NcanonSites}{138}            % sites inscribed 1978–1984 (founding canon)
+  \newcommand{\NcanonAp}{11}              % canon A+ count
+  \newcommand{\canonApRate}{8.0}            % canon A+ rate (%)
+  \newcommand{\pCanon}{0.0232}         % p-value, canon A+ binomial
+  \newcommand{\canonEnrich}{1.99}           % enrichment ratio, canon
+  \newcommand{\NpreTwoK}{501}            % sites inscribed pre-2000
+  \newcommand{\NpreTwoKAp}{33}              % pre-2000 A+ count
+  \newcommand{\preTwoKApRate}{6.6}            % pre-2000 A+ rate (%)
+  \newcommand{\pPreTwoK}{0.0041}         % p-value, pre-2000 A+ binomial
+  \newcommand{\preTwoKEnrich}{1.65}           % enrichment ratio, pre-2000
+  \newcommand{\NmodernSites}{510}            % sites inscribed 2000+
+  \newcommand{\NmodernAp}{23}              % modern A+ count
+  \newcommand{\modernApRate}{4.5}            % modern A+ rate (%)
+  \newcommand{\pModern}{0.3081}         % p-value, modern A+ binomial
+  \newcommand{\modernEnrich}{1.13}           % enrichment ratio, modern
+  \newcommand{\pFisherCanonModern}{0.0844}         % Fisher p, canon vs modern
+  \newcommand{\orCanonModern}{1.83}           % Fisher OR, canon vs modern
+  \newcommand{\NreligUnion}{363}            % any-religion union N
+  \newcommand{\NreligUnionAp}{22}              % religion-union A+ count
+  \newcommand{\religUnionApRate}{6.1}            % religion-union A+ rate (%)
+  \newcommand{\pReligUnion}{0.0369}         % p-value, religion-union A+ binomial
+  \newcommand{\religUnionEnrich}{1.52}           % enrichment ratio, religion union
+  \newcommand{\NchristSites}{219}            % Christian sacred sites N
+  \newcommand{\NchristAp}{15}              % Christian sites A+ count
+  \newcommand{\christApRate}{6.8}            % Christian sites A+ rate (%)
+  \newcommand{\pChrist}{0.0312}         % p-value, Christian sites A+ binomial
+  \newcommand{\christEnrich}{1.71}           % enrichment ratio, Christian sites
+
+% --- analysis/unesco/founding_sites_analysis.py
+  \newcommand{\NthematicTotal}{56}                 % total A+ sites
+  \newcommand{\NthematicFounding}{25}             % A+ with founding/origin theme
+  \newcommand{\thematicFoundingPct}{45}          % % of A+ with founding theme
+  \newcommand{\NthematicCapital}{11}             % founding/capital theme count
+  \newcommand{\NthematicMonument}{6}             % monument theme count
+  \newcommand{\NthematicSacred}{4}              % sacred/religious theme count
+  \newcommand{\NthematicAxis}{4}              % cosmic axis theme count
+  \newcommand{\NthematicLandscape}{3}           % sacred landscape theme count
+  \newcommand{\NthematicUnclassified}{28}         % unclassified A+ sites
+  \newcommand{\NfoundKwAll}{296}                % corpus sites with founding keyword
+  \newcommand{\foundKwBaseRate}{29.3}          % base rate, founding keyword (%)
+  \newcommand{\NfoundKwAp}{25}             % A+ sites with founding keyword
+  \newcommand{\foundKwApRate}{44.6}          % founding keyword rate in A+ (%)
+  \newcommand{\NfoundKwNonAp}{271}           % non-A+ sites with founding keyword
+  \newcommand{\foundKwNonApRate}{28.4}        % founding keyword rate in non-A+ (%)
+  \newcommand{\foundKwFisherOR}{2.04}          % Fisher OR, A+ vs non-A+ founding keyword
+  \newcommand{\pFoundKwFisher}{0.009}         % p-value, Fisher test founding keyword
+
+% --- analysis/unesco/sacred_origin_test.py
+  \newcommand{\topHitOne}{Lumbini, the Birthplace of the Lord Buddha}  % top-ranked sacred-origin site
+  \newcommand{\topHitTwo}{Historic Centre of Oaxaca and Archaeological Site of Monte Albán}  % 2nd-ranked sacred-origin site
+  \newcommand{\topHitThree}{Old City of Jerusalem and its Walls}  % 3rd-ranked sacred-origin site
+
+% --- analysis/unesco/meta_keyword_test.py
+  \newcommand{\NmetaKeywords}{1741}          % total keyword permutations tested
+  \newcommand{\NmetaBeatingChi}{41}           % keywords beating Gerizim chi-sq
+  \newcommand{\metaBeatingChiPct}{2.4}         % % of keywords beating Gerizim chi-sq
+
+% --- analysis/unesco/temporal_gradient_test.py
+  \newcommand{\ZcochranThree}{-1.66}       % Cochran-Armitage Z, 3-bin
+  \newcommand{\pCochranThree}{0.0481}      % p-value, Cochran-Armitage 3-bin
+  \newcommand{\ZcochranFive}{-1.66}         % Cochran-Armitage Z, 5-bin
+  \newcommand{\pCochranFive}{0.0489}      % p-value, Cochran-Armitage 5-bin
+  \newcommand{\rhoSpearman}{-0.0462}        % Spearman rho, A+ rate vs era
+  \newcommand{\pSpearman}{0.141866}        % p-value, Spearman rank correlation
+
+% --- analysis/unesco/deep_temporal_analysis.py
+  \newcommand{\NdatedSites}{579}          % sites with known founding date
+  \newcommand{\NpreCE}{173}             % pre-CE (antiquity) sites
+  \newcommand{\NpreCEap}{9}            % A+ sites pre-CE
+  \newcommand{\preCErate}{5.2}           % A+ rate in pre-CE sites (%)
+  \newcommand{\preCEenrich}{1.30}          % enrichment, pre-CE A+
+  \newcommand{\pPreCEbinom}{0.2577}        % p-value, pre-CE A+ binomial
+  \newcommand{\NpostCE}{406}            % post-CE sites
+  \newcommand{\NpostCEap}{24}           % A+ sites post-CE
+  \newcommand{\postCErate}{5.9}           % A+ rate in post-CE sites (%)
+  \newcommand{\preCEfisherOR}{0.87}          % Fisher OR, pre- vs post-CE A+
+  \newcommand{\pPreCEfisher}{0.6965}         % p-value, Fisher pre- vs post-CE
+  \newcommand{\NapPreCE}{9}           % A+ sites with pre-CE founding date
+  \newcommand{\apPreCEpct}{16}            % % of all A+ that are pre-CE
+  \newcommand{\NapDeep}{3}             % A+ sites deeply pre-CE (antiquity)
+  \newcommand{\apPreCEofDated}{27}           % % of dated A+ that are pre-CE
+  \newcommand{\nonApPreCEpct}{30}           % % of dated non-A+ that are pre-CE
+  \newcommand{\preCEantiqFisherOR}{0.87}       % Fisher OR, A+ vs non-A+ pre-CE antiquity
+  \newcommand{\pPreCEantiqFisher}{0.2952}         % p-value, A+ vs non-A+ antiquity Fisher
+  \newcommand{\rhoFoundDate}{0.0031}          % Spearman rho, founding date vs A+ status
+  \newcommand{\pFoundDateSpearman}{0.9407}      % p-value, founding date Spearman
+  \newcommand{\peakSigYear}{2003}             % UNESCO inscription year with peak A+ signal
+  \newcommand{\peakSigN}{605}              % cumulative sites at peak signal year
+  \newcommand{\peakSigAp}{43}             % cumulative A+ at peak signal year
+  \newcommand{\peakSigRate}{7.1}           % A+ rate at peak signal year (%)
+  \newcommand{\peakSigP}{0.00025926}     % p-value at peak signal year
+  \newcommand{\peakNegLogP}{3.59}          % -log10(p) at peak signal year
+  \newcommand{\firstSigYear}{1982}           % first year A+ signal reached p<0.05
+  \newcommand{\firstSigN}{103}             % cumulative sites at first significant year
+  \newcommand{\NfirstHalf}{505}             % sites inscribed in first half of UNESCO record
+  \newcommand{\NapFirstHalf}{33}            % A+ sites in first half
+  \newcommand{\firstHalfRate}{6.5}           % A+ rate in first half (%)
+  \newcommand{\pFirstHalf}{0.004581}       % p-value, first-half A+ binomial
+  \newcommand{\NsecondHalf}{506}            % sites inscribed in second half of UNESCO record
+  \newcommand{\NapSecondHalf}{23}           % A+ sites in second half
+  \newcommand{\secondHalfRate}{4.5}           % A+ rate in second half (%)
+  \newcommand{\pSecondHalf}{0.295198}       % p-value, second-half A+ binomial
+  \newcommand{\halfFisherOR}{1.47}          % Fisher OR, first vs second half A+
+  \newcommand{\pHalfFisher}{0.106399}       % p-value, Fisher half-corpus comparison
+
+% --- analysis/global/anchor_uniqueness_audit.py
+  \newcommand{\anchorSweepNanchors}{36000}          % number of anchor points in sweep
+  \newcommand{\anchorSweepApMean}{40.4}           % mean A+ count across all anchors
+  \newcommand{\anchorSweepApStd}{6.9}            % std A+ count across all anchors
+  \newcommand{\anchorSweepGlobalMax}{60}           % global max A+/A combined at any anchor
+  \newcommand{\anchorSweepGlobalMaxA}{59}           % global max A at any anchor
+  \newcommand{\GerizimSweepApp}{7}             % Gerizim A++ in sweep
+  \newcommand{\GerizimSweepAp}{55}              % Gerizim A+ in sweep
+  \newcommand{\GerizimSweepA}{227}             % Gerizim A in sweep
+  \newcommand{\anchorSweepPctile}{98.3}          % Gerizim percentile in A+ anchor sweep
+  \newcommand{\anchorSweepGeApPct}{3.10}          % % of anchors beating Gerizim A+
+  \newcommand{\JerusalemSweepApp}{7}           % Jerusalem A++ in sweep
+  \newcommand{\JerusalemSweepAp}{56}            % Jerusalem A+ in sweep
+  \newcommand{\JerusalemSweepA}{217}           % Jerusalem A in sweep
+  \newcommand{\JerusalemSweepPctile}{98.3}        % Jerusalem percentile in A+ anchor sweep
+  \newcommand{\anchorSweepJerApPct}{2.77}          % % of anchors beating Jerusalem A+
+
+% --- analysis/unesco/verify_x18_periodicity.py
+  \newcommand{\optimalPhase}{2.18}          % optimal x.18° phase (degrees mod 3)
+  \newcommand{\optimalPhaseAp}{60}           % A+ count at optimal phase
+  \newcommand{\GerizimPhase}{2.269}         % Gerizim longitude mod 3
+  \newcommand{\phaseGap}{0.089}           % gap between Gerizim and optimal phase (°)
+  \newcommand{\phaseGapKm}{8.4}           % phase gap converted to km
+
+% --- analysis/global/peak_geography_audit.py
+  \newcommand{\JerichoAnchorAp}{36}           % A+ count with Jericho as anchor
+  \newcommand{\DeadSeaAnchorAp}{43}          % A+ count with Dead Sea centre as anchor
+  \newcommand{\MtNeboAnchorAp}{43}           % A+ count with Mt Nebo as anchor
+  \newcommand{\DamascusAnchorAp}{55}          % A+ count with Damascus as anchor
+  \newcommand{\localBestLon}{35.179}          % longitude of local peak A+ in Levant sweep
+  \newcommand{\localBestAp}{61}           % A+ count at local peak longitude
+
+% --- analysis/global/landmark_anchor_ranking.py
+  \newcommand{\GerizimTempleAp}{56}          % A+ count at Gerizim Temple anchor
+  \newcommand{\GerizimTempleRank}{41}          % rank of Gerizim Temple among all landmarks
+
+% --- analysis/global/global_corridor_comparison.py
+  \newcommand{\corridorJeruN}{5}              % Levantine corridor matches (Jerusalem anchor)
+  \newcommand{\corridorJeruSum}{281}           % sum of Levantine corridor A+ hits
+  \newcommand{\corridorJeruLevantine}{4}        % Levantine-region corridor sites
+  \newcommand{\corridorRivalLon}{23}          % longitude of best rival corridor
+  \newcommand{\corridorRivalN}{4}              % best rival corridor match count
+  \newcommand{\corridorRivalSum}{225}           % sum of best rival corridor A+ hits
+
+% --- analysis/global/corridor_precision_test.py
+  \newcommand{\corridorPrecN}{17}            % harmonics tested in corridor precision
+  \newcommand{\corridorPrecHits}{17}           % harmonics with corridor hit
+  \newcommand{\corridorPrecApp}{6}            % A++ hits in corridor precision test
+  \newcommand{\corridorPrecApOnly}{11}         % A+-only hits (not A++) in corridor
+  \newcommand{\pCorridorBinom}{1.7e-24}       % p-value, corridor binomial test
+  \newcommand{\pCorridorFisher}{1.5e-19}       % p-value, corridor Fisher test
+  \newcommand{\corridorAppOR}{20.73}           % Fisher OR, A++ vs A+ in corridor
+  \newcommand{\pCorridorAppFisher}{0.0022}       % p-value, A++ Fisher test in corridor
+  \newcommand{\corridorMeanDevKm}{2.26}        % mean deviation within corridor (km)
+  \newcommand{\corridorGlobalMeanKm}{3.47}      % mean deviation global (km)
+  \newcommand{\corridorPrecRatio}{1.53}        % precision ratio, global/corridor deviation
+  \newcommand{\pCorridorMW}{0.016}           % p-value, Mann-Whitney corridor precision
+  \newcommand{\corridorJeruHits}{16}          % corridor hits with Jerusalem anchor
+
+% --- analysis/global/anchor_site_comparison.py
+  \newcommand{\LumbiniDevKm}{0.79}          % Lumbini deviation from Gerizim (km)
+  \newcommand{\LumbiniDevM}{789}           % Lumbini deviation from Gerizim (m)
+  \newcommand{\LumbiniDevBeru}{0.000237}      % Lumbini deviation from Gerizim (beru)
+  \newcommand{\LumbiniTier}{A+}            % Lumbini tier relative to Gerizim
+  \newcommand{\LumbiniJerDevKm}{4.93}        % Lumbini deviation from Jerusalem (km)
+  \newcommand{\LumbiniJerDevBeru}{0.001480}    % Lumbini deviation from Jerusalem (beru)
+  \newcommand{\LumbiniJerTier}{A+}          % Lumbini tier relative to Jerusalem
+  \newcommand{\TakhtGerizimDevKm}{3.77}       % Takht-e Soleyman deviation from Gerizim (km)
+  \newcommand{\TakhtGerizimDevBeru}{0.001133}   % Takht-e Soleyman deviation from Gerizim (beru)
+  \newcommand{\TakhtGerizimTier}{A+}         % Takht-e Soleyman tier relative to Gerizim
+  \newcommand{\TakhtJerDevKm}{0.37}          % Takht-e Soleyman deviation from Jerusalem (km)
+  \newcommand{\TakhtJerDevM}{366}         % Takht-e Soleyman deviation from Jerusalem (m)
+  \newcommand{\TakhtJerDevBeru}{0.000110}      % Takht-e Soleyman deviation from Jerusalem (beru)
+  \newcommand{\TakhtJerTier}{A++}            % Takht-e Soleyman tier relative to Jerusalem
+  \newcommand{\KhojaGerizimDevKm}{0.23}       % Khoja Ahmed Yasawi deviation from Gerizim (km)
+  \newcommand{\KhojaGerizimDevBeru}{0.000069}   % Khoja Ahmed Yasawi deviation from Gerizim (beru)
+  \newcommand{\KhojaGerizimTier}{A++}         % Khoja Ahmed Yasawi tier relative to Gerizim
+  \newcommand{\KhojaJerDevKm}{4.37}          % Khoja Ahmed Yasawi deviation from Jerusalem (km)
+  \newcommand{\KhojaJerDevBeru}{0.001312}      % Khoja Ahmed Yasawi deviation from Jerusalem (beru)
+  \newcommand{\KhojaJerTier}{A+}            % Khoja Ahmed Yasawi tier relative to Jerusalem
+  \newcommand{\NappTotal}{7}             % total A++ sites from Gerizim anchor
+  \newcommand{\GerizimAppCount}{7}        % Gerizim A++ count (alias)
+  \newcommand{\WPPDeltaKm}{0.59}          % World Peace Pagoda deviation from Gerizim (km)
+  \newcommand{\WPPDeltaBeru}{0.000177}      % World Peace Pagoda deviation from Gerizim (beru)
+
+% --- analysis/unesco/spatial_independence_test.py
+  \newcommand{\DEFFhalf}{1.310}          % design effect (DEFF), half-degree blocks
+  \newcommand{\NeffHalf}{772}            % effective N, half-degree blocks
+  \newcommand{\pNeffHalf}{0.020}           % p-value, A+ test with effective N (half-°)
+  \newcommand{\ICChalf}{0.069}           % intracluster correlation, half-degree blocks
+  \newcommand{\DEFFquarter}{1.289}         % design effect (DEFF), quarter-degree blocks
+  \newcommand{\NeffQuarter}{784}          % effective N, quarter-degree blocks
+  \newcommand{\pNeffQuarter}{0.025}         % p-value, A+ test with effective N (quarter-°)
+  \newcommand{\blockBootCIlo}{4.04}        % block-bootstrap CI lower bound, A+ rate (%)
+  \newcommand{\blockBootCIhi}{6.87}        % block-bootstrap CI upper bound, A+ rate (%)
+  \newcommand{\blockBootZ}{2.14}           % block-bootstrap Z-score, A+
+
+% --- analysis/unesco/regional_temporal_gradient.py
+  \newcommand{\MHcommonOR}{1.582}          % Mantel-Haenszel common OR
+  \newcommand{\CMHchisq}{2.553}           % Cochran-Mantel-Haenszel chi-sq
+  \newcommand{\pCMH}{0.1101}               % p-value, CMH test
+
+% --- analysis/unesco/fdr_multiple_comparisons.py
+  \newcommand{\NtotalTests}{84}           % total tests in FDR analysis
+  \newcommand{\NconfTests}{59}           % confirmatory tests
+  \newcommand{\NexplTests}{25}           % exploratory tests
+  \newcommand{\NsurviveFDR}{41}           % tests surviving BH FDR (q<0.05)
+  \newcommand{\NsurviveBonfAll}{15}           % tests surviving Bonferroni (all tests)
+
+% --- analysis/unesco/tumulus_dome_evolution_raw_sweep.py
+  \newcommand{\NevoTotal}{132}            % total dome-evolution corpus
+  \newcommand{\NevoAp}{14}             % A+ sites in dome-evolution corpus
+  \newcommand{\evoApRate}{10.6}           % A+ rate, dome-evolution corpus (%)
+  \newcommand{\evoEnrichAp}{2.65}          % enrichment ratio, A+ in dome corpus
+  \newcommand{\pEvoAp}{0.0009}          % p-value, A+ binomial (dome corpus)
+  \newcommand{\NevoA}{41}             % Tier-A sites in dome-evolution corpus
+  \newcommand{\evoARate}{31.1}           % A rate, dome-evolution corpus (%)
+  \newcommand{\evoEnrichA}{1.55}           % enrichment ratio, A in dome corpus
+  \newcommand{\pEvoA}{0.0017}          % p-value, A binomial (dome corpus)
+  \newcommand{\NevoMound}{48}           % sites with mound stage
+  \newcommand{\NevoMoundAp}{3}            % A+ sites with mound stage
+  \newcommand{\pEvoMound}{0.3012}          % p-value, A+ binomial in mound stage
+  \newcommand{\NevoStupa}{18}            % sites with stupa stage
+  \newcommand{\NevoStupaAp}{4}             % A+ sites with stupa stage
+  \newcommand{\pEvoStupa}{0.0050}          % p-value, A+ binomial in stupa stage
+  \newcommand{\NevoDome}{75}            % sites with dome stage
+  \newcommand{\NevoDomeAp}{8}             % A+ sites with dome stage
+  \newcommand{\pEvoDome}{0.0102}          % p-value, A+ binomial in dome stage
+  \newcommand{\NevoMoundOnly}{42}          % mound-only sites (no later dome/stupa)
+  \newcommand{\NevoMoundOnlyAp}{3}           % A+ in mound-only sites
+  \newcommand{\NevoOverlap}{6}            % sites with both mound and dome/stupa stages
+
+% --- analysis/unesco/bonferroni_correction.py
+  MANUSCRIPT MACRO VALUES  (copy into \newcommand block)
+  \newcommand{\BonfK}{4}  % k = confirmatory tests (Tests 1, 2, 3, 4; Test 2b is sensitivity variant)
+  \newcommand{\pAdjTestOne}{0.041}  % Bonferroni-adj p, Test 1 (Global enrichment — full corpus A+ (binomial))
+  \newcommand{\pAdjTestTwo}{0.004}  % Bonferroni-adj p, Test 2 (Domed/spherical A+ — RAW sweep (binomial))
+  \newcommand{\pAdjTestThree}{0.013}  % Bonferroni-adj p, Test 3 (Cluster asymmetry — permutation p)
+  \newcommand{\pAdjTestFour}{0.192}  % Bonferroni-adj p, Test 4 (Temporal gradient (Cochran-Armitage))
+
+% --- analysis/global/wikidata_p1435_control_analysis.py
+  \newcommand{\WDctrlN}{62{,}785}           % Wikidata P1435 control corpus size
+  \newcommand{\WDctrlAp}{2361}            % A+ hits in Wikidata P1435 control
+  \newcommand{\WDctrlRate}{3.76}          % A+ rate, Wikidata P1435 control (%)
+  \newcommand{\WDctrlBinomP}{0.00}          % p-value, binomial test P1435 control
+  \newcommand{\WDctrlOR}{1.50}           % global odds ratio, P1435 control
+  \newcommand{\WDctrlORlo}{1.14}           % OR 95% CI lower bound
+  \newcommand{\WDctrlORhi}{1.97}           % OR 95% CI upper bound
+  \newcommand{\WDctrlZp}{0.0016}          % p-value, Z-test OR significance
+  \newcommand{\WDctrlPermP}{0.003}          % permutation p, Wikidata P1435 control
+  \newcommand{\WDctrlMHOR}{1.588}           % Mantel-Haenszel OR, stratified
+  \newcommand{\WDctrlMHchi}{10.291}          % Mantel-Haenszel chi-sq
+  \newcommand{\WDctrlMHp}{0.0013}           % p-value, Mantel-Haenszel test
+  \newcommand{\WDctrlDropEuropeOR}{1.66}     % OR after dropping European sites
+
+% --- analysis/global/dome_periodicity_audit.py
+\newcommand{\domePhaseChiSq}{14.89}     % chi-sq for dome phase uniformity
+\newcommand{\domePhaseChiP}{0.0940}     % p-value, dome phase chi-sq
+\newcommand{\domePhaseChiSig}{~}        % significance label
+\newcommand{\fullPhaseChiP}{0.0195}     % p-value, full-corpus phase chi-sq
+\newcommand{\domePhaseKSD}{0.0975}      % KS statistic, dome vs full phases
+\newcommand{\domePhaseKSP}{0.3854}      % KS p-value, dome vs full phases
+\newcommand{\domeGerizimPctile}{100.0}    % Gerizim's percentile in dome sweep
+\newcommand{\domeArtMeanAp}{10.00}      % mean dome A+ at x.18°E anchors
+\newcommand{\domeArtMaxAp}{10}         % max dome A+ at any x.18°E anchor
+\newcommand{\domeArtBeatGer}{0}         % x.18° anchors beating Gerizim in dome sweep
+\newcommand{\domeArtTotal}{120}          % total x.18°E anchors in sweep
+\newcommand{\domeArtifactN}{20}          % dome sites in x.18° artifact window
+\newcommand{\domeResidualN}{70}          % dome sites outside artifact window
+\newcommand{\domeResidualAp}{0}          % A+ in residual
+\newcommand{\domeResidualRate}{0.0}     % A+ rate in residual (%)
+\newcommand{\domeResidualEnrich}{0.00}    % enrichment in residual
+\newcommand{\domeResidualP}{1.0000}      % binomial p, residual
+\newcommand{\domeResidualSig}{ns}        % significance label, residual
+\newcommand{\domeBandN}{20}           % dome sites in artifact-proximate band
+\newcommand{\domeBandAp}{11}          % dome A+ in band
+\newcommand{\domeBandRate}{55.0}      % dome A+ rate in band (%)
+\newcommand{\nonDomeBandN}{98}       % non-dome sites in band
+\newcommand{\nonDomeBandAp}{45}     % non-dome A+ in band
+\newcommand{\nonDomeBandRate}{45.9} % non-dome A+ rate in band (%)
+\newcommand{\domeBandFisherOR}{1.44}  % Fisher OR, dome vs non-dome in band
+\newcommand{\domeBandFisherP}{0.4738}  % Fisher p, dome vs non-dome in band
+\newcommand{\domeBandFisherSig}{ns}  % significance label
+
+% --- analysis/unesco/simulation_null_model.py
+  \newcommand{\simNperms}{100,000}        % number of permutations in null model
+  \newcommand{\simDomePermZ}{3.20}         % permutation Z-score, dome corpus
+  \newcommand{\simDomePermP}{0.004}          % permutation p, dome corpus
+  \newcommand{\simDomeBootP}{0.006}          % bootstrap p, dome corpus
+  \newcommand{\simCanonPermP}{0.127}         % permutation p, canonical sites
+  \newcommand{\simPreTwoKPermP}{0.094}        % permutation p, pre-2000 BCE sites
+  \newcommand{\simPostTwoKPermP}{0.944}       % permutation p, post-2000 BCE sites
+  \newcommand{\simKDEZ}{2.50}           % KDE-based Z-score, null model
+  \newcommand{\simKDEP}{0.011}           % KDE-based p-value, null model
+  \newcommand{\simBootFullMean}{56.0}         % bootstrap mean A+, full corpus
+  \newcommand{\simBootFullStd}{7.3}          % bootstrap std A+, full corpus
+  \newcommand{\simKDEMean}{40.4}           % KDE null-model mean A+
+  \newcommand{\simKDEStd}{6.2}            % KDE null-model std A+
+
+% --- analysis/americas/americas_harmonic_depletion_audit.py
+  \newcommand{\AmericasCtrlN}{20469}          % Americas control corpus size
+  \newcommand{\AmericasCtrlAp}{104}           % A+ hits in Americas control
+  \newcommand{\AmericasCtrlRate}{0.508}         % A+ rate, Americas control (%)
+  \newcommand{\AmericasCtrlExpected}{819}       % expected A+ hits under null
+  \newcommand{\AmericasCtrlDeplFactor}{0.127}      % harmonic depletion factor (observed/expected)
+  \newcommand{\pAmericasDepl}{$< 10^{-200}$}   % p-value, Americas harmonic depletion
+

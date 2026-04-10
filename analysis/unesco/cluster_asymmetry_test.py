@@ -522,3 +522,39 @@ print(f"""
   This test does NOT require one-per-complex deduplication.
   Instead of discarding the clusters, it USES them as the signal.
 """)
+
+# ── LaTeX macros (GROUP 2) ────────────────────────────────────────────────────
+perm_z = (mean_ap - np.mean(perm_means)) / max(np.std(perm_means), 0.001)
+n_ap_harmonics = len(density_at_ap_harmonics)
+n_nonap_harmonics = len(density_at_nonap_harmonics)
+mean_ap_h = np.mean(density_at_ap_harmonics) if density_at_ap_harmonics else 0
+mean_nonap_h = np.mean(density_at_nonap_harmonics) if density_at_nonap_harmonics else 0
+
+print("  % LaTeX macros (GROUP 2):")
+print(f"  \\newcommand{{\\NclusterTotal}}{{{N}}}          % full Cultural/Mixed corpus")
+print(f"  \\newcommand{{\\NclusterAp}}{{{n_Ap}}}              % Tier-A+ sites")
+print(f"  \\newcommand{{\\clusterApRate}}{{{100*n_Ap/N:.1f}}}           % A+ rate (%)")
+print(f"  \\newcommand{{\\clusterApBinom}}{{{bt_Ap.pvalue:.4f}}}        % binomial p, A+")
+print(f"  \\newcommand{{\\clusterApMean}}{{{mean_ap:.2f}}}          % mean cluster size, A+ sites")
+print(f"  \\newcommand{{\\clusterNonApMean}}{{{mean_nonap:.2f}}}          % mean cluster size, non-A+ sites")
+print(f"  \\newcommand{{\\clusterRatio}}{{{mean_ap / max(mean_nonap, 0.01):.2f}}}           % A+/non-A+ cluster size ratio")
+print(f"  \\newcommand{{\\clusterMWp}}{{{mw_p:.4f}}}        % Mann-Whitney p (site-level)")
+print(f"  \\newcommand{{\\clusterPermP}}{{{perm_p:.4f}}}        % permutation p (site-level)")
+print(f"  \\newcommand{{\\clusterPermZ}}{{{perm_z:.2f}}}          % permutation Z-score")
+print(f"  \\newcommand{{\\NclusterApHarmonics}}{{{n_ap_harmonics}}}              % harmonics with ≥1 A+ site")
+print(f"  \\newcommand{{\\NclusterNonApHarmonics}}{{{n_nonap_harmonics}}}              % harmonics with 0 A+ sites")
+print(f"  \\newcommand{{\\clusterHarmonicApMean}}{{{mean_ap_h:.1f}}}          % mean UNESCO sites/harmonic (A+ harmonics)")
+print(f"  \\newcommand{{\\clusterHarmonicNonApMean}}{{{mean_nonap_h:.1f}}}           % mean UNESCO sites/harmonic (non-A+ harmonics)")
+print(f"  \\newcommand{{\\clusterHarmonicRatio}}{{{mean_ap_h / max(mean_nonap_h, 0.01):.2f}}}           % harmonic-level density ratio")
+print(f"  \\newcommand{{\\clusterHarmonicMWp}}{{{mw2_p:.4f}}}        % Mann-Whitney p (harmonic-level)")
+print(f"  \\newcommand{{\\NclusterNodeAp}}{{{n_node_ap_ps}}}              % node-side A+ sites (phase-split)")
+print(f"  \\newcommand{{\\NclusterAntiAp}}{{{n_anti_ap_ps}}}              % anti-side A+ sites (phase-split)")
+print(f"  \\newcommand{{\\clusterNodeApMean}}{{{mean_nap:.2f}}}          % mean cluster size, node-side A+")
+print(f"  \\newcommand{{\\clusterAntiApMean}}{{{mean_aap:.2f}}}          % mean cluster size, anti-side A+")
+print(f"  \\newcommand{{\\clusterNodeNonApMean}}{{{mean_nna:.2f}}}          % mean cluster size, node-side non-A+")
+print(f"  \\newcommand{{\\clusterAntiNonApMean}}{{{mean_ana:.2f}}}          % mean cluster size, anti-side non-A+")
+print(f"  \\newcommand{{\\clusterNodeVsAntiApRatio}}{{{ratio_nap_aap:.2f}}}           % node A+ / anti A+ cluster ratio")
+print(f"  \\newcommand{{\\clusterNodeVsAntiApMWp}}{{{p_nap_vs_aap:.4f}}}        % Mann-Whitney p, node A+ > anti A+")
+print(f"  \\newcommand{{\\clusterNodeAllMean}}{{{mean_nall:.2f}}}          % mean cluster size, all node-side")
+print(f"  \\newcommand{{\\clusterAntiAllMean}}{{{mean_aall:.2f}}}          % mean cluster size, all anti-side")
+print(f"  \\newcommand{{\\clusterNodeVsAntiAllMWp}}{{{p_nall_vs_aall:.4f}}}        % Mann-Whitney p, all node > all anti")

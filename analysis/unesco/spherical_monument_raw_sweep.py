@@ -209,3 +209,28 @@ print()
 print("  Note: Sites with unambiguous keywords (stupa/tholos) are always")
 print("  in both populations. Only ambiguous-keyword-only sites differ.")
 print()
+
+# ── LaTeX macros (GROUP 1) ────────────────────────────────────────────────────
+enr_A = (nA / N_raw) / P_NULL_A if N_raw else 0
+mean_dev = float(np.mean([s["dev"] for s in raw_sites])) if raw_sites else 0
+N_validated = 83
+N_context_rejected = N_raw - N_validated
+
+print("  % LaTeX macros (GROUP 1):")
+print(f"  \\newcommand{{\\NcircTotal}}{{{N_raw}}}           % raw-sweep population size")
+print(f"  \\newcommand{{\\NcircValidated}}{{{N_validated}}}             % context-validated population (Test 2)")
+print(f"  \\newcommand{{\\NcircKeywords}}{{{len(FORM_KEYWORDS)}}}               % number of dome-form keywords")
+print(f"  \\newcommand{{\\NcircExcluded}}{{{0}}}               % excluded (natural/no-coord)")
+print(f"  \\newcommand{{\\NcircContextRejected}}{{{N_context_rejected}}}               % added by raw sweep vs validated")
+print(f"  \\newcommand{{\\NcircTierAp}}{{{nAp}}}             % Tier-A+ hits (raw sweep)")
+print(f"  \\newcommand{{\\NcircTierA}}{{{nA}}}             % Tier-A hits (raw sweep)")
+print(f"  \\newcommand{{\\NcircTierB}}{{{nB}}}             % Tier-B hits (raw sweep)")
+print(f"  \\newcommand{{\\NcircTierC}}{{{nC}}}               % Tier-C hits (raw sweep)")
+print(f"  \\newcommand{{\\pCircAp}}{{{bt_Ap.pvalue:.4f}}}          % p-value, A+ binomial (raw sweep)")
+print(f"  \\newcommand{{\\pCircA}}{{{bt_A.pvalue:.4f}}}          % p-value, A  binomial (raw sweep)")
+print(f"  \\newcommand{{\\pCircChi}}{{{chi_p:.4f}}}          % chi-sq uniform, 5 bins, df=4 (raw sweep)")
+print(f"  \\newcommand{{\\GerizimPctileAp}}{{{pctile:.0f}}}            % anchor-sweep percentile, A+ (raw sweep)")
+print(f"  \\newcommand{{\\GerizimPctileA}}{{{pctile:.0f}}}            % anchor-sweep percentile, A  (raw sweep)")
+print(f"  \\newcommand{{\\circEnrichAp}}{{{enr_Ap:.2f}}}           % enrichment ratio, A+")
+print(f"  \\newcommand{{\\circEnrichA}}{{{enr_A:.2f}}}           % enrichment ratio, A")
+print(f"  \\newcommand{{\\circMeanDev}}{{{mean_dev:.4f}}}        % mean beru deviation (raw sweep)")

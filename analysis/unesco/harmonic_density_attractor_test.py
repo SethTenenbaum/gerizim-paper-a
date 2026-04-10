@@ -298,3 +298,32 @@ print(f"""
   used as a founding meridian: the founding city anchors the tradition,
   and all subsequent foundations in that tradition cluster around it.
 """)
+
+# ── LaTeX macros (GROUP 3) ────────────────────────────────────────────────────
+# MWU at 0.3° window
+ap03  = [s["n03"] for s in aplus]
+nap03 = [s["n03"] for s in non_aplus]
+_, p03_mw = mannwhitneyu(ap03, nap03, alternative="greater")
+_, p10_mw = mannwhitneyu([s["n10"] for s in aplus], [s["n10"] for s in non_aplus], alternative="greater")
+
+# Nara/Kyoto max pairwise distance
+ANTINODE_LON = 135.77
+band_c = [s for s in sites if abs(s["lon"] - ANTINODE_LON) <= 0.3]
+if len(band_c) >= 2:
+    lons_band = [s["lon"] for s in band_c]
+    max_dist = max(abs(lons_band[i] - lons_band[j]) * 111.0
+                   for i in range(len(lons_band)) for j in range(i+1, len(lons_band)))
+else:
+    max_dist = 0.0
+
+print("  % LaTeX macros (GROUP 3):")
+print(f"  \\newcommand{{\\attractorApMeanN}}{{{np.mean(ap03):.2f}}}           % mean 0.3° neighbours, A+ sites")
+print(f"  \\newcommand{{\\attractorNonApMeanN}}{{{np.mean(nap03):.2f}}}           % mean 0.3° neighbours, non-A+ sites")
+print(f"  \\newcommand{{\\attractorMWp}}{{{p03_mw:.4f}}}        % Mann-Whitney p, A+ > non-A+ at 0.3°")
+print(f"  \\newcommand{{\\attractorMWpWide}}{{{p10_mw:.4f}}}        % Mann-Whitney p, A+ > non-A+ at 1.0°")
+print(f"  \\newcommand{{\\attractorSpearmanRho}}{{{rho03:+.3f}}}          % Spearman rho, dev vs 0.3° density")
+print(f"  \\newcommand{{\\attractorSpearmanP}}{{{p03:.5f}}}       % Spearman p-value")
+print(f"  \\newcommand{{\\attractorHarmonicRatio}}{{{ratio:.2f}}}           % A+ harmonic / non-A+ harmonic density ratio")
+print(f"  \\newcommand{{\\attractorHarmonicMWp}}{{{p3:.4f}}}        % Mann-Whitney p, harmonic-level density")
+print(f"  \\newcommand{{\\attractorEUMWp}}{{{peu:.4f}}}        % Mann-Whitney p, Europe-only sub-analysis")
+print(f"  \\newcommand{{\\NaraKyotoMaxDist}}{{{max_dist:.1f}}}          % max pairwise distance (km), Nara/Kyoto cluster")

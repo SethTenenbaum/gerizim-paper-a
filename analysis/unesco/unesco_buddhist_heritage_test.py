@@ -474,3 +474,102 @@ print(f"""
   Tier-A+ (not Tier-A), indicating precise rather than approximate
   alignment.
 """)
+
+# ── LaTeX macros (GROUP 4) ────────────────────────────────────────────────────
+mauryan = [s for s in buddhist_sites if s.get("region") == "South/SE Asian (Mauryan lineage)"]
+east_asian = [s for s in buddhist_sites if s.get("region") == "East Asian"]
+silk_road = [s for s in buddhist_sites if s.get("region") == "Silk Road/Central Asian"]
+
+n_mauryan_ap = sum(1 for s in mauryan if is_aplus(s["tier"]))
+n_east_ap    = sum(1 for s in east_asian if is_aplus(s["tier"]))
+n_silk_ap    = sum(1 for s in silk_road if is_aplus(s["tier"]))
+
+# Anti-node numbers
+anti_eligible = [s for s in buddhist_sites if s["anti_dev"] < s["dev"]]
+n_anti = len(anti_eligible)
+n_anti_Ap = sum(1 for s in anti_eligible if s["anti_dev"] <= TIER_APLUS)
+n_anti_A  = sum(1 for s in anti_eligible if s["anti_dev"] <= TIER_A_MAX)
+
+bt_anti_Ap = binomtest(n_anti_Ap, n_anti, P_NULL_AP, alternative="greater") if n_anti > 0 else None
+bt_anti_A  = binomtest(n_anti_A,  n_anti, P_NULL_A,  alternative="greater") if n_anti > 0 else None
+
+node_eligible = [s for s in buddhist_sites if not (s["anti_dev"] < s["dev"])]
+n_node_bud = len(node_eligible)
+n_node_Ap_bud = sum(1 for s in node_eligible if is_aplus(s["tier"]))
+
+# Fisher node vs anti
+if n_node_bud > 0 and n_anti > 0:
+    from scipy.stats import fisher_exact as _fe
+    ct_bud = [[n_node_Ap_bud, n_node_bud - n_node_Ap_bud],
+              [n_anti_Ap, n_anti - n_anti_Ap]]
+    or_bud, fe_bud = _fe(ct_bud, alternative="greater")
+else:
+    or_bud, fe_bud = 0, 1.0
+
+# Mauryan node vs anti
+m_anti = [s for s in mauryan if s["anti_dev"] < s["dev"]]
+m_node = [s for s in mauryan if not (s["anti_dev"] < s["dev"])]
+n_m_anti_Ap = sum(1 for s in m_anti if s["anti_dev"] <= TIER_APLUS)
+n_m_node_Ap = sum(1 for s in m_node if is_aplus(s["tier"]))
+if m_node and m_anti:
+    ct_m = [[n_m_node_Ap, len(m_node) - n_m_node_Ap],
+            [n_m_anti_Ap, len(m_anti) - n_m_anti_Ap]]
+    or_m, fe_m = _fe(ct_m, alternative="greater")
+else:
+    or_m, fe_m = float("inf"), 1.0
+
+# Named anti-node site deviations
+def find_anti_site(name_fragment):
+    for s in buddhist_sites:
+        if name_fragment.lower() in s["name"].lower():
+            return s
+    return None
+
+nara = find_anti_site("Nara")
+kyoto = find_anti_site("Kyoto")
+horyu = find_anti_site("Horyu") or find_anti_site("Hōryū")
+sulaiman = find_anti_site("Sulaiman")
+
+print("  % LaTeX macros (GROUP 4):")
+print(f"  \\newcommand{{\\NbudTotal}}{{{N_bud}}}              % total UNESCO Buddhist heritage sites")
+print(f"  \\newcommand{{\\NbudTierAp}}{{{n_Ap}}}               % Tier-A+ Buddhist sites")
+print(f"  \\newcommand{{\\budApRate}}{{{100*n_Ap/N_bud:.1f}}}            % A+ rate (%)")
+print(f"  \\newcommand{{\\pBudAp}}{{{bt_Ap.pvalue:.4f}}}         % p-value, A+ binomial")
+print(f"  \\newcommand{{\\budApEnrich}}{{{(n_Ap/N_bud)/P_NULL_AP:.2f}}}           % A+ enrichment ratio")
+print(f"  \\newcommand{{\\NbudTierA}}{{{n_A}}}              % Tier-A Buddhist sites")
+print(f"  \\newcommand{{\\budARate}}{{{100*n_A/N_bud:.1f}}}           % A rate (%)")
+print(f"  \\newcommand{{\\pBudA}}{{{bt_A.pvalue:.4f}}}         % p-value, A binomial")
+print(f"  \\newcommand{{\\budAEnrich}}{{{(n_A/N_bud)/P_NULL_A:.2f}}}           % A enrichment ratio")
+print(f"  \\newcommand{{\\NbudMauryan}}{{{len(mauryan)}}}              % Mauryan-lineage sub-group N")
+print(f"  \\newcommand{{\\NbudMauryanAp}}{{{n_mauryan_ap}}}               % Mauryan-lineage A+")
+print(f"  \\newcommand{{\\budMauryanApRate}}{{{100*n_mauryan_ap/max(len(mauryan),1):.1f}}}            % Mauryan A+ rate (%)")
+print(f"  \\newcommand{{\\NbudEastAsian}}{{{len(east_asian)}}}              % East Asian sub-group N")
+print(f"  \\newcommand{{\\NbudEastAsianAp}}{{{n_east_ap}}}               % East Asian A+")
+print(f"  \\newcommand{{\\NbudSilkRoad}}{{{len(silk_road)}}}               % Silk Road sub-group N")
+print(f"  \\newcommand{{\\NbudSilkRoadAp}}{{{n_silk_ap}}}               % Silk Road A+")
+print(f"  \\newcommand{{\\budSilkRoadApRate}}{{{100*n_silk_ap/max(len(silk_road),1):.1f}}}           % Silk Road A+ rate (%)")
+print(f"  \\newcommand{{\\NbudAntiEligible}}{{{n_anti}}}              % anti-node-eligible Buddhist sites")
+print(f"  \\newcommand{{\\NbudAntiAp}}{{{n_anti_Ap}}}               % anti-node A+ Buddhist sites")
+print(f"  \\newcommand{{\\budAntiApRate}}{{{100*n_anti_Ap/max(n_anti,1):.1f}}}            % anti-node A+ rate (%)")
+print(f"  \\newcommand{{\\pBudAntiAp}}{{{bt_anti_Ap.pvalue if bt_anti_Ap else 1.0:.4f}}}         % p-value, anti-node A+ binomial")
+print(f"  \\newcommand{{\\NbudAntiA}}{{{n_anti_A}}}              % anti-node Tier-A Buddhist sites")
+print(f"  \\newcommand{{\\budAntiARate}}{{{100*n_anti_A/max(n_anti,1):.1f}}}           % anti-node A rate (%)")
+print(f"  \\newcommand{{\\pBudAntiA}}{{{bt_anti_A.pvalue if bt_anti_A else 1.0:.4f}}}         % p-value, anti-node A binomial")
+print(f"  \\newcommand{{\\budNodeApRate}}{{{100*n_node_Ap_bud/max(n_node_bud,1):.1f}}}           % node-side A+ rate (%)")
+print(f"  \\newcommand{{\\budFisherOR}}{{{or_bud:.2f}}}           % Fisher OR, node vs anti-node")
+print(f"  \\newcommand{{\\budFisherP}}{{{fe_bud:.4f}}}         % Fisher p, node vs anti-node")
+or_m_str = "\\infty" if or_m == float("inf") else f"{or_m:.2f}"
+print(f"  \\newcommand{{\\budMauryanFisherOR}}{{{or_m_str}}}          % Fisher OR, Mauryan node vs anti-node")
+print(f"  \\newcommand{{\\budMauryanFisherP}}{{{fe_m:.4f}}}         % Fisher p, Mauryan node vs anti-node")
+if nara:
+    print(f"  \\newcommand{{\\NaraAntiDev}}{{{nara['anti_dev']:.5f}}}      % Nara anti-node deviation (beru)")
+    print(f"  \\newcommand{{\\NaraAntiKm}}{{{nara['anti_dev_km']:.1f}}}            % Nara anti-node deviation (km)")
+if kyoto:
+    print(f"  \\newcommand{{\\KyotoAntiDev}}{{{kyoto['anti_dev']:.5f}}}      % Kyoto anti-node deviation (beru)")
+    print(f"  \\newcommand{{\\KyotoAntiKm}}{{{kyoto['anti_dev_km']:.1f}}}            % Kyoto anti-node deviation (km)")
+if horyu:
+    print(f"  \\newcommand{{\\HoryuAntiDev}}{{{horyu['anti_dev']:.5f}}}      % Hōryū-ji anti-node deviation (beru)")
+    print(f"  \\newcommand{{\\HoryuAntiKm}}{{{horyu['anti_dev_km']:.1f}}}            % Hōryū-ji anti-node deviation (km)")
+if sulaiman:
+    print(f"  \\newcommand{{\\SulaimanAntiDev}}{{{sulaiman['anti_dev']:.5f}}}      % Sulaiman-Too anti-node deviation (beru)")
+    print(f"  \\newcommand{{\\SulaimanAntiKm}}{{{sulaiman['anti_dev_km']:.1f}}}            % Sulaiman-Too anti-node deviation (km)")

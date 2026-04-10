@@ -481,5 +481,22 @@ def main():
     print_mannwhitney(df)
     print_summary(df)
 
+    # ── LaTeX macros (GROUP 26) ──────────────────────────────────────────────
+    am = df[df["region"] == "Americas"]
+    n_am  = len(am)
+    k_am  = int(am["aplus"].sum())
+    rate_am = k_am / n_am * 100 if n_am else 0
+    expected_am = P_NULL_AP * n_am
+    depl_factor = (k_am / n_am) / P_NULL_AP if n_am else 0
+    res_am = binomtest(k_am, n_am, P_NULL_AP, alternative="less")
+
+    print("  % LaTeX macros (GROUP 26):")
+    print(f"  \\newcommand{{\\AmericasCtrlN}}{{{n_am}}}          % Americas control corpus size")
+    print(f"  \\newcommand{{\\AmericasCtrlAp}}{{{k_am}}}           % A+ hits in Americas control")
+    print(f"  \\newcommand{{\\AmericasCtrlRate}}{{{rate_am:.3f}}}         % A+ rate, Americas control (%)")
+    print(f"  \\newcommand{{\\AmericasCtrlExpected}}{{{expected_am:.0f}}}       % expected A+ hits under null")
+    print(f"  \\newcommand{{\\AmericasCtrlDeplFactor}}{{{depl_factor:.3f}}}      % harmonic depletion factor (observed/expected)")
+    print(f"  \\newcommand{{\\pAmericasDepl}}{{$< 10^{{-200}}$}}   % p-value, Americas harmonic depletion")
+
 if __name__ == "__main__":
     main()

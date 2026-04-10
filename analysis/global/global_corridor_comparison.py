@@ -343,3 +343,23 @@ for alt_thresh in [53, 50]:
 print(f"\n\n{'=' * 100}")
 print("  DONE — global_corridor_comparison.py")
 print(f"{'=' * 100}")
+
+# ── LaTeX macros (GROUP 14) ───────────────────────────────────────────────────
+if jerusalem_cluster:
+    j_c = jerusalem_cluster
+    j_n_m = len(j_c)
+    j_sum_m = sum(s["ap_count"] for s in j_c)
+    j_lev = sum(1 for s in j_c if 30 <= s.get("lat", 0) <= 38)  # rough Levantine check
+
+    best_r = max(other_clusters, key=lambda c: len(c)) if other_clusters else []
+    r_center = np.mean([s["lon"] for s in best_r]) if best_r else 0
+    r_n_m = len(best_r)
+    r_sum_m = sum(s["ap_count"] for s in best_r) if best_r else 0
+
+    print("  % LaTeX macros (GROUP 14):")
+    print(f"  \\newcommand{{\\corridorJeruN}}{{{j_n_m}}}              % Levantine corridor matches (Jerusalem anchor)")
+    print(f"  \\newcommand{{\\corridorJeruSum}}{{{j_sum_m}}}           % sum of Levantine corridor A+ hits")
+    print(f"  \\newcommand{{\\corridorJeruLevantine}}{{{j_lev}}}        % Levantine-region corridor sites")
+    print(f"  \\newcommand{{\\corridorRivalLon}}{{{r_center:.0f}}}          % longitude of best rival corridor")
+    print(f"  \\newcommand{{\\corridorRivalN}}{{{r_n_m}}}              % best rival corridor match count")
+    print(f"  \\newcommand{{\\corridorRivalSum}}{{{r_sum_m}}}           % sum of best rival corridor A+ hits")

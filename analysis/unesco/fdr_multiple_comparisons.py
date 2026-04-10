@@ -236,6 +236,20 @@ def main():
         if bh_q[i] < 0.05:
             print(f"    • {names[i]:45s}  p = {pvals[i]:.4f}  q = {bh_q[i]:.4f}")
 
+    # ── LaTeX macros (GROUP 19) ──────────────────────────────────────────────
+    n_conf = len(conf_idx)
+    n_expl = m - n_conf
+    n_survive_fdr = int(np.sum(bh_q < 0.05))
+    n_survive_bonf = int(np.sum(bonf < 0.05))
+
+    print()
+    print("  % LaTeX macros (GROUP 19):")
+    print(f"  \\newcommand{{\\NtotalTests}}{{{m}}}           % total tests in FDR analysis")
+    print(f"  \\newcommand{{\\NconfTests}}{{{n_conf}}}           % confirmatory tests")
+    print(f"  \\newcommand{{\\NexplTests}}{{{n_expl}}}           % exploratory tests")
+    print(f"  \\newcommand{{\\NsurviveFDR}}{{{n_survive_fdr}}}           % tests surviving BH FDR (q<0.05)")
+    print(f"  \\newcommand{{\\NsurviveBonfAll}}{{{n_survive_bonf}}}           % tests surviving Bonferroni (all tests)")
+
     print()
     return 0
 

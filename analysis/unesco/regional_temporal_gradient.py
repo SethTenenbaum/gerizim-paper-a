@@ -375,7 +375,7 @@ print("""
 
 # Print LaTeX macros
 if mh_tables:
-    print(f"  \\newcommand{{\\MHcommonOR}}{{{MH_OR:.3f}}}")
-    print(f"  \\newcommand{{\\CMHchisq}}{{{chi_sq:.3f}}}")
-    print(f"  \\newcommand{{\\pCMH}}{{{p_cmh:.4f}}}")
+    print(f"  \\newcommand{{\\MHcommonOR}}{{{MH_OR:.3f}}}          % Mantel-Haenszel common OR")
+    print(f"  \\newcommand{{\\CMHchisq}}{{{chi_sq:.3f}}}           % Cochran-Mantel-Haenszel chi-sq")
+    print(f"  \\newcommand{{\\pCMH}}{{{p_cmh:.4f}}}               % p-value, CMH test")
 print()

@@ -293,3 +293,51 @@ print(f"""
   This is the pre-specified, no-keyword, no-selection result.
   The founding-site pattern is the explanation FOR that result.
 """)
+
+# ── LaTeX macros (GROUP 5 — origin_sites_test.py portion) ─────────────────────
+n_all, nap_all, _, p_all, enr_all = stats(sites)
+n_canon, nap_canon, _, p_canon, enr_canon = stats(early)
+pre2k = [s for s in sites if s["yr"] < 2000]
+n_pre2k, nap_pre2k, _, p_pre2k, enr_pre2k = stats(pre2k)
+n_modern, nap_modern, _, p_modern, enr_modern = stats(late)
+
+# religion subsets
+christian_kws = next(kws for name, kws in RELIGION_SETS if name.lower().startswith("christ"))
+christian = [s for s in sites if any(k in s["text"] for k in christian_kws)]
+n_chr, nap_chr, _, p_chr, enr_chr = stats(christian)
+
+n_rel, nap_rel, _, p_rel, enr_rel = stats(any_relig)
+
+print("  % LaTeX macros (GROUP 5 — origin_sites_test.py):")
+print(f"  \\newcommand{{\\NoriginCorpus}}{{{n_all}}}          % full Cultural/Mixed corpus")
+print(f"  \\newcommand{{\\NoriginAp}}{{{nap_all}}}              % full-corpus A+ count")
+print(f"  \\newcommand{{\\originApRate}}{{{100*nap_all/n_all:.1f}}}            % full-corpus A+ rate (%)")
+print(f"  \\newcommand{{\\pOriginAll}}{{{p_all:.4f}}}         % p-value, full-corpus A+ binomial")
+print(f"  \\newcommand{{\\originEnrichAll}}{{{enr_all:.2f}}}           % enrichment ratio, full corpus")
+print(f"  \\newcommand{{\\NcanonSites}}{{{n_canon}}}            % sites inscribed 1978–1984 (founding canon)")
+print(f"  \\newcommand{{\\NcanonAp}}{{{nap_canon}}}              % canon A+ count")
+print(f"  \\newcommand{{\\canonApRate}}{{{100*nap_canon/n_canon:.1f}}}            % canon A+ rate (%)")
+print(f"  \\newcommand{{\\pCanon}}{{{p_canon:.4f}}}         % p-value, canon A+ binomial")
+print(f"  \\newcommand{{\\canonEnrich}}{{{enr_canon:.2f}}}           % enrichment ratio, canon")
+print(f"  \\newcommand{{\\NpreTwoK}}{{{n_pre2k}}}            % sites inscribed pre-2000")
+print(f"  \\newcommand{{\\NpreTwoKAp}}{{{nap_pre2k}}}              % pre-2000 A+ count")
+print(f"  \\newcommand{{\\preTwoKApRate}}{{{100*nap_pre2k/n_pre2k:.1f}}}            % pre-2000 A+ rate (%)")
+print(f"  \\newcommand{{\\pPreTwoK}}{{{p_pre2k:.4f}}}         % p-value, pre-2000 A+ binomial")
+print(f"  \\newcommand{{\\preTwoKEnrich}}{{{enr_pre2k:.2f}}}           % enrichment ratio, pre-2000")
+print(f"  \\newcommand{{\\NmodernSites}}{{{n_modern}}}            % sites inscribed 2000+")
+print(f"  \\newcommand{{\\NmodernAp}}{{{nap_modern}}}              % modern A+ count")
+print(f"  \\newcommand{{\\modernApRate}}{{{100*nap_modern/n_modern:.1f}}}            % modern A+ rate (%)")
+print(f"  \\newcommand{{\\pModern}}{{{p_modern:.4f}}}         % p-value, modern A+ binomial")
+print(f"  \\newcommand{{\\modernEnrich}}{{{enr_modern:.2f}}}           % enrichment ratio, modern")
+print(f"  \\newcommand{{\\pFisherCanonModern}}{{{p_fl:.4f}}}         % Fisher p, canon vs modern")
+print(f"  \\newcommand{{\\orCanonModern}}{{{or_fl:.2f}}}           % Fisher OR, canon vs modern")
+print(f"  \\newcommand{{\\NreligUnion}}{{{n_rel}}}            % any-religion union N")
+print(f"  \\newcommand{{\\NreligUnionAp}}{{{nap_rel}}}              % religion-union A+ count")
+print(f"  \\newcommand{{\\religUnionApRate}}{{{100*nap_rel/n_rel:.1f}}}            % religion-union A+ rate (%)")
+print(f"  \\newcommand{{\\pReligUnion}}{{{p_rel:.4f}}}         % p-value, religion-union A+ binomial")
+print(f"  \\newcommand{{\\religUnionEnrich}}{{{enr_rel:.2f}}}           % enrichment ratio, religion union")
+print(f"  \\newcommand{{\\NchristSites}}{{{n_chr}}}            % Christian sacred sites N")
+print(f"  \\newcommand{{\\NchristAp}}{{{nap_chr}}}              % Christian sites A+ count")
+print(f"  \\newcommand{{\\christApRate}}{{{100*nap_chr/n_chr:.1f}}}            % Christian sites A+ rate (%)")
+print(f"  \\newcommand{{\\pChrist}}{{{p_chr:.4f}}}         % p-value, Christian sites A+ binomial")
+print(f"  \\newcommand{{\\christEnrich}}{{{enr_chr:.2f}}}           % enrichment ratio, Christian sites")

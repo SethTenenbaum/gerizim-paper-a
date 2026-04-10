@@ -305,5 +305,21 @@ def main():
   is anomalous given the empirical longitude clumping.
 """)
 
+    # ── LaTeX macros (GROUP 25) ──────────────────────────────────────────────
+    print("  % LaTeX macros (GROUP 25):")
+    print(f"  \\newcommand{{\\simNperms}}{{{N_PERMS:,}}}        % number of permutations in null model")
+    print(f"  \\newcommand{{\\simDomePermZ}}{{{z_dome:.2f}}}         % permutation Z-score, dome corpus")
+    print(f"  \\newcommand{{\\simDomePermP}}{{{p_perm_dome:.3f}}}          % permutation p, dome corpus")
+    print(f"  \\newcommand{{\\simDomeBootP}}{{{p_boot_dome:.3f}}}          % bootstrap p, dome corpus")
+    print(f"  \\newcommand{{\\simCanonPermP}}{{{p_perm_canon:.3f}}}         % permutation p, canonical sites")
+    print(f"  \\newcommand{{\\simPreTwoKPermP}}{{{p_perm_pre2k:.3f}}}        % permutation p, pre-2000 BCE sites")
+    print(f"  \\newcommand{{\\simPostTwoKPermP}}{{{p_perm_post2k:.3f}}}       % permutation p, post-2000 BCE sites")
+    print(f"  \\newcommand{{\\simKDEZ}}{{{z_kde:.2f}}}           % KDE-based Z-score, null model")
+    print(f"  \\newcommand{{\\simKDEP}}{{{p_kde:.3f}}}           % KDE-based p-value, null model")
+    print(f"  \\newcommand{{\\simBootFullMean}}{{{boot_mean:.1f}}}         % bootstrap mean A+, full corpus")
+    print(f"  \\newcommand{{\\simBootFullStd}}{{{boot_std:.1f}}}          % bootstrap std A+, full corpus")
+    print(f"  \\newcommand{{\\simKDEMean}}{{{kde_mean:.1f}}}           % KDE null-model mean A+")
+    print(f"  \\newcommand{{\\simKDEStd}}{{{kde_std:.1f}}}            % KDE null-model std A+")
+
 if __name__ == "__main__":
     main()

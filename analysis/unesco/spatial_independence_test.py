@@ -282,5 +282,34 @@ def main():
   the result.
 """)
 
+    # ── LaTeX macros (GROUP 17) ──────────────────────────────────────────────
+    # DEFF at ±0.5°
+    d_half = design_effect_correction(sites, bandwidth=0.50)
+    n_eff_half = max(1, int(round(d_half["N_eff"])))
+    ap_eff_half = max(1, int(round(obs_ap * d_half["N_eff"] / d_half["N"])))
+    p_eff_half = binomtest(ap_eff_half, n_eff_half, P_NULL_AP, alternative='greater').pvalue
+
+    # DEFF at ±0.25°
+    d_qtr = design_effect_correction(sites, bandwidth=0.25)
+    n_eff_qtr = max(1, int(round(d_qtr["N_eff"])))
+    ap_eff_qtr = max(1, int(round(obs_ap * d_qtr["N_eff"] / d_qtr["N"])))
+    p_eff_qtr = binomtest(ap_eff_qtr, n_eff_qtr, P_NULL_AP, alternative='greater').pvalue
+
+    # Block bootstrap at 5.0°
+    b5 = spatial_block_bootstrap(sites, block_width=5.0, n_boot=N_BOOT)
+    z5 = (b5["obs_rate"] - P_NULL_AP) / b5["boot_std"] if b5["boot_std"] > 0 else 0
+
+    print("  % LaTeX macros (GROUP 17):")
+    print(f"  \\newcommand{{\\DEFFhalf}}{{{d_half['DEFF']:.3f}}}          % design effect (DEFF), half-degree blocks")
+    print(f"  \\newcommand{{\\NeffHalf}}{{{n_eff_half}}}            % effective N, half-degree blocks")
+    print(f"  \\newcommand{{\\pNeffHalf}}{{{p_eff_half:.3f}}}           % p-value, A+ test with effective N (half-°)")
+    print(f"  \\newcommand{{\\ICChalf}}{{{d_half['rho']:.3f}}}           % intracluster correlation, half-degree blocks")
+    print(f"  \\newcommand{{\\DEFFquarter}}{{{d_qtr['DEFF']:.3f}}}         % design effect (DEFF), quarter-degree blocks")
+    print(f"  \\newcommand{{\\NeffQuarter}}{{{n_eff_qtr}}}          % effective N, quarter-degree blocks")
+    print(f"  \\newcommand{{\\pNeffQuarter}}{{{p_eff_qtr:.3f}}}         % p-value, A+ test with effective N (quarter-°)")
+    print(f"  \\newcommand{{\\blockBootCIlo}}{{{b5['ci_lo']*100:.2f}}}        % block-bootstrap CI lower bound, A+ rate (%)")
+    print(f"  \\newcommand{{\\blockBootCIhi}}{{{b5['ci_hi']*100:.2f}}}        % block-bootstrap CI upper bound, A+ rate (%)")
+    print(f"  \\newcommand{{\\blockBootZ}}{{{z5:.2f}}}           % block-bootstrap Z-score, A+")
+
 if __name__ == "__main__":
     main()

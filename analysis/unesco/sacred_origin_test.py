@@ -321,6 +321,22 @@ def main():
         print(f"  concentrated specifically in sacred-origin sites vs. the corpus.")
     print("=" * 100)
 
+    # ── LaTeX macros (GROUP 7) ────────────────────────────────────────────────
+    # Sort sacred-origin A+ sites by deviation for top-3 naming
+    so_ap_sites = sorted(
+        [(s, beru_deviation(s.longitude)) for s in so_sites
+         if beru_deviation(s.longitude) <= TIER_AP],
+        key=lambda x: x[1],
+    )
+    top_names = [s.site for s, _ in so_ap_sites[:3]]
+    print("  % LaTeX macros (GROUP 7):")
+    if len(top_names) >= 1:
+        print(f"  \\newcommand{{\\topHitOne}}{{{top_names[0]}}}  % top-ranked sacred-origin site")
+    if len(top_names) >= 2:
+        print(f"  \\newcommand{{\\topHitTwo}}{{{top_names[1]}}}  % 2nd-ranked sacred-origin site")
+    if len(top_names) >= 3:
+        print(f"  \\newcommand{{\\topHitThree}}{{{top_names[2]}}}  % 3rd-ranked sacred-origin site")
+
 
 if __name__ == "__main__":
     main()
