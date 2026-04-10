@@ -1,4 +1,4 @@
-% Generated macros — 2026-04-10T06:46:37Z
+% Generated macros — 2026-04-10T21:18:21Z
 % Source: bash manuscript/reproduce_all_macros.sh --macros-only
 % IMPORTANT: values are computed fresh each run — do NOT hardcode
 
@@ -11,6 +11,14 @@
   \newcommand{\GerizimJerusalemKm}{4.1}  % Gerizim–Jerusalem separation (km, equatorial)
   \newcommand{\NwhcTotal}{1248}  % total UNESCO WHC inscribed sites (all types)
 
+% --- analysis/global/geodesic_sensitivity.py
+  \newcommand{\GeodesicApCurrent}{56}  % A+ count under angular criterion
+  \newcommand{\GeodesicApPhysical}{70}  % A+ count under 6.7-km geodesic threshold
+  \newcommand{\GeodesicDropOut}{0}  % angular A+ sites that exceed 6.7 km physically
+  \newcommand{\GeodesicGainIn}{14}  % non-A+ sites within 6.7 km physically
+  \newcommand{\GeodesicThresholdKm}{6.7}  % physical km threshold used in geodesic check
+  \newcommand{\GeodesicKmPerDegAtSixty}{55.7}  % east-west km per degree at 60.0°N
+
 % --- analysis/unesco/spherical_monument_raw_sweep.py
   \newcommand{\NcircTotal}{90}           % raw-sweep population size
   \newcommand{\NcircValidated}{83}             % context-validated population (Test 2)
@@ -18,6 +26,7 @@
   \newcommand{\NcircExcluded}{0}               % excluded (natural/no-coord)
   \newcommand{\NcircContextRejected}{7}               % added by raw sweep vs validated
   \newcommand{\NcircTierAp}{11}             % Tier-A+ hits (raw sweep)
+  \newcommand{\NcircApRate}{12.2}     % A+ rate (%) = 11/90, rounded to 1 d.p.
   \newcommand{\NcircTierA}{29}             % Tier-A hits (raw sweep)
   \newcommand{\NcircTierB}{61}             % Tier-B hits (raw sweep)
   \newcommand{\NcircTierC}{0}               % Tier-C hits (raw sweep)
@@ -426,9 +435,13 @@
   \newcommand{\blockBootZ}{2.14}           % block-bootstrap Z-score, A+
 
 % --- analysis/unesco/regional_temporal_gradient.py
-  \newcommand{\MHcommonOR}{1.582}          % Mantel-Haenszel common OR
-  \newcommand{\CMHchisq}{2.553}           % Cochran-Mantel-Haenszel chi-sq
-  \newcommand{\pCMH}{0.1101}               % p-value, CMH test
+  \newcommand{\MHcommonOR}{1.582}             % MH common OR (early vs late)
+  \newcommand{\CMHchisq}{2.553}              % CMH chi-squared
+  \newcommand{\pCMH}{0.1101}                  % CMH p-value
+  \newcommand{\stratNconcordant}{4}    % regions with early > late
+  \newcommand{\stratNregions}{5}   % total regions tested
+  \newcommand{\stratNsig}{0}          % regions sig at p<0.05
+  \newcommand{\stratVerdict}{largely explained by regional composition after adjustment}
 
 % --- analysis/unesco/tumulus_dome_evolution_raw_sweep.py
   \newcommand{\NevoTotal}{132}            % total dome-evolution corpus
@@ -477,11 +490,22 @@
   \newcommand{\evoStupaAp}{4}  % stupa-stage A+ count
   \newcommand{\pEvoStupa}{0.0050}  % p-value, stupa-stage binomial
 
+% --- analysis/unesco/leave_one_out_sensitivity.py
+  \newcommand{\LOOdomeN}{89}               % LOO dome: N after removing one A+ site
+  \newcommand{\LOOdomeAp}{10}              % LOO dome: A+ after removing one A+ site
+  \newcommand{\LOOdomeRate}{11.2}          % LOO dome: A+ rate after LOO (%)
+  \newcommand{\LOOdomeEnrich}{2.81}        % LOO dome: enrichment after LOO
+  \newcommand{\LOOdomeP}{0.0030}           % LOO dome: p-value after LOO (same for all 11 removals)
+  \newcommand{\LOOstupaN}{17}              % LOO stupa: N after removing one A+ stupa site
+  \newcommand{\LOOstupaAp}{3}              % LOO stupa: A+ after LOO
+  \newcommand{\LOOstupaRate}{17.6}          % LOO stupa: A+ rate after LOO (%)
+  \newcommand{\LOOstupaP}{0.0286}          % LOO stupa: p after LOO (same for all 4 removals)
+
 % --- analysis/global/wikidata_p1435_control_analysis.py
   \newcommand{\WDctrlN}{62{,}785}           % Wikidata P1435 control corpus size
   \newcommand{\WDctrlAp}{2361}            % A+ hits in Wikidata P1435 control
   \newcommand{\WDctrlRate}{3.76}          % A+ rate, Wikidata P1435 control (%)
-  \newcommand{\WDctrlBinomP}{$< 0.001$}          % p-value, binomial test P1435 control
+  \newcommand{\WDctrlBinomP}{0.002}          % p-value, binomial test P1435 control
   \newcommand{\WDctrlOR}{1.50}           % global odds ratio, P1435 control
   \newcommand{\WDctrlORlo}{1.14}           % OR 95% CI lower bound
   \newcommand{\WDctrlORhi}{1.97}           % OR 95% CI upper bound
@@ -543,6 +567,14 @@
   \newcommand{\simBootFullStd}{7.3}          % bootstrap std A+, full corpus
   \newcommand{\simKDEMean}{40.4}           % KDE null-model mean A+
   \newcommand{\simKDEStd}{6.2}            % KDE null-model std A+
+
+% --- analysis/unesco/unit_sweep_fill.py
+
+% --- analysis/unesco/sensitivity_slope_permutation_test.py
+  \newcommand{\permSlopeNperms}{10{,}000}
+  \newcommand{\permSlopePcanon}{0.1728}
+  \newcommand{\permSlopePsharp}{0.1728}
+  \newcommand{\permSlopePsharpBound}{0.1728}
 
 % --- analysis/unesco/fdr_multiple_comparisons.py
   \newcommand{\NtotalTests}{43}           % total tests in FDR analysis

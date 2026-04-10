@@ -224,6 +224,7 @@ print(f"  \\newcommand{{\\NcircKeywords}}{{{len(FORM_KEYWORDS)}}}               
 print(f"  \\newcommand{{\\NcircExcluded}}{{{0}}}               % excluded (natural/no-coord)")
 print(f"  \\newcommand{{\\NcircContextRejected}}{{{N_context_rejected}}}               % added by raw sweep vs validated")
 print(f"  \\newcommand{{\\NcircTierAp}}{{{nAp}}}             % Tier-A+ hits (raw sweep)")
+print(f"  \\newcommand{{\\NcircApRate}}{{{100*nAp/N_raw:.1f}}}     % A+ rate (%) = {nAp}/{N_raw}, rounded to 1 d.p.")
 print(f"  \\newcommand{{\\NcircTierA}}{{{nA}}}             % Tier-A hits (raw sweep)")
 print(f"  \\newcommand{{\\NcircTierB}}{{{nB}}}             % Tier-B hits (raw sweep)")
 print(f"  \\newcommand{{\\NcircTierC}}{{{nC}}}               % Tier-C hits (raw sweep)")
@@ -243,5 +244,6 @@ ResultsStore().write_many({
     "pCircChi":  chi_p,          # chi-sq uniform, 5 bins, df=4
     "NcircTotal": N_raw,         # raw-sweep population size
     "NcircTierAp": nAp,          # Tier-A+ hits
+    "NcircApRate": round(100 * nAp / N_raw, 1),  # A+ rate (%)
     "circEnrichAp": enr_Ap,      # enrichment ratio, A+
 })

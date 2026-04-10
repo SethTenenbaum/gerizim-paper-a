@@ -154,7 +154,7 @@ def main():
     print(f"  p(canonical sig AND all ±0.3% collapsed) = {p_sharp_peak:.4f}")
     print()
     print("Manuscript macro values:")
-    print(f"  \\newcommand{{\\permSlopeNperms}}{{{N_PERMS:,}}}")
+    print(f"  \\newcommand{{\\permSlopeNperms}}{{{N_PERMS:,}}}".replace(",", "{,}"))
     print(f"  \\newcommand{{\\permSlopePcanon}}{{{p_canonical_joint:.4f}}}")
     print(f"  \\newcommand{{\\permSlopePsharp}}{{{p_sharp_peak:.4f}}}")
     if p_sharp_peak == 0:
