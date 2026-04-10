@@ -396,6 +396,7 @@ window = 100
 print(f"\n  {'Block':>15}  {'Sites':>6}  {'A+':>4}  {'Rate':>6}  {'Enrich':>7}  {'p':>10}  Sig")
 print("  " + "─" * 65)
 
+block_stats = []   # list of (block_num, n, nap, rate, p) — 1-indexed block number
 for i in range(0, N, window):
     block = sites_sorted[i:i+window]
     n = len(block)
@@ -405,6 +406,8 @@ for i in range(0, N, window):
     rate = nap / n if n else 0
     enrich = rate / P_NULL_AP if rate else 0
     p = binomtest(nap, n, P_NULL_AP, alternative="greater").pvalue if n >= 5 else 1.0
+    block_num = i // window + 1
+    block_stats.append((block_num, n, nap, rate, p))
     label = f"#{i+1}–{i+n}"
     print(f"  {label:>15}  ({yr_lo}-{yr_hi})  {nap:>4}  {100*rate:>4.1f}%  {enrich:>6.2f}×  {p:>10.4f}  {sig(p)}")
 
@@ -522,6 +525,29 @@ print(f"\n  % Spearman: founding date vs A+ status")
 print(f"  \\newcommand{{\\rhoFoundDate}}{{{rho2:.4f}}}          % Spearman rho, founding date vs A+ status")
 print(f"  \\newcommand{{\\pFoundDateSpearman}}{{{p_sp2:.4f}}}      % p-value, founding date Spearman")
 
+# ── Era-level breakdown macros ────────────────────────────────────────────────
+# Early modern (1500–1800 CE) — used directly in manuscript Table of Eras
+_em = era_results.get("Early modern (1500–1800 CE)")
+if _em:
+    _em_p = binomtest(_em["nap"], _em["n"], P_NULL_AP, alternative="greater").pvalue
+    print(f"\n  % Early-modern era (1500–1800 CE)")
+    print(f"  \\newcommand{{\\earlyModernN}}{{{_em['n']}}}  % early modern (1500–1800 CE) N")
+    print(f"  \\newcommand{{\\earlyModernAp}}{{{_em['nap']}}}  % early modern A+ count")
+    print(f"  \\newcommand{{\\earlyModernRate}}{{{100*_em['rate']:.1f}}}  % early modern A+ rate (%)")
+    print(f"  \\newcommand{{\\pEarlyModern}}{{{_em_p:.4f}}}  % p-value, early modern binomial")
+
+# Canon (≤1984) + post-CE founding — from Part C interaction table
+_cpce = canon_post_ce
+_n_cpce  = len(_cpce)
+_nap_cpce = sum(1 for s in _cpce if s["is_ap"])
+_rate_cpce = _nap_cpce / _n_cpce if _n_cpce else 0
+_p_cpce = binomtest(_nap_cpce, _n_cpce, P_NULL_AP, alternative="greater").pvalue if _n_cpce else 1.0
+print(f"\n  % Canon + post-CE interaction")
+print(f"  \\newcommand{{\\canonPostCEN}}{{{_n_cpce}}}  % canon (≤1984) sites with post-CE founding date N")
+print(f"  \\newcommand{{\\canonPostCEap}}{{{_nap_cpce}}}  % canon + post-CE A+ count")
+print(f"  \\newcommand{{\\canonPostCErate}}{{{100*_rate_cpce:.1f}}}  % canon + post-CE A+ rate (%)")
+print(f"  \\newcommand{{\\pCanonPostCE}}{{{_p_cpce:.4f}}}  % p-value, canon + post-CE binomial")
+
 # Sequential/peak analysis
 print(f"\n  % Sequential inscription analysis")
 print(f"  \\newcommand{{\\peakSigYear}}{{{peak_year}}}             % UNESCO inscription year with peak A+ signal")
@@ -534,6 +560,7 @@ print(f"  \\newcommand{{\\peakNegLogP}}{{{peak_neglog:.2f}}}          % -log10(p
 if first_sig:
     print(f"  \\newcommand{{\\firstSigYear}}{{{first_sig['year']}}}           % first year A+ signal reached p<0.05")
     print(f"  \\newcommand{{\\firstSigN}}{{{first_sig['cum_n']}}}             % cumulative sites at first significant year")
+    print(f"  \\newcommand{{\\firstSigRate}}{{{100*first_sig['rate']:.1f}}}          % A+ rate at first significance (%)")
 
 print(f"\n  % Half-corpus comparison")
 print(f"  \\newcommand{{\\NfirstHalf}}{{{n1}}}             % sites inscribed in first half of UNESCO record")
@@ -547,8 +574,18 @@ print(f"  \\newcommand{{\\pSecondHalf}}{{{p2:.6f}}}       % p-value, second-half
 print(f"  \\newcommand{{\\halfFisherOR}}{{{or3:.2f}}}          % Fisher OR, first vs second half A+")
 print(f"  \\newcommand{{\\pHalfFisher}}{{{p3:.6f}}}       % p-value, Fisher half-corpus comparison")
 
+# ── Block-of-100 macros (blocks 1, 3, 5 = sites 1-100, 201-300, 401-500) ─────
+print(f"\n  % Sliding-window block analysis (blocks 1, 3, 5 — sites 1–100, 201–300, 401–500)")
+_block_labels = {1: "One", 3: "Three", 5: "Five"}
+for bnum, label in _block_labels.items():
+    matching = [bs for bs in block_stats if bs[0] == bnum]
+    if matching:
+        _, _n, _nap, _rate, _p = matching[0]
+        print(f"  \\newcommand{{\\block{label}Rate}}{{{100*_rate:.1f}}}  % A+ rate in sites {(bnum-1)*100+1}–{bnum*100} (block {bnum})")
+        print(f"  \\newcommand{{\\pBlock{label}}}{{{_p:.4f}}}  % binomial p, block {bnum}")
+
 # ── Write to results store ────────────────────────────────────────────────────
-ResultsStore().write_many({
+store_dict = {
     "pFoundDateSpearman": p_sp2,       # Spearman p, founding date vs A+
     "pPreCEfisher":       p_fisher,    # Fisher pre- vs post-CE A+
     "pPreCEbinom":        p_pre_binom, # binomial p, pre-CE A+
@@ -556,6 +593,26 @@ ResultsStore().write_many({
     "pFirstHalf":         p1,          # first-half A+ binomial p
     "pSecondHalf":        p2,          # second-half A+ binomial p
     "pHalfFisher":        p3,          # Fisher p, half-corpus comparison
-})
+}
+if first_sig:
+    store_dict["firstSigRate"] = round(100 * first_sig["rate"], 1)
+    store_dict["firstSigN"]    = first_sig["cum_n"]
+    store_dict["firstSigYear"] = first_sig["year"]
+for bnum, label in _block_labels.items():
+    matching = [bs for bs in block_stats if bs[0] == bnum]
+    if matching:
+        _, _n, _nap, _rate, _p = matching[0]
+        store_dict[f"block{label}Rate"] = round(100 * _rate, 1)
+        store_dict[f"pBlock{label}"]    = _p
+if _em:
+    store_dict["earlyModernN"]    = _em["n"]
+    store_dict["earlyModernAp"]   = _em["nap"]
+    store_dict["earlyModernRate"] = round(100 * _em["rate"], 1)
+    store_dict["pEarlyModern"]    = _em_p
+store_dict["canonPostCEN"]    = _n_cpce
+store_dict["canonPostCEap"]   = _nap_cpce
+store_dict["canonPostCErate"] = round(100 * _rate_cpce, 1)
+store_dict["pCanonPostCE"]    = _p_cpce
+ResultsStore().write_many(store_dict)
 
 print("\n  DONE.")

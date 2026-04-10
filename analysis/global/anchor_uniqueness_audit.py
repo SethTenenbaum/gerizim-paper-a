@@ -256,6 +256,7 @@ print(f"  \\newcommand{{\\anchorSweepApMean}}{{{np.mean(ap_A):.1f}}}           %
 print(f"  \\newcommand{{\\anchorSweepApStd}}{{{np.std(ap_A):.1f}}}            % std A+ count across all anchors")
 print(f"  \\newcommand{{\\anchorSweepGlobalMax}}{{{global_max_B}}}           % global max A+/A combined at any anchor")
 print(f"  \\newcommand{{\\anchorSweepGlobalMaxA}}{{{global_max_A}}}           % global max A at any anchor")
+print(f"  \\newcommand{{\\optimalPhaseApA}}{{{global_max_A}}}           % max A+ at any x.18°E anchor, Sweep A (alias for anchorSweepGlobalMaxA)")
 print(f"  \\newcommand{{\\GerizimSweepApp}}{{{ger_app}}}             % Gerizim A++ in sweep")
 print(f"  \\newcommand{{\\GerizimSweepAp}}{{{ger_ap}}}              % Gerizim A+ in sweep")
 print(f"  \\newcommand{{\\GerizimSweepA}}{{{ger_a}}}             % Gerizim A in sweep")

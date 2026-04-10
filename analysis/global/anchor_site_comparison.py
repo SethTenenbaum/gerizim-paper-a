@@ -73,6 +73,45 @@ def find_site(sites: list[dict], fragment: str) -> dict | None:
     return None
 
 
+def _html_to_latex(text: str) -> str:
+    """Convert UNESCO XML HTML markup and special characters to LaTeX equivalents."""
+    import re as _re
+    import unicodedata as _ud
+    # HTML italic/bold
+    text = _re.sub(r'<[Ii]>(.*?)</[Ii]>', r'\\textit{\1}', text)
+    text = _re.sub(r'<[Bb]>(.*?)</[Bb]>', r'\\textbf{\1}', text)
+    # Remove any remaining HTML tags
+    text = _re.sub(r'<[^>]+>', '', text)
+    # Unicode → LaTeX for common diacritics (expand as needed)
+    _UNICODE_TO_LATEX = {
+        'š': r'\v{s}', 'Š': r'\v{S}',
+        'č': r'\v{c}', 'Č': r'\v{C}',
+        'ž': r'\v{z}', 'Ž': r'\v{Z}',
+        'ř': r'\v{r}', 'Ř': r'\v{R}',
+        'ě': r'\v{e}', 'Ě': r'\v{E}',
+        'ñ': r'\~{n}', 'Ñ': r'\~{N}',
+        'ó': r"\'{o}", 'Ó': r"\'{O}",
+        'é': r"\'{e}", 'É': r"\'{E}",
+        'á': r"\'{a}", 'Á': r"\'{A}",
+        'í': r"\'{i}", 'Í': r"\'{I}",
+        'ú': r"\'{u}", 'Ú': r"\'{U}",
+        'ü': r'\"u',   'Ü': r'\"U',
+        'ö': r'\"o',   'Ö': r'\"O',
+        'ä': r'\"a',   'Ä': r'\"A',
+        'ō': r'\={o}', 'Ō': r'\={O}',
+        'ū': r'\={u}', 'Ū': r'\={U}',
+        'ā': r'\={a}', 'Ā': r'\={A}',
+    }
+    for char, latex in _UNICODE_TO_LATEX.items():
+        text = text.replace(char, latex)
+    return text
+
+
+def _fmt_lon(lon: float, dp: int = 4) -> str:
+    """Format a longitude to dp decimal places, stripping trailing zeros."""
+    return f"{lon:.{dp}f}".rstrip('0').rstrip('.')
+
+
 def main():
     # Load UNESCO corpus
     corpus = load_corpus()
@@ -88,6 +127,46 @@ def main():
     near = np.round(bvs * 10) / 10
     devs = np.abs(bvs - near)
     n_app = int(np.sum(devs <= TIER_APP))
+
+    # ── All A++ sites sorted by deviation (for \topHit* and \appSite* macros) ──
+    _ORDINAL_LABELS = [
+        "One", "Two", "Three", "Four", "Five", "Six", "Seven",
+        "Eight", "Nine", "Ten",
+    ]
+    site_devs = [(sites[i], devs[i]) for i in range(len(sites))]
+    app_sites_sorted = sorted(
+        [(s, d) for s, d in site_devs if d <= TIER_APP],
+        key=lambda x: x[1]
+    )
+    top3 = app_sites_sorted[:3]
+
+    # ── Jerusalem A+ count (self-excluded — corpus minus Jerusalem itself) ─
+    JERUSALEM = _CFG["anchors"]["jerusalem"]["longitude"]
+    jer_arcs = np.abs(lons - JERUSALEM)
+    jer_arcs = np.minimum(jer_arcs, 360 - jer_arcs)
+    jer_bvs  = jer_arcs / BERU
+    jer_near = np.round(jer_bvs * 10) / 10
+    jer_devs = np.abs(jer_bvs - jer_near)
+    # exclude Jerusalem itself (the site with lon closest to JERUSALEM)
+    jer_self_idx = int(np.argmin(np.abs(lons - JERUSALEM)))
+    jer_devs_excl = np.delete(jer_devs, jer_self_idx)
+    jer_ap_count = int(np.sum(jer_devs_excl <= TIER_APLUS))
+
+    # ── Mecca A+ count ────────────────────────────────────────────────────
+    # config.json uses display-name keys like "Mecca (39.826°E)"
+    _mecca_key = next((k for k in _CFG.get("notable_anchors", {}) if "mecca" in k.lower()), None)
+    if _mecca_key is None:
+        MECCA_LON = 39.826   # fallback: Mecca longitude
+    else:
+        MECCA_LON = _CFG["notable_anchors"][_mecca_key]
+    mecca_arcs = np.abs(lons - MECCA_LON)
+    mecca_arcs = np.minimum(mecca_arcs, 360 - mecca_arcs)
+    mecca_bvs  = mecca_arcs / BERU
+    mecca_near = np.round(mecca_bvs * 10) / 10
+    mecca_devs = np.abs(mecca_bvs - mecca_near)
+    mecca_ap   = int(np.sum(mecca_devs <= TIER_APLUS))
+    from scipy.stats import binomtest as _binom
+    mecca_p = _binom(mecca_ap, len(sites), 0.04, alternative="greater").pvalue
 
     print("=" * 72)
     print("  GROUP 16 — Anchor-Comparison Macros")
@@ -176,8 +255,63 @@ def main():
     print(f"  \\newcommand{{\\WPPDeltaKm}}{{{km_wpp:.2f}}}          % World Peace Pagoda deviation from Gerizim (km)")
     print(f"  \\newcommand{{\\WPPDeltaBeru}}{{{dev_wpp:.6f}}}      % World Peace Pagoda deviation from Gerizim (beru)")
 
+    # ── All A++ sites — top-hit macros (\topHit*) and appendix macros (\appSite*) ──
     print("\n" + "=" * 72)
-    print("  DONE — all GROUP 16 + GROUP 22 macros printed above.")
+    print("  GROUP 23 — Top-Hit and AppSite Macros (all A++ sites, sorted by deviation)")
+    print("  Script: analysis/global/anchor_site_comparison.py")
+    print("=" * 72)
+    import re as _re
+    for (s, d), ord_label in zip(app_sites_sorted, _ORDINAL_LABELS):
+        km_t  = d * BERU * KM_PER_DEG
+        m_t   = km_t * 1000
+        name  = _html_to_latex(s["name"])
+        lon_s = _fmt_lon(s["lon"])
+        short_raw = _re.split(r'[,(]', s["name"])[0].strip()
+        # Strip HTML italic tags for the short name (used in body text)
+        short = _re.sub(r'<[Ii]>(.*?)</[Ii]>', r'\1', short_raw).strip()
+        # Strip common lead-in words so body text reads naturally.
+        # Only strip if the name is clearly "Prefix + core-name".
+        for _prefix in ("Mausoleum of ", "Church of ", "Ruins of ",
+                        "Archaeological Site of ", "Monastery of "):
+            if short.startswith(_prefix):
+                short = short[len(_prefix):]
+                break
+        # For "X of Y and Z" patterns where X is a known abbreviated form,
+        # keep only X.  Example: "Sacri Monti of Piedmont and Lombardy" → "Sacri Monti"
+        # We detect this by checking if the name contains " of " and the part
+        # before " of " is not itself a generic descriptor (handled above).
+        _m = _re.match(r'^([\w\s]+) of (.+)$', short)
+        if _m:
+            _before = _m.group(1).strip()
+            # Only shorten if the 'before' part is ≥2 words (i.e., proper name)
+            if len(_before.split()) >= 2:
+                short = _before
+        print(f"\n  % Rank {ord_label}: {s['name'][:60]}")
+        # \topHit* macros (top 3 only — manuscript body text references these)
+        if ord_label in ("One", "Two", "Three"):
+            print(f"  \\newcommand{{\\topHitName{ord_label}}}{{{name}}}  % rank-{ord_label.lower()} A++ site name")
+            print(f"  \\newcommand{{\\topHitLon{ord_label}}}{{{lon_s}}}  % rank-{ord_label.lower()} A++ site longitude (°E)")
+            print(f"  \\newcommand{{\\topHitDevBeru{ord_label}}}{{{d:.6f}}}  % rank-{ord_label.lower()} beru deviation")
+            print(f"  \\newcommand{{\\topHitDevKm{ord_label}}}{{{km_t:.2f}}}  % rank-{ord_label.lower()} deviation (km)")
+            print(f"  \\newcommand{{\\topHitDevM{ord_label}}}{{{int(round(m_t))}}}  % rank-{ord_label.lower()} deviation (m)")
+            print(f"  \\newcommand{{\\topHit{ord_label}}}{{{short}}}  % rank-{ord_label.lower()} short name")
+        # \appSite* macros — full A++ appendix table (all ranks)
+        print(f"  \\newcommand{{\\appSiteName{ord_label}}}{{{name}}}  % A++ table rank {ord_label}: name")
+        print(f"  \\newcommand{{\\appSiteLon{ord_label}}}{{{lon_s}}}  % A++ table rank {ord_label}: longitude")
+        print(f"  \\newcommand{{\\appSiteDevBeru{ord_label}}}{{{d:.6f}}}  % A++ table rank {ord_label}: beru deviation")
+        print(f"  \\newcommand{{\\appSiteDevKm{ord_label}}}{{{km_t:.2f}}}  % A++ table rank {ord_label}: km")
+        print(f"  \\newcommand{{\\appSiteDevM{ord_label}}}{{{int(round(m_t))}}}  % A++ table rank {ord_label}: m")
+
+    # ── Jerusalem and Mecca anchor counts ─────────────────────────────────
+    print("\n" + "=" * 72)
+    print("  GROUP 24 — Jerusalem and Mecca anchor A+ counts")
+    print("=" * 72)
+    print(f"  \\newcommand{{\\JerusalemAp}}{{{jer_ap_count}}}  % Jerusalem A+ count (self-excluded corpus)")
+    print(f"  \\newcommand{{\\MeccaAp}}{{{mecca_ap}}}  % Mecca A+ count (full corpus)")
+    print(f"  \\newcommand{{\\pMeccaAnchor}}{{{mecca_p:.3f}}}  % p-value, Mecca binomial (A+, one-sided)")
+
+    print("\n" + "=" * 72)
+    print("  DONE — GROUP 16, 22, 23, 24 macros printed above.")
     print("=" * 72)
 
 

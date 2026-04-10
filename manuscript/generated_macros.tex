@@ -1,6 +1,15 @@
-% Generated macros — 2026-04-10T05:02:48Z
+% Generated macros — 2026-04-10T06:46:37Z
 % Source: bash manuscript/reproduce_all_macros.sh --macros-only
 % IMPORTANT: values are computed fresh each run — do NOT hardcode
+
+% --- analysis/global/emit_constants.py
+  \newcommand{\GerizimLon}{35.269}  % anchor longitude, decimal degrees E
+  \newcommand{\GerizimLonDMS}{E35~16~08}  % anchor longitude, DMS (from config)
+  \newcommand{\GerizimLatDMS}{N32~12~44}  % anchor latitude, DMS (from config)
+  \newcommand{\JerusalemLon}{35.232}  % Jerusalem longitude, decimal degrees E
+  \newcommand{\GerizimJerusalemSep}{0.037}  % Gerizim–Jerusalem separation (degrees, equatorial)
+  \newcommand{\GerizimJerusalemKm}{4.1}  % Gerizim–Jerusalem separation (km, equatorial)
+  \newcommand{\NwhcTotal}{1248}  % total UNESCO WHC inscribed sites (all types)
 
 % --- analysis/unesco/spherical_monument_raw_sweep.py
   \newcommand{\NcircTotal}{90}           % raw-sweep population size
@@ -175,6 +184,37 @@
   \newcommand{\pCochranFive}{0.0489}      % p-value, Cochran-Armitage 5-bin
   \newcommand{\rhoSpearman}{-0.0462}        % Spearman rho, A+ rate vs era
   \newcommand{\pSpearman}{0.141866}        % p-value, Spearman rank correlation
+  \newcommand{\NcohortRawA}{138}  % 1978-1984 cohort N
+  \newcommand{\NcohortRawAap}{11}  % 1978-1984 cohort A+ count
+  \newcommand{\cohortRawArate}{8.0}  % 1978-1984 cohort A+ rate (%)
+  \newcommand{\NcohortA}{138}  % 1978-1984 cohort N (alias)
+  \newcommand{\NcohortAap}{11}  % 1978-1984 cohort A+ count (alias)
+  \newcommand{\cohortArate}{8.0}  % 1978-1984 cohort A+ rate (%) (alias)
+  \newcommand{\NcohortRawB}{141}  % 1985-1991 cohort N
+  \newcommand{\NcohortRawBap}{8}  % 1985-1991 cohort A+ count
+  \newcommand{\cohortRawBrate}{5.7}  % 1985-1991 cohort A+ rate (%)
+  \newcommand{\NcohortB}{141}  % 1985-1991 cohort N (alias)
+  \newcommand{\NcohortBap}{8}  % 1985-1991 cohort A+ count (alias)
+  \newcommand{\cohortBrate}{5.7}  % 1985-1991 cohort A+ rate (%) (alias)
+  \newcommand{\NcohortRawC}{222}  % 1992-1999 cohort N
+  \newcommand{\NcohortRawCap}{14}  % 1992-1999 cohort A+ count
+  \newcommand{\cohortRawCrate}{6.3}  % 1992-1999 cohort A+ rate (%)
+  \newcommand{\NcohortC}{222}  % 1992-1999 cohort N (alias)
+  \newcommand{\NcohortCap}{14}  % 1992-1999 cohort A+ count (alias)
+  \newcommand{\cohortCrate}{6.3}  % 1992-1999 cohort A+ rate (%) (alias)
+  \newcommand{\NcohortRawD}{211}  % 2000-2009 cohort N
+  \newcommand{\NcohortRawDap}{11}  % 2000-2009 cohort A+ count
+  \newcommand{\cohortRawDrate}{5.2}  % 2000-2009 cohort A+ rate (%)
+  \newcommand{\NcohortD}{211}  % 2000-2009 cohort N (alias)
+  \newcommand{\NcohortDap}{11}  % 2000-2009 cohort A+ count (alias)
+  \newcommand{\cohortDrate}{5.2}  % 2000-2009 cohort A+ rate (%) (alias)
+  \newcommand{\NcohortRawE}{299}  % 2010-2025 cohort N
+  \newcommand{\NcohortRawEap}{12}  % 2010-2025 cohort A+ count
+  \newcommand{\cohortRawErate}{4.0}  % 2010-2025 cohort A+ rate (%)
+  \newcommand{\NcohortE}{299}  % 2010-2025 cohort N (alias)
+  \newcommand{\NcohortEap}{12}  % 2010-2025 cohort A+ count (alias)
+  \newcommand{\cohortErate}{4.0}  % 2010-2025 cohort A+ rate (%) (alias)
+  \newcommand{\pAdjTestTwoB}{---}  % Test 2b excluded from Bonferroni (sensitivity variant, not independent)
 
 % --- analysis/unesco/deep_temporal_analysis.py
   \newcommand{\NdatedSites}{579}          % sites with known founding date
@@ -197,6 +237,14 @@
   \newcommand{\pPreCEantiqFisher}{0.2952}         % p-value, A+ vs non-A+ antiquity Fisher
   \newcommand{\rhoFoundDate}{0.0031}          % Spearman rho, founding date vs A+ status
   \newcommand{\pFoundDateSpearman}{0.9407}      % p-value, founding date Spearman
+  \newcommand{\earlyModernN}{126}  % early modern (1500–1800 CE) N
+  \newcommand{\earlyModernAp}{10}  % early modern A+ count
+  \newcommand{\earlyModernRate}{7.9}  % early modern A+ rate (%)
+  \newcommand{\pEarlyModern}{0.0303}  % p-value, early modern binomial
+  \newcommand{\canonPostCEN}{53}  % canon (≤1984) sites with post-CE founding date N
+  \newcommand{\canonPostCEap}{8}  % canon + post-CE A+ count
+  \newcommand{\canonPostCErate}{15.1}  % canon + post-CE A+ rate (%)
+  \newcommand{\pCanonPostCE}{0.0012}  % p-value, canon + post-CE binomial
   \newcommand{\peakSigYear}{2003}             % UNESCO inscription year with peak A+ signal
   \newcommand{\peakSigN}{605}              % cumulative sites at peak signal year
   \newcommand{\peakSigAp}{43}             % cumulative A+ at peak signal year
@@ -205,6 +253,7 @@
   \newcommand{\peakNegLogP}{3.59}          % -log10(p) at peak signal year
   \newcommand{\firstSigYear}{1982}           % first year A+ signal reached p<0.05
   \newcommand{\firstSigN}{103}             % cumulative sites at first significant year
+  \newcommand{\firstSigRate}{8.7}          % A+ rate at first significance (%)
   \newcommand{\NfirstHalf}{505}             % sites inscribed in first half of UNESCO record
   \newcommand{\NapFirstHalf}{33}            % A+ sites in first half
   \newcommand{\firstHalfRate}{6.5}           % A+ rate in first half (%)
@@ -215,6 +264,12 @@
   \newcommand{\pSecondHalf}{0.295198}       % p-value, second-half A+ binomial
   \newcommand{\halfFisherOR}{1.47}          % Fisher OR, first vs second half A+
   \newcommand{\pHalfFisher}{0.106399}       % p-value, Fisher half-corpus comparison
+  \newcommand{\blockOneRate}{9.0}  % A+ rate in sites 1–100 (block 1)
+  \newcommand{\pBlockOne}{0.0190}  % binomial p, block 1
+  \newcommand{\blockThreeRate}{11.0}  % A+ rate in sites 201–300 (block 3)
+  \newcommand{\pBlockThree}{0.0022}  % binomial p, block 3
+  \newcommand{\blockFiveRate}{8.0}  % A+ rate in sites 401–500 (block 5)
+  \newcommand{\pBlockFive}{0.0475}  % binomial p, block 5
 
 % --- analysis/global/anchor_uniqueness_audit.py
   \newcommand{\anchorSweepNanchors}{36{,}000}          % number of anchor points in sweep
@@ -222,6 +277,7 @@
   \newcommand{\anchorSweepApStd}{6.9}            % std A+ count across all anchors
   \newcommand{\anchorSweepGlobalMax}{60}           % global max A+/A combined at any anchor
   \newcommand{\anchorSweepGlobalMaxA}{59}           % global max A at any anchor
+  \newcommand{\optimalPhaseApA}{59}           % max A+ at any x.18°E anchor, Sweep A (alias for anchorSweepGlobalMaxA)
   \newcommand{\GerizimSweepApp}{7}             % Gerizim A++ in sweep
   \newcommand{\GerizimSweepAp}{55}              % Gerizim A+ in sweep
   \newcommand{\GerizimSweepA}{227}             % Gerizim A in sweep
@@ -300,6 +356,62 @@
   \newcommand{\GerizimAppCount}{7}        % Gerizim A++ count (alias)
   \newcommand{\WPPDeltaKm}{0.59}          % World Peace Pagoda deviation from Gerizim (km)
   \newcommand{\WPPDeltaBeru}{0.000177}      % World Peace Pagoda deviation from Gerizim (beru)
+  \newcommand{\topHitNameOne}{\textit{Sacri Monti} of Piedmont and Lombardy}  % rank-one A++ site name
+  \newcommand{\topHitLonOne}{8.2697}  % rank-one A++ site longitude (°E)
+  \newcommand{\topHitDevBeruOne}{0.000024}  % rank-one beru deviation
+  \newcommand{\topHitDevKmOne}{0.08}  % rank-one deviation (km)
+  \newcommand{\topHitDevMOne}{80}  % rank-one deviation (m)
+  \newcommand{\topHitOne}{Sacri Monti}  % rank-one short name
+  \newcommand{\appSiteNameOne}{\textit{Sacri Monti} of Piedmont and Lombardy}  % A++ table rank One: name
+  \newcommand{\appSiteLonOne}{8.2697}  % A++ table rank One: longitude
+  \newcommand{\appSiteDevBeruOne}{0.000024}  % A++ table rank One: beru deviation
+  \newcommand{\appSiteDevKmOne}{0.08}  % A++ table rank One: km
+  \newcommand{\appSiteDevMOne}{80}  % A++ table rank One: m
+  \newcommand{\topHitNameTwo}{Mausoleum of Khoja Ahmed Yasawi}  % rank-two A++ site name
+  \newcommand{\topHitLonTwo}{68.2711}  % rank-two A++ site longitude (°E)
+  \newcommand{\topHitDevBeruTwo}{0.000069}  % rank-two beru deviation
+  \newcommand{\topHitDevKmTwo}{0.23}  % rank-two deviation (km)
+  \newcommand{\topHitDevMTwo}{228}  % rank-two deviation (m)
+  \newcommand{\topHitTwo}{Khoja Ahmed Yasawi}  % rank-two short name
+  \newcommand{\appSiteNameTwo}{Mausoleum of Khoja Ahmed Yasawi}  % A++ table rank Two: name
+  \newcommand{\appSiteLonTwo}{68.2711}  % A++ table rank Two: longitude
+  \newcommand{\appSiteDevBeruTwo}{0.000069}  % A++ table rank Two: beru deviation
+  \newcommand{\appSiteDevKmTwo}{0.23}  % A++ table rank Two: km
+  \newcommand{\appSiteDevMTwo}{228}  % A++ table rank Two: m
+  \newcommand{\topHitNameThree}{Site of Palmyra}  % rank-three A++ site name
+  \newcommand{\topHitLonThree}{38.2667}  % rank-three A++ site longitude (°E)
+  \newcommand{\topHitDevBeruThree}{0.000078}  % rank-three beru deviation
+  \newcommand{\topHitDevKmThree}{0.26}  % rank-three deviation (km)
+  \newcommand{\topHitDevMThree}{259}  % rank-three deviation (m)
+  \newcommand{\topHitThree}{Site of Palmyra}  % rank-three short name
+  \newcommand{\appSiteNameThree}{Site of Palmyra}  % A++ table rank Three: name
+  \newcommand{\appSiteLonThree}{38.2667}  % A++ table rank Three: longitude
+  \newcommand{\appSiteDevBeruThree}{0.000078}  % A++ table rank Three: beru deviation
+  \newcommand{\appSiteDevKmThree}{0.26}  % A++ table rank Three: km
+  \newcommand{\appSiteDevMThree}{259}  % A++ table rank Three: m
+  \newcommand{\appSiteNameFour}{Boyana Church}  % A++ table rank Four: name
+  \newcommand{\appSiteLonFour}{23.2662}  % A++ table rank Four: longitude
+  \newcommand{\appSiteDevBeruFour}{0.000094}  % A++ table rank Four: beru deviation
+  \newcommand{\appSiteDevKmFour}{0.31}  % A++ table rank Four: km
+  \newcommand{\appSiteDevMFour}{312}  % A++ table rank Four: m
+  \newcommand{\appSiteNameFive}{Antigua Guatemala}  % A++ table rank Five: name
+  \newcommand{\appSiteLonFive}{-90.7282}  % A++ table rank Five: longitude
+  \newcommand{\appSiteDevBeruFive}{0.000095}  % A++ table rank Five: beru deviation
+  \newcommand{\appSiteDevKmFive}{0.32}  % A++ table rank Five: km
+  \newcommand{\appSiteDevMFive}{315}  % A++ table rank Five: m
+  \newcommand{\appSiteNameSix}{Hola\v{s}ovice Historic Village}  % A++ table rank Six: name
+  \newcommand{\appSiteLonSix}{14.2726}  % A++ table rank Six: longitude
+  \newcommand{\appSiteDevBeruSix}{0.000120}  % A++ table rank Six: beru deviation
+  \newcommand{\appSiteDevKmSix}{0.40}  % A++ table rank Six: km
+  \newcommand{\appSiteDevMSix}{401}  % A++ table rank Six: m
+  \newcommand{\appSiteNameSeven}{Historic Town of Grand-Bassam}  % A++ table rank Seven: name
+  \newcommand{\appSiteLonSeven}{-3.7364}  % A++ table rank Seven: longitude
+  \newcommand{\appSiteDevBeruSeven}{0.000180}  % A++ table rank Seven: beru deviation
+  \newcommand{\appSiteDevKmSeven}{0.60}  % A++ table rank Seven: km
+  \newcommand{\appSiteDevMSeven}{598}  % A++ table rank Seven: m
+  \newcommand{\JerusalemAp}{56}  % Jerusalem A+ count (self-excluded corpus)
+  \newcommand{\MeccaAp}{51}  % Mecca A+ count (full corpus)
+  \newcommand{\pMeccaAnchor}{0.057}  % p-value, Mecca binomial (A+, one-sided)
 
 % --- analysis/unesco/spatial_independence_test.py
   \newcommand{\DEFFhalf}{1.310}          % design effect (DEFF), half-degree blocks
@@ -330,12 +442,15 @@
   \newcommand{\pEvoA}{0.0017}          % p-value, A binomial (dome corpus)
   \newcommand{\NevoMound}{48}           % sites with mound stage
   \newcommand{\NevoMoundAp}{3}            % A+ sites with mound stage
+  \newcommand{\evoMoundApRate}{6.2}           % A+ rate, mound stage (%)
   \newcommand{\pEvoMound}{0.3012}          % p-value, A+ binomial in mound stage
   \newcommand{\NevoStupa}{18}            % sites with stupa stage
   \newcommand{\NevoStupaAp}{4}             % A+ sites with stupa stage
+  \newcommand{\evoStupaApRate}{22.2}            % A+ rate, stupa stage (%)
   \newcommand{\pEvoStupa}{0.0050}          % p-value, A+ binomial in stupa stage
   \newcommand{\NevoDome}{75}            % sites with dome stage
   \newcommand{\NevoDomeAp}{8}             % A+ sites with dome stage
+  \newcommand{\evoDomeApRate}{10.7}            % A+ rate, dome stage (%)
   \newcommand{\pEvoDome}{0.0102}          % p-value, A+ binomial in dome stage
   \newcommand{\NevoMoundOnly}{42}          % mound-only sites (no later dome/stupa)
   \newcommand{\NevoMoundOnlyAp}{3}           % A+ in mound-only sites
@@ -349,6 +464,18 @@
   \newcommand{\pEvoApValidated}{0.0002}          % p-value A+ binomial, context-validated (Exploratory)
   \newcommand{\pEvoAValidated}{0.0032}           % p-value A  binomial, context-validated (Exploratory)
   \newcommand{\NevoValidRejected}{16}           % sites rejected by context validation
+  \newcommand{\evoDomeApRate}{11.8}  % dome-stage A+ rate (%)
+  \newcommand{\evoDomeN}{68}  % dome-stage corpus N
+  \newcommand{\evoDomeAp}{8}  % dome-stage A+ count
+  \newcommand{\pEvoDome}{0.0057}  % p-value, dome-stage binomial
+  \newcommand{\evoMoundApRate}{8.3}  % mound-stage A+ rate (%)
+  \newcommand{\evoMoundN}{36}  % mound-stage corpus N
+  \newcommand{\evoMoundAp}{3}  % mound-stage A+ count
+  \newcommand{\pEvoMound}{0.1734}  % p-value, mound-stage binomial
+  \newcommand{\evoStupaApRate}{22.2}  % stupa-stage A+ rate (%)
+  \newcommand{\evoStupaN}{18}  % stupa-stage corpus N
+  \newcommand{\evoStupaAp}{4}  % stupa-stage A+ count
+  \newcommand{\pEvoStupa}{0.0050}  % p-value, stupa-stage binomial
 
 % --- analysis/global/wikidata_p1435_control_analysis.py
   \newcommand{\WDctrlN}{62{,}785}           % Wikidata P1435 control corpus size
@@ -431,4 +558,5 @@
   \newcommand{\pAdjTestTwo}{0.004}  % Bonferroni-adj p, Test 2 (Domed/spherical A+ — RAW sweep (binomial))
   \newcommand{\pAdjTestThree}{0.013}  % Bonferroni-adj p, Test 3 (Cluster asymmetry — permutation p)
   \newcommand{\pAdjTestFour}{0.192}  % Bonferroni-adj p, Test 4 (Temporal gradient (Cochran-Armitage 3-cohort))
+  \newcommand{\pAdjClusterMW}{0.073}  % Bonf-adj p, cluster MW (= 0.0182 × 4)
 

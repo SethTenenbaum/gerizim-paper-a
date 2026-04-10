@@ -383,13 +383,15 @@ print(SEP)
 print()
 print(f"  {'Stage':<35}  {'N':>5}  {'A+':>4}  {'A':>4}  {'Enrich':>7}  {'p (A+)':>8}  Sig")
 print(f"  {'-'*75}")
-for stage_name, stage_kws in [
-    ("Mound (tumulus/barrow/kofun/mound)", MOUND_KEYWORDS_ALL),
-    ("Stupa (stupa/dagoba/chorten)",       STUPA_KEYWORDS),
-    ("Dome  (tholos/dome/domed/spherical)", DOME_KEYWORDS),
+stage_stat_results = {}   # keyed by short name: "mound", "stupa", "dome"
+for stage_key, stage_name, stage_kws in [
+    ("mound", "Mound (tumulus/barrow/kofun/mound)", MOUND_KEYWORDS_ALL),
+    ("stupa", "Stupa (stupa/dagoba/chorten)",       STUPA_KEYWORDS),
+    ("dome",  "Dome  (tholos/dome/domed/spherical)", DOME_KEYWORDS),
 ]:
     entries = [e for e in selected if any(kw in e["keywords"] for kw in stage_kws)]
     ns, nap_s, na_s, p_s, enr_s = stage_stats(entries)
+    stage_stat_results[stage_key] = {"n": ns, "nap": nap_s, "rate": nap_s/ns if ns else 0, "p": p_s, "enr": enr_s}
     print(f"  {stage_name:<35}  {ns:>5}  {nap_s:>4}  {na_s:>4}  {enr_s:>6.2f}×  {p_s:>8.4f}  {sig(p_s)}")
 
 # Context-rejected sites
@@ -452,6 +454,15 @@ print(f"  \\newcommand{{\\evoValidEnrichAp}}{{{enr_ap:.2f}}}            % enrich
 print(f"  \\newcommand{{\\pEvoApValidated}}{{{bt_ap.pvalue:.4f}}}          % p-value A+ binomial, context-validated (Exploratory)")
 print(f"  \\newcommand{{\\pEvoAValidated}}{{{bt_a.pvalue:.4f}}}           % p-value A  binomial, context-validated (Exploratory)")
 print(f"  \\newcommand{{\\NevoValidRejected}}{{{len(raw_rejected)}}}           % sites rejected by context validation")
+
+# ── Stage-level A+ rate macros ────────────────────────────────────────────────
+for _skey, _sfx in [("dome", "Dome"), ("mound", "Mound"), ("stupa", "Stupa")]:
+    _sr = stage_stat_results.get(_skey)
+    if _sr:
+        print(f"  \\newcommand{{\\evo{_sfx}ApRate}}{{{100*_sr['rate']:.1f}}}  % {_skey}-stage A+ rate (%)")
+        print(f"  \\newcommand{{\\evo{_sfx}N}}{{{_sr['n']}}}  % {_skey}-stage corpus N")
+        print(f"  \\newcommand{{\\evo{_sfx}Ap}}{{{_sr['nap']}}}  % {_skey}-stage A+ count")
+        print(f"  \\newcommand{{\\pEvo{_sfx}}}{{{_sr['p']:.4f}}}  % p-value, {_skey}-stage binomial")
 print()
 
 # ── Write to results store ────────────────────────────────────────────────────
@@ -461,6 +472,15 @@ ResultsStore().write_many({
     "NevoValidTotal":   N,                # corpus size, context-validated
     "NevoValidAp":      n_ap,             # A+ hits, context-validated
     "NevoValidRejected": len(raw_rejected), # sites removed by context filter
+    **{f"evo{sfx}ApRate": round(100 * stage_stat_results[k]["rate"], 1)
+       for k, sfx in [("dome","Dome"),("mound","Mound"),("stupa","Stupa")]
+       if k in stage_stat_results},
+    **{f"evo{sfx}N": stage_stat_results[k]["n"]
+       for k, sfx in [("dome","Dome"),("mound","Mound"),("stupa","Stupa")]
+       if k in stage_stat_results},
+    **{f"pEvo{sfx}": stage_stat_results[k]["p"]
+       for k, sfx in [("dome","Dome"),("mound","Mound"),("stupa","Stupa")]
+       if k in stage_stat_results},
 })
 print(f"  ✓ Results written to data/store/results.json")
 print(f"    pEvoAp_validated = {bt_ap.pvalue:.6f}  {sig(bt_ap.pvalue)}")

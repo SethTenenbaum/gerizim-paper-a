@@ -67,6 +67,8 @@ if [ "${1:-}" = "--macros-only" ]; then
     #   Primary analysis scripts first (they write to the store)
     #   Summary scripts last (they read from the store)
     SCRIPTS=(
+        # ── Constants (config.json + corpus size) — no corpus analysis needed ──
+        analysis/global/emit_constants.py                    # → GerizimLon, NwhcTotal, etc.
         # ── Primary analysis (write to store) ─────────────────────────────
         analysis/unesco/spherical_monument_raw_sweep.py      # → pCircAp, pCircA, pCircChi
         analysis/unesco/spherical_monument_test.py            # → pCircAp_validated (context-validated, Exploratory 2x)
@@ -157,6 +159,9 @@ run_script() {
 # PRIMARY ANALYSIS SCRIPTS
 # (Each writes its p-values and statistics to data/store/results.json)
 # ════════════════════════════════════════════════════════════════════════════
+
+run_script "GROUP 0: Constants (config.json + corpus size)"        \
+           analysis/global/emit_constants.py
 
 run_script "GROUP 1: Dome/Spherical Monument Raw Sweep (Test 2)"  \
            analysis/unesco/spherical_monument_raw_sweep.py

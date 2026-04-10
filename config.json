@@ -2,6 +2,9 @@
   "anchors": {
     "gerizim": {
       "longitude": 35.269,
+      "latitude": 32.212,
+      "lon_dms": "E35~16~08",
+      "lat_dms": "N32~12~44",
       "label": "Mount Gerizim",
       "note": "UNESCO tentative list (ref. 5706), DMS E35 16 08 = 35.2689°E, rounded to 35.269°E"
     },

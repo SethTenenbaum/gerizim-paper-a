@@ -152,3 +152,12 @@ for tid, lbl, raw_p, p_adj, survives, macro, _ in results:
 
 print(SEP)
 print()
+
+# ── Supplementary Bonferroni-adjusted values (single tests, not in family) ───
+# \pAdjClusterMW = cluster Mann-Whitney p × k (same k as main family)
+_mw_raw = store.read("clusterMWp", default=None)
+if _mw_raw is not None:
+    _adj_mw = min(float(_mw_raw) * K, 1.0)
+    print(f"  % Cluster asymmetry Mann-Whitney (Bonferroni-adj, k={K})")
+    print(f"  \\newcommand{{\\pAdjClusterMW}}{{{_adj_mw:.3f}}}  % Bonf-adj p, cluster MW (= {_mw_raw:.4f} × {K})")
+    print()

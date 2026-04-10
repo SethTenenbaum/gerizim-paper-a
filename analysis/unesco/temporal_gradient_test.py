@@ -163,6 +163,7 @@ five_cohorts = [
 scores5 = [1, 2, 3, 4, 5]
 ns5 = []
 aps5 = []
+cohort5_data = []   # (label, n, nap, rate, p) — needed for macro emission below
 for label, y0, y1 in five_cohorts:
     subset = [s for s in sites if y0 <= s["yr"] <= y1]
     n = len(subset)
@@ -171,6 +172,7 @@ for label, y0, y1 in five_cohorts:
     aps5.append(nap)
     rate = nap / n if n else 0
     p_b = binomtest(nap, n, P_NULL_AP, alternative="greater").pvalue if n else 1.0
+    cohort5_data.append((label, n, nap, rate, p_b))
     print(f"  {label}:  N={n:>4},  A+={nap:>3},  rate={100*rate:.1f}%,  enrich={rate/P_NULL_AP:.2f}×,  p={p_b:.4f} {sig(p_b)}")
 
 ca5 = cochran_armitage(ns5, aps5, scores=scores5)
@@ -191,10 +193,33 @@ print(f"  \\newcommand{{\\pCochranFive}}{{{p_ca5:.4f}}}      % p-value, Cochran-
 print(f"  \\newcommand{{\\rhoSpearman}}{{{rho2:.4f}}}        % Spearman rho, A+ rate vs era")
 print(f"  \\newcommand{{\\pSpearman}}{{{p_rho2:.6f}}}        % p-value, Spearman rank correlation")
 
+# ── Five-cohort table macros ──────────────────────────────────────────────────
+# Cohort suffixes: A=1978-1984, B=1985-1991, C=1992-1999, D=2000-2009, E=2010-2025
+suffixes = list("ABCDE")
+for (label, n, nap, rate, p_b), sfx in zip(cohort5_data, suffixes):
+    print(f"  \\newcommand{{\\NcohortRaw{sfx}}}{{{n}}}  % {label} cohort N")
+    print(f"  \\newcommand{{\\NcohortRaw{sfx}ap}}{{{nap}}}  % {label} cohort A+ count")
+    print(f"  \\newcommand{{\\cohortRaw{sfx}rate}}{{{100*rate:.1f}}}  % {label} cohort A+ rate (%)")
+    # Manuscript-compatible aliases (without 'Raw' infix)
+    print(f"  \\newcommand{{\\Ncohort{sfx}}}{{{n}}}  % {label} cohort N (alias)")
+    print(f"  \\newcommand{{\\Ncohort{sfx}ap}}{{{nap}}}  % {label} cohort A+ count (alias)")
+    print(f"  \\newcommand{{\\cohort{sfx}rate}}{{{100*rate:.1f}}}  % {label} cohort A+ rate (%) (alias)")
+
+# ── Bonferroni-adjusted p-values for primary tests ───────────────────────────
+# pAdjTestTwoB: Test 2b (sensitivity variant) is excluded from Bonferroni family
+# by design — it is reported descriptively only.
+print(f"  \\newcommand{{\\pAdjTestTwoB}}{{---}}  % Test 2b excluded from Bonferroni (sensitivity variant, not independent)")
+
 # ── Write to results store ────────────────────────────────────────────────────
-ResultsStore().write_many({
+store_dict = {
     "pCochranThree": p_ca,     # Cochran-Armitage 3-cohort p — Test 4
     "pCochranFive":  p_ca5,    # Cochran-Armitage 5-cohort p
     "ZcochranThree": Z_ca,     # Z-statistic, 3-cohort
     "ZcochranFive":  Z5,       # Z-statistic, 5-cohort
-})
+}
+# Store 5-cohort breakdown
+for (label, n, nap, rate, p_b), sfx in zip(cohort5_data, suffixes):
+    store_dict[f"NcohortRaw{sfx}"]    = n
+    store_dict[f"NcohortRaw{sfx}ap"]  = nap
+    store_dict[f"cohortRaw{sfx}rate"] = round(100 * rate, 1)
+ResultsStore().write_many(store_dict)
