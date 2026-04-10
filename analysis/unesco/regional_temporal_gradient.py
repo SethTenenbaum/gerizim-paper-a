@@ -33,6 +33,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus, cultural_sites_with_coords
 from lib.beru import GERIZIM, BERU, TIER_APLUS, P_NULL_AP, deviation as beru_dev
 from lib.stats import significance_label as sig
+from lib.results_store import ResultsStore
 
 TIER_AP = TIER_APLUS
 
@@ -378,4 +379,10 @@ if mh_tables:
     print(f"  \\newcommand{{\\MHcommonOR}}{{{MH_OR:.3f}}}          % Mantel-Haenszel common OR")
     print(f"  \\newcommand{{\\CMHchisq}}{{{chi_sq:.3f}}}           % Cochran-Mantel-Haenszel chi-sq")
     print(f"  \\newcommand{{\\pCMH}}{{{p_cmh:.4f}}}               % p-value, CMH test")
+
+    # ── Write to results store ─────────────────────────────────────────────
+    ResultsStore().write_many({
+        "pCMH":     p_cmh,   # CMH stratified test p-value
+        "MH_OR":    MH_OR,   # Mantel-Haenszel common OR
+    })
 print()

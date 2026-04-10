@@ -18,6 +18,7 @@ N_PERMS    = 100_000  # number of permutation trials
 
 # (from dome_filter.py, shared with spherical_monument_test.py)
 from lib.dome_filter import is_dome_site
+from lib.results_store import ResultsStore
 
 DOME_EXCLUDE = set()  # no exclusions (see spherical_monument_test.py for rationale)
 
@@ -307,7 +308,8 @@ def main():
 
     # ── LaTeX macros (GROUP 25) ──────────────────────────────────────────────
     print("  % LaTeX macros (GROUP 25):")
-    print(f"  \\newcommand{{\\simNperms}}{{{N_PERMS:,}}}        % number of permutations in null model")
+    _nperms_fmt = f"{N_PERMS:,}".replace(",", "{,}")
+    print(f"  \\newcommand{{\\simNperms}}{{{_nperms_fmt}}}        % number of permutations in null model")
     print(f"  \\newcommand{{\\simDomePermZ}}{{{z_dome:.2f}}}         % permutation Z-score, dome corpus")
     print(f"  \\newcommand{{\\simDomePermP}}{{{p_perm_dome:.3f}}}          % permutation p, dome corpus")
     print(f"  \\newcommand{{\\simDomeBootP}}{{{p_boot_dome:.3f}}}          % bootstrap p, dome corpus")
@@ -320,6 +322,16 @@ def main():
     print(f"  \\newcommand{{\\simBootFullStd}}{{{boot_std:.1f}}}          % bootstrap std A+, full corpus")
     print(f"  \\newcommand{{\\simKDEMean}}{{{kde_mean:.1f}}}           % KDE null-model mean A+")
     print(f"  \\newcommand{{\\simKDEStd}}{{{kde_std:.1f}}}            % KDE null-model std A+")
+
+    # ── Write to results store ────────────────────────────────────────────────
+    ResultsStore().write_many({
+        "simDomePermP":      p_perm_dome,    # permutation p, dome corpus
+        "simDomeBootP":      p_boot_dome,    # bootstrap p, dome corpus
+        "simKDEP":           p_kde,          # KDE-based p-value
+        "simCanonPermP":     p_perm_canon,   # permutation p, canonical
+        "simPreTwoKPermP":   p_perm_pre2k,   # permutation p, pre-2000
+        "simPostTwoKPermP":  p_perm_post2k,  # permutation p, post-2000
+    })
 
 if __name__ == "__main__":
     main()

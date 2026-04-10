@@ -70,10 +70,12 @@ from lib.beru import (
     deviation as beru_deviation, tier_label, is_aplus, is_a_or_better,
 )
 from lib.stats import significance_label as sig
+from lib.results_store import ResultsStore
 
-TIER_APLUS_VAL = TIER_APLUS
-TIER_A_MAX = TIER_A_MAX
-P_NULL_AP_VAL = P_NULL_AP
+import json as _json
+_ROOT = Path(__file__).parent.parent.parent
+_CFG  = _json.loads((_ROOT / "config.json").read_text())
+N_PERM_CLUSTER = _CFG["simulation"]["n_permutations_cluster"]  # 10,000
 
 # Cluster radius: defined by the Tier-A beru threshold, matching the
 # metrological framework of the stupa cluster enrichment test.
@@ -224,7 +226,7 @@ print("=" * 95)
 
 rng = np.random.default_rng(42)
 all_cluster_sizes = np.array([s["cluster_size"] for s in sites])
-n_perm = 10_000
+n_perm = N_PERM_CLUSTER
 perm_means = np.zeros(n_perm)
 
 for i in range(n_perm):
@@ -307,7 +309,7 @@ for s in sites:
     cell = _math.floor(beru_val / 0.1)
     frac = beru_val - cell * 0.1        # position within 0.1-beru cell [0, 0.1)
     s["coarse_node"] = frac < 0.05      # True = node-side, False = anti-side
-    s["anti_aplus"]  = s["anti_dev"] <= TIER_APLUS_VAL
+    s["anti_aplus"]  = s["anti_dev"] <= TIER_APLUS
 
 node_ap_ps = [s for s in sites if s["coarse_node"] and is_aplus(s["tier"])]
 anti_ap_ps = [s for s in sites if not s["coarse_node"] and s["anti_aplus"]]
@@ -558,3 +560,12 @@ print(f"  \\newcommand{{\\clusterNodeVsAntiApMWp}}{{{p_nap_vs_aap:.4f}}}        
 print(f"  \\newcommand{{\\clusterNodeAllMean}}{{{mean_nall:.2f}}}          % mean cluster size, all node-side")
 print(f"  \\newcommand{{\\clusterAntiAllMean}}{{{mean_aall:.2f}}}          % mean cluster size, all anti-side")
 print(f"  \\newcommand{{\\clusterNodeVsAntiAllMWp}}{{{p_nall_vs_aall:.4f}}}        % Mann-Whitney p, all node > all anti")
+
+# ── Write to results store ────────────────────────────────────────────────────
+ResultsStore().write_many({
+    "clusterApBinom":     bt_Ap.pvalue,      # binomial p, full corpus A+ — Test 1
+    "clusterPermP":       perm_p,            # permutation p, cluster asymmetry — Test 3
+    "clusterMWp":         mw_p,              # Mann-Whitney p (site-level)
+    "clusterHarmonicMWp": mw2_p,             # Mann-Whitney p (harmonic-level)
+    "clusterPermZ":       round(perm_z, 4),  # permutation Z-score
+})

@@ -12,6 +12,7 @@ from lib.beru import (
     deviation as beru_dev, tier_label as tier,
 )
 from lib.stats import significance_label as sig, cochran_armitage
+from lib.results_store import ResultsStore
 
 # ── Load corpus ──────────────────────────────────────────────────────────────
 corpus = load_corpus()
@@ -189,3 +190,11 @@ print(f"  \\newcommand{{\\ZcochranFive}}{{{Z5:.2f}}}         % Cochran-Armitage 
 print(f"  \\newcommand{{\\pCochranFive}}{{{p_ca5:.4f}}}      % p-value, Cochran-Armitage 5-bin")
 print(f"  \\newcommand{{\\rhoSpearman}}{{{rho2:.4f}}}        % Spearman rho, A+ rate vs era")
 print(f"  \\newcommand{{\\pSpearman}}{{{p_rho2:.6f}}}        % p-value, Spearman rank correlation")
+
+# ── Write to results store ────────────────────────────────────────────────────
+ResultsStore().write_many({
+    "pCochranThree": p_ca,     # Cochran-Armitage 3-cohort p — Test 4
+    "pCochranFive":  p_ca5,    # Cochran-Armitage 5-cohort p
+    "ZcochranThree": Z_ca,     # Z-statistic, 3-cohort
+    "ZcochranFive":  Z5,       # Z-statistic, 5-cohort
+})

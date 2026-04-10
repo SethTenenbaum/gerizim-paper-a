@@ -1,5 +1,6 @@
-% Generated macros — 2026-04-10T03:14:53Z
+% Generated macros — 2026-04-10T05:02:48Z
 % Source: bash manuscript/reproduce_all_macros.sh --macros-only
+% IMPORTANT: values are computed fresh each run — do NOT hardcode
 
 % --- analysis/unesco/spherical_monument_raw_sweep.py
   \newcommand{\NcircTotal}{90}           % raw-sweep population size
@@ -19,6 +20,10 @@
   \newcommand{\circEnrichAp}{3.06}           % enrichment ratio, A+
   \newcommand{\circEnrichA}{1.61}           % enrichment ratio, A
   \newcommand{\circMeanDev}{0.0220}        % mean beru deviation (raw sweep)
+
+% --- analysis/unesco/spherical_monument_test.py
+  \newcommand{\pCircApValidated}{0.0005}  % p-value, A+ binomial (context-validated dome corpus)
+  \newcommand{\pCircAValidated}{0.0098}   % p-value, A binomial (context-validated dome corpus)
 
 % --- analysis/unesco/cluster_asymmetry_test.py
   \newcommand{\NclusterTotal}{1011}          % full Cultural/Mixed corpus
@@ -154,9 +159,9 @@
   \newcommand{\pFoundKwFisher}{0.009}         % p-value, Fisher test founding keyword
 
 % --- analysis/unesco/sacred_origin_test.py
-  \newcommand{\topHitOne}{Lumbini, the Birthplace of the Lord Buddha}  % top-ranked sacred-origin site
-  \newcommand{\topHitTwo}{Historic Centre of Oaxaca and Archaeological Site of Monte Albán}  % 2nd-ranked sacred-origin site
-  \newcommand{\topHitThree}{Old City of Jerusalem and its Walls}  % 3rd-ranked sacred-origin site
+  \newcommand{\sacredHitOne}{Lumbini, the Birthplace of the Lord Buddha}  % top-ranked sacred-origin A+ site (by beru deviation)
+  \newcommand{\sacredHitTwo}{Historic Centre of Oaxaca and Archaeological Site of Monte Albán}  % 2nd-ranked sacred-origin A+ site
+  \newcommand{\sacredHitThree}{Old City of Jerusalem and its Walls}  % 3rd-ranked sacred-origin A+ site
 
 % --- analysis/unesco/meta_keyword_test.py
   \newcommand{\NmetaKeywords}{1741}          % total keyword permutations tested
@@ -212,7 +217,7 @@
   \newcommand{\pHalfFisher}{0.106399}       % p-value, Fisher half-corpus comparison
 
 % --- analysis/global/anchor_uniqueness_audit.py
-  \newcommand{\anchorSweepNanchors}{36000}          % number of anchor points in sweep
+  \newcommand{\anchorSweepNanchors}{36{,}000}          % number of anchor points in sweep
   \newcommand{\anchorSweepApMean}{40.4}           % mean A+ count across all anchors
   \newcommand{\anchorSweepApStd}{6.9}            % std A+ count across all anchors
   \newcommand{\anchorSweepGlobalMax}{60}           % global max A+/A combined at any anchor
@@ -260,8 +265,8 @@
   \newcommand{\corridorPrecHits}{17}           % harmonics with corridor hit
   \newcommand{\corridorPrecApp}{6}            % A++ hits in corridor precision test
   \newcommand{\corridorPrecApOnly}{11}         % A+-only hits (not A++) in corridor
-  \newcommand{\pCorridorBinom}{1.7e-24}       % p-value, corridor binomial test
-  \newcommand{\pCorridorFisher}{1.5e-19}       % p-value, corridor Fisher test
+  \newcommand{\pCorridorBinom}{1.7 \times 10^{-24}}       % p-value, corridor binomial test
+  \newcommand{\pCorridorFisher}{1.5 \times 10^{-19}}       % p-value, corridor Fisher test
   \newcommand{\corridorAppOR}{20.73}           % Fisher OR, A++ vs A+ in corridor
   \newcommand{\pCorridorAppFisher}{0.0022}       % p-value, A++ Fisher test in corridor
   \newcommand{\corridorMeanDevKm}{2.26}        % mean deviation within corridor (km)
@@ -313,13 +318,6 @@
   \newcommand{\CMHchisq}{2.553}           % Cochran-Mantel-Haenszel chi-sq
   \newcommand{\pCMH}{0.1101}               % p-value, CMH test
 
-% --- analysis/unesco/fdr_multiple_comparisons.py
-  \newcommand{\NtotalTests}{84}           % total tests in FDR analysis
-  \newcommand{\NconfTests}{59}           % confirmatory tests
-  \newcommand{\NexplTests}{25}           % exploratory tests
-  \newcommand{\NsurviveFDR}{41}           % tests surviving BH FDR (q<0.05)
-  \newcommand{\NsurviveBonfAll}{15}           % tests surviving Bonferroni (all tests)
-
 % --- analysis/unesco/tumulus_dome_evolution_raw_sweep.py
   \newcommand{\NevoTotal}{132}            % total dome-evolution corpus
   \newcommand{\NevoAp}{14}             % A+ sites in dome-evolution corpus
@@ -343,13 +341,14 @@
   \newcommand{\NevoMoundOnlyAp}{3}           % A+ in mound-only sites
   \newcommand{\NevoOverlap}{6}            % sites with both mound and dome/stupa stages
 
-% --- analysis/unesco/bonferroni_correction.py
-  MANUSCRIPT MACRO VALUES  (copy into \newcommand block)
-  \newcommand{\BonfK}{4}  % k = confirmatory tests (Tests 1, 2, 3, 4; Test 2b is sensitivity variant)
-  \newcommand{\pAdjTestOne}{0.041}  % Bonferroni-adj p, Test 1 (Global enrichment — full corpus A+ (binomial))
-  \newcommand{\pAdjTestTwo}{0.004}  % Bonferroni-adj p, Test 2 (Domed/spherical A+ — RAW sweep (binomial))
-  \newcommand{\pAdjTestThree}{0.013}  % Bonferroni-adj p, Test 3 (Cluster asymmetry — permutation p)
-  \newcommand{\pAdjTestFour}{0.192}  % Bonferroni-adj p, Test 4 (Temporal gradient (Cochran-Armitage))
+% --- analysis/unesco/tumulus_dome_evolution_test.py
+  \newcommand{\NevoValidTotal}{116}              % total dome-evolution corpus (context-validated)
+  \newcommand{\NevoValidAp}{14}               % A+ sites (context-validated)
+  \newcommand{\evoValidApRate}{12.1}             % A+ rate, context-validated (%)
+  \newcommand{\evoValidEnrichAp}{3.02}            % enrichment ratio A+ (context-validated)
+  \newcommand{\pEvoApValidated}{0.0002}          % p-value A+ binomial, context-validated (Exploratory)
+  \newcommand{\pEvoAValidated}{0.0032}           % p-value A  binomial, context-validated (Exploratory)
+  \newcommand{\NevoValidRejected}{16}           % sites rejected by context validation
 
 % --- analysis/global/wikidata_p1435_control_analysis.py
   \newcommand{\WDctrlN}{62{,}785}           % Wikidata P1435 control corpus size
@@ -395,8 +394,16 @@
 \newcommand{\domeBandFisherP}{0.4738}  % Fisher p, dome vs non-dome in band
 \newcommand{\domeBandFisherSig}{ns}  % significance label
 
+% --- analysis/americas/americas_harmonic_depletion_audit.py
+  \newcommand{\AmericasCtrlN}{20469}          % Americas control corpus size
+  \newcommand{\AmericasCtrlAp}{104}           % A+ hits in Americas control
+  \newcommand{\AmericasCtrlRate}{0.508}         % A+ rate, Americas control (%)
+  \newcommand{\AmericasCtrlExpected}{819}       % expected A+ hits under null
+  \newcommand{\AmericasCtrlDeplFactor}{0.127}      % harmonic depletion factor (observed/expected)
+  \newcommand{\pAmericasDepl}{$< 10^{-200}$}   % p-value, Americas harmonic depletion
+
 % --- analysis/unesco/simulation_null_model.py
-  \newcommand{\simNperms}{100,000}        % number of permutations in null model
+  \newcommand{\simNperms}{100{,}000}        % number of permutations in null model
   \newcommand{\simDomePermZ}{3.20}         % permutation Z-score, dome corpus
   \newcommand{\simDomePermP}{0.004}          % permutation p, dome corpus
   \newcommand{\simDomeBootP}{0.006}          % bootstrap p, dome corpus
@@ -410,11 +417,18 @@
   \newcommand{\simKDEMean}{40.4}           % KDE null-model mean A+
   \newcommand{\simKDEStd}{6.2}            % KDE null-model std A+
 
-% --- analysis/americas/americas_harmonic_depletion_audit.py
-  \newcommand{\AmericasCtrlN}{20469}          % Americas control corpus size
-  \newcommand{\AmericasCtrlAp}{104}           % A+ hits in Americas control
-  \newcommand{\AmericasCtrlRate}{0.508}         % A+ rate, Americas control (%)
-  \newcommand{\AmericasCtrlExpected}{819}       % expected A+ hits under null
-  \newcommand{\AmericasCtrlDeplFactor}{0.127}      % harmonic depletion factor (observed/expected)
-  \newcommand{\pAmericasDepl}{$< 10^{-200}$}   % p-value, Americas harmonic depletion
+% --- analysis/unesco/fdr_multiple_comparisons.py
+  \newcommand{\NtotalTests}{43}           % total tests in FDR analysis
+  \newcommand{\NconfTests}{38}           % confirmatory tests
+  \newcommand{\NexplTests}{5}           % exploratory tests
+  \newcommand{\NsurviveFDR}{24}           % tests surviving BH FDR (q<0.05)
+  \newcommand{\NsurviveBonfAll}{6}           % tests surviving Bonferroni (all tests)
+
+% --- analysis/unesco/bonferroni_correction.py
+  MANUSCRIPT MACRO VALUES  (copy into \newcommand block)
+  \newcommand{\BonfK}{4}  % k = confirmatory tests (Tests 1, 2, 3, 4)
+  \newcommand{\pAdjTestOne}{0.041}  % Bonferroni-adj p, Test 1 (Global enrichment — full corpus A+ (binomial))
+  \newcommand{\pAdjTestTwo}{0.004}  % Bonferroni-adj p, Test 2 (Domed/spherical A+ — RAW sweep (binomial))
+  \newcommand{\pAdjTestThree}{0.013}  % Bonferroni-adj p, Test 3 (Cluster asymmetry — permutation p)
+  \newcommand{\pAdjTestFour}{0.192}  % Bonferroni-adj p, Test 4 (Temporal gradient (Cochran-Armitage 3-cohort))
 

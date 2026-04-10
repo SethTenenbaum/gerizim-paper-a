@@ -22,8 +22,10 @@ OUTPUT
 """
 
 from __future__ import annotations
+
 import sys
 from pathlib import Path
+import json as _json
 import numpy as np
 
 # ── Repo root ─────────────────────────────────────────────────────────────────
@@ -33,11 +35,10 @@ sys.path.insert(0, str(ROOT))
 from data.unesco_corpus import load_corpus, cultural_sites_with_coords
 from lib.beru import GERIZIM, BERU, TIER_APP, TIER_APLUS
 
-# ── Constants ─────────────────────────────────────────────────────────────────
-JERUSALEM = 35.2317          # UNESCO XML coordinate
-BERU_DEG  = 30.0             # 1 beru = 30°
-STEP      = 3.0              # 0.1 beru = 3°
-KM_PER_DEG = 111.0           # equatorial km per degree (no cos-lat correction, per study convention)
+# ── Constants from config.json ────────────────────────────────────────────────
+_CFG      = _json.loads((ROOT / "config.json").read_text())
+JERUSALEM = _CFG["anchors"]["jerusalem"]["longitude"]    # 35.2317 — from config
+KM_PER_DEG = _CFG["units"]["km_per_degree"]             # 111.0
 
 # World Peace Pagoda, Lumbini — Wikidata Q6540965 coordinate (not in UNESCO XML)
 # The UNESCO XML records the Lumbini WHS centroid at 83.27611°E (used for
@@ -51,10 +52,10 @@ WPP_LON = 83.2743            # Wikidata Q6540965 — Nipponzan-Myohoji pagoda
 def beru_dev(lon: float, anchor: float) -> tuple[float, float, str]:
     """Return (dev_beru, dev_km, tier_label) for a site relative to anchor."""
     arc  = abs(lon - anchor)
-    bv   = arc / BERU_DEG
+    bv   = arc / BERU
     near = round(bv * 10) / 10
     dev  = abs(bv - near)
-    km   = dev * BERU_DEG * KM_PER_DEG   # equatorial, no cos-lat
+    km   = dev * BERU * KM_PER_DEG   # equatorial, no cos-lat
     if dev <= TIER_APP:
         tier = "A++"
     elif dev <= TIER_APLUS:
@@ -83,7 +84,7 @@ def main():
     # ── Count A++ from Gerizim ────────────────────────────────────────────
     arcs = np.abs(lons - GERIZIM)
     arcs = np.minimum(arcs, 360 - arcs)
-    bvs  = arcs / BERU_DEG
+    bvs  = arcs / BERU
     near = np.round(bvs * 10) / 10
     devs = np.abs(bvs - near)
     n_app = int(np.sum(devs <= TIER_APP))

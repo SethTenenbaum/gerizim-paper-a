@@ -48,17 +48,19 @@ from scipy.stats import binomtest
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
+import json as _json
 from data.unesco_corpus import load_corpus, cultural_sites_with_coords
-from lib.beru import GERIZIM, BERU, TIER_APLUS
+from lib.beru import GERIZIM, BERU, TIER_APLUS, P_NULL_AP
 
-# ── Constants ─────────────────────────────────────────────────────────────────
-BERU_DEG       = 30.0
-HARMONIC_STEP  = 3.0          # 0.1 beru
+# ── Constants from config.json ────────────────────────────────────────────────
+_CFG           = _json.loads((ROOT / "config.json").read_text())
+BERU_DEG       = BERU                          # 30.0° — from lib.beru
+HARMONIC_STEP  = BERU * 0.1                   # 0.1 beru = 3.0°
 HALF_STEP      = HARMONIC_STEP / 2
-P_NULL         = 0.04         # geometric null for Tier-A+
+P_NULL         = P_NULL_AP                    # 0.04 — geometric null for Tier-A+
 CTRL_CSV       = ROOT / "data" / "store" / "wikidata" / "p1435_global_control.csv"
-N_PERM         = 50_000
-SEED           = 42
+N_PERM         = _CFG["simulation"]["n_permutations_wikidata"]  # 50,000
+SEED           = _CFG["simulation"]["random_seed"]              # 42
 
 # Region boxes matching fetch_p1435_global.py
 REGION_BOXES = {
@@ -80,7 +82,7 @@ def assign_region(lat: float, lon: float) -> str:
 def beru_dev(lon: float) -> float:
     arc  = abs(lon - GERIZIM)
     arc  = min(arc, 360 - arc)
-    bv   = arc / BERU_DEG
+    bv   = arc / BERU
     near = round(bv * 10) / 10
     return abs(bv - near)
 

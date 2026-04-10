@@ -59,6 +59,7 @@ from lib.founding_filter import (
     primary_category,
 )
 from lib.stats import significance_label as sig
+from lib.results_store import ResultsStore
 from lib.reporting import (
     print_header, print_thematic_breakdown, print_unclassified_sites,
     print_top_sites, print_enrichment_table, print_fisher_inline,
@@ -247,5 +248,11 @@ print(f"  \\newcommand{{\\NfoundKwNonAp}}{{{n_found_kw_nonap}}}           % non-
 print(f"  \\newcommand{{\\foundKwNonApRate}}{{{found_kw_nonap_rate:.1f}}}        % founding keyword rate in non-A+ (%)")
 print(f"  \\newcommand{{\\foundKwFisherOR}}{{{or_kw:.2f}}}          % Fisher OR, A+ vs non-A+ founding keyword")
 print(f"  \\newcommand{{\\pFoundKwFisher}}{{{p_kw:.3f}}}         % p-value, Fisher test founding keyword")
+
+# ── Write to results store ────────────────────────────────────────────────────
+ResultsStore().write_many({
+    "pFoundKwFisher": p_kw,        # Fisher p, founding keyword enrichment — Test E
+    "foundKwFisherOR": or_kw,      # Fisher OR
+})
 
 

@@ -12,6 +12,7 @@ from lib.beru import (
     deviation as beru_dev, tier_label,
 )
 from lib.stats import significance_label as sig
+from lib.results_store import ResultsStore
 
 TIER_AP = TIER_APLUS
 
@@ -545,5 +546,16 @@ print(f"  \\newcommand{{\\secondHalfRate}}{{{100*nap2/n2:.1f}}}           % A+ r
 print(f"  \\newcommand{{\\pSecondHalf}}{{{p2:.6f}}}       % p-value, second-half A+ binomial")
 print(f"  \\newcommand{{\\halfFisherOR}}{{{or3:.2f}}}          % Fisher OR, first vs second half A+")
 print(f"  \\newcommand{{\\pHalfFisher}}{{{p3:.6f}}}       % p-value, Fisher half-corpus comparison")
+
+# ── Write to results store ────────────────────────────────────────────────────
+ResultsStore().write_many({
+    "pFoundDateSpearman": p_sp2,       # Spearman p, founding date vs A+
+    "pPreCEfisher":       p_fisher,    # Fisher pre- vs post-CE A+
+    "pPreCEbinom":        p_pre_binom, # binomial p, pre-CE A+
+    "peakSigP":           peak_p,      # p at peak sequential signal
+    "pFirstHalf":         p1,          # first-half A+ binomial p
+    "pSecondHalf":        p2,          # second-half A+ binomial p
+    "pHalfFisher":        p3,          # Fisher p, half-corpus comparison
+})
 
 print("\n  DONE.")

@@ -69,7 +69,7 @@
 \newcommand{\GerizimPctileA}{100}   % anchor-sweep percentile, A  (raw sweep)
 \newcommand{\circEnrichAp}{3.06}    % enrichment ratio, A+
 \newcommand{\circEnrichA}{1.61}     % enrichment ratio, A
-\newcommand{\circMeanDev}{0.0219}   % mean beru deviation (approx)
+\newcommand{\circMeanDev}{0.0220}   % mean beru deviation (approx)
 % Cluster asymmetry test (analysis/unesco/cluster_asymmetry_test.py)
 % Full UNESCO corpus, no keyword filter.  Compares cluster density
 % (other Cultural/Mixed sites within ±0.3° longitude = ±Tier-A beru window) at A+ vs non-A+ sites.
@@ -101,7 +101,7 @@
 \newcommand{\attractorSpearmanRho}{-0.108} % Spearman rho, deviation vs density
 \newcommand{\attractorSpearmanP}{0.00061}  % Spearman p
 \newcommand{\attractorHarmonicRatio}{4.19} % A+ harmonic density ratio
-\newcommand{\attractorHarmonicMWp}{0.0001} % harmonic-level MWU p
+\newcommand{\attractorHarmonicMWp}{0.0000} % harmonic-level MWU p
 \newcommand{\attractorEUMWp}{0.0224}       % Europe-only MWU p
 \newcommand{\NaraKyotoMaxDist}{34.2}       % max pairwise distance, Nara/Kyoto cluster (km)
 % Phase-split cluster analysis (node-side vs beru-half-interval-side)
@@ -109,10 +109,10 @@
 \newcommand{\NclusterAntiAp}{23}           % beru-half-interval-side A+ sites
 \newcommand{\clusterNodeApMean}{9.85}     % mean cluster, node A+
 \newcommand{\clusterAntiApMean}{5.83}      % mean cluster, half-interval A+
-\newcommand{\clusterNodeNonApMean}{8.15}   % mean cluster, node non-A+
+\newcommand{\clusterNodeNonApMean}{8.16}   % mean cluster, node non-A+
 \newcommand{\clusterAntiNonApMean}{7.23}   % mean cluster, half-interval non-A+
 \newcommand{\clusterNodeVsAntiApRatio}{1.69} % node A+ / half-interval A+ ratio
-\newcommand{\clusterNodeVsAntiApMWp}{0.024}  % MW p, node A+ > half-interval A+
+\newcommand{\clusterNodeVsAntiApMWp}{0.0238}  % MW p, node A+ > half-interval A+
 \newcommand{\clusterNodeAllMean}{8.25}     % mean cluster, all node-side
 \newcommand{\clusterAntiAllMean}{7.17}     % mean cluster, all half-interval-side
 \newcommand{\clusterNodeVsAntiAllMWp}{0.0075} % MW p, node-side > half-interval-side
@@ -240,8 +240,8 @@
 % Meta-keyword test (analysis/unesco/meta_keyword_test.py)
 % Exhaustive scan of all 4+-letter words in UNESCO short_descriptions
 \newcommand{\NmetaKeywords}{1741}         % total candidate keywords tested
-\newcommand{\NmetaBeatingChi}{44}         % keywords with χ² ≤ curated set
-\newcommand{\metaBeatingChiPct}{2.5}      % percent
+\newcommand{\NmetaBeatingChi}{41}         % keywords with χ² ≤ curated set
+\newcommand{\metaBeatingChiPct}{2.4}      % percent
 
 % Temporal gradient (analysis/unesco/temporal_gradient_test.py)
 % Cochran-Armitage trend test: A+ rate decreases with inscription year
@@ -272,7 +272,7 @@
 \newcommand{\peakSigN}{605}               % cumulative N at peak
 \newcommand{\peakSigAp}{43}              % cumulative A+ at peak
 \newcommand{\peakSigRate}{7.1}           % A+ rate at peak
-\newcommand{\peakSigP}{0.00026}          % p at peak
+\newcommand{\peakSigP}{0.00025926}       % p at peak
 \newcommand{\peakNegLogP}{3.59}          % -log10(p) at peak
 \newcommand{\firstSigYear}{1982}          % first year p < 0.05
 \newcommand{\firstSigN}{103}             % N at first significance
@@ -281,13 +281,13 @@
 \newcommand{\NfirstHalf}{505}             % first half (earliest inscribed)
 \newcommand{\NapFirstHalf}{33}
 \newcommand{\firstHalfRate}{6.5}
-\newcommand{\pFirstHalf}{0.0046}
+\newcommand{\pFirstHalf}{0.004581}
 \newcommand{\NsecondHalf}{506}
 \newcommand{\NapSecondHalf}{23}
 \newcommand{\secondHalfRate}{4.5}
-\newcommand{\pSecondHalf}{0.2952}
+\newcommand{\pSecondHalf}{0.295198}
 \newcommand{\halfFisherOR}{1.47}
-\newcommand{\pHalfFisher}{0.1064}
+\newcommand{\pHalfFisher}{0.106399}
 % Antiquity (founding-era) dating from UNESCO descriptions
 % (deep_temporal_analysis.py Part A)
 \newcommand{\NdatedSites}{579}            % sites with extractable founding date
@@ -331,8 +331,8 @@
 \newcommand{\GerizimSweepApp}{7}              % Gerizim A++ count (Sweep A)
 \newcommand{\GerizimSweepAp}{55}             % Gerizim A+  count (Sweep A)
 \newcommand{\GerizimSweepA}{227}             % Gerizim A   count (Sweep A)
-\newcommand{\anchorSweepPctile}{97.2}         % Gerizim percentile (Sweep A)
-\newcommand{\anchorSweepGeApPct}{4.33}        % \% anchors scoring ≥ Gerizim
+\newcommand{\anchorSweepPctile}{98.3}         % Gerizim percentile (Sweep A)
+\newcommand{\anchorSweepGeApPct}{3.10}        % \% anchors scoring ≥ Gerizim
 % Sweep B — Jerusalem
 \newcommand{\JerusalemSweepApp}{7}            % Jerusalem A++ count (Sweep B)
 \newcommand{\JerusalemSweepAp}{56}           % Jerusalem A+  count (Sweep B)
@@ -367,8 +367,8 @@
 \newcommand{\GerizimPhase}{2.269}          % Gerizim mod 3.0°
 \newcommand{\phaseGap}{0.089}              % Gerizim's offset from optimal
 \newcommand{\phaseGapKm}{8.4}             % at 32°N latitude
-\newcommand{\localBestLon}{35.180}         % local peak in 34-37°E window
-\newcommand{\localBestAp}{59}              % local peak count (Sweep A; Gerizim corpus)
+\newcommand{\localBestLon}{35.179}         % local peak in 34-37°E window
+\newcommand{\localBestAp}{61}              % local peak count (Sweep A; Gerizim corpus)
 % Gerizim landmark ranking (analysis/global/landmark_anchor_ranking.py)
 % Gerizim (35.269°E) ranks #41 out of 1011 UNESCO sites (top 4.1%)
 \newcommand{\GerizimTempleAp}{56}          % A+ count at 35.269°E
@@ -509,31 +509,31 @@
 % Design-effect / ICC correction for spatial autocorrelation
 \newcommand{\DEFFhalf}{1.310}              % DEFF at ±0.5° bandwidth
 \newcommand{\NeffHalf}{772}                % effective-N at ±0.5° bandwidth
-\newcommand{\pNeffHalf}{0.015}             % corrected p at ±0.5°
+\newcommand{\pNeffHalf}{0.020}             % corrected p at ±0.5°
 \newcommand{\ICChalf}{0.069}               % ICC at ±0.5°
 \newcommand{\DEFFquarter}{1.289}           % DEFF at ±0.25°
 \newcommand{\NeffQuarter}{784}             % effective-N at ±0.25°
-\newcommand{\pNeffQuarter}{0.014}          % corrected p at ±0.25°
-% Block bootstrap 95% CI (at 3° block width)
-\newcommand{\blockBootCIlo}{4.19}          % lower 95% CI (%)
-\newcommand{\blockBootCIhi}{6.86}          % upper 95% CI (%)
-\newcommand{\blockBootZ}{2.25}             % Z vs 4% null
+\newcommand{\pNeffQuarter}{0.025}          % corrected p at ±0.25°
+% Block bootstrap 95% CI (at 5° block width)
+\newcommand{\blockBootCIlo}{4.04}          % lower 95% CI (%)
+\newcommand{\blockBootCIhi}{6.87}          % upper 95% CI (%)
+\newcommand{\blockBootZ}{2.14}             % Z vs 4% null
 
 % Regional temporal gradient (analysis/unesco/regional_temporal_gradient.py)
 % Mantel-Haenszel region-adjusted analysis
 \newcommand{\MHcommonOR}{1.582}            % MH common odds ratio (early vs late)
 \newcommand{\CMHchisq}{2.553}              % CMH chi-squared
-\newcommand{\pCMH}{0.110}                 % CMH p-value
+\newcommand{\pCMH}{0.1101}                 % CMH p-value
 
 % FDR multiple comparisons (analysis/unesco/fdr_multiple_comparisons.py)
 % Benjamini-Hochberg correction across ALL tests in the paper
 % NOTE: Tests 2 and E share the same full-corpus A+ binomial; counted once.
 % Test 2b (Wikidata Q180987) adds 6 tests: 3 confirmatory + 3 exploratory.
-\newcommand{\NtotalTests}{84}              % total hypothesis tests counted (fdr_multiple_comparisons.py)
-\newcommand{\NconfTests}{59}               % confirmatory (pre-specified)
-\newcommand{\NexplTests}{25}               % exploratory (post-hoc)
-\newcommand{\NsurviveFDR}{41}              % survive BH-FDR at q<0.05
-\newcommand{\NsurviveBonfAll}{15}          % survive Bonferroni k=84
+\newcommand{\NtotalTests}{43}              % total hypothesis tests counted (fdr_multiple_comparisons.py)
+\newcommand{\NconfTests}{38}               % confirmatory (pre-specified)
+\newcommand{\NexplTests}{5}                % exploratory (post-hoc)
+\newcommand{\NsurviveFDR}{24}              % survive BH-FDR at q<0.05
+\newcommand{\NsurviveBonfAll}{6}           % survive Bonferroni k=43
 
 % Hemispherical mound evolution test — RAW SWEEP (analysis/unesco/tumulus_dome_evolution_raw_sweep.py)
 % PRIMARY confirmatory version (Test 2b). No context validation — maximally pre-specified.
@@ -612,20 +612,19 @@
 % Wikidata global heritage control
 % Data fetch: data/scripts/fetch_p1435_global.py
 % Statistical analysis: analysis/global/wikidata_p1435_control_analysis.py
-% 51,102 globally-balanced Wikidata heritage structures, beru deviation vs Gerizim
-\newcommand{\WDctrlN}{51{,}102}            % control group N
-\newcommand{\WDctrlAp}{1992}               % control A+ count
-\newcommand{\WDctrlRate}{3.90}             % control A+ rate (%)
-\newcommand{\WDctrlBinomP}{0.88}           % binomial p vs 4% null (ns)
-\newcommand{\WDctrlOR}{1.47}               % odds ratio UNESCO vs control
-\newcommand{\WDctrlORlo}{1.12}             % OR 95% CI lower
-\newcommand{\WDctrlORhi}{1.93}             % OR 95% CI upper
-\newcommand{\WDctrlZp}{0.0024}             % 2-prop z-test p
-\newcommand{\WDctrlPermP}{0.004}           % permutation p (50k draws)
-\newcommand{\WDctrlMHOR}{1.443}            % Mantel-Haenszel common OR
-\newcommand{\WDctrlMHchi}{6.704}           % CMH chi-squared
-\newcommand{\WDctrlMHp}{0.0096}            % CMH p-value
-\newcommand{\WDctrlDropEuropeOR}{1.83}     % OR after dropping Europe
+\newcommand{\WDctrlN}{62{,}785}            % control group N
+\newcommand{\WDctrlAp}{2361}               % control A+ count
+\newcommand{\WDctrlRate}{3.76}             % control A+ rate (%)
+\newcommand{\WDctrlBinomP}{0.00}           % binomial p vs 4% null (ns)
+\newcommand{\WDctrlOR}{1.50}               % odds ratio UNESCO vs control
+\newcommand{\WDctrlORlo}{1.14}             % OR 95% CI lower
+\newcommand{\WDctrlORhi}{1.97}             % OR 95% CI upper
+\newcommand{\WDctrlZp}{0.0016}             % 2-prop z-test p
+\newcommand{\WDctrlPermP}{0.003}           % permutation p (50k draws)
+\newcommand{\WDctrlMHOR}{1.588}            % Mantel-Haenszel common OR
+\newcommand{\WDctrlMHchi}{10.291}          % CMH chi-squared
+\newcommand{\WDctrlMHp}{0.0013}            % CMH p-value
+\newcommand{\WDctrlDropEuropeOR}{1.66}     % OR after dropping Europe
 
 % Dome Periodicity Audit (analysis/global/dome_periodicity_audit.py)
 % Tests whether the x.18°E artifact explains the dome A+ enrichment (Test 2).

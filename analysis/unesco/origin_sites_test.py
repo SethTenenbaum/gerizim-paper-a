@@ -47,6 +47,7 @@ from lib.beru import (
     load_religion_sets,
 )
 from lib.stats import significance_label as sig
+from lib.results_store import ResultsStore
 from lib.reporting import (
     print_header, print_subheader,
     print_enrichment_header, print_enrichment_row,
@@ -341,3 +342,13 @@ print(f"  \\newcommand{{\\NchristAp}}{{{nap_chr}}}              % Christian site
 print(f"  \\newcommand{{\\christApRate}}{{{100*nap_chr/n_chr:.1f}}}            % Christian sites A+ rate (%)")
 print(f"  \\newcommand{{\\pChrist}}{{{p_chr:.4f}}}         % p-value, Christian sites A+ binomial")
 print(f"  \\newcommand{{\\christEnrich}}{{{enr_chr:.2f}}}           % enrichment ratio, Christian sites")
+
+# ── Write to results store ────────────────────────────────────────────────────
+ResultsStore().write_many({
+    "pCanon":             p_canon,      # binomial p, canon cohort (1978-1984)
+    "pPreTwoK":           p_pre2k,      # binomial p, pre-2000 cohort
+    "pModern":            p_modern,     # binomial p, modern cohort (2000+)
+    "pFisherCanonModern": p_fl,         # Fisher p, canon vs modern
+    "pReligUnion":        p_rel,        # any-religion A+ binomial p
+    "pChrist":            p_chr,        # Christian A+ binomial p
+})

@@ -44,17 +44,24 @@ from lib.beru import (
     deviation as _beru_dev, tier_label, is_aplus, is_a_or_better,
 )
 from lib.stats import significance_label as sig
+from lib.results_store import ResultsStore
 
-# ── Keyword lists (mirror tumulus_dome_evolution_test.py exactly) ─────────────
+# ── Load keyword sets from keywords.json ─────────────────────────────────────
+import json
+_KW_PATH = Path(__file__).parent.parent.parent / "keywords.json"
+with open(_KW_PATH) as _f:
+    _KW = json.load(_f)
+
+_evo = _KW["mound_evolution"]
 # Mound family — always unambiguous in the mound-evolution context
-MOUND_KEYWORDS = ["tumulus", "tumuli", "barrow", "barrows", "kofun", "mound"]
+MOUND_KEYWORDS = _evo["mound_unambiguous"] + _evo["mound_ambiguous"]
 
 # Stupa family — unambiguous monumental spherical architecture
-STUPA_KEYWORDS = ["stupa", "stupas", "dagoba", "chorten"]
+STUPA_KEYWORDS = _evo["stupa"]
 
 # Dome family — includes words that are ambiguous in isolation; we skip
 # context-checking here intentionally (raw sweep).
-DOME_KEYWORDS = ["tholos", "dome", "domed", "domes", "spherical"]
+DOME_KEYWORDS = _evo["dome"]
 
 ALL_KEYWORDS = MOUND_KEYWORDS + STUPA_KEYWORDS + DOME_KEYWORDS
 
@@ -396,3 +403,14 @@ print(f"  \\newcommand{{\\pEvoDome}}{{{p_dome_stage:.4f}}}          % p-value, A
 print(f"  \\newcommand{{\\NevoMoundOnly}}{{{len(mound_only)}}}          % mound-only sites (no later dome/stupa)")
 print(f"  \\newcommand{{\\NevoMoundOnlyAp}}{{{n_mo_ap}}}           % A+ in mound-only sites")
 print(f"  \\newcommand{{\\NevoOverlap}}{{{len(overlap)}}}            % sites with both mound and dome/stupa stages")
+
+# ── Write to results store ────────────────────────────────────────────────────
+ResultsStore().write_many({
+    "pEvoAp":      bt_ap.pvalue,    # binomial p, A+ (dome-evolution corpus) — Test 2b
+    "pEvoA":       bt_a.pvalue,     # binomial p, A
+    "pEvoMound":   p_mound_stage,   # A+ binomial, mound stage
+    "pEvoStupa":   p_stupa_stage,   # A+ binomial, stupa stage
+    "pEvoDome":    p_dome_stage,    # A+ binomial, dome stage
+    "NevoTotal":   N,               # total dome-evolution corpus
+    "NevoAp":      n_ap,            # A+ sites
+})

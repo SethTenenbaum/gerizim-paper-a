@@ -35,8 +35,9 @@ TIER_A_MAX = CONFIG["tiers"]["A"]["max_deviation_beru"]   # 0.010
 TIER_B_MAX = CONFIG["tiers"]["B"]["max_deviation_beru"]   # 0.050
 
 # Geometric null rates
-P_NULL_AP = CONFIG["null_rates"]["tier_aplus"]   # 0.04
-P_NULL_A = CONFIG["null_rates"]["tier_a"]        # 0.20
+P_NULL_APP = CONFIG["null_rates"]["tier_app"]    # 0.004
+P_NULL_AP  = CONFIG["null_rates"]["tier_aplus"]  # 0.04
+P_NULL_A   = CONFIG["null_rates"]["tier_a"]      # 0.20
 
 
 # ---------------------------------------------------------------------------

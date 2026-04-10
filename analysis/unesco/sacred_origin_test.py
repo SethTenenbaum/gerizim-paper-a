@@ -42,7 +42,7 @@ from scipy.stats import binomtest, fisher_exact, hypergeom
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus, cultural_sites_with_coords
 from lib.beru import (
-    GERIZIM, BERU, TIER_APP, TIER_APLUS, TIER_B_MAX,
+    GERIZIM, BERU, TIER_APP, TIER_APLUS, TIER_B_MAX, P_NULL_AP, P_NULL_APP,
     deviation as beru_deviation, tier_label,
     CONFIG,
 )
@@ -54,10 +54,10 @@ MEGIDDO   = CONFIG["anchors"]["megiddo"]["longitude"]
 
 TIER_AP = TIER_APLUS
 
-P0_APP = 2 * TIER_APP / 0.1   # 0.004 = 0.4%
-P0_AP  = 2 * TIER_AP  / 0.1   # 0.04  = 4.0%
+P0_APP = P_NULL_APP   # 0.004 — from lib.beru
+P0_AP  = P_NULL_AP    # 0.04  — from lib.beru
 
-N_PERM = 100_000
+N_PERM = CONFIG["simulation"]["n_permutations"]   # 100,000 from config
 
 
 def _matches_so(site) -> bool:
@@ -322,7 +322,10 @@ def main():
     print("=" * 100)
 
     # ── LaTeX macros (GROUP 7) ────────────────────────────────────────────────
-    # Sort sacred-origin A+ sites by deviation for top-3 naming
+    # Sort sacred-origin A+ sites by deviation for top-3 naming.
+    # NOTE: these macros are named \sacredHitOne/Two/Three to avoid collision
+    # with \topHitOne/Two/Three, which are corridor-precision macros produced
+    # by corridor_precision_test.py and anchor_site_comparison.py.
     so_ap_sites = sorted(
         [(s, beru_deviation(s.longitude)) for s in so_sites
          if beru_deviation(s.longitude) <= TIER_AP],
@@ -331,11 +334,11 @@ def main():
     top_names = [s.site for s, _ in so_ap_sites[:3]]
     print("  % LaTeX macros (GROUP 7):")
     if len(top_names) >= 1:
-        print(f"  \\newcommand{{\\topHitOne}}{{{top_names[0]}}}  % top-ranked sacred-origin site")
+        print(f"  \\newcommand{{\\sacredHitOne}}{{{top_names[0]}}}  % top-ranked sacred-origin A+ site (by beru deviation)")
     if len(top_names) >= 2:
-        print(f"  \\newcommand{{\\topHitTwo}}{{{top_names[1]}}}  % 2nd-ranked sacred-origin site")
+        print(f"  \\newcommand{{\\sacredHitTwo}}{{{top_names[1]}}}  % 2nd-ranked sacred-origin A+ site")
     if len(top_names) >= 3:
-        print(f"  \\newcommand{{\\topHitThree}}{{{top_names[2]}}}  % 3rd-ranked sacred-origin site")
+        print(f"  \\newcommand{{\\sacredHitThree}}{{{top_names[2]}}}  % 3rd-ranked sacred-origin A+ site")
 
 
 if __name__ == "__main__":

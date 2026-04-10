@@ -1,4 +1,5 @@
 import sys
+import json as _json
 from pathlib import Path
 from collections import defaultdict
 import numpy as np
@@ -8,9 +9,16 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus, cultural_sites_with_coords
 from lib.beru import GERIZIM, BERU, TIER_APLUS, P_NULL_AP
 
+_CFG  = _json.loads((Path(__file__).parent.parent.parent / "config.json").read_text())
+_corr = _CFG["corridor"]
+
 TIER_AP = TIER_APLUS
-P_NULL = P_NULL_AP
-WINDOW = 0.5  # ±0.25° → 0.5° total window
+P_NULL  = P_NULL_AP
+WINDOW  = 0.5  # ±0.25° → 0.5° total window
+
+# Jerusalem–Gerizim corridor bounds (from config)
+JER_CORR_MIN = _corr["jerusalem_corridor_lon_min"]  # 34.5
+JER_CORR_MAX = _corr["jerusalem_corridor_lon_max"]  # 36.0
 
 # ── Load sites ──────────────────────────────────────────────────────────────
 corpus = load_corpus()
@@ -175,7 +183,7 @@ jerusalem_cluster = None
 other_clusters = []
 for c in clusters:
     center = np.mean([s["lon"] for s in c])
-    if 34.5 <= center <= 36.0:
+    if JER_CORR_MIN <= center <= JER_CORR_MAX:
         jerusalem_cluster = c
     else:
         other_clusters.append(c)
@@ -186,7 +194,7 @@ if jerusalem_cluster:
     j_sum = sum(s["ap_count"] for s in jerusalem_cluster)
     j_mean_top3 = np.mean(sorted([s["ap_count"] for s in jerusalem_cluster], reverse=True)[:3])
     
-    print(f"\n  JERUSALEM–GERIZIM CORRIDOR (34.5–36.0°E):")
+    print(f"\n  JERUSALEM–GERIZIM CORRIDOR ({JER_CORR_MIN}–{JER_CORR_MAX}°E):")
     print(f"    Sites with A+ ≥ {MAIN_THRESH}: {j_size}")
     print(f"    Max A+: {j_max}")
     print(f"    Sum A+: {j_sum}")
@@ -229,7 +237,7 @@ for c in clusters:
     lat_range = max(s["lat"] for s in c) - min(s["lat"] for s in c)
     lon_range = max(s["lon"] for s in c) - min(s["lon"] for s in c)
     
-    is_jerusalem = 34.5 <= center <= 36.0
+    is_jerusalem = JER_CORR_MIN <= center <= JER_CORR_MAX
     
     all_clusters_for_table.append({
         "center": center,
@@ -309,8 +317,8 @@ if jerusalem_cluster:
 
 for alt_thresh in [53, 50]:
     high = [s for s in site_ap_counts if s["ap_count"] >= alt_thresh]
-    j_alt = [s for s in high if 34.5 <= s["lon"] <= 36.0]
-    others = [s for s in high if not (34.5 <= s["lon"] <= 36.0)]
+    j_alt   = [s for s in high if JER_CORR_MIN <= s["lon"] <= JER_CORR_MAX]
+    others  = [s for s in high if not (JER_CORR_MIN <= s["lon"] <= JER_CORR_MAX)]
     
     # Cluster others
     others.sort(key=lambda x: x["lon"])

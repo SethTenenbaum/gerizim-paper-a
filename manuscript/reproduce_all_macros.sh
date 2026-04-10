@@ -6,19 +6,26 @@
 # Runs every analysis script that produces numeric macros for
 # paper_a_primary_unesco.tex, in dependency order.
 #
+# DESIGN
+# ──────
+# 1. The results store (data/store/results.json) is CLEARED at the start.
+# 2. Every analysis script is run in dependency order.
+#    Each script writes its p-values and statistics to the store via
+#    lib/results_store.py — NO manual copying of values between scripts.
+# 3. Summary scripts (bonferroni_correction.py, fdr_multiple_comparisons.py)
+#    run LAST and read all values from the store.
+#    Adding a test or changing a keyword only requires re-running this script.
+#
 # USAGE:
 #   cd /path/to/gerizim-paper-a
 #   bash manuscript/reproduce_all_macros.sh
+#   bash manuscript/reproduce_all_macros.sh --macros-only   # LaTeX output only
 #
 # PREREQUISITES:
 #   - Python 3.10+ with numpy, scipy, pandas
 #   - pip install -r requirements.txt
-#   - UNESCO XML:  data/store/unesco/unesco.xml  (fetched by data/scripts/fetch_extended.py)
+#   - UNESCO XML:  data/store/unesco/unesco.xml
 #   - P1435 CSV:   data/store/wikidata/p1435_global_control.csv
-#                  (fetched by data/scripts/fetch_p1435_global.py)
-#
-# Each script prints its macro values to stdout.  Redirect to a file to
-# compare against the values in paper_a_primary_unesco.tex.
 #
 # ══════════════════════════════════════════════════════════════════════════════
 
@@ -34,44 +41,68 @@ echo "  Date: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
 echo "═══════════════════════════════════════════════════════════════════"
 echo ""
 
+# ── Step 0: Clear the results store ──────────────────────────────────────────
+# This ensures every value in the store was computed THIS run,
+# not left over from a previous run with different code or data.
+echo "Clearing results store..."
+python3 - <<'PYEOF'
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(".").resolve()))
+from lib.results_store import ResultsStore
+ResultsStore().clear()
+print("  ✓ data/store/results.json cleared")
+PYEOF
+echo ""
+
 # ── --macros-only: run all scripts, collect only \newcommand lines ────────────
 if [ "${1:-}" = "--macros-only" ]; then
     OUT_FILE="manuscript/generated_macros.tex"
     echo "% Generated macros — $(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$OUT_FILE"
     echo "% Source: bash manuscript/reproduce_all_macros.sh --macros-only" >> "$OUT_FILE"
+    echo "% IMPORTANT: values are computed fresh each run — do NOT hardcode" >> "$OUT_FILE"
     echo "" >> "$OUT_FILE"
 
-    # Run each group's script(s), capturing only \newcommand lines
+    # DEPENDENCY ORDER:
+    #   Primary analysis scripts first (they write to the store)
+    #   Summary scripts last (they read from the store)
     SCRIPTS=(
-        analysis/unesco/spherical_monument_raw_sweep.py
-        analysis/unesco/cluster_asymmetry_test.py
+        # ── Primary analysis (write to store) ─────────────────────────────
+        analysis/unesco/spherical_monument_raw_sweep.py      # → pCircAp, pCircA, pCircChi
+        analysis/unesco/spherical_monument_test.py            # → pCircAp_validated (context-validated, Exploratory 2x)
+        analysis/unesco/cluster_asymmetry_test.py            # → clusterApBinom, clusterPermP
         analysis/unesco/harmonic_density_attractor_test.py
-        analysis/unesco/unesco_buddhist_heritage_test.py
-        analysis/unesco/origin_sites_test.py
-        analysis/unesco/founding_sites_analysis.py
+        analysis/unesco/unesco_buddhist_heritage_test.py     # → pBudAp, pBudA
+        analysis/unesco/origin_sites_test.py                 # → pCanon, pPreTwoK, pModern
+        analysis/unesco/founding_sites_analysis.py           # → pFoundKwFisher
         analysis/unesco/sacred_origin_test.py
         analysis/unesco/meta_keyword_test.py
-        analysis/unesco/temporal_gradient_test.py
-        analysis/unesco/deep_temporal_analysis.py
+        analysis/unesco/temporal_gradient_test.py            # → pCochranThree, pCochranFive
+        analysis/unesco/deep_temporal_analysis.py            # → peakSigP, pFoundDateSpearman
         analysis/global/anchor_uniqueness_audit.py
         analysis/unesco/verify_x18_periodicity.py
         analysis/global/peak_geography_audit.py
         analysis/global/landmark_anchor_ranking.py
         analysis/global/global_corridor_comparison.py
-        analysis/global/corridor_precision_test.py
+        analysis/global/corridor_precision_test.py           # → pCorridorBinom, pCorridorFisher
         analysis/global/anchor_site_comparison.py
-        analysis/unesco/spatial_independence_test.py
-        analysis/unesco/regional_temporal_gradient.py
-        analysis/unesco/fdr_multiple_comparisons.py
-        analysis/unesco/tumulus_dome_evolution_raw_sweep.py
-        analysis/unesco/bonferroni_correction.py
+        analysis/unesco/spatial_independence_test.py         # → pNeffQuarter, pNeffHalf
+        analysis/unesco/regional_temporal_gradient.py        # → pCMH
+        analysis/unesco/tumulus_dome_evolution_raw_sweep.py  # → pEvoAp (Test 2b)
+        analysis/unesco/tumulus_dome_evolution_test.py        # → pEvoAp_validated (context-validated, Exploratory 2bx)
         analysis/global/wikidata_p1435_control_analysis.py
         analysis/global/dome_periodicity_audit.py
-        analysis/unesco/simulation_null_model.py
         analysis/americas/americas_harmonic_depletion_audit.py
+        # ── Simulation (slow — writes simDomePermP etc.) ──────────────────
+        analysis/unesco/simulation_null_model.py
+        # ── Summary scripts (read from store) ─────────────────────────────
+        analysis/unesco/fdr_multiple_comparisons.py          # reads all keys from config+store
+        analysis/unesco/bonferroni_correction.py             # reads confirmatory keys from store
     )
 
     for s in "${SCRIPTS[@]}"; do
+        # Skip comment lines
+        [[ "$s" == \#* ]] && continue
         echo "Running $s ..."
         echo "% --- $s" >> "$OUT_FILE"
         if [ -f "$s" ]; then
@@ -99,158 +130,144 @@ if [ ! -f "data/store/unesco/unesco.xml" ]; then
 fi
 echo "  ✓ UNESCO XML found"
 
-if [ ! -f "data/store/wikidata/p1435_global_control.csv" ]; then
-    echo "  WARNING: data/store/wikidata/p1435_global_control.csv not found."
-    echo "  Groups 23 and 26 will fail."
+P1435_CSV="data/store/wikidata/p1435_global_control.csv"
+HAS_P1435=true
+if [ ! -f "$P1435_CSV" ]; then
+    echo "  WARNING: $P1435_CSV not found."
+    echo "  Wikidata P1435 and Americas scripts will be skipped."
     echo "  Run: python3 data/scripts/fetch_p1435_global.py"
+    HAS_P1435=false
 fi
 echo ""
 
-# ── Group 1: Dome / Spherical Monument Raw Sweep (Test 2) ────────────────────
-echo "─── GROUP 1: Dome/Spherical Monument Raw Sweep (Test 2) ───"
-python3 analysis/unesco/spherical_monument_raw_sweep.py 2>&1 | tail -60
-echo ""
+# ── Helper: run a script, print output ───────────────────────────────────────
+run_script() {
+    local label="$1"
+    local script="$2"
+    echo "─── $label ───"
+    if [ -f "$script" ]; then
+        python3 "$script" 2>&1 | tail -60
+    else
+        echo "  SKIPPED — $script not found"
+    fi
+    echo ""
+}
 
-# ── Group 2: Cluster Asymmetry (Test 3) ──────────────────────────────────────
-echo "─── GROUP 2: Cluster Asymmetry (Test 3) ───"
-python3 analysis/unesco/cluster_asymmetry_test.py 2>&1 | tail -60
-echo ""
+# ════════════════════════════════════════════════════════════════════════════
+# PRIMARY ANALYSIS SCRIPTS
+# (Each writes its p-values and statistics to data/store/results.json)
+# ════════════════════════════════════════════════════════════════════════════
 
-# ── Group 3: Harmonic Density Attractor ──────────────────────────────────────
-echo "─── GROUP 3: Harmonic Density Attractor ───"
-python3 analysis/unesco/harmonic_density_attractor_test.py 2>&1 | tail -40
-echo ""
+run_script "GROUP 1: Dome/Spherical Monument Raw Sweep (Test 2)"  \
+           analysis/unesco/spherical_monument_raw_sweep.py
 
-# ── Group 4: Buddhist Heritage ───────────────────────────────────────────────
-echo "─── GROUP 4: Buddhist Heritage ───"
-python3 analysis/unesco/unesco_buddhist_heritage_test.py 2>&1 | tail -60
-echo ""
+run_script "GROUP 1b: Dome/Spherical Monument Context-Validated (Exploratory 2x)" \
+           analysis/unesco/spherical_monument_test.py
 
-# ── Group 5: Founding / Origin (Test E) ──────────────────────────────────────
-echo "─── GROUP 5: Origin Sites (Test E) ───"
-python3 analysis/unesco/origin_sites_test.py 2>&1 | tail -60
-echo ""
+run_script "GROUP 2: Cluster Asymmetry (Tests 1 & 3)"             \
+           analysis/unesco/cluster_asymmetry_test.py
 
-# ── Group 6: Founding Sites Analysis (keyword enrichment) ────────────────────
-echo "─── GROUP 6: Founding Sites Analysis ───"
-python3 analysis/unesco/founding_sites_analysis.py 2>&1 | tail -40
-echo ""
+run_script "GROUP 3: Harmonic Density Attractor"                   \
+           analysis/unesco/harmonic_density_attractor_test.py
 
-# ── Group 7: Sacred Origin Test ──────────────────────────────────────────────
-echo "─── GROUP 7: Sacred Origin Test ───"
-python3 analysis/unesco/sacred_origin_test.py 2>&1 | tail -20
-echo ""
+run_script "GROUP 4: Buddhist Heritage"                            \
+           analysis/unesco/unesco_buddhist_heritage_test.py
 
-# ── Group 8: Meta-Keyword Test ───────────────────────────────────────────────
-echo "─── GROUP 8: Meta-Keyword Test ───"
-python3 analysis/unesco/meta_keyword_test.py 2>&1 | tail -20
-echo ""
+run_script "GROUP 5: Origin Sites (canon/pre-2000/modern)"        \
+           analysis/unesco/origin_sites_test.py
 
-# ── Group 9: Temporal Gradient (Test 4) ──────────────────────────────────────
-echo "─── GROUP 9: Temporal Gradient (Test 4) ───"
-python3 analysis/unesco/temporal_gradient_test.py 2>&1 | tail -40
-echo ""
+run_script "GROUP 6: Founding Sites Analysis (keyword enrichment)" \
+           analysis/unesco/founding_sites_analysis.py
 
-# ── Group 10: Deep Temporal Analysis ─────────────────────────────────────────
-echo "─── GROUP 10: Deep Temporal Analysis ───"
-python3 analysis/unesco/deep_temporal_analysis.py 2>&1 | tail -80
-echo ""
+run_script "GROUP 7: Sacred Origin Test"                           \
+           analysis/unesco/sacred_origin_test.py
 
-# ── Group 11: Global Anchor Sweep ────────────────────────────────────────────
-echo "─── GROUP 11: Global Anchor Sweep ───"
-python3 analysis/global/anchor_uniqueness_audit.py 2>&1 | tail -40
-echo ""
+run_script "GROUP 8: Meta-Keyword Test"                            \
+           analysis/unesco/meta_keyword_test.py
 
-# ── Group 12: x.18°E Periodicity Verification ───────────────────────────────
-echo "─── GROUP 12: x.18° Periodicity ───"
-python3 analysis/unesco/verify_x18_periodicity.py 2>&1 | tail -20
-echo ""
+run_script "GROUP 9: Temporal Gradient (Test 4)"                   \
+           analysis/unesco/temporal_gradient_test.py
 
-# ── Group 12 (cont): Peak Geography Audit ────────────────────────────────────
-echo "─── GROUP 12 (cont): Peak Geography Audit ───"
-python3 analysis/global/peak_geography_audit.py 2>&1 | tail -30
-echo ""
+run_script "GROUP 10: Deep Temporal Analysis"                      \
+           analysis/unesco/deep_temporal_analysis.py
 
-# ── Group 13: Landmark Anchor Ranking ────────────────────────────────────────
-echo "─── GROUP 13: Landmark Anchor Ranking ───"
-python3 analysis/global/landmark_anchor_ranking.py 2>&1 | tail -20
-echo ""
+run_script "GROUP 11: Global Anchor Sweep"                         \
+           analysis/global/anchor_uniqueness_audit.py
 
-# ── Group 14: Global Corridor Comparison ─────────────────────────────────────
-echo "─── GROUP 14: Global Corridor Comparison ───"
-python3 analysis/global/global_corridor_comparison.py 2>&1 | tail -30
-echo ""
+run_script "GROUP 12: x.18° Periodicity Verification"             \
+           analysis/unesco/verify_x18_periodicity.py
 
-# ── Group 15: Corridor Precision Test ────────────────────────────────────────
-echo "─── GROUP 15: Corridor Precision Test ───"
-python3 analysis/global/corridor_precision_test.py 2>&1 | tail -60
-echo ""
+run_script "GROUP 12b: Peak Geography Audit"                       \
+           analysis/global/peak_geography_audit.py
 
-# ── Group 16 + 22: Anchor Site Comparison (Lumbini, Takht, Khoja, WPP) ──────
-echo "─── GROUP 16 + 22: Anchor Site Comparison ───"
-python3 analysis/global/anchor_site_comparison.py 2>&1
-echo ""
+run_script "GROUP 13: Landmark Anchor Ranking"                     \
+           analysis/global/landmark_anchor_ranking.py
 
-# ── Group 17: Spatial Independence / Autocorrelation ─────────────────────────
-echo "─── GROUP 17: Spatial Independence ───"
-python3 analysis/unesco/spatial_independence_test.py 2>&1 | tail -30
-echo ""
+run_script "GROUP 14: Global Corridor Comparison"                  \
+           analysis/global/global_corridor_comparison.py
 
-# ── Group 18: Regional Temporal Gradient (Mantel-Haenszel) ───────────────────
-echo "─── GROUP 18: Regional Temporal Gradient ───"
-python3 analysis/unesco/regional_temporal_gradient.py 2>&1 | tail -20
-echo ""
+run_script "GROUP 15: Corridor Precision Test"                     \
+           analysis/global/corridor_precision_test.py
 
-# ── Group 19: FDR Multiple Comparisons ───────────────────────────────────────
-echo "─── GROUP 19: FDR Multiple Comparisons ───"
-python3 analysis/unesco/fdr_multiple_comparisons.py 2>&1 | tail -20
-echo ""
+run_script "GROUP 16 + 22: Anchor Site Comparison"                 \
+           analysis/global/anchor_site_comparison.py
 
-# ── Group 20: Hemispherical Mound Evolution Raw Sweep (Test 2b) ──────────────
-echo "─── GROUP 20: Hemispherical Evolution Raw Sweep (Test 2b) ───"
-python3 analysis/unesco/tumulus_dome_evolution_raw_sweep.py 2>&1 | tail -40
-echo ""
+run_script "GROUP 17: Spatial Independence / Autocorrelation"      \
+           analysis/unesco/spatial_independence_test.py
 
-# ── Group 21: Bonferroni-Adjusted p-values ───────────────────────────────────
-echo "─── GROUP 21: Bonferroni Correction ───"
-python3 analysis/unesco/bonferroni_correction.py 2>&1 | tail -20
-echo ""
+run_script "GROUP 18: Regional Temporal Gradient (CMH)"            \
+           analysis/unesco/regional_temporal_gradient.py
 
-# ── Group 23: Wikidata P1435 Control Analysis ────────────────────────────────
+run_script "GROUP 20: Hemispherical Evolution Raw Sweep (Test 2b)" \
+           analysis/unesco/tumulus_dome_evolution_raw_sweep.py
+
+run_script "GROUP 20b: Hemispherical Evolution Context-Validated (Exploratory 2bx)" \
+           analysis/unesco/tumulus_dome_evolution_test.py
+
 echo "─── GROUP 23: Wikidata P1435 Control Analysis ───"
-if [ -f "data/store/wikidata/p1435_global_control.csv" ]; then
-    python3 analysis/global/wikidata_p1435_control_analysis.py 2>&1
+if [ "$HAS_P1435" = true ]; then
+    python3 analysis/global/wikidata_p1435_control_analysis.py 2>&1 | tail -40
 else
     echo "  SKIPPED — P1435 CSV not found"
 fi
 echo ""
 
-# ── Group 24: Dome Periodicity Audit ─────────────────────────────────────────
-echo "─── GROUP 24: Dome Periodicity Audit ───"
-python3 analysis/global/dome_periodicity_audit.py 2>&1 | tail -40
-echo ""
+run_script "GROUP 24: Dome Periodicity Audit"                      \
+           analysis/global/dome_periodicity_audit.py
 
-# ── Group 25: Simulation-Based Null Model ────────────────────────────────────
-echo "─── GROUP 25: Simulation Null Model (this may take a few minutes) ───"
+echo "─── GROUP 25: Simulation Null Model (may take several minutes) ───"
 python3 analysis/unesco/simulation_null_model.py 2>&1 | tail -40
 echo ""
 
-# ── Group 26: Americas P1435 Control ─────────────────────────────────────────
 echo "─── GROUP 26: Americas Harmonic Depletion ───"
-if [ -f "data/store/wikidata/p1435_global_control.csv" ]; then
+if [ "$HAS_P1435" = true ]; then
     python3 analysis/americas/americas_harmonic_depletion_audit.py 2>&1 | tail -30
 else
     echo "  SKIPPED — P1435 CSV not found"
 fi
 echo ""
 
-# ── Group 27: Unit Sweep (Tables 6-7) ────────────────────────────────────────
-echo "─── GROUP 27: Unit Sweep (spacing sensitivity) ───"
-python3 analysis/unesco/unit_sweep_fill.py 2>&1 | tail -40
+run_script "GROUP 27: Unit Sweep (spacing sensitivity)"            \
+           analysis/unesco/unit_sweep_fill.py
+
+# ════════════════════════════════════════════════════════════════════════════
+# SUMMARY SCRIPTS — run AFTER all data-producing scripts have written the store
+# ════════════════════════════════════════════════════════════════════════════
+
+echo "═══════════════════════════════════════════════════════════════════"
+echo "  SUMMARY SCRIPTS (read from data/store/results.json)"
+echo "═══════════════════════════════════════════════════════════════════"
 echo ""
+
+run_script "GROUP 19: FDR Multiple Comparisons (reads store)"      \
+           analysis/unesco/fdr_multiple_comparisons.py
+
+run_script "GROUP 21: Bonferroni Correction (reads store)"         \
+           analysis/unesco/bonferroni_correction.py
 
 echo "═══════════════════════════════════════════════════════════════════"
 echo "  ALL SCRIPTS COMPLETE"
-echo "  Compare the output above with the macro values in"
-echo "  manuscript/paper_a_primary_unesco.tex"
+echo "  Results store: data/store/results.json"
+echo "  To regenerate LaTeX macros file:"
+echo "    bash manuscript/reproduce_all_macros.sh --macros-only"
 echo "═══════════════════════════════════════════════════════════════════"

@@ -1,5 +1,6 @@
 import sys
 import math
+import json as _json
 import numpy as np
 from pathlib import Path
 from collections import defaultdict
@@ -12,20 +13,27 @@ from lib.beru import (
     deviation as beru_deviation, tier_label, is_aplus, is_a_or_better,
 )
 from lib.stats import significance_label as sig
+from lib.results_store import ResultsStore
+
+# ── Load config ───────────────────────────────────────────────────────────────
+_ROOT = Path(__file__).parent.parent.parent
+_CFG  = _json.loads((_ROOT / "config.json").read_text())
+_corr = _CFG["corridor"]
+_sim  = _CFG["simulation"]
 
 # ── Corridor definition ───────────────────────────────────────────────────────
-LUMBINI_LON      = 83.2761        # UNESCO XML coordinate
+LUMBINI_LON      = _corr["lumbini_lon"]           # from config.json
 LUMBINI_BERU     = abs(LUMBINI_LON - GERIZIM) / BERU   # = 1.6001
-CORRIDOR_MAX     = 1.6            # nearest integer-tenth beru to Lumbini
+CORRIDOR_MAX     = _corr["corridor_max_beru"]     # 1.6 — nearest integer-tenth beru to Lumbini
 CORRIDOR_HARMONICS = [round(n * 0.1, 1) for n in range(0, int(CORRIDOR_MAX * 10) + 1)]
-N_HARMONICS      = len(CORRIDOR_HARMONICS)   # 17
+N_HARMONICS      = len(CORRIDOR_HARMONICS)         # 17
 
-SURVEY_MAX        = 5.5           # beru; covers all 1248 UNESCO sites
+SURVEY_MAX        = _corr["survey_max_beru"]      # 5.5 beru; covers all UNESCO sites
 SURVEY_HARMONICS  = [round(n * 0.1, 1) for n in range(0, int(SURVEY_MAX * 10) + 1)]
 N_SURVEY          = len(SURVEY_HARMONICS)
 
 RUN_PERMTEST = "--permtest" in sys.argv
-N_PERM       = 100_000
+N_PERM       = _sim["n_permutations"]             # 100,000 from config
 
 # ── Site loading ──────────────────────────────────────────────────────────────
 corpus = load_corpus()
@@ -219,10 +227,8 @@ print("  ANCHOR COMPARISON: CORRIDOR OCCUPANCY")
 print(f"{'='*110}")
 
 anchors = [
-    ("Gerizim",   GERIZIM,  "(proposed anchor)"),
-    ("Jerusalem", 35.2317,  "(35.232°E)"),
-    ("Megiddo",   35.1833,  "(35.183°E, Tel Megiddo)"),
-    ("Bethel",    35.2250,  "(35.225°E)"),
+    (a["label"], a["lon"], f"({a['note']})")
+    for a in _corr["anchor_comparison"]
 ]
 
 def corridor_occupancy(anchor_lon, sites, n_harmonics=17, max_beru=1.6):
@@ -344,16 +350,25 @@ print(f"""
 """)
 
 # ── LaTeX macros (GROUP 15) ───────────────────────────────────────────────────
-# Jerusalem corridor occupancy
-jer_hits, _ = corridor_occupancy(35.2317, all_sites, n_harmonics=17)
+# Jerusalem corridor occupancy — lon from config anchor_comparison
+_jer_lon = next(a["lon"] for a in _corr["anchor_comparison"] if a["label"] == "Jerusalem")
+jer_hits, _ = corridor_occupancy(_jer_lon, all_sites, n_harmonics=17)
 
 print("  % LaTeX macros (GROUP 15):")
 print(f"  \\newcommand{{\\corridorPrecN}}{{{N_HARMONICS}}}            % harmonics tested in corridor precision")
 print(f"  \\newcommand{{\\corridorPrecHits}}{{{n_hits}}}           % harmonics with corridor hit")
 print(f"  \\newcommand{{\\corridorPrecApp}}{{{n_app}}}            % A++ hits in corridor precision test")
 print(f"  \\newcommand{{\\corridorPrecApOnly}}{{{n_hits - n_app}}}         % A+-only hits (not A++) in corridor")
-print(f"  \\newcommand{{\\pCorridorBinom}}{{{bt.pvalue:.1e}}}       % p-value, corridor binomial test")
-print(f"  \\newcommand{{\\pCorridorFisher}}{{{p_fisher:.1e}}}       % p-value, corridor Fisher test")
+
+def _latex_sci(p):
+    """Format a very small p-value as LaTeX scientific notation: 1.7 \\times 10^{-24}"""
+    import math
+    exp = int(math.floor(math.log10(p)))
+    mantissa = p / (10 ** exp)
+    return f"{mantissa:.1f} \\times 10^{{{exp}}}"
+
+print(f"  \\newcommand{{\\pCorridorBinom}}{{{_latex_sci(bt.pvalue)}}}       % p-value, corridor binomial test")
+print(f"  \\newcommand{{\\pCorridorFisher}}{{{_latex_sci(p_fisher)}}}       % p-value, corridor Fisher test")
 print(f"  \\newcommand{{\\corridorAppOR}}{{{ft_OR:.2f}}}           % Fisher OR, A++ vs A+ in corridor")
 print(f"  \\newcommand{{\\pCorridorAppFisher}}{{{ft_p:.4f}}}       % p-value, A++ Fisher test in corridor")
 print(f"  \\newcommand{{\\corridorMeanDevKm}}{{{corr_mean * BERU * 111:.2f}}}        % mean deviation within corridor (km)")
@@ -361,3 +376,12 @@ print(f"  \\newcommand{{\\corridorGlobalMeanKm}}{{{global_mean * BERU * 111:.2f}
 print(f"  \\newcommand{{\\corridorPrecRatio}}{{{global_mean / max(corr_mean, 1e-10):.2f}}}        % precision ratio, global/corridor deviation")
 print(f"  \\newcommand{{\\pCorridorMW}}{{{mw_p:.3f}}}           % p-value, Mann-Whitney corridor precision")
 print(f"  \\newcommand{{\\corridorJeruHits}}{{{jer_hits}}}          % corridor hits with Jerusalem anchor")
+
+# ── Write to results store ────────────────────────────────────────────────────
+ResultsStore().write_many({
+    "pCorridorBinom":     bt.pvalue,   # corridor binomial p
+    "pCorridorFisher":    p_fisher,    # corridor Fisher combined p
+    "pCorridorAppFisher": ft_p,        # A++ enrichment Fisher p
+    "pCorridorMW":        mw_p,        # MW corridor precision p
+    "corridorAppOR":      ft_OR,       # Fisher OR, A++ vs A+
+})

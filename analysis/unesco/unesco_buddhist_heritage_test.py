@@ -61,6 +61,7 @@ from lib.beru import (
     load_keywords,
 )
 from lib.stats import significance_label as sig
+from lib.results_store import ResultsStore
 
 HALF_STEP = HARMONIC_STEP / 2.0   # 0.05 beru
 
@@ -573,3 +574,9 @@ if horyu:
 if sulaiman:
     print(f"  \\newcommand{{\\SulaimanAntiDev}}{{{sulaiman['anti_dev']:.5f}}}      % Sulaiman-Too anti-node deviation (beru)")
     print(f"  \\newcommand{{\\SulaimanAntiKm}}{{{sulaiman['anti_dev_km']:.1f}}}            % Sulaiman-Too anti-node deviation (km)")
+
+# ── Write to results store ────────────────────────────────────────────────────
+ResultsStore().write_many({
+    "pBudAp": bt_Ap.pvalue,   # Buddhist A+ binomial p
+    "pBudA":  bt_A.pvalue,    # Buddhist A binomial p
+})

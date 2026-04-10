@@ -38,6 +38,7 @@ from lib.beru import (
     GERIZIM, BERU, TIER_APP, TIER_APLUS, TIER_A_MAX,
     P_NULL_AP, CONFIG,
 )
+from lib.results_store import ResultsStore
 
 JERUSALEM_LON = CONFIG["anchors"]["jerusalem"]["longitude"]   # 35.2317°E
 JERUSALEM_ID  = "148"                                         # UNESCO XML id
@@ -249,7 +250,8 @@ print(f"""
 
 # ── LaTeX macros (GROUP 11) ───────────────────────────────────────────────────
 print("  % LaTeX macros (GROUP 11):")
-print(f"  \\newcommand{{\\anchorSweepNanchors}}{{{n_anchors}}}          % number of anchor points in sweep")
+_nanchors_fmt = f"{n_anchors:,}".replace(",", "{,}")
+print(f"  \\newcommand{{\\anchorSweepNanchors}}{{{_nanchors_fmt}}}          % number of anchor points in sweep")
 print(f"  \\newcommand{{\\anchorSweepApMean}}{{{np.mean(ap_A):.1f}}}           % mean A+ count across all anchors")
 print(f"  \\newcommand{{\\anchorSweepApStd}}{{{np.std(ap_A):.1f}}}            % std A+ count across all anchors")
 print(f"  \\newcommand{{\\anchorSweepGlobalMax}}{{{global_max_B}}}           % global max A+/A combined at any anchor")
@@ -264,3 +266,9 @@ print(f"  \\newcommand{{\\JerusalemSweepAp}}{{{jer_ap}}}            % Jerusalem 
 print(f"  \\newcommand{{\\JerusalemSweepA}}{{{jer_a}}}           % Jerusalem A in sweep")
 print(f"  \\newcommand{{\\JerusalemSweepPctile}}{{{pctile_jer:.1f}}}        % Jerusalem percentile in A+ anchor sweep")
 print(f"  \\newcommand{{\\anchorSweepJerApPct}}{{{pct_above_jer:.2f}}}          % % of anchors beating Jerusalem A+")
+
+# ── Write to results store ────────────────────────────────────────────────────
+ResultsStore().write_many({
+    "anchorSweepPctile":  pctile_ger,    # Gerizim percentile in A+ anchor sweep
+    "anchorSweepGeApPct": pct_above_ger, # % anchors beating Gerizim
+})

@@ -47,12 +47,13 @@ from scipy.stats import binomtest, chisquare
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus
+from lib.results_store import ResultsStore
 from lib.beru import (
     GERIZIM, BERU, TIER_APLUS, TIER_A_MAX,
     P_NULL_AP, P_NULL_A,
     deviation as _beru_dev, tier_label, is_aplus, is_a_or_better,
 )
-from lib.dome_filter import FORM_KEYWORDS, FORM_KEYWORD_RES
+from lib.dome_filter import FORM_KEYWORDS, FORM_KEYWORD_RES, AMBIGUOUS_KEYWORDS
 from lib.stats import significance_label as sig
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -199,7 +200,7 @@ validated_names = {
 }
 print()
 for s in sorted(raw_sites, key=lambda x: x["dev"]):
-    ambig_only = all(kw in ("dome", "domed", "domes", "spherical") for kw in s["keywords"])
+    ambig_only = all(kw in AMBIGUOUS_KEYWORDS for kw in s["keywords"])
     if ambig_only:
         mark = f"  ◀ A+ (p-diluting)" if is_aplus(s["tier"]) else ""
         print(f"  {s['name']:<55}  tier={s['tier']:<3}  km={s['dev_km']:>5.1f}"
@@ -234,3 +235,13 @@ print(f"  \\newcommand{{\\GerizimPctileA}}{{{pctile:.0f}}}            % anchor-s
 print(f"  \\newcommand{{\\circEnrichAp}}{{{enr_Ap:.2f}}}           % enrichment ratio, A+")
 print(f"  \\newcommand{{\\circEnrichA}}{{{enr_A:.2f}}}           % enrichment ratio, A")
 print(f"  \\newcommand{{\\circMeanDev}}{{{mean_dev:.4f}}}        % mean beru deviation (raw sweep)")
+
+# ── Write to results store ────────────────────────────────────────────────────
+ResultsStore().write_many({
+    "pCircAp":   bt_Ap.pvalue,   # binomial p, A+ (raw sweep) — Test 2
+    "pCircA":    bt_A.pvalue,    # binomial p, A  (raw sweep)
+    "pCircChi":  chi_p,          # chi-sq uniform, 5 bins, df=4
+    "NcircTotal": N_raw,         # raw-sweep population size
+    "NcircTierAp": nAp,          # Tier-A+ hits
+    "circEnrichAp": enr_Ap,      # enrichment ratio, A+
+})

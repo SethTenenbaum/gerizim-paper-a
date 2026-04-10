@@ -6,6 +6,7 @@ from scipy.stats import binomtest, chisquare
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus
+from lib.results_store import ResultsStore
 from lib.beru import (
     GERIZIM, BERU, TIER_APLUS, TIER_A_MAX, TIER_B_MAX,
     P_NULL_AP, P_NULL_A,
@@ -415,3 +416,18 @@ print(f"""
   ──────────────────────────────────────────────────────────────────────────────
   Gerizim percentile: A+ = {pct_Ap*100:.0f}th  |  A = {pct_A*100:.0f}th
 """)
+
+# ── LaTeX macros ──────────────────────────────────────────────────────────────
+print("=" * 100)
+print("  LATEX MACROS  (context-validated — Exploratory robustness check)")
+print("=" * 100)
+print()
+print(f"  \\newcommand{{\\pCircApValidated}}{{{bt_Ap.pvalue:.4f}}}  % p-value, A+ binomial (context-validated dome corpus)")
+print(f"  \\newcommand{{\\pCircAValidated}}{{{bt_A.pvalue:.4f}}}   % p-value, A binomial (context-validated dome corpus)")
+print()
+
+# ── Write to results store ────────────────────────────────────────────────────
+ResultsStore().write_many({
+    "pCircAp_validated": bt_Ap.pvalue,   # binomial p, A+ (context-validated dome corpus) — Exploratory 2x
+    "pCircA_validated":  bt_A.pvalue,    # binomial p, A  (context-validated dome corpus)
+})

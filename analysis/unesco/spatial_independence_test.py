@@ -11,6 +11,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus, cultural_sites_with_coords
 from lib.beru import GERIZIM, BERU, TIER_APLUS, P_NULL_AP
 from lib.beru import deviation as _beru_deviation
+from lib.results_store import ResultsStore
 
 N_BOOT     = 100_000
 
@@ -310,6 +311,15 @@ def main():
     print(f"  \\newcommand{{\\blockBootCIlo}}{{{b5['ci_lo']*100:.2f}}}        % block-bootstrap CI lower bound, A+ rate (%)")
     print(f"  \\newcommand{{\\blockBootCIhi}}{{{b5['ci_hi']*100:.2f}}}        % block-bootstrap CI upper bound, A+ rate (%)")
     print(f"  \\newcommand{{\\blockBootZ}}{{{z5:.2f}}}           % block-bootstrap Z-score, A+")
+
+    # ── Write to results store ────────────────────────────────────────────────
+    from scipy.stats import norm as _norm
+    blockBootZ_p = _norm.sf(z5)   # one-sided p from Z-score
+    ResultsStore().write_many({
+        "pNeffQuarter":  p_eff_qtr,   # DEFF-corrected binomial p (quarter-degree)
+        "pNeffHalf":     p_eff_half,  # DEFF-corrected binomial p (half-degree)
+        "blockBootZ_p":  blockBootZ_p, # one-sided p from block-bootstrap Z
+    })
 
 if __name__ == "__main__":
     main()
