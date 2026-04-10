@@ -1,6 +1,6 @@
 # Longitude Quantization in the UNESCO World Heritage Corpus: Domes, Stupas, and the Babylonian Beru
 
-**Paper A — Primary UNESCO Analysis** · `v1.0.3`
+**Paper A — Primary UNESCO Analysis** · `v1.0.5`
 
 Seth Tenenbaum · Independent Scholar  
 ORCID: [0009-0008-5797-2498](https://orcid.org/0009-0008-5797-2498)

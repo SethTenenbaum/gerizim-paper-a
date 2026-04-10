@@ -104,5 +104,8 @@
   "simDomePermP": 0.00416,
   "simKDEP": 0.01099,
   "simPostTwoKPermP": 0.94372,
-  "simPreTwoKPermP": 0.09442
+  "simPreTwoKPermP": 0.09442,
+  "stratNconcordant": 4,
+  "stratNregions": 5,
+  "stratNsig": 0
 }

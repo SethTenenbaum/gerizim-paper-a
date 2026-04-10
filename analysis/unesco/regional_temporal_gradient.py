@@ -346,14 +346,41 @@ if mh_tables:
     else:
         print(f"  → No consistent early > late pattern after regional adjustment.")
 
+    # Per-region concordance counts
+    n_concordant = sum(
+        1 for reg, a, b, c, d, n in mh_tables
+        if (a + b) > 0 and (c + d) > 0
+        and (a / (a + b)) > (c / (c + d))
+    )
+    n_regions_tested = len(mh_tables)
+
+    # Per-region individual Fisher tests (one-sided, early > late)
+    from scipy.stats import fisher_exact as _fisher
+    n_sig_regions = 0
     print(f"\n  Per-region summary:")
-    print(f"  {'Region':<30}  {'Early A+%':>10}  {'Late A+%':>10}  {'N_early':>8}  {'N_late':>8}")
-    print(f"  {'─'*75}")
+    print(f"  {'Region':<30}  {'Early A+%':>10}  {'Late A+%':>10}  {'N_early':>8}  {'N_late':>8}  {'Fisher p':>10}  Dir")
+    print(f"  {'─'*95}")
     for reg, a, b, c, d, n in mh_tables:
         early_pct = 100 * a / (a + b) if (a + b) > 0 else 0
-        late_pct = 100 * c / (c + d) if (c + d) > 0 else 0
+        late_pct  = 100 * c / (c + d) if (c + d) > 0 else 0
+        or_r, p_r = _fisher([[a, b], [c, d]], alternative="greater")
+        if p_r < 0.05:
+            n_sig_regions += 1
         direction = "↓" if early_pct > late_pct else "↑" if early_pct < late_pct else "="
-        print(f"  {reg:<30}  {early_pct:>8.1f}%  {late_pct:>8.1f}%  {a+b:>8}  {c+d:>8}  {direction}")
+        print(f"  {reg:<30}  {early_pct:>8.1f}%  {late_pct:>8.1f}%  {a+b:>8}  {c+d:>8}  {p_r:>10.4f}  {direction}")
+
+    print(f"\n  Concordant regions (early > late): {n_concordant}/{n_regions_tested}")
+    print(f"  Individually significant regions (p<0.05, one-sided): {n_sig_regions}/{n_regions_tested}")
+
+    # Decision rule
+    if MH_OR > 1 and p_cmh < 0.05 and n_concordant >= 4:
+        verdict = "attenuated but directionally consistent across regions"
+        status  = "supporting evidence"
+    else:
+        verdict = "largely explained by regional composition after adjustment"
+        status  = "descriptive only"
+    print(f"\n  → Verdict: {verdict}")
+    print(f"  → Test 4 status: {status}")
 
 # ── 5. Summary ───────────────────────────────────────────────────────────────
 print(f"\n" + "=" * 100)
@@ -371,18 +398,25 @@ print("""
   Mantel-Haenszel adjustment, the effect is not a regional-composition
   artifact.
 
-  LATEX MACROS (update tenenbaum_2026_gerizim_beru.tex):
+  LATEX MACROS (copy into paper_a_primary_unesco.tex preamble):
 """)
 
 # Print LaTeX macros
 if mh_tables:
-    print(f"  \\newcommand{{\\MHcommonOR}}{{{MH_OR:.3f}}}          % Mantel-Haenszel common OR")
-    print(f"  \\newcommand{{\\CMHchisq}}{{{chi_sq:.3f}}}           % Cochran-Mantel-Haenszel chi-sq")
-    print(f"  \\newcommand{{\\pCMH}}{{{p_cmh:.4f}}}               % p-value, CMH test")
+    print(f"  \\newcommand{{\\MHcommonOR}}{{{MH_OR:.3f}}}             % MH common OR (early vs late)")
+    print(f"  \\newcommand{{\\CMHchisq}}{{{chi_sq:.3f}}}              % CMH chi-squared")
+    print(f"  \\newcommand{{\\pCMH}}{{{p_cmh:.4f}}}                  % CMH p-value")
+    print(f"  \\newcommand{{\\stratNconcordant}}{{{n_concordant}}}    % regions with early > late")
+    print(f"  \\newcommand{{\\stratNregions}}{{{n_regions_tested}}}   % total regions tested")
+    print(f"  \\newcommand{{\\stratNsig}}{{{n_sig_regions}}}          % regions sig at p<0.05")
+    print(f"  \\newcommand{{\\stratVerdict}}{{{verdict}}}")
 
     # ── Write to results store ─────────────────────────────────────────────
     ResultsStore().write_many({
-        "pCMH":     p_cmh,   # CMH stratified test p-value
-        "MH_OR":    MH_OR,   # Mantel-Haenszel common OR
+        "pCMH":              p_cmh,
+        "MH_OR":             MH_OR,
+        "stratNconcordant":  n_concordant,
+        "stratNregions":     n_regions_tested,
+        "stratNsig":         n_sig_regions,
     })
 print()
