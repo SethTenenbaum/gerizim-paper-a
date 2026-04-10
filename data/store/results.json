@@ -1,4 +1,13 @@
 {
+  "LOOdomeAp": 10,
+  "LOOdomeEnrich": 2.81,
+  "LOOdomeN": 89,
+  "LOOdomeP": 0.003,
+  "LOOdomeRate": 11.2,
+  "LOOstupaAp": 3,
+  "LOOstupaN": 17,
+  "LOOstupaP": 0.0286,
+  "LOOstupaRate": 17.6,
   "MH_OR": 1.5822562795861395,
   "NcircTierAp": 11,
   "NcircTotal": 90,

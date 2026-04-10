@@ -93,6 +93,7 @@ if [ "${1:-}" = "--macros-only" ]; then
         analysis/unesco/regional_temporal_gradient.py        # → pCMH
         analysis/unesco/tumulus_dome_evolution_raw_sweep.py  # → pEvoAp (Test 2b)
         analysis/unesco/tumulus_dome_evolution_test.py        # → pEvoAp_validated (context-validated, Exploratory 2bx)
+        analysis/unesco/leave_one_out_sensitivity.py         # → LOOdomeN/Ap/Rate/Enrich/P, LOOstupaN/Ap/Rate/P
         analysis/global/wikidata_p1435_control_analysis.py
         analysis/global/dome_periodicity_audit.py
         analysis/americas/americas_harmonic_depletion_audit.py
@@ -232,6 +233,9 @@ run_script "GROUP 20: Hemispherical Evolution Raw Sweep (Test 2b)" \
 
 run_script "GROUP 20b: Hemispherical Evolution Context-Validated (Exploratory 2bx)" \
            analysis/unesco/tumulus_dome_evolution_test.py
+
+run_script "GROUP 20c: Leave-One-Out Sensitivity (Tests 2 & 2b)" \
+           analysis/unesco/leave_one_out_sensitivity.py
 
 echo "─── GROUP 23: Wikidata P1435 Control Analysis ───"
 if [ "$HAS_P1435" = true ]; then
