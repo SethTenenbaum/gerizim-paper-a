@@ -99,6 +99,9 @@ if [ "${1:-}" = "--macros-only" ]; then
         analysis/americas/americas_harmonic_depletion_audit.py
         # ── Simulation (slow — writes simDomePermP etc.) ──────────────────
         analysis/unesco/simulation_null_model.py
+        # ── Unit sweep + sensitivity slope permutation test ───────────────
+        analysis/unesco/unit_sweep_fill.py
+        analysis/unesco/sensitivity_slope_permutation_test.py  # → permSlopeNperms, permSlopePcanon, permSlopePsharp
         # ── Summary scripts (read from store) ─────────────────────────────
         analysis/unesco/fdr_multiple_comparisons.py          # reads all keys from config+store
         analysis/unesco/bonferroni_correction.py             # reads confirmatory keys from store
@@ -262,6 +265,10 @@ echo ""
 
 run_script "GROUP 27: Unit Sweep (spacing sensitivity)"            \
            analysis/unesco/unit_sweep_fill.py
+
+echo "─── GROUP 28: Sensitivity Slope Permutation Test (may take several minutes) ───"
+python3 analysis/unesco/sensitivity_slope_permutation_test.py 2>&1 | tail -40
+echo ""
 
 # ════════════════════════════════════════════════════════════════════════════
 # SUMMARY SCRIPTS — run AFTER all data-producing scripts have written the store
