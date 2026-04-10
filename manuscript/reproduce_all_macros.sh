@@ -96,12 +96,15 @@ if [ "${1:-}" = "--macros-only" ]; then
         analysis/unesco/leave_one_out_sensitivity.py         # → LOOdomeN/Ap/Rate/Enrich/P, LOOstupaN/Ap/Rate/P
         analysis/global/wikidata_p1435_control_analysis.py
         analysis/global/dome_periodicity_audit.py
+        analysis/global/x18_periodicity_formal_test.py       # → rayleighR/Z/PermP, fullRayleighR/Z/PermP, maxApCount/Z/PermP (GROUP 11b)
         analysis/americas/americas_harmonic_depletion_audit.py
         # ── Simulation (slow — writes simDomePermP etc.) ──────────────────
         analysis/unesco/simulation_null_model.py
         # ── Unit sweep + sensitivity slope permutation test ───────────────
         analysis/unesco/unit_sweep_fill.py
         analysis/unesco/sensitivity_slope_permutation_test.py  # → permSlopeNperms, permSlopePcanon, permSlopePsharp
+        analysis/unesco/dome_geographic_concentration_test.py  # → geoNullDomeBootP/Z/Mean, geoNullDomeRestrictedP/Z/Mean/N, domeEurasianFraction
+        analysis/unesco/stupa_geographic_concentration_test.py # → stupaGeoBootP/Z/Mean, stupaRegionP/Z/N, stupaGeoRestrictedP/Z/N (GROUP 29b)
         # ── Summary scripts (read from store) ─────────────────────────────
         analysis/unesco/fdr_multiple_comparisons.py          # reads all keys from config+store
         analysis/unesco/bonferroni_correction.py             # reads confirmatory keys from store
@@ -251,6 +254,10 @@ echo ""
 run_script "GROUP 24: Dome Periodicity Audit"                      \
            analysis/global/dome_periodicity_audit.py
 
+echo "─── GROUP 24b: x.18° Periodicity Formal Test (may take ~30 seconds) ───"
+python3 analysis/global/x18_periodicity_formal_test.py 2>&1 | tail -40
+echo ""
+
 echo "─── GROUP 25: Simulation Null Model (may take several minutes) ───"
 python3 analysis/unesco/simulation_null_model.py 2>&1 | tail -40
 echo ""
@@ -268,6 +275,14 @@ run_script "GROUP 27: Unit Sweep (spacing sensitivity)"            \
 
 echo "─── GROUP 28: Sensitivity Slope Permutation Test (may take several minutes) ───"
 python3 analysis/unesco/sensitivity_slope_permutation_test.py 2>&1 | tail -40
+echo ""
+
+echo "─── GROUP 29: Dome Geographic-Concentration Null (may take ~2 minutes) ───"
+python3 analysis/unesco/dome_geographic_concentration_test.py 2>&1 | tail -40
+echo ""
+
+echo "─── GROUP 29b: Stupa Geographic-Concentration Null (may take ~2 minutes) ───"
+python3 analysis/unesco/stupa_geographic_concentration_test.py 2>&1 | tail -40
 echo ""
 
 # ════════════════════════════════════════════════════════════════════════════

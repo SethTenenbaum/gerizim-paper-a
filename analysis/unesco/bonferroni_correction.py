@@ -81,33 +81,59 @@ exploratory  = [
 K = len(confirmatory)
 PER_TEST_THRESHOLD = FAMILY_ALPHA / K
 
+
+def holm_adjusted(raw_ps: list[float]) -> list[float]:
+    """
+    Holm (1979) step-down procedure.
+    Returns adjusted p-values in the ORIGINAL order.
+    Step-down rule: sort ascending; multiply p_(i) by (k - i + 1);
+    enforce monotonicity by taking running maximum; cap at 1.
+    """
+    n     = len(raw_ps)
+    order = sorted(range(n), key=lambda i: raw_ps[i])
+    p_adj = [0.0] * n
+    running = 0.0
+    for rank, idx in enumerate(order):
+        val     = raw_ps[idx] * (n - rank)
+        running = max(running, val)
+        p_adj[idx] = min(running, 1.0)
+    return p_adj
+
+
 # ── Compute adjusted p-values ─────────────────────────────────────────────────
+raw_ps   = [raw_p for _, _, raw_p, _, _ in confirmatory]
+bonf_adj = [min(p * K, 1.0) for p in raw_ps]
+holm_adj = holm_adjusted(raw_ps)
+
 results = []
-for tid, lbl, raw_p, macro, script in confirmatory:
-    p_adj    = min(raw_p * K, 1.0)
-    survives = p_adj < FAMILY_ALPHA
-    results.append((tid, lbl, raw_p, p_adj, survives, macro, script))
+for i, (tid, lbl, raw_p, macro, script) in enumerate(confirmatory):
+    p_bonf   = bonf_adj[i]
+    p_holm   = holm_adj[i]
+    survives = p_holm < FAMILY_ALPHA      # Holm is the primary decision rule
+    results.append((tid, lbl, raw_p, p_bonf, p_holm, survives, macro, script))
 
 # ── Pretty-print ──────────────────────────────────────────────────────────────
 SEP = "=" * 76
 
 print()
 print(SEP)
-print("  BONFERRONI CORRECTION — Gerizim/UNESCO Analysis")
+print("  MULTIPLE-COMPARISONS — Gerizim/UNESCO Analysis (Bonferroni & Holm)")
 print(SEP)
 print(f"  Confirmatory family size : k = {K}")
 print(f"  Family-wise alpha        : {FAMILY_ALPHA}")
 print(f"  Per-test threshold       : alpha/k = {FAMILY_ALPHA}/{K} = {PER_TEST_THRESHOLD:.4f}")
+print(f"  Primary procedure        : Holm (1979) step-down (controls FWER exactly)")
+print(f"  Secondary (for ref)      : Bonferroni (conservative upper bound)")
 print(f"  P-values sourced from    : data/store/results.json")
 print()
-print(f"  {'Test':<6} {'Raw p':>9} {'p_adj (×k)':>12}  {'Result':<14}  Label")
-print("  " + "-" * 72)
-for tid, lbl, raw_p, p_adj, survives, macro, _ in results:
-    tag = ("*** SURVIVES" if p_adj < 0.001
-           else "** SURVIVES"  if p_adj < 0.01
-           else "*  SURVIVES"  if p_adj < 0.05
+print(f"  {'Test':<6} {'Raw p':>9} {'Bonf. adj':>10} {'Holm adj':>9}  {'Result (Holm)':<15}  Label")
+print("  " + "-" * 80)
+for tid, lbl, raw_p, p_bonf, p_holm, survives, macro, _ in results:
+    tag = ("*** SURVIVES" if p_holm < 0.001
+           else "** SURVIVES"  if p_holm < 0.01
+           else "*  SURVIVES"  if p_holm < 0.05
            else "   ns")
-    print(f"  {tid:<6} {raw_p:>9.4f} {p_adj:>12.4f}  {tag:<14}  {lbl}")
+    print(f"  {tid:<6} {raw_p:>9.4f} {p_bonf:>10.4f} {p_holm:>9.4f}  {tag:<15}  {lbl}")
 
 print()
 print(SEP)
@@ -139,15 +165,30 @@ print()
 print(f"  %% Bonferroni family size")
 print(f"  \\newcommand{{\\BonfK}}{{{K}}}  % k = confirmatory tests (Tests {', '.join(t[0] for t in confirmatory)})")
 print()
-for tid, lbl, raw_p, p_adj, survives, macro, _ in results:
-    p_adj_rounded = round(p_adj, 4)
-    p_adj_3 = f"{p_adj_rounded:.3f}".rstrip('0').rstrip('.')
-    if '.' not in p_adj_3:
-        p_adj_3 += '.0'
-    status = "SURVIVES" if survives else "ns"
+for tid, lbl, raw_p, p_bonf, p_holm, survives, macro, _ in results:
+    # Bonferroni macro
+    p_bonf_rounded = round(p_bonf, 4)
+    p_bonf_3 = f"{p_bonf_rounded:.3f}".rstrip('0').rstrip('.')
+    if '.' not in p_bonf_3:
+        p_bonf_3 += '.0'
+    # Holm macro (3 sig figs for display)
+    p_holm_rounded = round(p_holm, 4)
+    p_holm_3 = f"{p_holm_rounded:.3f}".rstrip('0').rstrip('.')
+    if '.' not in p_holm_3:
+        p_holm_3 += '.0'
+    # Survival decision uses Holm (primary), but T4 is labelled descriptive-only
+    # because it is partially dependent on regional composition (see manuscript).
+    # We keep its Holm-adj for transparency but flag it in the comment.
+    descriptive_only = (tid == "4")
+    status = ("SURVIVES (descriptive-only; see §temporal gradient)"
+              if descriptive_only and survives
+              else "SURVIVES" if survives else "ns")
     print(f"  % Test {tid} — {lbl}")
-    print(f"  %   {raw_p} × {K} = {p_adj_rounded:.4f}  [{status}]")
-    print(f"  \\newcommand{{\\pAdjTest{macro}}}{{{p_adj_3}}}  % Bonferroni-adj p, Test {tid} ({lbl})")
+    print(f"  %   raw p = {raw_p:.6f}")
+    print(f"  %   Bonferroni: {raw_p:.6f} × {K} = {p_bonf_rounded:.4f}")
+    print(f"  %   Holm (step-down): adj p = {p_holm_rounded:.4f}  [{status}]")
+    print(f"  \\newcommand{{\\pAdjTest{macro}}}{{{p_bonf_3}}}  % Bonferroni-adj p, Test {tid} ({lbl})")
+    print(f"  \\newcommand{{\\pHolmTest{macro}}}{{{p_holm_3}}}  % Holm-adj p, Test {tid} ({lbl})")
     print()
 
 print(SEP)

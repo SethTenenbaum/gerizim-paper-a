@@ -1,0 +1,157 @@
+"""
+x18_periodicity_formal_test.py  — see inline docstring for details.
+GROUP: 11b
+"""
+import sys
+import numpy as np
+from pathlib import Path
+
+np.random.seed(42)
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from data.unesco_corpus import load_corpus, cultural_sites_with_coords
+from lib.beru import GERIZIM, BERU, TIER_APLUS
+from lib.results_store import ResultsStore
+
+HARMONIC_STEP_DEG = 3.0
+N_PERMS           = 10_000
+PHASE_SCAN_STEP   = 0.01
+
+corpus   = load_corpus()
+cultural = cultural_sites_with_coords(corpus)
+lons     = np.array([s.longitude for s in cultural])
+N        = len(lons)
+
+def beru_dev(lon):
+    arc = min(abs(lon - GERIZIM), 360.0 - abs(lon - GERIZIM))
+    bv  = arc / BERU
+    return abs(bv - round(bv * 10) / 10)
+
+is_ap   = np.array([beru_dev(lo) <= TIER_APLUS for lo in lons])
+ap_lons = lons[is_ap]
+N_ap    = int(is_ap.sum())
+
+def rayleigh_R(lon_array):
+    phases = lon_array % HARMONIC_STEP_DEG
+    angles = 2 * np.pi * phases / HARMONIC_STEP_DEG
+    return float(abs(np.mean(np.exp(1j * angles))))
+
+def phase_tie_fraction_vectorized(lon_arr):
+    """
+    Scan every phase offset in [0, HARMONIC_STEP_DEG) at PHASE_SCAN_STEP resolution
+    and count A+ sites for each candidate anchor.  Vectorised over all phases at once.
+
+    Shape trick:
+      phases shape  (P,)   – candidate anchor offsets
+      lon_arr shape (N,)
+      arcs    shape (P, N) – great-circle arc from each candidate to each site
+      devs    shape (P, N) – |beru_value - rounded_beru_value|  (mod-3 residual)
+      counts  shape (P,)   – A+ count per phase
+    """
+    phases = np.arange(0.0, HARMONIC_STEP_DEG, PHASE_SCAN_STEP)  # (P,)
+    # arc from each candidate anchor to every site  (P, N)
+    diff = np.abs(lon_arr[None, :] - phases[:, None])              # (P, N)
+    arcs = np.minimum(diff, 360.0 - diff)
+    bv   = arcs / BERU
+    devs = np.abs(bv - np.round(bv * 10) / 10)
+    counts = np.sum(devs <= TIER_APLUS, axis=1)                    # (P,)
+    return float(np.mean(counts == counts.max()))
+
+obs_full_R   = rayleigh_R(lons)
+obs_ap_R     = rayleigh_R(ap_lons)
+obs_tie_frac = phase_tie_fraction_vectorized(lons)
+
+n_phases     = int(round(HARMONIC_STEP_DEG / PHASE_SCAN_STEP))
+n_tie_phases = int(round(obs_tie_frac * n_phases))
+
+print("=" * 80)
+print("  x.18 PERIODICITY — FORMAL STATISTICAL TESTS")
+print(f"  N={N}  N_ap={N_ap}  Harmonic step={HARMONIC_STEP_DEG}  Anchor=Gerizim {GERIZIM}E")
+print("=" * 80)
+print(f"  Obs A (full-corpus Rayleigh R, mod 3): {obs_full_R:.4f}")
+print(f"  Obs B (A+-only Rayleigh R, mod 3):     {obs_ap_R:.4f}")
+print(f"  Obs C (phase-tie fraction):             {obs_tie_frac:.4f}  ({n_tie_phases}/{n_phases} phases tie)")
+
+rng = np.random.default_rng(42)
+
+# ── Tests A & B: Rayleigh R permutation (fully vectorised, batch) ────────────
+# Shuffle N_PERMS copies of lons simultaneously: shape (N_PERMS, N)
+shuffled = np.array([rng.permutation(lons) for _ in range(N_PERMS)])  # (K, N)
+
+def _rayleigh_batch(lon_matrix):
+    """Rayleigh R for each row of lon_matrix.  Shape (K,) → R values."""
+    angles = 2 * np.pi * (lon_matrix % HARMONIC_STEP_DEG) / HARMONIC_STEP_DEG
+    return np.abs(np.mean(np.exp(1j * angles), axis=1))
+
+perm_full_R = _rayleigh_batch(shuffled).real          # (K,)
+perm_ap_R   = _rayleigh_batch(shuffled[:, :N_ap]).real
+
+# ── Test C: phase-tie fraction permutation ───────────────────────────────────
+# For each permuted draw, compute the (P,) count vector and summarise.
+# We re-use the same shuffled matrix to keep permutations aligned.
+phases     = np.arange(0.0, HARMONIC_STEP_DEG, PHASE_SCAN_STEP)  # (P,)
+perm_tie_frac = np.zeros(N_PERMS)
+BATCH = 500                           # process 500 permutations at a time
+for start in range(0, N_PERMS, BATCH):
+    sl  = shuffled[start:start + BATCH]          # (b, N)
+    K_b = sl.shape[0]
+    # arcs: (b, P, N)
+    diff = np.abs(sl[:, None, :] - phases[None, :, None])
+    arcs = np.minimum(diff, 360.0 - diff)
+    bv   = arcs / BERU
+    devs = np.abs(bv - np.round(bv * 10) / 10)
+    counts = np.sum(devs <= TIER_APLUS, axis=2)  # (b, P)
+    tie_fracs = np.mean(counts == counts.max(axis=1, keepdims=True), axis=1)
+    perm_tie_frac[start:start + K_b] = tie_fracs
+    print(f"    ... {min(start + BATCH, N_PERMS)}/{N_PERMS}", flush=True)
+
+def _z(obs, arr):
+    s = arr.std()
+    return float((obs - arr.mean()) / s) if s > 0 else float("nan")
+
+p_full_R   = float(np.mean(perm_full_R   >= obs_full_R))
+p_ap_R     = float(np.mean(perm_ap_R     >= obs_ap_R))
+p_tie_frac = float(np.mean(perm_tie_frac >= obs_tie_frac))
+z_full_R   = _z(obs_full_R,   perm_full_R)
+z_ap_R     = _z(obs_ap_R,     perm_ap_R)
+z_tie_frac = _z(obs_tie_frac, perm_tie_frac)
+
+def sig(p):
+    return "***" if p<0.001 else "**" if p<0.01 else "*" if p<0.05 else "~" if p<0.10 else "ns"
+
+print(f"\n  PERMUTATION RESULTS ({N_PERMS} shuffles, seed=42)")
+print(f"  {'Test':<52}  {'Obs':>8}  {'Null mu':>8}  {'Z':>6}  {'p':>8}  Sig")
+rows = [
+    ("A: Rayleigh R all sites (mod 3)",        obs_full_R,   perm_full_R.mean(),   z_full_R,   p_full_R),
+    (f"B: Rayleigh R A+ sites N={N_ap} (mod 3)", obs_ap_R,   perm_ap_R.mean(),     z_ap_R,     p_ap_R),
+    ("C: Phase-tie fraction",                   obs_tie_frac, perm_tie_frac.mean(), z_tie_frac, p_tie_frac),
+]
+for label, obs, mu, z, p in rows:
+    print(f"  {label:<52}  {obs:>8.4f}  {mu:>8.4f}  {z:>6.2f}  {p:>8.4f}  {sig(p)}")
+
+print(f"\n  LATEX MACROS (GROUP 11b):")
+macro_pairs = [
+    ("fullRayleighR",     f"{obs_full_R:.4f}"),
+    ("fullRayleighZ",     f"{z_full_R:.2f}"),
+    ("fullRayleighPermP", f"{p_full_R:.4f}"),
+    ("rayleighR",         f"{obs_ap_R:.4f}"),
+    ("rayleighZ",         f"{z_ap_R:.2f}"),
+    ("rayleighPermP",     f"{p_ap_R:.4f}"),
+    ("phaseTieFrac",      f"{obs_tie_frac:.4f}"),
+    ("phaseTieZ",         f"{z_tie_frac:.2f}"),
+    ("phaseTiePermP",     f"{p_tie_frac:.4f}"),
+]
+for name, val in macro_pairs:
+    print(f"\\newcommand{{\\{name}}}{{{val}}}")
+
+ResultsStore().write_many({
+    "fullRayleighR":     float(obs_full_R),
+    "fullRayleighZ":     float(z_full_R),
+    "fullRayleighPermP": float(p_full_R),
+    "rayleighR":         float(obs_ap_R),
+    "rayleighZ":         float(z_ap_R),
+    "rayleighPermP":     float(p_ap_R),
+    "phaseTieFrac":      float(obs_tie_frac),
+    "phaseTieZ":         float(z_tie_frac),
+    "phaseTiePermP":     float(p_tie_frac),
+})
+print("Results written to data/store/results.json")
