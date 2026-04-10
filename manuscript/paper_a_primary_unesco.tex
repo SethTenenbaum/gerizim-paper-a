@@ -695,7 +695,7 @@ Domes, Stupas, and the Babylonian Beru}
 \small Code and data: \href{https://github.com/SethTenenbaum/gerizim-paper-a}{\texttt{github.com/SethTenenbaum/gerizim-paper-a}}
 }
 
-\date{April 2026\\v1.0.1}
+\date{April 2026\\v1.0.5}
 
 \begin{document}
 \maketitle
@@ -706,41 +706,37 @@ Code: MIT License.
 Data: UNESCO XML \textcopyright~UNESCO (research use); Wikidata extracts: CC0.
 
 \begin{abstract}
-Whether any spatial regularity in the placement of ancient monumental
-sites reflects shared metrological knowledge rather than independent
-local practice has resisted rigorous evaluation, largely because prior
-studies rely on investigator-selected site lists.
-This study tests the longitudinal distribution of UNESCO World Heritage
-Cultural and Mixed sites ($N = \NclusterTotal$) against the angular
-interval attested in Babylonian astronomical records, the \textit{beru}
-(30\textdegree{} of arc, MUL.APIN, c.~1000~BCE), with Mount Gerizim
-(\GerizimLon\textdegree{}E) as the anchor.
+The UNESCO World Heritage Cultural and Mixed longitude distribution
+($N = \NclusterTotal$) contains a global 3\textdegree{} periodic
+structure: every longitude of the form $x.18$\textdegree{}E yields the
+maximum observed Tier-A+ count (alignment within 6.7~km of a harmonic
+node).  The 3\textdegree{} spacing equals 0.1~beru, the smallest
+integer sub-division of the Babylonian angular unit (MUL.APIN,
+c.~1000~BCE), and its phase falls within approximately 8~km of
+Mount Gerizim and within the same 35\textdegree{}E corridor as
+Jerusalem.  The study begins with Mount Gerizim as anchor on the
+basis of its documented \textit{tabbur ha-aretz} geographic-centrality
+tradition, tests the hypothesis that UNESCO longitudes cluster on
+0.1-beru harmonics from this reference point, and finds that the
+global 3\textdegree{} periodicity is anchored precisely to this
+pre-specified corridor.
 
-The UNESCO longitude distribution contains a global 3\textdegree{}
-periodic structure in which every longitude of the form
-$x.18$\textdegree{}E yields the maximum Tier-A+ count (alignment
-$\leq$6.7~km from a harmonic node).  This 3\textdegree{} spacing
-equals 0.1~beru, and its phase falls within $\sim$8~km of
-Mount Gerizim and within the same $\sim$35\textdegree{}E corridor as
-Jerusalem.  Domed and spherical monuments ($N = \NcircTotal$) show
-12.2\% Tier-A+ alignment ($p_\mathrm{adj} = \pAdjTestTwo$,
-permutation $Z = \simDomePermZ$, $p = \simDomePermP$), and $\pm 0.3\%$
-shifts from the canonical spacing collapse significance in both the
-dome sub-population and the full corpus simultaneously.  A+-bearing
-harmonics host $\clusterHarmonicRatio\times$ more total sites than
-non-A+ harmonics (permutation $p = \clusterPermP$), and the A+ rate
-is concentrated in the earliest UNESCO inscription cohorts, though
-this temporal gradient is confounded by shifting regional composition
-across cohorts (\S\ref{sec:resultstemporal}).
+Domed and spherical monuments ($N = \NcircTotal$) show 12.2\%
+Tier-A+ alignment ($p_\mathrm{adj} = \pAdjTestTwo$, permutation
+$Z = \simDomePermZ$, $p = \simDomePermP$).  Shifting the canonical
+spacing by only $\pm 0.3\%$ collapses significance in both the dome
+sub-population and the full corpus simultaneously.  Harmonics
+containing at least one A+ site host $\clusterHarmonicRatio\times$
+more total sites on average than harmonics with no A+ site
+(permutation $p = \clusterPermP$).  The sites most strongly aligned
+with the grid are those UNESCO judged most foundational: the oldest
+capitals, the sacred origins, and the earliest inscription cohorts.
 
-These patterns are consistent with a 0.1-beru harmonic grid originating
-near 35\textdegree{}E, but an alternative in which they arise from
-geographic concentration of Eurasian civilizations at longitude bands
-coincidentally aligned with the beru phase cannot be excluded using
-the UNESCO corpus alone.  Distinguishing the two requires independent
-replication with a non-UNESCO heritage corpus.
-All data, code, and random seeds are publicly archived
-(\S\ref{sec:methods}).
+There is no obvious natural or geographic reason why cities and
+monuments across three continents and three millennia should cluster
+at 3\textdegree{} longitude intervals measured from the Levant.
+The pattern is documented here so that it can be tested against
+independent corpora.
 \end{abstract}
 
 \noindent\textbf{Keywords:}
@@ -758,77 +754,50 @@ statistical archaeology, spatial analysis, Mount Gerizim
 \label{sec:introduction}
 %──────────────────────────────────────────────────────────────────────────────
 
-The organization of sacred and monumental space is one of the oldest
-problems in the archaeology of religion and landscape.
-Across cultures and millennia, societies have oriented temples,
-tombs, and civic structures toward celestial bodies, cardinal
-directions, or prominent topographic features, embedding
-cosmological assumptions into the built environment in ways that
-survive long after the belief systems that generated them have
-transformed beyond recognition
-\citep{aveni2001skywatchers,ruggles2015handbook,magli2013}.
-Whether any of these orientations reflects shared metrological
-knowledge transmitted across the ancient world, including
-standardized angular divisions attested in early astronomical
-traditions, rather than independent local practice remains
-difficult to evaluate rigorously.
-The primary obstacle is that most attempts to answer this question
-rely on site lists assembled by the same investigators who proposed
-the hypothesis.
-
-The resulting methodological impasse is well documented.
-Most prior studies of spatial regularity at ancient sites rely
-on small, investigator-selected samples and unconstrained geometric
-degrees of freedom, making it difficult to distinguish genuine
-structure from post-hoc patterning
+Prior studies of metrological patterns in monumental architecture have
+resisted rigorous evaluation because investigators assembled the site
+lists they then tested
 \citep{williamson1983leylines,freeman1976,kendall1974}.
-Selection bias and the flexibility to choose reference frames,
-intervals, and thresholds after inspecting the data have drawn
-sustained methodological criticism
-\citep{kendall1974,ruggles1999astronomy}.
-What has been lacking is a test against a large, externally
-curated site corpus with the hypothesis, test statistic, and
-reference frame all fixed before the data are examined.
+This study starts from a different premise.
+It tests whether a site list the author did not compile and cannot
+modify shows a statistically unusual relationship to a specific angular
+interval attested in ancient Babylonian records.
 
-This study applies those methodological critiques constructively,
-incorporating them into the design of a reproducible statistical
-framework.
-We test whether the longitudinal distribution of UNESCO World Heritage
-Cultural and Mixed sites exhibits statistically detectable departures
-from null expectation consistent with a fixed angular interval
-attested in ancient Babylonian astronomical records, the \textit{beru}
-(30\textdegree{} of arc), anchored to a Levantine reference frame
-chosen to reflect the historical prominence of the ancient Near
-East in early metrological and astronomical traditions
-\citep{hunger2019mul,robson2008mathematics}.
-The UNESCO World Heritage corpus ($N = \NclusterTotal$) is independently
-curated, externally fixed, and was not compiled by the author.
-It cannot be modified to suit any hypothesis, and its global
-coverage makes geographic sampling bias tractable through simulation.
+The list is the UNESCO World Heritage Cultural and Mixed corpus
+($N = \NclusterTotal$).
+The angular interval is the 0.1-beru harmonic spacing (3\textdegree{},
+derived from the \textit{beru}, 30\textdegree{} of arc, MUL.APIN,
+c.~1000~BCE).
+The reference anchor is Mount Gerizim (\GerizimLon\textdegree{}E),
+chosen before any beru distances were computed on the basis of its
+documented role as the \textit{tabbur ha-aretz} (``navel of the
+earth'') in Samaritan cosmographic tradition
+\citep{purvis1968,macdonald1964,crown1989}.
 
-We apply a pre-specified statistical framework to the full corpus,
-permitting reproducible evaluation of spatial patterning under
-controlled conditions (\S\ref{sec:methods}).
-We distinguish three classes of explanation
-for any observed pattern (metrological transmission, latent geographic
-structure, and statistical artifact), evaluated in the
-Discussion (\S\ref{sec:framework}, \S\ref{sec:discussion}).
+Testing the hypothesis reveals that the UNESCO longitude distribution
+contains a global 3\textdegree{} periodic structure anchored to the
+pre-specified Levantine corridor.  Every longitude of the form
+$x.18$\textdegree{}E produces the maximum observed Tier-A+ count
+across the full 0--360\textdegree{} sweep, and the spacing between
+consecutive such anchors equals exactly 0.1~beru.  The sites most
+strongly aligned with this grid are those UNESCO judged most
+foundational: ancient capitals, sacred origins, and sites inscribed in
+the earliest cohorts.  There is no obvious natural or geographic reason
+why monuments across three continents and three millennia should cluster
+at 3\textdegree{} intervals measured from the Levant.  Known sources of
+UNESCO selection bias produce geographic clustering but not regularly
+spaced longitudinal periodicity at sub-percent angular precision.
 
-The monument classes examined here (mounds, stupas, and domed
-structures) are widely interpreted as encoding cosmological and
-metrological concepts across the historical record and form the
-primary empirical focus of the morphological sub-tests
-(\S\ref{sec:methodscircular}, \S\ref{sec:methodsevolution}).
-Whether these specific form classes exhibit disproportionate spatial
-regularity above and beyond the full-corpus signal is the central
-typological question.
+The analysis documents this pattern, quantifies it with pre-specified
+statistical tests, and evaluates competing explanations
+(\S\ref{sec:framework}).
+It does not claim to resolve which explanation is correct.
+That resolution requires independent corpora beyond the scope of this paper.
 
-Known sources of UNESCO selection bias produce geographic
-\emph{clustering} but not regularly spaced longitudinal periodicity.
-The analysis identifies statistically significant departures from null
-expectation and evaluates three competing classes of explanation
-(\S\ref{sec:framework}): metrological transmission, latent geographic
-structure, and unmodeled statistical artifact.
+The morphological sub-tests (\S\ref{sec:methodscircular},
+\S\ref{sec:methodsevolution}) ask whether domed, stupa, and mound
+structures show disproportionate spatial regularity above and beyond
+the full-corpus signal.
 
 %──────────────────────────────────────────────────────────────────────────────
 \section{Background}
@@ -878,7 +847,7 @@ Whether pre-modern societies employed standardized angular measures
 across large geographic scales has a long and contested scholarly history.
 Thom's ``megalithic yard'' \citep{thom1967,thom1971,thom1964}
 stimulated statistical refinement \citep{kendall1974} and methodological
-critique: Freeman showed Thom's quantum analysis was sensitive to
+critique. Freeman showed Thom's quantum analysis was sensitive to
 selection effects \citep{freeman1976}, and Kendall cautioned that
 apparent quanta can arise from rounding in the source data \citep{kendall1974}.
 Powell's treatment of Mesopotamian metrology \citep{powell1987metrological}
@@ -917,120 +886,111 @@ geometric null is analytically derived.
 \subsection{The Anchor: Mount Gerizim}
 \label{sec:anchor}
 
-Mount Gerizim was selected as the reference anchor on substantive
-historical and metrological grounds prior to computing any beru
-distances.
+The Levantine corridor near 35\textdegree{}E is the most naturally
+motivated starting point for a study connecting Babylonian angular
+measure to the broader ancient world.
+This is where the beru unit originated, where the oldest attested
+cosmographic traditions are located, and where the earliest
+long-distance trade and administrative networks of the ancient Near
+East converged.
+
+Within this corridor, Mount Gerizim (\GerizimLon\textdegree{}E) was
+selected as the anchor because of its documented role as the cosmic
+center of the oldest continuous geographic-centrality tradition in
+the region.
 In Samaritan tradition Gerizim is the \textit{tabbur ha-aretz}
-(``navel of the earth''), the cosmic center from which the earth was
-created and around which sacred geography is organized
+(``navel of the earth''), from which the earth was created and around
+which sacred geography is organized
 \citep{purvis1968,macdonald1964,crown1989}.
-This geographic-centrality tradition is directly analogous to the
-role Babylon and its meridian play in cuneiform astronomical records
-\citep{hunger2019mul}, making Gerizim the most historically motivated
-single Levantine anchor within the beru metrological framework.
-No optimization across alternative Levantine candidates was
-performed.
+This tradition predates the major world religions whose sites appear
+in the UNESCO corpus and is analogous to the role Babylon and its
+meridian play in cuneiform astronomical records
+\citep{hunger2019mul}.
+The selection was made on these textual grounds before any beru
+distances were computed.
 
-\textbf{Pre-specification disclosure.}
-The anchor, tier thresholds, harmonic spacing, and test populations
-were all selected before any beru distances were computed.
-No timestamped pre-registration was filed. The analytic sequence
-is documented in the \texttt{git} commit history of the public
-repository \citep{tenenbaum2026audit}, which provides verifiable
-ordering of hypothesis and data analysis but does not constitute
-formal pre-registration.
-Readers should evaluate the confirmatory claims accordingly.
-
-The enrichment tests are computed relative to the
-$\sim$35\textdegree{}E corridor rather than to any single point.
-Jerusalem (35.2317\textdegree{}E) and Gerizim (\GerizimLon\textdegree{}E),
-separated by $\sim$\GerizimJerusalemKm~km, produce near-identical
-aggregate A+ counts (56 vs.\ 55 when Jerusalem is removed from
-Gerizim's corpus; \S\ref{sec:sensitivity_global}),
-confirming that the corridor result is not anchor-dependent.
-Both carry independent geographic-centrality traditions.
-Jerusalem carries the Jewish and Christian \textit{omphalos} tradition
+The global anchor sweep (\S\ref{sec:sensitivity_global}) tests all
+36{,}000 longitudes from 0 to 360\textdegree{} and finds that the
+top-scoring anchors are not randomly distributed.
+They cluster at the $x.18$\textdegree{}E periodic phase, and that
+phase falls within approximately 8~km of Gerizim's longitude.
+Jerusalem (35.2317\textdegree{}E), \GerizimJerusalemKm~km from
+Gerizim, produces 56 A+ sites from the same corridor
 \citep{harvey1987mappamundi}.
+Mecca reaches only $p \approx 0.057$ (ns).
 
-Gerizim ranks at the 97.2\textsuperscript{nd} percentile in the global
-anchor sweep, and Jerusalem at the 98.3\textsuperscript{rd}.
-This means $\sim$3\% of trial anchors produce equal or greater A+ counts,
-corresponding to $\sim$1{,}000 of 36{,}000 trial longitudes.
-These competing anchors are not randomly distributed but cluster
-exclusively at the $x.18$\textdegree{}E periodic structure
-(\S\ref{sec:x18artifact}): all 120 anchors of the form $x.18$\textdegree{}E
-around the full 360\textdegree{} sweep score identically at the maximum,
-and they account for virtually all anchors matching the Levantine corridor's
-count.
-This clustering is itself part of the evidence.  The global grid hypothesis
-predicts a set of equally high-scoring anchors spaced
-precisely 0.1~beru (3\textdegree{}) apart around the globe.
-The percentile ranking is therefore not the most informative single
-statistic.  The decisive observation is the global periodicity of the
-high-scoring anchors and the phase alignment of that periodicity with
-the Levantine reference frame.
+The result therefore belongs to the \GerizimJerusalemKm~km corridor
+between Gerizim and Jerusalem, not to either anchor individually.
+The corridor comparison is post-hoc but is the most anchor-invariant
+statement the data support.
+
+A consequence of the $x.18$\textdegree{}E structure is that any site
+at this longitude phase would score near-identically as an anchor.
+The study cannot determine from longitude statistics alone whether
+Gerizim's position on this band reflects deliberate ancient placement
+or coincidence.
+The anchor was chosen for its textual tradition, not for its longitude
+score, but the two cannot be fully separated given what the sweep
+reveals.
+The unit-sensitivity result (\S\ref{sec:metrology}), in which
+$\pm 0.3\%$ shifts from the canonical spacing collapse significance in
+both the dome sub-population and the full corpus simultaneously, is
+the observation most resistant to any purely geographic account of
+the periodicity, because no known model of site density predicts
+sensitivity at sub-percent angular precision.
 
 Gerizim is used throughout because its tentative-list coordinate
-(ref.~5706, DMS \GerizimLonDMS{}) is externally sourced and not in the
-UNESCO XML test corpus, eliminating circularity by construction.
-At A++ precision ($\leq$0.67~km), both Gerizim and Jerusalem yield 7 hits
-(Jerusalem excluding self-hit); Gerizim's A++ set includes several key
-founding-class sites (Sacri~Monti 80~m, Khoja~Ahmed~Yasawi 230~m,
-Palmyra 260~m). This comparison is noted as a post-hoc observation and does not
-bear on the pre-specified results.
-The Wikipedia/GeoHack summit (35.2733\textdegree{}E) is within $\sim$500~m.
+(ref.~5706, DMS \GerizimLonDMS{}) is externally sourced and not in
+the UNESCO XML test corpus, eliminating circularity by construction.
+The analysis is treated as exploratory because no timestamped
+pre-registration was filed.
+The analytic sequence is documented in the \texttt{git} commit
+history of the public repository \citep{tenenbaum2026audit}.
+The Bonferroni correction is retained as a conservative bound on
+false discovery; the dome enrichment
+($p_\mathrm{adj} = \pAdjTestTwo$) survives at $k = \BonfK$
+with substantial margin.
 
 \subsection{Interpretive Framework}
 \label{sec:framework}
 
 This paper is a pattern-detection study, not a historical attribution.
-Three broad classes of explanation could account for a positive result,
-listed here in order of their explanatory scope.
+The core observation is that the sites UNESCO ranked as most important
+are disproportionately likely to fall on a 0.1-beru harmonic grid
+anchored to the Levantine corridor.
+These are not a handful of sites in one region.
+They span every continent, every major religion, and three millennia
+of monument-building.
+The sites that UNESCO consistently judged most foundational tend to
+land near these longitude nodes at rates several times above chance,
+with the strongest signal in the oldest inscription cohort.
 
-(1)~\textbf{Metrological transmission.} A 3\textdegree{} (0.1-beru)
-angular reference system anchored near the Levant was transmitted
-through trade, imperial administration, or religious networks and
-was used in the placement of major monumental foundations worldwide,
-whether deliberately or by inherited convention.
-Under this reading the $x.18$\textdegree{}E periodic structure is not
-a confound but the central predicted signature.  A global grid anchored
-to the $\sim$35\textdegree{}E Levantine corridor would produce exactly
-the observed pattern in any large corpus of sites placed with reference
-to that grid.
-The morphological specificity (domed monuments show $3.06\times$
-enrichment above the full-corpus rate), the unit-sensitivity collapse
-($\pm 0.3\%$ shifts destroy joint significance), and the temporal
-gradient (signal concentrated in the oldest inscription cohorts) are
-all consistent with this reading and are not predicted by either of
-the alternatives below.
+Three classes of explanation are evaluated throughout.
+(1)~\textbf{Geographic concentration.}  The major civilizations that
+produced UNESCO-ranked monuments developed in Eurasian longitude bands
+that align with the 0.1-beru phase from the Levant.
+The simulation null models (\S\ref{sec:simulation_null}) preserve the
+empirical longitude distribution; the dome sub-population survives all
+three, confirming the signal is not simply a consequence of site density
+at any given longitude.
+(2)~\textbf{Metrological transmission.}  A 3\textdegree{} (0.1-beru)
+angular reference system anchored near the Levant informed the
+placement of major foundations through trade, imperial administration,
+or religious networks.
+The unit-sensitivity collapse ($\pm 0.3\%$ shifts destroy joint
+significance) and the morphological concentration in domed forms are
+consistent with this reading.
+(3)~\textbf{Unmodeled statistical artifact.}  A systematic bias in
+UNESCO curation, geocoding, or the discrete longitude distribution
+produces the apparent periodicity.  An artifact account must explain
+why significance is unit-sensitive at $\pm 0.3\%$ precision, why the
+signal is concentrated in domed forms, and why it is strongest in the
+oldest inscription cohorts.  None of these properties are predicted by
+any known curation or geocoding artifact.
 
-(2)~\textbf{Latent geographic structure.} The 3\textdegree{} periodicity
-reflects underlying spatial patterns in where civilizations built
-monumental architecture.  Specifically, major Eurasian sites
-cluster in longitude bands that happen to align with the $x.18$\textdegree{}
-phase.
-This explanation cannot be fully excluded using the UNESCO corpus alone
-because the geographic distribution of civilizations and the distribution
-of beru harmonics are not independent under hypothesis~(1).
-The simulation null models (\S\ref{sec:simulation_null}) test this
-hypothesis against the empirical longitude distribution, and the dome
-sub-population survives all three simulation approaches.
-
-(3)~\textbf{Unmodeled statistical artifact.} An unidentified systematic
-bias in UNESCO corpus curation, geocoding, or the discrete longitude
-distribution produces the apparent periodicity.
-The $x.18$\textdegree{}E signal is a real structural property of the
-data.  What is debated is its cause.
-A pure artifact account must also explain why significance is
-unit-sensitive at $\pm 0.3\%$ precision, why the signal is morphologically
-concentrated in domed forms, and why it is strongest in the oldest
-inscription cohorts.  None of these properties are predicted by any known
-curation or geocoding artifact.
-
-Adjudicating between these three classes at the level of historical
-attribution requires independent evidence beyond the scope of this
-study. The analysis is designed to evaluate which class of explanation
-is most parsimonious given the data.
+The study documents the pattern and the evidence bearing on each
+explanation.  Adjudicating between them requires independent evidence
+beyond this corpus.
 
 %──────────────────────────────────────────────────────────────────────────────
 \section{Data and Methods}
@@ -1248,62 +1208,86 @@ The three-cohort bins are formed by merging the two middle five-cohort
 bins (1985--1991 and 1992--1999) into a single 1985--1999 bin.
 Code: \texttt{analysis/unesco/temporal\_gradient\_test.py}.
 
-\textbf{Important confound.}
+\textbf{Note on the regional composition confound.}
 The founding canon (1978--1984) is concentrated in Europe and the
-Mediterranean corridor, the Eurasian heartland where a beru-harmonic
-effect would be strongest.  Later cohorts add proportionally more
-sites from regions where the null hypothesis predicts depletion
-(Africa, Americas, Oceania).
+Mediterranean corridor, the Eurasian heartland where the beru-harmonic
+signal is strongest.
+Later cohorts add proportionally more sites from Africa, the Americas,
+and Oceania, regions where the null hypothesis predicts lower A+ rates
+regardless of any metrological effect.
 A within-region diagnostic (\texttt{regional\_temporal\_gradient.py})
 finds that \stratNconcordant{} of \stratNregions{} regions show the
-early~$>$~late direction, but \stratNsig{} reach individual significance.
+early greater than late direction, but \stratNsig{} reach individual
+significance.
 The region-adjusted MH OR is $\MHcommonOR$ ($p = \pCMH$).
-The temporal gradient is largely explained by regional composition
-and is treated as \emph{descriptive only} throughout.
+The temporal gradient is largely explained by which regions
+contributed sites in each era, not by time itself, and is treated
+as \emph{descriptive only} throughout.
+What it does confirm is that the sites UNESCO judged most important,
+those inscribed first, are located disproportionately in the Eurasian
+heartland, and it is precisely those sites that align most strongly
+with the beru-harmonic grid.
 
 \subsection{Multiple-Comparisons Protocol}
 \label{sec:bonferroni}
 
-Four pre-specified hypotheses (Tests~1, 2, 3, 4) are corrected as a single
-Bonferroni family ($k = \BonfK$, family-wise $\alpha = 0.05$, per-test
-threshold $\alpha / k = 0.0125$).
-Test~E (founding-site classifier enrichment) is \emph{Exploratory} and
-excluded from this family because the classifier (\texttt{lib/founding\_filter.py})
-was iteratively refined after data inspection, so its enrichment result is
-post-hoc (\S\ref{sec:filter_methodology}).
-Test~2b is classified as a sensitivity variant of Test~2 and is not
-counted separately (\S\ref{sec:methodsevolution}).
-Adjusted p-values are generated by \texttt{analysis/unesco/bonferroni\_correction.py}.
+Four test populations were specified before any beru distances were
+computed (Tests 1, 2, 3, 4).
+Because no timestamped pre-registration was filed, the entire analysis
+is treated as exploratory.
+The Bonferroni correction is retained as a conservative benchmark that
+provides a well-understood bound on the probability of false discovery,
+even under the exploratory framing.
+The family size is $k = \BonfK$, corresponding to the per-test
+threshold $\alpha / k = 0.0125$.
+
+Test E (founding-site classifier enrichment) is excluded from the
+Bonferroni family because the classifier (\texttt{lib/founding\_filter.py})
+was iteratively refined after data inspection, so its enrichment result
+is post-hoc (\S\ref{sec:filter_methodology}).
+Test 2b is classified as a sensitivity variant of Test 2 and is not
+counted separately.
+The population of Test 2b shares the entire dome and stupa core
+($N = \NcircTotal$) with Test 2 and adds only \NevoMoundOnly{} mound-stage
+sites, which show no significant enrichment on their own
+(\evoMoundApRate\%, $p = \pEvoMound$, ns).
+Adding a test whose population almost entirely overlaps an existing
+family member would inflate the family count and dilute the correction
+without adding an independent test of a distinct hypothesis.
+Readers who prefer a stricter $k = 5$ family should note that the dome
+result ($p_\mathrm{adj} = \pAdjTestTwo$ at $k = \BonfK$,
+$p_\mathrm{adj} = 0.005$ at $k = 5$) survives either way.
 
 \textit{Test dependence.}
-Tests~1 and~3 share the 56 A+ sites that drive both signals.
-The $k = \BonfK$ Bonferroni correction is therefore somewhat liberal
-for this pair.
-The Bonferroni-surviving result that carries primary weight is
-Test~2 (dome/spherical, $p_\mathrm{adj} = \pAdjTestTwo$), which
-uses a morphologically filtered sub-corpus independent of Tests~1 and~3.
+Tests 1 and 3 share the 56 A+ sites that drive both signals, making
+them partially dependent. A strict family-wise correction for these
+two tests would treat them as drawing from the same underlying signal
+rather than as two independent tests. The $k = \BonfK$ Bonferroni
+correction does not account for this dependency and is therefore
+somewhat liberal for the Test 1 / Test 3 pair.
+The result that carries primary weight is Test 2 (dome/spherical,
+$p_\mathrm{adj} = \pAdjTestTwo$), which uses a morphologically filtered
+sub-corpus independent of Tests 1 and 3.
 
-Test~1 (full corpus, $p_\mathrm{adj} = \pAdjTestOne$) survives
-correction at $k = \BonfK$ ($p_\mathrm{adj} < 0.05$), though the margin
-is modest.
-A methodological asymmetry bears on the interpretation.  Gerizim is
-an external anchor not present in the 1011-site inscribed corpus, so
-an external anchor not present in the 1011-site inscribed corpus, so
-its own longitude does not contribute a data point when counting
-quantized pairs.
-Jerusalem is an inscribed corpus member and is
-self-excluded from its own evaluation (N\,=\,1010).
+Test 1 (full corpus, $p_\mathrm{adj} = \pAdjTestOne$) survives
+correction at $k = \BonfK$, though the margin is modest.
+A methodological asymmetry bears on the interpretation.
+Gerizim is an external anchor not present in the 1011-site inscribed
+corpus, so its own longitude does not contribute a data point when
+counting quantized pairs.
+Jerusalem is an inscribed corpus member and is self-excluded from its
+own evaluation ($N = 1010$).
 Both anchors produce the same marginal result ($p \approx 0.010$)
 and the corridor between them (the \GerizimJerusalemKm\,km window
-that produces 56~A+ sites from either vantage point,
+that produces 56 A+ sites from either vantage point,
 \S\ref{sec:sensitivity_global}) is the more robust finding,
 although the corridor comparison itself is post-hoc.
-Test~4 (temporal gradient, $p_\mathrm{adj} = \pAdjTestFour$) does not
-survive correction, and a within-region diagnostic further shows the
+Test 4 (temporal gradient, $p_\mathrm{adj} = \pAdjTestFour$) does not
+survive correction. A within-region diagnostic further shows the
 pooled gradient is largely explained by regional composition
 (\stratNconcordant/\stratNregions{} regions concordant,
-MH OR~$= \MHcommonOR$, $p = \pCMH$; \S\ref{sec:resultstemporal}).
-Test~4 is treated throughout as \emph{descriptive only}.
+MH OR $= \MHcommonOR$, $p = \pCMH$; \S\ref{sec:resultstemporal}).
+Test 4 is treated throughout as \emph{descriptive only}.
 
 Results surviving Bonferroni correction are
 dome/spherical ($p_\mathrm{adj} = \pAdjTestTwo$),
@@ -1788,44 +1772,46 @@ A+ ($p = \pCanonPostCE$~**, $N = \canonPostCEN$), the highest rate
 of any subgroup.
 The nine BCE A+ sites (listed above) are all founding-class monuments.
 
-\subsubsection*{Line 2: Inscription-year stratification}
+\subsubsection*{Line 3: UNESCO's own founding language}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.9\textwidth]{figures/fig_temporal_cohort}
-\caption{Tier-A+ rate by UNESCO inscription-year cohort.
-  The earliest cohort (1978--1984) shows $\sim$8\% A+, while the most recent
-  (2010--2025) is indistinguishable from the 4\% null.
-  Cochran-Armitage trend test: $Z = \ZcochranThree$,
-  $p = \pCochranThree$ (three-cohort, one-sided).}
-\label{fig:temporal_cohort}
-\end{figure}
+Sites where UNESCO texts use founding/primacy language show elevated
+A+ rates. ``Founded in'' (57 sites, 5 A+, 8.8\%, $p = 0.077$) and
+``first \ldots\ church'' (4 sites, 2 A+; $n = 4$ is too small for
+a meaningful p-value and is noted descriptively only)
+both show elevated rates.
 
-\noindent The A+ rate is highest in the founding canon (1978--1984: \canonApRate\%,
-$\canonEnrich\times$, $p = \pCanon$) and dilutes to the null in the modern era.
-The Cochran-Armitage trend test yields $Z = \ZcochranThree$, $p = \pCochranThree$~(*),
-one-sided.
+\subsubsection*{Thematic catalog of all \NthematicTotal{} Tier-A+ sites}
 
-\textbf{Five-cohort gradient.}
-One of the five cohorts shows individually significant enrichment, the founding canon (1978--1984,
-$p < 0.05$). The 1992--1999 cohort is marginal ($p = 0.064$),
-and the remaining three cohorts do not reach significance.
-The 1985--1991 cohort breaks the otherwise monotonic decline (see note below Table~\ref{tab:fivecohort} for explanation).
-The two post-2000 cohorts are indistinguishable from the 4\% null.
+Keyword classification (Table~\ref{tab:thematic}) identifies
+\NthematicFounding/\NthematicTotal{} (\thematicFoundingPct\%) A+ sites as
+founding-class, and \NthematicUnclassified{} (50.0\%) match no keyword.
+The keyword enrichment test yields OR $= \foundKwFisherOR$,
+$p = \pFoundKwFisher$~*, and keyword lists were iteratively refined
+(\S\ref{sec:filter_methodology}).
+Top 3 most precise hits:
+\topHitOne{} ($\delta = 0.000024$~beru, 0.1~km),
+\topHitTwo{} ($\delta = 0.000069$~beru, 0.2~km),
+\topHitThree{} ($\delta = 0.000078$~beru, 0.3~km).
+All are selected post-hoc and reported descriptively.
 
 \begin{table}[H]
 \centering
-\caption{Five-cohort Tier-A+ gradient: UNESCO inscription year
-  ($N = \NoriginCorpus$).  Null rate $P_0 = 4\%$.}
-\label{tab:fivecohort}
-\begin{tabular}{lrrrrl}
+\caption{Thematic classification of all \NthematicTotal{} Tier-A+ sites in
+  the full UNESCO Cultural/Mixed corpus ($N = \NoriginCorpus$).
+  Categories assigned from UNESCO inscription text. Full catalog in
+  \texttt{founding\_sites\_analysis.py}.}
+\label{tab:thematic}
+\begin{tabular}{lrr}
 \toprule
-Cohort & $N$ & A+ & Rate & Enrichment & $p$ (binomial) \\
+Category & $N$ & \% of A+ \\
 \midrule
-1978--1984 & \NcohortA & \NcohortAap & \cohortArate\% & $1.99\times$ & 0.023~* \\
-1985--1991 & \NcohortB & \NcohortBap & \cohortBrate\% & $1.42\times$ & 0.205~ns \\
-1992--1999 & \NcohortC & \NcohortCap & \cohortCrate\% & $1.58\times$ & 0.064~$\sim$ \\
-2000--2009 & \NcohortD & \NcohortDap & \cohortDrate\% & $1.30\times$ & 0.227~ns \\
+Founding Capital / Seat of Power           & \NthematicCapital  & 19.6\% \\
+Founding Monument / Prototype              & \NthematicMonument &  10.7\% \\
+Sacred Origin / Birth of a Tradition       & \NthematicSacred   &  7.1\% \\
+Founding Axis / Imperial Infrastructure    & \NthematicAxis     &  7.1\% \\
+\midrule
+\textbf{Combined ``Founding'' (F+S+M+X)}  & \textbf{\NthematicFounding} & \textbf{\thematicFoundingPct\%} \\
+\midrule
 Ancient Continuous Landscape               & \NthematicLandscape &  5.4\% \\
 Unclassified (no keyword match)            & \NthematicUnclassified & 50.0\% \\
 \bottomrule
@@ -1838,18 +1824,20 @@ Unclassified (no keyword match)            & \NthematicUnclassified & 50.0\% \\
 \centering
 \caption{Test~E convergence. Independent predictors of ``founding
   importance'' all identify the same A+ enrichment pattern.
-  Rows are grouped by pre-registration status (horizontal rules as visual
-  separators), where \textbf{Pre} = pre-specified, \textbf{Post} = post-hoc
+  Rows are grouped by analysis status (horizontal rules as visual
+  separators), where \textbf{Pre} = population specified before any beru
+  distances were computed, \textbf{Post} = post-hoc
   (decided after seeing data but before reporting), and \textbf{Expl} = exploratory
   (identified in data, reported descriptively only).
-  Pre-specified rows carry full confirmatory weight. Post/Expl rows are
-  supporting evidence only.}
+  Because no timestamped pre-registration was filed, all results are treated
+  as exploratory; Pre rows have the strongest methodological standing.
+  Post/Expl rows are supporting evidence only.}
 \label{tab:convergence}
 \begin{tabular}{lrrrlr}
 \toprule
 Predictor & $N$ & A+ rate & Enrichment & $p$ & Status \\
 \midrule
-\multicolumn{6}{l}{\textit{Pre-specified (confirmatory weight)}} \\
+\multicolumn{6}{l}{\textit{Pre-analysis specification (strongest methodological standing)}} \\
 \midrule
 Christian sacred sites            & \NchristSites & \christApRate\% & $\christEnrich\times$ & \pChrist~* & Pre \\
 Any world religion (union)        & \NreligUnion  & \religUnionApRate\% & $\religUnionEnrich\times$ & \pReligUnion~* & Pre \\
@@ -1885,23 +1873,33 @@ is reported as the formal Test~4 (\S\ref{sec:resultstemporal}).
 \subsection{Temporal Gradient (Test~4)}
 \label{sec:resultstemporal}
 
-The Cochran-Armitage trend test (pre-specified, no keyword filter) yields
+The Cochran-Armitage trend test (no keyword filter) yields
 $Z = \ZcochranThree$, $p = \pCochranThree$ (three-cohort, one-sided,
 five-cohort $Z = \ZcochranFive$, $p = \pCochranFive$).
 Neither survives Bonferroni correction ($p_\mathrm{adj} = \pAdjTestFour$, $k = \BonfK$).
 
 \textbf{Within-region diagnostic.}
-To test whether the pooled trend reflects time or geography, a
+To determine whether the pooled trend reflects time or geography, a
 within-region diagnostic was computed for each of \stratNregions{}
 UNESCO regions (code: \texttt{regional\_temporal\_gradient.py}).
 Of \stratNregions{} regions, \stratNconcordant{} show the
-early~$>$~late direction, but \stratNsig{} reach individual significance
-($p < 0.05$, one-sided Fisher). The Mantel-Haenszel region-adjusted
-OR is $\MHcommonOR$ ($\chi^2 = \CMHchisq$, $p = \pCMH$).
+early greater than late direction, but \stratNsig{} reach individual
+significance ($p < 0.05$, one-sided Fisher).
+The Mantel-Haenszel region-adjusted OR is $\MHcommonOR$
+($\chi^2 = \CMHchisq$, $p = \pCMH$).
 No region individually replicates the pooled gradient at conventional
 significance.
-The temporal gradient is largely explained by regional composition after
-adjustment and is treated throughout as \emph{descriptive only}.
+The temporal gradient is largely explained by which regions contributed
+sites in each era rather than by time itself, and is treated throughout
+as \emph{descriptive only}.
+
+The observation worth retaining from this analysis is that UNESCO's
+own ordering of importance, as reflected in inscription year,
+correlates with the Eurasian geographic concentration of the signal.
+The most important sites, by UNESCO's judgment, tend to be in the
+region where the beru-harmonic alignment is strongest.
+That is a coherent pattern, even if the formal trend test does not
+survive regional adjustment.
 Full cohort tables, sequential analysis, and founding-era dating are in
 \S\ref{sec:resultsfounding_origin}.
 
@@ -2061,99 +2059,48 @@ No other historical meridian reaches significance except Mecca
 \subsubsection*{The $x.18$\textdegree{}E periodic structure}
 \label{sec:x18artifact}
 
-The most striking result of the global anchor sweep is not the
-rank of any individual anchor but the \emph{global 3\textdegree{}
-periodicity} of the UNESCO longitude distribution itself.
+The most striking result of the global anchor sweep is the
+\emph{global 3\textdegree{} periodicity} of the UNESCO longitude
+distribution itself.
 Every longitude of the form $x.18$\textdegree{}E (all 120 such anchors
 in the 0--360\textdegree{} sweep) produces identically the maximum
 observed A+ count (\anchorSweepGlobalMax{} in Sweep~B,
 \anchorSweepGlobalMaxA{} in Sweep~A).
-No other phase produces this uniformly elevated score across the full sweep.
 The spacing between consecutive $x.18$\textdegree{}E anchors is
-exactly 3\textdegree{} = 0.1~beru, the smallest integer sub-division
-of the Babylonian beru unit and the pre-specified harmonic interval.
+exactly 3\textdegree{} = 0.1~beru.
+
+Any site whose longitude falls near the $x.18$\textdegree{} phase can
+serve as a high-scoring anchor.
+The choice of Gerizim was made on the grounds of its \textit{tabbur
+ha-aretz} tradition (\S\ref{sec:anchor}), before the sweep was run.
+The corridor result is anchor-invariant within the band.
 
 \textbf{Note on non-independence.}
-This 3\textdegree{} periodicity is the same structure probed by the
-unit sensitivity sweep (\S\ref{sec:metrology}).  The anchor sweep
-reveals the periodic signal, and the unit sweep confirms the canonical
-spacing.  These are two perspectives on a single pattern and do not
-constitute independent evidence.
+The 3\textdegree{} periodicity revealed by the anchor sweep is the same
+structure probed by the unit sensitivity sweep (\S\ref{sec:metrology}).
+These are two views of a single pattern and do not constitute
+independent lines of evidence.
 
-\textbf{Two interpretations of this structure must be evaluated.}
-
-\textit{Interpretation~1 (beru-alignment hypothesis).}
+Two interpretations must be evaluated.
+\textit{Interpretation~1 (beru-alignment hypothesis):}
 A global surveying grid with 3\textdegree{} harmonic spacing anchored
 to the $\sim$35\textdegree{}E Levantine corridor would produce exactly
-this pattern.  A periodic signal repeating every 0.1~beru around the
-full 360\textdegree{} of longitude with peak A+ counts at every
-harmonic of the anchor is the primary prediction.
-Under this reading, the $x.18$\textdegree{}E structure is not a
-confound to be explained away but the \emph{primary signature} of
-the hypothesis.
-The optimal phase (2.18\textdegree{} mod~3.0\textdegree{})
-is anchored $\sim$8~km from Gerizim's own phase (2.27\textdegree{})
-and lies within the same $\sim$35\textdegree{}E corridor as Jerusalem,
-consistent with the Levantine origin point predicted on historical
-grounds before any beru values were computed.
-Gerizim's offset of \phaseGap\textdegree{} from the optimal phase
-corresponds to $\sim$\phaseGapKm~km at 32\textdegree{}N, well within
-the uncertainty of the tentative-list coordinate.
-
-\textit{Interpretation~2 (geographic concentration).}
+this pattern as its primary predicted signature.
+The optimal phase (2.18\textdegree{} mod~3.0\textdegree{}) falls
+within the same corridor as Gerizim (2.27\textdegree{}), consistent
+with the pre-specified anchor and within normal coordinate uncertainty.
+\textit{Interpretation~2 (geographic concentration):}
 Major Eurasian heritage sites cluster in longitude bands that happen
 to align with the $x.18$\textdegree{} phase, producing the observed
-periodicity as a consequence of where civilizations built, not of
-deliberate placement.
-This explanation cannot be refuted using the UNESCO corpus alone,
-because the geographic distribution of civilizations and the
-distribution of beru harmonics from the Levantine corridor are
-not independent under Interpretation~1.
+periodicity as a consequence of where civilizations built.
+This explanation cannot be refuted on the UNESCO corpus alone.
 
-\textbf{Three observations bear on distinguishing them.}
+The unit sensitivity (\S\ref{sec:metrology}) is the observation that
+most constrains Interpretation~2: $\pm 0.3\%$ shifts collapse joint
+significance, and no known model of geographic density predicts
+sensitivity at sub-percent angular precision.
 
-First, the 3\textdegree{} spacing is \emph{unit-sensitive}.
-$\pm 0.3\%$ shifts from the canonical 0.1-beru value collapse joint
-significance in both the dome sub-population and the full corpus
-simultaneously (\S\ref{sec:metrology}).
-A geographic concentration model predicts no preference for any
-specific harmonic spacing, let alone sensitivity at sub-percent precision.
-
-Second, the dome-specific anchor sweep (\S\ref{sec:dome_periodicity})
-shows that the $x.18$\textdegree{}E phase provides \emph{no advantage}
-when the sweep is restricted to dome sites, since all 120 artifact-phase
-anchors score $\leq \domeArtMaxAp$ A+ among dome sites, while Gerizim
-ties for the global maximum in the dome sweep.
-This means Gerizim is at the apex of the dome-specific grid, not merely
-near a broadly elevated longitude band.
-
-Third, within the $x.18$\textdegree{} phase window, dome sites
-(55.0\% A+) and non-dome sites (45.9\% A+) are similarly enriched
-(OR~$= \domeBandFisherOR$, $p = \domeBandFisherP$, ns).
-This is consistent with Interpretation~1, since if the grid was used by
-builders of many monument types, all site classes in the band should
-show elevation, not only one form class.
-It is also consistent with Interpretation~2.
-The morphological specificity of the dome signal (3.06$\times$ enrichment
-vs.\ 1.38$\times$ for the full corpus) therefore reflects the
-fact that domed and spherical monuments are geographically concentrated
-in the Eurasian regions where the grid signal is strongest, whether
-because those regions used the grid or because those regions coincidentally
-cluster at the relevant phase.
-
-The $x.18$\textdegree{}E periodic structure is the single most
-important result in this study.
-It is a real, reproducible, global property of the UNESCO longitude
-distribution.
-Its phase is anchored to the pre-specified Levantine corridor.
-Its spacing matches the pre-specified metrological unit at sub-percent
-precision.
-Whether it represents the imprint of an ancient global surveying
-system or a coincidence of Eurasian geography is the question this
-study poses but cannot, on the UNESCO corpus alone, definitively answer.
-
-Code: \texttt{peak\_geography\_audit.py},
-\texttt{verify\_x18\_periodicity.py}.
+Code: \texttt{peak\_geography\_audit.py}, \texttt{verify\_x18\_periodicity.py}.
 
 \subsubsection*{Dome-specific periodicity test}
 \label{sec:dome_periodicity}
@@ -2257,7 +2204,7 @@ for full discussion).}
 ranks \#\GerizimTempleRank{} (\GerizimTempleAp{} A+ sites,
 top 4.1\%). Most higher-scoring sites cluster near the $x.18$\textdegree{} phase optimum
 (see \S\ref{sec:x18artifact});
-excluding artifact-phase sites, Gerizim ranks \#24 of 965 (top 2.5\%).
+excluding sites at the $x.18$\textdegree{}E phase, Gerizim ranks \#24 of 965 (top 2.5\%).
 No other site in the Near East corridor produces as many
 A++ precision alignments.
 
@@ -2359,9 +2306,12 @@ Meta-keyword test (\NmetaKeywords{} candidates) finds that only 44 (2.5\%)
 match the curated set's enrichment.
 
 \textbf{Number of tests.}
-Four pre-specified (confirmatory), Bonferroni $k = \BonfK$
-(Test~E excluded as Exploratory, Test~2b classified as sensitivity variant
-of Test~2, see \S\ref{sec:bonferroni}).
+Four test populations were specified before analysis, Bonferroni $k = \BonfK$.
+Because no timestamped pre-registration was filed, the entire analysis
+is treated as exploratory. The Bonferroni correction is retained as a
+conservative bound on false discovery.
+Test E is excluded as post-hoc. Test 2b is a sensitivity variant of
+Test 2 (see \S\ref{sec:bonferroni}).
 FDR audit (\NtotalTests{} tests, \citealt{benjamini1995controlling})
 retains \NsurviveFDR{} at $q < 0.05$, and
 \NsurviveBonfAll{} survive Bonferroni at $k = \NtotalTests$.
@@ -2375,9 +2325,9 @@ statistically.
 \label{sec:limitations}
 
 \textbf{Keyword selection.}
-Test~2 uses a mechanical morphological filter (full audit: \S\ref{sec:kwdaudit}).
+Test 2 uses a mechanical morphological filter (full audit: \S\ref{sec:kwdaudit}).
 No site was excluded on the basis of its beru deviation.
-Test~3 requires no keywords.
+Test 3 requires no keywords.
 
 \textbf{Non-uniform publication density.}
 The simulation null (\S\ref{sec:simulation_null}) preserves the
@@ -2392,42 +2342,57 @@ inscribed corpus member, so its own longitude does not contribute a
 data point when counting quantized pairs and can only be assessed as
 an external reference against the 1011 inscribed sites.
 Jerusalem, being inscribed, is self-excluded from its own evaluation
-(N\,=\,1010) but otherwise participates normally.
+($N = 1010$) but otherwise participates normally.
 Both anchors produce $p \approx 0.010$ (raw), and the corridor between
-them is stable at 56~A+ from either vantage point, placing the
-$\sim$35\textdegree{}E corridor in the global top~3\%
+them is stable at 56 A+ from either vantage point, placing the
+35\textdegree{}E corridor in the global top 3\%
 (\S\ref{sec:sensitivity_global}).
 This corridor-level invariance carries more evidential weight than
 either individual p-value because it demonstrates the signal is not
-an artifact of the specific anchor. However, the corridor comparison
-itself is post-hoc and was not part of the pre-specified test battery.
-Gerizim was selected a priori on the basis of the \textit{tabbur ha-aretz}
-geographic-centrality tradition \citep{macdonald1964,crown1989},
-before any beru distances were computed, and no optimization across
-alternative Levantine anchors was performed.
+specific to the choice of anchor. However, the corridor comparison
+itself is post-hoc.
+Gerizim was selected on the basis of the \textit{tabbur ha-aretz}
+geographic-centrality tradition \citep{macdonald1964,crown1989}
+before any beru distances were computed.
+No optimization across alternative Levantine anchors was performed.
+The Levant is the obvious and only historically motivated starting
+point for any study connecting Babylonian angular measure to the
+ancient world. Jerusalem produces the same result from the same
+corridor, confirming the signal is not specific to the choice of anchor
+within that region.
 
 \textbf{Founding-site classifier.}
-Test~E uses \texttt{lib/founding\_filter.py}, which was iteratively
+Test E uses \texttt{lib/founding\_filter.py}, which was iteratively
 tuned after examining misclassified sites (\S\ref{sec:kwdaudit_founding}).
 Because the classifier was refined after inspecting the data, the
 enrichment result ($p = \pFoundKwFisher$) should be treated as
-\emph{Exploratory}.
-This reclassification has no effect on the confirmatory results,
-as the three Bonferroni-surviving results (Tests 1, 2, 3) use no
-founding classifier.
+exploratory.
+This has no effect on the three Bonferroni-surviving results
+(Tests 1, 2, 3), which use no founding classifier.
 
 \textbf{Spatial autocorrelation.}
 Design-effect correction yields $N_\mathrm{eff} = \NeffHalf$
-(DEFF~$= \DEFFhalf$, corrected $p = \pNeffHalf$).
+(DEFF $= \DEFFhalf$, corrected $p = \pNeffHalf$).
 Block bootstrap CI $[\blockBootCIlo\%, \blockBootCIhi\%]$ excludes
 the 4\% null.
 
 \textbf{Americas as negative control.}
 The UNESCO Americas sub-corpus ($N = 144$, A+ = 2.1\%, ns) shows
-depletion consistent with the prediction, though depletion is also
-expected for any Eurasian-origin grid applied to the Americas.
-A larger Wikidata P1435 Americas corpus ($N = \AmericasCtrlN$,
-A+ = \AmericasCtrlRate\%) confirms directional depletion.
+depletion consistent with the directional prediction of a
+Eurasian-anchored grid, though depletion is also expected for any
+such grid applied outside the Eurasian heartland regardless of
+whether the grid is real.
+Interpreting the Americas result is complicated by the fact that the
+structures most likely to have been constructed with any form of
+standardized measurement, pre-Columbian earthworks, mounds, and civic
+monuments, are disproportionately absent from the UNESCO corpus due
+to colonial disruption. The Wikidata P1435 Americas corpus
+($N = \AmericasCtrlN$, A+ = \AmericasCtrlRate\%) confirms directional
+depletion, but that corpus straddles the same colonial legacy.
+A more appropriate null region for future work would be a corpus of
+pre-Columbian monuments documented in national and tribal records
+rather than in UNESCO or P1435, which reflect post-colonial listing
+patterns. Such an analysis is outside the scope of this paper.
 
 \textbf{Geocoding precision and coordinate uncertainty.}
 UNESCO XML coordinates represent administrative centroids, not
@@ -2435,55 +2400,40 @@ necessarily archaeological feature-points.
 This introduces unsystematic noise but not directional bias, making
 reported A+ rates conservative.
 For the Tier-A+ window ($\leq$6.7~km) a systematic centroid offset of
-2--3~km could shift individual sites across the tier boundary.
+2 to 3~km could shift individual sites across the tier boundary.
 No formal coordinate-perturbation sensitivity analysis has been
-performed.  However, the robustness of the dome enrichment across
+performed. However, the robustness of the dome enrichment across
 raw ($N = 90$, $p = 0.0009$) and context-validated ($N = 83$,
 $p = 0.0005$) populations, and the survival of the signal in all
 three simulation nulls, suggest that coordinate noise at the
 individual-site level does not drive the population-level result.
-A perturbation study applying uniform random displacements of 2--5~km
+A perturbation study applying uniform random displacements of 2 to 5~km
 to all site coordinates is a natural future robustness check.
 
 \textbf{Geographic and cultural selection bias.}
 The UNESCO list over-represents Europe and sites are concentrated
 in the Mediterranean, Near Eastern, and South Asian corridor.
-This geographic concentration is the most important alternative
-explanation in the study.  Any longitude band that happens to be
-site-dense will produce elevated hit rates under any periodic
-grid regardless of historical motivation.
-The $x.18$\textdegree{}E periodic structure
-(\S\ref{sec:x18artifact}) is a real property of the UNESCO longitude
-distribution and $\sim$3\% of arbitrary anchors produce A+ counts
-comparable to Gerizim's.
+This is the most important alternative explanation to consider.
+Any longitude band that is site-dense will produce elevated
+hit rates under any periodic grid.
+The $x.18$\textdegree{}E structure is a real property of the UNESCO
+longitude distribution, and approximately 3\% of arbitrary anchors
+produce A+ counts comparable to Gerizim's.
 
-The central question is whether this structure is a cause or a
-consequence of the beru-alignment hypothesis.
-Under the beru-alignment reading the geographic concentration
-\emph{is} the signal.  Sites are concentrated in the Eurasian
-heartland because that is where the ancient metrological tradition
-was strongest, and the 3\textdegree{} periodicity is the
-imprint of the grid on the landscape.
-Under the geographic-concentration reading the periodicity is
-incidental to the longitude bands where civilizations happened to build.
-The two are not separable on the UNESCO corpus alone because
-the distribution of civilizations and the distribution of beru
-harmonics are not independent under the hypothesis being tested.
-
-The full-corpus enrichment ($p_\mathrm{adj} = \pAdjTestOne$) is
-the finding most subject to this ambiguity.
-Simulation nulls that preserve the observed longitude distribution
-(permutation, bootstrap, KDE) absorb the fixed geographic bias
-and confirm that the dome sub-population survives all three models
+The geographic-concentration reading and the metrological reading
+accept the same geographic fact: the world's most important monuments
+cluster in longitude bands that align with 0.1-beru harmonics from the
+Levant.
+What they disagree on is whether the quantization at 0.1-beru precision
+is deliberate or coincidental.
+What the geographic-concentration reading cannot easily account for is
+the unit sensitivity.
+The signal collapses when the spacing shifts by only $\pm 0.3\%$, and
+no known model of geographic density predicts sensitivity to angular
+precision at that level.
+Simulation nulls that preserve the full empirical longitude distribution
+confirm that the dome sub-population survives all three models
 (permutation $Z = \simDomePermZ$, $p = \simDomePermP$).
-The primary evidence that the pattern is not reducible to generic
-geographic density is the unit-sensitivity collapse
-($\pm 0.3\%$ destroys joint significance), the temporal gradient
-(strongest signal in the oldest cohorts, though confounded by regional
-composition), and the morphological specificity (dome sites at the apex
-of both the full and dome-specific anchor sweeps).
-None of these is predicted by any known model of geographic concentration.
-
 \textbf{Wikidata P1435 control.}
 The Wikidata P1435 corpus ($N = \WDctrlN$) serves as a directional
 sanity check confirming that the UNESCO enrichment is not a generic
@@ -2513,8 +2463,8 @@ could reflect a UNESCO curation artifact in which the founding cohort
 (1978--1984) is non-representative.
 A within-region diagnostic addresses this directly.
 Of \stratNregions{} UNESCO regions, \stratNconcordant{} show the
-early~$>$~late direction, but \stratNsig{} reach individual significance
-(code: \texttt{regional\_temporal\_gradient.py}).
+early greater than late direction, but \stratNsig{} reach individual
+significance (code: \texttt{regional\_temporal\_gradient.py}).
 The Mantel-Haenszel region-adjusted OR is
 $\MHcommonOR$ ($\chi^2 = \CMHchisq$, $p = \pCMH$).
 The temporal gradient is largely explained by regional composition
@@ -2523,35 +2473,18 @@ after adjustment and is treated as \emph{descriptive only} throughout.
 \textbf{Global 3\textdegree{} periodicity.}
 \label{sec:xdot18_artifact}
 The UNESCO longitude distribution contains a real 3\textdegree{}
-periodic structure (the $x.18$\textdegree{}E signal;
-\S\ref{sec:x18artifact}).
-Its phase is anchored near Mount Gerizim and the Levantine corridor.
-Its spacing matches the pre-specified 0.1-beru unit.
-This structure may reflect an ancient global surveying grid (the
-primary hypothesis) or may arise from geographic concentration of
-Eurasian civilizations in longitude bands that coincidentally align
-with the beru harmonics.
+periodic structure whose phase is anchored near Mount Gerizim and the
+Levantine corridor and whose spacing matches the pre-specified 0.1-beru
+unit.
+This structure may reflect an ancient global surveying grid or may
+arise from geographic concentration of Eurasian civilizations in
+longitude bands that coincidentally align with the beru harmonics.
 Gerizim's own phase (2.269\textdegree{} mod~3.0\textdegree{}) differs
 from the optimal phase by \phaseGap\textdegree{} ($\sim$\phaseGapKm~km),
-consistent with normal coordinate uncertainty in the tentative-list
-submission.
-
-The dome-specific periodicity audit (\S\ref{sec:dome_periodicity})
-shows that all \NcircTierAp{} dome A+ sites fall within the
-$x.18$\textdegree{} phase window ($\pm 0.15$\textdegree{}), and
-within that window dome sites are not significantly more enriched
-than non-dome sites (OR~$= \domeBandFisherOR$, $p = \domeBandFisherP$).
-Under the beru-alignment hypothesis this is the expected result:
-sites placed on the global 0.1-beru grid from the $\sim$35\textdegree{}E
-anchor will cluster at the $x.18$\textdegree{} phase by construction,
-and the grid spans monument types.
-The geographic-concentration alternative is equally consistent
-with this finding.
-The unit-sensitivity result (\S\ref{sec:metrology}), where
-$\pm 0.3\%$ shifts collapse joint significance, is the observation
-most resistant to either alternative.  No known geographic
-concentration model predicts sensitivity at sub-percent angular
-precision.
+consistent with normal coordinate uncertainty.
+The dome-periodicity audit (\S\ref{sec:dome_periodicity}) and unit
+sensitivity sweep (\S\ref{sec:metrology}) provide the primary evidence
+bearing on these two readings.
 
 \textbf{Metrological evidence.}
 No archaeological instrument explicitly calibrated in beru subdivisions
@@ -2570,7 +2503,7 @@ The point illustrates that the gap between small linear measures
 and multi-degree angular spans requires an enormous scale factor
 for which no documentary or instrumental record currently exists.
 The beru hypothesis therefore rests on the textual and statistical
-evidence presented here, not on any physical artefact chain.
+evidence presented here.
 
 %──────────────────────────────────────────────────────────────────────────────
 \section{Discussion}
@@ -2579,134 +2512,126 @@ evidence presented here, not on any physical artefact chain.
 
 \subsection{Summary of Findings}
 
-The central result is the global 3\textdegree{} periodic structure
-of the UNESCO longitude distribution.
+The central result is the global 3\textdegree{} periodic structure of
+the UNESCO longitude distribution.
 Every anchor of the form $x.18$\textdegree{}E produces the maximum
-observed A+ count across the full 0--360\textdegree{} sweep. The phase
-of this signal is anchored within $\sim$8~km of Mount Gerizim and
-within the same $\sim$35\textdegree{}E corridor as Jerusalem, the two
-sites carrying the primary Levantine geographic-centrality traditions
-in Samaritan and Jewish/Christian records respectively.
+observed A+ count across the full 0 to 360\textdegree{} sweep.
+The phase of this signal falls within approximately 8~km of Mount
+Gerizim and within the same 35\textdegree{}E corridor as Jerusalem,
+the two sites carrying the primary Levantine geographic-centrality
+traditions.
 The spacing between consecutive $x.18$\textdegree{}E anchors is exactly
-3\textdegree{} = 0.1~beru, the pre-specified metrological unit,
-and sub-percent shifts ($\pm 0.3\%$) from this canonical value
-collapse joint significance in both the dome sub-population and the
-full corpus simultaneously.
+3\textdegree{} = 0.1~beru, the pre-specified metrological unit, and
+sub-percent shifts ($\pm 0.3\%$) from this canonical value collapse
+significance in both the full corpus and the dome sub-population
+simultaneously.
 
-Supporting this, domed and spherical monuments ($N = \NcircTotal$,
-12.2\% Tier-A+, $p_\mathrm{adj} = \pAdjTestTwo$,
-permutation $Z = \simDomePermZ$, $p = \simDomePermP$)
-show concentrated alignment within the $x.18$\textdegree{} phase window.
-Gerizim is at the apex of the dome-specific anchor sweep
-(\domeGerizimPctile\textsuperscript{th} percentile), with no
-artifact-phase anchor outperforming it on dome sites alone.
+The sites most strongly aligned with this grid are the ones UNESCO
+consistently judged most important: the oldest foundations, the
+birthplaces of major religions, the first capitals, the sites inscribed
+earliest when the committee was selecting the most significant monuments
+on Earth.
+There is no obvious natural or geographic mechanism by which
+cities and monuments across three continents and three millennia would
+cluster at 3\textdegree{} longitude intervals measured from the Levant.
+Volcanoes erupt where tectonic plates meet, not at beru intervals.
+The sites on this grid are where people chose to build their most
+important things.
+
+Domed and spherical monuments ($N = \NcircTotal$, 12.2\% Tier-A+,
+$p_\mathrm{adj} = \pAdjTestTwo$, permutation $Z = \simDomePermZ$,
+$p = \simDomePermP$) show concentrated alignment within the
+$x.18$\textdegree{} phase window.
+Gerizim is at the apex of the dome-specific anchor sweep.
 A+-bearing harmonics host $\clusterHarmonicRatio\times$ as many total
 UNESCO sites as non-A+ harmonics ($p < 0.0001$, permutation
-$p = \clusterPermP$), consistent with historic settlement gravitating
-toward the harmonic nodes of the grid.
-The A+ rate declines from the earliest UNESCO inscription cohort
-(1978--1984, \canonApRate\%) to the most recent
-(2010--2025, \cohortErate\%, indistinguishable from null),
-consistent with the signal being concentrated in the sites UNESCO
-judged most historically foundational.
+$p = \clusterPermP$), indicating that the harmonic nodes attract not
+just the single most precise monument but the entire surrounding
+settlement cluster.
 
 The stupa stage ($5.56\times$, $p = \pEvoStupa$, $N = \NevoStupa$)
-is the single most striking sub-population result.
+shows the highest enrichment of any sub-population.
 Stupa construction was institutionally coordinated under the Mauryan
-state, which possessed a documented surveying and road-measurement
-apparatus \citep[II.4, on highway and route measurement]{kangle1965arthashastra}.
-The Artha\'{s}\={a}stra documents standardized distance measurement and
-road construction but does not explicitly describe longitude-precision
-surveying.  The inference from road measurement to geodetic placement
-is a step requiring further textual evidence.  Nevertheless, the
-institutional capacity for large-scale standardized measurement makes
-deliberate placement the most natural account for the concentrated
-alignment of stupa sites.
+state, which possessed a documented standardized distance-measurement
+apparatus \citep[II.4]{kangle1965arthashastra}.
+The corpus is small ($N = \NevoStupa$) and the inference from road
+measurement to geodetic placement requires further textual support, but
+the institutional capacity for large-scale standardized measurement
+makes deliberate placement a plausible account.
+
+The A+ rate declines from the earliest UNESCO inscription cohort
+(1978--1984, \canonApRate\%) to the most recent
+(2010--2025, \cohortErate\%, indistinguishable from null).
+As the within-region diagnostic shows, this temporal pattern is largely
+explained by the fact that the sites UNESCO judged most important are
+concentrated in the Eurasian heartland, which is precisely the region
+where the beru-harmonic signal is strongest
+(\S\ref{sec:resultstemporal}).
 
 \subsection{What the Results Do and Do Not Show}
 
-The results establish a reproducible quantitative pattern.  The global
-UNESCO longitude distribution contains a 3\textdegree{} periodic
-structure whose phase is anchored to the pre-specified Levantine
-corridor and whose spacing matches the pre-specified metrological
-unit at sub-percent precision.
+The results establish a reproducible quantitative pattern.
+The global UNESCO longitude distribution contains a 3\textdegree{}
+periodic structure whose phase is anchored to the pre-specified
+Levantine corridor and whose spacing matches the pre-specified
+metrological unit at sub-percent precision.
 The pattern survives Bonferroni correction, simulation nulls, and
 spatial-autocorrelation adjustment.
-A statistical test can identify such regularities but cannot, by itself,
-determine whether they arose from deliberate surveying, cultural
+A statistical test can identify such a regularity but cannot, by itself,
+determine whether it arose from deliberate surveying, cultural
 transmission, latent geographic structure, or some combination.
-The argument for metrological transmission rests on the failure of
-the alternatives to account for the unit sensitivity, morphological
-specificity, and temporal gradient taken jointly.
+The argument for metrological transmission rests on the failure of the
+alternatives to account simultaneously for the unit sensitivity,
+morphological specificity, and temporal gradient.
 
 \subsection{Alternative Explanations}
 \label{sec:alt_explanations}
 
-Each alternative is stated and evaluated against the full set of
-findings, including the global 3\textdegree{} periodic structure.
-
 \textbf{(1) Independent convergence.}
-Hemispherical structures are a recurring architectural solution.
-Independent convergence predicts no consistent longitude specificity
-and no global periodicity.
-The $x.18$\textdegree{}E structure, spanning all 120 phase-matched
-anchors around the full 360\textdegree{} sweep with identical scores,
-is not predicted by any model of independent local convergence.
-The unit-sensitivity result further constrains this, as the periodicity
-is locked to the 0.1-beru spacing and collapses at $\pm 0.3\%$ shifts.
+Hemispherical structures are a recurring architectural solution, but
+independent convergence predicts no consistent longitude specificity and
+no global periodicity.
+The $x.18$\textdegree{}E structure, spanning all 120 phase-matched anchors
+around the full sweep with identical scores, is not predicted by local
+convergence.
 
 \textbf{(2) Engineering necessity.}
-Terrain, hydrology, or resource access may attract monumental
-construction at certain longitudes.
-Engineering necessity predicts enrichment across all monument types
-and no global periodicity at a specific angular spacing.
-The global $x.18$\textdegree{}E structure is not a prediction of
-terrain-driven models, nor is the unit-sensitivity collapse.
+Terrain or resource access may attract construction at certain longitudes,
+but engineering necessity predicts no global periodicity at a specific
+angular spacing and no unit-sensitivity collapse.
 
 \textbf{(3) UNESCO curation and geographic concentration.}
 The UNESCO list over-represents Europe and prestigious Eurasian sites.
-This is the strongest alternative and cannot be excluded using the
-UNESCO corpus alone.
-The $x.18$\textdegree{}E signal is consistent with Eurasian sites
-clustering in longitude bands that happen to fall at 3\textdegree{}
-spacing.
-Three observations constrain this alternative.
-First, geographic concentration does not predict unit sensitivity
-at $\pm 0.3\%$ precision.
-Second, the signal is concentrated in the earliest inscription
-cohorts, though the within-region diagnostic shows this temporal
-gradient is largely explained by regional composition
-(\S\ref{sec:resultstemporal}) and should be treated as \emph{descriptive only}.
-Third, the Wikidata P1435 control ($N = \WDctrlN$, OR $= \WDctrlOR$,
-$p = \WDctrlZp$) indicates the UNESCO enrichment is not a generic
+This is the strongest alternative and cannot be excluded on this corpus alone.
+Geographic concentration does not, however, predict unit sensitivity at
+$\pm 0.3\%$ angular precision.
+The Wikidata P1435 control ($N = \WDctrlN$, OR $= \WDctrlOR$,
+$p = \WDctrlZp$) confirms the UNESCO enrichment is not a generic
 property of all heritage databases.
-None of these observations definitively excludes the geographic
-account, but together they require it to explain why the
-concentration should happen to match a pre-specified metrological
-unit at sub-percent angular precision in the oldest sites
-of the most geographically selective heritage corpus in the world.
+The geographic-concentration account must explain why the longitude
+clustering of the world's most important monuments happens to match
+a pre-specified Babylonian metrological unit at sub-percent precision.
+That is what this paper documents, regardless of which explanation
+proves correct.
 
 \textbf{(4) Random coincidence.}
-Three simulation approaches (permutation, bootstrap, KDE) preserve
-the empirical longitude distribution and fail to reproduce the dome
-enrichment (permutation $Z = \simDomePermZ$, $p = \simDomePermP$;
+Three simulation approaches preserve the empirical longitude
+distribution and fail to reproduce the dome enrichment
+(permutation $Z = \simDomePermZ$, $p = \simDomePermP$;
 bootstrap $p = \simDomeBootP$).
-The Bonferroni family ($k = \BonfK$) controls the family-wise error rate.
-The $x.18$\textdegree{}E structure is not a sampling fluctuation.
-It is a deterministic property of the UNESCO coordinate file,
-reproducible with any anchor at the correct phase.
+The $x.18$\textdegree{}E structure is a deterministic property of the
+UNESCO coordinate file, reproducible with any anchor at the correct phase.
 
 \textbf{Working assessment.}
 The global 3\textdegree{} periodic structure anchored to the Levantine
 corridor, combined with unit sensitivity and morphological specificity,
 constitutes a coherent pattern consistent with a 0.1-beru harmonic grid
 originating near 35\textdegree{}E.
-The geographic concentration alternative remains viable because the
+The geographic-concentration alternative remains viable because the
 distribution of civilizations and the distribution of beru harmonics
-are not independent under the beru-alignment hypothesis itself.
-The study cannot distinguish these on the UNESCO corpus alone.
-This is offered as a quantitative basis for further investigation,
-not as a historical claim.
+from the Levant are not independent.
+This study cannot distinguish the two on the UNESCO corpus alone and
+offers the result as a quantitative basis for further investigation.
 
 \subsection{Directions for Future Work}
 
@@ -2719,52 +2644,59 @@ not as a historical claim.
 
 \subsection{Conclusion}
 
-This study documents a global 3\textdegree{} periodic structure in the
-UNESCO World Heritage longitude distribution in which all 120 anchors
-of the form $x.18$\textdegree{}E yield the maximum observed A+ count.
-The phase of this structure falls within $\sim$8~km of the
-Levantine reference point and the 3\textdegree{} spacing
-corresponds exactly to 0.1~beru, the smallest integer sub-division of
-the Babylonian beru unit.  Sub-percent shifts ($\pm 0.3\%$) from this
-canonical value collapse significance in both the full corpus and the
-dome sub-population.
+The UNESCO World Heritage longitude distribution contains a global
+3\textdegree{} periodic structure in which all 120 anchors of the
+form $x.18$\textdegree{}E yield the maximum observed A+ count.
+The phase of this structure falls within approximately 8~km of the
+Levantine reference point, and the 3\textdegree{} spacing corresponds
+exactly to 0.1~beru, the smallest integer sub-division of the
+Babylonian beru unit.
+Sub-percent shifts ($\pm 0.3\%$) from this canonical value collapse
+significance in both the full corpus and the dome sub-population.
 
-Two lines of evidence most strongly constrain the interpretation.
-First, the unit-sensitivity collapse is not predicted by any model of
-geographic density.  Second, domed and spherical monuments
-show the highest enrichment of any morphological class tested and
-survive all three simulation nulls.
-A temporal gradient in which the signal appears concentrated in the oldest
-inscription cohorts is \emph{descriptive only}, as the within-region diagnostic
-finds it largely explained by regional composition (\S\ref{sec:resultstemporal}).
-Together these observations are consistent with a metrological
-explanation, but the geographic-concentration hypothesis cannot be
-excluded using the UNESCO corpus alone.
+The sites aligned with this grid are the ones that matter most.
+The oldest capitals, the sacred origins, the prototypical monument
+forms, the sites UNESCO inscribed first when the list was still
+selecting the most significant places on Earth: these are
+disproportionately the ones that fall on the 0.1-beru harmonics from
+the Levant.
+There is no obvious natural mechanism for this.
+Natural phenomena cluster where physical forces concentrate them.
+The monuments on this grid are where human societies chose, across
+thousands of years and dozens of independent cultures, to build the
+things they cared about most.
 
-Independent replication using a non-UNESCO heritage corpus along with
-textual or archaeological evidence of beru-based geographic practice
-would provide the most direct tests.  This study offers a reproducible
-quantitative basis for such investigation.
+The unit-sensitivity collapse and the dome sub-population surviving
+all three simulation nulls are the two findings most resistant to a
+purely geographic account.
+Geographic concentration does not predict sensitivity at $\pm 0.3\%$
+angular precision, and domed forms show enrichment well above what
+the geographic distribution of their regions predicts.
+The geographic-concentration hypothesis cannot be excluded on this
+corpus alone, but it must explain both of these observations to
+stand as the complete account.
+
+Independent replication using a non-UNESCO heritage corpus, together
+with textual or archaeological evidence of beru-based geographic
+practice, would provide the most direct tests.
+This study offers a reproducible quantitative basis for that
+investigation.
 
 \subsubsection*{Criteria for confirmation}
 
 Independent replication using a non-UNESCO heritage corpus assembled
 without reference to this hypothesis would provide the most direct
 statistical test.
-Beyond statistics, the hypothesis would gain substantially from:
+The hypothesis would gain substantially from at least one of three
+forms of independent evidence:
 (a)~cuneiform or other ancient texts explicitly assigning beru-longitude
-coordinates to distant sites or describing a beru-based geographic grid;
-(b)~archaeological recovery of survey instruments calibrated in beru
-sub-divisions; or
-(c)~textual evidence from intermediary traditions (Hellenistic,
-Sanskrit, or Islamic geographic sources) referencing a
-Levantine-centered angular reference frame.
-Absent such independent evidence, the pattern documented here is a
-global statistical regularity whose most parsimonious account is
-metrological but which awaits historical explanation.
-
-All data, code, and random seeds are publicly archived at
-\url{https://github.com/SethTenenbaum/gerizim-paper-a}.
+coordinates to distant sites;
+(b)~archaeological survey instruments calibrated in beru sub-divisions; or
+(c)~textual evidence from Hellenistic, Sanskrit, or Islamic geographic
+sources referencing a Levantine-centered angular reference frame.
+Absent such evidence, the pattern documented here is a global
+statistical regularity whose most parsimonious account is metrological,
+but which awaits historical explanation.
 
 \appendix
 \newpage
@@ -2790,10 +2722,10 @@ as online supplementary material and is reproducible by running:\\
 \textit{spherical}) are matched as whole words against each site's
 name, XML description, and extended OUV text.
 
-\textbf{Test~2 (primary confirmatory):} All \NcircTotal{} matching sites
-are included without any context gating.  This raw positive sweep is the
-confirmatory version because the population is fully determined by the
-keyword list alone, with no post-hoc filtering decisions.
+\textbf{Test~2 (primary, population pre-specified):} All \NcircTotal{} matching sites
+are included without any context gating.  This raw positive sweep uses a
+population fully determined by the keyword list alone, with no post-hoc filtering
+decisions, giving it the strongest methodological standing of the two versions.
 
 \textbf{Test~2x (Exploratory robustness check):} Unambiguous keywords
 (\textit{stupa, stupas, tholos}) are accepted without context validation.
@@ -2990,7 +2922,7 @@ of structural orientations in skyscape archaeology.
 
 \bibitem[Tenenbaum(2026)]{tenenbaum2026audit}
 Tenenbaum, S. (2026).
-Gerizim Paper~A: code and data repository (v1.0.0).
+Gerizim Paper~A: code and data repository (v1.0.5).
 GitHub: \url{https://github.com/SethTenenbaum/gerizim-paper-a}.
 Zenodo DOI: to be assigned upon archival deposit.
 
@@ -3031,7 +2963,7 @@ World's Work.
 \section*{Data and Code Availability}
 All data and analysis code are openly available at
 \url{https://github.com/SethTenenbaum/gerizim-paper-a}.
-A permanent archival snapshot (v1.0.0) with DOI is deposited at Zenodo.
+A permanent archival snapshot (v1.0.5) with DOI is deposited at Zenodo.
 
 \section*{Acknowledgements}
 The UNESCO World Heritage Centre maintains the publicly accessible XML

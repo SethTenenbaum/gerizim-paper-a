@@ -114,6 +114,21 @@ gerizim-paper-a/
 
 ## Changelog
 
+### v1.0.5 — 2026-04-10
+- **Manuscript revision:** abstract restructured to open with the primary
+  discovery (global 3° periodic structure); introduction tightened and
+  reordered to state the Gerizim hypothesis before the finding.
+- **Prose trimming:** anchor section, interpretive framework, x.18°E
+  robustness discussion, alternative-explanations section, limitations, and
+  conclusion all condensed to remove repeated restatements of the same
+  evidence. Overall manuscript reduced by ~230 lines.
+- **Clarity:** added explicit framing that no natural geographic mechanism
+  predicts monuments clustering at 3° beru intervals from the Levant;
+  unit-sensitivity argument linked directly to the circular-phase objection
+  in §2.3.
+- **Version bump:** `\date` in manuscript, bibentry, and `CITATION.cff`
+  updated to v1.0.5.
+
 ### v1.0.3 — 2026-04-10
 - **Pipeline-driven manuscript:** all 439 manuscript macros are now emitted
   by analysis scripts via `manuscript/reproduce_all_macros.sh`; zero
