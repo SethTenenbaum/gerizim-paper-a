@@ -31,7 +31,21 @@ OUTPUT
 USAGE
 -----
   python3 analysis/global/wikidata_p1435_control_analysis.py
+
+CHANGELOG
+---------
+  1.0.4 (2026-04-10)
+    - BUG FIX: \\WDctrlBinomP was emitted as "0.00" when the binomial
+      p-value rounds below 0.01 under :.2f formatting.  Replaced with
+      fmt_p() helper that outputs "$< 0.001$" for p < 0.001, consistent
+      with the corrected macro in paper_a_primary_unesco.tex and
+      generated_macros.tex.
+    - Console print (a) changed from :.2f to :.4g for the same reason.
+  1.0.0 (2026-04-09)
+    - Initial release.
 """
+
+__version__ = "1.0.4"
 
 from __future__ import annotations
 
@@ -165,7 +179,7 @@ def main():
 
     print("=" * 72)
     print("  GROUP 23 — Wikidata P1435 Global Heritage Control")
-    print("  Script: analysis/global/wikidata_p1435_control_analysis.py")
+    print(f"  Script: analysis/global/wikidata_p1435_control_analysis.py  v{__version__}")
     print("=" * 72)
 
     print(f"\n  UNESCO:  N = {n_u:,}, A+ = {k_u}, rate = {r_u*100:.2f}%")
@@ -232,7 +246,7 @@ def main():
         or_noeu = float("inf")
 
     # ── Print results ─────────────────────────────────────────────────────
-    print(f"\n  (a) Binomial (control vs 4% null):  p = {p_binom_c:.2f}")
+    print(f"\n  (a) Binomial (control vs 4% null):  p = {p_binom_c:.4g}")
     print(f"  (b) 2-prop z-test (UNESCO > ctrl):  z = {z:.3f}, p = {p_z:.4f}")
     print(f"  (c) OR = {or_global:.2f}  (95% CI {or_lo:.2f}--{or_hi:.2f})")
     print(f"  (d) Permutation p ({N_PERM:,} draws):  p = {p_perm:.3f}")
@@ -240,13 +254,21 @@ def main():
     print(f"  (f) Drop-Europe OR = {or_noeu:.2f}")
 
     # ── LaTeX macros ──────────────────────────────────────────────────────
+    def fmt_p(p: float, decimals: int = 3) -> str:
+        """Format a p-value for LaTeX: use '$< 0.001$' when rounding would give 0.000."""
+        threshold = 10 ** (-decimals)
+        if p < threshold:
+            zeros = "0" * decimals
+            return f"$< 0.{zeros[:-1]}1$"
+        return f"{p:.{decimals}f}"
+
     print(f"\n  % LaTeX macros (GROUP 23):")
     # Format N with comma
     n_c_fmt = f"{n_c:,}".replace(",", "{,}")
     print(f"  \\newcommand{{\\WDctrlN}}{{{n_c_fmt}}}           % Wikidata P1435 control corpus size")
     print(f"  \\newcommand{{\\WDctrlAp}}{{{k_c}}}            % A+ hits in Wikidata P1435 control")
     print(f"  \\newcommand{{\\WDctrlRate}}{{{r_c*100:.2f}}}          % A+ rate, Wikidata P1435 control (%)")
-    print(f"  \\newcommand{{\\WDctrlBinomP}}{{{p_binom_c:.2f}}}          % p-value, binomial test P1435 control")
+    print(f"  \\newcommand{{\\WDctrlBinomP}}{{{fmt_p(p_binom_c)}}}          % p-value, binomial test P1435 control")
     print(f"  \\newcommand{{\\WDctrlOR}}{{{or_global:.2f}}}           % global odds ratio, P1435 control")
     print(f"  \\newcommand{{\\WDctrlORlo}}{{{or_lo:.2f}}}           % OR 95% CI lower bound")
     print(f"  \\newcommand{{\\WDctrlORhi}}{{{or_hi:.2f}}}           % OR 95% CI upper bound")
