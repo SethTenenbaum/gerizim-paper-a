@@ -95,7 +95,7 @@ from statsmodels.stats.multitest import multipletests
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
-from lib.beru import TIER_APLUS, P_NULL_AP
+from lib.beru import GERIZIM, TIER_APLUS, P_NULL_AP
 from lib.stats import significance_label as SIG
 
 # ─────────────────────────────────────────────────────────────────────────────
