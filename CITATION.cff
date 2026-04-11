@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this code or data, please cite it as below."
 type: software
-title: "Longitude Quantization in the UNESCO World Heritage Corpus: Domes, Stupas, and the Babylonian Beru — Code and Data"
+title: "Longitude Quantization in the UNESCO World Heritage Corpus: Domes, Stupas, and the Babylonian Beru - Code and Data"
 authors:
   - family-names: Tenenbaum
     given-names: Seth
@@ -16,8 +16,8 @@ abstract: >
   Analysis code and data for "Longitude Quantization in the UNESCO World
   Heritage Corpus: Domes, Stupas, and the Babylonian Beru". Tests whether
   domed and spherical UNESCO World Heritage monuments cluster non-randomly
-  on integer-multiple longitudes of the Babylonian beru (30°) measured from
-  Mount Gerizim (35.269°E). Includes 26 analysis scripts, shared library,
+  on integer-multiple longitudes of the Babylonian beru (30 deg) measured from
+  Mount Gerizim (35.269 deg E). Includes 26 analysis scripts, shared library,
   UNESCO WHC XML corpus (1,248 sites), and Wikidata control dataset.
 keywords:
   - longitude periodicity
