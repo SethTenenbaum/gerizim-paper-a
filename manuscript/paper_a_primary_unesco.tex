@@ -348,6 +348,15 @@ Adjudicating between explanations~1 and~2 requires independent corpora.
 \label{sec:methods}
 %──────────────────────────────────────────────────────────────────────────────
 
+\subsection{Corpus Construction}
+\label{sec:corpus}
+
+The UNESCO World Heritage XML dataset contains $\NwhcTotal$ inscribed
+nominations across all categories. Two outcome-blind filters yield the
+analysis corpus: (1)~Natural-only sites are excluded ($-235$, retaining
+Cultural and Mixed); (2)~entries lacking geocoordinates are excluded ($-2$).
+The result is $N = \NclusterTotal$ sites with valid longitudes.
+
 \subsection{Geodetic Framework}
 
 The reference anchor is Mount Gerizim at \GerizimLon\textdegree{}E,

@@ -8,7 +8,7 @@ GROUP 0 — Geographic and metrological constants:
   \\GerizimLon, \\GerizimLonDMS, \\GerizimLatDMS
   \\JerusalemLon
   \\GerizimJerusalemSep, \\GerizimJerusalemKm
-  \\NwhcTotal
+  \\NwhcTotal, \\NclusterTotalPreCoord, \\NclusterTotal
 
 USAGE
 -----
@@ -37,8 +37,11 @@ sep_deg = round(abs(GER_LON - JER_LON), 3)
 sep_km  = round(sep_deg * KM_PER_DEG, 1)
 
 # Total UNESCO corpus size (all site types, including natural)
+from data.unesco_corpus import cultural_sites_with_coords
 corpus    = load_corpus()
 n_whc     = len(corpus)
+n_cult_mixed         = sum(1 for s in corpus if s.is_cultural_or_mixed)   # after category filter, before coord filter
+n_cult_mixed_coords  = len(cultural_sites_with_coords(corpus))             # final analysis corpus
 
 print("=" * 72)
 print("  EMIT CONSTANTS — GROUP 0")
@@ -54,6 +57,8 @@ print(f"  \\newcommand{{\\JerusalemLon}}{{{JER_LON:.3f}}}  % Jerusalem longitude
 print(f"  \\newcommand{{\\GerizimJerusalemSep}}{{{sep_deg}}}  % Gerizim–Jerusalem separation (degrees, equatorial)")
 print(f"  \\newcommand{{\\GerizimJerusalemKm}}{{{sep_km}}}  % Gerizim–Jerusalem separation (km, equatorial)")
 print(f"  \\newcommand{{\\NwhcTotal}}{{{n_whc}}}  % total UNESCO WHC inscribed sites (all types)")
+print(f"  \\newcommand{{\\NclusterTotalPreCoord}}{{{n_cult_mixed}}}  % Cultural+Mixed before coordinate filter")
+print(f"  \\newcommand{{\\NclusterTotal}}{{{n_cult_mixed_coords}}}  % Cultural+Mixed with valid coordinates (analysis corpus)")
 print(f"  \\newcommand{{\\NfineSweepSpacings}}{{7}}  % number of spacings in the fine unit sweep (Table tab:unitsweep_fine)")
 
 print()
