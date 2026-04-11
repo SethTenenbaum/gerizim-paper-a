@@ -180,8 +180,7 @@ that initiated this study are defined in \S\ref{sec:circularity}.
 
 This subsection is the single canonical statement of the circularity problem
 and its analytic consequences.
-All later mentions in the paper are back-references to this section; the
-argument is not repeated elsewhere.
+All later mentions in the paper are back-references to this section.
 
 \textbf{How the circularity arose.}
 This study began with the hypothesis that the Babylonian beru unit might be
@@ -983,10 +982,13 @@ Code: \texttt{data/scripts/fetch\_p1435\_global.py}.
 
 Results are presented in order: Test~2 (dome/spherical, primary pre-specified),
 Test~3 (cluster asymmetry, primary pre-specified),
-Test~B (Rayleigh phase-lock of the A+ sub-sample; structural description with permutation check --- see \S\ref{sec:results_rayleigh} for the interpretive caveat regarding its mathematical dependence on the A+ classification criterion),
-Test~2b (hemispherical evolution,
-sensitivity variant), Test~1 (full corpus, descriptive), Test~4 (temporal
-gradient, descriptive), and Test~E (founding classifier, post-hoc appendix).
+Test~2b (hemispherical evolution, sensitivity variant),
+Test~1 (full corpus, descriptive), and Test~4 (temporal gradient, descriptive).
+A methodological note on Test~B (Rayleigh phase-lock of the A+ sub-sample)
+follows §\ref{sec:resultscircular}; its high $R$ is a mathematical consequence
+of the A+ classification criterion (\S\ref{sec:results_rayleigh}) and it
+is reported as a structural description, not as independent evidence.
+Test~E (founding classifier, post-hoc) is reported in Appendix~\ref{sec:kwdaudit_founding}.
 Simulation-based null models (\S\ref{sec:simulation_null}) are the primary
 test against geographic concentration.
 
@@ -1131,33 +1133,85 @@ Dome sites exceed the broader footprint expectation at all three window
 sizes. The morphological specificity finding is not an artifact of the
 particular $\pm 5$\textdegree{} window choice.
 
-\textbf{Reconciliation.}
+\textbf{Reconciliation and the logical structure of the two nulls.}
 These two results are simultaneously correct and together characterise the
-geographic-concentration alternative precisely.
-Null~A shows that the dome sites' own longitude positions encode the enrichment:
-their geographic locations are concentrated near harmonic longitudes.
-Null~C shows that \emph{other monuments} from the same longitudes show only
-5.8\% A+ (pool mean 4.81), significantly less than the dome sites' 13.3\%.
-Geographic concentration of Eurasian domed architecture explains \emph{why
-dome sites are near harmonics} (Null~A), but does not explain \emph{why dome
-sites are more enriched than other monuments at the same longitudes}
-(Null~C significant).
-The morphological specificity result --- domed forms outperforming non-domed
-forms within the same geographic footprint --- is the claim that the
-geographic-concentration alternative must additionally explain.
+geographic-concentration alternative with precision.
+Understanding why Null~A being non-significant does \emph{not} imply that
+geographic concentration fully explains the dome result requires unpacking
+what each null actually tests.
+
+\textbf{What Null~A tests.}
+Null~A asks: \emph{given the geographic positions that domed monuments actually
+occupy, how many A+ hits would we expect by chance?}
+The answer is $\approx \geoNullDomeBootMean$ --- essentially the observed count.
+This confirms that domed monuments are geographically concentrated in longitude
+bands that happen to fall near 0.1-beru harmonics.
+A non-significant Null~A therefore says: ``the dome sites are \emph{where they are},
+and those positions happen to be near harmonics.''
+It does \emph{not} say ``any monument type placed at those same positions would
+show the same enrichment.''
+It takes the dome sites' locations as given and asks only whether resampling from
+those locations reproduces the signal.
+
+\textbf{What Null~C tests.}
+Null~C asks: \emph{given those same longitude positions, do domed monuments show
+more harmonic alignment than other monuments built at the same longitudes?}
+The answer is yes: the broader pool of monuments within $\pm 5$\textdegree{} of
+any dome site shows only 5.8\% A+ on average, while dome sites show 13.3\%.
+A significant Null~C therefore says: ``at the very same longitudes, domed and
+stupa forms cluster disproportionately at the harmonic sub-positions, compared
+to all other monument types.''
+
+\textbf{Why Null~A non-significant $\neq$ geographic concentration fully explains the result.}
+Null~A non-significant means: the dome sites' overall longitude distribution is
+consistent with their observed A+ count.
+But it does not address the question of \emph{why domed monuments occupy those particular
+longitudes in the first place} --- and specifically, whether they are more precisely
+positioned at harmonic nodes than non-domed monuments at the same latitudes.
+That is precisely what Null~C tests and finds significant.
+
+A useful analogy: imagine a city where the most prestigious buildings are concentrated
+on the east side of town, and the east side happens to align with a proposed grid.
+Null~A says: ``resample from the east side and you reproduce the signal'' ---
+consistent with the east-side concentration explaining everything.
+Null~C says: ``but even within the east side, the prestigious buildings are closer
+to grid lines than other buildings'' --- which the geographic account does not predict.
+The geographic-concentration alternative explains \emph{why} dome sites are in
+harmonic-rich longitude zones; it does not predict \emph{why} dome sites sit
+preferentially at the precise harmonic sub-positions within those zones, compared
+to other monument types built at identical longitudes.
+
+\textbf{Why domed and stupa forms are the relevant sub-population.}
+The UNESCO World Heritage corpus is, by design, an index of the most significant
+built structures on Earth, selected by an international body without reference to
+this hypothesis.
+Domed and stupa monuments represent the most universal form of the ``sacred
+center'' in the world's major monumental traditions: the Buddhist stupa
+encodes the axis mundi; the Islamic dome marks the sanctuary; the Greco-Roman
+tholos marks the omphalos.
+If any class of monument were placed with reference to a cosmographic longitude
+grid --- and the beru unit is attested precisely as both an astronomical and a
+territorial-cosmographic measure (\S\ref{sec:beru}) --- it is this class.
+The geographic-concentration alternative must therefore explain not only the
+longitude clustering of these monuments, but why this morphological form, above
+all others at the same longitude positions, disproportionately falls at the
+precise sub-positions the 0.1-beru grid predicts.
+No non-metrological model currently available to the author makes this prediction.
 
 \textbf{Residual ambiguity.}
-Domed monuments may simply be built in the specific sub-longitudes within the
-Eurasian corridor that happen to align with 0.1-beru harmonics, without any
-metrological intent.
-This reading is logically available and cannot be excluded on this corpus alone.
-What it requires is an explanation of why domed and stupa forms in particular, 
-and not other monument types at those same sub-longitudes, cluster at the harmonic 
-positions.
-No such non-metrological model is known to the author.
-This paper documents the pattern; adjudicating between geographic coincidence
-at sub-longitude precision and metrological intent requires independent corpora
-or historical evidence outside the scope of this study.
+Null~A establishes that the dome sites' own longitude distribution fully encodes
+their enrichment.
+This means geographic concentration is a \emph{necessary} first-level account:
+if dome sites were placed uniformly around the globe, there would be no signal.
+But Null~C establishes that geographic concentration is not \emph{sufficient}:
+other monuments at those same longitudes do not show comparable precision of
+harmonic alignment.
+The residual question is whether the sub-longitude precision of domed monument
+placement is metrological intent or an unmodeled aspect of the civilizations
+that built them.
+This paper documents the quantitative regularity; adjudicating between those two
+explanations requires independent corpora or historical evidence outside the
+scope of this study.
 
 In the global anchor sweep (\S\ref{sec:sensitivity_global}),
 Gerizim scores \GerizimSweepAp{} A+ (\anchorSweepPctile{}\textsuperscript{th}
@@ -1338,55 +1392,28 @@ Sites at harmonic nodes cluster more densely than sites at harmonic midpoints
 (\clusterNodeApMean{} vs.\ \clusterAntiApMean{} neighbors;
 $\clusterNodeVsAntiApRatio\times$, $p = \clusterNodeVsAntiApMWp$).
 
-%──────────────────────────────────────────────────────────────────────────────
-\subsection{Phase-Lock of the A+ Sub-sample: Rayleigh Test (Test~B)}
+% ── Test~B (Rayleigh) demoted from stand-alone subsection; retained as a
+%    methodological note because it is cross-referenced from tables and §4.
+%    The high R is a mathematical consequence of the A+ criterion; the only
+%    independent contribution is the permutation check. ──────────────────────
+\paragraph*{Methodological note: Rayleigh phase-lock of the A+ sub-sample (Test~B).}
 \label{sec:results_rayleigh}
-%──────────────────────────────────────────────────────────────────────────────
-
-\textbf{Important caveat before the result.}
-As established in \S\ref{sec:circularity}, Test~B does not resolve the
-circularity problem: a near-perfect $R$ is a direct mathematical consequence
-of the A+ classification criterion, not an independent confirmation that the
-periodicity is real.
-Specifically, every A+ site's longitude satisfies
-$\lambda \bmod 3.0 \approx \GerizimPhase$\textdegree{} (within
-$\pm 0.006$\textdegree{} of the $x.18$\textdegree{} phase on the
-3\textdegree{} circle) by construction.
-Test~B is reported here as a structural description --- a precise
-quantification of how tightly the A+ sub-sample is concentrated at the
-phase implied by its own definition --- and as a check that the permutation
-null does not reproduce this concentration by chance.
-
-\textbf{Result:} $R = \rayleighR$, $Z = \rayleighZ$,
-permutation $p_\mathrm{perm} < 0.0001$ (10{,}000 shuffles, seed~42).
-
-We project all \Nap{} Tier-A+ sites onto the 3\textdegree{} circle
-(phase $= \lambda \bmod 3.0$\textdegree{}) and compute the Rayleigh mean
-resultant length~$R$.
-Under the permutation null --- a random draw of \Nap{} longitudes from the full corpus
---- the sub-sample has no preferred phase and $R \approx 0$ is expected.
-$R = \rayleighR$ means that \rayleighRPctPhrasing{} of the \Nap{}
-Tier-A+ sites project essentially onto the same direction on the
-3\textdegree{} circle.
-A value of $R = 0$ would indicate uniform phase distribution;
-$R = 1$ would indicate all sites at exactly the same phase.
-The observed $R = \rayleighR$ is very close to the maximum possible,
-as expected given the A+ classification criterion.
-What the permutation null adds is this: a random draw of the same number of sites
-from the full UNESCO longitude distribution does \emph{not} reproduce this
-concentration ($p < 0.0001$), confirming that the A+ sites are \emph{not}
-simply a random sample from the Eurasian-dense part of the corpus.
-The Eurasian longitude concentration alone does not explain which specific
-sites clear the A+ threshold.
-
-For comparison, the full corpus Rayleigh~$R$ on the same 3\textdegree{} circle
-is $R = \fullRayleighR$ ($p_\mathrm{perm} = \fullRayleighPermP$, ns),
-confirming no spurious global periodicity in the raw longitude distribution.
-The phase concentration is specific to the Tier-A+ sub-sample, not a
-property of the corpus as a whole.
-
-Code: \texttt{analysis/global/x18\_periodicity\_formal\_test.py}
-(Test~B; full details in \S\ref{sec:x18_formal}).
+As established in \S\ref{sec:circularity}, the near-perfect Rayleigh $R$ of
+the A+ sub-sample is a direct mathematical consequence of the A+ classification
+criterion: every A+ site's longitude satisfies
+$\lambda \bmod 3.0 \approx \GerizimPhase$\textdegree{} by construction.
+Test~B is therefore reported as a \emph{structural description}, not as
+independent evidence.
+Its sole independent contribution is the permutation check:
+a random draw of \Nap{} longitudes from the full corpus does \emph{not}
+reproduce the observed phase concentration
+($R = \rayleighR$, $Z = \rayleighZ$, $p_\mathrm{perm} < 0.0001$, 10{,}000
+shuffles, seed~42), confirming that the A+ sub-sample is not a random
+draw from the Eurasian-dense longitude distribution.
+The full corpus Rayleigh~$R = \fullRayleighR$ ($p_\mathrm{perm} = \fullRayleighPermP$, ns)
+confirms there is no spurious global periodicity in the raw longitude file.
+Full details and code (\texttt{x18\_periodicity\_formal\_test.py}) are in
+\S\ref{sec:x18_formal}.
 
 \subsection{Global Enrichment (Test~1, Descriptive)}
 \label{sec:results_global}
@@ -1600,17 +1627,23 @@ The key finding is that \emph{inscription year} is a stronger predictor
 of A+ status than founding era: the temporal gradient reflects when
 UNESCO inscribed sites, not when the sites were founded.
 
-\noindent\textit{Post-hoc keyword enrichment (for completeness only).}
+\noindent\textit{Founding-site classifier (Test~E, post-hoc; full report in
+Appendix~\ref{sec:kwdaudit_founding}).}
 A founding-site classifier (\texttt{lib/founding\_filter.py}),
-iteratively tuned after data inspection, identifies
-\NfoundKwAp/\NthematicTotal{} (\thematicFoundingPct\%) A+ sites as
-founding-class (Fisher OR~$= \foundKwFisherOR$, $p = \pFoundKwFisher$~*).
-Because the classifier was refined after seeing the data, this result
-has a positive bias of unknown magnitude.
-It is reported in full in Appendix~\ref{sec:kwdaudit_founding}
-and carries no independent evidential weight here.
+iteratively tuned after data inspection, identifies A+ sites
+associated with founding capitals, sacred origins, and early religious
+centers at an elevated rate (Fisher OR~$= \foundKwFisherOR$,
+$p = \pFoundKwFisher$~*).
+This result has a positive bias of unknown magnitude because the classifier
+was refined after seeing the data, and it is therefore classified as
+fully post-hoc and removed from the main evidential chain.
+It is reported in full in Appendix~\ref{sec:kwdaudit_founding},
+where it provides supporting context for the \emph{type} of site that
+tends to fall on $x.18$\textdegree{}E nodes: not only domed and stupa
+structures, but the founding loci of major civilizational and religious
+traditions.
 The two primary pre-specified results (Tests~2 and~3) and all
-keyword-independent results above are unaffected by this classifier.
+keyword-independent results are unaffected by this classifier.
 
 \noindent
 The signal is present in the full corpus ($p = \pOriginAll$),
@@ -1644,13 +1677,34 @@ five-cohort $Z = \ZcochranFive$, $p = \pCochranFive$).
 This pooled result is reported for completeness; it does not enter the
 primary pre-specified family (see \S\ref{sec:bonferroni}).
 
-The observation worth retaining from this analysis is that UNESCO's
-own ordering of importance, as reflected in inscription year,
-correlates with the Eurasian geographic concentration of the signal.
-The most important sites, by UNESCO's judgment, tend to be in the
-region where the beru-harmonic alignment is strongest.
-That is a coherent pattern, even if the formal trend test does not
-survive regional adjustment.
+The substantive observation worth retaining from this analysis is the
+following.
+UNESCO's own ordering of importance, as reflected in inscription year,
+is correlated with the beru-harmonic signal: the earliest-inscribed cohort
+(1978--1984) --- the sites the international committee judged most significant
+when the programme began --- shows the highest A+ rate (\canonApRate\%,
+$\canonEnrich\times$), while the most recent cohort (2010--2025) is
+indistinguishable from the null (\cohortErate\%).
+This is interpretively coherent within the beru-alignment hypothesis:
+if a longitude grid anchored near Jerusalem and Gerizim influenced the
+siting of the most cosmographically important foundations in antiquity,
+then the very sites UNESCO identifies as paramount --- Jerusalem, Lumbini,
+the early Islamic capitals, the first Buddhist pilgrimage centers --- are
+precisely the ones the hypothesis predicts would most reliably fall on harmonic nodes.
+That UNESCO selected those sites first, independently of any knowledge of
+beru geometry, and that those sites are disproportionately on the
+$x.18$\textdegree{}E grid, is the qualitative coherence the temporal
+gradient documents.
+The within-region adjustment shows this pattern is substantially
+explained by geography --- the most important sites are in Eurasia, and
+Eurasia is where the signal is strongest --- but that geographic
+explanation is itself part of what the beru-alignment hypothesis predicts:
+the grid is Eurasian in origin, so its strongest signal should be in
+the ancient Eurasian heartland.
+Both the geographic-concentration and the metrological readings make the
+same directional prediction for the temporal gradient; the gradient therefore
+does not adjudicate between them, but it is qualitatively consistent with
+the hypothesis and not an artifact of the statistical procedure.
 Full cohort tables, sequential analysis, and founding-era dating are in
 \S\ref{sec:resultsfounding_origin}.
 
@@ -2863,7 +2917,7 @@ Test~2x yields $N = 83$, $p = 0.0005$, $3.31\times$ enrichment, an
 equal-or-stronger signal than the raw sweep, confirming that the
 7 rejected sites are longitude-diluting false positives, not true hits.
 
-\subsection{Founding-Origin Classifier (Test~E)}
+\subsection{Founding-Origin Classifier (Test~E, Post-Hoc Context)}
 \label{sec:kwdaudit_founding}
 
 The founding-origin classifier (\texttt{lib/founding\_filter.py})
@@ -2876,30 +2930,41 @@ Full keyword lists: \texttt{config.json}.
 
 This classifier was iteratively tuned by examining misclassified
 sites (\S\ref{sec:filter_methodology}).
-Tuning required one pass of keyword-grouped corrections;
-no site was excluded individually, and no longitude-based decisions
-were made at any stage.
-The complete version history is preserved in the project's
-\texttt{git} commit log and is auditable at the public repository
-(\url{https://github.com/SethTenenbaum/gerizim-paper-a}).
+Because refinement occurred after data inspection, the enrichment
+result has a positive bias of unknown magnitude and is classified
+as fully post-hoc.
+It carries no weight in the primary evidential chain (Tests~2 and~3)
+but is reported here because it speaks to a substantive question:
+\emph{what kinds of sites, beyond domed and stupa monuments, tend to
+fall on $x.18$\textdegree{}E nodes?}
 
-\textbf{Keyword enrichment result (post-hoc; not used as primary evidence).}
+\textbf{Answer.}
+The classifier finds that the A+ set is enriched not only in
+morphologically domed structures, but in sites associated with
+the founding of civilizational and religious traditions: early capitals,
+sacred origin sites, and founding monuments of the major world religions.
+The pattern is consistent with the beru-alignment hypothesis, which
+predicts that the most cosmographically significant locations in the
+ancient world --- the sites that later became the seeds of empires and
+pilgrimage networks --- would be most reliably placed on a
+cosmographic longitude grid.
+The post-hoc nature of the classifier means this reading cannot be
+advanced as independent evidence; it is offered as a direction for
+confirmatory work using an independently assembled founding-site corpus.
+
+\textbf{Keyword enrichment result.}
 Applied to the full corpus ($N = \NoriginCorpus$),
 the classifier finds \NfoundKwAp{} keyword-founding sites among the 56 A+ sites
 (\foundKwApRate\%; $N_{\mathrm{kw}} = \NfoundKwAll$ keyword-founding sites overall,
 base rate \foundKwBaseRate\%).
 Fisher exact test: OR~$= \foundKwFisherOR$, $p = \pFoundKwFisher$~*.
-Because the classifier was iteratively refined after inspecting the data,
-this result has a positive bias of unknown magnitude and is reported here
-as descriptive context only.
-The founding-site evidence that does not depend on keyword
-classification --- namely the inscription-year gradient ($p = \pCochranThree$)
-and world-religion keyword match ($p = \pReligUnion$) --- both reach
-significance independently.
 
 Known false negatives (e.g., Florence, Timbuktu) affect A+ and
-non-A+ sites equally, and the automated enrichment test is a conservative
+non-A+ sites equally, making the enrichment estimate a conservative
 lower bound even before any post-hoc inflation is considered.
+The complete version history of the classifier is preserved in the
+project's \texttt{git} commit log and is auditable at the public
+repository (\url{https://github.com/SethTenenbaum/gerizim-paper-a}).
 
 
 
