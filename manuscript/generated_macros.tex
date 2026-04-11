@@ -1,4 +1,4 @@
-% Generated macros — 2026-04-10T21:18:21Z
+% Generated macros — 2026-04-11T00:11:21Z
 % Source: bash manuscript/reproduce_all_macros.sh --macros-only
 % IMPORTANT: values are computed fresh each run — do NOT hardcode
 
@@ -477,18 +477,18 @@
   \newcommand{\pEvoApValidated}{0.0002}          % p-value A+ binomial, context-validated (Exploratory)
   \newcommand{\pEvoAValidated}{0.0032}           % p-value A  binomial, context-validated (Exploratory)
   \newcommand{\NevoValidRejected}{16}           % sites rejected by context validation
-  \newcommand{\evoDomeApRateValid}{11.8}  % dome-stage A+ rate (%, context-validated)
-  \newcommand{\evoDomeNValid}{68}  % dome-stage corpus N (context-validated)
-  \newcommand{\evoDomeApValid}{8}  % dome-stage A+ count (context-validated)
-  \newcommand{\pEvoDomeValid}{0.0057}  % p-value, dome-stage binomial (context-validated)
-  \newcommand{\evoMoundApRateValid}{8.3}  % mound-stage A+ rate (%, context-validated)
-  \newcommand{\evoMoundNValid}{36}  % mound-stage corpus N (context-validated)
-  \newcommand{\evoMoundApValid}{3}  % mound-stage A+ count (context-validated)
-  \newcommand{\pEvoMoundValid}{0.1734}  % p-value, mound-stage binomial (context-validated)
-  \newcommand{\evoStupaApRateValid}{22.2}  % stupa-stage A+ rate (%, context-validated)
-  \newcommand{\evoStupaNValid}{18}  % stupa-stage corpus N (context-validated)
-  \newcommand{\evoStupaApValid}{4}  % stupa-stage A+ count (context-validated)
-  \newcommand{\pEvoStupaValid}{0.0050}  % p-value, stupa-stage binomial (context-validated)
+  \newcommand{\evoDomeApRate}{11.8}  % dome-stage A+ rate (%)
+  \newcommand{\evoDomeN}{68}  % dome-stage corpus N
+  \newcommand{\evoDomeAp}{8}  % dome-stage A+ count
+  \newcommand{\pEvoDome}{0.0057}  % p-value, dome-stage binomial
+  \newcommand{\evoMoundApRate}{8.3}  % mound-stage A+ rate (%)
+  \newcommand{\evoMoundN}{36}  % mound-stage corpus N
+  \newcommand{\evoMoundAp}{3}  % mound-stage A+ count
+  \newcommand{\pEvoMound}{0.1734}  % p-value, mound-stage binomial
+  \newcommand{\evoStupaApRate}{22.2}  % stupa-stage A+ rate (%)
+  \newcommand{\evoStupaN}{18}  % stupa-stage corpus N
+  \newcommand{\evoStupaAp}{4}  % stupa-stage A+ count
+  \newcommand{\pEvoStupa}{0.0050}  % p-value, stupa-stage binomial
 
 % --- analysis/unesco/leave_one_out_sensitivity.py
   \newcommand{\LOOdomeN}{89}               % LOO dome: N after removing one A+ site
@@ -545,17 +545,17 @@
 \newcommand{\domeBandFisherP}{0.4738}  % Fisher p, dome vs non-dome in band
 \newcommand{\domeBandFisherSig}{ns}  % significance label
 
-% --- analysis/global/x18_periodicity_formal_test.py  (GROUP 11b)
-\newcommand{\fullRayleighR}{0.0224}     % Rayleigh R, full corpus mod 3°
-\newcommand{\fullRayleighZ}{1.06}       % Z-score, full-corpus Rayleigh R
-\newcommand{\fullRayleighPermP}{0.3715} % permutation p, full-corpus Rayleigh R
-\newcommand{\rayleighR}{0.9972}         % Rayleigh R, A+ sites mod 3° (PRIMARY)
-\newcommand{\rayleighZ}{14.57}          % Z-score, A+-only Rayleigh R
-\newcommand{\rayleighPermP}{0.0000}     % permutation p, A+-only Rayleigh R (<0.0001)
-\newcommand{\anchorShiftApCount}{56}    % A+ count at Gerizim (circular-shift null)
-\newcommand{\anchorShiftNullMu}{40.36}  % null mean A+ under random anchor shift
-\newcommand{\anchorShiftZ}{2.23}        % Z-score, circular-shift null
-\newcommand{\anchorShiftPermP}{0.0286}  % permutation p, circular-shift null
+% --- analysis/global/x18_periodicity_formal_test.py
+\newcommand{\fullRayleighR}{0.0224}
+\newcommand{\fullRayleighZ}{1.06}
+\newcommand{\fullRayleighPermP}{0.3715}
+\newcommand{\rayleighR}{0.9972}
+\newcommand{\rayleighZ}{14.57}
+\newcommand{\rayleighPermP}{0.0000}
+\newcommand{\anchorShiftApCount}{56}
+\newcommand{\anchorShiftNullMu}{40.36}
+\newcommand{\anchorShiftZ}{2.23}
+\newcommand{\anchorShiftPermP}{0.0286}
 
 % --- analysis/americas/americas_harmonic_depletion_audit.py
   \newcommand{\AmericasCtrlN}{20469}          % Americas control corpus size
@@ -566,75 +566,17 @@
   \newcommand{\pAmericasDepl}{$< 10^{-200}$}   % p-value, Americas harmonic depletion
 
 % --- analysis/unesco/simulation_null_model.py
-  \newcommand{\simNperms}{100{,}000}        % number of permutations in null model
-  \newcommand{\simDomePermZ}{3.20}         % permutation Z-score, dome corpus
-  \newcommand{\simDomePermP}{0.004}          % permutation p, dome corpus
-  \newcommand{\simDomeBootP}{0.006}          % bootstrap p, dome corpus
-  \newcommand{\simCanonPermP}{0.127}         % permutation p, canonical sites
-  \newcommand{\simPreTwoKPermP}{0.094}        % permutation p, pre-2000 BCE sites
-  \newcommand{\simPostTwoKPermP}{0.944}       % permutation p, post-2000 BCE sites
-  \newcommand{\simKDEZ}{2.50}           % KDE-based Z-score, null model
-  \newcommand{\simKDEP}{0.011}           % KDE-based p-value, null model
-  \newcommand{\simBootFullMean}{56.0}         % bootstrap mean A+, full corpus
-  \newcommand{\simBootFullStd}{7.3}          % bootstrap std A+, full corpus
-  \newcommand{\simKDEMean}{40.4}           % KDE null-model mean A+
-  \newcommand{\simKDEStd}{6.2}            % KDE null-model std A+
 
-% --- analysis/unesco/dome_geographic_concentration_test.py
-  \newcommand{\geoNullDomeBootP}{0.5514}   % within-dome bootstrap p (Null A)
-  \newcommand{\geoNullDomeBootZ}{-0.00}    % within-dome bootstrap Z (Null A)
-  \newcommand{\geoNullDomeBootMean}{11.01} % within-dome bootstrap mean A+ (Null A)
-  \newcommand{\geoNullDomeRestrictedP}{0.0086}  % restricted-pool p (Null C)
-  \newcommand{\geoNullDomeRestrictedZ}{2.90}    % restricted-pool Z (Null C)
-  \newcommand{\geoNullDomeRestrictedMean}{4.81} % restricted-pool mean A+ (Null C)
-  \newcommand{\geoNullDomeRestrictedN}{881}      % restricted pool size (Null C)
-  \newcommand{\domeEurasianFraction}{77}         % \% dome sites in 20--120°E corridor
-  \newcommand{\fullCorpusEurasianFraction}{41}   % \% full corpus in 20--120°E corridor
-
-% --- analysis/unesco/stupa_geographic_concentration_test.py  (GROUP 29b)
-  \newcommand{\stupaGeoBootP}{0.5920}       % within-stupa bootstrap p (Null A)
-  \newcommand{\stupaGeoBootZ}{-0.00}        % within-stupa bootstrap Z (Null A)
-  \newcommand{\stupaGeoBootMean}{4.00}      % within-stupa bootstrap mean A+ (Null A)
-  \newcommand{\stupaRegionP}{0.0557}        % S/SE Asia heartland draw p (Null B)
-  \newcommand{\stupaRegionZ}{2.15}          % S/SE Asia heartland draw Z (Null B)
-  \newcommand{\stupaRegionMean}{1.48}       % heartland draw mean A+ (Null B)
-  \newcommand{\stupaRegionN}{97}            % S/SE Asia heartland pool size (Null B)
-  \newcommand{\stupaGeoRestrictedP}{0.0196} % restricted ±5° pool p (Null C)
-  \newcommand{\stupaGeoRestrictedZ}{2.92}   % restricted ±5° pool Z (Null C)
-  \newcommand{\stupaGeoRestrictedMean}{1.07}% restricted ±5° pool mean A+ (Null C)
-  \newcommand{\stupaGeoRestrictedN}{168}    % restricted ±5° pool size (Null C)
-  \newcommand{\stupaHeartlandFrac}{72}      % \% stupa sites in 70--110°E heartland
-  \newcommand{\fullCorpusHeartlandFrac}{10} % \% full corpus in 70--110°E heartland
-
-% --- analysis/unesco/unit_sweep_fill.py
-
-% --- analysis/unesco/sensitivity_slope_permutation_test.py
-  \newcommand{\permSlopeNperms}{10{,}000}
-  \newcommand{\permSlopePcanon}{0.1728}
-  \newcommand{\permSlopePsharp}{0.1728}
-  \newcommand{\permSlopePsharpBound}{0.1728}
-
-% --- analysis/unesco/fdr_multiple_comparisons.py
-  \newcommand{\NtotalTests}{43}           % total tests in FDR analysis
-  \newcommand{\NconfTests}{38}           % confirmatory tests
-  \newcommand{\NexplTests}{5}           % exploratory tests
-  \newcommand{\NsurviveFDR}{24}           % tests surviving BH FDR (q<0.05)
-  \newcommand{\NsurviveBonfAll}{6}           % tests surviving Bonferroni (all tests)
-
-% --- analysis/unesco/bonferroni_correction.py
-% MANUSCRIPT MACRO VALUES — Bonferroni (conservative bound) + Holm step-down (primary)
-% Primary decision rule: Holm–Bonferroni step-down (Holm 1979), controls FWER exactly.
-% Bonferroni retained as conservative upper bound for reference.
-  \newcommand{\BonfK}{4}  % k = confirmatory tests (Tests 1, 2, 3, 4)
-  % Bonferroni-adjusted p-values (conservative bound)
-  \newcommand{\pAdjTestOne}{0.041}    % Bonferroni-adj p, Test 1 (Global enrichment)
-  \newcommand{\pAdjTestTwo}{0.004}    % Bonferroni-adj p, Test 2 (Dome/spherical)
-  \newcommand{\pAdjTestThree}{0.013}  % Bonferroni-adj p, Test 3 (Cluster asymmetry)
-  \newcommand{\pAdjTestFour}{0.192}   % Bonferroni-adj p, Test 4 (Temporal gradient)
-  % Holm–Bonferroni step-down adjusted p-values (primary correction)
-  \newcommand{\pHolmTestOne}{0.021}   % Holm-adj p, Test 1 (Global enrichment)
-  \newcommand{\pHolmTestTwo}{0.004}   % Holm-adj p, Test 2 (Dome/spherical)
-  \newcommand{\pHolmTestThree}{0.010} % Holm-adj p, Test 3 (Cluster asymmetry)
-  \newcommand{\pHolmTestFour}{0.048}  % Holm-adj p, Test 4 (Temporal gradient; descriptive-only)
-  \newcommand{\pAdjClusterMW}{0.073}  % Bonf-adj p, cluster MW (= 0.0182 × 4)
-
+% --- analysis/unesco/dome_founding_stratification.py
+  \newcommand{\domeStratNfs}{23}               % dome sites that are F/S (founding capital or sacred origin)
+  \newcommand{\domeStratNnfs}{60}              % dome sites that are not F/S
+  \newcommand{\domeStratFsAp}{5}               % A+ count, F/S dome stratum
+  \newcommand{\domeStratNfsAp}{6}              % A+ count, non-F/S dome stratum
+  \newcommand{\domeStratFsRate}{21.7}          % A+ rate (%), F/S stratum
+  \newcommand{\domeStratNfsRate}{10.0}         % A+ rate (%), non-F/S stratum
+  \newcommand{\domeStratFsEnrich}{5.43}        % enrichment, F/S stratum
+  \newcommand{\domeStratNfsEnrich}{2.50}       % enrichment, non-F/S stratum
+  \newcommand{\domeStratFsP}{0.0019}           % binomial p, F/S stratum
+  \newcommand{\domeStratNfsP}{0.0325}          % binomial p, non-F/S stratum
+  \newcommand{\domeStratFisherOR}{2.50}        % Fisher OR, F/S vs non-F/S
+  \newcommand{\domeStratFisherP}{0.1471}       % Fisher p, F/S vs non-F/S

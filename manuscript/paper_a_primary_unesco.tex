@@ -107,7 +107,11 @@ filter) show \NcircApRate\% Tier-A+ alignment against the 4\% null
 Holm–Bonferroni step-down $p_\mathrm{Holm} = \pHolmTestTwo$,
 Bonferroni reference $p_\mathrm{adj} = \pAdjTestTwo$, across
 $k = \BonfK$ primary tests).
-A leave-one-out check confirms that no single site drives this result:
+This is the single result that survives correction with clear margin;
+the full-corpus enrichment (Test~1, $p_\mathrm{Holm} = \pHolmTestOne$)
+is marginal, and Tests~1 and~3 share the same 56 A+ sites and are
+therefore partially dependent (see \S\ref{sec:bonferroni}).
+A leave-one-out check confirms that no single site drives the dome result:
 removing any one of the \NcircTierAp{} A+ sites yields
 $N = \LOOdomeN$, A+$= \LOOdomeAp$, \LOOdomeRate\%, $\LOOdomeEnrich\times$,
 $p = \LOOdomeP$.
@@ -117,16 +121,16 @@ The pattern is strongest in the earliest UNESCO inscription cohorts and in
 sites UNESCO judged most foundational.
 
 \textbf{Alternative explanations:}
+The geographic-concentration alternative — that Eurasian civilizations
+built in longitude bands that happen to align with beru harmonics — cannot
+be excluded on this corpus alone.
 Shifting the canonical spacing by only $\pm 0.3\%$ collapses significance
 in both the dome sub-population and the full corpus simultaneously;
 however, a permutation test of the sensitivity slope confirms that this
 collapse is not unusual under an empirical null preserving the observed
-longitude distribution ($p_\mathrm{perm} = \permSlopePsharp$, ns),
-so the sensitivity peak is consistent with but does not independently
-confirm the metrological hypothesis.
-The geographic-concentration alternative — that Eurasian civilizations
-built in longitude bands that happen to align with beru harmonics — cannot
-be excluded on this corpus alone.
+longitude distribution ($p_\mathrm{perm} = \permSlopePsharp$, ns).
+The sensitivity observation is therefore presented as a robustness check
+only, not as evidence bearing on which explanation is correct.
 The primary contribution is documentation of a reproducible quantitative
 regularity in the UNESCO longitude distribution; the metrological
 interpretation is a motivated hypothesis awaiting independent historical
@@ -1764,6 +1768,17 @@ structure probed by the unit sensitivity sweep (\S\ref{sec:metrology}).
 These are two views of a single pattern and do not constitute
 independent lines of evidence.
 
+\textbf{Note on the logical structure of the $x.18$\textdegree{} observation.}
+It may appear circular to note that all 120 phase-matched anchors yield the same
+maximum A+ count: if a 3\textdegree{} periodic signal exists in the corpus,
+then by definition every anchor at the correct phase will score identically.
+That is precisely the claim being made.
+The observation that \emph{this} phase band (and not others) consistently hits the
+maximum is the primary reported finding.
+Stating it in terms of the 120 $x.18$\textdegree{}E anchors is an alternative
+parameterization of the same 3\textdegree{} periodic structure, not an
+additional independent result, and is not presented as one.
+
 Two interpretations must be evaluated.
 \textit{Interpretation~1 (beru-alignment hypothesis):}
 A global surveying grid with 3\textdegree{} harmonic spacing anchored
@@ -2503,6 +2518,22 @@ alone and offers the result as a quantitative basis for further investigation.
     or cosmographic systems employed a Levantine-anchored angular reference frame,
     including cuneiform, Sanskrit, and Hellenistic geographic sources.
   \item \textbf{Latitude dimension}, though the geometric null becomes more complex on the sphere.
+  \item \textbf{Dome enrichment stratified by founding-site category.}
+    Cross-tabulating the Test~2 dome corpus ($N = \NcircTotal$) against the
+    founding/sacred classifier (\texttt{lib/founding\_filter.py}) yields:
+    F/S dome sites (founding capital or sacred origin, $n = \domeStratNfs$):
+    \domeStratFsAp{} A+, \domeStratFsRate\%, $\domeStratFsEnrich\times$, $p = \domeStratFsP$;
+    non-F/S dome sites ($n = \domeStratNnfs$):
+    \domeStratNfsAp{} A+, \domeStratNfsRate\%, $\domeStratNfsEnrich\times$, $p = \domeStratNfsP$.
+    Fisher exact (F/S vs.\ non-F/S): OR~$= \domeStratFisherOR$, $p = \domeStratFisherP$ (ns).
+    Both strata are significantly enriched above the 4\% null,
+    and the stratum difference is not significant.
+    Dome enrichment is not restricted to founding/sacred sites;
+    it persists in the non-F/S stratum (Boyana Church, Humayun's Tomb,
+    Trulli of Alberobello, Kizhi Pogost, Echmiatsin, Pyu Ancient Cities),
+    which includes sites classified only as founding monuments (M) or
+    unclassified (?).
+    Code: \texttt{analysis/unesco/dome\_founding\_stratification.py}.
 \end{enumerate}
 
 \subsection{Conclusion}

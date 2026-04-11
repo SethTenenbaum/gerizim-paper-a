@@ -105,6 +105,7 @@ if [ "${1:-}" = "--macros-only" ]; then
         analysis/unesco/sensitivity_slope_permutation_test.py  # → permSlopeNperms, permSlopePcanon, permSlopePsharp
         analysis/unesco/dome_geographic_concentration_test.py  # → geoNullDomeBootP/Z/Mean, geoNullDomeRestrictedP/Z/Mean/N, domeEurasianFraction
         analysis/unesco/stupa_geographic_concentration_test.py # → stupaGeoBootP/Z/Mean, stupaRegionP/Z/N, stupaGeoRestrictedP/Z/N (GROUP 29b)
+        analysis/unesco/dome_founding_stratification.py        # → domeStratNfs, domeStratNnfs, domeStratF/NfsAp/Rate/Enrich/P, domeStratFisherOR/P
         # ── Summary scripts (read from store) ─────────────────────────────
         analysis/unesco/fdr_multiple_comparisons.py          # reads all keys from config+store
         analysis/unesco/bonferroni_correction.py             # reads confirmatory keys from store
@@ -284,6 +285,9 @@ echo ""
 echo "─── GROUP 29b: Stupa Geographic-Concentration Null (may take ~2 minutes) ───"
 python3 analysis/unesco/stupa_geographic_concentration_test.py 2>&1 | tail -40
 echo ""
+
+run_script "GROUP 29c: Dome × Founding-Category Stratification"   \
+           analysis/unesco/dome_founding_stratification.py
 
 # ════════════════════════════════════════════════════════════════════════════
 # SUMMARY SCRIPTS — run AFTER all data-producing scripts have written the store
