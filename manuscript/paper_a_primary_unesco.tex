@@ -132,10 +132,18 @@ Leave-one-out checks confirm no single site drives either result.
 \textbf{Alternative explanations.}
 Geographic concentration of Eurasian civilizations in longitude bands that
 happen to align with beru harmonics cannot be excluded on this corpus alone.
-A permutation test shows the $\pm 0.3\%$ sensitivity collapse is \emph{not}
-unusual under an empirical null preserving the observed longitude distribution
-($p_\mathrm{perm} = \permSlopePsharp$, ns): unit sensitivity is consistent
-with, but does not independently confirm, the metrological hypothesis.
+A sharpness permutation test shows the $\pm 0.3\%$ sensitivity collapse is
+\emph{not} unusual under geographic concentration
+($p_\mathrm{perm} = \permSlopePsharp$, ns).
+A stronger specificity test asks whether the peak lands specifically at the
+metrologically attested 0.1000-beru spacing: 0.1000~beru ranks
+\#\permSlopeCanonRankObs{} of \NfineSweepSpacings{} by combined
+$-\log_{10}(p)$ in the observed data, and the fraction of permutations where
+it is the unique best spacing is $p = \permSlopeCanonBestJoint{}$
+(\permSlopeCanonBestJointSig{};
+\S\ref{sec:sensitivity_slope_specificity}).
+Unit sensitivity is therefore consistent with, but does not independently
+confirm, the metrological hypothesis.
 The primary evidence against a purely geographic account comes from the dome
 enrichment surviving all three simulation nulls and exceeding the expectation
 from monuments at the same longitude footprint (Null~C, \S\ref{sec:geo_conc_null}).
@@ -568,10 +576,16 @@ evidence.
 Independent evidence comes from morphological specificity (the dome enrichment
 surviving simulation nulls) and the cluster asymmetry.
 Both the anchor sweep and the unit sensitivity observation are consistent with
-the metrological hypothesis, but a permutation test shows the $\pm 0.3\%$
-sensitivity collapse is not unusual under geographic concentration alone
-($p = \permSlopePsharp$, ns; \S\ref{sec:sensitivity_slope_perm});
-neither robustness check independently discriminates the two explanations.
+the metrological hypothesis.
+A sharpness permutation test shows the $\pm 0.3\%$ collapse is not unusual
+under geographic concentration alone ($p = \permSlopePsharp$, ns;
+\S\ref{sec:sensitivity_slope_perm}).
+A stronger specificity test
+(\S\ref{sec:sensitivity_slope_specificity}) asks whether the peak lands
+specifically at 0.1000~beru: $p = \permSlopeCanonBestJoint{}$
+(\permSlopeCanonBestJointSig{}).
+Neither robustness check independently discriminates the two explanations
+beyond the primary dome-enrichment result.
 
 \subsection{Tier Classification (fixed before data analysis)}
 
@@ -861,14 +875,14 @@ reported only in Appendix~\ref{sec:kwdaudit_founding}.
 \toprule
 Test & Population & Raw $p$ & $p_\mathrm{adj}$ ($k=2$) & $p_\mathrm{adj}$ ($k=5$) & Status \\
 \midrule
-Test 2 (dome/spherical A+)   & $N = \NcircTotal$ & 0.0009 & \pAdjTestTwo~*** & 0.005~*** & \textbf{Primary (exploratory)} \\
-Test 3 (cluster asymmetry)   & $N = \NclusterTotal$ & 0.0033 & \pAdjTestThree~** & 0.017~** & \textbf{Primary (exploratory)} \\
+Test 2 (dome/spherical A+)   & $N = \NcircTotal$ & \pCircAp & \pAdjTestTwo~*** & 0.005~*** & \textbf{Primary (exploratory)} \\
+Test 3 (cluster asymmetry)   & $N = \NclusterTotal$ & \clusterPermP & \pAdjTestThree~** & 0.017~** & \textbf{Primary (exploratory)} \\
 \midrule
-Test 1 (full corpus A+)      & $N = \NclusterTotal$ & 0.0103 & \pAdjTestOne & --- & Descriptive \\
-Test 2b (hemispherical evol.)& $N = \NevoTotal$   & 0.0009 & ---  & --- & Sensitivity variant \\
-Test 4 (temporal gradient)   & $N = \NoriginCorpus$ & \pCochranThree & ---  & --- & Descriptive only \\
-Test E (founding classifier) & $N = \NoriginCorpus$ & \pFoundKwFisher & --- & --- & Post-hoc (Appendix) \\
-Test B (Rayleigh phase-lock)$^\dagger$ & $N = \Nap$ & $<$0.0001 & --- & --- & Structural description only \\
+Test 1 (full corpus A+)      & $N = \NclusterTotal$ & \clusterApBinom & \pAdjTestOne & --- & Descriptive \\
+Test 2b (hemispherical evol.)& $N = \NevoTotal$   & \pEvoAp & \pRawTestTwoB~N/A  & \pRawTestTwoB~N/A & Sensitivity variant \\
+Test 4 (temporal gradient)   & $N = \NoriginCorpus$ & \pCochranThree & \pAdjTestFour  & --- & Descriptive only \\
+Test E (founding classifier) & $N = \NoriginCorpus$ & \pFoundKwFisher & \pRawTestTestE~N/A & \pRawTestTestE~N/A & Post-hoc (Appendix) \\
+Test B (Rayleigh phase-lock)$^\dagger$ & $N = \Nap$ & \pRawTestB & \FDRqTestB~N/A & \BonfAllTestB~N/A & Structural description only \\
 \bottomrule
 \multicolumn{7}{l}{\footnotesize Tests~1 and~3 share the same 56 A+ sites; keeping Test~1 in the family} \\
 \multicolumn{7}{l}{\footnotesize would introduce partial dependence without adding an independent test.} \\
@@ -911,13 +925,13 @@ The complete FDR summary table is presented here
 \toprule
 Test & Population & Raw $p$ & BH $q$ ($k=\NtotalTests$) & Bonf.\ $p_\mathrm{adj}$ ($k=\NtotalTests$) & Status \\
 \midrule
-Test~B (Rayleigh phase-lock)$^{\dagger\dagger}$ & $N = \Nap$ & $<$0.0001 & --- & --- & Structural only$^{\dagger\dagger}$ \\
-Test~2 (dome/spherical A+)    & $N = \NcircTotal$    & 0.0009    & \FDRqTestTwo    & \BonfAllTestTwo    & \textbf{Primary} \\
-Test~3 (cluster asymmetry)    & $N = \NclusterTotal$ & 0.0033    & \FDRqTestThree  & \BonfAllTestThree  & \textbf{Primary} \\
-Test~2b (hemispherical evol.) & $N = \NevoTotal$     & 0.0009    & \FDRqTestTwob   & \BonfAllTestTwob   & Sensitivity variant \\
-Test~1 (full corpus A+)       & $N = \NclusterTotal$ & 0.0103    & \FDRqTestOne    & \BonfAllTestOne    & Descriptive \\
+Test~B (Rayleigh phase-lock)$^{\dagger\dagger}$ & $N = \Nap$ & \pRawTestB & \FDRqTestB~N/A & \BonfAllTestB~N/A & Structural only$^{\dagger\dagger}$ \\
+Test~2 (dome/spherical A+)    & $N = \NcircTotal$    & \pCircAp    & \FDRqTestTwo    & \BonfAllTestTwo    & \textbf{Primary} \\
+Test~3 (cluster asymmetry)    & $N = \NclusterTotal$ & \clusterPermP    & \FDRqTestThree  & \BonfAllTestThree  & \textbf{Primary} \\
+Test~2b (hemispherical evol.) & $N = \NevoTotal$     & \pEvoAp    & \FDRqTestTwoB   & \BonfAllTestTwoB   & Sensitivity variant \\
+Test~1 (full corpus A+)       & $N = \NclusterTotal$ & \clusterApBinom    & \FDRqTestOne    & \BonfAllTestOne    & Descriptive \\
 Test~4 (temporal gradient)    & $N = \NoriginCorpus$ & \pCochranThree & \FDRqTestFour & \BonfAllTestFour & Descriptive \\
-Test~E (founding classifier)  & $N = \NoriginCorpus$ & \pFoundKwFisher & \FDRqTestE & \BonfAllTestE & Post-hoc (Appendix) \\
+Test~E (founding classifier)  & $N = \NoriginCorpus$ & \pFoundKwFisher & \FDRqTestTestE & \BonfAllTestTestE & Post-hoc (Appendix) \\
 \bottomrule
 \multicolumn{6}{l}{\footnotesize \NsurviveFDR{} tests survive BH-FDR at $q < 0.05$;
   \NsurviveBonfAll{} survive Bonferroni at $k = \NtotalTests$.} \\
@@ -1026,8 +1040,8 @@ driving the result.
 \toprule
 Metric & Obs & Exp($H_0$) & Rate [95\% CI] & Enrich. & $p$ & \\
 \midrule
-Tier-A+ ($\leq 0.002$ beru) & \NcircTierAp & 3.60 & \NcircApRate\% [6.3, 20.8] & $\circEnrichAp\times$ & \pCircAp & *** \\
-Tier-A\phantom{+} ($\leq 0.010$ beru)  & \NcircTierA  & 18.00 & 32.2\% [22.9, 42.7] & $\circEnrichA\times$ & \pCircA  & ** \\
+Tier-A+ ($\leq 0.002$ beru) & \NcircTierAp & \circExpAp & \NcircApRate\% [\circApCIlo, \circApCIhi] & $\circEnrichAp\times$ & \pCircAp & *** \\
+Tier-A\phantom{+} ($\leq 0.010$ beru)  & \NcircTierA  & \circExpA & \circARate\% [\circACIlo, \circACIhi] & $\circEnrichA\times$ & \pCircA  & ** \\
 $\chi^2$-uniform (5 bins, df\,=\,4) & --- & --- & ---  & --- & \pCircChi & ns \\
 \midrule
 \multicolumn{7}{l}{Expected under $H_0$: A+ = 4\%, A = 20\%. CIs are Clopper-Pearson exact.} \\
@@ -1391,6 +1405,41 @@ on average than non-A+ harmonics ($p < 0.0001$).
 Sites at harmonic nodes cluster more densely than sites at harmonic midpoints
 (\clusterNodeApMean{} vs.\ \clusterAntiApMean{} neighbors;
 $\clusterNodeVsAntiApRatio\times$, $p = \clusterNodeVsAntiApMWp$).
+
+\paragraph*{Subtest: does clustering produce the unit-sensitivity peak?}
+\label{sec:cluster_cond_sensitivity}
+The unit-sensitivity permutation tests (\S\ref{sec:sensitivity_slope_perm},
+\S\ref{sec:sensitivity_slope_specificity}) show that both the sharpness and
+the location of the fine-sweep peak are not unusual under a simple
+longitude-shuffle null.
+A natural follow-up is whether the \emph{clustering} established above is
+sufficient to produce the peak --- i.e., whether the two results are
+mechanically linked.
+
+We ran \clusterCondN{} joint permutations using two independent shuffles per
+iteration: (1)~a tier-label shuffle (same null as above) to evaluate whether
+clustering is reproduced, and (2)~a longitude shuffle (same null as the
+sensitivity tests) to evaluate whether the canonical-unit peak is present.
+Permutations where the drawn A+ mean cluster size met or exceeded the observed
+value (\clusterApMean{}) numbered \clusterCondClusterOk{} of \clusterCondN{}
+($p_\mathrm{cluster} = 0.0036$, confirming that extreme clustering is itself
+unusual under the null).
+Of those \clusterCondClusterOk{} clustering-matched permutations,
+\clusterCondPeakAndCluster{} also produced the canonical-unit peak.
+
+\textbf{The conditional fraction is \clusterCondPeakFrac{}}, compared to
+the unconditional fraction of \clusterCondPeakFracUncond{}.
+The conditional and unconditional rates are nearly equal: permutations that
+reproduce extreme clustering are no more likely to produce the unit-sensitivity
+peak than random permutations.
+\textbf{Conclusion: the unit-sensitivity peak and the clustering signal are
+statistically independent.}
+The peak is not a mechanical by-product of clustering; it is simply not unusual
+under geographic concentration regardless of whether that concentration is as
+extreme as observed.
+The primary evidence bearing on the metrological hypothesis remains the
+clustering (Test~3, $p = \clusterPermP$) and dome enrichment (Test~2,
+$p = \simDomePermP$) results.
 
 % ── Test~B (Rayleigh) demoted from stand-alone subsection; retained as a
 %    methodological note because it is cross-referenced from tables and §4.
@@ -1805,13 +1854,9 @@ $-0.5\%$ shift (0.0995~beru) collapses the dome population to
 non-significance, and a $\pm 0.3\%$ shift collapses both populations.
 Only the canonical value and its immediate neighbor (0.1001~beru, $+0.1\%$)
 retain dome significance.
-\textbf{Important caveat:} a permutation test (\S\ref{sec:sensitivity_slope_perm},
-below) shows that this sharp collapse is \emph{not unusual} under an empirical
-null preserving the observed longitude distribution
-($p_\mathrm{perm} = \permSlopePsharp$, ns).
-The collapse is therefore consistent with a discrete unit but does not
-independently confirm it; geographic concentration alone is sufficient to
-reproduce the observed sharpness.
+
+Two permutation tests evaluate the evidential weight of this pattern.
+The first tests sharpness; the second --- stronger --- tests specificity.
 
 \begin{table}[H]
 \centering
@@ -1849,35 +1894,76 @@ Spacing & Null & Dome hits/$N_D$ & $p$(Dome) && Full hits/$N$ & $p$(Full) \\
 \label{fig:unitsweep}
 \end{figure}
 
-\textbf{Permutation test of the sensitivity slope.}
-To assess whether the sharp collapse at $\pm 0.3\%$ is unusual under
-an empirical null that preserves the observed UNESCO longitude
-distribution, the fine sweep was repeated on \permSlopeNperms{}
-longitude-permuted datasets (seed~$= 42$;
+\textbf{Test I --- Sharpness permutation.}
+\label{sec:sensitivity_slope_perm}
+Does the $\pm 0.3\%$ collapse pattern appear in random permutations of the
+corpus longitudes?
+The fine sweep was repeated on \permSlopeNperms{} longitude-permuted datasets
+(seed~$= 42$;
 code: \texttt{sensitivity\_slope\_permutation\_test.py}).
-In each permutation the site longitudes are shuffled across the corpus
-(preserving the marginal distribution) and the same fine sweep is run.
-
 The sharp-peak pattern (canonical spacing jointly significant in both
 populations AND all spacings $\geq 0.0003$~beru away from canonical
 non-significant in at least one population) occurs in
 \permSlopePsharp{} of permuted datasets
 ($p_\mathrm{perm} = \permSlopePsharp$, ns).
-\textbf{The observed ±0.3\% sensitivity collapse is therefore not
-unusual under an empirical null: geographic concentration of sites in
-Eurasian longitude bands is sufficient to produce it.}
-The sensitivity slope is consistent with the metrological hypothesis
-but does not discriminate between the metrological and geographic-concentration
-explanations.
-The primary evidence against the geographic-concentration alternative
-comes from the dome enrichment surviving all three simulation nulls
+\textbf{The $\pm 0.3\%$ sensitivity collapse is not unusual under an empirical
+null: geographic concentration of sites in Eurasian longitude bands is
+sufficient to reproduce it.}
+This test therefore provides no independent evidence for the metrological hypothesis.
+
+\textbf{Test II --- Canonical-unit specificity permutation (stronger test).}
+\label{sec:sensitivity_slope_specificity}
+The sharpness test is agnostic about \emph{which} spacing hosts the peak.
+Under geographic concentration, a sharp peak can appear at any spacing in
+the fine window; under the metrological hypothesis, the peak should appear
+specifically at 0.1000~beru (the historically attested unit).
+The stronger question is therefore: \emph{in what fraction of permutations
+does 0.1000 specifically achieve the best joint significance in the fine window?}
+Code: \texttt{sensitivity\_slope\_specificity\_test.py}, \permSlopeSpecN{} permutations.
+
+For each permuted dataset, we computed the combined
+$-\log_{10}(p_\mathrm{dome}) - \log_{10}(p_\mathrm{full})$ score for every
+spacing in Table~\ref{tab:unitsweep_fine} and recorded whether 0.1000~beru
+was the unique spacing achieving both joint significance and the highest
+combined score.
+
+\textbf{Results.}
+In the observed data, 0.1000~beru ranks \#\permSlopeCanonRankObs{} of
+\NfineSweepSpacings{} by combined $-\log_{10}(p)$ --- the most jointly
+significant spacing in the fine window.
+Across \permSlopeSpecN{} permuted datasets,
+the fraction where 0.1000 is the unique best joint-significance spacing
+(i.e., the sharp peak lands specifically at the metrologically attested unit)
+is $p = \permSlopeCanonBestJoint{}$ (\permSlopeCanonBestJointSig{}).
+This is \textbf{not significant}: geographic concentration alone produces
+the canonical spacing as the unique best spacing in approximately
+\permSlopeCanonBestJoint{} of permutations.
+The rank-based statistic is also uninformative here: since permuted
+datasets almost always rank 0.1000 first by combined score (perm
+mean rank $= 1.10$), the observed rank of~1 carries no discriminating value.
+Of the \permSlopeSharpPeakTotal{} permutations that show a sharp-peak
+pattern, all \permSlopeSharpAtCanon{} have the peak at 0.1000~beru;
+this conditional fraction of \permSlopeCanonCondFraction{} is a
+structural consequence of the collapse criterion (off-canonical spacings
+$\geq 0.0003$~beru from canonical by definition cannot host a peak under
+that criterion) and should not be read as a positive finding.
+
+\textbf{Interpretation.}
+Both permutation tests are non-significant.
+Geographic concentration is sufficient to reproduce not only the sharpness
+of the sensitivity collapse but also its location at the canonical
+0.1000-beru spacing.
+The unit-sensitivity observation therefore provides no independent evidential
+value beyond what the dome enrichment and cluster asymmetry already establish.
+The primary evidence against a purely geographic account in either case
+remains the dome enrichment surviving all three simulation nulls
 (\S\ref{sec:simulation_null}; permutation $Z = \simDomePermZ$,
 $p = \simDomePermP$) and the cluster asymmetry (\S\ref{sec:resultscluster}).
 
-The 0.1-beru harmonic interval derives from the documented
-sexagesimal subdivision of the Babylonian \emph{beru} arc unit.
-That derivation provides the metrological basis for testing this
-particular spacing against the UNESCO WHC corpus.
+The 0.1-beru harmonic interval derives from the documented sexagesimal
+subdivision of the Babylonian \emph{beru} arc unit, which provides the
+metrological basis for testing this particular spacing
+(\S\ref{sec:metrology_basis}).
 
 \subsection{Global Anchor Sweep}
 \label{sec:sensitivity_global}
@@ -2135,10 +2221,15 @@ grid, all dome A+ sites fall within the predicted phase window, and
 both dome and non-dome sites in the band are enriched, as expected
 if the grid spans monument types.
 The same evidence is also consistent with geographic concentration.
-A permutation test of the sensitivity slope (\S\ref{sec:sensitivity_slope_perm})
+A sharpness permutation test of the sensitivity slope (\S\ref{sec:sensitivity_slope_perm})
 shows that the ±0.3\% collapse is not unusual under an empirical null
-($p_\mathrm{perm} = \permSlopePsharp$, ns), so the unit-sensitivity
-result does not independently discriminate between the two explanations.
+($p_\mathrm{perm} = \permSlopePsharp$, ns).
+A stronger specificity test (\S\ref{sec:sensitivity_slope_specificity})
+asks whether the canonical 0.1000-beru spacing specifically achieves the
+best joint significance: $p = \permSlopeCanonBestJoint{}$
+(\permSlopeCanonBestJointSig{}).
+Together, these tests show that the unit-sensitivity result does not
+independently discriminate between the two explanations.
 The dome enrichment surviving all three simulation nulls remains the
 primary evidence against a purely geographic account.
 
@@ -2442,12 +2533,17 @@ is deliberate or coincidental.
 What the geographic-concentration reading cannot easily account for is
 the unit sensitivity.
 The signal collapses when the spacing shifts by only $\pm 0.3\%$.
-However, a permutation-based test of the sensitivity slope
+However, a sharpness permutation test of the sensitivity slope
 (\S\ref{sec:sensitivity_slope_perm}) shows that this collapse is not
 unusual under an empirical null preserving the observed longitude
 distribution ($p_\mathrm{perm} = \permSlopePsharp$, ns): geographic
-concentration alone is sufficient to produce a signal this sharply
-peaked around the observed spacing.
+concentration alone is sufficient to produce a signal this sharply peaked
+around the observed spacing.
+A stronger specificity test (\S\ref{sec:sensitivity_slope_specificity})
+asks whether the peak lands specifically at the metrologically attested
+0.1000-beru unit: the fraction of permutations where 0.1000 is the
+unique best joint-significance spacing is $p = \permSlopeCanonBestJoint{}$
+(\permSlopeCanonBestJointSig{}).
 
 Simulation nulls that preserve the full empirical longitude distribution
 confirm that the dome sub-population is significantly enriched
@@ -2526,9 +2622,12 @@ Historical significance, a UNESCO selection criterion, partially
 correlates with the predictors tested here.
 The unit-sensitivity observation (sub-percent shifts collapse
 joint significance) is consistent with the metrological hypothesis,
-but a permutation test (\S\ref{sec:sensitivity_slope_perm}) shows that
-the sharpness of this collapse is not unusual under geographic
+but a sharpness permutation test (\S\ref{sec:sensitivity_slope_perm})
+shows that the collapse pattern is not unusual under geographic
 concentration alone ($p_\mathrm{perm} = \permSlopePsharp$, ns).
+A stronger specificity test (\S\ref{sec:sensitivity_slope_specificity})
+asks whether the peak lands specifically at 0.1000~beru:
+$p = \permSlopeCanonBestJoint{}$ (\permSlopeCanonBestJointSig{}).
 The dome enrichment surviving simulation nulls remains the primary
 evidence against purely non-metrological explanations.
 
@@ -2595,12 +2694,16 @@ The spacing between consecutive $x.18$\textdegree{}E anchors is exactly
 3\textdegree{} = 0.1~beru, the metrologically attested unit.
 Sub-percent shifts ($\pm 0.3\%$) from this canonical value collapse
 significance in both the full corpus and the dome sub-population
-simultaneously; however, a permutation test
+simultaneously; however, a sharpness permutation test
 (\S\ref{sec:sensitivity_slope_perm}) shows that this collapse is
 not unusual under an empirical null preserving the observed longitude
-distribution ($p_\mathrm{perm} = \permSlopePsharp$, ns), so the
-unit sensitivity is consistent with but does not independently confirm
-the metrological hypothesis.
+distribution ($p_\mathrm{perm} = \permSlopePsharp$, ns).
+A stronger specificity test (\S\ref{sec:sensitivity_slope_specificity})
+asks whether the peak lands specifically at the metrologically attested
+0.1000-beru unit: $p = \permSlopeCanonBestJoint{}$
+(\permSlopeCanonBestJointSig{}).
+Taken together, unit sensitivity is consistent with but does not
+independently confirm the metrological hypothesis.
 
 The Levantine corridor where this study began — within approximately
 8~km of Mount Gerizim and containing Jerusalem — is one of 120 equally
@@ -2694,11 +2797,15 @@ angular spacing and no unit-sensitivity collapse.
 \textbf{(3) UNESCO curation and geographic concentration.}
 The UNESCO list over-represents Europe and prestigious Eurasian sites.
 This is the strongest alternative and cannot be excluded on this corpus alone.
-A permutation test of the sensitivity slope (\S\ref{sec:sensitivity_slope_perm})
+A sharpness permutation test of the sensitivity slope (\S\ref{sec:sensitivity_slope_perm})
 shows that geographic concentration of sites in Eurasian longitude bands
 is \emph{sufficient} to reproduce the observed $\pm 0.3\%$ sensitivity
 collapse ($p_\mathrm{perm} = \permSlopePsharp$, ns): this particular
 feature of the data does not discriminate between the two explanations.
+A stronger specificity test (\S\ref{sec:sensitivity_slope_specificity})
+asks whether the peak lands specifically at the metrologically attested
+0.1000-beru unit: $p = \permSlopeCanonBestJoint{}$
+(\permSlopeCanonBestJointSig{}).
 The dedicated geographic-concentration simulation (\S\ref{sec:geo_conc_null})
 refines this picture: Null~A (within-dome bootstrap, $p = \geoNullDomeBootP$, ns)
 confirms that the dome sites' own longitude distribution reproduces the enrichment,
@@ -2739,9 +2846,14 @@ permutation $p = \clusterPermP$; \textbf{primary pre-specified Test~3}).
 Multiple-comparisons bounds (Holm and Bonferroni) are applied as descriptive
 conventions to the $k=2$ pre-specified family (Tests~2 and~3 only);
 all results remain exploratory in the absence of pre-registration.
-A permutation test (\S\ref{sec:sensitivity_slope_perm}) shows that the
-sharpness of the sensitivity peak is not unusual under the empirical null
-($p_\mathrm{perm} = \permSlopePsharp$, ns), so the unit-sensitivity
+A sharpness permutation test (\S\ref{sec:sensitivity_slope_perm}) shows that
+the sharpness of the sensitivity peak is not unusual under the empirical null
+($p_\mathrm{perm} = \permSlopePsharp$, ns).
+A stronger specificity test (\S\ref{sec:sensitivity_slope_specificity})
+asks whether the peak lands specifically at the metrologically attested
+0.1000-beru unit: $p = \permSlopeCanonBestJoint{}$
+(\permSlopeCanonBestJointSig{}).
+Together, the unit-sensitivity
 observation is consistent with but does not independently confirm the
 metrological hypothesis.
 The geographic-concentration alternative remains viable because the
@@ -2799,11 +2911,15 @@ Multiple-comparisons bounds (Holm and Bonferroni) are applied to
 the $k=2$ pre-specified family (Tests~2 and~3 only).
 
 These findings admit a geographic-concentration alternative.
-A permutation test of the sensitivity slope
-(\S\ref{sec:sensitivity_slope_perm}) shows that the sharpness of the
-$\pm 0.3\%$ sensitivity peak is \emph{not} unusual under the empirical
-null ($p_\mathrm{perm} = \permSlopePsharp$, ns): the observed
-unit-sensitivity pattern is consistent with, but does not
+A sharpness permutation test of the sensitivity slope
+(\S\ref{sec:sensitivity_slope_perm}) shows that the $\pm 0.3\%$
+sensitivity peak is \emph{not} unusual under the empirical
+null ($p_\mathrm{perm} = \permSlopePsharp$, ns).
+A stronger specificity test (\S\ref{sec:sensitivity_slope_specificity})
+asks whether the peak lands specifically at the metrologically attested
+0.1000-beru unit: $p = \permSlopeCanonBestJoint{}$
+(\permSlopeCanonBestJointSig{}).
+The observed unit-sensitivity pattern is consistent with, but does not
 independently confirm, the metrological hypothesis.
 Geographic concentration of heritage sites in Eurasian longitude bands
 is sufficient to reproduce this feature of the data.

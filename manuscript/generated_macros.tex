@@ -1,4 +1,4 @@
-% Generated macros — 2026-04-11T05:17:06Z
+% Generated macros — 2026-04-11T16:29:06Z
 % Source: bash manuscript/reproduce_all_macros.sh --macros-only
 % IMPORTANT: values are computed fresh each run — do NOT hardcode
 
@@ -10,6 +10,7 @@
   \newcommand{\GerizimJerusalemSep}{0.037}  % Gerizim–Jerusalem separation (degrees, equatorial)
   \newcommand{\GerizimJerusalemKm}{4.1}  % Gerizim–Jerusalem separation (km, equatorial)
   \newcommand{\NwhcTotal}{1248}  % total UNESCO WHC inscribed sites (all types)
+  \newcommand{\NfineSweepSpacings}{7}  % number of spacings in the fine unit sweep (Table tab:unitsweep_fine)
 
 % --- analysis/global/geodesic_sensitivity.py
   \newcommand{\GeodesicApCurrent}{56}  % A+ count under angular criterion
@@ -38,12 +39,77 @@
   \newcommand{\circEnrichAp}{3.06}           % enrichment ratio, A+
   \newcommand{\circEnrichA}{1.61}           % enrichment ratio, A
   \newcommand{\circMeanDev}{0.0220}        % mean beru deviation (raw sweep)
+  \newcommand{\circExpAp}{3.6}         % expected A+ count under H0 (= N × 4%)
+  \newcommand{\circExpA}{18.0}          % expected A count under H0 (= N × 20%)
+  \newcommand{\circARate}{32.2}         % Tier-A rate (%) = 29/90
+  \newcommand{\circApCIlo}{nan}         % Clopper-Pearson 95% CI lower, A+ rate (%)
+  \newcommand{\circApCIhi}{nan}         % Clopper-Pearson 95% CI upper, A+ rate (%)
+  \newcommand{\circACIlo}{nan}          % Clopper-Pearson 95% CI lower, A rate (%)
+  \newcommand{\circACIhi}{nan}          % Clopper-Pearson 95% CI upper, A rate (%)
 
 % --- analysis/unesco/spherical_monument_test.py
   \newcommand{\pCircApValidated}{0.0005}  % p-value, A+ binomial (context-validated dome corpus)
   \newcommand{\pCircAValidated}{0.0098}   % p-value, A binomial (context-validated dome corpus)
 
 % --- analysis/unesco/cluster_asymmetry_test.py
+
+% --- analysis/unesco/harmonic_density_attractor_test.py
+
+% --- analysis/unesco/unesco_buddhist_heritage_test.py
+
+% --- analysis/unesco/origin_sites_test.py
+
+% --- analysis/unesco/founding_sites_analysis.py
+
+% --- analysis/unesco/sacred_origin_test.py
+
+% --- analysis/unesco/meta_keyword_test.py
+
+% --- analysis/unesco/temporal_gradient_test.py
+
+% --- analysis/unesco/deep_temporal_analysis.py
+
+% --- analysis/global/anchor_uniqueness_audit.py
+
+% --- analysis/unesco/verify_x18_periodicity.py
+
+% --- analysis/global/peak_geography_audit.py
+
+% --- analysis/global/landmark_anchor_ranking.py
+
+% --- analysis/global/global_corridor_comparison.py
+
+% --- analysis/global/corridor_precision_test.py
+
+% --- analysis/global/anchor_site_comparison.py
+
+% --- analysis/unesco/spatial_independence_test.py
+
+% --- analysis/unesco/regional_temporal_gradient.py
+
+% --- analysis/unesco/tumulus_dome_evolution_raw_sweep.py
+
+% --- analysis/unesco/tumulus_dome_evolution_test.py
+
+% --- analysis/unesco/leave_one_out_sensitivity.py
+
+% --- analysis/unesco/dome_leave_k_out.py
+
+% --- analysis/global/wikidata_p1435_control_analysis.py
+
+% --- analysis/global/dome_periodicity_audit.py
+
+% --- analysis/global/x18_periodicity_formal_test.py
+
+% --- analysis/americas/americas_harmonic_depletion_audit.py
+
+% --- analysis/unesco/dome_footprint_window_sensitivity.py
+
+% --- analysis/unesco/stupa_coordinate_perturbation.py
+
+% --- analysis/unesco/americas_directional_test.py
+
+% --- analysis/unesco/simulation_null_model.py
   \newcommand{\NclusterTotal}{1011}          % full Cultural/Mixed corpus
   \newcommand{\NclusterAp}{56}              % Tier-A+ sites
   \newcommand{\clusterApRate}{5.5}           % A+ rate (%)
@@ -71,6 +137,12 @@
   \newcommand{\clusterNodeAllMean}{8.25}          % mean cluster size, all node-side
   \newcommand{\clusterAntiAllMean}{7.17}          % mean cluster size, all anti-side
   \newcommand{\clusterNodeVsAntiAllMWp}{0.0075}        % Mann-Whitney p, all node > all anti
+  \newcommand{\clusterCondN}{50000}          % perms in conditional subtest
+  \newcommand{\clusterCondClusterOk}{182}    % perms reproducing observed clustering
+  \newcommand{\clusterCondPeakAndCluster}{22}    % perms with clustering AND unit peak
+  \newcommand{\clusterCondPeakFrac}{0.1209}    % conditional fraction (peak | cluster)
+  \newcommand{\clusterCondPeakFracUncond}{0.1681}    % unconditional peak fraction
+  \newcommand{\clusterCondPeakSig}{ns}    % significance label, conditional fraction
 
 % --- analysis/unesco/harmonic_density_attractor_test.py
   \newcommand{\attractorApMeanN}{6.77}           % mean 0.3° neighbours, A+ sites
@@ -477,18 +549,6 @@
   \newcommand{\pEvoApValidated}{0.0002}          % p-value A+ binomial, context-validated (Exploratory)
   \newcommand{\pEvoAValidated}{0.0032}           % p-value A  binomial, context-validated (Exploratory)
   \newcommand{\NevoValidRejected}{16}           % sites rejected by context validation
-  \newcommand{\evoDomeApRate}{11.8}  % dome-stage A+ rate (%)
-  \newcommand{\evoDomeN}{68}  % dome-stage corpus N
-  \newcommand{\evoDomeAp}{8}  % dome-stage A+ count
-  \newcommand{\pEvoDome}{0.0057}  % p-value, dome-stage binomial
-  \newcommand{\evoMoundApRate}{8.3}  % mound-stage A+ rate (%)
-  \newcommand{\evoMoundN}{36}  % mound-stage corpus N
-  \newcommand{\evoMoundAp}{3}  % mound-stage A+ count
-  \newcommand{\pEvoMound}{0.1734}  % p-value, mound-stage binomial
-  \newcommand{\evoStupaApRate}{22.2}  % stupa-stage A+ rate (%)
-  \newcommand{\evoStupaN}{18}  % stupa-stage corpus N
-  \newcommand{\evoStupaAp}{4}  % stupa-stage A+ count
-  \newcommand{\pEvoStupa}{0.0050}  % p-value, stupa-stage binomial
 
 % --- analysis/unesco/leave_one_out_sensitivity.py
   \newcommand{\LOOdomeN}{89}               % LOO dome: N after removing one A+ site
@@ -584,6 +644,10 @@
 \newcommand{\rayleighRPctPhrasing}{essentially all}  % prose for R=0.9972: 'essentially all / nearly all / most'
 
 % --- analysis/americas/americas_harmonic_depletion_audit.py
+
+% --- analysis/unesco/unit_sweep_fill.py
+
+% --- analysis/unesco/sensitivity_slope_permutation_test.py
   \newcommand{\AmericasCtrlN}{20469}          % Americas control corpus size
   \newcommand{\AmericasCtrlAp}{104}           % A+ hits in Americas control
   \newcommand{\AmericasCtrlRate}{0.508}         % A+ rate, Americas control (%)
@@ -602,6 +666,10 @@
   \newcommand{\geoNullDomeTenDegStar}{**}
 
 % --- analysis/unesco/stupa_coordinate_perturbation.py
+  \newcommand{\stupaCoordPerturbTrials}{10,000}
+  \newcommand{\stupaCoordPerturbMean}{0.00}
+  \newcommand{\stupaCoordPerturbStd}{0.00}
+  \newcommand{\stupaCoordPerturbSigPct}{0}
 
 % --- analysis/unesco/americas_directional_test.py
   \newcommand{\AmericasN}{145}
@@ -612,6 +680,19 @@
   \newcommand{\AmericasDirectional}{in}
 
 % --- analysis/unesco/simulation_null_model.py
+
+% --- analysis/unesco/sensitivity_slope_specificity_test.py
+
+% --- analysis/unesco/dome_geographic_concentration_test.py
+
+% --- analysis/unesco/stupa_geographic_concentration_test.py
+
+% --- analysis/unesco/dome_founding_stratification.py
+
+% --- analysis/unesco/fdr_multiple_comparisons.py
+
+% --- analysis/unesco/bonferroni_correction.py
+
   \newcommand{\simNperms}{100{,}000}        % number of permutations in null model
   \newcommand{\simDomePermZ}{3.20}         % permutation Z-score, dome corpus
   \newcommand{\simDomePermP}{0.004}          % permutation p, dome corpus
@@ -633,6 +714,18 @@
   \newcommand{\permSlopePcanon}{0.1728}
   \newcommand{\permSlopePsharp}{0.1728}
   \newcommand{\permSlopePsharpBound}{0.1728}
+
+% --- analysis/unesco/sensitivity_slope_specificity_test.py
+  \newcommand{\permSlopeSpecN}{10000}
+  \newcommand{\permSlopeCanonRankObs}{1}
+  \newcommand{\permSlopeCanonBestJoint}{0.1728}
+  \newcommand{\permSlopeCanonRankP}{1.0000}
+  \newcommand{\permSlopeCanonRankPctile}{90.3000}
+  \newcommand{\permSlopeCanonCondFraction}{1.0000}
+  \newcommand{\permSlopeSharpPeakTotal}{1728}
+  \newcommand{\permSlopeSharpAtCanon}{1728}
+  \newcommand{\permSlopeCanonBestJointSig}{ns}
+  \newcommand{\permSlopeCanonRankSig}{ns}
 
 % --- analysis/unesco/dome_geographic_concentration_test.py
   \newcommand{\geoNullDomeBootP}{0.5514}   % within-dome bootstrap p
@@ -689,14 +782,8 @@
   \newcommand{\BonfAllTestThree}{0.1419}  % Bonf adj (k=43), Test 3: Cluster asymmetry — permutation p
   \newcommand{\FDRqTestFour}{0.0751}  % BH q, Test 4: Temporal gradient (Cochran-Armitage 3-cohort)
   \newcommand{\BonfAllTestFour}{1.0}  % Bonf adj (k=43), Test 4: Temporal gradient (Cochran-Armitage 3-cohort)
-  \newcommand{\BonfK}{4}  % paper's own Bonferroni family size
-  \newcommand{\pAdjTestOne}{0.0412}  % Bonf adj (k=4), Test 1: Global enrichment — full corpus A+ (binomial)
-  \newcommand{\pAdjTestTwo}{0.0038}  % Bonf adj (k=4), Test 2: Domed/spherical A+ — RAW sweep (binomial)
-  \newcommand{\pAdjTestThree}{0.0132}  % Bonf adj (k=4), Test 3: Cluster asymmetry — permutation p
-  \newcommand{\pAdjTestFour}{0.1922}  % Bonf adj (k=4), Test 4: Temporal gradient (Cochran-Armitage 3-cohort)
 
 % --- analysis/unesco/bonferroni_correction.py
-  MANUSCRIPT MACRO VALUES  (copy into \newcommand block)
   \newcommand{\BonfK}{4}  % k = confirmatory tests (Tests 1, 2, 3, 4)
   \newcommand{\pAdjTestOne}{0.041}  % Bonferroni-adj p, Test 1 (Global enrichment — full corpus A+ (binomial))
   \newcommand{\pHolmTestOne}{0.021}  % Holm-adj p, Test 1 (Global enrichment — full corpus A+ (binomial))
@@ -706,5 +793,14 @@
   \newcommand{\pHolmTestThree}{0.01}  % Holm-adj p, Test 3 (Cluster asymmetry — permutation p)
   \newcommand{\pAdjTestFour}{0.192}  % Bonferroni-adj p, Test 4 (Temporal gradient (Cochran-Armitage 3-cohort))
   \newcommand{\pHolmTestFour}{0.048}  % Holm-adj p, Test 4 (Temporal gradient (Cochran-Armitage 3-cohort))
+  \newcommand{\FDRqTestTwoB}{---}  % FDR q: N/A (excluded from family)
+  \newcommand{\BonfAllTestTwoB}{---}  % Bonf adj: N/A (excluded from family)
+  \newcommand{\pRawTestTwoB}{0.0009}  % raw p, Test 2b (Hemispherical mound evolution A+ — RAW sweep (binomial))
+  \newcommand{\FDRqTestTestE}{---}  % FDR q: N/A (excluded from family)
+  \newcommand{\BonfAllTestTestE}{---}  % Bonf adj: N/A (excluded from family)
+  \newcommand{\pRawTestTestE}{0.0087}  % raw p, Test E (Founding-site classifier enrichment)
+  \newcommand{\FDRqTestB}{---}  % FDR q: N/A (structural, excluded)
+  \newcommand{\BonfAllTestB}{---}  % Bonf adj: N/A (structural, excluded)
+  \newcommand{\pRawTestB}{0.0000}  % Rayleigh permutation p
   \newcommand{\pAdjClusterMW}{0.073}  % Bonf-adj p, cluster MW (= 0.0182 × 4)
 

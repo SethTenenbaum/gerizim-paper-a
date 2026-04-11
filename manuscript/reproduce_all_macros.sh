@@ -105,9 +105,13 @@ if [ "${1:-}" = "--macros-only" ]; then
         analysis/unesco/americas_directional_test.py           # → AmericasN, AmericasApCount, AmericasOneSidedP, AmericasDirectional
         # ── Simulation (slow — writes simDomePermP etc.) ──────────────────
         analysis/unesco/simulation_null_model.py
-        # ── Unit sweep + sensitivity slope permutation test ───────────────
+        # ── Cluster asymmetry + conditional sensitivity subtest ───────────
+        # (cluster_asymmetry_test.py now includes the conditional subtest at the end;
+        #  it emits clusterCondN, clusterCondClusterOk, clusterCondPeakFrac, etc.)
+
         analysis/unesco/unit_sweep_fill.py
         analysis/unesco/sensitivity_slope_permutation_test.py  # → permSlopeNperms, permSlopePcanon, permSlopePsharp
+        analysis/unesco/sensitivity_slope_specificity_test.py  # → permSlopeCanonRankObs, permSlopeCanonBestJoint, permSlopeCanonRankP, permSlopeCanonCondFraction
         analysis/unesco/dome_geographic_concentration_test.py  # → geoNullDomeBootP/Z/Mean, geoNullDomeRestrictedP/Z/Mean/N, domeEurasianFraction
         analysis/unesco/stupa_geographic_concentration_test.py # → stupaGeoBootP/Z/Mean, stupaRegionP/Z/N, stupaGeoRestrictedP/Z/N (GROUP 29b)
         analysis/unesco/dome_founding_stratification.py        # → domeStratNfs, domeStratNnfs, domeStratF/NfsAp/Rate/Enrich/P, domeStratFisherOR/P
@@ -129,10 +133,48 @@ if [ "${1:-}" = "--macros-only" ]; then
         echo "" >> "$OUT_FILE"
     done
 
+    n_macros_raw=$(grep -c '\\newcommand' "$OUT_FILE" || true)
+
+    # ── Deduplicate: keep LAST definition of each \newcommand ─────────────────
+    # Multiple scripts may emit the same macro name (e.g. summary scripts
+    # re-emit values already written by primary scripts).  LaTeX requires each
+    # \newcommand to be unique.  We post-process the file: scan from the bottom,
+    # keep only the first (= last in file order) occurrence of each macro name,
+    # preserve all non-\newcommand lines (comments, blanks, section headers).
+    python3 - "$OUT_FILE" <<'PYEOF'
+import sys, re
+from pathlib import Path
+
+path = Path(sys.argv[1])
+lines = path.read_text().splitlines(keepends=True)
+
+# Regex to extract the macro name from a \newcommand line
+_RE = re.compile(r'\\newcommand\{(\\[A-Za-z@]+)\}')
+
+seen = set()
+kept = []
+# Scan in reverse so we always keep the LAST definition
+for line in reversed(lines):
+    m = _RE.search(line)
+    if m:
+        name = m.group(1)
+        if name in seen:
+            continue          # drop earlier (duplicate) definition
+        seen.add(name)
+    kept.append(line)
+
+# Restore original order
+kept.reverse()
+path.write_text("".join(kept))
+print(f"  ✓ Deduplicated: kept {len(seen)} unique macros "
+      f"(removed {len(lines)-len(kept)} duplicate lines)")
+PYEOF
+
     n_macros=$(grep -c '\\newcommand' "$OUT_FILE" || true)
     echo ""
     echo "═══════════════════════════════════════════════════════════════════"
-    echo "  Wrote $n_macros \\newcommand lines to $OUT_FILE"
+    echo "  Raw \\newcommand lines : $n_macros_raw"
+    echo "  After deduplication  : $n_macros  (in $OUT_FILE)"
     echo "═══════════════════════════════════════════════════════════════════"
     exit 0
 fi
@@ -186,7 +228,7 @@ run_script "GROUP 1: Dome/Spherical Monument Raw Sweep (Test 2)"  \
 run_script "GROUP 1b: Dome/Spherical Monument Context-Validated (Exploratory 2x)" \
            analysis/unesco/spherical_monument_test.py
 
-run_script "GROUP 2: Cluster Asymmetry (Tests 1 & 3)"             \
+run_script "GROUP 2: Cluster Asymmetry (Tests 1 & 3) + conditional sensitivity subtest" \
            analysis/unesco/cluster_asymmetry_test.py
 
 run_script "GROUP 3: Harmonic Density Attractor"                   \
@@ -293,6 +335,10 @@ run_script "GROUP 27: Unit Sweep (spacing sensitivity)"            \
 
 echo "─── GROUP 28: Sensitivity Slope Permutation Test (may take several minutes) ───"
 python3 analysis/unesco/sensitivity_slope_permutation_test.py 2>&1 | tail -40
+echo ""
+
+echo "─── GROUP 28b: Sensitivity Slope Specificity Test — canonical-unit rank (may take several minutes) ───"
+python3 analysis/unesco/sensitivity_slope_specificity_test.py 2>&1 | tail -50
 echo ""
 
 echo "─── GROUP 29: Dome Geographic-Concentration Null (may take ~2 minutes) ───"
