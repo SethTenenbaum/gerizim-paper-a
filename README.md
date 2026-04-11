@@ -30,6 +30,9 @@ gerizim-paper-a/
 ├── manuscript/
 │   ├── paper_a_primary_unesco.tex    # LaTeX source (main manuscript)
 │   ├── paper_a_primary_unesco.pdf    # Compiled PDF
+│   ├── generated_macros.tex          # All pipeline-emitted LaTeX macros (single source of truth)
+│   ├── reproduce_all_macros.sh       # Shell script to regenerate all macros
+│   ├── MACRO_SOURCE_AUDIT.tex        # Audit trail: macro → emitting script
 │   ├── generate_figures.py           # Generates all 3 manuscript figures
 │   └── figures/
 │       ├── fig_devhist.{pdf,png}     # Figure 1: Beru deviation histogram
@@ -38,36 +41,53 @@ gerizim-paper-a/
 │
 ├── analysis/
 │   ├── unesco/                       # Primary UNESCO corpus tests
-│   │   ├── spherical_monument_raw_sweep.py   # Test 2: Dome enrichment (confirmatory)
-│   │   ├── spherical_monument_test.py        # Test 2x: Dome enrichment (context-validated)
-│   │   ├── cluster_asymmetry_test.py         # Test 3: Phase-split cluster asymmetry
-│   │   ├── temporal_gradient_test.py         # Test 4: Temporal gradient
-│   │   ├── deep_temporal_analysis.py         # Sequential inscription analysis
-│   │   ├── origin_sites_test.py              # Test E: Founding/origin sites
-│   │   ├── founding_sites_analysis.py        # Founding sites detailed analysis
-│   │   ├── sacred_origin_test.py             # Sacred origin keyword test
-│   │   ├── meta_keyword_test.py              # Meta-keyword cross-check
-│   │   ├── harmonic_density_attractor_test.py # Harmonic density attractor
-│   │   ├── unesco_buddhist_heritage_test.py  # Buddhist heritage keyword test
-│   │   ├── tumulus_dome_evolution_raw_sweep.py # Mound→dome morphological test
-│   │   ├── unit_sweep_fill.py                # Unit sensitivity sweep
-│   │   ├── bonferroni_correction.py          # Bonferroni family correction
-│   │   ├── simulation_null_model.py          # Permutation/bootstrap null models
-│   │   ├── spatial_independence_test.py      # Spatial independence correction
-│   │   ├── regional_temporal_gradient.py     # Regional temporal gradient
-│   │   ├── fdr_multiple_comparisons.py       # FDR multiple comparisons
-│   │   └── verify_x18_periodicity.py         # x.18°E artifact check
+│   │   ├── spherical_monument_raw_sweep.py        # Test 2: Dome enrichment (confirmatory)
+│   │   ├── spherical_monument_test.py             # Test 2x: Dome enrichment (context-validated)
+│   │   ├── cluster_asymmetry_test.py              # Test 3: Phase-split cluster asymmetry
+│   │   ├── temporal_gradient_test.py              # Test 4: Temporal gradient
+│   │   ├── deep_temporal_analysis.py              # Sequential inscription analysis
+│   │   ├── origin_sites_test.py                   # Test E: Founding/origin sites
+│   │   ├── founding_sites_analysis.py             # Founding sites detailed analysis
+│   │   ├── dome_founding_stratification.py        # Dome × founding stratification
+│   │   ├── sacred_origin_test.py                  # Sacred origin keyword test
+│   │   ├── meta_keyword_test.py                   # Meta-keyword cross-check
+│   │   ├── harmonic_density_attractor_test.py     # Harmonic density attractor
+│   │   ├── unesco_buddhist_heritage_test.py       # Buddhist heritage keyword test
+│   │   ├── tumulus_dome_evolution_raw_sweep.py    # Mound→dome morphological test
+│   │   ├── tumulus_dome_evolution_test.py         # Mound→dome evolution (validated)
+│   │   ├── unit_sweep_fill.py                     # Unit sensitivity sweep
+│   │   ├── bonferroni_correction.py               # Bonferroni family correction
+│   │   ├── simulation_null_model.py               # Permutation/bootstrap null models
+│   │   ├── spatial_independence_test.py           # Spatial independence correction
+│   │   ├── regional_temporal_gradient.py          # Regional temporal gradient
+│   │   ├── region_conditioned_permutation.py      # Region-conditioned permutation test
+│   │   ├── fdr_multiple_comparisons.py            # FDR multiple comparisons
+│   │   ├── leave_one_out_sensitivity.py           # Leave-one-out sensitivity
+│   │   ├── dome_leave_k_out.py                    # Dome leave-k-out robustness
+│   │   ├── dome_footprint_window_sensitivity.py   # Footprint window sensitivity
+│   │   ├── dome_geographic_concentration_test.py  # Geographic concentration test
+│   │   ├── stupa_coordinate_perturbation.py       # Stupa coordinate perturbation
+│   │   ├── stupa_geographic_concentration_test.py # Stupa geographic concentration
+│   │   ├── sensitivity_slope_permutation_test.py  # Sensitivity slope permutation
+│   │   ├── sensitivity_slope_specificity_test.py  # Sensitivity slope specificity
+│   │   ├── americas_directional_test.py           # Americas directional control
+│   │   └── verify_x18_periodicity.py              # x.18°E artifact check
 │   │
 │   ├── global/                       # Global robustness checks
-│   │   ├── anchor_uniqueness_audit.py        # Global anchor sweep
-│   │   ├── peak_geography_audit.py           # Peak geography audit
-│   │   ├── dome_periodicity_audit.py         # Dome periodicity / x.18° artifact test
-│   │   ├── global_corridor_comparison.py     # Corridor comparison
-│   │   ├── corridor_precision_test.py        # Corridor precision test
-│   │   └── landmark_anchor_ranking.py        # Gerizim vs. other anchors
+│   │   ├── anchor_uniqueness_audit.py             # Global anchor sweep
+│   │   ├── anchor_site_comparison.py              # Anchor site comparison
+│   │   ├── peak_geography_audit.py                # Peak geography audit
+│   │   ├── dome_periodicity_audit.py              # Dome periodicity / x.18° artifact test
+│   │   ├── global_corridor_comparison.py          # Corridor comparison
+│   │   ├── corridor_precision_test.py             # Corridor precision test
+│   │   ├── geodesic_sensitivity.py                # Geodesic vs. planar sensitivity
+│   │   ├── landmark_anchor_ranking.py             # Gerizim vs. other anchors
+│   │   ├── wikidata_p1435_control_analysis.py     # Wikidata P1435 control analysis
+│   │   ├── x18_periodicity_formal_test.py         # x.18°E formal periodicity test
+│   │   └── emit_constants.py                      # Emit pure constants as LaTeX macros
 │   │
 │   └── americas/                     # Control comparison
-│       └── americas_harmonic_depletion_audit.py  # Americas P1435 depletion control
+│       └── americas_harmonic_depletion_audit.py   # Americas P1435 depletion control
 │
 ├── lib/                              # Shared analysis library
 │   ├── beru.py               # Beru-unit calculations, tier classification
@@ -77,6 +97,7 @@ gerizim-paper-a/
 │   ├── units.py              # Unit conversion utilities
 │   ├── landmarks.py          # Landmark coordinate definitions
 │   ├── reporting.py          # Output formatting, LaTeX macro generation
+│   ├── results_store.py      # Persistent results store (JSON)
 │   └── sweep.py              # Anchor sweep analysis
 │
 ├── data/
@@ -86,12 +107,25 @@ gerizim-paper-a/
 │   │   ├── fetch_extended.py         # Fetch extended descriptions from UNESCO
 │   │   └── fetch_p1435_global.py     # Fetch Wikidata P1435 global control
 │   └── store/
+│       ├── results.json                    # Aggregated pipeline results
 │       ├── unesco/
 │       │   ├── unesco.xml                  # UNESCO WHC XML export (1,248 sites)
 │       │   ├── extended_cache.json         # Cached extended descriptions
 │       │   └── meta_keyword_results.json   # Pre-computed keyword results
 │       └── wikidata/
 │           └── p1435_global_control.csv    # Wikidata P1435 global heritage control
+│
+├── supplementary/                    # Archived evidence for anchor citation (ref. 5706)
+│   ├── unesco_5706_rendered.html     # Archived rendered UNESCO Tentative List page
+│   ├── unesco_5706.pdf               # PDF snapshot
+│   ├── unesco_5706.png               # Screenshot
+│   ├── unesco_site_by_site_audit.txt # Site-by-site audit notes
+│   ├── fetch_unesco_playwright.py    # Script used to archive the page
+│   └── README_audit.txt              # Audit provenance notes
+│
+├── guide/                            # Reference guides
+│   ├── statistical_methods_guide.md  # Statistical methods reference
+│   └── statistical_tests_reference.md
 │
 ├── tests/                            # Unit tests for shared library
 │   ├── test_beru.py
@@ -100,6 +134,8 @@ gerizim-paper-a/
 │   ├── test_stats.py
 │   └── test_sweep.py
 │
+├── _run_x18.py               # Standalone x.18°E periodicity runner
+├── keywords.json             # Keyword lists for dome/stupa filtering
 ├── config.json               # All parameters, anchors, keywords, thresholds
 ├── conftest.py               # Pytest path configuration
 ├── pytest.ini                # Pytest settings
