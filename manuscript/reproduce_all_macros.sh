@@ -115,6 +115,8 @@ if [ "${1:-}" = "--macros-only" ]; then
         analysis/unesco/dome_geographic_concentration_test.py  # → geoNullDomeBootP/Z/Mean, geoNullDomeRestrictedP/Z/Mean/N, domeEurasianFraction
         analysis/unesco/stupa_geographic_concentration_test.py # → stupaGeoBootP/Z/Mean, stupaRegionP/Z/N, stupaGeoRestrictedP/Z/N (GROUP 29b)
         analysis/unesco/dome_founding_stratification.py        # → domeStratNfs, domeStratNnfs, domeStratF/NfsAp/Rate/Enrich/P, domeStratFisherOR/P
+        # ── Geographic concentration robustness ───────────────────────────
+        analysis/unesco/region_conditioned_permutation.py    # → regionCondPermP/Z/Obs/Mean/Std/Nregions/Nperms (GROUP 35)
         # ── Summary scripts (read from store) ─────────────────────────────
         analysis/unesco/fdr_multiple_comparisons.py          # reads all keys from config+store
         analysis/unesco/bonferroni_correction.py             # reads confirmatory keys from store

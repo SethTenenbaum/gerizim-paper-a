@@ -159,7 +159,7 @@ for tid, lbl, raw_p, macro, script, note in exploratory:
 print()
 
 print(SEP)
-print("  MANUSCRIPT MACRO VALUES  (copy into \\newcommand block)")
+print("% Bonferroni correction macros")
 print(SEP)
 print()
 print(f"  %% Bonferroni family size")
@@ -190,6 +190,39 @@ for tid, lbl, raw_p, p_bonf, p_holm, survives, macro, _ in results:
     print(f"  \\newcommand{{\\pAdjTest{macro}}}{{{p_bonf_3}}}  % Bonferroni-adj p, Test {tid} ({lbl})")
     print(f"  \\newcommand{{\\pHolmTest{macro}}}{{{p_holm_3}}}  % Holm-adj p, Test {tid} ({lbl})")
     print()
+
+print(SEP)
+print()
+
+# ── Placeholder macros for excluded tests (sensitivity, exploratory, structural) ──
+# These emit \FDRqTest{Macro} = "---" and \BonfAllTest{Macro} = "---" so that
+# the manuscript table never contains hardcoded dashes.  The raw p-value macro
+# (\pAdjTest{Macro} = "---") is also emitted so table cells can reference it.
+print("  % Placeholder macros for tests EXCLUDED from the Bonferroni family")
+print("  % (sensitivity variants, exploratory, structural-only).")
+print("  % These are intentionally set to {---} so the table reflects that no")
+print("  % family-wide correction applies — but the value comes from the pipeline.")
+print()
+
+_excluded_tests = list(sensitivity) + list(exploratory)
+for item in _excluded_tests:
+    tid, lbl, raw_p, macro, script, note = item
+    if not macro:
+        continue
+    print(f"  % Test {tid} — {lbl} [EXCLUDED from Bonferroni family]")
+    print(f"  \\newcommand{{\\FDRqTest{macro}}}{{---}}  % FDR q: N/A (excluded from family)")
+    print(f"  \\newcommand{{\\BonfAllTest{macro}}}{{---}}  % Bonf adj: N/A (excluded from family)")
+    print(f"  \\newcommand{{\\pRawTest{macro}}}{{{raw_p:.4f}}}  % raw p, Test {tid} ({lbl})")
+    print()
+
+# Test B (Rayleigh phase-lock) — structural description, excluded from FDR count
+print("  % Test B (Rayleigh phase-lock) — structural description, excluded from FDR")
+_rayleigh_p = store.read("rayleighPermP", default=None)
+_rayleigh_p_str = f"{float(_rayleigh_p):.4f}" if _rayleigh_p is not None else "---"
+print(f"  \\newcommand{{\\FDRqTestB}}{{---}}  % FDR q: N/A (structural, excluded)")
+print(f"  \\newcommand{{\\BonfAllTestB}}{{---}}  % Bonf adj: N/A (structural, excluded)")
+print(f"  \\newcommand{{\\pRawTestB}}{{{_rayleigh_p_str}}}  % Rayleigh permutation p")
+print()
 
 print(SEP)
 print()

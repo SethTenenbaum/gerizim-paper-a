@@ -1,0 +1,508 @@
+[unesco_corpus] Loaded 1248 sites, 1248 with extended descriptions
+
+UNESCO XML KEYWORD AUDIT — spherical_monument_test.py
+Keyword set: ['stupa', 'stupas', 'tholos', 'dome', 'domed', 'domes', 'spherical']
+Unambiguous: ['stupa', 'stupas', 'tholos']
+Ambiguous (context-validated): ['dome', 'domed', 'domes', 'spherical']
+Total entries in XML : 1248
+Sites INCLUDED       : 83
+Sites CONTEXT-REJECTED: 7
+Sites EXCLUDED       : 0
+
+INCLUDED SITES:
+────────────────────────────────────────────────────────────────────────────────────────────────────
+  Aachen Cathedral
+    KEYS   : ['dome']  (raw: ['dome'])
+    VALID  : {'dome': 'context-validated'}
+    FORM   : "The Palatine Chapel is based on an octagonal ground plan, which is surrounded by an aisle and by tribunes above, and roofed with a dome."
+    FORM   : "The high dome gathers light from eight open-arched windows above the drum; it was originally entirely covered with a large mosaic depicting Christ Enthroned, in purple robes and surrounded by the Elde"
+
+  Ajanta Caves
+    KEYS   : ['stupa']  (raw: ['stupa'])
+    VALID  : {'stupa': 'unambiguous'}
+    FORM   : "At the centre of the apse stands the object of worship in the form of a chaitya or stupa, also hewn out of the rock."
+
+  Antequera Dolmens Site
+    KEYS   : ['tholos']  (raw: ['tholos'])
+    VALID  : {'tholos': 'unambiguous'}
+    FORM   : "Located at the heart of Andalusia in southern Spain, the site comprises three megalithic monuments: the Menga and Viera dolmens and the  Tholos  of El Romeral, and two natural monuments: La Peña de lo"
+    FORM   : "Brief synthesis The Antequera Dolmens Site is a serial property made up of three megalithic monuments: the Menga Dolmen, the Viera Dolmen and the Tholos of El Romeral, and two natural monuments, La Pe"
+
+  Archaeological Ruins at Moenjodaro
+    KEYS   : ['stupa']  (raw: ['stupa'])
+    VALID  : {'stupa': 'unambiguous'}
+    FORM   : "Moenjodaro comprises two sectors: a citadel area in the west where the Buddhist stupa was constructed with unbaked brick over the ruins of Moenjodaro in the 2nd century AD, and to the east, the lower "
+
+  Archaeological Site of Mystras
+    KEYS   : ['domed']  (raw: ['domed'])
+    VALID  : {'domed': 'context-validated'}
+    FORM   : "Various architectural styles are applied in ecclesiastical architecture, but the so-called “mixed type of Mystras” (in which a three aisled basilica at ground level is combined with a five-domed cross"
+
+  Archaeological Site of Nalanda Mahavihara at Nalanda, Bihar
+    KEYS   : ['stupa', 'stupas']  (raw: ['stupa', 'stupas'])
+    VALID  : {'stupa': 'unambiguous', 'stupas': 'unambiguous'}
+    FORM   : "It includes  stupas , shrines,  viharas  (residential and educational buildings) and important art works in stucco, stone and metal."
+    FORM   : "It includes stupas, chaityas, viharas, shrines, many votive structures and important art works in stucco, stone and metal."
+
+  Archaeological Site of Philippi
+    KEYS   : ['domed']  (raw: ['domed'])
+    VALID  : {'domed': 'context-validated'}
+    FORM   : "The Octagon Church, the transept Basilica, and the domed Basilica stand out as types of Early Christian architecture."
+
+  Archaeological Sites of Mycenae and Tiryns
+    KEYS   : ['tholos']  (raw: ['tholos'])
+    VALID  : {'tholos': 'unambiguous'}
+    FORM   : "Significant stages in monumental architecture are still visible in the property, such as the massive defensive walls, the corbelled tholos tombs and the Lions Gate."
+
+  Architectural Ensemble of the Trinity Sergius Lavra in Sergiev Posad
+    KEYS   : ['dome', 'domes']  (raw: ['dome', 'domes'])
+    VALID  : {'dome': 'context-validated', 'domes': 'context-validated'}
+    FORM   : "A remarkable feature of this church is a bell tower under its dome without internal interconnection between the belfry and the cathedral itself."
+    FORM   : "The Parish churches situated within the territory of Sergiev Posad, which were originally wooden and later rebuilt in stone, formed a ring of domes echoing those of Lavra."
+
+  Architectural, Residential and Cultural Complex of the Radziwill Family at Nesvizh
+    KEYS   : ['domed']  (raw: ['domed'])
+    VALID  : {'domed': 'context-validated'}
+    FORM   : "The Radziwill family complex - and in particular the domed basilica Corpus Christi mausoleum-church represents an important stage in the development of building typology in 16th and 17th century Centr"
+    FORM   : "In particular, this concerns Corpus Christi Church with its domed basilica typology."
+
+  Astronomical Observatories of Kazan Federal University
+    KEYS   : ['dome', 'domes']  (raw: ['dome', 'domes'])
+    VALID  : {'dome': 'context-validated', 'domes': 'context-validated'}
+    FORM   : "The Kazan City Astronomical Observatory, built in 1837, is located on the University campus and the building is characterized by a semi-circular façade and three towers with domes built to house astro"
+    FORM   : "It is characterised by a semi-circular façade and three towers with domes built to house astronomical instruments."
+
+  Bagan
+    KEYS   : ['stupas']  (raw: ['stupas'])
+    VALID  : {'stupas': 'unambiguous'}
+    FORM   : "The seven components of the serial property include numerous temples, stupas, monasteries and places of pilgrimage, as well as archaeological remains, frescoes and sculptures."
+    FORM   : "The serial property of eight components consists of 3,595 recorded monuments – including stupas, temples and other structures for Buddhist spiritual practice, extensive archaeological resources, and m"
+
+  Bam and its Cultural Landscape
+    KEYS   : ['domed']  (raw: ['domed'])
+    VALID  : {'domed': 'context-validated'}
+    FORM   : "Arg-e Bam is the most representative example of a fortified medieval town built in vernacular technique using mud layers (Chineh), sun-dried mud bricks (khesht), and vaulted and domed structures."
+
+  Borobudur Temple Compounds
+    KEYS   : ['stupa', 'stupas', 'dome']  (raw: ['stupa', 'stupas', 'dome'])
+    VALID  : {'stupa': 'unambiguous', 'stupas': 'unambiguous', 'dome': 'context-validated'}
+    FORM   : "It was built in three tiers: a pyramidal base with five concentric square terraces, the trunk of a cone with three circular platforms and, at the top, a monumental stupa."
+    FORM   : "Around the circular platforms are 72 openwork stupas, each containing a statue of the Buddha."
+
+  Boyana Church
+    KEYS   : ['dome']  (raw: ['dome'])
+    VALID  : {'dome': 'context-validated'}
+    FORM   : "Criterion (ii): From an architectural point of view, Boyana Church is a pure example of a church with a Greek cross ground-plan with dome, richly decorated facades and decoration of ceramic elements."
+
+  Buddhist Monuments at Sanchi
+    KEYS   : ['stupa', 'stupas', 'dome']  (raw: ['stupa', 'stupas', 'dome'])
+    VALID  : {'stupa': 'unambiguous', 'stupas': 'unambiguous', 'dome': 'context-validated'}
+    FORM   : "Brief synthesis The stupas, temples, viharas, and stambha at Sanchi in central India are among the oldest and most mature examples of aniconic arts and free-standing architecture that comprehensively "
+    FORM   : "Contemporary with the stambha was a brick stupa, which was later increased in scale during the Sunga dynasty (184-72 BCE), covered with an ashlar stone veneer, and augmented with circumambulatory path"
+
+  Buddhist Ruins of Takht-i-Bahi and Neighbouring City Remains at Sahr-i-Bahlol
+    KEYS   : ['stupa', 'stupas']  (raw: ['stupa', 'stupas'])
+    VALID  : {'stupa': 'unambiguous', 'stupas': 'unambiguous'}
+    FORM   : "Today the ruins comprise a main stupa court, votive stupas court, a group of three stupas, the monastic quadrangle with meditation cells, conference hall, covered stepped passageways and other secular"
+
+  Cathedral and Churches of Echmiatsin and the Archaeological Site of Zvartnots
+    KEYS   : ['dome', 'domed']  (raw: ['dome', 'domed'])
+    VALID  : {'dome': 'context-validated', 'domed': 'context-validated'}
+    FORM   : "The cathedral and churches of Echmiatsin and the archaeological remains at Zvartnots graphically illustrate the evolution and development of the Armenian central-domed cross-hall type of church, which"
+    FORM   : "They graphically illustrate the evolution and flowering of the Armenian central-domed cross-hall type of church."
+
+  Centennial Hall in Wrocław
+    KEYS   : ['dome', 'domes']  (raw: ['dome', 'domes'])
+    VALID  : {'dome': 'context-validated', 'domes': 'context-validated'}
+    FORM   : "The 23m-high dome is topped with a lantern in steel and glass."
+    FORM   : "The hall has a symmetrical quatrefoil ground plan with a huge circular central space covered by a ribbed dome topped with a lantern."
+
+  Chhatrapati Shivaji Terminus (formerly Victoria Terminus)
+    KEYS   : ['dome']  (raw: ['dome'])
+    VALID  : {'dome': 'context-validated'}
+    FORM   : "Its remarkable stone dome, turrets, pointed arches and eccentric ground plan are close to traditional Indian palace architecture."
+    FORM   : "Its remarkable stone dome, turrets, pointed arches and eccentric ground plan are close to traditional Indian palace architecture."
+
+  Church and Dominican Convent of Santa Maria delle Grazie with “The Last Supper” by Leonardo da Vinci
+    KEYS   : ['dome']  (raw: ['dome'])
+    VALID  : {'dome': 'context-validated'}
+    FORM   : "Bramante structurally enlarged the church and added large semi-circular apses, a wonderful drum-shaped dome surrounded by columns, and a spectacular cloister and refectory."
+
+  Church of the Ascension, Kolomenskoye
+    KEYS   : ['domed']  (raw: ['domed'])
+    VALID  : {'domed': 'context-validated'}
+    FORM   : "Its one-pillar construction differed from the usual five-domed structure on four pillars, making it more like a memorial sculpture with architectural features that incorporated the best of the Byzanti"
+
+  Churches of the Pskov School of Architecture
+    KEYS   : ['domes']  (raw: ['domes'])
+    VALID  : {'domes': 'context-validated'}
+    FORM   : "Characteristics of these buildings, produced by the Pskov School of Architecture, include cubic volumes, domes, porches and belfries, with the oldest elements dating back to the 12th century."
+    FORM   : "The school utilized a limited set of decorative techniques and architectural elements, illustrating a synthesis of vernacular styles brought into urban and monumental contexts, cubic volumes, domes, t"
+
+  Convent of Christ in Tomar
+    KEYS   : ['dome']  (raw: ['dome'])
+    VALID  : {'dome': 'context-validated'}
+    FORM   : "The paintings and frescos depicting mainly 16th century biblical scenes, as well as the gilt statuary under the Byzantine dome were carefully restored."
+
+  Cordouan Lighthouse
+    KEYS   : ['domes']  (raw: ['domes'])
+    VALID  : {'domes': 'context-validated'}
+    FORM   : "The tower of Louis de Foix clearly reflects the influence of antiquity and Italy, evoking in the open sea the forms of Roman mausoleums, and the domes and most elegant features of Renaissance manneris"
+
+  Elephanta Caves
+    KEYS   : ['stupas']  (raw: ['stupas'])
+    VALID  : {'stupas': 'unambiguous'}
+    FORM   : "There is further scope to reveal archaeological material and enhance information by exposing the buried stupas."
+    FORM   : "Besides the caves, Elephanta Island possesses archaeological remains from as early as the 2nd century BC and from the Portuguese period, as witnessed, respectively, by stupas buried towards the easter"
+
+  Ephesus
+    KEYS   : ['domed']  (raw: ['domed'])
+    VALID  : {'domed': 'context-validated'}
+    FORM   : "Since the 5 th  century, the House of the Virgin Mary, a domed cruciform chapel seven kilometres from Ephesus, became a major place of Christian pilgrimage."
+
+  Episcopal Complex of the Euphrasian Basilica in the Historic Centre of Poreč
+    KEYS   : ['dome']  (raw: ['dome'])
+    VALID  : {'dome': 'context-validated'}
+    FORM   : "In the main apse there are mosaics around the four windows, in the semi-dome and on the front wall."
+
+  Great Mosque and Hospital of Divriği
+    KEYS   : ['dome']  (raw: ['dome'])
+    VALID  : {'dome': 'context-validated'}
+    FORM   : "Founded by the Mengücekide emir Ahmed Shah following the victory of the Seljuk Turks over the Byzantine army at the battle of Malazgirt in 1071, the mosque is dominated externally by the hexagonal, po"
+    FORM   : "It is entered via a monumental, elaborately carved stone portal on the west, leading into a double height atrium formed by four massive piers supporting a dome with an oculus over a central pool, arou"
+
+  Historic Areas of Istanbul
+    KEYS   : ['dome']  (raw: ['dome'])
+    VALID  : {'dome': 'context-validated'}
+    FORM   : "The distinctive and characteristic skyline of Istanbul was built up over many centuries and encompasses the  Hagia  Sophia whose vast dome reflects the architectural and decorative expertise of the 6t"
+
+  Historic Cairo
+    KEYS   : ['dome', 'domes']  (raw: ['dome', 'domes'])
+    VALID  : {'dome': 'context-validated', 'domes': 'context-validated'}
+    FORM   : "As limited space was available, they reconstructed ruined places, renovated multiple buildings that preceded them, and added new landmarks built following local traditions such as the Ibrahim Kalashni"
+    FORM   : "The extraordinary Bahri Mamluk (1250-1382 AD) and Burgi Mamluk (1382-1517 AD) monuments reign triumphant above the skyline of Cairo, the refinement of their colourful architecture, boldly defined, ori"
+
+  Historic Centre of Bukhara
+    KEYS   : ['dome']  (raw: ['dome'])
+    VALID  : {'dome': 'context-validated'}
+    FORM   : "Later buildings from this phase of Bukhara´s history include monumental medressehs at important crossroads: Taki Sarafon (Dome of the Moneychangers), Taki-Tilpak-Furushan (Dome of the Headguard Seller"
+
+  Historic Centre of Zacatecas
+    KEYS   : ['dome']  (raw: ['dome'])
+    VALID  : {'dome': 'context-validated'}
+    FORM   : "Its massive dome and towers provide a counterpoint to the nearby cathedral."
+
+  Historic Centre of the City of Salzburg
+    KEYS   : ['domes']  (raw: ['domes'])
+    VALID  : {'domes': 'context-validated'}
+    FORM   : "The Salzburg skyline, against a backdrop of mountains, is characterized by its profusion of spires and domes, dominated by the fortress of HohenSalzburg."
+
+  Historic City of Yazd
+    KEYS   : ['domes']  (raw: ['domes'])
+    VALID  : {'domes': 'context-validated'}
+    FORM   : "The use of earth in buildings includes walls, and roofs by the construction of vaults and domes."
+    FORM   : "The skyline of the city punctuated with wind catchers, minarets and domes of the monuments and mosques offer an outstanding panorama visible from far away, from inside and outside the historic city."
+
+  Historic Ensemble of the Potala Palace, Lhasa
+    KEYS   : ['stupas']  (raw: ['stupas'])
+    VALID  : {'stupas': 'unambiguous'}
+    FORM   : "To the west and higher up the mountain the Red Palace contains the gilded burial stupas of past Dalai Lamas."
+
+  Historical Monuments of Mtskheta
+    KEYS   : ['domed']  (raw: ['domed'])
+    VALID  : {'domed': 'context-validated'}
+    FORM   : "The small domed church of the Samtavro Monastery was originally built in the 4th century and has since been subject to various restorations."
+
+  Hospicio Cabañas, Guadalajara
+    KEYS   : ['dome']  (raw: ['dome'])
+    VALID  : {'dome': 'context-validated'}
+    FORM   : "The kitchen is topped by a saucer dome and small lantern."
+    FORM   : "It is the chapel, however, that is the visually dominant feature of the hospice with its imposing dome rising 32.5 metres."
+
+  Humayun's Tomb, Delhi
+    KEYS   : ['dome', 'domes']  (raw: ['dome', 'domes'])
+    VALID  : {'dome': 'context-validated', 'domes': 'context-validated'}
+    FORM   : "It is surmounted by a 42.5 m high double dome clad with marble flanked by pillared kiosks (chhatris) and the domes of the central chhatris are adorned with glazed ceramic tiles."
+
+  Jesuit Missions of La Santísima Trinidad de Paraná and Jesús de Tavarangue
+    KEYS   : ['dome']  (raw: ['dome'])
+    VALID  : {'dome': 'context-validated'}
+    FORM   : "The large stone church had a fine dome and impressive decoration."
+
+  Kathmandu Valley
+    KEYS   : ['stupa', 'stupas']  (raw: ['stupa', 'stupas'])
+    VALID  : {'stupa': 'unambiguous', 'stupas': 'unambiguous'}
+    FORM   : "The seven include the Durbar Squares of Hanuman Dhoka (Kathmandu), Patan and Bhaktapur, the Buddhist stupas of Swayambhu and Bauddhanath and the Hindu temples of Pashupati and Changu Narayan."
+    FORM   : "The religious ensemble of Swayambhu includes the oldest Buddhist monument (a stupa) in the Valley; that of Bauddhanath includes the largest stupa in Nepal; Pashupati has an extensive Hindu temple prec"
+
+  Kizhi Pogost
+    KEYS   : ['dome', 'domed', 'domes']  (raw: ['dome', 'domed', 'domes'])
+    VALID  : {'dome': 'context-validated', 'domed': 'context-validated', 'domes': 'context-validated'}
+    FORM   : "Nowadays it is the only ensemble with two multi-domed wooden churches preserved in Russia."
+    FORM   : "The eight cupolas encircle the 27m high central onion dome, and which covers the central parallelepiped space, gives it a more static appearance."
+
+  Kremlin and Red Square, Moscow
+    KEYS   : ['domed', 'domes']  (raw: ['domed', 'domes'])
+    VALID  : {'domed': 'context-validated', 'domes': 'context-validated'}
+    FORM   : "The five-domed Assumption Cathedral (1475–1479) was built by an Italian architect Aristotele Fiorvanti."
+    FORM   : "In the same square another Italian architect, Alevisio Novi, erected the five-domed Church of the Archangel in 1505-1508."
+
+  Kunya-Urgench
+    KEYS   : ['dome', 'domes']  (raw: ['dome', 'domes'])
+    VALID  : {'dome': 'context-validated', 'domes': 'context-validated'}
+    FORM   : "There are constructions from adobe and burned bricks, plain unicameral dome constructions up-going to ancient chartak and buildings with complicated compositions, sometimes with а long history of deve"
+    FORM   : "These monuments also demonstrate the evolution of methods of treatment of inner surface of domes from cellular sails to stalactite those times called “ muqarnas ” and brought to the highest perfection"
+
+  Kyiv: Saint-Sophia Cathedral and Related Monastic Buildings, Kyiv-Pechersk Lavra
+    KEYS   : ['dome']  (raw: ['dome'])
+    VALID  : {'dome': 'context-validated'}
+    FORM   : "The Cathedral’s architecture is distinguished by supplementary naves added to the five-nave core and pyramidal spatial composition of the cross dome church."
+
+  Longmen Grottoes
+    KEYS   : ['stupas']  (raw: ['stupas'])
+    VALID  : {'stupas': 'unambiguous'}
+    FORM   : "These contain almost 110,000 Buddhist stone statues, more than 60 stupas and 2,800 inscriptions carved on steles."
+
+  Lumbini, the Birthplace of the Lord Buddha
+    KEYS   : ['stupas']  (raw: ['stupas'])
+    VALID  : {'stupas': 'unambiguous'}
+    FORM   : "Additionally there are the excavated remains of Buddhist viharas (monasteries) of the 3rd century BC to the 5th century AD and the remains of Buddhist stupas (memorial shrines) from the 3rd century BC"
+    FORM   : "Criterion (vi): The archaeological remains of the Buddhist viharas (monasteries) and stupas (memorial shrines) from the 3rd century BC to the 15th century AD, provide important evidence about the natu"
+
+  Mahabodhi Temple Complex at Bodh Gaya
+    KEYS   : ['stupas']  (raw: ['stupas'])
+    VALID  : {'stupas': 'unambiguous'}
+    FORM   : "The present Mahabodhi Temple Complex at Bodh Gaya comprises the 50 m high grand Temple, the Vajrasana, sacred Bodhi Tree and other six sacred sites of Buddha's enlightenment, surrounded by numerous an"
+    FORM   : "Along this path there are significant places associated with events that immediately followed the Buddha’s Enlightment, together with votive stupas and shrines."
+
+  Masjed-e Jāmé of Isfahan
+    KEYS   : ['dome', 'domes']  (raw: ['dome', 'domes'])
+    VALID  : {'dome': 'context-validated', 'domes': 'context-validated'}
+    FORM   : "Its double-shelled ribbed domes represent an architectural innovation that inspired builders throughout the region."
+    FORM   : "Following its Seljuq expansion and the characteristic introduction of the four iwans (Chahar Ayvān) around the courtyard as well as two extraordinary domes, the mosque became the prototype of a distin"
+
+  Mausoleum of Khoja Ahmed Yasawi
+    KEYS   : ['dome', 'domes', 'spherical']  (raw: ['dome', 'domes', 'spherical'])
+    VALID  : {'dome': 'context-validated', 'domes': 'context-validated', 'spherical': 'context-validated'}
+    FORM   : "Its innovative spatial arrangements, vaults, domes, and decoration were prototypes that served as models for other major buildings of the Timurid period, in particular in Samarkand."
+    FORM   : "A conic-spherical dome, the largest in Central Asia, sits above the Main Hall (Kazandyk)."
+
+  Medieval Monuments in Kosovo
+    KEYS   : ['domed']  (raw: ['domed'])
+    VALID  : {'domed': 'context-validated'}
+    FORM   : "The Patriarchate of Peć Monastery is a group of four domed churches featuring series of wall paintings."
+    FORM   : "The Patriarchate of Peć Monastery is a group of four domed churches featuring series of wall paintings."
+
+  Meidan Emam, Esfahan
+    KEYS   : ['dome']  (raw: ['dome'])
+    VALID  : {'dome': 'context-validated'}
+    FORM   : "Of particular interest is the Royal Mosque, which is connected to the south side of the square by means of an immense, deep entrance portal with angled corners and topped with a half-dome, covered on "
+
+  Millenary Benedictine Abbey of Pannonhalma and its Natural Environment
+    KEYS   : ['dome']  (raw: ['dome'])
+    VALID  : {'dome': 'context-validated'}
+    FORM   : "It was originally surmounted by a dome 26 m high on a high drum, but this had to be removed in 1937-38 because of its severe deterioration."
+
+  Monasteries of Daphni, Hosios Loukas and Nea Moni of Chios
+    KEYS   : ['dome']  (raw: ['dome'])
+    VALID  : {'dome': 'context-validated'}
+    FORM   : "The churches are built on a cross-in-square plan with a large dome supported by squinches defining an octagonal space."
+    FORM   : "The churches are built on a cross-in-square plan with a large dome supported by squinches defining an octagonal space."
+
+  Monasteries of Haghpat and Sanahin
+    KEYS   : ['dome', 'domed']  (raw: ['dome', 'domed'])
+    VALID  : {'dome': 'context-validated', 'domed': 'context-validated'}
+    FORM   : "The church is a rectangular domed construction, slightly elongated from east to west, with an internal cross-shaped plan."
+    FORM   : "The central dome rests on four massive pillars in the side walls."
+
+  Monastery of Geghard and the Upper Azat Valley
+    KEYS   : ['dome']  (raw: ['dome'])
+    VALID  : {'dome': 'context-validated'}
+    FORM   : "The Kathoghikè (main church) is in the classic Armenian form, an equal-armed cross inscribed in a square in plan and covered with a dome on a square base, linked with the base by vaulting."
+
+  Monticello and the University of Virginia in Charlottesville
+    KEYS   : ['dome']  (raw: ['dome'])
+    VALID  : {'dome': 'context-validated'}
+    FORM   : "His house at Monticello, with its dome, porticos supported by Doric columns, and cornices and friezes derived from classical Roman buildings, and his Academical Village, with its Rotunda modeled on th"
+
+  Mount Kumgang – Diamond Mountain from the Sea
+    KEYS   : ['stupas']  (raw: ['stupas'])
+    VALID  : {'stupas': 'unambiguous'}
+    FORM   : "This cultural landscape is home to ancient hermitages, temples, stupas, and stone carvings, many located in the Outer and Inner Kumgang Area."
+    FORM   : "Temples, pagodas, steles, stupas, sculptures and stone lanterns attest to the sequence of development of Korean mountain Buddhism."
+
+  Old City of Jerusalem and its Walls
+    KEYS   : ['dome']  (raw: ['dome'])
+    VALID  : {'dome': 'context-validated'}
+    FORM   : "Among its 220 historic monuments, the Dome of the Rock stands out: built in the 7th century, it is decorated with beautiful geometric and floral motifs."
+    FORM   : "Among its 220 historic monuments, the Dome of the Rock stands out: built in the 7th century, it is decorated with beautiful geometric and floral motifs."
+
+  Painted Churches in the Troodos Region
+    KEYS   : ['domes']  (raw: ['domes'])
+    VALID  : {'domes': 'context-validated'}
+    FORM   : "The structures display elements that were specific to Cyprus and were determined by its geography, history and climate, including steep-pitched wooden roofs with flat hooked tiles, in some cases provi"
+
+  Paleochristian and Byzantine Monuments of Thessalonika
+    KEYS   : ['dome']  (raw: ['dome'])
+    VALID  : {'dome': 'context-validated'}
+    FORM   : "the south dome of the narthex of the Church of Panagia Chalkeon)."
+
+  Pyu Ancient Cities
+    KEYS   : ['stupas']  (raw: ['stupas'])
+    VALID  : {'stupas': 'unambiguous'}
+    FORM   : "Remains include excavated palace citadels, burial grounds and manufacture sites, as well as monumental brick Buddhist stupas, partly standing walls and water management features – some still in use – "
+    FORM   : "Marked by imposing memorial stupas and other sophisticated forms of brick ritual structures, the Pyu Ancient Cities provide the earliest evidence of the emergence of these innovative architectural for"
+
+  Quseir Amra
+    KEYS   : ['dome', 'domed']  (raw: ['dome', 'domed'])
+    VALID  : {'dome': 'context-validated', 'domed': 'context-validated'}
+    FORM   : "The representation of the zodiac on the domed ceiling of the caldarium (hot room) is one of the earliest known, surviving portrayals of a map of the heavens on a dome."
+    FORM   : "The zodiac dome, human portraits and depictions of animals and birds in the hunting scenes are found only in this early period of Islamic art."
+
+  Residence of Bukovinian and Dalmatian Metropolitans
+    KEYS   : ['domed']  (raw: ['domed'])
+    VALID  : {'domed': 'context-validated'}
+    FORM   : "The property, an outstanding example of 19th-century historicist architecture, also includes a seminary and monastery and is dominated by the domed, cruciform Seminary Church with a garden and park."
+    FORM   : "Criterion (iii) : The Residence bears exceptional testimony to the cultural tradition of the Orthodox Church which is signified by the use of Byzantine forms for the domed cruciform church, while the "
+
+  Royal Exhibition Building and Carlton Gardens
+    KEYS   : ['dome']  (raw: ['dome'])
+    VALID  : {'dome': 'context-validated'}
+    FORM   : "This building is cruciform in plan and incorporates the typical architectural template of earlier exhibition buildings: namely a dome, great portal entries, viewing platforms, towers, and fanlight win"
+    FORM   : "Conservation work has recently been undertaken on the building’s dome and structure, the external joinery and stonework, and timber floors."
+
+  Ruins of Kilwa Kisiwani and Ruins of Songo Mnara
+    KEYS   : ['domed', 'domes']  (raw: ['dome', 'domed', 'domes'])
+    VALID  : {'dome': 'rejected-context', 'domed': 'context-validated', 'domes': 'context-validated'}
+    FORM   : "The substantial standing ruins, built of coral and lime mortar, include the Great Mosque constructed in the 11th century and considerably enlarged in the 13th century, and roofed entirely with domes a"
+    FORM   : "The Great Mosque of Kilwa Kisiwani is the oldest standing mosque on the East African coast and, with its sixteen domed and vaulted bays, has a unique plan."
+
+  Sanctuary of Asklepios at Epidaurus
+    KEYS   : ['tholos']  (raw: ['tholos'])
+    VALID  : {'tholos': 'unambiguous'}
+    FORM   : "Its principal monuments, particularly the temple of Asklepios, the Tholos and the Theatre - considered one of the purest masterpieces of Greek architecture – date from the 4th century."
+    FORM   : "The Theatre, together with the Temples of Artemis and Asklepios, the Tholos, the Enkoimeterion and the Propylaia, comprise a coherent assembly of monuments that illustrate the significance and power o"
+
+  Sassanid Archaeological Landscape of Fars Region
+    KEYS   : ['domes']  (raw: ['domes'])
+    VALID  : {'domes': 'context-validated'}
+    FORM   : "The architecture of the Sassanid monuments in the property further illustrates early examples of construction of domes with squinches on square spaces, such as in the chahar-taq buildings, where the f"
+
+  Selimiye Mosque and its Social Complex
+    KEYS   : ['dome']  (raw: ['dome'])
+    VALID  : {'dome': 'context-validated'}
+    FORM   : "The square Mosque with its single great dome and four slender minarets, dominates the skyline of the former Ottoman capital of Edirne."
+    FORM   : "The imposing mosque stepping up to its single great dome with four soaring slender minarets, spectacular decorated interior space, manuscript library, meticulous craftsmanship, brilliant Iznik tiles a"
+
+  Seokguram Grotto and Bulguksa Temple
+    KEYS   : ['dome', 'domed']  (raw: ['dome', 'domed'])
+    VALID  : {'dome': 'context-validated', 'domed': 'context-validated'}
+    FORM   : "The domed ceiling of the rotunda and the entrance corridor employed an innovative construction technique that involved the use of more than 360 stone slabs."
+    FORM   : "The construction of a concrete dome between 1913 and 1915 resulted in humidity build-up and moisture infiltration."
+
+  Silk Roads: the Routes Network of Chang'an-Tianshan Corridor
+    KEYS   : ['stupas']  (raw: ['stupas'])
+    VALID  : {'stupas': 'unambiguous'}
+    FORM   : "The series of Buddhist pagodas and large, elaborate cave temples extending from Kucha (now Kuqa County) in the west to Luoyong in the east, record the eastward transmission of Buddhism from India via "
+
+  Soltaniyeh
+    KEYS   : ['dome']  (raw: ['dome'])
+    VALID  : {'dome': 'context-validated'}
+    FORM   : "The octagonal building is crowned with a 50 m tall dome covered in turquoise-blue faience and surrounded by eight slender minarets."
+    FORM   : "It is the earliest existing example of the double-shelled dome in Iran."
+
+  Speyer Cathedral
+    KEYS   : ['domes']  (raw: ['domes'])
+    VALID  : {'domes': 'context-validated'}
+    FORM   : "Speyer Cathedral, a basilica with four towers and two domes, was founded by Conrad II in 1030 and remodelled at the end of the 11th century."
+    FORM   : "Brief synthesis Speyer Cathedral in the southwest of Germany, a basilica with four towers and two domes, was founded as a flat-ceiling basilica by Konrad II in 1030, probably soon after his imperial c"
+
+  State Historical and Cultural Park “Ancient Merv”
+    KEYS   : ['stupa']  (raw: ['stupa'])
+    VALID  : {'stupa': 'unambiguous'}
+    FORM   : "In the interior are the remains of a number of important structures: the central Beni Makhan mosque and its cistern; the Buddhist stupa and monastery; and the “Oval Building” consisting in a series of"
+
+  Studenica Monastery
+    KEYS   : ['domed']  (raw: ['domed'])
+    VALID  : {'domed': 'context-validated'}
+    FORM   : "The exterior of the domed single-nave church is reminiscent of Italian Romanesque cathedrals, while interior wall paintings in the naos and the sanctuary reflect trends of monumental paintings that em"
+
+  Taj Mahal
+    KEYS   : ['dome', 'domed', 'domes']  (raw: ['dome', 'domed', 'domes'])
+    VALID  : {'dome': 'context-validated', 'domed': 'context-validated', 'domes': 'context-validated'}
+    FORM   : "For its construction, masons, stone-cutters, inlayers, carvers, painters, calligraphers, dome builders and other artisans were requisitioned from the whole of the empire and also from the Central Asia"
+    FORM   : "Its recognised architectonic beauty has a rhythmic combination of solids and voids, concave and convex and light shadow; such as arches and domes further increases the aesthetic aspect."
+
+  Taxila
+    KEYS   : ['stupa', 'stupas', 'domed']  (raw: ['stupa', 'stupas', 'domed'])
+    VALID  : {'stupa': 'unambiguous', 'stupas': 'unambiguous', 'domed': 'context-validated'}
+    FORM   : "The many private houses, stupas, and temples were laid out on the Hellenistic grid system and show the strong Western classical influence on local architecture."
+    FORM   : "The Taxila serial site also includes Khanpur cave, which has produced stratified microlithic tools of the Mesolithic period, and a number of Buddhist monasteries and stupas of various periods."
+
+  The <I>Trulli</I> of Alberobello
+    KEYS   : ['domed']  (raw: ['domed'])
+    VALID  : {'domed': 'context-validated'}
+    FORM   : "Characteristically, they feature pyramidal, domed or conical roofs built up of corbelled limestone slabs."
+    FORM   : "These structures, dating from as early as the mid-14th century, characteristically feature pyramidal, domed, or conical roofs built up of corbelled limestone slabs."
+
+  The Cathedral of St James in Šibenik
+    KEYS   : ['dome']  (raw: ['dome'])
+    VALID  : {'dome': 'context-validated'}
+    FORM   : "The three architects who succeeded one another in the construction of the Cathedral - Francesco di Giacomo, Georgius Mathei Dalmaticus and Niccolò di Giovanni Fiorentino - developed a structure built "
+    FORM   : "Between 1431 and 1505, three architects who succeeded one another, Francesco di Giacomo, Georgius Mathei Dalmaticus and Niccolò di Giovanni Fiorentino, developed a structure built entirely from stone "
+
+  Thracian Tomb of Kazanlak
+    KEYS   : ['tholos']  (raw: ['tholos'])
+    VALID  : {'tholos': 'unambiguous'}
+    FORM   : "The tholos has a narrow corridor and a round burial chamber, both decorated with murals representing Thracian burial rituals and culture."
+
+  Tombs of Buganda Kings at Kasubi
+    KEYS   : ['dome']  (raw: ['dome'])
+    VALID  : {'dome': 'context-validated'}
+    FORM   : "Four royal tombs now lie within the Muzibu Azaala Mpanga, the main building, which is circular and surmounted by a dome."
+    FORM   : "The main tomb building, which is circular and surmounted by a dome, is a major example of an architectural achievement that was raised with use of vegetal materials comprised of wooden poles, spear gr"
+
+  White Monuments of Vladimir and Suzdal
+    KEYS   : ['dome', 'domed']  (raw: ['dome', 'domed'])
+    VALID  : {'dome': 'context-validated', 'domed': 'context-validated'}
+    FORM   : "It was built in the town Kremlin with three naves surmounted by a delicate drum and a helmet dome."
+    FORM   : "It has a single dome at the crossing and reliefs on the upper part of the exterior walls."
+
+  Wooden <em>Tserkvas</em> of the Carpathian Region in Poland and Ukraine
+    KEYS   : ['domes']  (raw: ['domes'])
+    VALID  : {'domes': 'context-validated'}
+    FORM   : "The&nbsp; tserkvas &nbsp;bear testimony to a distinct building tradition rooted in Orthodox ecclesiastic design interwoven with elements of local tradition, and symbolic references to their communitie"
+    FORM   : "The architectural forms of the tserkvas with tri-partite plans, pyramidal domes, cupolas and bell towers conform to the requirements of Eastern liturgy while reflecting the cultural traditions of the "
+
+CONTEXT-REJECTED SITES:
+────────────────────────────────────────────────────────────────────────────────────────────────────
+  Ulu<U>r</U>u-Kata Tju<U>t</U>a National Park
+    RAW KEYS : ['domes']
+    NOTES    : {'domes': 'rejected-context'}
+
+  Precolumbian Chiefdom Settlements with Stone Spheres of the Diquís
+    RAW KEYS : ['spherical']
+    NOTES    : {'spherical': 'rejected-context'}
+
+  Viñales Valley
+    RAW KEYS : ['dome']
+    NOTES    : {'dome': 'rejected-context'}
+
+  Hiroshima Peace Memorial (Genbaku Dome)
+    RAW KEYS : ['dome']
+    NOTES    : {'dome': 'rejected-context'}
+
+  Rock Islands Southern Lagoon
+    RAW KEYS : ['dome']
+    NOTES    : {'dome': 'rejected-context'}
+
+  Gyeongju Historic Areas
+    RAW KEYS : ['domed']
+    NOTES    : {'domed': 'rejected-context'}
+
+  Richtersveld Cultural and Botanical Landscape
+    RAW KEYS : ['domed']
+    NOTES    : {'domed': 'rejected-context'}
+
+EXCLUDED SITES (with reasons):
+────────────────────────────────────────────────────────────────────────────────────────────────────

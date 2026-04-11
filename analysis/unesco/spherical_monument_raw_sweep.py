@@ -43,7 +43,7 @@ import re
 import sys
 import numpy as np
 from pathlib import Path
-from scipy.stats import binomtest, chisquare
+from scipy.stats import binomtest, chisquare, binom as binom_dist
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus
@@ -236,6 +236,23 @@ print(f"  \\newcommand{{\\GerizimPctileA}}{{{pctile:.0f}}}            % anchor-s
 print(f"  \\newcommand{{\\circEnrichAp}}{{{enr_Ap:.2f}}}           % enrichment ratio, A+")
 print(f"  \\newcommand{{\\circEnrichA}}{{{enr_A:.2f}}}           % enrichment ratio, A")
 print(f"  \\newcommand{{\\circMeanDev}}{{{mean_dev:.4f}}}        % mean beru deviation (raw sweep)")
+
+# ── Expected counts and Clopper-Pearson CIs ───────────────────────────────────
+circ_exp_ap = round(N_raw * P_NULL_AP, 2)
+circ_exp_a  = round(N_raw * P_NULL_A,  2)
+circ_rate_a = round(100 * nA / N_raw, 1)
+# Clopper-Pearson exact 95% CI
+_cp_ap_lo = round(100 * binom_dist.ppf(0.025, nAp, N_raw) / N_raw, 1)
+_cp_ap_hi = round(100 * binom_dist.ppf(0.975, nAp, N_raw) / N_raw, 1)
+_cp_a_lo  = round(100 * binom_dist.ppf(0.025, nA,  N_raw) / N_raw, 1)
+_cp_a_hi  = round(100 * binom_dist.ppf(0.975, nA,  N_raw) / N_raw, 1)
+print(f"  \\newcommand{{\\circExpAp}}{{{circ_exp_ap}}}         % expected A+ count under H0 (= N × 4%)")
+print(f"  \\newcommand{{\\circExpA}}{{{circ_exp_a}}}          % expected A count under H0 (= N × 20%)")
+print(f"  \\newcommand{{\\circARate}}{{{circ_rate_a}}}         % Tier-A rate (%) = {nA}/{N_raw}")
+print(f"  \\newcommand{{\\circApCIlo}}{{{_cp_ap_lo}}}         % Clopper-Pearson 95% CI lower, A+ rate (%)")
+print(f"  \\newcommand{{\\circApCIhi}}{{{_cp_ap_hi}}}         % Clopper-Pearson 95% CI upper, A+ rate (%)")
+print(f"  \\newcommand{{\\circACIlo}}{{{_cp_a_lo}}}          % Clopper-Pearson 95% CI lower, A rate (%)"  )
+print(f"  \\newcommand{{\\circACIhi}}{{{_cp_a_hi}}}          % Clopper-Pearson 95% CI upper, A rate (%)"  )
 
 # ── Write to results store ────────────────────────────────────────────────────
 ResultsStore().write_many({

@@ -1,6 +1,6 @@
 # Longitude Quantization in the UNESCO World Heritage Corpus: Domes, Stupas, and the Babylonian Beru
 
-**Paper A — Primary UNESCO Analysis** · `v1.0.5`
+**Paper A — Primary UNESCO Analysis** · `v1.0.6`
 
 Seth Tenenbaum · Independent Scholar  
 ORCID: [0009-0008-5797-2498](https://orcid.org/0009-0008-5797-2498)
@@ -113,6 +113,19 @@ gerizim-paper-a/
 ```
 
 ## Changelog
+
+### v1.0.6 — 2026-04-11
+- **Keywords revised:** replaced generic archaeoastronomy / history-of-astronomy
+  terms with journal-targeted vocabulary for *Journal of Archaeological Science*
+  (`longitude periodicity`, `monument distribution`, `binomial enrichment test`,
+  `heritage site geography`, `archaeometry`, `Levantine metrology`,
+  `quantitative archaeology`). Updated in `CITATION.cff` and manuscript.
+- **Anchor citation completed:** archived rendered HTML, screenshot, and PDF of
+  UNESCO Tentative List ref. 5706 saved to `supplementary/`. Full footnote with
+  archived URL added at every `ref. 5706` occurrence in the manuscript
+  (`sec:anchor`, `sec:methods`, landmark-ranking footnote).
+- **Submission note updated:** TODO for web archiving marked complete in
+  manuscript header comment.
 
 ### v1.0.5 — 2026-04-10
 - **Manuscript revision:** abstract restructured to open with the primary

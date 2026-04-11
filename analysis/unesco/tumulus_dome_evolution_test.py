@@ -455,14 +455,8 @@ print(f"  \\newcommand{{\\pEvoApValidated}}{{{bt_ap.pvalue:.4f}}}          % p-v
 print(f"  \\newcommand{{\\pEvoAValidated}}{{{bt_a.pvalue:.4f}}}           % p-value A  binomial, context-validated (Exploratory)")
 print(f"  \\newcommand{{\\NevoValidRejected}}{{{len(raw_rejected)}}}           % sites rejected by context validation")
 
-# ── Stage-level A+ rate macros ────────────────────────────────────────────────
-for _skey, _sfx in [("dome", "Dome"), ("mound", "Mound"), ("stupa", "Stupa")]:
-    _sr = stage_stat_results.get(_skey)
-    if _sr:
-        print(f"  \\newcommand{{\\evo{_sfx}ApRate}}{{{100*_sr['rate']:.1f}}}  % {_skey}-stage A+ rate (%)")
-        print(f"  \\newcommand{{\\evo{_sfx}N}}{{{_sr['n']}}}  % {_skey}-stage corpus N")
-        print(f"  \\newcommand{{\\evo{_sfx}Ap}}{{{_sr['nap']}}}  % {_skey}-stage A+ count")
-        print(f"  \\newcommand{{\\pEvo{_sfx}}}{{{_sr['p']:.4f}}}  % p-value, {_skey}-stage binomial")
+# NOTE: Stage-level evo* macros (evoDomeApRate, pEvoDome, etc.) are emitted by
+# tumulus_dome_evolution_raw_sweep.py (authoritative). Do not emit them here.
 print()
 
 # ── Write to results store ────────────────────────────────────────────────────

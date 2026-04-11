@@ -8,8 +8,8 @@ authors:
     orcid: "https://orcid.org/0009-0008-5797-2498"
     email: sethtenenbaum1@gmail.com
     affiliation: Independent Scholar
-version: "1.0.5"
-date-released: "2026-04-10"
+version: "1.0.6"
+date-released: "2026-04-11"
 license: MIT
 repository-code: "https://github.com/SethTenenbaum/gerizim-paper-a"
 abstract: >
@@ -20,15 +20,20 @@ abstract: >
   Mount Gerizim (35.269°E). Includes 26 analysis scripts, shared library,
   UNESCO WHC XML corpus (1,248 sites), and Wikidata control dataset.
 keywords:
+  - longitude periodicity
+  - monument distribution
   - UNESCO World Heritage
-  - longitude quantization
   - Babylonian beru
-  - geodetic analysis
-  - spherical monuments
-  - stupa
+  - ancient units of measurement
   - Mount Gerizim
-  - archaeoastronomy
-  - statistical archaeology
+  - domed architecture
+  - stupa
+  - spatial statistics
+  - binomial enrichment test
+  - heritage site geography
+  - archaeometry
+  - Levantine metrology
+  - quantitative archaeology
 references:
   - type: dataset
     title: "UNESCO World Heritage List (XML export)"

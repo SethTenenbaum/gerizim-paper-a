@@ -211,27 +211,28 @@ def main():
     print(f"  \\newcommand{{\\NtotalTestsP}}{{{bonf_threshold_fmt}}}  "
           f"% Bonferroni threshold = 0.05/{m} (used in FDR table header)")
 
-    # ── Per-confirmatory-test BH q-value and Bonferroni macros ───────────────
-    # Emit \FDRqTest{Macro} and \BonfAllTest{Macro} for each test that has
-    # a 'macro' field in config.json → tests → confirmatory.
+    # ── Per-test BH q-value and Bonferroni macros ────────────────────────────
+    # Emit \FDRqTest{Macro} and \BonfAllTest{Macro} for every test that has
+    # a 'macro' field in config.json (confirmatory, sensitivity, exploratory).
     # The macro suffix comes from config so it stays in sync automatically.
-    bonf_family = _CONFIG["tests"]["confirmatory"]
-    # Build a lookup: store_key → (bh_q_value, bonf_adjusted)
-    _key_to_idx = {entry["p_key"]: i for i, entry in enumerate(
-        [{"p_key": tests[i][0]} for i in range(m)]
-    )}
-    # Re-build a proper key → position map from the actual tests list
+    # Build a proper store_key → position map from the actual tests list.
     _pkey_to_pos: dict[str, int] = {}
     for _i, (_label, _p, _cat) in enumerate(tests):
-        # match against registry to find the store key
         for _entry in registry:
             if _entry["label"] == _label:
                 _pkey_to_pos[_entry["p_key"]] = _i
                 break
 
+    # Collect all test entries that have a macro suffix (from all categories)
+    _all_macro_entries = (
+        list(_CONFIG["tests"]["confirmatory"])
+        + list(_CONFIG["tests"].get("sensitivity", []))
+        + [e for e in _CONFIG["tests"].get("exploratory", []) if e.get("macro")]
+    )
+
     print()
-    print("  % Per-confirmatory-test BH q-values and full-k Bonferroni:")
-    for e in bonf_family:
+    print("  % Per-test BH q-values and full-k Bonferroni (confirmatory + sensitivity + exploratory):")
+    for e in _all_macro_entries:
         macro_suffix = e.get("macro")
         if not macro_suffix:
             continue
@@ -247,23 +248,8 @@ def main():
         print(f"  \\newcommand{{\\BonfAllTest{macro_suffix}}}{{{bf_val}}}  "
               f"% Bonf adj (k={m}), Test {e['id']}: {e['label']}")
 
-    # Also emit BonfK (the paper's own Bonferroni family size k) and
-    # per-family-test adjusted p-values under the paper's own k.
-    k_paper = len(bonf_family)
-    family_alpha = _CONFIG["tests"]["family_alpha"]
-    print()
-    print(f"  \\newcommand{{\\BonfK}}{{{k_paper}}}  % paper's own Bonferroni family size")
-    for e in bonf_family:
-        macro_suffix = e.get("macro")
-        if not macro_suffix:
-            continue
-        raw_p = store.read(e["p_key"], default=None)
-        if raw_p is None:
-            print(f"  % MISSING: {e['p_key']} not in store")
-            continue
-        p_adj = round(min(float(raw_p) * k_paper, 1.0), 4)
-        print(f"  \\newcommand{{\\pAdjTest{macro_suffix}}}{{{p_adj}}}  "
-              f"% Bonf adj (k={k_paper}), Test {e['id']}: {e['label']}")
+    # NOTE: BonfK and pAdjTest* are emitted by bonferroni_correction.py (authoritative).
+    # Do not emit them here to avoid duplicate \newcommand definitions.
 
     # ── Write summary counts to store ─────────────────────────────────────────
     ResultsStore().write_many({

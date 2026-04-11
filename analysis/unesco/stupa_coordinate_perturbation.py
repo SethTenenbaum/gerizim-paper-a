@@ -53,7 +53,7 @@ from __future__ import annotations
 
 import sys
 from pathlib import Path
-from scipy.stats import binom_test  # type: ignore
+from scipy.stats import binomtest  # type: ignore
 
 import numpy as np
 
@@ -93,7 +93,7 @@ def count_aplus(lons: np.ndarray) -> int:
 def binomial_p(n_ap: int, n_total: int) -> float:
     """One-sided binomial p-value (H₁: rate > P_NULL_AP)."""
     try:
-        return float(binom_test(n_ap, n_total, P_NULL_AP, alternative="greater"))
+        return float(binomtest(n_ap, n_total, P_NULL_AP, alternative="greater").pvalue)
     except TypeError:
         # scipy ≥ 1.11 uses binomtest
         from scipy.stats import binomtest as _bt

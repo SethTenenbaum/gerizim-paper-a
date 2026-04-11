@@ -213,7 +213,7 @@
     "exploratory": [
       {
         "id": "E",   "label": "Founding-site classifier enrichment",
-        "p_key": "pFoundKwFisher",  "macro": null,
+        "p_key": "pFoundKwFisher",  "macro": "TestE",
         "note": "Founding-site classifier iteratively tuned post-hoc.",
         "script": "analysis/unesco/founding_sites_analysis.py"
       },

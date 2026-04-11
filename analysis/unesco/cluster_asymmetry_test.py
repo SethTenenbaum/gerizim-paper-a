@@ -569,3 +569,155 @@ ResultsStore().write_many({
     "clusterHarmonicMWp": mw2_p,             # Mann-Whitney p (harmonic-level)
     "clusterPermZ":       round(perm_z, 4),  # permutation Z-score
 })
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SUBTEST: Conditional sensitivity-peak test
+# ══════════════════════════════════════════════════════════════════════════════
+#
+# The unit-sensitivity peak (±0.3% collapse at 0.1000 beru) is not unusual
+# under a simple longitude-shuffle null (permSlopePsharp, ns; Test I).
+# The deeper question is: does clustering *itself* produce the peak?
+#
+# We test this by conditioning: among permutations that reproduce clustering
+# at least as extreme as observed, what fraction also show the canonical-unit
+# specificity (0.1000 beru is the best joint-significance spacing)?
+#
+# Clustering null: exactly the same as the permutation block above — shuffle
+# which n_Ap sites are called A+ (fixed real cluster sizes, random assignment).
+# Fine-sweep null: independently shuffle longitudes (same as sensitivity_slope_*.py).
+# Both shuffles run in the same loop; they use the same RNG but are independent
+# draws (cluster draw uses choice(), fine-sweep uses permutation()).
+#
+# Interpretation:
+#   conditional fraction >> unconditional → clustering drives the peak
+#   conditional fraction ≈ unconditional  → peak is independent of clustering
+# ══════════════════════════════════════════════════════════════════════════════
+
+from scipy.stats import binomtest as _binomtest
+from lib.beru import deviation_at_spacing
+from lib.dome_filter import is_dome_site
+
+# Fine sweep configuration (must match sensitivity_slope_specificity_test.py)
+FINE_SPACINGS_SS = [0.0990, 0.0993, 0.0995, 0.1000, 0.1001, 0.1003, 0.1010]
+CANONICAL_SS     = 0.1000
+THRESH_SS        = 0.05
+
+# Load site longitudes for the fine-sweep half (reuse cultural sites already loaded)
+dome_mask_ss = np.array([is_dome_site(s) for s in cultural_sites_with_coords(load_corpus())])
+all_lons_ss  = np.array([s.longitude     for s in cultural_sites_with_coords(load_corpus())])
+
+def _null_rate(spacing):
+    return 2 * TIER_APLUS / spacing
+
+def _count_hits(lons, spacing):
+    return int(sum(deviation_at_spacing(lon, spacing) <= TIER_APLUS for lon in lons))
+
+def _canon_is_best_joint(all_lons, dome_lons):
+    """Return True iff 0.1000 beru is the unique best joint-significance spacing."""
+    best_comb = -1.0
+    best_sp   = None
+    for sp in FINE_SPACINGS_SS:
+        nr   = _null_rate(sp)
+        d_p  = _binomtest(_count_hits(dome_lons, sp), len(dome_lons), nr, alternative='greater').pvalue
+        f_p  = _binomtest(_count_hits(all_lons,  sp), len(all_lons),  nr, alternative='greater').pvalue
+        comb = -np.log10(max(d_p, 1e-15)) + -np.log10(max(f_p, 1e-15))
+        if (d_p < THRESH_SS and f_p < THRESH_SS) and comb > best_comb:
+            best_comb = comb
+            best_sp   = sp
+    return best_sp == CANONICAL_SS
+
+# The clustering null is IDENTICAL to the permutation block above:
+# draw n_Ap random indices from all_cluster_sizes (fixed real cluster sizes),
+# check whether the drawn mean >= mean_ap (observed A+ mean cluster size).
+# The fine-sweep null independently shuffles all_lons_ss with the same RNG.
+all_cluster_sizes_ss = all_cluster_sizes   # numpy array from cluster block above (line ~228)
+
+N_COND_PERMS = 50_000
+SEED_COND    = 99
+rng_cond     = np.random.default_rng(SEED_COND)
+
+n_cluster_ok       = 0   # perms where cluster mean >= mean_ap
+n_cluster_and_peak = 0   # perms where cluster ok AND canonical is best
+n_peak_total       = 0   # unconditional canonical-best count
+
+print()
+print("=" * 95)
+print("  SUBTEST: Conditional sensitivity-peak test")
+print(f"  Q: When permutations reproduce the observed A+ clustering")
+print(f"     (drawn mean cluster size >= {mean_ap:.2f}), do they also produce")
+print(f"     the unit-sensitivity peak at 0.1000 beru more often?")
+print(f"  Clustering null : shuffle tier labels, fixed cluster sizes (same as above).")
+print(f"  Fine-sweep null : independently shuffle longitudes.")
+print(f"  N permutations  : {N_COND_PERMS:,}  (seed={SEED_COND})")
+print("=" * 95)
+
+for i in range(N_COND_PERMS):
+    # Clustering: draw n_Ap random indices from fixed cluster sizes
+    drawn_idx   = rng_cond.choice(len(all_cluster_sizes_ss), size=n_Ap, replace=False)
+    perm_c_mean = float(all_cluster_sizes_ss[drawn_idx].mean())
+    cluster_ok  = (perm_c_mean >= mean_ap)
+
+    # Fine sweep: shuffle longitudes independently
+    perm_lons      = rng_cond.permutation(all_lons_ss)
+    perm_dome_lons = perm_lons[dome_mask_ss]
+    peak_ok = _canon_is_best_joint(perm_lons, perm_dome_lons)
+
+    if cluster_ok:
+        n_cluster_ok += 1
+        if peak_ok:
+            n_cluster_and_peak += 1
+    if peak_ok:
+        n_peak_total += 1
+
+    if (i + 1) % 5000 == 0:
+        cond_frac = n_cluster_and_peak / n_cluster_ok if n_cluster_ok else float('nan')
+        print(f"  {i+1:>6}/{N_COND_PERMS}  "
+              f"cluster_ok={n_cluster_ok}  "
+              f"cluster_and_peak={n_cluster_and_peak}  "
+              f"cond_frac={cond_frac:.3f}")
+
+p_cluster_alone = n_cluster_ok   / N_COND_PERMS
+p_peak_uncond   = n_peak_total   / N_COND_PERMS
+p_peak_cond     = (n_cluster_and_peak / n_cluster_ok) if n_cluster_ok > 0 else float('nan')
+
+def _sig(p):
+    if p < 0.001: return "***"
+    if p < 0.01:  return "**"
+    if p < 0.05:  return "*"
+    if p < 0.10:  return "~"
+    return "ns"
+
+print(f"""
+  ── Results ──
+  Total permutations:                        {N_COND_PERMS:,}
+  Permutations with clustering >= observed:  {n_cluster_ok}  (p = {p_cluster_alone:.4f})
+  Of those, canonical peak also present:     {n_cluster_and_peak}
+    Conditional fraction (peak | cluster):   {p_peak_cond:.4f}  {_sig(p_peak_cond)}
+  Unconditional peak fraction (reference):   {n_peak_total}/{N_COND_PERMS}  = {p_peak_uncond:.4f}
+
+  INTERPRETATION:
+  If conditional fraction >> unconditional fraction, clustering drives the peak.
+  If roughly equal, clustering adds no extra specificity to the unit result.
+""")
+
+# Significance label strings for macros
+sig_cond  = _sig(p_peak_cond)
+sig_uncond = _sig(p_peak_uncond)
+
+print("  % LaTeX macros (cluster conditional sensitivity subtest):")
+print(f"  \\newcommand{{\\clusterCondN}}{{{N_COND_PERMS}}}          % perms in conditional subtest")
+print(f"  \\newcommand{{\\clusterCondClusterOk}}{{{n_cluster_ok}}}    % perms reproducing observed clustering")
+print(f"  \\newcommand{{\\clusterCondPeakAndCluster}}{{{n_cluster_and_peak}}}    % perms with clustering AND unit peak")
+print(f"  \\newcommand{{\\clusterCondPeakFrac}}{{{p_peak_cond:.4f}}}    % conditional fraction (peak | cluster)")
+print(f"  \\newcommand{{\\clusterCondPeakFracUncond}}{{{p_peak_uncond:.4f}}}    % unconditional peak fraction")
+print(f"  \\newcommand{{\\clusterCondPeakSig}}{{{sig_cond}}}    % significance label, conditional fraction")
+
+ResultsStore().write_many({
+    "clusterCondN":              N_COND_PERMS,
+    "clusterCondClusterOk":      n_cluster_ok,
+    "clusterCondPeakAndCluster": n_cluster_and_peak,
+    "clusterCondPeakFrac":       round(p_peak_cond,   4),
+    "clusterCondPeakFracUncond": round(p_peak_uncond, 4),
+    "clusterCondPeakSig":        sig_cond,
+})

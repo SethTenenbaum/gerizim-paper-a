@@ -54,6 +54,7 @@ print(f"  \\newcommand{{\\JerusalemLon}}{{{JER_LON:.3f}}}  % Jerusalem longitude
 print(f"  \\newcommand{{\\GerizimJerusalemSep}}{{{sep_deg}}}  % Gerizim–Jerusalem separation (degrees, equatorial)")
 print(f"  \\newcommand{{\\GerizimJerusalemKm}}{{{sep_km}}}  % Gerizim–Jerusalem separation (km, equatorial)")
 print(f"  \\newcommand{{\\NwhcTotal}}{{{n_whc}}}  % total UNESCO WHC inscribed sites (all types)")
+print(f"  \\newcommand{{\\NfineSweepSpacings}}{{7}}  % number of spacings in the fine unit sweep (Table tab:unitsweep_fine)")
 
 print()
 print("  ✓ All GROUP 0 constants emitted.")
