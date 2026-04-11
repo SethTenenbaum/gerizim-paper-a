@@ -196,6 +196,11 @@ def main():
     n_survive_fdr  = int(np.sum(bh_q < 0.05))
     n_survive_bonf = int(np.sum(bonf < 0.05))
 
+    # Bonferroni threshold label for the FDR table column header:
+    # NtotalTestsP = 0.05 / m (used as a threshold label, not an adjusted p).
+    bonf_threshold = round(0.05 / m, 4) if m > 0 else 0.0
+    bonf_threshold_fmt = f"{bonf_threshold:.4f}"
+
     print()
     print("  % LaTeX macros (GROUP 19):")
     print(f"  \\newcommand{{\\NtotalTests}}{{{m}}}           % total tests in FDR analysis")
@@ -203,6 +208,62 @@ def main():
     print(f"  \\newcommand{{\\NexplTests}}{{{n_expl}}}           % exploratory tests")
     print(f"  \\newcommand{{\\NsurviveFDR}}{{{n_survive_fdr}}}           % tests surviving BH FDR (q<0.05)")
     print(f"  \\newcommand{{\\NsurviveBonfAll}}{{{n_survive_bonf}}}           % tests surviving Bonferroni (all tests)")
+    print(f"  \\newcommand{{\\NtotalTestsP}}{{{bonf_threshold_fmt}}}  "
+          f"% Bonferroni threshold = 0.05/{m} (used in FDR table header)")
+
+    # ── Per-confirmatory-test BH q-value and Bonferroni macros ───────────────
+    # Emit \FDRqTest{Macro} and \BonfAllTest{Macro} for each test that has
+    # a 'macro' field in config.json → tests → confirmatory.
+    # The macro suffix comes from config so it stays in sync automatically.
+    bonf_family = _CONFIG["tests"]["confirmatory"]
+    # Build a lookup: store_key → (bh_q_value, bonf_adjusted)
+    _key_to_idx = {entry["p_key"]: i for i, entry in enumerate(
+        [{"p_key": tests[i][0]} for i in range(m)]
+    )}
+    # Re-build a proper key → position map from the actual tests list
+    _pkey_to_pos: dict[str, int] = {}
+    for _i, (_label, _p, _cat) in enumerate(tests):
+        # match against registry to find the store key
+        for _entry in registry:
+            if _entry["label"] == _label:
+                _pkey_to_pos[_entry["p_key"]] = _i
+                break
+
+    print()
+    print("  % Per-confirmatory-test BH q-values and full-k Bonferroni:")
+    for e in bonf_family:
+        macro_suffix = e.get("macro")
+        if not macro_suffix:
+            continue
+        p_key = e["p_key"]
+        pos = _pkey_to_pos.get(p_key)
+        if pos is None:
+            print(f"  % MISSING: {p_key} not in store — run {e['script']}")
+            continue
+        q_val  = round(float(bh_q[pos]),  4)
+        bf_val = round(float(bonf[pos]),  4)
+        print(f"  \\newcommand{{\\FDRqTest{macro_suffix}}}{{{q_val}}}  "
+              f"% BH q, Test {e['id']}: {e['label']}")
+        print(f"  \\newcommand{{\\BonfAllTest{macro_suffix}}}{{{bf_val}}}  "
+              f"% Bonf adj (k={m}), Test {e['id']}: {e['label']}")
+
+    # Also emit BonfK (the paper's own Bonferroni family size k) and
+    # per-family-test adjusted p-values under the paper's own k.
+    k_paper = len(bonf_family)
+    family_alpha = _CONFIG["tests"]["family_alpha"]
+    print()
+    print(f"  \\newcommand{{\\BonfK}}{{{k_paper}}}  % paper's own Bonferroni family size")
+    for e in bonf_family:
+        macro_suffix = e.get("macro")
+        if not macro_suffix:
+            continue
+        raw_p = store.read(e["p_key"], default=None)
+        if raw_p is None:
+            print(f"  % MISSING: {e['p_key']} not in store")
+            continue
+        p_adj = round(min(float(raw_p) * k_paper, 1.0), 4)
+        print(f"  \\newcommand{{\\pAdjTest{macro_suffix}}}{{{p_adj}}}  "
+              f"% Bonf adj (k={k_paper}), Test {e['id']}: {e['label']}")
 
     # ── Write summary counts to store ─────────────────────────────────────────
     ResultsStore().write_many({
@@ -210,6 +271,7 @@ def main():
         "NconfTests":      n_conf,
         "NsurviveFDR":     n_survive_fdr,
         "NsurviveBonfAll": n_survive_bonf,
+        "NtotalTestsP":    bonf_threshold,
     })
     print()
     return 0

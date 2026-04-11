@@ -94,10 +94,15 @@ if [ "${1:-}" = "--macros-only" ]; then
         analysis/unesco/tumulus_dome_evolution_raw_sweep.py  # → pEvoAp (Test 2b)
         analysis/unesco/tumulus_dome_evolution_test.py        # → pEvoAp_validated (context-validated, Exploratory 2bx)
         analysis/unesco/leave_one_out_sensitivity.py         # → LOOdomeN/Ap/Rate/Enrich/P, LOOstupaN/Ap/Rate/P
+        analysis/unesco/dome_leave_k_out.py                  # → LKOsiteOne/Two/ThreeName/DevKm, LKOtwo*/three*/worstTwo/ThreeP
         analysis/global/wikidata_p1435_control_analysis.py
         analysis/global/dome_periodicity_audit.py
         analysis/global/x18_periodicity_formal_test.py       # → rayleighR/Z/PermP, fullRayleighR/Z/PermP, maxApCount/Z/PermP (GROUP 11b)
         analysis/americas/americas_harmonic_depletion_audit.py
+        # ── Reviewer robustness checks ────────────────────────────────────
+        analysis/unesco/dome_footprint_window_sensitivity.py   # → geoNullDomeTwoDeg*, geoNullDomeTenDeg*
+        analysis/unesco/stupa_coordinate_perturbation.py       # → stupaCoordPerturb*
+        analysis/unesco/americas_directional_test.py           # → AmericasN, AmericasApCount, AmericasOneSidedP, AmericasDirectional
         # ── Simulation (slow — writes simDomePermP etc.) ──────────────────
         analysis/unesco/simulation_null_model.py
         # ── Unit sweep + sensitivity slope permutation test ───────────────
@@ -244,6 +249,9 @@ run_script "GROUP 20b: Hemispherical Evolution Context-Validated (Exploratory 2b
 run_script "GROUP 20c: Leave-One-Out Sensitivity (Tests 2 & 2b)" \
            analysis/unesco/leave_one_out_sensitivity.py
 
+run_script "GROUP 20d: Leave-2-out / Leave-3-out Stability (dome corpus)" \
+           analysis/unesco/dome_leave_k_out.py
+
 echo "─── GROUP 23: Wikidata P1435 Control Analysis ───"
 if [ "$HAS_P1435" = true ]; then
     python3 analysis/global/wikidata_p1435_control_analysis.py 2>&1 | tail -40
@@ -270,6 +278,15 @@ else
     echo "  SKIPPED — P1435 CSV not found"
 fi
 echo ""
+
+run_script "GROUP 26b: Dome footprint window sensitivity (±2°/±10°)"  \
+           analysis/unesco/dome_footprint_window_sensitivity.py
+
+run_script "GROUP 26c: Stupa coordinate-perturbation sensitivity"      \
+           analysis/unesco/stupa_coordinate_perturbation.py
+
+run_script "GROUP 26d: Americas UNESCO directional test"               \
+           analysis/unesco/americas_directional_test.py
 
 run_script "GROUP 27: Unit Sweep (spacing sensitivity)"            \
            analysis/unesco/unit_sweep_fill.py

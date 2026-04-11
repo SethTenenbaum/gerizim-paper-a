@@ -34,6 +34,12 @@ USAGE
 
 CHANGELOG
 ---------
+  1.1.0 (2026-04-11)
+    - Added Arab States region breakdown macros (GROUP 23g):
+      \\WDctrlArabN, \\WDctrlArabAp, \\WDctrlArabRate.
+      These are descriptive only (P1435 control corpus, not matched
+      against UNESCO Arab States); used in manuscript to ground the
+      Arabian Peninsula observation in code-generated numbers.
   1.0.4 (2026-04-10)
     - BUG FIX: \\WDctrlBinomP was emitted as "0.00" when the binomial
       p-value rounds below 0.01 under :.2f formatting.  Replaced with
@@ -47,7 +53,7 @@ CHANGELOG
 
 from __future__ import annotations
 
-__version__ = "1.0.4"
+__version__ = "1.1.0"
 
 import csv
 import math
@@ -245,6 +251,11 @@ def main():
     else:
         or_noeu = float("inf")
 
+    # (g) Arab States region breakdown (P1435 control only — descriptive)
+    nc_arab  = sum(1 for r in ctrl if r["region"] == "Arab States")
+    kc_arab  = sum(1 for r in ctrl if r["region"] == "Arab States" and r["aplus"])
+    rc_arab  = kc_arab / nc_arab if nc_arab > 0 else 0.0
+
     # ── Print results ─────────────────────────────────────────────────────
     print(f"\n  (a) Binomial (control vs 4% null):  p = {p_binom_c:.4g}")
     print(f"  (b) 2-prop z-test (UNESCO > ctrl):  z = {z:.3f}, p = {p_z:.4f}")
@@ -252,6 +263,7 @@ def main():
     print(f"  (d) Permutation p ({N_PERM:,} draws):  p = {p_perm:.3f}")
     print(f"  (e) Mantel-Haenszel: OR = {mh_or:.3f}, χ² = {mh_chi2:.3f}, p = {mh_p:.4f}")
     print(f"  (f) Drop-Europe OR = {or_noeu:.2f}")
+    print(f"  (g) Arab States (P1435 ctrl): N = {nc_arab:,}, A+ = {kc_arab}, rate = {rc_arab*100:.2f}%")
 
     # ── LaTeX macros ──────────────────────────────────────────────────────
     def fmt_p(p: float, decimals: int = 3) -> str:
@@ -278,6 +290,11 @@ def main():
     print(f"  \\newcommand{{\\WDctrlMHchi}}{{{mh_chi2:.3f}}}          % Mantel-Haenszel chi-sq")
     print(f"  \\newcommand{{\\WDctrlMHp}}{{{mh_p:.4f}}}           % p-value, Mantel-Haenszel test")
     print(f"  \\newcommand{{\\WDctrlDropEuropeOR}}{{{or_noeu:.2f}}}     % OR after dropping European sites")
+    # Arab States region — descriptive only (P1435 control)
+    nc_arab_fmt = f"{nc_arab:,}".replace(",", "{,}")
+    print(f"  \\newcommand{{\\WDctrlArabN}}{{{nc_arab_fmt}}}           % P1435 control: Arab States site count")
+    print(f"  \\newcommand{{\\WDctrlArabAp}}{{{kc_arab}}}            % P1435 control: Arab States A+ count")
+    print(f"  \\newcommand{{\\WDctrlArabRate}}{{{rc_arab*100:.2f}}}          % P1435 control: Arab States A+ rate (%)")
 
     print(f"\n" + "=" * 72)
     print(f"  DONE — all GROUP 23 macros printed above.")

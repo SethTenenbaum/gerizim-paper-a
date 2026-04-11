@@ -167,16 +167,45 @@ macro_pairs = [
 for name, val in macro_pairs:
     print(f"\\newcommand{{\\{name}}}{{{val}}}")
 
+# ── \Nap and \rayleighRPctPhrasing ────────────────────────────────────────────
+# \Nap: total Tier-A+ site count — used throughout the manuscript as a
+#        shorthand for "N = N_ap A+ sites".
+# \rayleighRPctPhrasing: prose description of what R ≈ 1 means geometrically.
+#   Formula: R = |mean unit-vector|, so R = 1 iff all phase angles are identical.
+#   We describe it as the fraction of sites whose phase angle is within a very
+#   small arc of the mean direction (≤ 1% of the full circle, i.e. ≤ 3.6°).
+_phrasing_threshold_deg = 3.0 * 0.01    # 1% of the 3-deg circle = 0.03 deg
+_angles = 2.0 * np.pi * (ap_lons % HARMONIC_STEP_DEG) / HARMONIC_STEP_DEG
+_mean_angle = np.angle(np.mean(np.exp(1j * _angles)))
+_angular_diffs = np.abs(np.angle(np.exp(1j * (_angles - _mean_angle))))
+_within_one_pct = int(np.sum(_angular_diffs <= (2 * np.pi * 0.01)))
+
+# Choose a natural-language phrase that conveys near-unity R:
+if obs_ap_R >= 0.99:
+    _phrasing = "essentially all"
+elif obs_ap_R >= 0.95:
+    _phrasing = "nearly all"
+elif obs_ap_R >= 0.80:
+    _phrasing = "most"
+else:
+    _phrasing = f"{round(100 * obs_ap_R)}\%"
+
+print(f"\\newcommand{{\\Nap}}{{{N_ap}}}  % Tier-A+ count (alias for NclusterAp)")
+print(f"\\newcommand{{\\rayleighRPctPhrasing}}{{{_phrasing}}}  "
+      f"% prose for R={obs_ap_R:.4f}: 'essentially all / nearly all / most'")
+
 ResultsStore().write_many({
-    "fullRayleighR":      float(obs_full_R),
-    "fullRayleighZ":      float(z_full_R),
-    "fullRayleighPermP":  float(p_full_R),
-    "rayleighR":          float(obs_ap_R),
-    "rayleighZ":          float(z_ap_R),
-    "rayleighPermP":      float(p_ap_R),
-    "anchorShiftApCount": int(obs_ap_count),
-    "anchorShiftNullMu":  float(perm_shift_ap.mean()),
-    "anchorShiftZ":       float(z_shift_ap),
-    "anchorShiftPermP":   float(p_shift_ap),
+    "fullRayleighR":        float(obs_full_R),
+    "fullRayleighZ":        float(z_full_R),
+    "fullRayleighPermP":    float(p_full_R),
+    "rayleighR":            float(obs_ap_R),
+    "rayleighZ":            float(z_ap_R),
+    "rayleighPermP":        float(p_ap_R),
+    "anchorShiftApCount":   int(obs_ap_count),
+    "anchorShiftNullMu":    float(perm_shift_ap.mean()),
+    "anchorShiftZ":         float(z_shift_ap),
+    "anchorShiftPermP":     float(p_shift_ap),
+    "Nap":                  int(N_ap),
+    "rayleighRPctPhrasing": _phrasing,
 })
 print("Results written to data/store/results.json")
