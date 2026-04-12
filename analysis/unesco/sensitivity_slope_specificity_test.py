@@ -183,14 +183,19 @@ def main():
     dome_mask = np.array([is_dome_site(s) for s in cultural])
 
     # Recompute using the same approach as sensitivity_slope_permutation_test.py:
-    # work with raw longitudes, not pre-subtracted deviations, since count_hits
-    # uses lib/beru.deviation_at_spacing internally.  Redefine count_hits locally
-    # to use the correct beru logic.
-    # Override count_hits to use the full beru pipeline for accuracy.
-    from lib.beru import deviation_at_spacing
+    # work with raw longitudes, not pre-subtracted deviations, since deviation_at_spacing
+    # uses lib/beru constants internally.
+    from lib.beru import GERIZIM, BERU, deviation_at_spacing
+
+    def _dev_at_spacing_vec(lons_arr: np.ndarray, spacing: float) -> np.ndarray:
+        """Vectorized deviation_at_spacing for an array of raw longitudes."""
+        arc      = np.abs(lons_arr - GERIZIM) / BERU        # beru units
+        nearest  = np.round(arc / spacing) * spacing
+        return np.abs(arc - nearest)
 
     def count_hits_correct(lons: np.ndarray, spacing: float) -> int:
-        return int(sum(deviation_at_spacing(lon, spacing) <= TIER_APLUS for lon in lons))
+        """Vectorized version — identical result to the old scalar loop."""
+        return int(np.sum(_dev_at_spacing_vec(np.asarray(lons), spacing) <= TIER_APLUS))
 
     N_all = len(all_lons_full)
     N_dome = int(dome_mask.sum())
@@ -229,8 +234,20 @@ def main():
     print(f"  Sharp-peak spacing:  {obs_sharp_peak_spacing}")
     print(f"  0.1000 is unique best joint-sig spacing:  {obs_canon_is_best_joint}")
 
-    # ── Permutation loop ───────────────────────────────────────────────────────
-    print(f"\n── Permutation test ({N_PERMS:,} trials) ──")
+    # ── Permutation loop — vectorized over spacings ────────────────────────────
+    print(f"\n── Permutation test ({N_PERMS:,} trials) — vectorized ──")
+
+    spacings_arr   = np.array(FINE_SPACINGS)                             # (S,)
+    null_rates_arr = np.array([null_rate(sp) for sp in FINE_SPACINGS])   # (S,)
+    canon_idx      = FINE_SPACINGS.index(CANONICAL)
+    off_mask       = np.array([sp in OFF_CANONICAL for sp in FINE_SPACINGS])  # (S,)
+
+    def _hits_all_spacings(lons_arr: np.ndarray) -> np.ndarray:
+        """Return (S,) integer hit counts for all spacings simultaneously."""
+        arc     = np.abs(lons_arr[:, None] - GERIZIM) / BERU            # (n, S)
+        nearest = np.round(arc / spacings_arr) * spacings_arr            # (n, S)
+        dev     = np.abs(arc - nearest)                                  # (n, S)
+        return (dev <= TIER_APLUS).sum(axis=0).astype(int)               # (S,)
 
     # stat 1: fraction where canonical is unique best joint-sig spacing
     n_canon_best_joint = 0
@@ -241,18 +258,26 @@ def main():
     n_sharp_peak_at_canon = 0
 
     for i in range(N_PERMS):
-        perm_lons = rng.permutation(all_lons_full)
+        perm_lons      = rng.permutation(all_lons_full)
         perm_dome_lons = perm_lons[dome_mask]
 
-        perm_scores = []
-        for sp in FINE_SPACINGS:
-            nr = null_rate(sp)
-            d_hits = count_hits_correct(perm_dome_lons, sp)
-            f_hits = count_hits_correct(perm_lons, sp)
-            d_p = binomtest(d_hits, N_dome, nr, alternative='greater').pvalue
-            f_p = binomtest(f_hits, N_all, nr, alternative='greater').pvalue
-            combined = -np.log10(max(d_p, 1e-15)) + -np.log10(max(f_p, 1e-15))
-            perm_scores.append((sp, d_p, f_p, combined))
+        d_hits = _hits_all_spacings(perm_dome_lons)   # (S,)
+        f_hits = _hits_all_spacings(perm_lons)         # (S,)
+
+        # Compute p-values for all spacings at once
+        d_pvals = np.array([binomtest(int(d_hits[j]), N_dome, null_rates_arr[j],
+                                      alternative='greater').pvalue
+                            for j in range(len(FINE_SPACINGS))])
+        f_pvals = np.array([binomtest(int(f_hits[j]), N_all, null_rates_arr[j],
+                                      alternative='greater').pvalue
+                            for j in range(len(FINE_SPACINGS))])
+        combined   = (-np.log10(np.maximum(d_pvals, 1e-15))
+                      - np.log10(np.maximum(f_pvals, 1e-15)))            # (S,)
+        joint_sig  = (d_pvals < ALPHA) & (f_pvals < ALPHA)              # (S,)
+
+        # Build scores list for compatibility with helpers
+        perm_scores = [(FINE_SPACINGS[j], d_pvals[j], f_pvals[j], combined[j])
+                       for j in range(len(FINE_SPACINGS))]
 
         # stat 1
         perm_peak_sp = sharp_peak_spacing(perm_scores)

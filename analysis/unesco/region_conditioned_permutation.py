@@ -114,6 +114,7 @@ def main():
     print(f"  \\newcommand{{\\regionCondNperms}}{{{N_PERMS:,}}}        % permutations")
     print(f"  \\newcommand{{\\regionCondBPermP}}{{{fmt_p(res_b['p_val'])}}}     % Strategy B p")
     print(f"  \\newcommand{{\\regionCondBPermZ}}{{{fmt_z(res_b['z_val'])}}}      % Strategy B Z")
+    print(f"  \\newcommand{{\\regionCondBNblocks}}{{{res_b['n_groups']}}}         % Strategy B blocks")
 
     ResultsStore().write_many({
         "regionCondPermP":    res_a["p_val"],
@@ -125,6 +126,7 @@ def main():
         "regionCondNperms":   N_PERMS,
         "regionCondBPermP":   res_b["p_val"],
         "regionCondBPermZ":   res_b["z_val"],
+        "regionCondBNblocks": res_b["n_groups"],
     })
     print("\n  Results written to store.")
 

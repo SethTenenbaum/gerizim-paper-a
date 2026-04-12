@@ -270,6 +270,13 @@ print(f"  \\newcommand{{\\anchorSweepJerApPct}}{{{pct_above_jer:.2f}}}          
 
 # ── Write to results store ────────────────────────────────────────────────────
 ResultsStore().write_many({
-    "anchorSweepPctile":  pctile_ger,    # Gerizim percentile in A+ anchor sweep
-    "anchorSweepGeApPct": pct_above_ger, # % anchors beating Gerizim
+    "anchorSweepPctile":    pctile_ger,    # Gerizim percentile in A+ anchor sweep
+    "anchorSweepGeApPct":   pct_above_ger, # % anchors beating Gerizim
+    "anchorSweepGlobalMaxA": int(global_max_A),  # max A+ at any anchor, Sweep A (Jerusalem removed)
+    "anchorSweepGlobalMaxB": int(global_max_B),  # max A+ at any anchor, Sweep B (Jerusalem kept)
+    "anchorSweepNsweep":     int(N_A),            # N for Sweep A corpus
+    "pX18BinomA":            float(p_x18_A),      # binomial p for global max, Sweep A
+    "pX18BinomB":            float(p_x18_B),      # binomial p for global max, Sweep B
+    "anchorSweepApMeanRaw":  float(np.mean(ap_A)),
+    "anchorSweepApStdRaw":   float(np.std(ap_A)),
 })

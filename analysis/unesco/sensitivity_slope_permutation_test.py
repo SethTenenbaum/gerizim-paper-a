@@ -60,21 +60,33 @@ def null_rate_at_spacing(tier_aplus, spacing):
     return 2 * tier_aplus / spacing
 
 
+# ── Vectorized helpers ────────────────────────────────────────────────────────
+
+def _deviation_at_spacing_vec(lons: np.ndarray, spacing: float,
+                               anchor: float = GERIZIM, beru: float = BERU) -> np.ndarray:
+    """Vectorized deviation_at_spacing for an array of longitudes."""
+    arc = np.abs(lons - anchor)
+    beru_val = arc / beru
+    nearest = np.round(beru_val / spacing) * spacing
+    return np.abs(beru_val - nearest)
+
+
+def count_hits_vec(lons: np.ndarray, spacing: float) -> int:
+    """Count sites within TIER_APLUS of the nearest harmonic (vectorized)."""
+    return int(np.sum(_deviation_at_spacing_vec(lons, spacing) <= TIER_APLUS))
+
+
+# Keep scalar version for compatibility (used by observed-pattern block)
 def count_hits_array(lons, spacing):
     """Count sites within TIER_APLUS of the nearest harmonic at given spacing."""
-    hits = 0
-    for lon in lons:
-        dev = deviation_at_spacing(lon, spacing)
-        if dev <= TIER_APLUS:
-            hits += 1
-    return hits
+    return count_hits_vec(np.asarray(lons), spacing)
 
 
 def joint_significant(dome_lons, all_lons, spacing):
     """Return (dome_p, full_p, is_joint_sig)."""
     nr = null_rate_at_spacing(TIER_APLUS, spacing)
-    d_hits = count_hits_array(dome_lons, spacing)
-    f_hits = count_hits_array(all_lons, spacing)
+    d_hits = count_hits_vec(np.asarray(dome_lons), spacing)
+    f_hits = count_hits_vec(np.asarray(all_lons), spacing)
     d_p = binomtest(d_hits, len(dome_lons), nr, alternative='greater').pvalue
     f_p = binomtest(f_hits, len(all_lons), nr, alternative='greater').pvalue
     return d_p, f_p, (d_p < THRESHOLD and f_p < THRESHOLD)
@@ -113,24 +125,48 @@ def main():
           f"all off-canonical collapsed={obs_off_all_collapsed}, "
           f"sharp-peak={obs_sharp_peak}")
 
-    # ── Permutation loop ───────────────────────────────────────────────────
-    print(f"\n── Permutation test ({N_PERMS:,} trials) ──")
-    n_canonical_joint = 0   # permutations where canonical is jointly significant
-    n_sharp_peak = 0        # permutations with the full sharp-peak pattern
+    # ── Vectorized permutation loop ────────────────────────────────────────
+    # Pre-compute null rates and off-canonical mask (constant across trials)
+    spacings_arr    = np.array(FINE_SPACINGS)                    # (S,)
+    null_rates      = np.array([null_rate_at_spacing(TIER_APLUS, sp) for sp in FINE_SPACINGS])
+    canon_idx       = FINE_SPACINGS.index(CANONICAL)
+    off_canon_mask  = np.array([sp in OFF_CANONICAL for sp in FINE_SPACINGS])   # (S,)
+
+    def _hits_matrix(lons_arr: np.ndarray) -> np.ndarray:
+        """Return (S,) int array of hit counts for each spacing."""
+        # lons_arr: (n,)  spacings_arr: (S,) -> broadcasts to (n, S)
+        arc     = np.abs(lons_arr[:, None] - GERIZIM) / BERU            # (n, S) beru-val
+        nearest = np.round(arc / spacings_arr) * spacings_arr            # (n, S)
+        dev     = np.abs(arc - nearest)                                  # (n, S)
+        hits    = (dev <= TIER_APLUS).sum(axis=0)                        # (S,)
+        return hits
+
+    print(f"\n── Permutation test ({N_PERMS:,} trials) — vectorized ──")
+    n_canonical_joint = 0
+    n_sharp_peak = 0
+
+    N_dome_int = int(dome_mask.sum())
+    N_all_int  = len(all_lons)
 
     for i in range(N_PERMS):
-        perm_lons = rng.permutation(all_lons)
+        perm_lons      = rng.permutation(all_lons)
         perm_dome_lons = perm_lons[dome_mask]
 
-        canon_joint = False
-        off_collapsed = True
+        d_hits = _hits_matrix(perm_dome_lons)   # (S,)
+        f_hits = _hits_matrix(perm_lons)         # (S,)
 
-        for sp in FINE_SPACINGS:
-            d_p, f_p, joint = joint_significant(perm_dome_lons, perm_lons, sp)
-            if sp == CANONICAL and joint:
-                canon_joint = True
-            if sp in OFF_CANONICAL and joint:
-                off_collapsed = False
+        # Compute p-values for all spacings at once
+        from scipy.stats import binomtest as _bt
+        d_pvals = np.array([_bt(int(d_hits[j]), N_dome_int, null_rates[j],
+                                alternative='greater').pvalue
+                            for j in range(len(FINE_SPACINGS))])
+        f_pvals = np.array([_bt(int(f_hits[j]), N_all_int, null_rates[j],
+                                alternative='greater').pvalue
+                            for j in range(len(FINE_SPACINGS))])
+        joint_sig = (d_pvals < THRESHOLD) & (f_pvals < THRESHOLD)   # (S,) bool
+
+        canon_joint  = bool(joint_sig[canon_idx])
+        off_collapsed = not bool(joint_sig[off_canon_mask].any())
 
         if canon_joint:
             n_canonical_joint += 1

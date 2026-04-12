@@ -168,6 +168,24 @@ def main():
     from scipy.stats import binomtest as _binom
     mecca_p = _binom(mecca_ap, len(sites), 0.04, alternative="greater").pvalue
 
+    # ── Mt. Meru A+ count (Tanzania; 36.750°E) ────────────────────────────
+    # Physical Mt. Meru, Tanzania. The cosmological/Hindu "Mt. Meru" has no
+    # fixed longitude; the most cited geographic candidate is Mt. Kailash
+    # (81.312°E, Tibet), tested separately below.
+    MERU_LON    = 36.750
+    KAILASH_LON = 81.312
+    def _anchor_ap(anchor_lon):
+        arcs = np.abs(lons - anchor_lon)
+        arcs = np.minimum(arcs, 360 - arcs)
+        bvs  = arcs / BERU
+        near = np.round(bvs * 10) / 10
+        devs = np.abs(bvs - near)
+        ap   = int(np.sum(devs <= TIER_APLUS))
+        p    = _binom(ap, len(sites), 0.04, alternative="greater").pvalue
+        return ap, p
+    meru_ap,    meru_p    = _anchor_ap(MERU_LON)
+    kailash_ap, kailash_p = _anchor_ap(KAILASH_LON)
+
     print("=" * 72)
     print("  GROUP 16 — Anchor-Comparison Macros")
     print("  Script: analysis/global/anchor_site_comparison.py")
@@ -309,6 +327,20 @@ def main():
     print(f"  \\newcommand{{\\JerusalemAp}}{{{jer_ap_count}}}  % Jerusalem A+ count (self-excluded corpus)")
     print(f"  \\newcommand{{\\MeccaAp}}{{{mecca_ap}}}  % Mecca A+ count (full corpus)")
     print(f"  \\newcommand{{\\pMeccaAnchor}}{{{mecca_p:.3f}}}  % p-value, Mecca binomial (A+, one-sided)")
+    print(f"  \\newcommand{{\\MeruAp}}{{{meru_ap}}}  % Mt. Meru (Tanzania, 36.750E) A+ count")
+    print(f"  \\newcommand{{\\pMeruAnchor}}{{{meru_p:.3f}}}  % p-value, Mt. Meru binomial (A+, one-sided)")
+    print(f"  \\newcommand{{\\KailashAp}}{{{kailash_ap}}}  % Mt. Kailash (81.312E) A+ count")
+    print(f"  \\newcommand{{\\pKailashAnchor}}{{{kailash_p:.3f}}}  % p-value, Kailash binomial (A+, one-sided)")
+
+    ResultsStore = __import__("lib.results_store", fromlist=["ResultsStore"]).ResultsStore
+    ResultsStore().write_many({
+        "MeccaAp":       mecca_ap,
+        "pMeccaAnchor":  mecca_p,
+        "MeruAp":        meru_ap,
+        "pMeruAnchor":   meru_p,
+        "KailashAp":     kailash_ap,
+        "pKailashAnchor": kailash_p,
+    })
 
     print("\n" + "=" * 72)
     print("  DONE — GROUP 16, 22, 23, 24 macros printed above.")
