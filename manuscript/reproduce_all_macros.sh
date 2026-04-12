@@ -98,6 +98,8 @@ if [ "${1:-}" = "--macros-only" ]; then
         analysis/global/wikidata_p1435_control_analysis.py
         analysis/global/dome_periodicity_audit.py
         analysis/global/x18_periodicity_formal_test.py       # → rayleighR/Z/PermP, fullRayleighR/Z/PermP, maxApCount/Z/PermP (GROUP 11b)
+        analysis/global/x18_max_permutation_test.py          # → anchorMaxPermObsMax/NullMu/NullSD/Z/P/Nperms/BootMu/BootSD/BootZ/BootP (GROUP 11c)
+        analysis/global/x18_optimal_band_significance.py     # → x18OptApCount/B/N/BinomP/B/Enrich/B  (GROUP 11d)
         analysis/americas/americas_harmonic_depletion_audit.py
         # ── Reviewer robustness checks ────────────────────────────────────
         analysis/unesco/dome_footprint_window_sensitivity.py   # → geoNullDomeTwoDeg*, geoNullDomeTenDeg*
@@ -310,6 +312,13 @@ run_script "GROUP 24: Dome Periodicity Audit"                      \
 echo "─── GROUP 24b: x.18° Periodicity Formal Test (may take ~30 seconds) ───"
 python3 analysis/global/x18_periodicity_formal_test.py 2>&1 | tail -40
 echo ""
+
+echo "─── GROUP 24c: x.18° Discovery-Corrected Max-Permutation Test (may take several minutes) ───"
+python3 analysis/global/x18_max_permutation_test.py 2>&1 | tail -40
+echo ""
+
+run_script "GROUP 24d: x.18° Optimal Band Binomial Significance (reads store)" \
+           analysis/global/x18_optimal_band_significance.py
 
 echo "─── GROUP 25: Simulation Null Model (may take several minutes) ───"
 python3 analysis/unesco/simulation_null_model.py 2>&1 | tail -40

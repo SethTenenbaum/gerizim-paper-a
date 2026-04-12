@@ -200,11 +200,19 @@ paper would not exist in its current form.
 
 \textbf{The protocol.}
 \emph{This identification problem cannot be closed by any statistical method
-applied to this corpus.} There is no way to demonstrate after the fact
-whether the $x.18$\textdegree{}E phase was discovered before or after
-Gerizim was chosen as the anchor; even a time-stamped archive cannot resolve
-this because the internal sequence of analysis steps is unverifiable by any
-external party.
+applied to this corpus.} There is no way to demonstrate whether the 
+$x.18$\textdegree{}E phase was discovered before or after Gerizim was chosen
+as the anchor; even a time-stamped archive cannot resolve this because the
+internal sequence of analysis steps is unverifiable by any external party.
+Because the longitude axis is finite and fully enumerable, a historically
+named location falling near a significant phase by chance is statistically
+expected, regardless of whether any metrological practice ever existed.
+The evidential weight therefore depends on how many of the
+\anchorSweepNanchors{} candidate anchors could plausibly be considered
+historically motivated: a small set (Gerizim, Jerusalem, Mecca, Mt.\ Meru)
+reduces the effective multiplicity, but does not eliminate that multiplicity
+to zero, and no purely spatial test can distinguish a real ancient grid from
+a coincidence within a bounded search space.
 Accordingly:
 \begin{enumerate}[label=(\alph*)]
   \item All results are treated as \emph{exploratory} without exception.
@@ -316,7 +324,11 @@ of Gerizim, is an inscribed corpus member. It is self-excluded when used as
 anchor and produces the same A+ count (\S\ref{sec:sensitivity_global}).
 The enrichment belongs to the \GerizimJerusalemKm~km corridor, not to the
 specific choice of anchor within it.
-Mecca reaches only $p \approx 0.057$ (ns).
+Mecca reaches only $p \approx \pMeccaAnchor$ (ns);
+Mt.\ Meru (Tanzania, 36.750\textdegree{}E) reaches $p \approx \pMeruAnchor$ (ns)
+and Mt.\ Kailash, the most cited geographic candidate for the cosmological
+axis mundi, reaches $p \approx \pKailashAnchor$ (ns).
+Neither alternative anchor approaches significance.
 
 \subsection{Interpretive Framework}
 \label{sec:framework}
@@ -1309,34 +1321,37 @@ that most constrains this interpretation.
 
 Code: \texttt{peak\_geography\_audit.py}, \texttt{verify\_x18\_periodicity.py}.
 
-\subsubsection*{Formal statistical test for the $x.18$\textdegree{} periodicity}
+\subsubsection*{Formal statistical tests for the $x.18$\textdegree{} periodicity}
 \label{sec:x18_formal}
 
-Three permutation tests (10,000 shuffles, seed~42;
-code: \texttt{analysis/global/\allowbreak x18\_periodicity\_formal\_test.py}):
+Four permutation tests (10,000 shuffles, seed~42;
+code: \texttt{analysis/global/x18\_periodicity\_formal\_test.py},
+\texttt{x18\_max\_permutation\_test.py}):
 
-\textbf{Test~A (full-corpus Rayleigh~$R$, mod~3\textdegree{}).}
+\textbf{Test~A (full-corpus Rayleigh~$R$).}
 $R = \fullRayleighR$, $Z = \fullRayleighZ$,
-$p_\mathrm{perm} = \fullRayleighPermP$ (ns). No spurious global
-periodicity in the raw longitude distribution.
+$p_\mathrm{perm} = \fullRayleighPermP$ (ns): no spurious global periodicity
+in the raw longitude distribution.
 
 \textbf{Test~B (A+-only Rayleigh~$R$).}
-Because A+ sites are classified by the 0.002-beru threshold, near-perfect
-$R$ is structurally expected and does not independently confirm periodicity.
-The permutation null (random draw of \Nap{} longitudes) does not reproduce
-the observed concentration: $R = \rayleighR$, $Z = \rayleighZ$,
-$p_\mathrm{perm} = \rayleighPermP$ ($p < 0.0001$).
+A+ site concentration on harmonics is structurally expected by definition;
+it confirms self-consistency, not independent periodicity
+($R = \rayleighR$, $Z = \rayleighZ$, $p_\mathrm{perm} = \rayleighPermP$).
 
 \textbf{Test~C (circular-shift anchor null).}
 A randomly placed anchor recovers only $\sim\!\anchorShiftNullMu$ A+ on
 average versus \anchorShiftApCount{} at Gerizim
 ($Z = \anchorShiftZ$, $p_\mathrm{perm} = \anchorShiftPermP$, *).
+The result is the sole test providing positive evidence that the observed A+
+enrichment depends specifically on the Gerizim anchor rather than on geographic
+concentration alone.
 
-Together, these tests confirm that the 3\textdegree{} structure is a real
-property of the corpus and that the $x.18$\textdegree{}E phase is
-specifically aligned with the data.
-
-Code: \texttt{analysis/global/\allowbreak x18\_periodicity\_formal\_test.py}.
+\textbf{Test~D (discovery-corrected max-permutation).}
+\label{sec:x18_optband}
+The naive binomial for the sweep optimum ($p = \xOptBandBinomP$, **) does not
+account for the \anchorSweepNanchors{}-anchor search; once corrected,
+the observed maximum of \anchorMaxPermObsMax{} is within the expected range
+($Z=\anchorMaxPermZ$, $p=\anchorMaxPermP$, ns).
 \label{sec:dome_periodicity}
 
 \textbf{Dome-specific periodicity audit}

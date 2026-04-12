@@ -1,4 +1,4 @@
-% Generated macros — 2026-04-11T16:29:06Z
+% Generated macros — 2026-04-12T17:57:01Z
 % Source: bash manuscript/reproduce_all_macros.sh --macros-only
 % IMPORTANT: values are computed fresh each run — do NOT hardcode
 
@@ -10,6 +10,7 @@
   \newcommand{\GerizimJerusalemSep}{0.037}  % Gerizim–Jerusalem separation (degrees, equatorial)
   \newcommand{\GerizimJerusalemKm}{4.1}  % Gerizim–Jerusalem separation (km, equatorial)
   \newcommand{\NwhcTotal}{1248}  % total UNESCO WHC inscribed sites (all types)
+  \newcommand{\NclusterTotalPreCoord}{1013}  % Cultural+Mixed before coordinate filter
   \newcommand{\NfineSweepSpacings}{7}  % number of spacings in the fine unit sweep (Table tab:unitsweep_fine)
 
 % --- analysis/global/geodesic_sensitivity.py
@@ -52,64 +53,6 @@
   \newcommand{\pCircAValidated}{0.0098}   % p-value, A binomial (context-validated dome corpus)
 
 % --- analysis/unesco/cluster_asymmetry_test.py
-
-% --- analysis/unesco/harmonic_density_attractor_test.py
-
-% --- analysis/unesco/unesco_buddhist_heritage_test.py
-
-% --- analysis/unesco/origin_sites_test.py
-
-% --- analysis/unesco/founding_sites_analysis.py
-
-% --- analysis/unesco/sacred_origin_test.py
-
-% --- analysis/unesco/meta_keyword_test.py
-
-% --- analysis/unesco/temporal_gradient_test.py
-
-% --- analysis/unesco/deep_temporal_analysis.py
-
-% --- analysis/global/anchor_uniqueness_audit.py
-
-% --- analysis/unesco/verify_x18_periodicity.py
-
-% --- analysis/global/peak_geography_audit.py
-
-% --- analysis/global/landmark_anchor_ranking.py
-
-% --- analysis/global/global_corridor_comparison.py
-
-% --- analysis/global/corridor_precision_test.py
-
-% --- analysis/global/anchor_site_comparison.py
-
-% --- analysis/unesco/spatial_independence_test.py
-
-% --- analysis/unesco/regional_temporal_gradient.py
-
-% --- analysis/unesco/tumulus_dome_evolution_raw_sweep.py
-
-% --- analysis/unesco/tumulus_dome_evolution_test.py
-
-% --- analysis/unesco/leave_one_out_sensitivity.py
-
-% --- analysis/unesco/dome_leave_k_out.py
-
-% --- analysis/global/wikidata_p1435_control_analysis.py
-
-% --- analysis/global/dome_periodicity_audit.py
-
-% --- analysis/global/x18_periodicity_formal_test.py
-
-% --- analysis/americas/americas_harmonic_depletion_audit.py
-
-% --- analysis/unesco/dome_footprint_window_sensitivity.py
-
-% --- analysis/unesco/stupa_coordinate_perturbation.py
-
-% --- analysis/unesco/americas_directional_test.py
-
-% --- analysis/unesco/simulation_null_model.py
   \newcommand{\NclusterTotal}{1011}          % full Cultural/Mixed corpus
   \newcommand{\NclusterAp}{56}              % Tier-A+ sites
   \newcommand{\clusterApRate}{5.5}           % A+ rate (%)
@@ -493,6 +436,10 @@
   \newcommand{\JerusalemAp}{56}  % Jerusalem A+ count (self-excluded corpus)
   \newcommand{\MeccaAp}{51}  % Mecca A+ count (full corpus)
   \newcommand{\pMeccaAnchor}{0.057}  % p-value, Mecca binomial (A+, one-sided)
+  \newcommand{\MeruAp}{44}  % Mt. Meru (Tanzania, 36.750E) A+ count
+  \newcommand{\pMeruAnchor}{0.305}  % p-value, Mt. Meru binomial (A+, one-sided)
+  \newcommand{\KailashAp}{46}  % Mt. Kailash (81.312E) A+ count
+  \newcommand{\pKailashAnchor}{0.206}  % p-value, Kailash binomial (A+, one-sided)
 
 % --- analysis/unesco/spatial_independence_test.py
   \newcommand{\DEFFhalf}{1.310}          % design effect (DEFF), half-degree blocks
@@ -643,11 +590,28 @@
 \newcommand{\Nap}{56}  % Tier-A+ count (alias for NclusterAp)
 \newcommand{\rayleighRPctPhrasing}{essentially all}  % prose for R=0.9972: 'essentially all / nearly all / most'
 
+% --- analysis/global/x18_max_permutation_test.py
+\newcommand{\anchorMaxPermObsMax}{59}
+\newcommand{\anchorMaxPermNullMu}{57.17}
+\newcommand{\anchorMaxPermNullSD}{3.17}
+\newcommand{\anchorMaxPermZ}{0.58}
+\newcommand{\anchorMaxPermP}{0.2966}
+\newcommand{\anchorMaxPermNperms}{10{,}000}
+\newcommand{\anchorMaxPermBootMu}{66.32}
+\newcommand{\anchorMaxPermBootSD}{4.72}
+\newcommand{\anchorMaxPermBootZ}{-1.55}
+\newcommand{\anchorMaxPermBootP}{0.9783}
+
+% --- analysis/global/x18_optimal_band_significance.py
+\newcommand{\xOptBandApCount}{59}
+\newcommand{\xOptBandApCountB}{60}
+\newcommand{\xOptBandN}{1010}
+\newcommand{\xOptBandBinomP}{0.0030}
+\newcommand{\xOptBandBinomPB}{0.0019}
+\newcommand{\xOptBandEnrich}{1.46}
+\newcommand{\xOptBandEnrichB}{1.49}
+
 % --- analysis/americas/americas_harmonic_depletion_audit.py
-
-% --- analysis/unesco/unit_sweep_fill.py
-
-% --- analysis/unesco/sensitivity_slope_permutation_test.py
   \newcommand{\AmericasCtrlN}{20469}          % Americas control corpus size
   \newcommand{\AmericasCtrlAp}{104}           % A+ hits in Americas control
   \newcommand{\AmericasCtrlRate}{0.508}         % A+ rate, Americas control (%)
@@ -680,28 +644,15 @@
   \newcommand{\AmericasDirectional}{in}
 
 % --- analysis/unesco/simulation_null_model.py
-
-% --- analysis/unesco/sensitivity_slope_specificity_test.py
-
-% --- analysis/unesco/dome_geographic_concentration_test.py
-
-% --- analysis/unesco/stupa_geographic_concentration_test.py
-
-% --- analysis/unesco/dome_founding_stratification.py
-
-% --- analysis/unesco/fdr_multiple_comparisons.py
-
-% --- analysis/unesco/bonferroni_correction.py
-
   \newcommand{\simNperms}{100{,}000}        % number of permutations in null model
-  \newcommand{\simDomePermZ}{3.20}         % permutation Z-score, dome corpus
+  \newcommand{\simDomePermZ}{3.21}         % permutation Z-score, dome corpus
   \newcommand{\simDomePermP}{0.004}          % permutation p, dome corpus
   \newcommand{\simDomeBootP}{0.006}          % bootstrap p, dome corpus
   \newcommand{\simCanonPermP}{0.127}         % permutation p, canonical sites
   \newcommand{\simPreTwoKPermP}{0.094}        % permutation p, pre-2000 BCE sites
-  \newcommand{\simPostTwoKPermP}{0.944}       % permutation p, post-2000 BCE sites
+  \newcommand{\simPostTwoKPermP}{0.945}       % permutation p, post-2000 BCE sites
   \newcommand{\simKDEZ}{2.50}           % KDE-based Z-score, null model
-  \newcommand{\simKDEP}{0.011}           % KDE-based p-value, null model
+  \newcommand{\simKDEP}{0.010}           % KDE-based p-value, null model
   \newcommand{\simBootFullMean}{56.0}         % bootstrap mean A+, full corpus
   \newcommand{\simBootFullStd}{7.3}          % bootstrap std A+, full corpus
   \newcommand{\simKDEMean}{40.4}           % KDE null-model mean A+
@@ -767,6 +718,18 @@
   \newcommand{\domeStratFisherOR}{2.50}          % Fisher OR, F/S vs non-F/S
   \newcommand{\domeStratFisherP}{0.1471}         % Fisher p, F/S vs non-F/S
 
+% --- analysis/unesco/region_conditioned_permutation.py
+  \newcommand{\regionCondPermP}{1.0000}     % Strategy A p
+  \newcommand{\regionCondPermZ}{---}      % Strategy A Z
+  \newcommand{\regionCondPermObs}{56}              % observed A+
+  \newcommand{\regionCondPermMean}{56.0}     % Strategy A perm mean
+  \newcommand{\regionCondPermStd}{0.0}      % Strategy A perm std
+  \newcommand{\regionCondNregions}{34}          % Strategy A groups
+  \newcommand{\regionCondNperms}{100,000}        % permutations
+  \newcommand{\regionCondBPermP}{1.0000}     % Strategy B p
+  \newcommand{\regionCondBPermZ}{---}      % Strategy B Z
+  \newcommand{\regionCondBNblocks}{61}         % Strategy B blocks
+
 % --- analysis/unesco/fdr_multiple_comparisons.py
   \newcommand{\NtotalTests}{43}           % total tests in FDR analysis
   \newcommand{\NconfTests}{38}           % confirmatory tests
@@ -774,7 +737,7 @@
   \newcommand{\NsurviveFDR}{24}           % tests surviving BH FDR (q<0.05)
   \newcommand{\NsurviveBonfAll}{6}           % tests surviving Bonferroni (all tests)
   \newcommand{\NtotalTestsP}{0.0012}  % Bonferroni threshold = 0.05/43 (used in FDR table header)
-  \newcommand{\FDRqTestOne}{0.0261}  % BH q, Test 1: Global enrichment — full corpus A+ (binomial)
+  \newcommand{\FDRqTestOne}{0.0246}  % BH q, Test 1: Global enrichment — full corpus A+ (binomial)
   \newcommand{\BonfAllTestOne}{0.4429}  % Bonf adj (k=43), Test 1: Global enrichment — full corpus A+ (binomial)
   \newcommand{\FDRqTestTwo}{0.0068}  % BH q, Test 2: Domed/spherical A+ — RAW sweep (binomial)
   \newcommand{\BonfAllTestTwo}{0.0407}  % Bonf adj (k=43), Test 2: Domed/spherical A+ — RAW sweep (binomial)
@@ -782,14 +745,6 @@
   \newcommand{\BonfAllTestThree}{0.1419}  % Bonf adj (k=43), Test 3: Cluster asymmetry — permutation p
   \newcommand{\FDRqTestFour}{0.0751}  % BH q, Test 4: Temporal gradient (Cochran-Armitage 3-cohort)
   \newcommand{\BonfAllTestFour}{1.0}  % Bonf adj (k=43), Test 4: Temporal gradient (Cochran-Armitage 3-cohort)
-
-% --- analysis/unesco/region_conditioned_permutation.py
-  \newcommand{\regionCondPermObs}{56}       % observed A+ count
-  \newcommand{\regionCondPermMean}{56.0}    % Strategy A permutation mean
-  \newcommand{\regionCondPermStd}{0.0}      % Strategy A permutation std
-  \newcommand{\regionCondNregions}{34}      % Strategy A groups (region × 20° bin)
-  \newcommand{\regionCondNperms}{100{,}000} % number of permutation trials
-  \newcommand{\regionCondBNblocks}{61}      % Strategy B blocks (5° global bins)
 
 % --- analysis/unesco/bonferroni_correction.py
   \newcommand{\BonfK}{4}  % k = confirmatory tests (Tests 1, 2, 3, 4)
