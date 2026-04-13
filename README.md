@@ -16,7 +16,7 @@ spherical monumental heritage sites in the UNESCO World Heritage List are
 non-randomly concentrated near integer-multiple longitudes of the Babylonian
 *beru* (30° of arc) measured from Mount Gerizim (35.269°E).
 
-The confirmatory test finds that **domed/spherical UNESCO monuments** cluster
+The primary exploratory test finds that **domed/spherical UNESCO monuments** cluster
 on beru harmonics at rates significantly exceeding the geometric null
 (binomial *p* < 0.001), with supporting evidence from a temporal gradient
 (pre-2000 vs. post-2000 inscription cohorts), morphological evolution
@@ -41,7 +41,7 @@ gerizim-paper-a/
 │
 ├── analysis/
 │   ├── unesco/                       # Primary UNESCO corpus tests
-│   │   ├── spherical_monument_raw_sweep.py        # Test 2: Dome enrichment (confirmatory)
+│   │   ├── spherical_monument_raw_sweep.py        # Test 2: Dome enrichment (primary)
 │   │   ├── spherical_monument_test.py             # Test 2x: Dome enrichment (context-validated)
 │   │   ├── cluster_asymmetry_test.py              # Test 3: Phase-split cluster asymmetry
 │   │   ├── temporal_gradient_test.py              # Test 4: Temporal gradient
@@ -295,7 +295,7 @@ Or individually:
 # Unit tests
 pytest
 
-# Primary confirmatory test (Test 2: Dome enrichment)
+# Primary test (Test 2: Dome enrichment)
 python3 analysis/unesco/spherical_monument_raw_sweep.py
 
 # Temporal gradient (Test 4)
