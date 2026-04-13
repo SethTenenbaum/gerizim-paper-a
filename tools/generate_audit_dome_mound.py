@@ -25,6 +25,7 @@ from lib.dome_filter import (
     AMBIGUOUS_KEYWORDS   as DOME_AMB,
     FORM_KEYWORD_RES,
     validate_keyword_match as dome_validate,
+    rejection_reason,
 )
 
 OUT = Path(__file__).parent.parent / "supplementary" / "audit" / "dome_mound_keyword_audit.txt"
@@ -63,17 +64,28 @@ def form_sentences(text, kw):
     return [s.strip() for s in re.split(r"(?<=[.!?])\s+", text) if pat.search(s)]
 
 def validate(text_orig, kw):
-    """Return (accepted: bool, verdict: str)."""
+    """Return (accepted: bool, verdict: str, reject_reason: str|None)."""
     if kw in DOME_UNAMB or kw in MOUND_UNAMB:
-        return True, "unambiguous"
+        return True, "unambiguous", None
     if kw in DOME_AMB:
         ok, _, _note = dome_validate(text_orig, kw)
-        return ok, "context-validated" if ok else "REJECTED"
+        if ok:
+            return True, "context-validated", None
+        # Find first matching sentence and explain rejection
+        kw_re = KW_RES[kw]
+        sents = [s.strip() for s in re.split(r"(?<=[.!?])\s+", text_orig)
+                 if kw_re.search(s)]
+        reason = rejection_reason(sents[0]) if sents else "no matching sentence found"
+        return False, "REJECTED", reason
     if kw == "mound":
         sents = form_sentences(text_orig, kw)
         ok = any(any(p.search(s) for p in MOUND_POS_RES) for s in sents)
-        return ok, "mound+arch.context" if ok else "REJECTED"
-    return True, "unambiguous"
+        if ok:
+            return True, "mound+arch.context", None
+        reason = ("no archaeological-context co-occurrence"
+                  if sents else "no matching sentence found")
+        return False, "REJECTED", reason
+    return True, "unambiguous", None
 
 def run():
     corpus = load_corpus()
@@ -90,8 +102,8 @@ def run():
         if not hits:
             continue
 
-        validated = {k: validate(txt, k) for k in hits}
-        accepted_keys = [k for k, (ok, _) in validated.items() if ok]
+        validated_full = {k: validate(txt, k) for k in hits}
+        accepted_keys = [k for k, (ok, _, _r) in validated_full.items() if ok]
 
         dev    = beru_dev(site.longitude)
         tier   = tier_label(dev)
@@ -100,7 +112,10 @@ def run():
         record = dict(
             name=site.site, lon=site.longitude,
             dev=dev, dev_km=dev_km, tier=tier,
-            keys=hits, validated={k: v for k, (_, v) in validated.items()},
+            keys=hits,
+            validated={k: v for k, (_, v, _r) in validated_full.items()},
+            reject_reasons={k: r for k, (ok, _, r) in validated_full.items()
+                            if not ok and r},
             sentences={k: form_sentences(txt, k)[:2] for k in hits},
         )
         if accepted_keys:
@@ -148,6 +163,9 @@ def run():
         lines.append(f"  {r['name']}")
         lines.append(f"    KEYS : {r['keys']}  →  {r['validated']}")
         for k in r["keys"]:
+            reason = r.get("reject_reasons", {}).get(k)
+            if reason:
+                lines.append(f"    REASON [{k}]: {reason}")
             for s in r["sentences"].get(k, []):
                 lines.append(f"    [{k}] \"{s[:140]}\"")
         lines.append("")

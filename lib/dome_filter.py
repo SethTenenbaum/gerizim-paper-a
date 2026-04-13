@@ -75,6 +75,20 @@ def validate_ambiguous_sentence(sentence: str) -> bool:
             return True
     return False
 
+
+def rejection_reason(sentence: str) -> str:
+    """Return a human-readable reason why a sentence was rejected.
+
+    Returns the first matching negative-context pattern, or
+    'no-positive-context' if no negative pattern matched but no
+    positive pattern matched either.
+    """
+    for pat in NEGATIVE_CONTEXT_RES:
+        m = pat.search(sentence)
+        if m:
+            return f"negative-context: «{m.group(0)}» matched /{pat.pattern}/"
+    return "no-positive-context (no architectural term found)"
+
 # Keep private alias for internal use
 _validate_ambiguous_sentence = validate_ambiguous_sentence
 

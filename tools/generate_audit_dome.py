@@ -22,6 +22,7 @@ from lib.beru import GERIZIM, BERU, TIER_APLUS, deviation as beru_dev, tier_labe
 from lib.dome_filter import (
     UNAMBIGUOUS_KEYWORDS, AMBIGUOUS_KEYWORDS, FORM_KEYWORD_RES,
     validate_keyword_match,
+    rejection_reason,
 )
 
 OUT = Path(__file__).parent.parent / "supplementary" / "audit" / "dome_keyword_audit.txt"
@@ -44,11 +45,11 @@ def run():
     for site in corpus:
         if site.category not in ("Cultural", "Mixed"):
             continue
-        full = strip_html(" ".join(filter(None, [
-            site.site, site.short_description,
-            getattr(site, "long_description", ""),
-            getattr(site, "justification", ""),
-        ]))).lower()
+        if site.longitude is None:
+            continue
+
+        # Use full_text (lowercased) for hit detection — includes extended_description
+        full = site.full_text  # already lowercased
 
         hit_unamb = [k for k in UNAMBIGUOUS_KEYWORDS
                      if re.search(r"\b" + re.escape(k) + r"\b", full)]
@@ -58,18 +59,29 @@ def run():
         if not hit_unamb and not hit_amb:
             continue
 
+        # Preserve original casing for sentence extraction / context validation
         full_orig = strip_html(" ".join(filter(None, [
             site.site, site.short_description,
-            getattr(site, "long_description", ""),
-            getattr(site, "justification", ""),
+            site.justification,
+            getattr(site, "extended_description", ""),
         ])))
 
         validated = {}
+        reject_reasons = {}   # keyword → reason string (for rejected keywords)
         for k in hit_unamb:
             validated[k] = "unambiguous"
         for k in hit_amb:
-            ok, _, _note = validate_keyword_match(full_orig, k)
+            ok, matched_sents, _note = validate_keyword_match(full_orig, k)
             validated[k] = "context-validated" if ok else "REJECTED"
+            if not ok:
+                # Find the first matching sentence and explain why it failed
+                kw_re = FORM_KEYWORD_RES[k]
+                sents = re.split(r"(?<=[.!?])\s+", full_orig)
+                hit_sents = [s.strip() for s in sents if kw_re.search(s)]
+                if hit_sents:
+                    reject_reasons[k] = rejection_reason(hit_sents[0])
+                else:
+                    reject_reasons[k] = "no matching sentence found"
 
         all_keys = hit_unamb + hit_amb
         accepted_keys = [k for k in all_keys if validated.get(k) != "REJECTED"]
@@ -87,6 +99,7 @@ def run():
             tier=tier,
             keys=all_keys,
             validated=validated,
+            reject_reasons=reject_reasons,
             sentences={k: form_sentences(full_orig, [k]) for k in all_keys},
         )
         if is_rejected:
@@ -135,6 +148,9 @@ def run():
         lines.append(f"  {r['name']}")
         lines.append(f"    KEYS : {r['keys']}  →  {r['validated']}")
         for k in r["keys"]:
+            reason = r["reject_reasons"].get(k)
+            if reason:
+                lines.append(f"    REASON [{k}]: {reason}")
             for s in r["sentences"].get(k, [])[:2]:
                 lines.append(f"    [{k}] \"{s[:140]}\"")
         lines.append("")

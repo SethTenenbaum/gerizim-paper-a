@@ -1,5 +1,5 @@
 UNESCO DOME + HEMISPHERICAL MOUND EVOLUTION KEYWORD AUDIT
-Generated  : Mon Apr 13 21:33:34 UTC 2026
+Generated  : Mon Apr 13 21:39:07 UTC 2026
 Script     : tools/generate_audit_dome_mound.py
 Dome unamb : ['stupa', 'stupas', 'tholos']
 Dome amb   : ['dome', 'domed', 'domes', 'spherical']  (context-validated)
@@ -856,64 +856,79 @@ CONTEXT-REJECTED SITES:
 ────────────────────────────────────────────────────────────────────────────────────────
   Archaeological Monuments Zone of Xochicalco
     KEYS : ['mound']  →  {'mound': 'REJECTED'}
+    REASON [mound]: no archaeological-context co-occurrence
     [mound] "The Main Plaza itself is built on an enormous artificial mound, accessible only through the two defended porticoes."
 
   Diyarbakır Fortress and Hevsel Gardens Cultural Landscape
     KEYS : ['mound']  →  {'mound': 'REJECTED'}
+    REASON [mound]: no archaeological-context co-occurrence
     [mound] "The site encompasses the Inner castle, known as İçkale and including the Amida Mound, and the 5.8 km-long city walls of Diyarbakır with thei"
 
   Gonbad-e Qābus
     KEYS : ['mound']  →  {'mound': 'REJECTED'}
+    REASON [mound]: no archaeological-context co-occurrence
     [mound] "The exterior flanges and inscription bands are in good condition, but the insertion of the ramp and the design of the retaining wall on the "
 
   Hiroshima Peace Memorial (Genbaku Dome)
     KEYS : ['dome']  →  {'dome': 'REJECTED'}
+    REASON [dome]: negative-context: «atomic bomb» matched /\batomic bomb\b/
     [dome] "Hiroshima Peace Memorial (Genbaku Dome) The Hiroshima Peace Memorial (Genbaku Dome) was the only structure left standing in the area where t"
     [dome] "The Committee decided to inscribe the Hiroshima Peace Memorial (Genbaku Dome) on the World Heritage List, exceptionally on the basis of cult"
 
   Neolithic Site of Çatalhöyük
     KEYS : ['mound']  →  {'mound': 'REJECTED'}
+    REASON [mound]: no archaeological-context co-occurrence
     [mound] "The taller eastern mound contains eighteen levels of Neolithic occupation between 7400&nbsp;bc and 6200&nbsp;bc, including wall paintings, r"
     [mound] "The western mound shows the evolution of cultural practices in the Chalcolithic period, from 6200&nbsp;bc to 5200&nbsp;bc."
 
   Old and New Towns of Edinburgh
     KEYS : ['mound']  →  {'mound': 'REJECTED'}
+    REASON [mound]: no archaeological-context co-occurrence
     [mound] "The juxtaposition of these two distinctive townscapes, each of exceptional historic and architectural interest, which are linked across the "
 
   Old town of Kuldīga
     KEYS : ['mound']  →  {'mound': 'REJECTED'}
+    REASON [mound]: no archaeological-context co-occurrence
     [mound] "Integrity The property encompasses the medieval castle mound plateau, the medieval area known as Kalnamiests, and the urban areas which deve"
 
   Precolumbian Chiefdom Settlements with Stone Spheres of the Diquís
     KEYS : ['spherical']  →  {'spherical': 'REJECTED'}
+    REASON [spherical]: negative-context: «stone sphere» matched /\bstone sphere/
     [spherical] "Special objects of wonder and admiration are the distinctive Diquís stone spheres, which are rare in their perfection of large-sized (up to "
 
   Richtersveld Cultural and Botanical Landscape
     KEYS : ['domed']  →  {'domed': 'REJECTED'}
+    REASON [domed]: negative-context: «traditional domed house» matched /\btraditional .{0,15}house/
     [domed] "The authenticity of the traditional domed houses is mainly intact, despite the incorporation of some new materials along with the finely bra"
 
   Rock Islands Southern Lagoon
     KEYS : ['dome']  →  {'dome': 'REJECTED'}
+    REASON [dome]: negative-context: «Rock Island» matched /\brock island/
     [dome] "The maze of dome-shaped and green Rock Islands seemingly floating in the turquoise lagoon surrounded by coral reef is of exceptional aesthet"
 
   Temple of Heaven: an Imperial Sacrificial Altar in Beijing
     KEYS : ['mound']  →  {'mound': 'REJECTED'}
+    REASON [mound]: no archaeological-context co-occurrence
     [mound] "Brief synthesis The Temple of Heaven is an axial arrangement of Circular Mound Altar to the south open to the sky with the conically roofed "
     [mound] "In the ninth year of the reign of Emperor Jiajing (1530) the decision was taken to offer separate sacrifices to heaven and earth, and so the"
 
   The par force hunting landscape in North Zealand
     KEYS : ['mound']  →  {'mound': 'REJECTED'}
+    REASON [mound]: no archaeological-context co-occurrence
     [mound] "The king's monogram, crown and initials document the authenticity of Kongestenen, but the mound it was placed on has been disturbed."
 
   Thracian Tomb of Sveshtari
     KEYS : ['mound']  →  {'mound': 'REJECTED'}
+    REASON [mound]: no archaeological-context co-occurrence
     [mound] "Authenticity The Property retains its authenticity, being preserved in its original location by a moisture-isolating protective shell when t"
 
   Ulu<U>r</U>u-Kata Tju<U>t</U>a National Park
     KEYS : ['domes']  →  {'domes': 'REJECTED'}
+    REASON [domes]: negative-context: «rock dome» matched /\brock dome/
     [domes] "Uluru, an immense monolith, and Kata Tjuta, the rock domes located west of Uluru, form part of the traditional belief system of one of the o"
     [domes] "© The sandstone monolith of Ulu r u and the conglomerate domes of Kata Tju t a, rise abruptly, to over 300 metres in height, above the relat"
 
   Viñales Valley
     KEYS : ['dome']  →  {'dome': 'REJECTED'}
+    REASON [dome]: negative-context: «karst» matched /\bkarst\b/
     [dome] "Brief synthesis The Viñales Valley in the Sierra de los Organos near the western end of the island of Cuba is an outstanding karst landscape"
