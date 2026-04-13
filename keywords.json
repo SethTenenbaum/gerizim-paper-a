@@ -443,10 +443,9 @@
     "mound_positive_context": [
       "burial", "funerary", "mortuary", "grave", "tomb", "interment",
       "cemetery", "necropolis", "barrow", "tumulus", "tumuli", "kofun",
-      "earthwork", "earthen", "earthmound", "monumental",
-      "platform", "ritual", "ceremonial", "sacred", "archaeological",
-      "prehistoric", "ancient", "mound group", "mound complex",
-      "keyhole", "fill", "constructed"
+      "earthwork", "earthen", "earthmound", "monumental", "platform",
+      "ritual", "ceremonial", "sacred", "archaeological", "prehistoric", "ancient",
+      "mound group", "mound complex", "keyhole", "fill", "constructed"
     ]
   }
 }

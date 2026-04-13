@@ -1,5 +1,5 @@
 UNESCO DOME + HEMISPHERICAL MOUND EVOLUTION KEYWORD AUDIT
-Generated  : Mon Apr 13 21:39:07 UTC 2026
+Generated  : Mon Apr 13 22:08:23 UTC 2026
 Script     : tools/generate_audit_dome_mound.py
 Dome unamb : ['stupa', 'stupas', 'tholos']
 Dome amb   : ['dome', 'domed', 'domes', 'spherical']  (context-validated)
