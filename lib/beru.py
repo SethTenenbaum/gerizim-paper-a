@@ -1,10 +1,8 @@
 """
 beru.py — Beru-unit calculations.
 
-Numeric constants (anchor, tier thresholds, null rates) are loaded from
-config.json.  Keyword and classification lists are loaded from keywords.json,
-which is the single source of truth for all keyword content.  No script
-should hardcode values from either file independently.
+All beru math lives here. Constants are loaded from config.json
+so that no script hardcodes values independently.
 
 A "beru" is 30° of arc, attested in the Babylonian astronomical compendium
 MUL.APIN (c. 1000 BCE). The harmonic grid divides the beru into 10 equal
@@ -16,18 +14,11 @@ import json
 from pathlib import Path
 
 # ---------------------------------------------------------------------------
-# Load constants from config.json (numeric config only).
+# Load constants from the shared config file.
 # ---------------------------------------------------------------------------
 _CONFIG_PATH = Path(__file__).parent.parent / "config.json"
 with open(_CONFIG_PATH) as f:
     CONFIG = json.load(f)
-
-# ---------------------------------------------------------------------------
-# Load keyword lists from keywords.json (single source of truth).
-# ---------------------------------------------------------------------------
-_KW_PATH = Path(__file__).parent.parent / "keywords.json"
-with open(_KW_PATH) as _f:
-    _KEYWORDS = json.load(_f)
 
 # Anchor longitude
 GERIZIM = CONFIG["anchors"]["gerizim"]["longitude"]
@@ -195,23 +186,23 @@ def dev_to_km(dev: float) -> float:
 
 def load_keywords(key: str) -> list:
     """
-    Return a keyword list from keywords.json.
+    Return a keyword list from the config ``keywords`` section.
 
-    Handles both flat lists and dicts with "unambiguous"/"ambiguous"
-    sub-lists. In the dict case, returns the combined list for backward
+    Handles both old-style flat lists and new-style dicts with
+    "unambiguous"/"ambiguous" sub-lists. In the dict case, returns
+    the combined list (unambiguous + ambiguous) for backward
     compatibility with scripts that do simple substring matching.
 
-    For context-aware classification (with negative/positive_context
-    patterns), use ``lib.founding_filter`` or ``lib.dome_filter`` instead.
+    For context-aware classification, use ``lib.founding_filter``
+    instead.
 
     Parameters
     ----------
     key : str
-        One of the named keyword groups in keywords.json:
+        One of the named keyword groups in config.json:
         ``"founding_capital"``, ``"sacred_origin"``,
         ``"founding_monument"``, ``"founding_axis"``,
-        ``"ancient_landscape"``, ``"dome_forms"``,
-        ``"buddhist_heritage"``, ``"mound_evolution"``.
+        ``"ancient_landscape"``.
 
     Returns
     -------
@@ -221,12 +212,12 @@ def load_keywords(key: str) -> list:
     Raises
     ------
     KeyError
-        If *key* is not present in keywords.json.
+        If *key* is not present in the ``keywords`` section.
     """
-    val = _KEYWORDS[key]
+    val = CONFIG["keywords"][key]
     if isinstance(val, list):
         return val
-    # Dict with unambiguous/ambiguous sub-lists
+    # New-style dict with unambiguous/ambiguous sub-lists
     if isinstance(val, dict):
         return val.get("unambiguous", []) + val.get("ambiguous", [])
     return val
@@ -235,10 +226,10 @@ def load_keywords(key: str) -> list:
 def load_religion_sets() -> list:
     """
     Return the religion keyword sets as a list of (name, [kw, ...]) tuples,
-    in the order they appear in keywords.json.
+    in the order they appear in config.json.
     """
-    sets = _KEYWORDS["religion_sets"]
-    return [(k, v) for k, v in sets.items() if not k.startswith("_")]
+    sets = CONFIG["keywords"]["religion_sets"]
+    return list(sets.items())
 
 
 def load_notable_anchors() -> dict:

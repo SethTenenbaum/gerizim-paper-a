@@ -1,0 +1,325 @@
+UNESCO DOME + HEMISPHERICAL MOUND EVOLUTION KEYWORD AUDIT
+Generated  : Mon Apr 13 21:23:10 UTC 2026
+Script     : tools/generate_audit_dome_mound.py
+Dome unamb : ['stupa', 'stupas', 'tholos']
+Dome amb   : ['dome', 'domed', 'domes', 'spherical']  (context-validated)
+Mound unamb: ['barrow', 'barrows', 'kofun', 'tumuli', 'tumulus']
+Mound amb  : ['mound']  (requires archaeological context)
+
+INCLUDED   : 46
+REJECTED   : 4
+FP rate    : 8.0%
+A+ included: 6
+
+INCLUDED SITES:
+────────────────────────────────────────────────────────────────────────────────────────
+  Pyu Ancient Cities ★
+    LON  : 95.2900°E  |  dev 0.0007 beru  (2.3 km)  |  Tier A+
+    KEYS : ['stupas']
+    VALID: {'stupas': 'unambiguous'}
+    [stupas] "Remains include excavated palace citadels, burial grounds and manufacture sites, as well as monumental brick Buddhist stupas, partly standin"
+
+  The <I>Trulli</I> of Alberobello ★
+    LON  : 17.2369°E  |  dev 0.0011 beru  (3.6 km)  |  Tier A+
+    KEYS : ['domed']
+    VALID: {'domed': 'context-validated'}
+    [domed] "Characteristically, they feature pyramidal, domed or conical roofs built up of corbelled limestone slabs."
+
+  Old City of Jerusalem and its Walls ★
+    LON  : 35.2317°E  |  dev 0.0012 beru  (4.1 km)  |  Tier A+
+    KEYS : ['dome']
+    VALID: {'dome': 'context-validated'}
+    [dome] "Among its 220 historic monuments, the Dome of the Rock stands out: built in the 7th century, it is decorated with beautiful geometric and fl"
+
+  Borobudur Temple Compounds ★
+    LON  : 110.2301°E  |  dev 0.0013 beru  (4.3 km)  |  Tier A+
+    KEYS : ['stupa', 'stupas']
+    VALID: {'stupa': 'unambiguous', 'stupas': 'unambiguous'}
+    [stupa] "It was built in three tiers: a pyramidal base with five concentric square terraces, the trunk of a cone with three circular platforms and, a"
+    [stupas] "Around the circular platforms are 72 openwork stupas, each containing a statue of the Buddha."
+
+  Gaya Tumuli ★
+    LON  : 128.3213°E  |  dev 0.0017 beru  (5.8 km)  |  Tier A+
+    KEYS : ['tumuli']
+    VALID: {'tumuli': 'unambiguous'}
+    [tumuli] "Gaya Tumuli This serial property includes archaeological cemetery sites with burial mounds attributed to the Gaya Confederacy, which develop"
+    [tumuli] "The introduction of new forms of tombs and the intensification of the spatial hierarchy in the tumuli sites reflect the structural changes e"
+
+  Cathedral and Churches of Echmiatsin and the Archaeological Site of Zvartnots ★
+    LON  : 44.3246°E  |  dev 0.0019 beru  (6.2 km)  |  Tier A+
+    KEYS : ['domed']
+    VALID: {'domed': 'context-validated'}
+    [domed] "Cathedral and Churches of Echmiatsin and the Archaeological Site of Zvartnots The cathedral and churches of Echmiatsin and the archaeologica"
+
+  Arslantepe Mound
+    LON  : 38.3611°E  |  dev 0.0031 beru  (10.2 km)  |  Tier A
+    KEYS : ['mound']
+    VALID: {'mound': 'mound+arch.context'}
+    [mound] "Arslantepe Mound Arslantepe Mound is a 30-metre-tall archaeological tell located in the Malatya plain, 15 km south-west of the Euphrates Riv"
+
+  Mount Kumgang – Diamond Mountain from the Sea
+    LON  : 128.1375°E  |  dev 0.0044 beru  (14.6 km)  |  Tier A
+    KEYS : ['stupas']
+    VALID: {'stupas': 'unambiguous'}
+    [stupas] "This cultural landscape is home to ancient hermitages, temples, stupas, and stone carvings, many located in the Outer and Inner Kumgang Area"
+
+  Speyer Cathedral
+    LON  : 8.4424°E  |  dev 0.0058 beru  (19.2 km)  |  Tier A
+    KEYS : ['domes']
+    VALID: {'domes': 'context-validated'}
+    [domes] "Speyer Cathedral Speyer Cathedral, a basilica with four towers and two domes, was founded by Conrad II in 1030 and remodelled at the end of "
+
+  Ancient Jericho/Tell es-Sultan
+    LON  : 35.4441°E  |  dev 0.0058 beru  (19.4 km)  |  Tier A
+    KEYS : ['mound']
+    VALID: {'mound': 'mound+arch.context'}
+    [mound] "Ancient Jericho/Tell es-Sultan Ancient Jerico/Tell es-Sultan is located northwest of present-day Jericho in the Jordan Valley in Palestine, "
+
+  Sanctuary of Asklepios at Epidaurus
+    LON  : 23.0806°E  |  dev 0.0063 beru  (20.9 km)  |  Tier A
+    KEYS : ['tholos']
+    VALID: {'tholos': 'unambiguous'}
+    [tholos] "Its principal monuments, particularly the temple of Asklepios, the Tholos and the Theatre - considered one of the purest masterpieces of Gre"
+
+  Centennial Hall in Wrocław
+    LON  : 17.0770°E  |  dev 0.0064 beru  (21.3 km)  |  Tier A
+    KEYS : ['dome']
+    VALID: {'dome': 'context-validated'}
+    [dome] "The 23m-high dome is topped with a lantern in steel and glass."
+
+  Stone Circles of Senegambia
+    LON  : -15.5167°E  |  dev 0.0071 beru  (23.8 km)  |  Tier A
+    KEYS : ['tumuli']
+    VALID: {'tumuli': 'unambiguous'}
+    [tumuli] "The four groups, Sine Ngayène, Wanar, Wassu and Kerbatch, cover 93 stone circles and numerous tumuli, burial mounds, some of which have been"
+
+  Dilmun Burial Mounds
+    LON  : 50.5056°E  |  dev 0.0079 beru  (26.3 km)  |  Tier A
+    KEYS : ['tumuli', 'mound']
+    VALID: {'tumuli': 'unambiguous', 'mound': 'mound+arch.context'}
+    [tumuli] "Six of these sites are burial mound fields consisting of a few dozen to several thousand tumuli."
+    [mound] "Six of these sites are burial mound fields consisting of a few dozen to several thousand tumuli."
+
+  Qal’at al-Bahrain – Ancient Harbour and Capital of Dilmun
+    LON  : 50.5183°E  |  dev 0.0083 beru  (27.7 km)  |  Tier A
+    KEYS : ['mound']
+    VALID: {'mound': 'mound+arch.context'}
+    [mound] "Qal’at al-Bahrain – Ancient Harbour and Capital of Dilmun Qal’at al-Bahrain is a typical tell – an artificial mound created by many successi"
+    [mound] "On the top of the 12 m mound there is the impressive Portuguese fort, which gave the whole site its name, qal’a (fort)."
+
+  Erbil Citadel
+    LON  : 44.0092°E  |  dev 0.0087 beru  (28.8 km)  |  Tier A
+    KEYS : ['mound']
+    VALID: {'mound': 'mound+arch.context'}
+    [mound] "Written and iconographic historical records document the antiquity of settlement on the site – Erbil corresponds to ancient Arbela, an impor"
+
+  Tombs of Buganda Kings at Kasubi
+    LON  : 32.5514°E  |  dev 0.0094 beru  (31.3 km)  |  Tier A
+    KEYS : ['dome']
+    VALID: {'dome': 'context-validated'}
+    [dome] "Four royal tombs now lie within the Muzibu Azaala Mpanga, the main building, which is circular and surmounted by a dome."
+
+  Gordion
+    LON  : 31.9861°E  |  dev 0.0094 beru  (31.4 km)  |  Tier A
+    KEYS : ['tumuli', 'mound']
+    VALID: {'tumuli': 'unambiguous', 'mound': 'mound+arch.context'}
+    [tumuli] "The key elements of this archaeological site include the Citadel Mound, the Lower Town, the Outer Town and Fortifications, and several buria"
+    [mound] "The key elements of this archaeological site include the Citadel Mound, the Lower Town, the Outer Town and Fortifications, and several buria"
+
+  Selimiye Mosque and its Social Complex
+    LON  : 26.5594°E  |  dev 0.0097 beru  (32.2 km)  |  Tier A
+    KEYS : ['dome']
+    VALID: {'dome': 'context-validated'}
+    [dome] "Selimiye Mosque and its Social Complex The square Mosque with its single great dome and four slender minarets, dominates the skyline of the "
+
+  Bagan
+    LON  : 94.9642°E  |  dev 0.0102 beru  (33.8 km)  |  Tier B
+    KEYS : ['stupas']
+    VALID: {'stupas': 'unambiguous'}
+    [stupas] "The seven components of the serial property include numerous temples, stupas, monasteries and places of pilgrimage, as well as archaeologica"
+
+  Residence of Bukovinian and Dalmatian Metropolitans
+    LON  : 25.9247°E  |  dev 0.0115 beru  (38.2 km)  |  Tier B
+    KEYS : ['domed']
+    VALID: {'domed': 'context-validated'}
+    [domed] "The property, an outstanding example of 19th-century historicist architecture, also includes a seminary and monastery and is dominated by th"
+
+  Monasteries of Daphni, Hosios Loukas and Nea Moni of Chios
+    LON  : 23.6366°E  |  dev 0.0123 beru  (40.8 km)  |  Tier B
+    KEYS : ['dome']
+    VALID: {'dome': 'context-validated'}
+    [dome] "The churches are built on a cross-in-square plan with a large dome supported by squinches defining an octagonal space."
+
+  Moidams – the Mound-Burial System of the Ahom Dynasty
+    LON  : 94.8764°E  |  dev 0.0131 beru  (43.6 km)  |  Tier B
+    KEYS : ['mound']
+    VALID: {'mound': 'mound+arch.context'}
+    [mound] "Moidams – the Mound-Burial System of the Ahom Dynasty Set in the foothills of the Patkai Ranges in eastern Assam, the property contains the "
+
+  Medieval Monuments in Kosovo
+    LON  : 20.7333°E  |  dev 0.0155 beru  (51.5 km)  |  Tier B
+    KEYS : ['domed']
+    VALID: {'domed': 'context-validated'}
+    [domed] "The Patriarchate of Peć Monastery is a group of four domed churches featuring series of wall paintings."
+
+  Cahokia Mounds State Historic Site
+    LON  : -90.0614°E  |  dev 0.0223 beru  (74.3 km)  |  Tier B
+    KEYS : ['mound']
+    VALID: {'mound': 'mound+arch.context'}
+    [mound] "It is a striking example of a complex chiefdom society, with many satellite mound centres and numerous outlying hamlets and villages."
+    [mound] "Primary features at the site include Monks Mound, the largest prehistoric earthwork in the Americas, covering over 5 ha and standing 30 m hi"
+
+  Saloum Delta
+    LON  : -16.4986°E  |  dev 0.0256 beru  (85.2 km)  |  Tier B
+    KEYS : ['tumuli']
+    VALID: {'tumuli': 'unambiguous'}
+    [tumuli] "Burial sites on 28 of the mounds take the form of tumuli where remarkable artefacts have been found."
+
+  Antequera Dolmens Site
+    LON  : -4.5406°E  |  dev 0.0270 beru  (89.9 km)  |  Tier B
+    KEYS : ['tholos', 'tumuli']
+    VALID: {'tholos': 'unambiguous', 'tumuli': 'unambiguous'}
+    [tholos] "Antequera Dolmens Site Located at the heart of Andalusia in southern Spain, the site comprises three megalithic monuments: the Menga and Vie"
+    [tumuli] "These three tombs, buried beneath their original earth tumuli, are one of the most remarkable architectural works of European prehistory and"
+
+  Archaeological Site of Nalanda Mahavihara at Nalanda, Bihar
+    LON  : 85.4439°E  |  dev 0.0275 beru  (91.6 km)  |  Tier B
+    KEYS : ['stupas']
+    VALID: {'stupas': 'unambiguous'}
+    [stupas] "It includes  stupas , shrines,  viharas  (residential and educational buildings) and important art works in stucco, stone and metal."
+
+  Etruscan Necropolises of Cerveteri and Tarquinia
+    LON  : 12.1019°E  |  dev 0.0278 beru  (92.5 km)  |  Tier B
+    KEYS : ['tumuli']
+    VALID: {'tumuli': 'unambiguous'}
+    [tumuli] "Some of the tombs are monumental, cut in rock and topped by impressive tumuli (burial mounds)."
+    [tumuli] "The site contains very different types of tombs: trenches cut in rock; tumuli; and some, also carved in rock, in the shape of huts or houses"
+
+  Kathmandu Valley
+    LON  : 85.4285°E  |  dev 0.0280 beru  (93.3 km)  |  Tier B
+    KEYS : ['stupas']
+    VALID: {'stupas': 'unambiguous'}
+    [stupas] "The seven include the Durbar Squares of Hanuman Dhoka (Kathmandu), Patan and Bhaktapur, the Buddhist stupas of Swayambhu and Bauddhanath and"
+
+  Thracian Tomb of Kazanlak
+    LON  : 25.3992°E  |  dev 0.0290 beru  (96.6 km)  |  Tier B
+    KEYS : ['tholos']
+    VALID: {'tholos': 'unambiguous'}
+    [tholos] "The tholos has a narrow corridor and a round burial chamber, both decorated with murals representing Thracian burial rituals and culture."
+
+  The Cultural Landscape of Al-Faw Archaeological Area
+    LON  : 45.1634°E  |  dev 0.0298 beru  (99.3 km)  |  Tier B
+    KEYS : ['tumuli']
+    VALID: {'tumuli': 'unambiguous'}
+    [tumuli] "Archaeological features include the Palaeolithic and Neolithic tools of early people, tapered structures, cairns and circular constructions,"
+
+  Capital Cities and Tombs of the Ancient Koguryo Kingdom
+    LON  : 126.1762°E  |  dev 0.0302 beru  (100.7 km)  |  Tier B
+    KEYS : ['tumulus', 'mound']
+    VALID: {'tumulus': 'unambiguous', 'mound': 'mound+arch.context'}
+    [tumulus] "Some of the tombs show great ingenuity in their elaborate ceilings, designed to roof wide spaces without columns and carry the heavy load of"
+    [mound] "Some of the tombs show great ingenuity in their elaborate ceilings, designed to roof wide spaces without columns and carry the heavy load of"
+
+  Churches of the Pskov School of Architecture
+    LON  : 28.3341°E  |  dev 0.0312 beru  (103.8 km)  |  Tier B
+    KEYS : ['domes']
+    VALID: {'domes': 'context-validated'}
+    [domes] "Characteristics of these buildings, produced by the Pskov School of Architecture, include cubic volumes, domes, porches and belfries, with t"
+
+  Archaeological Site of Aigai (modern name Vergina)
+    LON  : 22.3183°E  |  dev 0.0317 beru  (105.5 km)  |  Tier B
+    KEYS : ['tumulus', 'tumuli']
+    VALID: {'tumulus': 'unambiguous', 'tumuli': 'unambiguous'}
+    [tumulus] "One of the royal tombs in the Great Tumulus is identified as that of Philip II, who conquered all the Greek cities, paving the way for his s"
+    [tumuli] "The most important remains are the monumental palace, lavishly decorated with mosaics and painted stuccoes, and the burial ground with more "
+
+  Ephesus
+    LON  : 27.3336°E  |  dev 0.0355 beru  (118.2 km)  |  Tier B
+    KEYS : ['domed']
+    VALID: {'domed': 'context-validated'}
+    [domed] "Since the 5 th  century, the House of the Virgin Mary, a domed cruciform chapel seven kilometres from Ephesus, became a major place of Chris"
+
+  Wooden <em>Tserkvas</em> of the Carpathian Region in Poland and Ukraine
+    LON  : 24.3446°E  |  dev 0.0359 beru  (119.4 km)  |  Tier B
+    KEYS : ['domes']
+    VALID: {'domes': 'context-validated'}
+    [domes] "The&nbsp; tserkvas &nbsp;bear testimony to a distinct building tradition rooted in Orthodox ecclesiastic design interwoven with elements of "
+
+  Head-Smashed-In Buffalo Jump
+    LON  : -113.6521°E  |  dev 0.0360 beru  (119.8 km)  |  Tier B
+    KEYS : ['tumulus']
+    VALID: {'tumulus': 'unambiguous'}
+    [tumulus] "Head-Smashed-In Buffalo Jump In south-west Alberta, the remains of marked trails and an aboriginal camp, and a tumulus where vast quantities"
+
+  Astronomical Observatories of Kazan Federal University
+    LON  : 49.1191°E  |  dev 0.0383 beru  (127.6 km)  |  Tier B
+    KEYS : ['domes']
+    VALID: {'domes': 'context-validated'}
+    [domes] "The Kazan City Astronomical Observatory, built in 1837, is located on the University campus and the building is characterized by a semi-circ"
+
+  Sardis and the Lydian Tumuli of Bin Tepe
+    LON  : 28.0453°E  |  dev 0.0408 beru  (135.8 km)  |  Tier B
+    KEYS : ['tumulus', 'tumuli']
+    VALID: {'tumulus': 'unambiguous', 'tumuli': 'unambiguous'}
+    [tumulus] "The cemetery of Bin Tepe features some of the largest tumulus tombs in the world."
+    [tumuli] "Sardis and the Lydian Tumuli of Bin Tepe Sardis was the capital of the Lydians, a powerful Iron Age civilization (8th-6th centuries BCE) kno"
+
+  Mozu-Furuichi Kofun Group: Mounded Tombs of Ancient Japan
+    LON  : 135.4994°E  |  dev 0.0410 beru  (136.6 km)  |  Tier B
+    KEYS : ['kofun']
+    VALID: {'kofun': 'unambiguous'}
+    [kofun] "Mozu-Furuichi Kofun Group: Mounded Tombs of Ancient Japan Located on a plateau above the Osaka Plain, this property includes 49  kofun  (“ol"
+    [kofun] "These  kofun  have been selected from among a total of 160,000 in Japan and form the richest material representation of the Kofun period, fr"
+
+  The Cathedral of St James in Šibenik
+    LON  : 15.8891°E  |  dev 0.0460 beru  (153.2 km)  |  Tier B
+    KEYS : ['dome']
+    VALID: {'dome': 'context-validated'}
+    [dome] "The three architects who succeeded one another in the construction of the Cathedral - Francesco di Giacomo, Georgius Mathei Dalmaticus and N"
+    [dome] "These interchanges created the conditions for unique and outstanding solutions to the technical and structural problems of constructing the "
+
+  Taxila
+    LON  : 72.8805°E  |  dev 0.0463 beru  (154.1 km)  |  Tier B
+    KEYS : ['tumulus']
+    VALID: {'tumulus': 'unambiguous'}
+    [tumulus] "Taxila From the ancient Neolithic tumulus of Saraikala to the ramparts of Sirkap (2nd century B.C.) and the city of Sirsukh (1st century A.D"
+
+  Masjed-e Jāmé of Isfahan
+    LON  : 51.6853°E  |  dev 0.0472 beru  (157.2 km)  |  Tier B
+    KEYS : ['domes']
+    VALID: {'domes': 'context-validated'}
+    [domes] "Its double-shelled ribbed domes represent an architectural innovation that inspired builders throughout the region."
+
+  Chhatrapati Shivaji Terminus (formerly Victoria Terminus)
+    LON  : 72.8362°E  |  dev 0.0478 beru  (159.0 km)  |  Tier B
+    KEYS : ['dome']
+    VALID: {'dome': 'context-validated'}
+    [dome] "Its remarkable stone dome, turrets, pointed arches and eccentric ground plan are close to traditional Indian palace architecture."
+
+  Soltaniyeh
+    LON  : 48.7947°E  |  dev 0.0491 beru  (163.6 km)  |  Tier B
+    KEYS : ['dome']
+    VALID: {'dome': 'context-validated'}
+    [dome] "The octagonal building is crowned with a 50 m tall dome covered in turquoise-blue faience and surrounded by eight slender minarets."
+    [dome] "It is the earliest existing example of the double-shelled dome in Iran."
+
+
+CONTEXT-REJECTED SITES:
+────────────────────────────────────────────────────────────────────────────────────────
+  Diyarbakır Fortress and Hevsel Gardens Cultural Landscape
+    KEYS : ['mound']  →  {'mound': 'REJECTED'}
+    [mound] "The site encompasses the Inner castle, known as İçkale and including the Amida Mound, and the 5.8 km-long city walls of Diyarbakır with thei"
+
+  Hiroshima Peace Memorial (Genbaku Dome)
+    KEYS : ['dome']  →  {'dome': 'REJECTED'}
+    [dome] "Hiroshima Peace Memorial (Genbaku Dome) The Hiroshima Peace Memorial (Genbaku Dome) was the only structure left standing in the area where t"
+    [dome] "The Committee decided to inscribe the Hiroshima Peace Memorial (Genbaku Dome) on the World Heritage List, exceptionally on the basis of cult"
+
+  Neolithic Site of Çatalhöyük
+    KEYS : ['mound']  →  {'mound': 'REJECTED'}
+    [mound] "The taller eastern mound contains eighteen levels of Neolithic occupation between 7400&nbsp;bc and 6200&nbsp;bc, including wall paintings, r"
+    [mound] "The western mound shows the evolution of cultural practices in the Chalcolithic period, from 6200&nbsp;bc to 5200&nbsp;bc."
+
+  Ulu<U>r</U>u-Kata Tju<U>t</U>a National Park
+    KEYS : ['domes']  →  {'domes': 'REJECTED'}
+    [domes] "Uluru, an immense monolith, and Kata Tjuta, the rock domes located west of Uluru, form part of the traditional belief system of one of the o"

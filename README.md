@@ -1,6 +1,6 @@
 # Longitude Quantization in the UNESCO World Heritage Corpus: Domes, Stupas, and the Babylonian Beru
 
-**Paper A — Primary UNESCO Analysis** · `v1.0.7`
+**Paper A — Primary UNESCO Analysis** · `v1.0.8`
 
 Seth Tenenbaum · Independent Scholar  
 ORCID: [0009-0008-5797-2498](https://orcid.org/0009-0008-5797-2498)
@@ -149,6 +149,22 @@ gerizim-paper-a/
 ```
 
 ## Changelog
+
+### v1.0.8 — 2026-04-13
+- **Supplementary materials reorganized:** `supplementary/audit/` holds all
+  keyword-classification audit files; `supplementary/UNESCO/` holds UNESCO
+  source files (rendered HTML, PDF, PNG); `fetch_unesco_playwright.py` deleted.
+- **Three keyword-audit files added** (all generated from deterministic scripts,
+  reproducible with `python3 tools/generate_audit_<name>.py`):
+  - `dome_keyword_audit.txt` — dome/spherical monument sweep (Test 2)
+  - `dome_mound_keyword_audit.txt` — dome + mound evolution sweep (Test 2b)
+  - `founding_keyword_audit.txt` — founding/sacred-origin classifier (Test 3)
+- **Audit generation scripts added:** `tools/generate_audit_dome.py`,
+  `tools/generate_audit_dome_mound.py`, `tools/generate_audit_founding.py`.
+- **`README_audit.txt` updated** to document all three audit files and
+  describe reproducibility instructions.
+- All keyword lists remain in `keywords.json` (single source of truth);
+  no changes to analysis logic.
 
 ### v1.0.7 — 2026-04-13
 - **Abstract:** added inline Tier-A+ definition ($\lesssim$6.7 km of a 0.1-beru
