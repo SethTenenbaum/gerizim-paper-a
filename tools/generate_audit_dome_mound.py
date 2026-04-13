@@ -49,11 +49,14 @@ def strip_html(t):
     return re.sub(r"<[^>]+>", " ", t or "")
 
 def full_text(site):
-    return strip_html(" ".join(filter(None, [
-        site.site, site.short_description,
-        getattr(site, "long_description", ""),
+    """Return full site text including extended_description (HTML-stripped, original case)."""
+    parts = [
+        site.site,
+        site.short_description,
         getattr(site, "justification", ""),
-    ])))
+        getattr(site, "extended_description", ""),
+    ]
+    return strip_html(" ".join(p for p in parts if p))
 
 def form_sentences(text, kw):
     pat = KW_RES.get(kw) or re.compile(r"\b" + re.escape(kw) + r"\b", re.IGNORECASE)

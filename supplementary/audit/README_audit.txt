@@ -1,7 +1,7 @@
 Gerizim Paper-A — Supplementary Keyword-Classification Audit Files
 ==================================================================
 
-Generated : Mon Apr 13 21:24:47 UTC 2026
+Generated : Mon Apr 13 22:00:00 UTC 2026
 Version   : v1.0.8 (see CITATION.cff and README.md)
 Source    : https://github.com/sethtenenbaum/gerizim-paper-a
 
@@ -24,6 +24,8 @@ FILE INDEX
    Method  : Ambiguous keywords require the hit sentence to contain ≥1
              architectural-context term AND no geological/natural-feature
              negative-context term (see keywords.json → dome_forms).
+             Full extended UNESCO descriptions are searched (not XML only).
+   Results : 83 included, 7 context-rejected (FP rate 7.8%), 11 A+ sites
    Output  : Every Cultural/Mixed UNESCO site that matched ≥1 keyword,
              showing which keywords matched, their validation status, and
              the trigger sentence(s).  Sites where every match was
@@ -38,6 +40,8 @@ FILE INDEX
    Method  : Mound keyword "mound" validated by co-occurrence with
              archaeological-context patterns from
              keywords.json → mound_evolution → mound_positive_context.
+   Results : 117 included, 15 context-rejected (FP rate 11.4%), 14 A+ sites
+             (strict superset of dome audit: 83 dome + 34 mound-only sites)
    Output  : Same format as (1) but covering the broader mound+dome class.
 
 3. founding_keyword_audit.txt
@@ -54,6 +58,8 @@ FILE INDEX
              (1) unambiguous keywords → accepted unconditionally
              (2) ambiguous keywords → sentence-level context validation
              (positive-context + negative-context pattern pairs per category)
+   Results : 355 classified, 28 A+ sites
+             F: 192  S: 56  M: 70  L: 82  X: 26
    Output  : All classified Cultural/Mixed sites, sorted by beru tier,
              showing primary category, all matched categories, matched
              keyword reasons, and trigger sentences.
