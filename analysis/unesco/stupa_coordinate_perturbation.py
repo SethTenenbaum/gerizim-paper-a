@@ -65,8 +65,18 @@ from lib.beru import TIER_APLUS, P_NULL_AP
 from lib.beru import deviation as _beru_deviation
 from lib.results_store import ResultsStore
 
-# Keywords that identify stupa sites (mirrors tumulus_dome_evolution_raw_sweep.py)
-STUPA_KEYWORDS = {"stupa", "stupas", "dagoba", "chorten"}
+import re
+import json
+
+# Load stupa keywords from keywords.json (same source as tumulus_dome_evolution_raw_sweep.py)
+_KW_PATH = Path(__file__).parent.parent.parent / "keywords.json"
+with open(_KW_PATH) as _f:
+    _KW = json.load(_f)
+STUPA_KEYWORDS = _KW["mound_evolution"]["stupa"]
+STUPA_KEYWORD_RES = {
+    kw: re.compile(r"\b" + re.escape(kw) + r"\b", re.IGNORECASE)
+    for kw in STUPA_KEYWORDS
+}
 
 N_TRIALS = 10_000
 # ±5 km displacement as an equatorial longitude offset
@@ -78,12 +88,8 @@ def beru_dev(lon: float) -> float:
 
 
 def is_stupa_site(site) -> bool:
-    text = " ".join([
-        getattr(site, "name", "") or "",
-        getattr(site, "short_description", "") or "",
-        getattr(site, "justification", "") or "",
-    ]).lower()
-    return any(kw in text.split() for kw in STUPA_KEYWORDS)
+    text = getattr(site, "full_text", "") or ""
+    return any(rx.search(text) for rx in STUPA_KEYWORD_RES.values())
 
 
 def count_aplus(lons: np.ndarray) -> int:

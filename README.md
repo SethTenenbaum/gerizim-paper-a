@@ -1,6 +1,6 @@
 # Longitude Quantization in the UNESCO World Heritage Corpus: Domes, Stupas, and the Babylonian Beru
 
-**Paper A — Primary UNESCO Analysis** · `v1.0.6`
+**Paper A — Primary UNESCO Analysis** · `v1.0.7`
 
 Seth Tenenbaum · Independent Scholar  
 ORCID: [0009-0008-5797-2498](https://orcid.org/0009-0008-5797-2498)
@@ -149,6 +149,31 @@ gerizim-paper-a/
 ```
 
 ## Changelog
+
+### v1.0.7 — 2026-04-13
+- **Abstract:** added inline Tier-A+ definition ($\lesssim$6.7 km of a 0.1-beru
+  harmonic node); named Mount Gerizim explicitly; corrected sweep-discovery
+  disclosure to reflect actual analysis sequence (Gerizim-first, sweep second).
+- **§1.1 Circularity protocol:** integrated Gelman & Loken (2014) forking-paths
+  citation; reordered and tightened the timestamp/fabrication argument for
+  cleaner flow; removed redundant em-dash punctuation.
+- **§2.1 Beru unit:** moved observational-capacity paragraphs (meridian transit,
+  eclipse timing, gnomon) here from §2.2; removed duplicate closing scope
+  statement; single logical arc from unit definition through territorial use
+  to measurement capacity.
+- **§2.2 Metrology:** replaced Kangle (1965) citation with first-hand source
+  Shamasastry (1915) throughout.
+- **§1.4 Interpretive framework:** geographic-concentration item now cites the
+  actual corridor statistics (\domeEurasianFraction% vs \fullCorpusEurasianFraction%,
+  20°–120°E) rather than asserting "Eurasian" without definition.
+- **Table 1 caption:** "Confirmatory family" → "Primary test family" to match
+  §1.1 framing that all results are exploratory.
+- **Founding-origin classifier description:** compressed 9-line paragraph to 6
+  lines; updated keyword-source reference from `config.json` to `keywords.json`.
+- **`config.json`:** removed duplicate `"keywords"` stanza (~110 lines);
+  replaced with `_keywords_moved` redirect. `keywords.json` is now the sole
+  source of truth for all keyword content.
+- **Bibliography:** added Gelman & Loken (2014) and Shamasastry (1915).
 
 ### v1.0.6 — 2026-04-11
 - **Keywords revised:** replaced generic archaeoastronomy / history-of-astronomy

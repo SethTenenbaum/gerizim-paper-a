@@ -93,6 +93,7 @@ if [ "${1:-}" = "--macros-only" ]; then
         analysis/unesco/regional_temporal_gradient.py        # → pCMH
         analysis/unesco/tumulus_dome_evolution_raw_sweep.py  # → pEvoAp (Test 2b)
         analysis/unesco/tumulus_dome_evolution_test.py        # → pEvoAp_validated (context-validated, Exploratory 2bx)
+        analysis/unesco/mound_keyword_context_audit.py        # → NmoundRaw/Accepted/Rejected, moundFPRate, moundKwFPRate, pmoundAccAp, moundEnrichAcc
         analysis/unesco/leave_one_out_sensitivity.py         # → LOOdomeN/Ap/Rate/Enrich/P, LOOstupaN/Ap/Rate/P
         analysis/unesco/dome_leave_k_out.py                  # → LKOsiteOne/Two/ThreeName/DevKm, LKOtwo*/three*/worstTwo/ThreeP
         analysis/global/wikidata_p1435_control_analysis.py
@@ -292,7 +293,11 @@ run_script "GROUP 20: Hemispherical Evolution Raw Sweep (Test 2b)" \
 run_script "GROUP 20b: Hemispherical Evolution Context-Validated (Exploratory 2bx)" \
            analysis/unesco/tumulus_dome_evolution_test.py
 
-run_script "GROUP 20c: Leave-One-Out Sensitivity (Tests 2 & 2b)" \
+echo "─── GROUP 20c: Mound Keyword Context Audit (FP rate, Test 2b-x) ───"
+python3 analysis/unesco/mound_keyword_context_audit.py --latex 2>&1 | tail -60
+echo ""
+
+run_script "GROUP 20d: Leave-One-Out Sensitivity (Tests 2 & 2b)" \
            analysis/unesco/leave_one_out_sensitivity.py
 
 run_script "GROUP 20d: Leave-2-out / Leave-3-out Stability (dome corpus)" \

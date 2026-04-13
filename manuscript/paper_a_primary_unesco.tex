@@ -85,7 +85,7 @@ and a Levantine Harmonic Grid}
 \small Code and data: \href{https://github.com/SethTenenbaum/gerizim-paper-a}{\texttt{github.com/SethTenenbaum/gerizim-paper-a}}
 }
 
-\date{April 2026\\v1.0.6}
+\date{April 2026\\v1.0.7}
 
 \begin{document}
 \maketitle
@@ -104,14 +104,17 @@ results are treated as exploratory.
 
 Every longitude of the form $x.18$\textdegree{}E (120 equally spaced anchors)
 yields the maximum observed count of sites within 6.7~km of a harmonic node
-(Tier-A+, against a 4\% geometric null). The 3\textdegree{} spacing equals
+(Tier-A+, sites within $\lesssim$6.7~km of a 0.1-beru harmonic node,
+against a 4\% geometric null). The 3\textdegree{} spacing equals
 0.1~beru, the smallest integer sub-division of the Babylonian angular unit
-(MUL.APIN, c.~1000~BCE). Gerizim's longitude falls within this phase band,
-initiating the analysis (\S\ref{sec:circularity}).
+(MUL.APIN, c.~1000~BCE). The analysis began with Mount Gerizim
+(35.27\textdegree{}E) as the historical anchor; a subsequent full-circle sweep
+revealed that Gerizim's longitude falls within the $x.18$\textdegree{}E phase
+band, introducing the circularity documented in \S\ref{sec:circularity}.
 
 Domed and spherical monuments ($N = \NcircTotal$) show \NcircApRate\%
 Tier-A+ (permutation $Z = \simDomePermZ$, $p = \simDomePermP$;
-Bonferroni $p_\mathrm{adj} = \pAdjTestTwo$, $k = 2$).
+Bonferroni $p_\mathrm{adj} = \pAdjTestTwo$, $k = \BonfK$).
 A+-bearing harmonics host $\clusterHarmonicRatio\times$ more total sites
 than non-A+-bearing harmonics (permutation $p = \clusterPermP$).
 Leave-one-out checks confirm no single site drives either result.
@@ -203,20 +206,24 @@ paper would not exist in its current form.
 \emph{This identification problem cannot be closed by any statistical method
 applied to this corpus.}
 The order in which the $x.18$\textdegree{}E phase and the Gerizim anchor
-were identified is not recoverable from the analysis record alone.
-A time-stamped archive would not help, because the internal sequence of
-analysis steps is unverifiable by any external party and because the
-analysis is simple enough to reproduce, making any timestamp trivially
-easy to fabricate.
-The deeper issue is that this archiving problem has no statistical
-solution. Given a finite and fully enumerable longitude axis, a
-historically named location falling near a significant phase by chance
-is statistically expected regardless of whether any metrological practice
-ever existed. Restricting the candidate set to historically credible
-anchors (Gerizim, Jerusalem, Mecca, Mt.\ Meru) reduces the effective
-multiplicity but does not eliminate it, and no purely spatial test can
-distinguish a real ancient grid from a coincidence within a bounded
-search space.
+were identified is not recoverable from the analysis record alone. A
+time-stamped archive would not resolve this problem. The internal sequence of
+analysis steps is unverifiable by any external party and the analysis is
+simple enough to reproduce, making any timestamp trivially easy to fabricate.
+More fundamentally, this is an instance of the \emph{forking paths} problem
+\citep{gelman2014forking}: analytical choices contingent on observed data
+cannot be reconstructed post-hoc even without intentional $p$-hacking,
+because investigator awareness of the data inevitably shapes which paths
+are reported.
+
+The deeper issue is that this archiving problem has no statistical solution.
+Given a finite and fully enumerable longitude axis, a historically named
+location falling near a significant phase by chance is statistically expected
+regardless of whether any metrological practice ever existed. Restricting
+the candidate set to historically credible anchors (Gerizim, Jerusalem,
+Mecca, Mt.\ Meru) reduces the effective multiplicity but does not eliminate
+it, and no purely spatial test can distinguish a real ancient grid from a
+coincidence within a bounded search space.
 Accordingly:
 \begin{enumerate}[label=(\alph*)]
   \item All results are treated as \emph{exploratory} without exception.
@@ -272,13 +279,25 @@ inscriptions record inter-regional distances in beru between major cities
 Salt Sea are marked as multiples of beru. The \textit{kudurru} (boundary stone)
 tradition records territorial extents in cuneiform, and many kudurru were
 deposited in temples as legally authoritative records
-\citep{robson2008mathematics,powell1987metrological}. This combination of a
-fractional angular unit at cosmological scales and temple-deposited territorial
-records provides the documentary basis for testing whether a 0.1-beru harmonic
-spacing is detectable in the longitude distribution of major monuments. This
-study tests the statistical pattern only. The mechanism by which any such
-correspondence could arise is not documented and is outside the scope of this
-paper.
+\citep{robson2008mathematics,powell1987metrological}.
+
+Longitudinal positioning at beru-scale precision did not require a dedicated
+geodetic instrument. Systematic meridian transit observation and comparative
+eclipse timing, both well attested in the cuneiform astronomical record
+\citep{hunger2019mul,neugebauer1975history}, are sufficient to derive inter-site
+angular separations at 1\textdegree{} resolution or better. The gnomon,
+attested across Mesopotamian, Egyptian, and Indian traditions
+\citep{neugebauer1975history,shamasastry1915arthashastra}, provides an independent means of
+establishing true meridian. The absence of a recovered instrument calibrated
+explicitly in beru subdivisions is therefore not equivalent to the absence
+of the operational capacity to execute positional measurements at that scale.
+
+This combination of a fractional angular unit, temple-deposited territorial
+records, and attested observational infrastructure provides the documentary
+basis for testing whether a 0.1-beru harmonic spacing is detectable in the
+longitude distribution of major monuments. This study tests the statistical
+pattern only. The mechanism by which any such correspondence could arise is
+not documented and is outside the scope of this paper.
 
 \subsection{Ancient Metrology and Geodetic Practice}
 
@@ -301,6 +320,8 @@ is externally curated (the UNESCO World Heritage List), eliminating selection
 bias. Second, the test is one-dimensional (longitude only), yielding a
 well-defined geometric null (4\%) with no free parameters. Third, the
 analysis is fully computational and publicly archived \citep{tenenbaum2026audit}.
+
+
 
 \subsection{The Anchor: Mount Gerizim}
 \label{sec:anchor}
@@ -440,11 +461,28 @@ fixed on metrological grounds, not tuned to the data.
 \subsection{Test Populations}
 \label{sec:test_populations}
 
+All keyword-based populations are approximate. The objective is to
+reduce false positives as far as possible while accepting that a
+simple morphological keyword match cannot eliminate interpretive
+ambiguity entirely. The primary (raw) sweep deliberately tolerates
+known false negatives for simplicity; the context-validated variant
+(Test~2x) applies sentence-level gating to reduce false positives
+further, at the cost of a more complex classification rule.
+Both populations are reported; the raw sweep serves as the
+conservative primary test because its inclusion criterion is
+fully mechanical.
+
 \textbf{Test~2 (dome/spherical, primary).}
 \NcircKeywords{} morphological keywords from four roots
 (\textit{stupa/stupas}, \textit{tholos}, \textit{dome/domed/domes},
 \textit{spherical}) are matched as whole words against each site's
 name, XML description, and extended OUV text ($N = \NcircTotal$).
+This raw sweep is over-inclusive: it admits sites where the keyword
+refers to geological or vernacular features rather than monumental
+architecture. The context-validated population ($N = \NcircValidated$)
+is reported alongside all primary results; it yields stronger
+significance, consistent with the rejected sites being
+longitude-diluting false positives.
 
 \textbf{Test~2b (mound evolution, sensitivity variant).}
 Extends Test~2 by adding earthen mound-stage keywords
@@ -460,33 +498,37 @@ Cochran-Armitage trend test on the full corpus, no keyword filter.
 \textbf{Test~E (founding classifier, post-hoc).}
 A context-aware keyword classifier
 (\texttt{lib/founding\_filter.py}) iteratively tuned after data
-inspection (Appendix~\ref{sec:kwdaudit_founding}).
+inspection to reduce false positives while accepting residual
+interpretive ambiguity
+(Appendix~\ref{sec:kwdaudit_founding}). The classifier is fully
+exploratory: it addresses what kinds of sites beyond domed
+monuments tend to fall on harmonic nodes, but carries no weight
+in the primary evidential chain.
 
 \subsection{Multiple-Comparisons Protocol}
 \label{sec:bonferroni}
 
 All results are exploratory (\S\ref{sec:circularity}).
 
-\textbf{Primary test family ($k = 2$).}
+\textbf{Primary test family ($k = \BonfK$).}
 \begin{itemize}
+  \item \textbf{Test 1} (full corpus, $N = \NclusterTotal$):
+    global enrichment above 4\% null (descriptive backdrop).
   \item \textbf{Test 2} (domed/spherical monuments, $N = \NcircTotal$):
     morphological sub-population enriched above 4\% null.
   \item \textbf{Test 3} (cluster asymmetry, full corpus, no keyword filter):
     A+-bearing harmonics host more total sites.
+  \item \textbf{Test 4} (temporal gradient, full corpus):
+    Cochran-Armitage trend across inscription-year cohorts.
 \end{itemize}
-These address structurally different questions on different populations.
-Both pass the Bonferroni bound at $k = 2$
+Tests~2 and~3 address structurally different questions on different
+populations and carry the primary evidential weight.
+All four pass the Bonferroni bound at $k = \BonfK$
 (dome $p_\mathrm{adj} = \pAdjTestTwo$~***,
-cluster $p_\mathrm{adj} = \pAdjTestThree$~**)
-and the conservative $k = 5$ bound
-(dome $p_\mathrm{adj} = 0.005$~***,
-cluster $p_\mathrm{adj} = 0.017$~**).
+cluster $p_\mathrm{adj} = \pAdjTestThree$~**).
 
 \textbf{Other tests.}
-Test~1 (full corpus) is descriptive and shares A+ sites with Test~3.
 Test~2b is a sensitivity variant of Test~2.
-Test~4 (temporal gradient) is descriptive only after within-region
-adjustment (\S\ref{sec:resultstemporal}).
 Test~E (founding classifier) is fully post-hoc (Appendix~\ref{sec:kwdaudit_founding}).
 Test~B (Rayleigh) is a structural description (\S\ref{sec:results_rayleigh}).
 
@@ -495,24 +537,24 @@ Test~B (Rayleigh) is a structural description (\S\ref{sec:results_rayleigh}).
 \begin{table}[H]
 \centering\small
 \caption{Multiple-comparisons summary.
-  Primary family: Tests~2 and~3 ($k = 2$, $\alpha = 0.025$).
+  Primary test family: Tests~1--4 ($k = \BonfK$, $\alpha = 0.05/\BonfK$).
   All results are exploratory (\S\ref{sec:circularity}).}
 \label{tab:bonferroni_both}
 \adjustbox{max width=\textwidth}{%
-\begin{tabular}{lcrrrll}
+\begin{tabular}{lcrll}
 \toprule
-Test & $N$ & Raw $p$ & $p_\mathrm{adj}$, $k{=}2$ & $p_\mathrm{adj}$, $k{=}5$ & Status \\
+Test & $N$ & Raw $p$ & $p_\mathrm{adj}$, $k{=}\BonfK$ & Status \\
 \midrule
-Test~2 (dome A+)       & \NcircTotal     & \pCircAp        & \pAdjTestTwo~***   & 0.005~***         & \textbf{Primary} \\
-Test~3 (cluster asym.) & \NclusterTotal  & \clusterPermP   & \pAdjTestThree~**  & 0.017~**          & \textbf{Primary} \\
+Test~2 (dome A+)       & \NcircTotal     & \pCircAp        & \pAdjTestTwo~***   & \textbf{Primary} \\
+Test~3 (cluster asym.) & \NclusterTotal  & \clusterPermP   & \pAdjTestThree~**  & \textbf{Primary} \\
+Test~1 (full corpus)   & \NclusterTotal  & \clusterApBinom & \pAdjTestOne~*     & Confirmatory \\
+Test~4 (temporal)      & \NoriginCorpus  & \pCochranThree  & \pAdjTestFour~ns   & Confirmatory \\
 \midrule
-Test~1 (full corpus)   & \NclusterTotal  & \clusterApBinom & \pAdjTestOne       & ---               & Descriptive \\
-Test~2b (mound evol.)  & \NevoTotal      & \pEvoAp         & N/A                & N/A               & Sensitivity \\
-Test~4 (temporal)      & \NoriginCorpus  & \pCochranThree  & \pAdjTestFour      & ---               & Descriptive \\
-Test~E (founding)      & \NoriginCorpus  & \pFoundKwFisher & N/A                & N/A               & Post-hoc \\
-Test~B (Rayleigh)$^\dagger$ & \Nap       & \pRawTestB      & N/A                & N/A               & Structural \\
+Test~2b (mound evol.)  & \NevoTotal      & \pEvoAp         & N/A                & Sensitivity \\
+Test~E (founding)      & \NoriginCorpus  & \pFoundKwFisher & N/A                & Post-hoc \\
+Test~B (Rayleigh)$^\dagger$ & \Nap       & \pRawTestB      & N/A                & Structural \\
 \bottomrule
-\multicolumn{7}{l}{\footnotesize $^\dagger$Test~B: $R\approx1$ by A+ construction; excluded from all family counts (\S\ref{sec:results_rayleigh}).} \\
+\multicolumn{5}{l}{\footnotesize $^\dagger$Test~B: $R\approx1$ by A+ construction; excluded from all family counts (\S\ref{sec:results_rayleigh}).} \\
 \end{tabular}}
 \end{table}
 
@@ -540,8 +582,8 @@ Test~B (Rayleigh)$^{\dagger}$ & \Nap          & \pRawTestB      & N/A           
 Test~2 (dome A+)              & \NcircTotal   & \pCircAp        & \FDRqTestTwo     & \BonfAllTestTwo   & \textbf{Primary} \\
 Test~3 (cluster asym.)        & \NclusterTotal& \clusterPermP   & \FDRqTestThree   & \BonfAllTestThree & \textbf{Primary} \\
 Test~2b (mound evol.)         & \NevoTotal    & \pEvoAp         & N/A              & N/A               & Sensitivity \\
-Test~1 (full corpus)          & \NclusterTotal& \clusterApBinom & \FDRqTestOne     & \BonfAllTestOne   & Descriptive \\
-Test~4 (temporal)             & \NoriginCorpus& \pCochranThree  & \FDRqTestFour    & \BonfAllTestFour  & Descriptive \\
+Test~1 (full corpus)          & \NclusterTotal& \clusterApBinom & \FDRqTestOne     & \BonfAllTestOne   & Confirmatory \\
+Test~4 (temporal)             & \NoriginCorpus& \pCochranThree  & \FDRqTestFour    & \BonfAllTestFour  & Confirmatory \\
 Test~E (founding)             & \NoriginCorpus& \pFoundKwFisher & N/A              & N/A               & Post-hoc \\
 \bottomrule
 \multicolumn{6}{l}{\footnotesize \NsurviveFDR{} tests survive BH-FDR ($q < 0.05$); \NsurviveBonfAll{} survive Bonferroni ($k = \NtotalTests$).} \\
@@ -605,7 +647,7 @@ $\chi^2$-uniform (5 bins, df\,=\,4) & --- & --- & ---  & --- & \pCircChi & ns \\
 
 \noindent\textbf{Tier-A+ sites} ($N = \NcircTierAp$, \NcircApRate\%, $\circEnrichAp\times$,
 permutation $p = \simDomePermP$,
-Bonferroni $p_\mathrm{adj} = \pAdjTestTwo$, $k = 2$):
+Bonferroni $p_\mathrm{adj} = \pAdjTestTwo$, $k = \BonfK$):
 Khoja Ahmed Yasawi (0.2~km),
 Boyana Church (0.3~km),
 Lumbini (0.8~km),
@@ -827,8 +869,8 @@ The full UNESCO Cultural/Mixed corpus ($N = \NclusterTotal$) shows a
 Tier-A+ rate of \clusterApRate\%
 (\NclusterAp/\NclusterTotal; Clopper-Pearson 95\% CI [4.2\%, 7.1\%]),
 above the 4\% null
-(binomial $p = \clusterApBinom$; Bonferroni reference at $k = 2$:
-$p_\mathrm{adj} = \pAdjTestOne$; descriptive only).
+(binomial $p = \clusterApBinom$; Bonferroni $p_\mathrm{adj} = \pAdjTestOne$,
+$k = \BonfK$).
 Both Gerizim (external) and Jerusalem (inscribed, self-excluded to
 $N = 1010$) produce $p = 0.010$; the signal belongs to the
 $\sim$35\textdegree{}E corridor, not to either anchor individually
@@ -1279,7 +1321,7 @@ Three simulation approaches fail to reproduce the dome enrichment
 All results are exploratory (\S\ref{sec:circularity}).
 The UNESCO longitude distribution contains a global 3\textdegree{} periodic
 structure matching the 0.1-beru unit. The dome sub-population (Test~2,
-Bonferroni $p_\mathrm{adj} = \pAdjTestTwo$, $k = 2$) survives all three
+Bonferroni $p_\mathrm{adj} = \pAdjTestTwo$, $k = \BonfK$) survives all three
 simulation nulls, and A+-bearing harmonics host
 $\clusterHarmonicRatio\times$ more sites than non-A+ harmonics (Test~3,
 $p = \clusterPermP$).
@@ -1325,13 +1367,19 @@ name, XML description, and extended OUV text.
 \textbf{Test~2 (primary):} All \NcircTotal{} matching sites are included
 without context gating. This raw positive sweep uses a population fully
 determined by the keyword list, with no post-hoc filtering decisions.
+The sweep is deliberately over-inclusive: it accepts sites where the
+matched keyword refers to geological domes, vernacular housing, or
+natural spherical features. The trade-off favors simplicity and
+reproducibility at the cost of known false negatives in specificity.
 
 \textbf{Test~2x (exploratory robustness check):} Unambiguous keywords
 are accepted without validation. Ambiguous keywords (\textit{dome, domed,
 domes, spherical}) are subject to a two-gate context check: Gate~1
 (28 negative patterns) rejects non-architectural uses; Gate~2
 (86 positive patterns) requires architectural confirmation. Full gate
-lists: \texttt{lib/dome\_filter.py}.
+lists: \texttt{lib/dome\_filter.py}. The gates reduce false positives
+but cannot eliminate interpretive ambiguity at the boundary between
+architectural and non-architectural uses.
 
 Of the \NcircTotal{} raw-sweep sites, \NcircContextRejected{} are
 rejected by context validation in Test~2x (Hiroshima Peace Memorial,
@@ -1349,15 +1397,20 @@ The founding-origin classifier (\texttt{lib/founding\_filter.py})
 assigns sites to five categories: Founding Capital (F), Sacred Origin
 (S), Founding Monument (M), Founding Axis (X), and Ancient Continuous
 Landscape (L), using unambiguous and context-gated keywords. Full
-keyword lists: \texttt{config.json}.
+keyword lists and gate-logic patterns are in \texttt{keywords.json},
+the single source of truth for all keyword content in this project
+(see also \texttt{lib/beru.py}:\texttt{load\_keywords()}).
 
-This classifier was iteratively tuned after data inspection and is
-classified as fully post-hoc. It carries no weight in the primary
-evidential chain but addresses a substantive question: what kinds of
-sites, beyond domed and stupa monuments, tend to fall on
-$x.18$\textdegree{}E nodes? The classifier finds enrichment not only
-in morphologically domed structures but in sites associated with the
-founding of civilizational and religious traditions.
+This classifier was iteratively tuned after data inspection. The
+objective was to reduce false positives while accepting that keyword-based
+classification cannot fully eliminate interpretive ambiguity at
+the boundary between founding-related and general heritage
+descriptions. It carries no weight in the primary evidential
+chain but addresses a substantive question: what kinds of sites,
+beyond domed and stupa monuments, tend to fall on $x.18$\textdegree{}E
+nodes? The classifier finds enrichment not only in morphologically
+domed structures but in sites associated with the founding of
+civilizational and religious traditions.
 
 \textbf{Keyword enrichment result.}
 Applied to the full corpus ($N = \NoriginCorpus$), the classifier finds
@@ -1402,6 +1455,11 @@ Freeman, P.~R. (1976).
 A Bayesian analysis of the megalithic yard.
 \textit{Journal of the Royal Statistical Society, Series A}, 139(1), 20--35.
 
+\bibitem[Gelman \& Loken(2014)]{gelman2014forking}
+Gelman, A., \& Loken, E. (2014).
+The statistical crisis in science.
+\textit{American Scientist}, 102(6), 460--465.
+
 \bibitem[Good(2005)]{good2005permutation}
 Good, P.~I. (2005).
 \textit{Permutation, Parametric, and Bootstrap Tests of Hypotheses}
@@ -1427,10 +1485,10 @@ Hutton, R. (1991).
 \textit{The Pagan Religions of the Ancient British Isles}.
 Blackwell.
 
-\bibitem[Kangle(1965)]{kangle1965arthashastra}
-Kangle, R.~P. (1965).
-\textit{The Kau\d{t}il\=\i ya Artha\'{s}\={a}stra}, 3~vols.
-University of Bombay.
+\bibitem[Shamasastry(1915)]{shamasastry1915arthashastra}
+Shamasastry, R. (1915).
+\textit{Kautilya's Artha\'{s}\={a}stra}.
+Mysore Government Press.
 
 \bibitem[Kendall(1974)]{kendall1974}
 Kendall, D.~G. (1974).
@@ -1503,7 +1561,7 @@ of structural orientations in skyscape archaeology.
 
 \bibitem[Tenenbaum(2026)]{tenenbaum2026audit}
 Tenenbaum, S. (2026).
-\textit{Longitude Quantization in the UNESCO World Heritage Corpus: Domes, Stupas, and the Babylonian Beru --- Code and Data} (v1.0.6).
+\textit{Longitude Quantization in the UNESCO World Heritage Corpus: Domes, Stupas, and the Babylonian Beru --- Code and Data} (v1.0.7).
 Zenodo. \url{https://doi.org/10.5281/zenodo.19520502}
 
 \bibitem[Thom(1964)]{thom1964}
@@ -1543,7 +1601,7 @@ World's Work.
 \section*{Data and Code Availability}
 All data and analysis code are openly available at
 \url{https://github.com/SethTenenbaum/gerizim-paper-a}.
-A permanent archival snapshot (v1.0.6) with DOI is deposited at Zenodo.
+A permanent archival snapshot (v1.0.7) with DOI is deposited at Zenodo.
 
 \section*{Acknowledgments}
 The UNESCO World Heritage Centre maintains the publicly accessible XML

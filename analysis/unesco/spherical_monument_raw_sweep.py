@@ -33,7 +33,7 @@ OUTPUT
 
 KEYWORDS
 --------
-    Sourced from config.json > keywords > dome_forms (same as Test 2).
+    Sourced from keywords.json > dome_forms (same as Test 2).
     Unambiguous: stupa, stupas, tholos
     Ambiguous:   dome, domed, domes, spherical
     All treated identically here — raw substring match, no gating.
@@ -241,11 +241,12 @@ print(f"  \\newcommand{{\\circMeanDev}}{{{mean_dev:.4f}}}        % mean beru dev
 circ_exp_ap = round(N_raw * P_NULL_AP, 2)
 circ_exp_a  = round(N_raw * P_NULL_A,  2)
 circ_rate_a = round(100 * nA / N_raw, 1)
-# Clopper-Pearson exact 95% CI
-_cp_ap_lo = round(100 * binom_dist.ppf(0.025, nAp, N_raw) / N_raw, 1)
-_cp_ap_hi = round(100 * binom_dist.ppf(0.975, nAp, N_raw) / N_raw, 1)
-_cp_a_lo  = round(100 * binom_dist.ppf(0.025, nA,  N_raw) / N_raw, 1)
-_cp_a_hi  = round(100 * binom_dist.ppf(0.975, nA,  N_raw) / N_raw, 1)
+# Clopper-Pearson exact 95% CI (uses beta distribution)
+from scipy.stats import beta as _beta
+_cp_ap_lo = round(100 * _beta.ppf(0.025, nAp, N_raw - nAp + 1), 1) if nAp > 0 else 0.0
+_cp_ap_hi = round(100 * _beta.ppf(0.975, nAp + 1, N_raw - nAp), 1)
+_cp_a_lo  = round(100 * _beta.ppf(0.025, nA, N_raw - nA + 1), 1) if nA > 0 else 0.0
+_cp_a_hi  = round(100 * _beta.ppf(0.975, nA + 1, N_raw - nA), 1)
 print(f"  \\newcommand{{\\circExpAp}}{{{circ_exp_ap}}}         % expected A+ count under H0 (= N × 4%)")
 print(f"  \\newcommand{{\\circExpA}}{{{circ_exp_a}}}          % expected A count under H0 (= N × 20%)")
 print(f"  \\newcommand{{\\circARate}}{{{circ_rate_a}}}         % Tier-A rate (%) = {nA}/{N_raw}")

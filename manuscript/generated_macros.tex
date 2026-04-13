@@ -1,4 +1,4 @@
-% Generated macros — 2026-04-12T17:57:01Z
+% Generated macros — 2026-04-13T17:59:23Z
 % Source: bash manuscript/reproduce_all_macros.sh --macros-only
 % IMPORTANT: values are computed fresh each run — do NOT hardcode
 
@@ -43,10 +43,10 @@
   \newcommand{\circExpAp}{3.6}         % expected A+ count under H0 (= N × 4%)
   \newcommand{\circExpA}{18.0}          % expected A count under H0 (= N × 20%)
   \newcommand{\circARate}{32.2}         % Tier-A rate (%) = 29/90
-  \newcommand{\circApCIlo}{nan}         % Clopper-Pearson 95% CI lower, A+ rate (%)
-  \newcommand{\circApCIhi}{nan}         % Clopper-Pearson 95% CI upper, A+ rate (%)
-  \newcommand{\circACIlo}{nan}          % Clopper-Pearson 95% CI lower, A rate (%)
-  \newcommand{\circACIhi}{nan}          % Clopper-Pearson 95% CI upper, A rate (%)
+  \newcommand{\circApCIlo}{6.3}         % Clopper-Pearson 95% CI lower, A+ rate (%)
+  \newcommand{\circApCIhi}{20.8}         % Clopper-Pearson 95% CI upper, A+ rate (%)
+  \newcommand{\circACIlo}{22.8}          % Clopper-Pearson 95% CI lower, A rate (%)
+  \newcommand{\circACIhi}{42.9}          % Clopper-Pearson 95% CI upper, A rate (%)
 
 % --- analysis/unesco/spherical_monument_test.py
   \newcommand{\pCircApValidated}{0.0005}  % p-value, A+ binomial (context-validated dome corpus)
@@ -497,6 +497,21 @@
   \newcommand{\pEvoAValidated}{0.0032}           % p-value A  binomial, context-validated (Exploratory)
   \newcommand{\NevoValidRejected}{16}           % sites rejected by context validation
 
+% --- analysis/unesco/mound_keyword_context_audit.py
+  \newcommand{\NmoundRaw}{132}           % raw-sweep population (no context filter)
+  \newcommand{\NmoundAccepted}{116}       % context-validated population
+  \newcommand{\NmoundRejected}{16}        % sites failing all context validation
+  \newcommand{\moundFPRate}{12.1}      % site-level FP rate (%) for mound-evo keywords
+  \newcommand{\moundKwFPRate}{45.5}     % FP rate (%) for 'mound' keyword specifically
+  \newcommand{\NmoundDeciding}{22}       % sites where 'mound' is the deciding inclusion factor
+  \newcommand{\NmoundDecidingRej}{10}    % of those, rejected by context validation
+  \newcommand{\NmoundRawAp}{14}        % Tier-A+ in raw sweep
+  \newcommand{\NmoundAccAp}{14}       % Tier-A+ in validated population
+  \newcommand{\pmoundRawAp}{0.0009}   % p-value A+ (raw sweep)
+  \newcommand{\pmoundAccAp}{0.0002}   % p-value A+ (validated)
+  \newcommand{\moundEnrichRaw}{2.65}  % enrichment A+ (raw sweep)
+  \newcommand{\moundEnrichAcc}{3.02}  % enrichment A+ (validated)
+
 % --- analysis/unesco/leave_one_out_sensitivity.py
   \newcommand{\LOOdomeN}{89}               % LOO dome: N after removing one A+ site
   \newcommand{\LOOdomeAp}{10}              % LOO dome: A+ after removing one A+ site
@@ -631,9 +646,9 @@
 
 % --- analysis/unesco/stupa_coordinate_perturbation.py
   \newcommand{\stupaCoordPerturbTrials}{10,000}
-  \newcommand{\stupaCoordPerturbMean}{0.00}
-  \newcommand{\stupaCoordPerturbStd}{0.00}
-  \newcommand{\stupaCoordPerturbSigPct}{0}
+  \newcommand{\stupaCoordPerturbMean}{3.58}
+  \newcommand{\stupaCoordPerturbStd}{0.58}
+  \newcommand{\stupaCoordPerturbSigPct}{96}
 
 % --- analysis/unesco/americas_directional_test.py
   \newcommand{\AmericasN}{145}
