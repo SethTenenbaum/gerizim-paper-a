@@ -1,6 +1,6 @@
 # Longitude Quantization in the UNESCO World Heritage Corpus: Domes, Stupas, and the Babylonian Beru
 
-**Paper A — Primary UNESCO Analysis** · `v1.0.8`
+**Paper A — Primary UNESCO Analysis** · `v1.0.9`
 
 Seth Tenenbaum · Independent Scholar  
 ORCID: [0009-0008-5797-2498](https://orcid.org/0009-0008-5797-2498)
@@ -71,6 +71,7 @@ gerizim-paper-a/
 │   │   ├── sensitivity_slope_permutation_test.py  # Sensitivity slope permutation
 │   │   ├── sensitivity_slope_specificity_test.py  # Sensitivity slope specificity
 │   │   ├── americas_directional_test.py           # Americas directional control
+│   │   ├── mound_keyword_context_audit.py         # Mound keyword context audit
 │   │   └── verify_x18_periodicity.py              # x.18°E artifact check
 │   │
 │   ├── global/                       # Global robustness checks
@@ -84,6 +85,8 @@ gerizim-paper-a/
 │   │   ├── landmark_anchor_ranking.py             # Gerizim vs. other anchors
 │   │   ├── wikidata_p1435_control_analysis.py     # Wikidata P1435 control analysis
 │   │   ├── x18_periodicity_formal_test.py         # x.18°E formal periodicity test
+│   │   ├── x18_max_permutation_test.py            # x.18°E max permutation test
+│   │   ├── x18_optimal_band_significance.py       # x.18°E optimal band significance
 │   │   └── emit_constants.py                      # Emit pure constants as LaTeX macros
 │   │
 │   └── americas/                     # Control comparison
@@ -115,17 +118,32 @@ gerizim-paper-a/
 │       └── wikidata/
 │           └── p1435_global_control.csv    # Wikidata P1435 global heritage control
 │
-├── supplementary/                    # Archived evidence for anchor citation (ref. 5706)
-│   ├── unesco_5706_rendered.html     # Archived rendered UNESCO Tentative List page
-│   ├── unesco_5706.pdf               # PDF snapshot
-│   ├── unesco_5706.png               # Screenshot
-│   ├── unesco_site_by_site_audit.txt # Site-by-site audit notes
-│   ├── fetch_unesco_playwright.py    # Script used to archive the page
-│   └── README_audit.txt              # Audit provenance notes
+├── supplementary/
+│   ├── audit/                        # Keyword-classification audit files (reproducible)
+│   │   ├── dome_keyword_audit.txt         # Dome/spherical monument sweep (Test 2)
+│   │   ├── dome_mound_keyword_audit.txt   # Dome + mound evolution sweep (Test 2b)
+│   │   ├── founding_keyword_audit.txt     # Founding/sacred-origin classifier (Test E)
+│   │   ├── unesco_site_by_site_audit.txt  # Site-by-site manual audit notes
+│   │   └── README_audit.txt              # Audit provenance and reproducibility notes
+│   └── UNESCO/                       # Archived source materials for anchor citation (ref. 5706)
+│       ├── unesco_5706_rendered.html # Archived rendered UNESCO Tentative List page
+│       ├── unesco_5706.pdf           # PDF snapshot
+│       └── unesco_5706.png           # Screenshot
+│
+├── tools/                            # Audit generation scripts
+│   ├── generate_audit_dome.py        # Regenerate dome_keyword_audit.txt
+│   ├── generate_audit_dome_mound.py  # Regenerate dome_mound_keyword_audit.txt
+│   ├── generate_audit_founding.py    # Regenerate founding_keyword_audit.txt
+│   └── md2pdf.sh                     # Markdown → PDF utility
+│
+├── results/                          # Cached permutation null distributions
+│   ├── x18_maxperm_null_A.npy
+│   ├── x18_maxperm_null_B.npy
+│   └── x18_maxperm_perm_max.npy
 │
 ├── guide/                            # Reference guides
 │   ├── statistical_methods_guide.md  # Statistical methods reference
-│   └── statistical_tests_reference.md
+│   └── statistical_methods_guide.pdf
 │
 ├── tests/                            # Unit tests for shared library
 │   ├── test_beru.py
@@ -134,13 +152,13 @@ gerizim-paper-a/
 │   ├── test_stats.py
 │   └── test_sweep.py
 │
-├── _run_x18.py               # Standalone x.18°E periodicity runner
-├── keywords.json             # Keyword lists for dome/stupa filtering
-├── config.json               # All parameters, anchors, keywords, thresholds
+├── keywords.json             # Single source of truth for all keyword lists
+├── config.json               # Pipeline parameters, anchors, thresholds
 ├── conftest.py               # Pytest path configuration
 ├── pytest.ini                # Pytest settings
 ├── requirements.txt          # Python dependencies
 ├── Makefile                  # Reproduce all results with `make all`
+├── _run_x18.py               # Standalone x.18°E periodicity runner
 ├── LICENSE                   # MIT License (code)
 ├── LICENSE_MANUSCRIPT.txt    # CC BY 4.0 (manuscript text and figures)
 ├── LICENSE_DATA.txt          # Data licensing notes (UNESCO, Wikidata)
@@ -149,6 +167,17 @@ gerizim-paper-a/
 ```
 
 ## Changelog
+
+### v1.0.9 — 2026-04-13
+- **Keyword filter restored:** `mound_positive_context` in `keywords.json`
+  reverted to original broader context list (`earthwork`, `earthen`, `platform`,
+  `ritual`, `ceremonial`, `sacred`, `archaeological`, `prehistoric`, `ancient`,
+  `constructed`, etc.) — capturing spherical earthworks, platform mounds, and
+  burial mounds that may have influenced hemispherical dome architecture.
+- **Audit files regenerated:** `dome_mound_keyword_audit.txt` (117 included,
+  14 A+ sites) and `dome_keyword_audit.txt` (83 included, 11 A+ sites).
+- **README updated:** directory structure corrected to reflect current layout
+  (`supplementary/audit/`, `supplementary/UNESCO/`, `tools/`, `results/`).
 
 ### v1.0.8 — 2026-04-13
 - **Supplementary materials reorganized:** `supplementary/audit/` holds all
