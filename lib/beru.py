@@ -20,6 +20,13 @@ _CONFIG_PATH = Path(__file__).parent.parent / "config.json"
 with open(_CONFIG_PATH) as f:
     CONFIG = json.load(f)
 
+# Keywords live in keywords.json (separated from config.json).
+# Inject them into CONFIG["keywords"] so all existing callers work unchanged.
+_KEYWORDS_PATH = Path(__file__).parent.parent / "keywords.json"
+if _KEYWORDS_PATH.exists():
+    with open(_KEYWORDS_PATH) as _f:
+        CONFIG["keywords"] = json.load(_f)
+
 # Anchor longitude
 GERIZIM = CONFIG["anchors"]["gerizim"]["longitude"]
 

@@ -61,7 +61,7 @@ np.random.seed(42)
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus, cultural_sites_with_coords
-from lib.beru import TIER_APLUS, P_NULL_AP
+from lib.beru import GERIZIM, BERU, TIER_APLUS, P_NULL_AP
 from lib.beru import deviation as _beru_deviation
 from lib.results_store import ResultsStore
 
@@ -93,7 +93,11 @@ def is_stupa_site(site) -> bool:
 
 
 def count_aplus(lons: np.ndarray) -> int:
-    return int(np.sum([beru_dev(float(lon)) <= TIER_APLUS for lon in lons]))
+    """Vectorized A+ counter — no Python loop over sites."""
+    arr = lons if isinstance(lons, np.ndarray) else np.asarray(lons, dtype=float)
+    arc = np.abs(arr - GERIZIM) / BERU
+    dev = np.abs(arc - np.round(arc / 0.1) * 0.1)
+    return int(np.sum(dev <= TIER_APLUS))
 
 
 def binomial_p(n_ap: int, n_total: int) -> float:

@@ -255,6 +255,9 @@ def main():
     nc_arab  = sum(1 for r in ctrl if r["region"] == "Arab States")
     kc_arab  = sum(1 for r in ctrl if r["region"] == "Arab States" and r["aplus"])
     rc_arab  = kc_arab / nc_arab if nc_arab > 0 else 0.0
+    # Binomial test: Arab States A+ rate vs 4% geometric null
+    p_arab_binom = binomtest(kc_arab, nc_arab, P_NULL, alternative="greater").pvalue \
+                   if nc_arab > 0 else 1.0
 
     # ── Print results ─────────────────────────────────────────────────────
     print(f"\n  (a) Binomial (control vs 4% null):  p = {p_binom_c:.4g}")
@@ -263,7 +266,7 @@ def main():
     print(f"  (d) Permutation p ({N_PERM:,} draws):  p = {p_perm:.3f}")
     print(f"  (e) Mantel-Haenszel: OR = {mh_or:.3f}, χ² = {mh_chi2:.3f}, p = {mh_p:.4f}")
     print(f"  (f) Drop-Europe OR = {or_noeu:.2f}")
-    print(f"  (g) Arab States (P1435 ctrl): N = {nc_arab:,}, A+ = {kc_arab}, rate = {rc_arab*100:.2f}%")
+    print(f"  (g) Arab States (P1435 ctrl): N = {nc_arab:,}, A+ = {kc_arab}, rate = {rc_arab*100:.2f}%, binom p (vs 4% null) = {p_arab_binom:.2e}")
 
     # ── LaTeX macros ──────────────────────────────────────────────────────
     def fmt_p(p: float, decimals: int = 3) -> str:
@@ -295,6 +298,7 @@ def main():
     print(f"  \\newcommand{{\\WDctrlArabN}}{{{nc_arab_fmt}}}           % P1435 control: Arab States site count")
     print(f"  \\newcommand{{\\WDctrlArabAp}}{{{kc_arab}}}            % P1435 control: Arab States A+ count")
     print(f"  \\newcommand{{\\WDctrlArabRate}}{{{rc_arab*100:.2f}}}          % P1435 control: Arab States A+ rate (%)")
+    print(f"  \\newcommand{{\\WDctrlArabBinomP}}{{{fmt_p(p_arab_binom)}}}  % P1435 Arab States binom p vs 4% null")
 
     print(f"\n" + "=" * 72)
     print(f"  DONE — all GROUP 23 macros printed above.")

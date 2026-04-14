@@ -283,24 +283,26 @@ if RUN_PERMTEST:
     print(f"\n{'='*110}")
     print(f"  PERMUTATION TEST  ({N_PERM:,} shuffles)")
     print(f"{'='*110}")
-    rng = np.random.default_rng(42)
+    rng  = np.random.default_rng(42)
     lons = np.array([s.longitude for s in all_sites])
+    harmonics_arr = np.array(CORRIDOR_HARMONICS)   # (H,) e.g. 17 values
+
+    # Vectorized: for each permutation, compute beru-values for all sites,
+    # then check which sites are A+ AND whose nearest harmonic is in the corridor.
+    # Count how many corridor harmonics have at least one such site.
     perm_counts = np.zeros(N_PERM, dtype=int)
     for i in range(N_PERM):
         shuffled = rng.permutation(lons)
-        count = 0
-        for n in CORRIDOR_HARMONICS:
-            harm_lon = GERIZIM + n * BERU
-            for lon in shuffled:
-                arc = abs(lon - GERIZIM)
-                bv  = arc / BERU
-                near = round(bv * 10) / 10
-                dev  = abs(bv - near)
-                if near == n and dev <= TIER_APLUS:
-                    count += 1
-                    break
-        perm_counts[i] = count
-    perm_p   = float(np.mean(perm_counts >= n_hits))
+        arc   = np.abs(shuffled - GERIZIM) / BERU          # (N,)
+        near  = np.round(arc * 10) / 10                     # (N,) nearest harmonic
+        dev   = np.abs(arc - near)                          # (N,) deviation
+        # A site counts if it's A+ AND its nearest harmonic is in the corridor
+        in_corridor = np.isin(near, harmonics_arr)          # (N,)
+        is_ap       = dev <= TIER_APLUS                     # (N,)
+        hits        = near[in_corridor & is_ap]             # harmonics hit by A+ sites
+        perm_counts[i] = len(np.unique(hits))               # distinct harmonics covered
+
+    perm_p    = float(np.mean(perm_counts >= n_hits))
     perm_mean = float(np.mean(perm_counts))
     perm_std  = float(np.std(perm_counts))
     perm_z    = (n_hits - perm_mean) / perm_std if perm_std > 0 else float("inf")
