@@ -595,7 +595,6 @@ ResultsStore().write_many({
 # ══════════════════════════════════════════════════════════════════════════════
 
 from scipy.stats import binomtest as _binomtest
-from lib.beru import deviation_at_spacing
 from lib.dome_filter import is_dome_site
 
 # Fine sweep configuration (must match sensitivity_slope_specificity_test.py)
@@ -604,23 +603,32 @@ CANONICAL_SS     = 0.1000
 THRESH_SS        = 0.05
 
 # Load site longitudes for the fine-sweep half (reuse cultural sites already loaded)
-dome_mask_ss = np.array([is_dome_site(s) for s in cultural_sites_with_coords(load_corpus())])
-all_lons_ss  = np.array([s.longitude     for s in cultural_sites_with_coords(load_corpus())])
+_cultural_ss = cultural_sites_with_coords(load_corpus())
+dome_mask_ss = np.array([is_dome_site(s) for s in _cultural_ss])
+all_lons_ss  = np.array([s.longitude     for s in _cultural_ss])
 
 def _null_rate(spacing):
     return 2 * TIER_APLUS / spacing
 
-def _count_hits(lons, spacing):
-    return int(sum(deviation_at_spacing(lon, spacing) <= TIER_APLUS for lon in lons))
+def _count_hits_vec(lons_arr: np.ndarray, spacing: float) -> int:
+    """Vectorized version of _count_hits — no Python loop over sites."""
+    arc = np.abs(lons_arr - GERIZIM)
+    beru_val = arc / BERU
+    nearest = np.round(beru_val / spacing) * spacing
+    dev = np.abs(beru_val - nearest)
+    return int(np.sum(dev <= TIER_APLUS))
 
-def _canon_is_best_joint(all_lons, dome_lons):
-    """Return True iff 0.1000 beru is the unique best joint-significance spacing."""
+def _canon_is_best_joint(all_lons: np.ndarray, dome_lons: np.ndarray) -> bool:
+    """Return True iff 0.1000 beru is the unique best joint-significance spacing.
+    Uses vectorized hit-counting for speed."""
     best_comb = -1.0
     best_sp   = None
+    n_all  = len(all_lons)
+    n_dome = len(dome_lons)
     for sp in FINE_SPACINGS_SS:
         nr   = _null_rate(sp)
-        d_p  = _binomtest(_count_hits(dome_lons, sp), len(dome_lons), nr, alternative='greater').pvalue
-        f_p  = _binomtest(_count_hits(all_lons,  sp), len(all_lons),  nr, alternative='greater').pvalue
+        d_p  = _binomtest(_count_hits_vec(dome_lons, sp), n_dome, nr, alternative='greater').pvalue
+        f_p  = _binomtest(_count_hits_vec(all_lons,  sp), n_all,  nr, alternative='greater').pvalue
         comb = -np.log10(max(d_p, 1e-15)) + -np.log10(max(f_p, 1e-15))
         if (d_p < THRESH_SS and f_p < THRESH_SS) and comb > best_comb:
             best_comb = comb

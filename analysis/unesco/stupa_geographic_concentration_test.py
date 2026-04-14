@@ -117,7 +117,12 @@ def beru_dev(lon: float) -> float:
 
 
 def count_aplus(lons) -> int:
-    return sum(1 for lo in lons if beru_dev(lo) <= TIER_APLUS)
+    """Count A+ sites. Accepts list or ndarray; always vectorized."""
+    arr = lons if isinstance(lons, np.ndarray) else np.asarray(lons)
+    arc = np.abs(arr - GERIZIM)
+    bv  = arc / BERU
+    dev = np.abs(bv - np.round(bv / 0.1) * 0.1)
+    return int(np.sum(dev <= TIER_APLUS))
 
 
 # ── Load corpus ───────────────────────────────────────────────────────────────
@@ -169,12 +174,11 @@ def main():
     print(f"  Draw N={N_stupa} from the stupa sites' own longitudes (with replacement).")
     print("─" * 80)
 
-    boot_a = np.zeros(N_PERMS, dtype=int)
-    for i in range(N_PERMS):
-        sample   = rng.choice(stupa_lons, size=N_stupa, replace=True)
-        boot_a[i] = count_aplus(sample)
-        if (i + 1) % 20_000 == 0:
-            print(f"    ... {i+1:,}/{N_PERMS:,}", file=sys.stderr)
+    # Fully batched: draw (N_PERMS, N_stupa) matrix, compute A+ count per row
+    mat_a = rng.choice(stupa_lons, size=(N_PERMS, N_stupa), replace=True)
+    arc_a = np.abs(mat_a - GERIZIM) / BERU
+    dev_a = np.abs(arc_a - np.round(arc_a / 0.1) * 0.1)
+    boot_a = (dev_a <= TIER_APLUS).sum(axis=1).astype(int)
 
     p_a    = float(np.mean(boot_a >= obs_stupa_ap))
     mean_a = float(boot_a.mean())
@@ -202,12 +206,10 @@ def main():
 
     print(f"\n  Heartland pool: N = {N_pool_b}  (A+ rate in pool = {pool_b_ap_rate:.1f}%)")
 
-    boot_b = np.zeros(N_PERMS, dtype=int)
-    for i in range(N_PERMS):
-        sample   = rng.choice(heartland_pool, size=N_stupa, replace=True)
-        boot_b[i] = count_aplus(sample)
-        if (i + 1) % 20_000 == 0:
-            print(f"    ... {i+1:,}/{N_PERMS:,}", file=sys.stderr)
+    mat_b = rng.choice(heartland_pool, size=(N_PERMS, N_stupa), replace=True)
+    arc_b = np.abs(mat_b - GERIZIM) / BERU
+    dev_b = np.abs(arc_b - np.round(arc_b / 0.1) * 0.1)
+    boot_b = (dev_b <= TIER_APLUS).sum(axis=1).astype(int)
 
     p_b    = float(np.mean(boot_b >= obs_stupa_ap))
     mean_b = float(boot_b.mean())
@@ -227,21 +229,19 @@ def main():
     print("  broad longitude footprint.")
     print("─" * 80)
 
-    restricted_pool = np.array([
-        lon for lon in all_lons
-        if any(abs(lon - d) <= 5.0 for d in stupa_lons)
-    ])
+    # Vectorized pool construction: broadcast (N_all,) vs (N_stupa,) → (N_all, N_stupa)
+    dists = np.abs(all_lons[:, None] - stupa_lons[None, :])  # (N_all, N_stupa)
+    in_pool = dists.min(axis=1) <= 5.0                        # (N_all,)
+    restricted_pool = all_lons[in_pool]
     N_pool_c      = len(restricted_pool)
     pool_c_ap_rate = count_aplus(restricted_pool) / N_pool_c * 100
 
     print(f"\n  Restricted pool: N = {N_pool_c}  (A+ rate in pool = {pool_c_ap_rate:.1f}%)")
 
-    boot_c = np.zeros(N_PERMS, dtype=int)
-    for i in range(N_PERMS):
-        sample   = rng.choice(restricted_pool, size=N_stupa, replace=True)
-        boot_c[i] = count_aplus(sample)
-        if (i + 1) % 20_000 == 0:
-            print(f"    ... {i+1:,}/{N_PERMS:,}", file=sys.stderr)
+    mat_c = rng.choice(restricted_pool, size=(N_PERMS, N_stupa), replace=True)
+    arc_c = np.abs(mat_c - GERIZIM) / BERU
+    dev_c = np.abs(arc_c - np.round(arc_c / 0.1) * 0.1)
+    boot_c = (dev_c <= TIER_APLUS).sum(axis=1).astype(int)
 
     p_c    = float(np.mean(boot_c >= obs_stupa_ap))
     mean_c = float(boot_c.mean())

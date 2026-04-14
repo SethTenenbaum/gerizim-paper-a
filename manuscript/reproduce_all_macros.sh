@@ -181,6 +181,13 @@ PYEOF
     echo "  Raw \\newcommand lines : $n_macros_raw"
     echo "  After deduplication  : $n_macros  (in $OUT_FILE)"
     echo "═══════════════════════════════════════════════════════════════════"
+    echo ""
+    echo "  Regenerating manuscript figures to match updated macros..."
+    python3 manuscript/generate_figures.py 2>&1 | grep -E "✓|Error|WARNING" || true
+    echo ""
+    echo "  ✓ Figures regenerated. Caption annotations and image annotations"
+    echo "    now derive from the same live pipeline run."
+    echo "═══════════════════════════════════════════════════════════════════"
     exit 0
 fi
 
@@ -384,8 +391,22 @@ run_script "GROUP 21: Bonferroni Correction (reads store)"         \
            analysis/unesco/bonferroni_correction.py
 
 echo "═══════════════════════════════════════════════════════════════════"
+echo "  REGENERATING MANUSCRIPT FIGURES"
+echo "  (must run after macros so figure annotations match pipeline values)"
+echo "═══════════════════════════════════════════════════════════════════"
+python3 manuscript/generate_figures.py 2>&1 | tail -20
+echo ""
+
+echo "═══════════════════════════════════════════════════════════════════"
 echo "  ALL SCRIPTS COMPLETE"
 echo "  Results store: data/store/results.json"
 echo "  To regenerate LaTeX macros file:"
 echo "    bash manuscript/reproduce_all_macros.sh --macros-only"
+echo ""
+echo "  RECOMMENDED FINAL SUBMISSION SEQUENCE:"
+echo "    1. bash manuscript/reproduce_all_macros.sh          # macros + figures"
+echo "    2. bash manuscript/reproduce_all_macros.sh --macros-only  # regen macros"
+echo "    3. cd manuscript/archaeometry && pdflatex paper_a_archaeometry.tex     # compile"
+echo "    4. pdflatex paper_a_archaeometry.tex                      # resolve refs"
+echo "    5. cd ../primary && pdflatex paper_a_primary_unesco.tex   # compile primary"
 echo "═══════════════════════════════════════════════════════════════════"

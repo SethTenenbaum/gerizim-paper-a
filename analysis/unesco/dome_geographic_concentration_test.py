@@ -85,7 +85,12 @@ def beru_dev(lon: float) -> float:
 
 
 def count_aplus(lons) -> int:
-    return sum(1 for lon in lons if beru_dev(lon) <= TIER_APLUS)
+    """Count A+ sites. Accepts list or ndarray; always vectorized."""
+    arr = lons if isinstance(lons, np.ndarray) else np.asarray(lons)
+    arc = np.abs(arr - GERIZIM)
+    bv  = arc / BERU
+    dev = np.abs(bv - np.round(bv / 0.1) * 0.1)
+    return int(np.sum(dev <= TIER_APLUS))
 
 
 # ── Load corpus ───────────────────────────────────────────────────────────────
@@ -130,12 +135,12 @@ def main():
     print("  If p < 0.05: enrichment exceeds what dome geography alone predicts.")
     print("─" * 80)
 
-    boot_a = np.zeros(N_PERMS, dtype=int)
-    for i in range(N_PERMS):
-        sample = np.random.choice(dome_lons, size=N_dome, replace=True)
-        boot_a[i] = count_aplus(sample)
-        if (i + 1) % 20_000 == 0:
-            print(f"    ... {i+1:,}/{N_PERMS:,}", file=sys.stderr)
+    # Fully batched: (N_PERMS, N_dome) matrix, no Python loop
+    rng = np.random.default_rng(42)
+    mat_a = rng.choice(dome_lons, size=(N_PERMS, N_dome), replace=True)
+    arc_a = np.abs(mat_a - GERIZIM) / BERU
+    dev_a = np.abs(arc_a - np.round(arc_a / 0.1) * 0.1)
+    boot_a = (dev_a <= TIER_APLUS).sum(axis=1).astype(int)
 
     p_null_a = float(np.mean(boot_a >= obs_dome_ap))
     mean_a = float(boot_a.mean())
@@ -172,21 +177,18 @@ def main():
     print("  monuments from the same longitude footprint?")
     print("─" * 80)
 
-    restricted_pool = np.array([
-        lon for lon in all_lons
-        if any(abs(lon - d) <= 5.0 for d in dome_lons)
-    ])
+    # Vectorized pool construction
+    dists = np.abs(all_lons[:, None] - dome_lons[None, :])  # (N_all, N_dome)
+    restricted_pool = all_lons[dists.min(axis=1) <= 5.0]
     N_pool = len(restricted_pool)
     pool_aplus_rate = count_aplus(restricted_pool) / N_pool * 100
     print(f"\n  Restricted pool: N = {N_pool}  "
           f"(A+ rate in pool = {pool_aplus_rate:.1f}%)")
 
-    boot_c = np.zeros(N_PERMS, dtype=int)
-    for i in range(N_PERMS):
-        sample = np.random.choice(restricted_pool, size=N_dome, replace=True)
-        boot_c[i] = count_aplus(sample)
-        if (i + 1) % 20_000 == 0:
-            print(f"    ... {i+1:,}/{N_PERMS:,}", file=sys.stderr)
+    mat_c = rng.choice(restricted_pool, size=(N_PERMS, N_dome), replace=True)
+    arc_c = np.abs(mat_c - GERIZIM) / BERU
+    dev_c = np.abs(arc_c - np.round(arc_c / 0.1) * 0.1)
+    boot_c = (dev_c <= TIER_APLUS).sum(axis=1).astype(int)
 
     p_null_c = float(np.mean(boot_c >= obs_dome_ap))
     mean_c = float(boot_c.mean())
@@ -269,6 +271,26 @@ def main():
     print(f"\n  Observed: {obs_dome_ap}/{N_dome} A+ = {rate_obs:.1f}%  "
           f"(geometric null {100*P_NULL_AP:.0f}%,  expected {exp_null:.2f})")
 
+    # ── Null C sensitivity sweep: ±2°, ±5°, ±10° ────────────────────────────
+    print("\n" + "─" * 80)
+    print("  NULL C SENSITIVITY SWEEP: ±2°, ±5°, ±10°")
+    print("─" * 80)
+    sensitivity = {}
+    for w in [2.0, 5.0, 10.0]:
+        dists_w = np.abs(all_lons[:, None] - dome_lons[None, :])
+        pool_w  = all_lons[dists_w.min(axis=1) <= w]
+        mat_w   = rng.choice(pool_w, size=(N_PERMS, N_dome), replace=True)
+        arc_w   = np.abs(mat_w - GERIZIM) / BERU
+        dev_w   = np.abs(arc_w - np.round(arc_w / 0.1) * 0.1)
+        boot_w  = (dev_w <= TIER_APLUS).sum(axis=1).astype(int)
+        p_w     = float(np.mean(boot_w >= obs_dome_ap))
+        mean_w  = float(boot_w.mean())
+        std_w   = float(boot_w.std())
+        z_w     = (obs_dome_ap - mean_w) / std_w if std_w > 0 else float("nan")
+        sensitivity[w] = {"n_pool": len(pool_w), "mean": mean_w, "z": z_w, "p": p_w}
+        print(f"  ±{w:.0f}°: N_pool={len(pool_w):,}  mean A+={mean_w:.2f}  "
+              f"Z={z_w:.2f}  p={p_w:.4f}  {_sig(p_w)}")
+
     # ── LaTeX macros (GROUP 26) ───────────────────────────────────────────────
     print("\n" + "=" * 80)
     print("  LATEX MACROS (GROUP 26 — geographic-concentration null):")
@@ -277,17 +299,23 @@ def main():
     print(f"  \\newcommand{{\\geoNullDomeBootP}}{{{p_null_a:.4f}}}   % within-dome bootstrap p")
     print(f"  \\newcommand{{\\geoNullDomeBootZ}}{{{z_a:.2f}}}    % within-dome bootstrap Z")
     print(f"  \\newcommand{{\\geoNullDomeBootMean}}{{{mean_a:.2f}}}   % within-dome bootstrap mean A+")
-    print(f"  % Null C: restricted geographic draw")
+    print(f"  % Null C: primary (±5°)")
     print(f"  \\newcommand{{\\geoNullDomeRestrictedP}}{{{p_null_c:.4f}}}   % restricted-pool p")
     print(f"  \\newcommand{{\\geoNullDomeRestrictedZ}}{{{z_c:.2f}}}    % restricted-pool Z")
     print(f"  \\newcommand{{\\geoNullDomeRestrictedMean}}{{{mean_c:.2f}}}   % restricted-pool mean A+")
     print(f"  \\newcommand{{\\geoNullDomeRestrictedN}}{{{N_pool}}}   % restricted pool size")
+    # Sensitivity sweep macros
+    for w, r in sensitivity.items():
+        tag = str(int(w))
+        print(f"  \\newcommand{{\\geoNullDomeRestrictedN{tag}}}{{{r['n_pool']}}}   % Null C ±{w:.0f}° pool size")
+        print(f"  \\newcommand{{\\geoNullDomeRestrictedP{tag}}}{{{r['p']:.4f}}}   % Null C ±{w:.0f}° p-value")
+        print(f"  \\newcommand{{\\geoNullDomeRestrictedMean{tag}}}{{{r['mean']:.2f}}}   % Null C ±{w:.0f}° mean A+")
     print(f"  % Corridor concentration diagnostic")
     print(f"  \\newcommand{{\\domeEurasianFraction}}{{{eurasian:.0f}}}   % % dome sites in 20-120E")
     print(f"  \\newcommand{{\\fullCorpusEurasianFraction}}{{{full_e:.0f}}}   % % full corpus in 20-120E")
 
     # ── Write to results store ────────────────────────────────────────────────
-    ResultsStore().write_many({
+    store_data = {
         "geoNullDomeBootP":           p_null_a,
         "geoNullDomeBootZ":           z_a,
         "geoNullDomeBootMean":        mean_a,
@@ -297,7 +325,13 @@ def main():
         "geoNullDomeRestrictedN":     float(N_pool),
         "domeEurasianFraction":       eurasian,
         "fullCorpusEurasianFraction": full_e,
-    })
+    }
+    for w, r in sensitivity.items():
+        tag = str(int(w))
+        store_data[f"geoNullDomeRestrictedN{tag}"]    = float(r["n_pool"])
+        store_data[f"geoNullDomeRestrictedP{tag}"]    = r["p"]
+        store_data[f"geoNullDomeRestrictedMean{tag}"] = r["mean"]
+    ResultsStore().write_many(store_data)
     print("\nResults written to data/store/results.json")
 
 

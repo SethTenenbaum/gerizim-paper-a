@@ -120,9 +120,9 @@ def _sig(p):
     return "***" if p < 0.001 else "**" if p < 0.01 else "*" if p < 0.05 \
            else "~" if p < 0.10 else "ns"
 
-p_full_R   = float(np.mean(perm_full_R   >= obs_full_R))
-p_ap_R     = float(np.mean(perm_ap_R     >= obs_ap_R))
-p_shift_ap = float(np.mean(perm_shift_ap >= obs_ap_count))
+p_full_R   = float((np.sum(perm_full_R   >= obs_full_R)   + 1) / (N_PERMS + 1))
+p_ap_R     = float((np.sum(perm_ap_R     >= obs_ap_R)     + 1) / (N_PERMS + 1))
+p_shift_ap = float((np.sum(perm_shift_ap >= obs_ap_count) + 1) / (N_PERMS + 1))
 z_full_R   = _z(obs_full_R,          perm_full_R)
 z_ap_R     = _z(obs_ap_R,            perm_ap_R)
 z_shift_ap = _z(float(obs_ap_count), perm_shift_ap.astype(float))

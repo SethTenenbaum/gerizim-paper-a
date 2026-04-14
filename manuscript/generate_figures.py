@@ -117,8 +117,10 @@ def make_devhist():
         alpha=0.85, zorder=3,
     )
 
-    # Shade the A+ window (first bin: 0–0.005 covers δ ≤ 0.002 and a bit more)
-    # More precisely: highlight only δ ≤ 0.002 region
+    # Shade exactly the A+ window (δ ≤ 0.002 = TIER_APLUS).
+    # Note: the histogram bin width is 0.005, so the first bar extends to 0.005
+    # and will always be taller than the A+ count (56). The annotation uses
+    # a direct count of sites with δ ≤ TIER_APLUS, not counts[0].
     ax.axvspan(0, TIER_APLUS, color=C_HIGHLIGHT, alpha=0.12, zorder=1,
                label=f"Tier-A+ window (δ ≤ {TIER_APLUS})")
 
@@ -127,14 +129,15 @@ def make_devhist():
     ax.axhline(expected_per_bin, color=C_NULL, linewidth=1.5,
                linestyle="--", zorder=4, label=f"Uniform null ({expected_per_bin:.1f}/bin)")
 
-    # Annotate the leftmost bin — point inward from the right to avoid
-    # colliding with the title; keep arrow tip at the bar top
-    leftmost_count = int(counts[0])
+    # Annotate the A+ window count (δ ≤ TIER_APLUS = 0.002), not the full
+    # first bin (δ ≤ 0.005).  The first bin is 2.5× wider than the A+ window
+    # so counts[0] always overstates the signal.
+    n_aplus = int(sum(1 for d in deviations if d <= TIER_APLUS))
     y_max_data = counts.max()
     ax.annotate(
-        f"{leftmost_count} sites",
-        xy=(bin_width / 2, leftmost_count),
-        xytext=(0.018, leftmost_count - 18),   # below the bar top, inside the plot
+        f"{n_aplus} A+ sites\n(δ ≤ {TIER_APLUS})",
+        xy=(TIER_APLUS, n_aplus),
+        xytext=(0.018, n_aplus + 8),
         fontsize=9, fontweight="bold", color=C_HIGHLIGHT,
         arrowprops=dict(arrowstyle="->", color=C_HIGHLIGHT, lw=1.2),
         zorder=5,
