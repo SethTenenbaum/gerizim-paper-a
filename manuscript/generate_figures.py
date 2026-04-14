@@ -232,22 +232,30 @@ def make_temporal():
     ax.legend(loc="upper right", framealpha=0.9)
     ax.set_ylim(0, max(rates) + 3)
 
-    # Add Cochran-Armitage annotation
-    # Three-cohort test (from manuscript macros)
-    dated_for_ca = [s for s in dated if s["yr"] is not None]
-    ca_cohorts_3 = [
-        (1978, 1984), (1985, 1999), (2000, 2025),
-    ]
-    ns3, aps3 = [], []
-    for y0, y1 in ca_cohorts_3:
-        sub = [s for s in dated_for_ca if y0 <= s["yr"] <= y1]
-        ns3.append(len(sub))
-        aps3.append(sum(1 for s in sub if s["is_ap"]))
-    ca3 = cochran_armitage(ns3, aps3, scores=[1, 2, 3])
+    # Add Cochran-Armitage annotation.
+    # Values are read from generated_macros.tex to ensure the figure annotation
+    # is always identical to the canonical analysis output (temporal_gradient_test.py).
+    # Do NOT recompute Z here — use the macro values so figure and text are in sync.
+    _macros_path = Path(__file__).resolve().parent / "generated_macros.tex"
+    z_ca3 = None
+    p_ca3 = None
+    if _macros_path.exists():
+        import re
+        _macro_text = _macros_path.read_text()
+        _z_match = re.search(r"\\newcommand\{\\ZcochranThree\}\{([^}]+)\}", _macro_text)
+        _p_match = re.search(r"\\newcommand\{\\pCochranThree\}\{([^}]+)\}", _macro_text)
+        if _z_match and _p_match:
+            z_ca3 = float(_z_match.group(1))
+            p_ca3 = float(_p_match.group(1))
+    if z_ca3 is None:
+        raise RuntimeError(
+            "Could not read \\ZcochranThree / \\pCochranThree from generated_macros.tex. "
+            "Run temporal_gradient_test.py first to regenerate macros."
+        )
 
     ax.text(0.98, 0.65,
             f"Cochran-Armitage (3-cohort)\n"
-            f"Z = {ca3.z_statistic:.2f}, p = {ca3.p_value:.4f}",
+            f"Z = {z_ca3:.2f}, p = {p_ca3:.4f}",
             transform=ax.transAxes, fontsize=8,
             ha="right", va="top",
             bbox=dict(boxstyle="round,pad=0.4", facecolor="#f0f0f0",

@@ -24,6 +24,15 @@
 %   - Hyperref colors set to black/muted for print compatibility.
 %   - Zenodo DOI placeholder *** MUST BE REPLACED before final submission ***.
 %     See the \bibitem[Tenenbaum(2026)]{tenenbaum2026audit} entry.
+%     VERIFY: confirm https://doi.org/10.5281/zenodo.19520501 resolves correctly.
+%     JAS desk editors check DOIs at submission. Also verify the Data Availability
+%     section DOI matches the bibitem entry.
+%   - REFERENCE FORMATTING: JAS uses author-date in-text citations and a specific
+%     reference style. The current reference list may need reformatting. Check:
+%     (1) Powell encyclopedia chapter format (Reallexikon entry) against JAS style;
+%     (2) all journal article entries include volume, issue, page range;
+%     (3) book chapters include "In:" editor format per JAS guidelines.
+%     Confirm against current JAS Author Guidelines before submission.
 %   - Gerizim tentative-list coordinate (ref. 5706): ARCHIVED. Rendered HTML,
 %     screenshot, and PDF saved to supplementary/. Internet Archive copy:
 %     https://ia601602.us.archive.org/33/items/unesco_5706_rendered/unesco_5706_rendered.html
@@ -33,6 +42,15 @@
 %     (§3.1-3.5, §4.4) and the full FDR table to supplementary material,
 %     retaining only the summary paragraph in the main text.
 %     Journal of Archaeological Science: Reports accepts extended papers.
+%   - ABSTRACT WORD COUNT: JAS has a 250-word abstract limit (verify current
+%     guidelines). Check the abstract word count before submission and trim
+%     if necessary. The abstract is structured: background → data/method →
+%     result → significance → circularity caveat → methodological contribution.
+%   - TABLE 1 (tab:bonferroni_both): consider splitting into two tiers for JAS
+%     submission: primary family (Tests 1–3) in the main table, with Test E
+%     and Test B footnoted or moved to a supplementary table, to reduce
+%     reviewer questions about why structurally-excluded tests appear in the
+%     primary summary.
 % ══════════════════════════════════════════════════════════════════════════════
 
 \documentclass[12pt,a4paper]{article}
@@ -74,9 +92,9 @@
 % ══════════════════════════════════════════════════════════════════════════════
 \input{generated_macros}
 
-\title{A Global 3\textdegree{} Periodic Structure in the UNESCO World Heritage\\
+\title{A One-Dimensional Angular Enrichment Test on the UNESCO World Heritage\\
 Longitude Distribution: Domed Monuments, the Babylonian Beru,\\
-and a Levantine Harmonic Grid}
+and a Reproducible Spatial-Pattern Template}
 
 \author{Seth Tenenbaum\\
 \small Independent Scholar\\
@@ -96,37 +114,33 @@ Code: MIT License.
 Data: UNESCO XML \textcopyright~UNESCO (research use); Wikidata extracts: CC0.
 
 \begin{abstract}
-This exploratory study documents a global 3\textdegree{} periodic structure
-in the UNESCO World Heritage Cultural and Mixed longitude distribution
-($N = \NclusterTotal$). Because the UNESCO World Heritage List is an open
-public dataset, pre-registration is not meaningful for this analysis.
+We present a transferable quantitative template for testing candidate angular
+units against externally-curated monument corpora, and apply it to the UNESCO
+World Heritage Cultural and Mixed site list ($N = \NclusterTotal$).
+The template uses a one-dimensional angular enrichment test against a fixed
+geometric null (4\%), a pre-registered morphological keyword classifier, and a
+fully reproducible open-source pipeline.
 
-Every longitude of the form $x.18$\textdegree{}E (120 equally spaced anchors)
-yields the maximum observed count of sites within 6.7~km of a harmonic node
-(Tier-A+, sites within $\lesssim$6.7~km of a 0.1-beru harmonic node,
-against a 4\% geometric null). The 3\textdegree{} spacing equals
-0.1~beru, the smallest integer sub-division of the Babylonian angular unit
-(MUL.APIN, c.~1000~BCE). The analysis began with Mount Gerizim
-(35.27\textdegree{}E) as the historical anchor; a subsequent full-circle sweep
-revealed that Gerizim's longitude falls within the $x.18$\textdegree{}E phase
-band, introducing the circularity documented in \S\ref{sec:circularity}.
-
-Domed and spherical monuments ($N = \NcircTotal$) show \NcircApRate\%
-Tier-A+ (permutation $Z = \simDomePermZ$, $p = \simDomePermP$;
-Bonferroni $p_\mathrm{adj} = \pAdjTestTwo$, $k = \BonfK$).
-A+-bearing harmonics host $\clusterHarmonicRatio\times$ more total sites
-than non-A+-bearing harmonics (permutation $p = \clusterPermP$).
+Applied to the 0.1-beru interval (3\textdegree{}, the smallest integer
+sub-division of the Babylonian angular unit; MUL.APIN, c.~1000~BCE), the
+method detects a global 3\textdegree{} periodic structure in the UNESCO
+longitude distribution.
+The primary confirmatory tests ($k = \BonfK$, Bonferroni-corrected) find:
+domed and spherical monuments ($N = \NcircTotal$) show \NcircApRate\%
+Tier-A+ rate against the 4\% geometric null
+($Z = \simDomePermZ$, $p_\mathrm{adj} = \pAdjTestTwo$~***);
+and A+-bearing harmonics host $\clusterHarmonicRatio\times$ more total sites
+than non-A+-bearing harmonics ($p_\mathrm{adj} = \pAdjTestThree$~**).
 Leave-one-out checks confirm no single site drives either result.
+The Americas sub-corpus shows directional depletion at the same harmonics,
+consistent with an Eurasian-anchored grid.
 
-Geographic concentration of Eurasian civilizations in longitude bands
-aligned with beru harmonics cannot be excluded on this corpus alone.
-The dome enrichment survives all three simulation nulls and exceeds the
-expectation from monuments at the same longitude footprint
-(Null~C, \S\ref{sec:geo_conc_null}), but the within-dome bootstrap
-confirms that domed monuments' own longitudes encode the enrichment
-(Null~A, ns). The primary contribution is documentation of a reproducible
-quantitative regularity. The metrological interpretation awaits independent
-historical confirmation.
+This study began with Mount Gerizim (35.27\textdegree{}E) as the historical
+anchor; the phase coincidence with the optimal band introduces a circularity
+(\S\ref{sec:circularity}) that limits all findings to exploratory status.
+The principal contribution is the methodological template itself: a fixed
+external corpus, a geometric null with no free parameters, and an archived
+pipeline applicable to any candidate angular unit.
 \end{abstract}
 
 \noindent\textbf{Keywords:}
@@ -144,9 +158,18 @@ archaeometry, Levantine metrology, quantitative archaeology, Mount Gerizim
 \section{Introduction}
 \label{sec:introduction}
 
-The UNESCO World Heritage Cultural and Mixed corpus ($N = \NclusterTotal$)
-appears to contain a global 3\textdegree{} periodic structure in its
-longitude distribution.
+This paper applies a one-dimensional angular enrichment test to the
+UNESCO World Heritage Cultural and Mixed corpus, an externally-curated
+and publicly fixed dataset, using a reproducible computational pipeline
+deposited in full at \url{https://github.com/SethTenenbaum/gerizim-paper-a}.
+The methodological approach relies on a fixed external corpus, a geometric
+null with no free parameters, and an open archival pipeline. It is intended
+as a transferable template for spatial pattern-detection studies in
+archaeological heritage data, applicable to any candidate angular unit
+and corpus.
+
+The corpus ($N = \NclusterTotal$) appears to contain a global
+3\textdegree{} periodic structure in its longitude distribution.
 Every longitude of the form $x.18$\textdegree{}E produces the maximum
 observed Tier-A+ count when used as an angular reference (sites within
 $\lesssim 6.7$~km of a harmonic node, against a 4\% geometric null).
@@ -159,80 +182,28 @@ that initiated this study are defined in \S\ref{sec:circularity}.
 \subsection{Circularity Containment Protocol}
 \label{sec:circularity}
 
-This subsection is the single canonical statement of the circularity problem
-and its analytic consequences. All later mentions are back-references to
-this section.
+This study began with Mount Gerizim (\GerizimLon\textdegree{}E) as the
+historical anchor for a beru-unit test on the UNESCO corpus. A global phase
+sweep subsequently revealed that Gerizim's longitude falls within the
+$x.18$\textdegree{}E optimal band, creating a circularity: reporting the
+Levantine corridor statistics was conditioned on observing the very phase
+alignment those statistics describe. This identification problem cannot be
+closed by any statistical method applied to this corpus. Accordingly, all
+results are treated as \emph{exploratory} without exception, the Bonferroni
+correction serves as a descriptive bound on effect magnitude, and the
+Levantine statistics are the motivated entry point rather than independent
+evidence.
 
-\textbf{How the circularity arose.}
-This study began with the hypothesis that the Babylonian beru unit might be
-detectable as a longitude-spacing signal in the UNESCO corpus, using Mount
-Gerizim (\GerizimLon\textdegree{}E) as the reference anchor.
-Running the global anchor sweep revealed that Gerizim's longitude
-falls within the $x.18$\textdegree{}E phase band.
-If the sweep had revealed a different optimal phase, this
-paper would not exist in its current form.
-
-\textbf{What the circularity contaminates.}
-\begin{itemize}
-  \item The Levantine corridor statistics (Tests~1, 2, 3 as computed from
-    Gerizim), since reporting them was conditioned on observing the
-    phase alignment.
-  \item The $x.18$\textdegree{}E framing, which was identified in the sweep,
-    not predicted independently.
-  \item The Rayleigh Test~B, whose near-perfect $R$ follows mathematically
-    from the A+ classification criterion (\S\ref{sec:results_rayleigh}).
-  \item All narrative emphasis on the Levantine corridor as historically
-    motivated.
-\end{itemize}
-
-\textbf{What the circularity does \emph{not} contaminate.}
-\begin{itemize}
-  \item \emph{The existence of a 3\textdegree{} periodic structure in the
-    UNESCO longitude file.}
-    Any investigator running an unanchored 120-phase scan will recover it
-    without reference to Gerizim.
-  \item \emph{The dome enrichment (Test~2).}
-    All 120 $x.18$\textdegree{}E anchors produce identical A+ counts for
-    the dome population.
-  \item \emph{The cluster asymmetry (Test~3).}
-    This is a full-corpus result requiring no keyword filter.
-  \item \emph{The unit sensitivity sweep.}
-    The sharp collapse at $\pm 0.3\%$ of the canonical spacing is a
-    property of the corpus structure, not of the choice of anchor.
-\end{itemize}
-
-\textbf{The protocol.}
-\emph{This identification problem cannot be closed by any statistical method
-applied to this corpus.}
-The order in which the $x.18$\textdegree{}E phase and the Gerizim anchor
-were identified is not recoverable from the analysis record alone. A
-time-stamped archive would not resolve this problem. The internal sequence of
-analysis steps is unverifiable by any external party and the analysis is
-simple enough to reproduce, making any timestamp trivially easy to fabricate.
-More fundamentally, this is an instance of the \emph{forking paths} problem
-\citep{gelman2014forking}: analytical choices contingent on observed data
-cannot be reconstructed post-hoc even without intentional $p$-hacking,
-because investigator awareness of the data inevitably shapes which paths
-are reported.
-
-The deeper issue is that this archiving problem has no statistical solution.
-Given a finite and fully enumerable longitude axis, a historically named
-location falling near a significant phase by chance is statistically expected
-regardless of whether any metrological practice ever existed. Restricting
-the candidate set to historically credible anchors (Gerizim, Jerusalem,
-Mecca, Mt.\ Meru) reduces the effective multiplicity but does not eliminate
-it, and no purely spatial test can distinguish a real ancient grid from a
-coincidence within a bounded search space.
-Accordingly:
-\begin{enumerate}[label=(\alph*)]
-  \item All results are treated as \emph{exploratory} without exception.
-  \item The Bonferroni correction is applied as a \emph{descriptive bound} on
-    effect magnitude.
-  \item The Levantine corridor statistics are reported as the motivated entry
-    point, not as independent evidence.
-  \item Downstream sections back-reference this section rather than re-stating
-    the argument.
-\end{enumerate}
+The circularity contaminates the Levantine corridor statistics (Tests~1--3
+as computed from Gerizim) and the $x.18$\textdegree{}E framing. It does
+\emph{not} contaminate the existence of the 3\textdegree{} periodic
+structure (recoverable by any unanchored 120-phase scan), the dome
+enrichment (Test~2, all 120 anchors produce identical A+ counts for the
+dome population), the cluster asymmetry (Test~3, a full-corpus result
+requiring no keyword filter), or the unit sensitivity sweep. The full
+canonical treatment, including the \emph{forking paths} analysis
+\citep{gelman2014forking} and the impossibility of a purely spatial
+resolution, is given in \S\ref{sec:limitations_circularity}.
 
 \textbf{Why this design addresses key methodological criticisms.}
 Prior metrological investigations were rightly criticized for investigator-assembled
@@ -243,12 +214,24 @@ is documented in cuneiform sources \citep{hunger2019mul} as the finest
 integer subdivision, limiting the parameter space; (3)~tier boundaries
 were fixed on geometric grounds and keywords are simple morphological matches.
 
+\textbf{Positioning within quantitative archaeometry.}
+This paper belongs to the tradition of probability-based spatial analysis in
+archaeometry and archaeoastronomy
+\citep{magli2013,magli2016,ruggles1999astronomy,ruggles2015handbook,silva2020statistical}.
+The use of a fixed external corpus, a geometric null free of fitted parameters,
+and a publicly archived computational pipeline responds directly to the
+methodological standards articulated in those frameworks and in the ICOMOS-IAU
+thematic study on World Heritage archaeoastronomy \citep{ruggles2010icomos}.
+The design is applicable to any candidate angular unit and any externally
+curated monument corpus, making the template reusable independently of the
+specific metrological hypothesis tested here.
+
 \textbf{Structure of the paper.}
 Section~\ref{sec:prior} provides background on the beru unit.
 Section~\ref{sec:methods} describes data, classification, and multiple-comparisons protocol.
 Section~\ref{sec:results} presents each test's design, result, and robustness together.
 Section~\ref{sec:robustness} reports additional robustness checks.
-Section~\ref{sec:limitations} catalogs limitations.
+Section~\ref{sec:limitations} catalogs limitations, including the full circularity treatment (\S\ref{sec:limitations_circularity}).
 Section~\ref{sec:discussion} evaluates alternatives and concludes.
 The Appendix contains the keyword audit.
 
@@ -312,7 +295,11 @@ probability-based frameworks for evaluating orientation claims
 \citep{ruggles1999astronomy,ruggles2015handbook,silva2020statistical}.
 The ICOMOS-IAU thematic study \citep{ruggles2010icomos} provides
 institutional context for archaeoastronomical analysis of World Heritage
-properties.
+properties. Medieval cartographic traditions also employed directional
+reference systems anchored to sacred geography, with Jerusalem and Mecca
+serving as orienting meridians in mappamundi and qibla charts
+\citep{harvey1987mappamundi}, providing historical context for the
+Levantine corridor hypothesis.
 
 This study departs from prior work in three respects. First, the site list
 is externally curated (the UNESCO World Heritage List), eliminating selection
@@ -515,26 +502,30 @@ in the primary evidential chain.
     morphological sub-population enriched above 4\% null.
   \item \textbf{Test 3} (cluster asymmetry, full corpus, no keyword filter):
     A+-bearing harmonics host more total sites.
-  \item \textbf{Test 4} (temporal gradient, full corpus):
-    Cochran-Armitage trend across inscription-year cohorts.
 \end{itemize}
 Tests~2 and~3 address structurally different questions on different
 populations and carry the primary evidential weight.
-All four pass the Bonferroni bound at $k = \BonfK$
+All three pass the Bonferroni bound at $k = \BonfK$
 (dome $p_\mathrm{adj} = \pAdjTestTwo$~***,
 cluster $p_\mathrm{adj} = \pAdjTestThree$~**).
 
 \textbf{Other tests.}
+Test~4 (temporal gradient, Cochran-Armitage) is reported as descriptive
+context; it was demoted from the primary family because the temporal trend
+is substantially explained by regional composition
+(\S\ref{sec:resultstemporal}), and removing it from the family
+strengthens the Bonferroni bound on the two primary results.
 Test~2b is a sensitivity variant of Test~2.
 Test~E (founding classifier) is fully post-hoc (Appendix~\ref{sec:kwdaudit_founding}).
-Test~B (Rayleigh) is a structural description (\S\ref{sec:results_rayleigh}).
+Test~B (Rayleigh) is a structural description (\S\ref{sec:results_rayleigh})
+and is not included in either table.
 
 \textbf{Summary table.}
 
 \begin{table}[H]
 \centering\small
 \caption{Multiple-comparisons summary.
-  Primary test family: Tests~1--4 ($k = \BonfK$, $\alpha = 0.05/\BonfK$).
+  Primary test family: Tests~1--3 ($k = \BonfK$, $\alpha = 0.05/\BonfK$).
   All results are exploratory (\S\ref{sec:circularity}).}
 \label{tab:bonferroni_both}
 \adjustbox{max width=\textwidth}{%
@@ -542,16 +533,18 @@ Test~B (Rayleigh) is a structural description (\S\ref{sec:results_rayleigh}).
 \toprule
 Test & $N$ & Raw $p$ & $p_\mathrm{adj}$, $k{=}\BonfK$ & Status \\
 \midrule
-Test~2 (dome A+)       & \NcircTotal     & \pCircAp        & \pAdjTestTwo~***   & \textbf{Primary} \\
-Test~3 (cluster asym.) & \NclusterTotal  & \clusterPermP   & \pAdjTestThree~**  & \textbf{Primary} \\
-Test~1 (full corpus)   & \NclusterTotal  & \clusterApBinom & \pAdjTestOne~*     & Exploratory \\
-Test~4 (temporal)      & \NoriginCorpus  & \pCochranThree  & \pAdjTestFour~ns   & Exploratory \\
+Test~2 (dome A+)       & \NcircTotal     & \pCircAp$^{a}$  & \pAdjTestTwo~***   & \textbf{Primary} \\
+Test~3 (cluster asym.) & \NclusterTotal  & \clusterPermP$^{b}$ & \pAdjTestThree~**  & \textbf{Primary} \\
+Test~1 (full corpus)   & \NclusterTotal  & \clusterApBinom$^{a}$ & \pAdjTestOne~*     & Exploratory \\
+Test~4 (temporal)      & \NoriginCorpus  & \pCochranThree$^{b}$ & ---                & Exploratory$^\ddagger$ \\
 \midrule
-Test~2b (mound evol.)  & \NevoTotal      & \pEvoAp         & N/A                & Sensitivity \\
-Test~E (founding)      & \NoriginCorpus  & \pFoundKwFisher & N/A                & Post-hoc \\
-Test~B (Rayleigh)$^\dagger$ & \Nap       & \pRawTestB      & N/A                & Structural \\
+Test~2b (mound evol.)  & \NevoTotal      & \pEvoAp$^{a}$   & N/A                & Sensitivity \\
+Test~E (founding)      & \NoriginCorpus  & \pFoundKwFisher$^{a}$ & N/A            & Post-hoc \\
+Test~B (Rayleigh)$^\dagger$ & \Nap       & \pRawTestB$^{b}$ & N/A               & Structural \\
 \bottomrule
+\multicolumn{5}{l}{\footnotesize $^{a}$Exact binomial $p$ (one-tailed vs.\ geometric null); $^{b}$permutation $p$.} \\
 \multicolumn{5}{l}{\footnotesize $^\dagger$Test~B: $R\approx1$ by A+ construction; excluded from all family counts (\S\ref{sec:results_rayleigh}).} \\
+\multicolumn{5}{l}{\footnotesize $^\ddagger$Test~4 demoted to exploratory; not in $k{=}\BonfK$ family; no adj-$p$ computed (\S\ref{sec:bonferroni}).} \\
 \end{tabular}}
 \end{table}
 
@@ -579,8 +572,8 @@ Test~B (Rayleigh)$^{\dagger}$ & \Nap          & \pRawTestB      & N/A           
 Test~2 (dome A+)              & \NcircTotal   & \pCircAp        & \FDRqTestTwo     & \BonfAllTestTwo   & \textbf{Primary} \\
 Test~3 (cluster asym.)        & \NclusterTotal& \clusterPermP   & \FDRqTestThree   & \BonfAllTestThree & \textbf{Primary} \\
 Test~2b (mound evol.)         & \NevoTotal    & \pEvoAp         & N/A              & N/A               & Sensitivity \\
-Test~1 (full corpus)          & \NclusterTotal& \clusterApBinom & \FDRqTestOne     & \BonfAllTestOne   & \textbf{Primary} \\
-Test~4 (temporal)             & \NoriginCorpus& \pCochranThree  & \FDRqTestFour    & \BonfAllTestFour  & \textbf{Primary} \\
+Test~1 (full corpus)          & \NclusterTotal& \clusterApBinom & \FDRqTestOne     & \BonfAllTestOne   & Exploratory \\
+Test~4 (temporal)             & \NoriginCorpus& \pCochranThree  & \FDRqTestFour    & \BonfAllTestFour  & Exploratory \\
 Test~E (founding)             & \NoriginCorpus& \pFoundKwFisher & N/A              & N/A               & Post-hoc \\
 \bottomrule
 \multicolumn{6}{l}{\footnotesize \NsurviveFDR{} tests survive BH-FDR ($q < 0.05$); \NsurviveBonfAll{} survive Bonferroni ($k = \NtotalTests$).} \\
@@ -759,6 +752,7 @@ Dome (dome/tholos/spherical) & \NevoDome  & \NevoDomeAp  & \evoDomeApRate\%  & $
 \midrule
 \textbf{Combined}            & \textbf{\NevoTotal} & \textbf{\NevoAp} & \textbf{\evoApRate\%} & $\mathbf{\evoEnrichAp}\times$ & \textbf{\pEvoAp~***} \\
 \bottomrule
+\multicolumn{6}{p{0.92\linewidth}}{\footnotesize Stage $N$ values sum to more than the combined total because \NevoOverlap{} sites match keywords from multiple stages and are counted once in the combined row. A+ counts by stage are computed within each stage population independently; a site matching two stages contributes its A+ status to each stage separately, so stage A+ values may not sum to the combined A+ count. The combined A+ total is the count of unique A+ sites across the full Test~2b population ($N = \NevoTotal$).} \\
 \end{tabular}
 \end{table}
 
@@ -925,12 +919,12 @@ $\canonEnrich\times$, $p = \pCanon$) and dilutes to the null in the modern era
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.9\textwidth]{figures/fig_temporal}
-\caption{Tier-A+ rate declines monotonically with UNESCO inscription
-  year.
+\caption{Tier-A+ rate declines monotonically with UNESCO inscription year.
   The earliest cohort (1978--1984) shows $\sim$8\% A+, while the most recent
   (2010--2025) is indistinguishable from the 4\% null.
-  Cochran-Armitage trend test: $Z = \ZcochranThree$,
-  $p = \pCochranThree$ (three-cohort, one-sided).}
+  Cochran-Armitage trend test (three-cohort):
+  $Z = \ZcochranThree$, $p = \pCochranThree$, one-sided.
+  Five-cohort result: $Z = \ZcochranFive$, $p = \pCochranFive$.}
 \label{fig:temporal}
 \end{figure}
 
@@ -1253,17 +1247,104 @@ matching the curated set's enrichment.
 FDR audit (\NtotalTests{} tests) retains \NsurviveFDR{} at $q < 0.05$;
 \NsurviveBonfAll{} survive Bonferroni at $k = \NtotalTests$.
 
+\subsection{Americas Negative Control}
+\label{sec:americas_control}
+
+The Americas sub-corpus ($N = 144$, A+ = 2.1\%, $p = \AmericasOneSidedP$
+one-sided, \AmericasOneSidedStar) shows directional \emph{depletion}
+relative to the 4\% null. This direction is consistent with what an
+Eurasian-anchored grid predicts for the western hemisphere, providing a
+positive robustness check. Because the depletion does not reach the
+conventional significance threshold ($p = 0.164$), it is reported as a
+directional consistency check only; it does not independently confirm the
+metrological hypothesis, and a custom pre-specified Americas corpus is
+required for any stronger inference.
+
 \section{Limitations}
 \label{sec:limitations}
 
-\textbf{Geographic and cultural selection bias}
-is the most important alternative explanation. The UNESCO list
-over-represents Europe and the Mediterranean-to-South-Asian corridor.
+\subsection{Circularity: Full Canonical Treatment}
+\label{sec:limitations_circularity}
+
+This subsection is the full canonical statement of the circularity
+introduced in \S\ref{sec:circularity}. All downstream back-references
+point here.
+
+\textbf{How the circularity arose.}
+This study began with the hypothesis that the Babylonian beru unit might be
+detectable as a longitude-spacing signal in the UNESCO corpus, using Mount
+Gerizim (\GerizimLon\textdegree{}E) as the reference anchor.
+Running the global anchor sweep revealed that Gerizim's longitude
+falls within the $x.18$\textdegree{}E phase band.
+If the sweep had revealed a different optimal phase, this paper would not
+exist in its current form.
+
+\textbf{What the circularity contaminates.}
+\begin{itemize}
+  \item The Levantine corridor statistics (Tests~1, 2, 3 as computed from
+    Gerizim), since reporting them was conditioned on observing the phase alignment.
+  \item The $x.18$\textdegree{}E framing, which was identified in the sweep,
+    not predicted independently.
+  \item The Rayleigh Test~B, whose near-perfect $R$ follows mathematically
+    from the A+ classification criterion (\S\ref{sec:results_rayleigh}).
+  \item All narrative emphasis on the Levantine corridor as historically motivated.
+\end{itemize}
+
+\textbf{What the circularity does \emph{not} contaminate.}
+\begin{itemize}
+  \item \emph{The existence of a 3\textdegree{} periodic structure in the
+    UNESCO longitude file.}
+    Any investigator running an unanchored 120-phase scan will recover it
+    without reference to Gerizim.
+  \item \emph{The dome enrichment (Test~2).}
+    All 120 $x.18$\textdegree{}E anchors produce identical A+ counts for
+    the dome population.
+  \item \emph{The cluster asymmetry (Test~3).}
+    This is a full-corpus result requiring no keyword filter.
+  \item \emph{The unit sensitivity sweep.}
+    The sharp collapse at $\pm 0.3\%$ of the canonical spacing is a
+    property of the corpus structure, not of the choice of anchor.
+\end{itemize}
+
+\textbf{The impossibility of statistical resolution.}
+\emph{This identification problem cannot be closed by any statistical
+method applied to this corpus.}
+The order in which the $x.18$\textdegree{}E phase and the Gerizim anchor
+were identified is not recoverable from the analysis record alone.
+A time-stamped archive would not resolve this problem: the internal
+sequence of analysis steps is unverifiable by any external party and
+the analysis is simple enough to reproduce, making any timestamp
+trivially easy to fabricate.
+More fundamentally, this is an instance of the \emph{forking paths} problem
+\citep{gelman2014forking}: analytical choices contingent on observed data
+cannot be reconstructed post-hoc even without intentional $p$-hacking,
+because investigator awareness of the data inevitably shapes which paths
+are reported.
+
+Given a finite and fully enumerable longitude axis, a historically named
+location falling near a significant phase by chance is statistically expected
+regardless of whether any metrological practice ever existed. Restricting
+the candidate set to historically credible anchors (Gerizim, Jerusalem,
+Mecca, Mt.~Meru) reduces the effective multiplicity but does not eliminate
+it, and no purely spatial test can distinguish a real ancient grid from a
+coincidence within a bounded search space.
+Accordingly: (a)~all results are treated as exploratory without exception;
+(b)~the Bonferroni correction is applied as a descriptive bound on effect
+magnitude; (c)~the Levantine corridor statistics are reported as the
+motivated entry point, not as independent evidence.
+
+\subsection{Geographic and Cultural Selection Bias}
+
+Geographic and cultural selection bias is the most important alternative
+explanation. The UNESCO list over-represents Europe and the
+Mediterranean-to-South-Asian corridor.
 Permutation tests show geographic concentration can reproduce the
 sensitivity peak (\S\ref{sec:sensitivity_slope_perm}). The dome
 enrichment surviving the restricted geographic draw (Null~C,
 $p = \geoNullDomeRestrictedP$, **) remains the primary evidence against
 a purely geographic account.
+
+\subsection{Other Limitations}
 
 \textbf{Spatial autocorrelation.}
 DEFF correction: $N_\mathrm{eff} = \NeffHalf$ (DEFF $= \DEFFhalf$,
@@ -1274,11 +1355,6 @@ $[\blockBootCIlo\%, \blockBootCIhi\%]$ excludes the 4\% null.
 UNESCO XML coordinates are administrative centroids, introducing
 unsystematic noise but not directional bias. Dome enrichment is robust
 across raw and context-validated populations and all three simulation nulls.
-
-\textbf{Americas as negative control.}
-The Americas sub-corpus ($N = 144$, A+ = 2.1\%, ns) shows directional
-depletion consistent with a Eurasian-anchored grid ($p = \AmericasOneSidedP$,
-\AmericasOneSidedStar).
 
 \textbf{Wikidata P1435 control.}
 The P1435 corpus ($N = \WDctrlN$) cannot serve as a direct null model.
@@ -1298,7 +1374,9 @@ recovered. The evidence is entirely documentary
 \label{sec:alt_explanations}
 
 \textbf{(1) Independent convergence.}
-Hemispherical structures are a recurring architectural solution, but
+Hemispherical structures are a recurring architectural solution, and
+convergent astronomical orientations across unconnected cultures have
+been documented \citep{aveni2001skywatchers,aveni2003archaeoastronomy}. However,
 independent convergence predicts no consistent longitude specificity.
 
 \textbf{(2) Geographic concentration.}
@@ -1337,6 +1415,18 @@ assigning beru-longitude coordinates to distant sites;
 (b)~archaeological survey instruments calibrated in beru sub-divisions; or
 (c)~textual evidence from Hellenistic, Sanskrit, or Islamic sources
 referencing a Levantine-centered angular reference frame.
+
+\subsubsection*{Methodological transferability}
+
+The pipeline developed here uses an externally-curated and publicly
+archived corpus, a one-dimensional angular test against a geometric null
+with no free parameters, simulation-based validation across multiple null
+types, and a fully reproducible open-source codebase. Together these
+features offer a general template for researchers testing other candidate
+angular units (e.g.\ Roman, Egyptian, or Chinese systems) against other
+monument corpora. The key asset is that the null model, tier boundaries,
+and test populations are all fixed on grounds independent of the data,
+making the approach auditable and directly reproducible by independent teams.
 
 \appendix
 \newpage
@@ -1476,11 +1566,6 @@ Hunger, H. \& Steele, J. (2019).
 \textit{The Babylonian Astronomical Compendium MUL.APIN}.
 Routledge.
 
-\bibitem[Hutton(1991)]{hutton1991pagan}
-Hutton, R. (1991).
-\textit{The Pagan Religions of the Ancient British Isles}.
-Blackwell.
-
 \bibitem[Shamasastry(1915)]{shamasastry1915arthashastra}
 Shamasastry, R. (1915).
 \textit{Kautilya's Artha\'{s}\={a}stra}.
@@ -1574,11 +1659,6 @@ Oxford University Press.
 Thom, A. (1971).
 \textit{Megalithic Lunar Observatories}.
 Oxford University Press.
-
-\bibitem[Watkins(1925)]{watkins1925}
-Watkins, A. (1925).
-\textit{The Old Straight Track}.
-Methuen \& Co.
 
 \bibitem[Watson \& Horowitz(2011)]{watson2011writing}
 Watson, R.~T. \& Horowitz, W. (2011).

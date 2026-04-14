@@ -195,11 +195,6 @@
         "id": "3",   "label": "Cluster asymmetry — permutation p",
         "p_key": "clusterPermP",    "macro": "Three",
         "script": "analysis/unesco/cluster_asymmetry_test.py"
-      },
-      {
-        "id": "4",   "label": "Temporal gradient (Cochran-Armitage 3-cohort)",
-        "p_key": "pCochranThree",   "macro": "Four",
-        "script": "analysis/unesco/temporal_gradient_test.py"
       }
     ],
     "sensitivity": [
@@ -211,6 +206,12 @@
       }
     ],
     "exploratory": [
+      {
+        "id": "4",   "label": "Temporal gradient (Cochran-Armitage 3-cohort)",
+        "p_key": "pCochranThree",   "macro": "Four",
+        "note": "Demoted from primary family (JAS submission); descriptive trend only.",
+        "script": "analysis/unesco/temporal_gradient_test.py"
+      },
       {
         "id": "E",   "label": "Founding-site classifier enrichment",
         "p_key": "pFoundKwFisher",  "macro": "TestE",
