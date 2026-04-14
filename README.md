@@ -2,26 +2,10 @@
 
 **Paper A — Primary UNESCO Analysis** · `v1.1.0`
 
-Seth Tenenbaum · Independent Sch## Changelog
-
-### v1.1.0 — 2026-04-14
-- **Manuscript directory restructured:** `manuscript/` now contains two
-  subdirectories — `primary/` (primary UNESCO analysis) and `archaeometry/`
-  (Wiley *Archaeometry* submission). Each subdirectory contains only its own
-  `.tex`, `.pdf`, and template-specific files.
-- **Shared resources centralised:** `generated_macros.tex`, `figures/`,
-  `generate_figures.py`, and `reproduce_all_macros.sh` remain in
-  `manuscript/` root and are referenced via `../` from each subdirectory.
-- **Archaeometry template files co-located:** `USG.cls`, all `*.sty` files,
-  `Wiley_logo.*`, `allergy.*`, and `images/` moved into `manuscript/archaeometry/`
-  so the Wiley build is fully self-contained in that directory.
-- **All version references updated:** `README.md`, `CITATION.cff`,
-  `paper_a_primary_unesco.tex`, `paper_a_archaeometry.tex` bumped to v1.1.0.
-- **`reproduce_all_macros.sh` compile instructions updated** to reflect the
-  new `primary/` and `archaeometry/` subdirectory paths.
-
-### v1.0.9 — 2026-04-13r  
+Seth Tenenbaum · Independent Scholar  
 ORCID: [0009-0008-5797-2498](https://orcid.org/0009-0008-5797-2498)
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19574076.svg)](https://doi.org/10.5281/zenodo.19574076)
 
 ---
 
@@ -203,19 +187,39 @@ gerizim-paper-a/
 ## Changelog
 
 ### v1.1.0 — 2026-04-14
-- **Manuscript directory restructured:** `manuscript/` now contains two
-  subdirectories — `manuscript/primary/` (primary UNESCO analysis,
-  `paper_a_primary_unesco.tex`) and `manuscript/archaeometry/`
-  (Archaeometry submission, `paper_a_archaeometry.tex`).
-- **Archaeometry template files relocated:** `USG.cls`, all `.sty` files,
-  `Wiley_logo.*`, `allergy.*`, and `images/` moved into
-  `manuscript/archaeometry/` where they belong.
-- **Shared resources** (`figures/`, `generated_macros.tex`,
-  `generate_figures.py`, `reproduce_all_macros.sh`) remain at
-  `manuscript/` root; `.tex` files reference them via `../`.
-- **All version references updated:** `CITATION.cff`, `README.md`,
-  both `.tex` files bumped to `v1.1.0`.
-- **Merged `archaeometry` branch into `master`** and tagged `v1.1.0`.
+**DOI:** [10.5281/zenodo.19574076](https://doi.org/10.5281/zenodo.19574076)
+
+#### Analysis changes
+- **Bonferroni primary family reduced from 4 → 3 tests:** Test 4 (temporal
+  gradient / Cochran-Armitage) demoted from the primary Bonferroni family to
+  exploratory in `config.json`, with an explicit note that it is a descriptive
+  trend only (motivated by the *Archaeometry* submission framing).
+- **All three manuscript figures regenerated** following the family change;
+  figure annotations now read `ZcochranThree` / `pCochranThree` directly from
+  `generated_macros.tex` rather than recomputing inline — ensuring the figure
+  and manuscript text are always in sync.
+- **`generate_figures.py` refactored:** removed the inline Cochran-Armitage
+  computation from the figure script; figures now pull all annotated values
+  from the canonical macro file.
+- **`data/store/results.json` updated** to reflect the revised family
+  membership and new macro values.
+
+#### Manuscript
+- **Archaeometry submission added:** `manuscript/archaeometry/paper_a_archaeometry.tex`
+  — a parallel manuscript formatted for Wiley *Archaeometry* (USG template).
+- **Manuscript directory restructured:** `manuscript/primary/` and
+  `manuscript/archaeometry/` subdirectories created; each contains only its
+  own `.tex`, `.pdf`, and template-specific files.
+- **Wiley template files co-located:** `USG.cls`, all `.sty` files,
+  `Wiley_logo.*`, `allergy.*`, and `images/` moved into `manuscript/archaeometry/`.
+- **Shared resources** (`generated_macros.tex`, `figures/`, `generate_figures.py`,
+  `reproduce_all_macros.sh`) remain at `manuscript/` root; both `.tex` files
+  reference them via `../`.
+
+#### Housekeeping
+- All version references (`CITATION.cff`, `README.md`, both `.tex` files)
+  bumped to `v1.1.0`.
+- Merged `archaeometry` branch into `master` and tagged `v1.1.0`.
 
 ### v1.0.9 — 2026-04-13
 - **Keyword filter restored:** `mound_positive_context` in `keywords.json`
