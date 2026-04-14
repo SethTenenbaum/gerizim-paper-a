@@ -424,6 +424,7 @@ print("=" * 100)
 print()
 print(f"  \\newcommand{{\\pCircApValidated}}{{{bt_Ap.pvalue:.4f}}}  % p-value, A+ binomial (context-validated dome corpus)")
 print(f"  \\newcommand{{\\pCircAValidated}}{{{bt_A.pvalue:.4f}}}   % p-value, A binomial (context-validated dome corpus)")
+print(f"  \\newcommand{{\\circEnrichApValidated}}{{{enr_Ap:.2f}}}  % enrichment ratio, A+ (context-validated dome corpus)")
 print()
 
 # ── Write to results store ────────────────────────────────────────────────────

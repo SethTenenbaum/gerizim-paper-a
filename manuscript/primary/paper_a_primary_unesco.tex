@@ -647,9 +647,9 @@ Code: \texttt{dome\_leave\_k\_out.py}.
 
 \textbf{Context-validated robustness check (Test~2x).}
 Applying sentence-level architectural confirmation reduces the population
-to $N = 83$ (\NcircContextRejected{} non-architectural false positives
+to $N = \NcircValidated$ (\NcircContextRejected{} non-architectural false positives
 rejected; full list in Appendix~\ref{sec:kwdaudit_dome}).
-Test~2x yields $p = 0.0005$, $3.31\times$ enrichment, stronger than the
+Test~2x yields $p = \pCircApValidated$, $3.31\times$ enrichment, stronger than the
 raw sweep, consistent with rejected sites diluting the signal.
 Because validation rules were developed after the initial sweep, Test~2x
 is excluded from the primary Bonferroni family.
@@ -793,14 +793,14 @@ Harmonics with $\geq 1$ A+ site (\NclusterApHarmonics{})
   & & \\
 Harmonics with 0 A+ sites (\NclusterNonApHarmonics{})
   & \multicolumn{2}{c}{mean $= \clusterHarmonicNonApMean$ sites}
-  & \clusterHarmonicRatio$\times$ & $< 0.0001$~*** \\
+  & \clusterHarmonicRatio$\times$ & $\clusterHarmonicMWpStr$~*** \\
 \midrule
 \bottomrule
 \end{tabular}}% end adjustbox
 \end{table}
 
 \noindent A+-bearing harmonics host \clusterHarmonicRatio$\times$ more sites
-on average than non-A+ harmonics ($p < 0.0001$).
+on average than non-A+ harmonics ($p\ \clusterHarmonicMWpStr$).
 Sites at harmonic nodes cluster more densely than sites at harmonic midpoints
 (\clusterNodeApMean{} vs.\ \clusterAntiApMean{} neighbors;
 $\clusterNodeVsAntiApRatio\times$, $p = \clusterNodeVsAntiApMWp$).
@@ -824,7 +824,7 @@ consequence of the A+ classification criterion (\S\ref{sec:circularity})
 and is reported as a structural description, not independent evidence.
 A permutation check confirms that a random draw of \Nap{} longitudes from
 the full corpus does not reproduce the observed phase concentration
-($R = \rayleighR$, $Z = \rayleighZ$, $p_\mathrm{perm} < 0.0001$,
+($R = \rayleighR$, $Z = \rayleighZ$, $p_\mathrm{perm} < \rayleighPermP$,
 10{,}000 shuffles, seed~42).
 The full corpus Rayleigh~$R = \fullRayleighR$
 ($p_\mathrm{perm} = \fullRayleighPermP$, ns) confirms no spurious global
@@ -851,7 +851,7 @@ above the 4\% null
 (binomial $p = \clusterApBinom$; Bonferroni $p_\mathrm{adj} = \pAdjTestOne$,
 $k = \BonfK$).
 Both Gerizim (external) and Jerusalem (inscribed, self-excluded to
-$N = 1010$) produce $p = 0.010$; the signal belongs to the
+$N = \NjerSelfExclCorpus$) produce $p = \pJerusalemAp$; the signal belongs to the
 $\sim$35\textdegree{}E corridor, not to either anchor individually
 (\S\ref{sec:sensitivity_global}).
 Test~1 provides the corpus-level backdrop for the stronger morphological
@@ -867,14 +867,14 @@ that the stupa corpus ($N = \NevoStupa$) has correspondingly wide CIs.
 \textbf{Region-stratified robustness.}
 Mantel-Haenszel analysis by UNESCO region: OR~$= \MHcommonOR$,
 $p = \pCMH$ (trend-level). Tested against region-specific empirical null
-rates, enrichment remains significant ($p = 0.0013$; pre-2000: $p = 0.0076$).
+rates, enrichment remains significant ($p = \pRegionEmpAll$; pre-2000: $p = \pRegionEmpPreTwoK$).
 
 \subsubsection*{World religion sites}
 
 Sites associated with any world religion ($N = \NreligUnion$): \religUnionApRate\%
 A+ ($\religUnionEnrich\times$, $p = \pReligUnion$~*).
 Christianity ($N = \NchristSites$): \christApRate\% A+, $p = \pChrist$~*.
-Buddhism ($N = 46$): 8.7\% A+ ($p = 0.11$, ns).
+Buddhism ($N = \NbudTotal$): \budApRate\% A+ ($p = \pBudAp$, ns).
 These populations were defined by religion-name matching only.
 
 \subsubsection*{Inscription-year stratification and formal trend test}
@@ -945,7 +945,7 @@ also a 0.05-beru harmonic ($0.10 = 2 \times 0.05$), and 0.20-beru harmonics
 are a strict subset. Adjacent non-harmonic spacings (0.06, 0.07, 0.09, 0.11,
 0.12~beru) are non-significant in both populations, which is the
 discriminating observation. The 0.08-beru row reaches nominal
-dome significance ($p = 0.023$) but not full-corpus ($p = 0.437$, ns),
+dome significance ($p = \sweepEightDomeP$) but not full-corpus ($p = \sweepEightFullP$, ns),
 reflecting unsystematic local overlap with the 0.10-beru grid.
 
 \begin{table}[H]
@@ -1058,15 +1058,15 @@ sexagesimal subdivision of the Babylonian beru (\S\ref{sec:metrology_basis}).
 Two parallel sweeps (0--360\textdegree{}E, 0.01\textdegree{} resolution,
 \anchorSweepNanchors{} trial anchors each) assess whether the
 $\sim$35\textdegree{}E corridor is unusual globally.
-Sweep~A removes Jerusalem and tests Gerizim as anchor ($N = 1010$);
-Sweep~B retains Jerusalem with self-exclusion ($N = 1010$).
+Sweep~A removes Jerusalem and tests Gerizim as anchor ($N = \NgerizimSweepCorpus$);
+Sweep~B retains Jerusalem with self-exclusion ($N = \NjerSelfExclCorpus$).
 
 \begin{table}[H]
 \centering\small
 \caption{Global anchor sweep: both Levantine anchors ranked within their
   own corpus. Each sweep: \anchorSweepNanchors{} trial anchors,
   0--360\textdegree{}E at 0.01\textdegree{} resolution.
-  Sweep~A: N\,=\,1010 (Jerusalem removed); Sweep~B: N\,=\,1010 (Jerusalem self-excluded).
+  Sweep~A: N\,=\,\NgerizimSweepCorpus{} (Jerusalem removed); Sweep~B: N\,=\,\NjerSelfExclCorpus{} (Jerusalem self-excluded).
   Gerizim is external in both.
   Mean A+ across all anchors: \anchorSweepApMean{}$\pm$\anchorSweepApStd{}.}
 \label{tab:sweep_summary}
@@ -1177,17 +1177,17 @@ a purely geographic account.
 
 \textbf{Corridor and landmark ranking.}
 Jerusalem and Gerizim (\GerizimJerusalemKm\,km apart) produce the same
-56~A+ and $p = 0.010$; the enrichment belongs to the corridor, not to
+56~A+ and $p = \pJerusalemAp$; the enrichment belongs to the corridor, not to
 the specific anchor. Using each UNESCO site as anchor, Gerizim ranks
 \#\GerizimTempleRank{} (top 4.1\%). The 35\textdegree{}E corridor leads
-globally; the closest rival (23.2\textdegree{}E, $N=4$) spans four
+globally; the closest rival (\corridorRivalLon\textdegree{}E, $N=\corridorRivalN$) spans four
 countries with no shared tradition.
 
 \subsection{Spatial Autocorrelation}
 \label{sec:autocorrelation}
 
 A+ harmonics host $\clusterHarmonicRatio\times$ as many total UNESCO
-sites as non-A+ harmonics ($p < 0.0001$).
+sites as non-A+ harmonics ($p\ \clusterHarmonicMWpStr$).
 
 \subsubsection*{Effective-$N$ correction}
 
@@ -1214,11 +1214,11 @@ Three simulation nulls (100{,}000 trials each, seed~$= 42$,
 \citealt{good2005permutation}):
 (1)~Longitude permutation: dome ($N = \NcircValidated$)
 $p_\mathrm{perm} = \simDomePermP$~(**);
-canon ($N = 138$) $p = 0.14$~(ns);
-pre-2000 ($N = 501$) $p = 0.074$~($^\dagger$).
+canon ($N = \NcanonSites$) $p = \simCanonPermP$~(ns);
+pre-2000 ($N = \NpreTwoK$) $p = \simPreTwoKPermP$~($^\dagger$).
 (2)~Bootstrap from full corpus: dome $p_\mathrm{boot} = \simDomeBootP$~(*).
-(3)~KDE-smoothed null: expected $40.4 \pm 6.2$, observed 56, $Z = 2.50$,
-$p = 0.011$~(*).
+(3)~KDE-smoothed null: expected $\simKDEMean \pm \simKDEStd$, observed \Nap{}, $Z = \simKDEZ$,
+$p = \simKDEP$~(*).
 Dome enrichment survives all three models.
 The geographic-concentration nulls (Null~A, Null~C;
 \S\ref{sec:geo_conc_null}) show that proximity to harmonic longitudes
@@ -1258,7 +1258,7 @@ unsystematic noise but not directional bias. Dome enrichment is robust
 across raw and context-validated populations and all three simulation nulls.
 
 \textbf{Americas as negative control.}
-The Americas sub-corpus ($N = 144$, A+ = 2.1\%, ns) shows directional
+The Americas sub-corpus ($N = \AmericasN$, A+ = \AmericasApRate\%, ns) shows directional
 depletion consistent with a Eurasian-anchored grid ($p = \AmericasOneSidedP$,
 \AmericasOneSidedStar).
 
@@ -1364,8 +1364,8 @@ rejected by context validation in Test~2x (Hiroshima Peace Memorial,
 Richtersveld, Gyeongju, Vi\~{n}ales Valley, Rock Islands Southern Lagoon,
 Uluru-Kata Tju\d{t}a, and Diqu\'{i}s Stone Spheres). In every case, the
 exclusion is driven by the semantic domain of the keyword match, not by
-any property of the site's longitude. Test~2x yields $N = 83$,
-$p = 0.0005$, $3.31\times$ enrichment, confirming that the 7 rejected
+any property of the site's longitude. Test~2x yields $N = \NcircValidated$,
+$p = \pCircApValidated$, $3.31\times$ enrichment, confirming that the 7 rejected
 sites are longitude-diluting false positives.
 
 \subsection{Founding-Origin Classifier (Test~E, Post-Hoc)}

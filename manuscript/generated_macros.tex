@@ -1,4 +1,4 @@
-% Generated macros — 2026-04-14T15:44:56Z
+% Generated macros — 2026-04-14T17:34:46Z
 % Source: bash manuscript/reproduce_all_macros.sh --macros-only
 % IMPORTANT: values are computed fresh each run — do NOT hardcode
 
@@ -11,6 +11,8 @@
   \newcommand{\GerizimJerusalemKm}{4.1}  % Gerizim–Jerusalem separation (km, equatorial)
   \newcommand{\NwhcTotal}{1248}  % total UNESCO WHC inscribed sites (all types)
   \newcommand{\NclusterTotalPreCoord}{1013}  % Cultural+Mixed before coordinate filter
+  \newcommand{\NexcNatural}{235}  % Natural-only sites excluded from analysis corpus
+  \newcommand{\NexcNoCoord}{2}  % Cultural/Mixed sites excluded for missing coordinates
   \newcommand{\NfineSweepSpacings}{7}  % number of spacings in the fine unit sweep (Table tab:unitsweep_fine)
 
 % --- analysis/global/geodesic_sensitivity.py
@@ -51,6 +53,7 @@
 % --- analysis/unesco/spherical_monument_test.py
   \newcommand{\pCircApValidated}{0.0005}  % p-value, A+ binomial (context-validated dome corpus)
   \newcommand{\pCircAValidated}{0.0098}   % p-value, A binomial (context-validated dome corpus)
+  \newcommand{\circEnrichApValidated}{3.31}  % enrichment ratio, A+ (context-validated dome corpus)
 
 % --- analysis/unesco/cluster_asymmetry_test.py
   \newcommand{\NclusterTotal}{1011}          % full Cultural/Mixed corpus
@@ -69,6 +72,7 @@
   \newcommand{\clusterHarmonicNonApMean}{7.0}           % mean UNESCO sites/harmonic (non-A+ harmonics)
   \newcommand{\clusterHarmonicRatio}{4.19}           % harmonic-level density ratio
   \newcommand{\clusterHarmonicMWp}{0.0000}        % Mann-Whitney p (harmonic-level)
+  \newcommand{\clusterHarmonicMWpStr}{< 0.0001}  % formatted harmonic MW p-value string
   \newcommand{\NclusterNodeAp}{26}              % node-side A+ sites (phase-split)
   \newcommand{\NclusterAntiAp}{23}              % anti-side A+ sites (phase-split)
   \newcommand{\clusterNodeApMean}{9.85}          % mean cluster size, node-side A+
@@ -82,6 +86,7 @@
   \newcommand{\clusterNodeVsAntiAllMWp}{0.0075}        % Mann-Whitney p, all node > all anti
   \newcommand{\clusterCondN}{50000}          % perms in conditional subtest
   \newcommand{\clusterCondClusterOk}{182}    % perms reproducing observed clustering
+  \newcommand{\clusterCondClusterP}{0.0036}    % p-value, clustering alone (cluster ok / N_COND_PERMS)
   \newcommand{\clusterCondPeakAndCluster}{22}    % perms with clustering AND unit peak
   \newcommand{\clusterCondPeakFrac}{0.1209}    % conditional fraction (peak | cluster)
   \newcommand{\clusterCondPeakFracUncond}{0.1681}    % unconditional peak fraction
@@ -171,6 +176,9 @@
   \newcommand{\christApRate}{6.8}            % Christian sites A+ rate (%)
   \newcommand{\pChrist}{0.0312}         % p-value, Christian sites A+ binomial
   \newcommand{\christEnrich}{1.71}           % enrichment ratio, Christian sites
+  \newcommand{\NbudSitesRelig}{46}            % Buddhism religion-tagged sites N
+  \newcommand{\budApRateRelig}{8.7}            % Buddhism religion-tagged A+ rate (%)
+  \newcommand{\pBudRelig}{0.1113}         % p-value, Buddhism religion-tagged A+ binomial
 
 % --- analysis/unesco/founding_sites_analysis.py
   \newcommand{\NthematicTotal}{56}                 % total A+ sites
@@ -312,6 +320,8 @@
   \newcommand{\JerusalemSweepA}{217}           % Jerusalem A in sweep
   \newcommand{\JerusalemSweepPctile}{98.3}        % Jerusalem percentile in A+ anchor sweep
   \newcommand{\anchorSweepJerApPct}{2.77}          % % of anchors beating Jerusalem A+
+  \newcommand{\anchorSweepTopPct}{1.7}          % top-N% globally (corridor, both anchors)
+  \newcommand{\sweepABDiff}{1}          % A+ count difference between Sweep A and Sweep B
 
 % --- analysis/unesco/verify_x18_periodicity.py
   \newcommand{\optimalPhase}{2.18}          % optimal x.18° phase (degrees mod 3)
@@ -434,6 +444,9 @@
   \newcommand{\appSiteDevKmSeven}{0.60}  % A++ table rank Seven: km
   \newcommand{\appSiteDevMSeven}{598}  % A++ table rank Seven: m
   \newcommand{\JerusalemAp}{56}  % Jerusalem A+ count (self-excluded corpus)
+  \newcommand{\NjerSelfExclCorpus}{1010}  % corpus size, Jerusalem self-excluded (Sweep B)
+  \newcommand{\NgerizimSweepCorpus}{1010}  % corpus size, Gerizim sweep (Jerusalem removed, Sweep A)
+  \newcommand{\pJerusalemAp}{0.0101}  % p-value, Jerusalem A+ binomial (self-excluded)
   \newcommand{\MeccaAp}{51}  % Mecca A+ count (full corpus)
   \newcommand{\pMeccaAnchor}{0.057}  % p-value, Mecca binomial (A+, one-sided)
   \newcommand{\MeruAp}{44}  % Mt. Meru (Tanzania, 36.750E) A+ count
@@ -461,6 +474,8 @@
   \newcommand{\stratNregions}{5}   % total regions tested
   \newcommand{\stratNsig}{0}          % regions sig at p<0.05
   \newcommand{\stratVerdict}{largely explained by regional composition after adjustment}
+  \newcommand{\pRegionEmpAll}{0.8230}    % region-specific empirical null, all sites
+  \newcommand{\pRegionEmpPreTwoK}{0.4205}  % region-specific empirical null, pre-2000
 
 % --- analysis/unesco/tumulus_dome_evolution_raw_sweep.py
   \newcommand{\NevoTotal}{132}            % total dome-evolution corpus
@@ -675,6 +690,8 @@
   \newcommand{\simKDEStd}{6.2}            % KDE null-model std A+
 
 % --- analysis/unesco/unit_sweep_fill.py
+  \newcommand{\sweepEightDomeP}{0.0229}   % p(Dome), 0.08-beru spacing
+  \newcommand{\sweepEightFullP}{0.4371}   % p(Full), 0.08-beru spacing
 
 % --- analysis/unesco/sensitivity_slope_permutation_test.py
   \newcommand{\permSlopeNperms}{10{,}000}
@@ -701,16 +718,16 @@
   \newcommand{\geoNullDomeRestrictedP}{0.0080}   % restricted-pool p
   \newcommand{\geoNullDomeRestrictedZ}{2.91}    % restricted-pool Z
   \newcommand{\geoNullDomeRestrictedMean}{4.80}   % restricted-pool mean A+
-  \newcommand{\geoNullDomeRestrictedN}{881}   % restricted pool size
-  \newcommand{\geoNullDomeRestrictedN2}{761}   % Null C ±2° pool size
-  \newcommand{\geoNullDomeRestrictedP2}{0.0113}   % Null C ±2° p-value
-  \newcommand{\geoNullDomeRestrictedMean2}{5.01}   % Null C ±2° mean A+
-  \newcommand{\geoNullDomeRestrictedN5}{881}   % Null C ±5° pool size
-  \newcommand{\geoNullDomeRestrictedP5}{0.0083}   % Null C ±5° p-value
-  \newcommand{\geoNullDomeRestrictedMean5}{4.81}   % Null C ±5° mean A+
-  \newcommand{\geoNullDomeRestrictedN10}{967}   % Null C ±10° pool size
-  \newcommand{\geoNullDomeRestrictedP10}{0.0077}   % Null C ±10° p-value
-  \newcommand{\geoNullDomeRestrictedMean10}{4.73}   % Null C ±10° mean A+
+  \newcommand{\geoNullDomeRestrictedN}{881}      % Null C ±5° pool size (primary window)
+  \newcommand{\geoNullDomeRestrictedNtwo}{761}   % Null C ±2° pool size
+  \newcommand{\geoNullDomeRestrictedPtwo}{0.0113}   % Null C ±2° p-value
+  \newcommand{\geoNullDomeRestrictedMeantwo}{5.01}  % Null C ±2° mean A+
+  \newcommand{\geoNullDomeRestrictedNfive}{881}     % Null C ±5° pool size (alias)
+  \newcommand{\geoNullDomeRestrictedPfive}{0.0083}  % Null C ±5° p-value
+  \newcommand{\geoNullDomeRestrictedMeanfive}{4.81} % Null C ±5° mean A+
+  \newcommand{\geoNullDomeRestrictedNten}{967}      % Null C ±10° pool size
+  \newcommand{\geoNullDomeRestrictedPten}{0.0077}   % Null C ±10° p-value
+  \newcommand{\geoNullDomeRestrictedMeantten}{4.73} % Null C ±10° mean A+
   \newcommand{\domeEurasianFraction}{77}   % % dome sites in 20-120E
   \newcommand{\fullCorpusEurasianFraction}{41}   % % full corpus in 20-120E
 

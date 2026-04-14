@@ -148,5 +148,18 @@ def main():
               f"& {bold_s}{d_str}{bold_e} & {bold_s}{d_p_str}~{d_sig}{bold_e} "
               f"& {bold_s}{f_str}{bold_e} & {bold_s}{f_p_str}~{f_sig}{bold_e} \\\\")
 
+    # ── LaTeX macros for adjacent-spacing prose references ─────────────────
+    # The 0.08-beru row is cited in the robustness section to show that
+    # non-harmonic adjacent spacings do not produce joint significance.
+    print()
+    print("  % LaTeX macros (unit_sweep_fill.py — adjacent spacing references):")
+    for sp, nr, d_hits, d_p, f_hits, f_p in coarse_rows:
+        if abs(sp - 0.08) < 1e-9:
+            def _fmt(p):
+                return f"{p:.4f}" if p >= 0.001 else f"{p:.1e}"
+            print(f"  \\newcommand{{\\sweepEightDomeP}}{{{_fmt(d_p)}}}   % p(Dome), 0.08-beru spacing")
+            print(f"  \\newcommand{{\\sweepEightFullP}}{{{_fmt(f_p)}}}   % p(Full), 0.08-beru spacing")
+            break
+
 if __name__ == "__main__":
     main()

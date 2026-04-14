@@ -59,6 +59,8 @@ print(f"  \\newcommand{{\\GerizimJerusalemKm}}{{{sep_km}}}  % Gerizim–Jerusale
 print(f"  \\newcommand{{\\NwhcTotal}}{{{n_whc}}}  % total UNESCO WHC inscribed sites (all types)")
 print(f"  \\newcommand{{\\NclusterTotalPreCoord}}{{{n_cult_mixed}}}  % Cultural+Mixed before coordinate filter")
 print(f"  \\newcommand{{\\NclusterTotal}}{{{n_cult_mixed_coords}}}  % Cultural+Mixed with valid coordinates (analysis corpus)")
+print(f"  \\newcommand{{\\NexcNatural}}{{{n_whc - n_cult_mixed}}}  % Natural-only sites excluded from analysis corpus")
+print(f"  \\newcommand{{\\NexcNoCoord}}{{{n_cult_mixed - n_cult_mixed_coords}}}  % Cultural/Mixed sites excluded for missing coordinates")
 print(f"  \\newcommand{{\\NfineSweepSpacings}}{{7}}  % number of spacings in the fine unit sweep (Table tab:unitsweep_fine)")
 
 print()

@@ -307,6 +307,10 @@ christian_kws = next(kws for name, kws in RELIGION_SETS if name.lower().startswi
 christian = [s for s in sites if any(k in s["text"] for k in christian_kws)]
 n_chr, nap_chr, _, p_chr, enr_chr = stats(christian)
 
+buddhist_kws = next(kws for name, kws in RELIGION_SETS if name.lower().startswith("buddh"))
+buddhist_relig = [s for s in sites if any(k in s["text"] for k in buddhist_kws)]
+n_bud_r, nap_bud_r, _, p_bud_r, enr_bud_r = stats(buddhist_relig)
+
 n_rel, nap_rel, _, p_rel, enr_rel = stats(any_relig)
 
 print("  % LaTeX macros (GROUP 5 — origin_sites_test.py):")
@@ -342,6 +346,9 @@ print(f"  \\newcommand{{\\NchristAp}}{{{nap_chr}}}              % Christian site
 print(f"  \\newcommand{{\\christApRate}}{{{100*nap_chr/n_chr:.1f}}}            % Christian sites A+ rate (%)")
 print(f"  \\newcommand{{\\pChrist}}{{{p_chr:.4f}}}         % p-value, Christian sites A+ binomial")
 print(f"  \\newcommand{{\\christEnrich}}{{{enr_chr:.2f}}}           % enrichment ratio, Christian sites")
+print(f"  \\newcommand{{\\NbudSitesRelig}}{{{n_bud_r}}}            % Buddhism religion-tagged sites N")
+print(f"  \\newcommand{{\\budApRateRelig}}{{{100*nap_bud_r/n_bud_r:.1f}}}            % Buddhism religion-tagged A+ rate (%)")
+print(f"  \\newcommand{{\\pBudRelig}}{{{p_bud_r:.4f}}}         % p-value, Buddhism religion-tagged A+ binomial")
 
 # ── Write to results store ────────────────────────────────────────────────────
 ResultsStore().write_many({
@@ -351,4 +358,5 @@ ResultsStore().write_many({
     "pFisherCanonModern": p_fl,         # Fisher p, canon vs modern
     "pReligUnion":        p_rel,        # any-religion A+ binomial p
     "pChrist":            p_chr,        # Christian A+ binomial p
+    "pBudRelig":          p_bud_r,      # Buddhism religion-tagged A+ binomial p
 })

@@ -304,9 +304,10 @@ def main():
     print(f"  \\newcommand{{\\geoNullDomeRestrictedZ}}{{{z_c:.2f}}}    % restricted-pool Z")
     print(f"  \\newcommand{{\\geoNullDomeRestrictedMean}}{{{mean_c:.2f}}}   % restricted-pool mean A+")
     print(f"  \\newcommand{{\\geoNullDomeRestrictedN}}{{{N_pool}}}   % restricted pool size")
-    # Sensitivity sweep macros
+    # Sensitivity sweep macros — letter-based suffixes to avoid LaTeX digit-in-csname issue
+    _tag_map = {2.0: "two", 5.0: "five", 10.0: "ten"}
     for w, r in sensitivity.items():
-        tag = str(int(w))
+        tag = _tag_map.get(w, str(int(w)))
         print(f"  \\newcommand{{\\geoNullDomeRestrictedN{tag}}}{{{r['n_pool']}}}   % Null C ±{w:.0f}° pool size")
         print(f"  \\newcommand{{\\geoNullDomeRestrictedP{tag}}}{{{r['p']:.4f}}}   % Null C ±{w:.0f}° p-value")
         print(f"  \\newcommand{{\\geoNullDomeRestrictedMean{tag}}}{{{r['mean']:.2f}}}   % Null C ±{w:.0f}° mean A+")
@@ -327,7 +328,7 @@ def main():
         "fullCorpusEurasianFraction": full_e,
     }
     for w, r in sensitivity.items():
-        tag = str(int(w))
+        tag = _tag_map.get(w, str(int(w)))
         store_data[f"geoNullDomeRestrictedN{tag}"]    = float(r["n_pool"])
         store_data[f"geoNullDomeRestrictedP{tag}"]    = r["p"]
         store_data[f"geoNullDomeRestrictedMean{tag}"] = r["mean"]

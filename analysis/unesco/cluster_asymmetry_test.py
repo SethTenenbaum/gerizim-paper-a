@@ -549,6 +549,8 @@ print(f"  \\newcommand{{\\clusterHarmonicApMean}}{{{mean_ap_h:.1f}}}          % 
 print(f"  \\newcommand{{\\clusterHarmonicNonApMean}}{{{mean_nonap_h:.1f}}}           % mean UNESCO sites/harmonic (non-A+ harmonics)")
 print(f"  \\newcommand{{\\clusterHarmonicRatio}}{{{mean_ap_h / max(mean_nonap_h, 0.01):.2f}}}           % harmonic-level density ratio")
 print(f"  \\newcommand{{\\clusterHarmonicMWp}}{{{mw2_p:.4f}}}        % Mann-Whitney p (harmonic-level)")
+_hw_str = f"< 0.0001" if mw2_p < 0.0001 else f"= {mw2_p:.4f}"
+print(f"  \\newcommand{{\\clusterHarmonicMWpStr}}{{{_hw_str}}}  % formatted harmonic MW p-value string")
 print(f"  \\newcommand{{\\NclusterNodeAp}}{{{n_node_ap_ps}}}              % node-side A+ sites (phase-split)")
 print(f"  \\newcommand{{\\NclusterAntiAp}}{{{n_anti_ap_ps}}}              % anti-side A+ sites (phase-split)")
 print(f"  \\newcommand{{\\clusterNodeApMean}}{{{mean_nap:.2f}}}          % mean cluster size, node-side A+")
@@ -716,6 +718,7 @@ sig_uncond = _sig(p_peak_uncond)
 print("  % LaTeX macros (cluster conditional sensitivity subtest):")
 print(f"  \\newcommand{{\\clusterCondN}}{{{N_COND_PERMS}}}          % perms in conditional subtest")
 print(f"  \\newcommand{{\\clusterCondClusterOk}}{{{n_cluster_ok}}}    % perms reproducing observed clustering")
+print(f"  \\newcommand{{\\clusterCondClusterP}}{{{p_cluster_alone:.4f}}}    % p-value, clustering alone (cluster ok / N_COND_PERMS)")
 print(f"  \\newcommand{{\\clusterCondPeakAndCluster}}{{{n_cluster_and_peak}}}    % perms with clustering AND unit peak")
 print(f"  \\newcommand{{\\clusterCondPeakFrac}}{{{p_peak_cond:.4f}}}    % conditional fraction (peak | cluster)")
 print(f"  \\newcommand{{\\clusterCondPeakFracUncond}}{{{p_peak_uncond:.4f}}}    % unconditional peak fraction")
@@ -724,6 +727,7 @@ print(f"  \\newcommand{{\\clusterCondPeakSig}}{{{sig_cond}}}    % significance l
 ResultsStore().write_many({
     "clusterCondN":              N_COND_PERMS,
     "clusterCondClusterOk":      n_cluster_ok,
+    "clusterCondClusterP":       round(p_cluster_alone, 4),
     "clusterCondPeakAndCluster": n_cluster_and_peak,
     "clusterCondPeakFrac":       round(p_peak_cond,   4),
     "clusterCondPeakFracUncond": round(p_peak_uncond, 4),

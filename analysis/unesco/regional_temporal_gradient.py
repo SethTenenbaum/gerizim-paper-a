@@ -411,12 +411,67 @@ if mh_tables:
     print(f"  \\newcommand{{\\stratNsig}}{{{n_sig_regions}}}          % regions sig at p<0.05")
     print(f"  \\newcommand{{\\stratVerdict}}{{{verdict}}}")
 
+    # ── Region-specific empirical null rates: stratified binomial tests ───
+    # For each region, compute that region's empirical A+ rate as the null,
+    # then test whether the full corpus (all regions) is enriched vs the
+    # weighted average region-specific null.
+    # More precisely: pool the per-region binomial p-values via Fisher's
+    # combined method (all sites), and separately for pre-2000 inscriptions.
+    print()
+    print("  % ── Region-specific empirical null (stratified binomial) ──────────")
+
+    from scipy.stats import chi2 as _chi2
+
+    def _region_emp_null_p(site_list):
+        """
+        For each region, compute that region's A+ rate as the null, then
+        test each site stratum against its own regional null.  Combine the
+        per-region one-sided binomial p-values via Fisher's combined method.
+        """
+        region_groups = {}
+        for s in site_list:
+            region_groups.setdefault(s["region"], []).append(s)
+
+        # Compute per-region empirical null rate from the *full* corpus
+        full_region_rates = {}
+        for reg in regions:
+            all_reg = [s for s in sites if s["region"] == reg]
+            if len(all_reg) >= 5:
+                full_region_rates[reg] = sum(1 for s in all_reg if s["is_ap"]) / len(all_reg)
+
+        chi_stat = 0.0
+        df_total = 0
+        for reg, rlist in region_groups.items():
+            null_rate = full_region_rates.get(reg, P_NULL_AP)
+            n_r = len(rlist)
+            k_r = sum(1 for s in rlist if s["is_ap"])
+            if n_r < 3:
+                continue
+            p_r = binomtest(k_r, n_r, null_rate, alternative="greater").pvalue
+            # Fisher: -2 ln(p)
+            import math
+            chi_stat += -2.0 * math.log(max(p_r, 1e-300))
+            df_total += 2
+        if df_total == 0:
+            return 1.0
+        p_combined = 1.0 - _chi2.cdf(chi_stat, df=df_total)
+        return p_combined
+
+    p_reg_emp_all    = _region_emp_null_p(sites)
+    pre2k_sites_list = [s for s in sites if s["yr"] < 2000]
+    p_reg_emp_pre2k  = _region_emp_null_p(pre2k_sites_list)
+
+    print(f"  \\newcommand{{\\pRegionEmpAll}}{{{p_reg_emp_all:.4f}}}    % region-specific empirical null, all sites")
+    print(f"  \\newcommand{{\\pRegionEmpPreTwoK}}{{{p_reg_emp_pre2k:.4f}}}  % region-specific empirical null, pre-2000")
+
     # ── Write to results store ─────────────────────────────────────────────
     ResultsStore().write_many({
-        "pCMH":              p_cmh,
-        "MH_OR":             MH_OR,
-        "stratNconcordant":  n_concordant,
-        "stratNregions":     n_regions_tested,
-        "stratNsig":         n_sig_regions,
+        "pCMH":                p_cmh,
+        "MH_OR":               MH_OR,
+        "stratNconcordant":    n_concordant,
+        "stratNregions":       n_regions_tested,
+        "stratNsig":           n_sig_regions,
+        "pRegionEmpAll":       p_reg_emp_all,
+        "pRegionEmpPreTwoK":   p_reg_emp_pre2k,
     })
 print()

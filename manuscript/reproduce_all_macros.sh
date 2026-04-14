@@ -73,7 +73,7 @@ if [ "${1:-}" = "--macros-only" ]; then
         # ── Primary analysis (write to store) ─────────────────────────────
         analysis/unesco/spherical_monument_raw_sweep.py      # → pCircAp, pCircA, pCircChi
         analysis/unesco/spherical_monument_test.py            # → pCircAp_validated (context-validated, Exploratory 2x)
-        analysis/unesco/cluster_asymmetry_test.py            # → clusterApBinom, clusterPermP
+        analysis/unesco/cluster_asymmetry_test.py            # → clusterApBinom, clusterPermP, clusterHarmonicMWpStr
         analysis/unesco/harmonic_density_attractor_test.py
         analysis/unesco/unesco_buddhist_heritage_test.py     # → pBudAp, pBudA
         analysis/unesco/origin_sites_test.py                 # → pCanon, pPreTwoK, pModern
@@ -88,7 +88,7 @@ if [ "${1:-}" = "--macros-only" ]; then
         analysis/global/landmark_anchor_ranking.py
         analysis/global/global_corridor_comparison.py
         analysis/global/corridor_precision_test.py           # → pCorridorBinom, pCorridorFisher
-        analysis/global/anchor_site_comparison.py
+        analysis/global/anchor_site_comparison.py            # → NjerSelfExclCorpus, NgerizimSweepCorpus
         analysis/unesco/spatial_independence_test.py         # → pNeffQuarter, pNeffHalf
         analysis/unesco/regional_temporal_gradient.py        # → pCMH
         analysis/unesco/tumulus_dome_evolution_raw_sweep.py  # → pEvoAp (Test 2b)

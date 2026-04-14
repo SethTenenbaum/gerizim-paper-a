@@ -267,16 +267,22 @@ print(f"  \\newcommand{{\\JerusalemSweepAp}}{{{jer_ap}}}            % Jerusalem 
 print(f"  \\newcommand{{\\JerusalemSweepA}}{{{jer_a}}}           % Jerusalem A in sweep")
 print(f"  \\newcommand{{\\JerusalemSweepPctile}}{{{pctile_jer:.1f}}}        % Jerusalem percentile in A+ anchor sweep")
 print(f"  \\newcommand{{\\anchorSweepJerApPct}}{{{pct_above_jer:.2f}}}          % % of anchors beating Jerusalem A+")
+top_pct = round(100.0 - min(pctile_ger, pctile_jer), 1)
+print(f"  \\newcommand{{\\anchorSweepTopPct}}{{{top_pct}}}          % top-N% globally (corridor, both anchors)")
+sweep_diff = abs(jer_ap - ger_ap)
+print(f"  \\newcommand{{\\sweepABDiff}}{{{sweep_diff}}}          % A+ count difference between Sweep A and Sweep B")
 
 # ── Write to results store ────────────────────────────────────────────────────
 ResultsStore().write_many({
-    "anchorSweepPctile":    pctile_ger,    # Gerizim percentile in A+ anchor sweep
-    "anchorSweepGeApPct":   pct_above_ger, # % anchors beating Gerizim
-    "anchorSweepGlobalMaxA": int(global_max_A),  # max A+ at any anchor, Sweep A (Jerusalem removed)
-    "anchorSweepGlobalMaxB": int(global_max_B),  # max A+ at any anchor, Sweep B (Jerusalem kept)
-    "anchorSweepNsweep":     int(N_A),            # N for Sweep A corpus
-    "pX18BinomA":            float(p_x18_A),      # binomial p for global max, Sweep A
-    "pX18BinomB":            float(p_x18_B),      # binomial p for global max, Sweep B
+    "anchorSweepPctile":    pctile_ger,
+    "anchorSweepGeApPct":   pct_above_ger,
+    "anchorSweepGlobalMaxA": int(global_max_A),
+    "anchorSweepGlobalMaxB": int(global_max_B),
+    "anchorSweepNsweep":     int(N_A),
+    "pX18BinomA":            float(p_x18_A),
+    "pX18BinomB":            float(p_x18_B),
     "anchorSweepApMeanRaw":  float(np.mean(ap_A)),
     "anchorSweepApStdRaw":   float(np.std(ap_A)),
+    "anchorSweepTopPct":     top_pct,
+    "sweepABDiff":           sweep_diff,
 })

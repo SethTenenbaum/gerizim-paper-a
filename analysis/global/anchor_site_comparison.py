@@ -324,7 +324,13 @@ def main():
     print("\n" + "=" * 72)
     print("  GROUP 24 — Jerusalem and Mecca anchor A+ counts")
     print("=" * 72)
+    # Jerusalem A+ p-value (self-excluded corpus, N = full corpus - 1)
+    from scipy.stats import binomtest as _binom2
+    jer_p = _binom2(jer_ap_count, len(sites) - 1, 0.04, alternative="greater").pvalue
     print(f"  \\newcommand{{\\JerusalemAp}}{{{jer_ap_count}}}  % Jerusalem A+ count (self-excluded corpus)")
+    print(f"  \\newcommand{{\\NjerSelfExclCorpus}}{{{len(sites) - 1}}}  % corpus size, Jerusalem self-excluded (Sweep B)")
+    print(f"  \\newcommand{{\\NgerizimSweepCorpus}}{{{len(sites) - 1}}}  % corpus size, Gerizim sweep (Jerusalem removed, Sweep A)")
+    print(f"  \\newcommand{{\\pJerusalemAp}}{{{jer_p:.4f}}}  % p-value, Jerusalem A+ binomial (self-excluded)")
     print(f"  \\newcommand{{\\MeccaAp}}{{{mecca_ap}}}  % Mecca A+ count (full corpus)")
     print(f"  \\newcommand{{\\pMeccaAnchor}}{{{mecca_p:.3f}}}  % p-value, Mecca binomial (A+, one-sided)")
     print(f"  \\newcommand{{\\MeruAp}}{{{meru_ap}}}  % Mt. Meru (Tanzania, 36.750E) A+ count")
@@ -334,12 +340,16 @@ def main():
 
     ResultsStore = __import__("lib.results_store", fromlist=["ResultsStore"]).ResultsStore
     ResultsStore().write_many({
-        "MeccaAp":       mecca_ap,
-        "pMeccaAnchor":  mecca_p,
-        "MeruAp":        meru_ap,
-        "pMeruAnchor":   meru_p,
-        "KailashAp":     kailash_ap,
-        "pKailashAnchor": kailash_p,
+        "JerusalemAp":          jer_ap_count,
+        "NjerSelfExclCorpus":   len(sites) - 1,
+        "NgerizimSweepCorpus":  len(sites) - 1,
+        "pJerusalemAp":         jer_p,
+        "MeccaAp":              mecca_ap,
+        "pMeccaAnchor":         mecca_p,
+        "MeruAp":               meru_ap,
+        "pMeruAnchor":          meru_p,
+        "KailashAp":            kailash_ap,
+        "pKailashAnchor":       kailash_p,
     })
 
     print("\n" + "=" * 72)
