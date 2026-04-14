@@ -1,8 +1,26 @@
 # Longitude Quantization in the UNESCO World Heritage Corpus: Domes, Stupas, and the Babylonian Beru
 
-**Paper A — Primary UNESCO Analysis** · `v1.0.9`
+**Paper A — Primary UNESCO Analysis** · `v1.1.0`
 
-Seth Tenenbaum · Independent Scholar  
+Seth Tenenbaum · Independent Sch## Changelog
+
+### v1.1.0 — 2026-04-14
+- **Manuscript directory restructured:** `manuscript/` now contains two
+  subdirectories — `primary/` (primary UNESCO analysis) and `archaeometry/`
+  (Wiley *Archaeometry* submission). Each subdirectory contains only its own
+  `.tex`, `.pdf`, and template-specific files.
+- **Shared resources centralised:** `generated_macros.tex`, `figures/`,
+  `generate_figures.py`, and `reproduce_all_macros.sh` remain in
+  `manuscript/` root and are referenced via `../` from each subdirectory.
+- **Archaeometry template files co-located:** `USG.cls`, all `*.sty` files,
+  `Wiley_logo.*`, `allergy.*`, and `images/` moved into `manuscript/archaeometry/`
+  so the Wiley build is fully self-contained in that directory.
+- **All version references updated:** `README.md`, `CITATION.cff`,
+  `paper_a_primary_unesco.tex`, `paper_a_archaeometry.tex` bumped to v1.1.0.
+- **`reproduce_all_macros.sh` compile instructions updated** to reflect the
+  new `primary/` and `archaeometry/` subdirectory paths.
+
+### v1.0.9 — 2026-04-13r  
 ORCID: [0009-0008-5797-2498](https://orcid.org/0009-0008-5797-2498)
 
 ---
@@ -28,11 +46,27 @@ checks.
 ```
 gerizim-paper-a/
 ├── manuscript/
-│   ├── paper_a_primary_unesco.tex    # LaTeX source (main manuscript)
-│   ├── paper_a_primary_unesco.pdf    # Compiled PDF
+│   ├── primary/                              # Primary UNESCO manuscript
+│   │   ├── paper_a_primary_unesco.tex        # LaTeX source
+│   │   └── paper_a_primary_unesco.pdf        # Compiled PDF
+│   │
+│   ├── archaeometry/                         # Archaeometry submission manuscript
+│   │   ├── paper_a_archaeometry.tex          # LaTeX source (Wiley/USG template)
+│   │   ├── paper_a_archaeometry.pdf          # Compiled PDF
+│   │   ├── USG.cls                           # Wiley Archaeometry document class
+│   │   ├── NJDapacite.sty                    # Wiley citation style
+│   │   ├── NJDnatbib.sty                     # Wiley natbib style
+│   │   ├── algorithm.sty                     # Algorithm package
+│   │   ├── algorithmicx.sty                  # Algorithmicx package
+│   │   ├── amssymb.sty                       # AMS symbols
+│   │   ├── appendix.sty                      # Appendix package
+│   │   ├── lettersp.sty                      # Letter spacing package
+│   │   ├── Wiley_logo.eps                    # Wiley logo (template asset)
+│   │   ├── allergy.eps                       # Template asset
+│   │   └── images/                           # Template icon assets (ORCID, logos, etc.)
+│   │
 │   ├── generated_macros.tex          # All pipeline-emitted LaTeX macros (single source of truth)
-│   ├── reproduce_all_macros.sh       # Shell script to regenerate all macros
-│   ├── MACRO_SOURCE_AUDIT.tex        # Audit trail: macro → emitting script
+│   ├── reproduce_all_macros.sh       # Shell script to regenerate all macros + figures
 │   ├── generate_figures.py           # Generates all 3 manuscript figures
 │   └── figures/
 │       ├── fig_devhist.{pdf,png}     # Figure 1: Beru deviation histogram
@@ -167,6 +201,21 @@ gerizim-paper-a/
 ```
 
 ## Changelog
+
+### v1.1.0 — 2026-04-14
+- **Manuscript directory restructured:** `manuscript/` now contains two
+  subdirectories — `manuscript/primary/` (primary UNESCO analysis,
+  `paper_a_primary_unesco.tex`) and `manuscript/archaeometry/`
+  (Archaeometry submission, `paper_a_archaeometry.tex`).
+- **Archaeometry template files relocated:** `USG.cls`, all `.sty` files,
+  `Wiley_logo.*`, `allergy.*`, and `images/` moved into
+  `manuscript/archaeometry/` where they belong.
+- **Shared resources** (`figures/`, `generated_macros.tex`,
+  `generate_figures.py`, `reproduce_all_macros.sh`) remain at
+  `manuscript/` root; `.tex` files reference them via `../`.
+- **All version references updated:** `CITATION.cff`, `README.md`,
+  both `.tex` files bumped to `v1.1.0`.
+- **Merged `archaeometry` branch into `master`** and tagged `v1.1.0`.
 
 ### v1.0.9 — 2026-04-13
 - **Keyword filter restored:** `mound_positive_context` in `keywords.json`
@@ -313,8 +362,11 @@ python3 analysis/global/dome_periodicity_audit.py
 # Regenerate manuscript figures
 python3 manuscript/generate_figures.py
 
-# Compile LaTeX → PDF (requires pdflatex)
-cd manuscript && pdflatex paper_a_primary_unesco.tex
+# Compile LaTeX → PDF — primary manuscript
+cd manuscript/primary && pdflatex paper_a_primary_unesco.tex
+
+# Compile LaTeX → PDF — archaeometry submission
+cd manuscript/archaeometry && pdflatex paper_a_archaeometry.tex
 ```
 
 ### Key outputs
@@ -327,10 +379,10 @@ running the pipeline build script:
 bash manuscript/reproduce_all_macros.sh --macros-only
 ```
 
-The manuscript `paper_a_primary_unesco.tex` imports `generated_macros.tex`
+Both manuscripts (`primary/` and `archaeometry/`) import `../generated_macros.tex`
 so that **every number in the PDF is pipeline-driven** — no values are
-hand-curated. As of v1.0.3 the manuscript contains 439 macros, all emitted
-by analysis scripts, with zero value mismatches between the manuscript and
+hand-curated. As of v1.1.0 the manuscripts contain 439 macros, all emitted
+by analysis scripts, with zero value mismatches between the manuscripts and
 the pipeline.
 
 > **Pipeline status:** 493 macros emitted · 439 used in manuscript · 0 mismatches
@@ -347,14 +399,23 @@ The UNESCO XML is included in `data/store/unesco/unesco.xml`. To refresh
 the extended descriptions cache, run `python3 data/scripts/fetch_extended.py`
 (requires internet; may take ~20 min due to rate limiting).
 
-## Manuscript
+## Manuscripts
 
-- **LaTeX source:** `manuscript/paper_a_primary_unesco.tex`
-- **Compiled PDF:** `manuscript/paper_a_primary_unesco.pdf`
-- **Figures:** `manuscript/figures/`
+### Primary UNESCO analysis
+- **LaTeX source:** `manuscript/primary/paper_a_primary_unesco.tex`
+- **Compiled PDF:** `manuscript/primary/paper_a_primary_unesco.pdf`
 
-The manuscript is self-contained: all statistical results are embedded as
-LaTeX macros in the document preamble (lines ~75–600), each annotated with
+### Archaeometry submission
+- **LaTeX source:** `manuscript/archaeometry/paper_a_archaeometry.tex`
+- **Compiled PDF:** `manuscript/archaeometry/paper_a_archaeometry.pdf`
+- Template files (`USG.cls`, `*.sty`, `images/`) live alongside the `.tex` in `manuscript/archaeometry/`.
+
+### Shared resources
+- **Macros:** `manuscript/generated_macros.tex` — single source of truth; both manuscripts `\input` this file via `../generated_macros.tex`
+- **Figures:** `manuscript/figures/` — referenced as `../figures/` from each subdirectory
+
+Both manuscripts are self-contained: all statistical results are embedded as
+LaTeX macros imported from `generated_macros.tex`, each annotated with
 the script that produced it. This ensures the PDF can be compiled without
 running any code.
 

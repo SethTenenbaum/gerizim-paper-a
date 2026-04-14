@@ -1,4 +1,4 @@
-% Generated macros — 2026-04-14T05:02:33Z
+% Generated macros — 2026-04-14T15:44:56Z
 % Source: bash manuscript/reproduce_all_macros.sh --macros-only
 % IMPORTANT: values are computed fresh each run — do NOT hardcode
 
@@ -51,7 +51,6 @@
 % --- analysis/unesco/spherical_monument_test.py
   \newcommand{\pCircApValidated}{0.0005}  % p-value, A+ binomial (context-validated dome corpus)
   \newcommand{\pCircAValidated}{0.0098}   % p-value, A binomial (context-validated dome corpus)
-  \newcommand{\circEnrichApValidated}{3.31}  % A+ enrichment ratio (context-validated; 11/83 / 0.04)
 
 % --- analysis/unesco/cluster_asymmetry_test.py
   \newcommand{\NclusterTotal}{1011}          % full Cultural/Mixed corpus
@@ -172,11 +171,6 @@
   \newcommand{\christApRate}{6.8}            % Christian sites A+ rate (%)
   \newcommand{\pChrist}{0.0312}         % p-value, Christian sites A+ binomial
   \newcommand{\christEnrich}{1.71}           % enrichment ratio, Christian sites
-  % Buddhism (religion-keyword match from origin_sites_test.py)
-  \newcommand{\NbudSitesRelig}{46}           % Buddhist sacred sites N (religion-match)
-  \newcommand{\NbudApRelig}{4}              % Buddhist sites A+ count (religion-match)
-  \newcommand{\budApRateRelig}{8.7}          % Buddhist sites A+ rate % (religion-match)
-  \newcommand{\pBudRelig}{0.1113}            % p-value, Buddhist sites A+ binomial (religion-match)
 
 % --- analysis/unesco/founding_sites_analysis.py
   \newcommand{\NthematicTotal}{56}                 % total A+ sites
@@ -210,7 +204,7 @@
 % --- analysis/unesco/temporal_gradient_test.py
   \newcommand{\ZcochranThree}{-1.664}       % Cochran-Armitage Z, 3-bin
   \newcommand{\pCochranThree}{0.0481}      % p-value, Cochran-Armitage 3-bin
-  \newcommand{\ZcochranFive}{-1.656}         % Cochran-Armitage Z, 5-bin
+  \newcommand{\ZcochranFive}{-1.655}         % Cochran-Armitage Z, 5-bin
   \newcommand{\pCochranFive}{0.0489}      % p-value, Cochran-Armitage 5-bin
   \newcommand{\rhoSpearman}{-0.0462}        % Spearman rho, A+ rate vs era
   \newcommand{\pSpearman}{0.141866}        % p-value, Spearman rank correlation
@@ -704,17 +698,19 @@
   \newcommand{\geoNullDomeBootP}{0.5490}   % within-dome bootstrap p
   \newcommand{\geoNullDomeBootZ}{-0.00}    % within-dome bootstrap Z
   \newcommand{\geoNullDomeBootMean}{11.01}   % within-dome bootstrap mean A+
-  \newcommand{\geoNullDomeRestrictedP}{0.0080}   % restricted-pool p (±5°)
-  \newcommand{\geoNullDomeRestrictedZ}{2.91}    % restricted-pool Z (±5°)
-  \newcommand{\geoNullDomeRestrictedMean}{4.80}   % restricted-pool mean A+ (±5°)
-  \newcommand{\geoNullDomeRestrictedN}{881}   % restricted pool size (±5°)
-  % Sensitivity sweep — word-spelled names (LaTeX macro names cannot end in digits)
-  \newcommand{\geoNullDomeRestrictedNtwo}{761}      % Null C ±2° pool size
-  \newcommand{\geoNullDomeRestrictedPtwo}{0.0113}   % Null C ±2° p-value
-  \newcommand{\geoNullDomeRestrictedMeantwo}{5.01}  % Null C ±2° mean A+
-  \newcommand{\geoNullDomeRestrictedNten}{967}      % Null C ±10° pool size
-  \newcommand{\geoNullDomeRestrictedPten}{0.0077}   % Null C ±10° p-value
-  \newcommand{\geoNullDomeRestrictedMeantenx}{4.73} % Null C ±10° mean A+
+  \newcommand{\geoNullDomeRestrictedP}{0.0080}   % restricted-pool p
+  \newcommand{\geoNullDomeRestrictedZ}{2.91}    % restricted-pool Z
+  \newcommand{\geoNullDomeRestrictedMean}{4.80}   % restricted-pool mean A+
+  \newcommand{\geoNullDomeRestrictedN}{881}   % restricted pool size
+  \newcommand{\geoNullDomeRestrictedN2}{761}   % Null C ±2° pool size
+  \newcommand{\geoNullDomeRestrictedP2}{0.0113}   % Null C ±2° p-value
+  \newcommand{\geoNullDomeRestrictedMean2}{5.01}   % Null C ±2° mean A+
+  \newcommand{\geoNullDomeRestrictedN5}{881}   % Null C ±5° pool size
+  \newcommand{\geoNullDomeRestrictedP5}{0.0083}   % Null C ±5° p-value
+  \newcommand{\geoNullDomeRestrictedMean5}{4.81}   % Null C ±5° mean A+
+  \newcommand{\geoNullDomeRestrictedN10}{967}   % Null C ±10° pool size
+  \newcommand{\geoNullDomeRestrictedP10}{0.0077}   % Null C ±10° p-value
+  \newcommand{\geoNullDomeRestrictedMean10}{4.73}   % Null C ±10° mean A+
   \newcommand{\domeEurasianFraction}{77}   % % dome sites in 20-120E
   \newcommand{\fullCorpusEurasianFraction}{41}   % % full corpus in 20-120E
 
