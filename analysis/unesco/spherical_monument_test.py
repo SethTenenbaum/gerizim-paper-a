@@ -425,6 +425,8 @@ print()
 print(f"  \\newcommand{{\\pCircApValidated}}{{{bt_Ap.pvalue:.4f}}}  % p-value, A+ binomial (context-validated dome corpus)")
 print(f"  \\newcommand{{\\pCircAValidated}}{{{bt_A.pvalue:.4f}}}   % p-value, A binomial (context-validated dome corpus)")
 print(f"  \\newcommand{{\\circEnrichApValidated}}{{{enr_Ap:.2f}}}  % enrichment ratio, A+ (context-validated dome corpus)")
+print(f"  \\newcommand{{\\NdomeGateNeg}}{{{len(NEGATIVE_CONTEXT)}}}  % number of negative-context gate patterns (Gate 1)")
+print(f"  \\newcommand{{\\NdomeGatePos}}{{{len(POSITIVE_CONTEXT)}}}  % number of positive-context gate patterns (Gate 2)")
 print()
 
 # ── Write to results store ────────────────────────────────────────────────────

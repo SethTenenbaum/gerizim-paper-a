@@ -304,6 +304,7 @@ def main():
     print(f"  \\newcommand{{\\geoNullDomeRestrictedZ}}{{{z_c:.2f}}}    % restricted-pool Z")
     print(f"  \\newcommand{{\\geoNullDomeRestrictedMean}}{{{mean_c:.2f}}}   % restricted-pool mean A+")
     print(f"  \\newcommand{{\\geoNullDomeRestrictedN}}{{{N_pool}}}   % restricted pool size")
+    print(f"  \\newcommand{{\\geoNullDomeRestrictedRate}}{{{pool_aplus_rate:.1f}}}   % A+ base rate in restricted pool (%)")
     # Sensitivity sweep macros — letter-based suffixes to avoid LaTeX digit-in-csname issue
     _tag_map = {2.0: "two", 5.0: "five", 10.0: "ten"}
     for w, r in sensitivity.items():

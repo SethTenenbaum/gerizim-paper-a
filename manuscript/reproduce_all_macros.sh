@@ -25,7 +25,7 @@
 #   - Python 3.10+ with numpy, scipy, pandas
 #   - pip install -r requirements.txt
 #   - UNESCO XML:  data/store/unesco/unesco.xml
-#   - P1435 CSV:   data/store/wikidata/p1435_global_control.csv
+#   - UNESCO XML: data/store/unesco/unesco.xml
 #
 # ══════════════════════════════════════════════════════════════════════════════
 
@@ -96,12 +96,10 @@ if [ "${1:-}" = "--macros-only" ]; then
         analysis/unesco/mound_keyword_context_audit.py        # → NmoundRaw/Accepted/Rejected, moundFPRate, moundKwFPRate, pmoundAccAp, moundEnrichAcc
         analysis/unesco/leave_one_out_sensitivity.py         # → LOOdomeN/Ap/Rate/Enrich/P, LOOstupaN/Ap/Rate/P
         analysis/unesco/dome_leave_k_out.py                  # → LKOsiteOne/Two/ThreeName/DevKm, LKOtwo*/three*/worstTwo/ThreeP
-        analysis/global/wikidata_p1435_control_analysis.py
         analysis/global/dome_periodicity_audit.py
         analysis/global/x18_periodicity_formal_test.py       # → rayleighR/Z/PermP, fullRayleighR/Z/PermP, maxApCount/Z/PermP (GROUP 11b)
         analysis/global/x18_max_permutation_test.py          # → anchorMaxPermObsMax/NullMu/NullSD/Z/P/Nperms/BootMu/BootSD/BootZ/BootP (GROUP 11c)
         analysis/global/x18_optimal_band_significance.py     # → x18OptApCount/B/N/BinomP/B/Enrich/B  (GROUP 11d)
-        analysis/americas/americas_harmonic_depletion_audit.py
         # ── Reviewer robustness checks ────────────────────────────────────
         analysis/unesco/dome_footprint_window_sensitivity.py   # → geoNullDomeTwoDeg*, geoNullDomeTenDeg*
         analysis/unesco/stupa_coordinate_perturbation.py       # → stupaCoordPerturb*
@@ -199,15 +197,6 @@ if [ ! -f "data/store/unesco/unesco.xml" ]; then
     exit 1
 fi
 echo "  ✓ UNESCO XML found"
-
-P1435_CSV="data/store/wikidata/p1435_global_control.csv"
-HAS_P1435=true
-if [ ! -f "$P1435_CSV" ]; then
-    echo "  WARNING: $P1435_CSV not found."
-    echo "  Wikidata P1435 and Americas scripts will be skipped."
-    echo "  Run: python3 data/scripts/fetch_p1435_global.py"
-    HAS_P1435=false
-fi
 echo ""
 
 # ── Helper: run a script, print output ───────────────────────────────────────
@@ -310,14 +299,6 @@ run_script "GROUP 20d: Leave-One-Out Sensitivity (Tests 2 & 2b)" \
 run_script "GROUP 20d: Leave-2-out / Leave-3-out Stability (dome corpus)" \
            analysis/unesco/dome_leave_k_out.py
 
-echo "─── GROUP 23: Wikidata P1435 Control Analysis ───"
-if [ "$HAS_P1435" = true ]; then
-    python3 analysis/global/wikidata_p1435_control_analysis.py 2>&1 | tail -40
-else
-    echo "  SKIPPED — P1435 CSV not found"
-fi
-echo ""
-
 run_script "GROUP 24: Dome Periodicity Audit"                      \
            analysis/global/dome_periodicity_audit.py
 
@@ -334,14 +315,6 @@ run_script "GROUP 24d: x.18° Optimal Band Binomial Significance (reads store)" 
 
 echo "─── GROUP 25: Simulation Null Model (may take several minutes) ───"
 python3 analysis/unesco/simulation_null_model.py 2>&1 | tail -40
-echo ""
-
-echo "─── GROUP 26: Americas Harmonic Depletion ───"
-if [ "$HAS_P1435" = true ]; then
-    python3 analysis/americas/americas_harmonic_depletion_audit.py 2>&1 | tail -30
-else
-    echo "  SKIPPED — P1435 CSV not found"
-fi
 echo ""
 
 run_script "GROUP 26b: Dome footprint window sensitivity (±2°/±10°)"  \

@@ -163,6 +163,7 @@ macro_pairs = [
     ("anchorShiftNullMu",  f"{perm_shift_ap.mean():.2f}"),
     ("anchorShiftZ",       f"{z_shift_ap:.2f}"),
     ("anchorShiftPermP",   f"{p_shift_ap:.4f}"),
+    ("NpermRayleigh",      f"{N_PERMS:,}"),
 ]
 for name, val in macro_pairs:
     print(f"\\newcommand{{\\{name}}}{{{val}}}")
@@ -207,5 +208,6 @@ ResultsStore().write_many({
     "anchorShiftPermP":     float(p_shift_ap),
     "Nap":                  int(N_ap),
     "rayleighRPctPhrasing": _phrasing,
+    "NpermRayleigh":        int(N_PERMS),
 })
 print("Results written to data/store/results.json")

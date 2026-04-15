@@ -35,7 +35,6 @@ This script tests:
 If H₁ holds, the clustering is PHASE-LOCKED: it follows the 0.1-beru
 node/anti-node distinction, not just settlement geography.  This is a
 second independent measure of grid structure, complementing the external
-P1435 control comparison (Test 7).
 
 METHODOLOGY
 ───────────
@@ -536,6 +535,9 @@ print("  % LaTeX macros (GROUP 2):")
 print(f"  \\newcommand{{\\NclusterTotal}}{{{N}}}          % full Cultural/Mixed corpus")
 print(f"  \\newcommand{{\\NclusterAp}}{{{n_Ap}}}              % Tier-A+ sites")
 print(f"  \\newcommand{{\\clusterApRate}}{{{100*n_Ap/N:.1f}}}           % A+ rate (%)")
+print(f"  \\newcommand{{\\clusterEnrichAp}}{{{(n_Ap/N)/0.04:.2f}}}          % enrichment ratio, A+ vs 4% null")
+print(f"  \\newcommand{{\\NclusterExpAp}}{{{N*0.04:.1f}}}           % expected A+ count under 4% null")
+print(f"  \\newcommand{{\\NclusterExcessAp}}{{{round(n_Ap - N*0.04)}}}          % excess A+ above chance (observed - expected)")
 print(f"  \\newcommand{{\\clusterApBinom}}{{{bt_Ap.pvalue:.4f}}}        % binomial p, A+")
 print(f"  \\newcommand{{\\clusterApMean}}{{{mean_ap:.2f}}}          % mean cluster size, A+ sites")
 print(f"  \\newcommand{{\\clusterNonApMean}}{{{mean_nonap:.2f}}}          % mean cluster size, non-A+ sites")
@@ -543,6 +545,7 @@ print(f"  \\newcommand{{\\clusterRatio}}{{{mean_ap / max(mean_nonap, 0.01):.2f}}
 print(f"  \\newcommand{{\\clusterMWp}}{{{mw_p:.4f}}}        % Mann-Whitney p (site-level)")
 print(f"  \\newcommand{{\\clusterPermP}}{{{perm_p:.4f}}}        % permutation p (site-level)")
 print(f"  \\newcommand{{\\clusterPermZ}}{{{perm_z:.2f}}}          % permutation Z-score")
+print(f"  \\newcommand{{\\NpermCluster}}{{{N_PERM_CLUSTER:,}}}         % permutation draws, cluster asymmetry test")
 print(f"  \\newcommand{{\\NclusterApHarmonics}}{{{n_ap_harmonics}}}              % harmonics with ≥1 A+ site")
 print(f"  \\newcommand{{\\NclusterNonApHarmonics}}{{{n_nonap_harmonics}}}              % harmonics with 0 A+ sites")
 print(f"  \\newcommand{{\\clusterHarmonicApMean}}{{{mean_ap_h:.1f}}}          % mean UNESCO sites/harmonic (A+ harmonics)")
@@ -570,6 +573,7 @@ ResultsStore().write_many({
     "clusterMWp":         mw_p,              # Mann-Whitney p (site-level)
     "clusterHarmonicMWp": mw2_p,             # Mann-Whitney p (harmonic-level)
     "clusterPermZ":       round(perm_z, 4),  # permutation Z-score
+    "NpermCluster":       int(N_PERM_CLUSTER),  # permutation draws, cluster asymmetry test
 })
 
 

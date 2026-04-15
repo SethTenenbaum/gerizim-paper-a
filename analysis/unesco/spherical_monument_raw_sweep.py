@@ -4,7 +4,7 @@ spherical_monument_raw_sweep.py
 Raw positive keyword sweep for hemispherical monument forms.
 
 Unlike spherical_monument_test.py (Test 2), this script performs NO
-context validation and NO disambiguation.  Any site whose full text
+context validation and NO disambiguation.  Any site who
 (name + short_description + extended OUV text) contains one or more
 of the FORM_KEYWORDS is included, regardless of whether the keyword
 refers to built monumental architecture or to geology, vernacular
@@ -254,6 +254,12 @@ print(f"  \\newcommand{{\\circApCIlo}}{{{_cp_ap_lo}}}         % Clopper-Pearson 
 print(f"  \\newcommand{{\\circApCIhi}}{{{_cp_ap_hi}}}         % Clopper-Pearson 95% CI upper, A+ rate (%)")
 print(f"  \\newcommand{{\\circACIlo}}{{{_cp_a_lo}}}          % Clopper-Pearson 95% CI lower, A rate (%)"  )
 print(f"  \\newcommand{{\\circACIhi}}{{{_cp_a_hi}}}          % Clopper-Pearson 95% CI upper, A rate (%)"  )
+# Enrichment ratio CIs (rate CI divided by null rate)
+_enr_ci_lo = round(_cp_ap_lo / (P_NULL_AP * 100), 2) if nAp > 0 else 0.0
+_enr_ci_hi = round(_cp_ap_hi / (P_NULL_AP * 100), 2)
+print(f"  \\newcommand{{\\circEnrichCIlo}}{{{_enr_ci_lo}}}        % Clopper-Pearson 95% CI lower, A+ enrichment ratio")
+print(f"  \\newcommand{{\\circEnrichCIhi}}{{{_enr_ci_hi}}}        % Clopper-Pearson 95% CI upper, A+ enrichment ratio")
+print(f"  \\newcommand{{\\NcircValidatedApRate}}{{{100*nAp/N_validated:.1f}}}  % A+ rate (%) = {nAp}/{N_validated}, validated pop")
 
 # ── Write to results store ────────────────────────────────────────────────────
 ResultsStore().write_many({
@@ -264,4 +270,6 @@ ResultsStore().write_many({
     "NcircTierAp": nAp,          # Tier-A+ hits
     "NcircApRate": round(100 * nAp / N_raw, 1),  # A+ rate (%)
     "circEnrichAp": enr_Ap,      # enrichment ratio, A+
+    "circEnrichCIlo": _enr_ci_lo,  # Clopper-Pearson 95% CI lower, enrichment ratio
+    "circEnrichCIhi": _enr_ci_hi,  # Clopper-Pearson 95% CI upper, enrichment ratio
 })

@@ -152,14 +152,49 @@ def main():
     # The 0.08-beru row is cited in the robustness section to show that
     # non-harmonic adjacent spacings do not produce joint significance.
     print()
-    print("  % LaTeX macros (unit_sweep_fill.py — adjacent spacing references):")
+    print("  % LaTeX macros (unit_sweep_fill.py):")
+
+    # Map spacing -> CamelCase tag used in macro names
+    COARSE_TAG = {
+        0.05: "ZeroFive",   0.06: "ZeroSix",   0.07: "ZeroSeven",
+        0.08: "ZeroEight",  0.09: "ZeroNine",  0.10: "ZeroTen",
+        0.11: "ZeroEleven", 0.12: "ZeroTwelve",0.15: "ZeroFifteen",
+        0.20: "ZeroTwenty",
+    }
+    FINE_TAG = {
+        0.0990: "NineNineZero",  0.0993: "NineNineThree",
+        0.0995: "NineNineFive",  0.1001: "OneZeroZeroOne",
+        0.1003: "OneZeroZeroThree", 0.1010: "OneZeroOneZero",
+    }
+
+    def _fmt(p):
+        return f"{p:.4f}" if p >= 0.0001 else "<0.0001"
+
     for sp, nr, d_hits, d_p, f_hits, f_p in coarse_rows:
-        if abs(sp - 0.08) < 1e-9:
-            def _fmt(p):
-                return f"{p:.4f}" if p >= 0.001 else f"{p:.1e}"
-            print(f"  \\newcommand{{\\sweepEightDomeP}}{{{_fmt(d_p)}}}   % p(Dome), 0.08-beru spacing")
-            print(f"  \\newcommand{{\\sweepEightFullP}}{{{_fmt(f_p)}}}   % p(Full), 0.08-beru spacing")
-            break
+        tag = COARSE_TAG.get(round(sp, 4), "")
+        if not tag or sp == 0.10:   # canonical row uses named macros elsewhere
+            if abs(sp - 0.08) < 1e-9:   # keep backward-compat names
+                print(f"  \\newcommand{{\\sweepEightDomeP}}{{{_fmt(d_p)}}}   % p(Dome), 0.08-beru spacing")
+                print(f"  \\newcommand{{\\sweepEightFullP}}{{{_fmt(f_p)}}}   % p(Full), 0.08-beru spacing")
+            continue
+        print(f"  \\newcommand{{\\sweep{tag}Null}}{{{nr*100:.1f}\\%}}   % null rate, {sp:.2f}-beru")
+        print(f"  \\newcommand{{\\sweep{tag}DomeHits}}{{{d_hits}}}   % dome hits, {sp:.2f}-beru")
+        print(f"  \\newcommand{{\\sweep{tag}DomeP}}{{{_fmt(d_p)}}}   % p(Dome), {sp:.2f}-beru")
+        print(f"  \\newcommand{{\\sweep{tag}FullHits}}{{{f_hits}}}   % full hits, {sp:.2f}-beru")
+        print(f"  \\newcommand{{\\sweep{tag}FullP}}{{{_fmt(f_p)}}}   % p(Full), {sp:.2f}-beru")
+
+    print(f"  \\newcommand{{\\sweepEightDomeP}}{{{_fmt(next(d_p for sp,nr,d_hits,d_p,f_hits,f_p in coarse_rows if abs(sp-0.08)<1e-9))}}}   % p(Dome), 0.08-beru")
+    print(f"  \\newcommand{{\\sweepEightFullP}}{{{_fmt(next(f_p for sp,nr,d_hits,d_p,f_hits,f_p in coarse_rows if abs(sp-0.08)<1e-9))}}}   % p(Full), 0.08-beru")
+
+    for sp, nr, d_hits, d_p, f_hits, f_p in fine_rows:
+        tag = FINE_TAG.get(round(sp, 4), "")
+        if not tag:
+            continue
+        print(f"  \\newcommand{{\\fine{tag}Null}}{{{nr*100:.2f}\\%}}   % null rate, {sp:.4f}-beru")
+        print(f"  \\newcommand{{\\fine{tag}DomeHits}}{{{d_hits}}}   % dome hits, {sp:.4f}-beru")
+        print(f"  \\newcommand{{\\fine{tag}DomeP}}{{{_fmt(d_p)}}}   % p(Dome), {sp:.4f}-beru")
+        print(f"  \\newcommand{{\\fine{tag}FullHits}}{{{f_hits}}}   % full hits, {sp:.4f}-beru")
+        print(f"  \\newcommand{{\\fine{tag}FullP}}{{{_fmt(f_p)}}}   % p(Full), {sp:.4f}-beru")
 
 if __name__ == "__main__":
     main()

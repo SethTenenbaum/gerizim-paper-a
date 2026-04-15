@@ -1,10 +1,18 @@
 {
-  "_note": "Single source of truth for ALL keyword lists and context-validation patterns used in the Gerizim analysis pipeline. Loaded by lib/dome_filter.py and lib/founding_filter.py — no keyword strings or regex patterns are hardcoded in those files. To add/remove/change a keyword or pattern, edit this file only.",
-
+  "_note": "Single source of truth for ALL keyword lists and context-validation patterns used in the Gerizim analysis pipeline. Loaded by lib/dome_filter.py and lib/founding_filter.py \u2014 no keyword strings or regex patterns are hardcoded in those files. To add/remove/change a keyword or pattern, edit this file only.",
   "dome_forms": {
     "_note": "Morphological keywords for domed/spherical monumental architecture. Unambiguous = always include; ambiguous = require a sentence-level architectural context check.",
-    "unambiguous": ["stupa", "stupas", "tholos"],
-    "ambiguous":   ["dome", "domed", "domes", "spherical"],
+    "unambiguous": [
+      "stupa",
+      "stupas",
+      "tholos"
+    ],
+    "ambiguous": [
+      "dome",
+      "domed",
+      "domes",
+      "spherical"
+    ],
     "negative_context": [
       "\\bkarst\\b",
       "\\brock island",
@@ -124,19 +132,27 @@
       "\\bmuqarnas\\b"
     ]
   },
-
   "founding_capital": {
     "_note": "F-category: first/original seat of a kingdom, empire, or state.",
     "unambiguous": [
-      "first capital", "imperial capital", "royal capital",
-      "ceremonial capital", "ancient capital", "colonial capital",
-      "seat of power", "seat of government",
-      "earliest settlement", "first settlement"
+      "first capital",
+      "imperial capital",
+      "royal capital",
+      "ceremonial capital",
+      "ancient capital",
+      "colonial capital",
+      "seat of power",
+      "seat of government",
+      "earliest settlement",
+      "first settlement"
     ],
     "ambiguous": [
-      "capital of", "seat of the",
-      "administrative centre", "administrative center",
-      "trading capital", "political capital",
+      "capital of",
+      "seat of the",
+      "administrative centre",
+      "administrative center",
+      "trading capital",
+      "political capital",
       "founding of"
     ],
     "negative_context": [
@@ -185,18 +201,27 @@
       "\\bcapital of\\b"
     ]
   },
-
   "sacred_origin": {
     "_note": "S-category: birthplace or founding sanctuary of a religion or sacred tradition.",
     "unambiguous": [
-      "holy city", "sacred city",
-      "founding of a religion", "founding sanctuary",
-      "mother church", "holiest", "sacred origin", "religious origin"
+      "holy city",
+      "sacred city",
+      "founding of a religion",
+      "founding sanctuary",
+      "mother church",
+      "holiest",
+      "sacred origin",
+      "religious origin"
     ],
     "ambiguous": [
-      "birthplace of", "birth of",
-      "place of pilgrimage", "pilgrimage centre", "pilgrimage center",
-      "pilgrimage site", "origin of", "sacred site"
+      "birthplace of",
+      "birth of",
+      "place of pilgrimage",
+      "pilgrimage centre",
+      "pilgrimage center",
+      "pilgrimage site",
+      "origin of",
+      "sacred site"
     ],
     "negative_context": [
       "\\bspecies\\b",
@@ -248,17 +273,20 @@
       "\\bbasilica\\b"
     ]
   },
-
   "founding_monument": {
     "_note": "M-category: prototype monument that defined or originated an architectural tradition.",
     "unambiguous": [
-      "first of its kind", "earliest example",
-      "oldest example", "earliest surviving",
+      "first of its kind",
+      "earliest example",
+      "oldest example",
+      "earliest surviving",
       "first example"
     ],
     "ambiguous": [
-      "prototype", "model for",
-      "which inspired", "culminating in"
+      "prototype",
+      "model for",
+      "which inspired",
+      "culminating in"
     ],
     "negative_context": [
       "\\bmasterpiece of .{0,20}(human creative genius|creative genius)",
@@ -304,16 +332,21 @@
       "\\brevolution\\w*\\b"
     ]
   },
-
   "founding_axis": {
     "_note": "X-category: primary imperial road, wall, or transcontinental trade corridor.",
     "unambiguous": [
-      "silk road", "great wall",
-      "imperial road", "founding avenue", "monumental axis"
+      "silk road",
+      "great wall",
+      "imperial road",
+      "founding avenue",
+      "monumental axis"
     ],
     "ambiguous": [
-      "trade route", "defensive wall",
-      "great road", "oldest road", "most important road"
+      "trade route",
+      "defensive wall",
+      "great road",
+      "oldest road",
+      "most important road"
     ],
     "regex_unambiguous": [
       "\\boldest.{0,20}road",
@@ -352,16 +385,17 @@
       "\\bconnect\\w+\\b"
     ]
   },
-
   "ancient_landscape": {
     "_note": "L-category: ancient, continuously inhabited or cultivated landscape spanning millennia.",
     "unambiguous": [
-      "oldest continuous", "ancient landscape",
+      "oldest continuous",
+      "ancient landscape",
       "continuous landscape"
     ],
     "ambiguous": [
       "cultural landscape",
-      "age-old", "oldest surviving"
+      "age-old",
+      "oldest surviving"
     ],
     "negative_context": [
       "\\b(18th|19th|20th|21st).century\\b",
@@ -399,53 +433,183 @@
       "\\bsacred .{0,10}landscape\\b"
     ]
   },
-
   "religion_sets": {
     "_note": "Keyword sets for per-religion enrichment tests (origin_sites_test.py, unesco_buddhist_heritage_test.py).",
-    "Buddhism":       ["buddha", "buddhist", "buddhism", "lumbini", "ashoka", "stupa", "bodhi", "nirvana"],
-    "Christianity":   ["christian", "cathedral", "church", "apostle", "biblical", "byzantine", "crusader", "orthodox"],
-    "Islam":          ["islam", "mosque", "muslim", "sufi", "ottoman", "caliphate", "madrasa", "mihrab", "quran"],
-    "Judaism":        ["jewish", "judaism", "synagogue", "hebrew", "israelite"],
-    "Hinduism":       ["hindu", "brahman", "vedic", "shiva", "vishnu", "ganges"],
-    "Zoroastrianism": ["zoroastrian", "sassanid", "sasanian", "fire temple"]
+    "Buddhism": [
+      "buddha",
+      "buddhist",
+      "buddhism",
+      "lumbini",
+      "ashoka",
+      "stupa",
+      "bodhi",
+      "nirvana"
+    ],
+    "Christianity": [
+      "christian",
+      "cathedral",
+      "church",
+      "apostle",
+      "biblical",
+      "byzantine",
+      "crusader",
+      "orthodox"
+    ],
+    "Islam": [
+      "islam",
+      "mosque",
+      "muslim",
+      "sufi",
+      "ottoman",
+      "caliphate",
+      "madrasa",
+      "mihrab",
+      "quran"
+    ],
+    "Judaism": [
+      "jewish",
+      "judaism",
+      "synagogue",
+      "hebrew",
+      "israelite"
+    ],
+    "Hinduism": [
+      "hindu",
+      "brahman",
+      "vedic",
+      "shiva",
+      "vishnu",
+      "ganges"
+    ],
+    "Zoroastrianism": [
+      "zoroastrian",
+      "sassanid",
+      "sasanian",
+      "fire temple"
+    ]
   },
-
   "buddhist_heritage": {
     "_note": "Regex patterns (case-insensitive) for the UNESCO Buddhist Heritage thematic scope test.",
     "patterns": [
-      "\\bbuddhis[tm]", "\\bbuddha\\b", "\\bstupa\\b", "\\bdagoba\\b",
-      "\\bvihara\\b", "\\bpagoda\\b", "\\bchorten\\b", "\\bprang\\b",
-      "\\bborobudur\\b", "\\blumbini\\b", "\\bajanta\\b", "\\bellora\\b",
-      "\\bmogao\\b", "\\byungang\\b", "\\blongmen\\b", "\\bbagan\\b",
-      "\\bpyu\\b", "\\banuradhapura\\b", "\\bkandy\\b", "\\bdambulla\\b",
-      "\\bsanchi\\b", "\\bnalanda\\b", "\\bbodh gaya\\b", "\\bmahabodhi\\b",
-      "\\bhoryu\\b", "\\bhoryuji\\b", "\\bnara\\b", "\\bnikko\\b",
-      "\\bhiraizumi\\b", "\\bsansa\\b", "\\bbulguksa\\b", "\\bseokguram\\b",
-      "\\bgyeongju\\b", "\\bbaekje\\b", "\\bsukhothai\\b", "\\bayutthaya\\b",
-      "\\bsi thep\\b", "\\bluang prabang\\b", "\\bpotala\\b", "\\bchengde\\b",
-      "\\bwutai\\b", "\\bdengfeng\\b", "\\btaxila\\b", "\\btakht-i-bahi\\b",
-      "\\bpaharpur\\b", "\\bsambor prei kuk\\b", "\\bangkor\\b",
-      "\\bprambanan\\b", "\\byogyakarta\\b", "\\bphu phrabat\\b",
-      "\\bbamiyan\\b", "\\bmerv\\b", "\\bkaesong\\b", "\\bkathmandu\\b",
-      "\\bhaeinsa\\b", "\\bnamhansanseong\\b",
-      "\\bkyoto\\b.*\\btemple", "\\bkii mountain\\b", "\\bfujisan\\b",
-      "\\bsilk road", "\\bplain of jars\\b", "\\bcosmological axis\\b",
-      "\\bxanadu\\b", "\\bancient merv\\b", "\\bkhuttal\\b"
+      "\\bbuddhis[tm]",
+      "\\bbuddha\\b",
+      "\\bstupa\\b",
+      "\\bdagoba\\b",
+      "\\bvihara\\b",
+      "\\bpagoda\\b",
+      "\\bchorten\\b",
+      "\\bprang\\b",
+      "\\bborobudur\\b",
+      "\\blumbini\\b",
+      "\\bajanta\\b",
+      "\\bellora\\b",
+      "\\bmogao\\b",
+      "\\byungang\\b",
+      "\\blongmen\\b",
+      "\\bbagan\\b",
+      "\\bpyu\\b",
+      "\\banuradhapura\\b",
+      "\\bkandy\\b",
+      "\\bdambulla\\b",
+      "\\bsanchi\\b",
+      "\\bnalanda\\b",
+      "\\bbodh gaya\\b",
+      "\\bmahabodhi\\b",
+      "\\bhoryu\\b",
+      "\\bhoryuji\\b",
+      "\\bnara\\b",
+      "\\bnikko\\b",
+      "\\bhiraizumi\\b",
+      "\\bsansa\\b",
+      "\\bbulguksa\\b",
+      "\\bseokguram\\b",
+      "\\bgyeongju\\b",
+      "\\bbaekje\\b",
+      "\\bsukhothai\\b",
+      "\\bayutthaya\\b",
+      "\\bsi thep\\b",
+      "\\bluang prabang\\b",
+      "\\bpotala\\b",
+      "\\bchengde\\b",
+      "\\bwutai\\b",
+      "\\bdengfeng\\b",
+      "\\btaxila\\b",
+      "\\btakht-i-bahi\\b",
+      "\\bpaharpur\\b",
+      "\\bsambor prei kuk\\b",
+      "\\bangkor\\b",
+      "\\bprambanan\\b",
+      "\\byogyakarta\\b",
+      "\\bphu phrabat\\b",
+      "\\bbamiyan\\b",
+      "\\bmerv\\b",
+      "\\bkaesong\\b",
+      "\\bkathmandu\\b",
+      "\\bhaeinsa\\b",
+      "\\bnamhansanseong\\b",
+      "\\bkyoto\\b.*\\btemple",
+      "\\bkii mountain\\b",
+      "\\bfujisan\\b",
+      "\\bsilk road",
+      "\\bplain of jars\\b",
+      "\\bcosmological axis\\b",
+      "\\bxanadu\\b",
+      "\\bancient merv\\b",
+      "\\bkhuttal\\b"
     ]
   },
-
   "mound_evolution": {
     "_note": "Keywords for the hemispherical mound-evolution test (tumulus_dome_evolution_*.py). Mound-unambiguous = always accepted; mound-ambiguous = 'mound' alone, requires archaeological context sentence.",
-    "mound_unambiguous": ["tumulus", "tumuli", "barrow", "barrows", "kofun"],
-    "mound_ambiguous":   ["mound"],
-    "stupa":             ["stupa", "stupas", "dagoba", "chorten"],
-    "dome":              ["tholos", "dome", "domed", "domes", "spherical"],
+    "mound_unambiguous": [
+      "tumulus",
+      "tumuli",
+      "barrow",
+      "barrows",
+      "kofun"
+    ],
+    "mound_ambiguous": [],
+    "stupa": [
+      "stupa",
+      "stupas",
+      "dagoba",
+      "chorten"
+    ],
+    "dome": [
+      "tholos",
+      "dome",
+      "domed",
+      "domes",
+      "spherical"
+    ],
     "mound_positive_context": [
-      "burial", "funerary", "mortuary", "grave", "tomb", "interment",
-      "cemetery", "necropolis", "barrow", "tumulus", "tumuli", "kofun",
-      "earthwork", "earthen", "earthmound", "monumental", "platform",
-      "ritual", "ceremonial", "sacred", "archaeological", "prehistoric", "ancient",
-      "mound group", "mound complex", "keyhole", "fill", "constructed"
+      "burial",
+      "funerary",
+      "mortuary",
+      "grave",
+      "tomb",
+      "interment",
+      "cemetery",
+      "necropolis",
+      "barrow",
+      "tumulus",
+      "tumuli",
+      "kofun",
+      "earthwork",
+      "earthen",
+      "earthmound",
+      "monumental",
+      "platform",
+      "ritual",
+      "ceremonial",
+      "sacred",
+      "archaeological",
+      "prehistoric",
+      "ancient",
+      "mound group",
+      "mound complex",
+      "keyhole",
+      "fill",
+      "constructed"
     ]
   }
 }

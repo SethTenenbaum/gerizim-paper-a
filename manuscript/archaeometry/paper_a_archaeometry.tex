@@ -34,14 +34,10 @@
 % Leave \received/\revised/\accepted empty for preprint/submission.
 % \articledoi and \volume will be assigned by the journal.
 \articletype{ORIGINAL ARTICLE}
-\received{}
-\revised{}
-\accepted{}
 \journal{Archaeometry}
 \volume{}
 \copyyear{2026}
 \startpage{1}
-\articledoi{10.1111/arcm.XXXXX}  % placeholder — replaced by journal at acceptance
 
 % ══════════════════════════════════════════════════════════════════════════════
 %  PIPELINE-GENERATED MACROS
@@ -61,27 +57,30 @@ A Spatial Enrichment Test Using the Babylonian B\={e}ru Unit}
 \authormark{TENENBAUM}
 \titlemark{LONGITUDE PERIODICITY IN THE UNESCO WORLD HERITAGE CORPUS}
 
-\address[1]{\orgname{Independent Scholar,}
+\address[1]{\orgname{Fourth Temple Research}
 \orgaddress{\country{USA}}}
 
-\corres{Seth Tenenbaum (\email{sethtenenbaum1@gmail.com})}
+\corres{Seth Tenenbaum (\email{seth@fourthtemple.com})}
 
 \fundingInfo{This research received no external funding.}
 
-\keywords{longitude periodicity | spatial statistics | UNESCO World Heritage | Babylonian b\={e}ru | ancient metrology | domed architecture | binomial enrichment test | quantitative archaeology | reproducible pipeline | monument distribution}
+\keywords{
+longitude periodicity | spatial statistics | Levant | UNESCO World Heritage |
+Babylonian b\={e}ru | ancient metrology | domed architecture | archaeoastronomy |
+monument distribution | MUL.APIN
+}
 
 \abstract[ABSTRACT]{
 A one-dimensional angular enrichment test is applied to the UNESCO World
 Heritage Cultural and Mixed corpus ($N=\NclusterTotal$) using the 0.1‑b\={e}ru
 interval (3\textdegree{}), the smallest integer subdivision of the Babylonian
-unit (MUL.APIN, c.~1000~BCE). Tier‑A+ denotes sites within $\leq0.002$ b\={e}ru
-(approximately 6.7\,km) of a 0.1-b\={e}ru harmonic measured from Mount Gerizim
-(\GerizimLon\textdegree{}E). Domed monuments ($N=\NcircTotal$) show
-significant enrichment at harmonic nodes (Bonferroni $p_{\mathrm{adj}}=\pAdjTestTwo$,
-$k=\BonfK$), and A+‑bearing harmonics host \clusterHarmonicRatio$\times$
-as many sites as non‑bearing harmonics ($p_{\mathrm{adj}}=\pAdjTestThree$).
-A phase coincidence limits findings to exploratory status. The paper
-provides a transferable, reproducible template for testing angular units.
+unit (MUL.APIN, c.~1000~BCE). Mount Gerizim (\GerizimLon\textdegree{}E)
+serves as anchor on independent historical grounds. Sites within $\leq0.002$
+b\={e}ru ($\sim$6.7\,km) of a harmonic node are designated Tier‑A+.
+Domed monuments ($N=\NcircTotal$) show significant A+ enrichment (Bonferroni
+$p_{\mathrm{adj}}=\pAdjTestTwo$, $k=\BonfK$). The Levantine corridor framing 
+is treated as the motivated entry point rather than independent confirmation. 
+The pipeline is fully reproducible.
 }
 
 \maketitle
@@ -104,7 +103,7 @@ The corpus ($N = \NclusterTotal$) appears to contain a global
 3\textdegree{} periodic structure in its longitude distribution.
 Every longitude of the form $x.18$\textdegree{}E produces the maximum
 observed Tier-A+ count when used as an angular reference (sites within
-$\lesssim 6.7$~km of a harmonic node, against a 4\% geometric null).
+$\lesssim 6.7$~km of a harmonic node, against a \NullRateAp{} geometric null).
 The 3\textdegree{} spacing equals the smallest integer sub-division of
 the Babylonian \textit{beru} unit
 (0.1~beru~$= 3$\textdegree{}~$= 3$~\textit{u\v{s}}, MUL.APIN, c.~1000~BCE).
@@ -120,23 +119,19 @@ site lists \citep{williamson1983leylines,freeman1976,kendall1974}.
 Three features distinguish this study: (1)~the UNESCO site list was compiled
 without reference to this hypothesis and is fixed; (2)~the 0.1-beru interval
 is documented in cuneiform sources \citep{hunger2019mul} as the finest
-integer subdivision, limiting the parameter space; (3)~tier boundaries
-were fixed on geometric grounds and keywords are simple morphological matches.
+integer subdivision, limiting the parameter space.
 
 \textbf{Positioning within quantitative archaeometry.}
 This paper belongs to the tradition of probability-based spatial analysis in
-archaeometry \citep{magli2013,magli2016,ruggles1999astronomy,ruggles2015handbook,silva2020statistical}.
-The fixed external corpus, geometric null, and publicly archived pipeline respond to
-the standards articulated in those frameworks and in the ICOMOS-IAU thematic study
-\citep{ruggles2010icomos}. The template is reusable for any candidate angular unit
+archaeometry \citep{magli2013,magli2016,ruggles1999astronomy,ruggles2015handbook,silva2020statistical}. 
+The template is reusable for any candidate angular unit
 and externally curated corpus.
 
 \textbf{Structure.}
-Section~\ref{sec:prior} gives background on the beru unit;
-\S\ref{sec:methods} describes data and protocol;
-\S\S\ref{sec:results}--\ref{sec:robustness} present results and robustness checks;
-\S\ref{sec:limitations} catalogs limitations including the circularity treatment;
-\S\ref{sec:discussion} evaluates alternatives and concludes.
+Sections~\ref{sec:prior}--\ref{sec:methods} cover background and methods;
+\S\S\ref{sec:results}--\ref{sec:robustness} results and robustness;
+\S\ref{sec:limitations} limitations;
+\S\ref{sec:discussion} conclusions.
 The Appendix contains the keyword audit.
 
 %──────────────────────────────────────────────────────────────────────────────
@@ -264,7 +259,7 @@ The result is $N = \NclusterTotal$ sites with valid longitudes.
 The reference anchor is Mount Gerizim at \GerizimLon\textdegree{}E,
 from Palestine's UNESCO tentative list (ref.~5706, 2012; see \S\ref{sec:anchor}).
 Gerizim is not on the inscribed World Heritage List and does not appear
-in the test-site corpus. Jerusalem is also excluded in both sweeps (\S\ref{sec:anchor}).
+in the corpus. Jerusalem is excluded in both sweeps (\S\ref{sec:anchor}).
 
 For a site at longitude $\lambda$, the beru-distance is
 $B = |\lambda - \GerizimLon| / 30$ and the beru-deviation from the
@@ -293,7 +288,7 @@ The harmonic spacing tested is 0.1~beru (3\textdegree{}), the smallest integer
 sub-division of the beru attested in cuneiform metrology, equalling exactly
 3~\textit{u\v{s}} \citep{hunger2019mul,robson2008mathematics,powell1987metrological}.
 It was selected because it is the finest metrologically attested integer
-sub-division that yields a tractable test (120 harmonics, 4\% geometric null).
+sub-division that yields a tractable test (\NharmonicsCoarse{} harmonics, \NullRateAp{} geometric null).
 Coarser spacings (0.5~beru, 1~beru) are uninformative; finer sub-divisions
 (0.02~beru) do not produce the signal (Table~\ref{tab:unitsweep}).
 No spacing was selected post-hoc.
@@ -308,9 +303,9 @@ result a coarser sub-sampling of the same periodicity, not a separate signal.
 Sites are classified by $\delta$, the angular deviation from the
 nearest 0.1-beru harmonic. All tier boundaries were fixed on metrological
 grounds, not tuned to the data.
-\textbf{Tier~A++}: $\delta \leq 0.0002$~beru ($\lesssim 0.67$~km), $P_0 = 0.4\%$, descriptive only.
-\textbf{Tier~A+}: $\delta \leq 0.002$~beru ($\lesssim 6.7$~km), $P_0 = 4\%$ (i.e.\ $2 \times 0.002/0.1$), primary threshold.
-\textbf{Tier~A}: $\delta \leq 0.010$~beru ($\lesssim 33$~km), $P_0 = 20\%$.
+\textbf{Tier~A++}: $\delta \leq 0.0002$~beru ($\lesssim 0.67$~km), $P_0 = \NullRateApp{}$, descriptive only.
+\textbf{Tier~A+}: $\delta \leq 0.002$~beru ($\lesssim 6.7$~km), $P_0 = \NullRateAp{}$ (i.e.\ $2 \times 0.002/0.1$), primary threshold.
+\textbf{Tier~A}: $\delta \leq 0.010$~beru ($\lesssim 33$~km), $P_0 = \NullRateA{}$.
 \textbf{Tier~B}: $\delta \leq 0.050$~beru.
 
 \subsection{Test Populations}
@@ -339,7 +334,7 @@ longitude-diluting false positives.
 
 \textbf{Test~2b (mound evolution, sensitivity variant).}
 Extends Test~2 by adding earthen mound-stage keywords
-(\textit{tumulus, tumuli, barrow, barrows, kofun, mound}).
+(\textit{tumulus, tumuli, barrow, barrows, kofun}).
 Not counted separately in the Bonferroni family.
 
 \textbf{Test~3 (cluster asymmetry, primary).}
@@ -365,9 +360,9 @@ in the primary evidential chain.
 \textbf{Primary test family ($k = \BonfK$).}
 \begin{itemize}
   \item \textbf{Test 1} (full corpus, $N = \NclusterTotal$):
-    global enrichment above 4\% null.
+    global enrichment above \NullRateAp{} null.
   \item \textbf{Test 2} (domed/spherical monuments, $N = \NcircTotal$):
-    morphological sub-population enriched above 4\% null.
+    morphological sub-population enriched above \NullRateAp{} null.
   \item \textbf{Test 3} (cluster asymmetry, full corpus, no keyword filter):
     A+-bearing harmonics host more total sites.
 \end{itemize}
@@ -388,9 +383,10 @@ Test~E (founding classifier) is post-hoc (Appendix~\ref{sec:kwdaudit_founding}).
 Test~B (Rayleigh) is a structural description (\S\ref{sec:results_rayleigh})
 and is not included in either table.
 
-\textbf{Summary table.}
+Results of all primary and secondary tests are consolidated
+in Table~\ref{tab:bonferroni_both}.
 
-\begin{table*}[!t]
+\begin{table*}[tp]
 \centering\small
 \caption{Multiple-comparisons summary.
   Primary test family: Tests~1--3 ($k = \BonfK$, $\alpha = 0.05/\BonfK$).}
@@ -429,10 +425,8 @@ The full audit is in the archived repository (\citealt{tenenbaum2026audit}).
 \label{sec:methods_simulation}
 
 Three simulation approaches (code: \texttt{simulation\_null\_model.py},
-100{,}000 trials each) and two dedicated geographic-concentration nulls
+\simNperms{} trials each) and two dedicated geographic-concentration nulls
 are described with their results in \S\ref{sec:simulation_null}.
-An independent Wikidata P1435 control corpus ($N = \WDctrlN$) is used
-as external reference (\S\ref{sec:limitations}).
 
 %──────────────────────────────────────────────────────────────────────────────
 \section{Results}
@@ -453,7 +447,9 @@ All keywords are treated identically (positive whole-word match, no context
 gating), making the population mechanically determined by the keyword list.
 Final population: $N = \NcircTotal$.
 Permutation $Z = \simDomePermZ$,
-$p = \simDomePermP$; bootstrap $p = \simDomeBootP$.
+$p = \simDomePermP$; bootstrap $p = \simDomeBootP$
+(Table~\ref{tab:circularstats}).
+
 
 \begin{table*}[!t]
 \centering
@@ -472,7 +468,7 @@ Tier-A+ ($\leq 0.002$ beru) & \NcircTierAp & \circExpAp & \NcircApRate\% [\circA
 Tier-A\phantom{+} ($\leq 0.010$ beru)  & \NcircTierA  & \circExpA & \circARate\% [\circACIlo, \circACIhi] & $\circEnrichA\times$ & \pCircA  & ** \\
 $\chi^2$-uniform (5 bins, df\,=\,4) & --- & --- & ---  & --- & \pCircChi & ns \\
 \midrule
-\multicolumn{7}{l}{Expected under $H_0$: A+ = 4\%, A = 20\%. CIs are Clopper-Pearson exact.} \\
+\multicolumn{7}{l}{Expected under $H_0$: A+ = \NullRateAp{}, A = \NullRateA{}. CIs are Clopper-Pearson exact.} \\
 \multicolumn{7}{l}{Tier-B: \NcircTierB\,/\,\NcircTotal{} sites ($\delta \leq 0.050$~beru). Mean $\delta$: \circMeanDev\,beru.} \\
 \multicolumn{7}{l}{\footnotesize *** $p < 0.001$, ** $p < 0.01$, * $p < 0.05$, $^\dagger$ $p < 0.10$ (trend-level), ns = not significant.} \\
 \bottomrule
@@ -515,7 +511,7 @@ Domed monuments are concentrated in the Eurasian corridor:
 \domeEurasianFraction\% fall in 20\textdegree--120\textdegree{}E
 versus \fullCorpusEurasianFraction\% of the full corpus.
 Two targeted null models test whether this explains the dome enrichment
-(code: \texttt{dome\_geographic\_concentration\_test.py}, 100{,}000 trials).
+(code: \texttt{dome\_geographic\_concentration\_test.py}, \simNperms{} trials).
 
 \textbf{Null~A (within-dome bootstrap):} Draw $N = \NcircValidated$ longitudes
 from the dome sites' own list. Mean $= \geoNullDomeBootMean$ A+,
@@ -555,12 +551,11 @@ The meta-keyword test confirms that only \metaBeatingChiPct\% of
 \label{sec:resultsevolution_inline}
 
 Extends Test~2 by adding earthen mound-stage keywords
-(\textit{tumulus, tumuli, barrow, barrows, kofun, mound});
-the combined population ($N = \NevoTotal$) comprises
-\NevoMoundOnly{} mound-stage sites added to the core domed/spherical
-population ($N = \NcircTotal$), plus \NevoOverlap{}
-sites matching both keywords. Mound-only sites show no significant enrichment
-(\evoMoundApRate\%, $p = \pEvoMound$, ns).
+(\textit{tumulus, tumuli, barrow, barrows, kofun});
+the combined population ($N = \NevoTotal$) adds
+\NevoMoundOnly{} mound-stage sites to the core
+domed/spherical population, with \NevoOverlap{}
+sites matching both keyword sets.
 
 \begin{table*}[!t]
 \centering
@@ -574,7 +569,7 @@ Metric & Obs & Exp($H_0$) & Rate & $p$ & \\
 Tier-A+ ($\leq 0.002$ beru, $\leq 6.7$\,km) & \NevoAp & 4.16 & \evoApRate\% & \pEvoAp & *** \\
 Tier-A\phantom{+} ($\leq 0.010$ beru, $\leq 33$\,km) & \NevoA & 20.80 & \evoARate\% & \pEvoA & ** \\
 \midrule
-\multicolumn{6}{l}{Expected under $H_0$: A+ = 4\%, A = 20\%.
+\multicolumn{6}{l}{Expected under $H_0$: A+ = \NullRateAp{}, A = \NullRateA{}.
   Enrichment: A+ = $\evoEnrichAp\times$, A = $\evoEnrichA\times$.} \\
 \multicolumn{6}{l}{\footnotesize *** $p < 0.001$, ** $p < 0.01$, * $p < 0.05$,
   $^\dagger$ $p < 0.10$, ns = not significant.} \\
@@ -587,14 +582,14 @@ Tier-A\phantom{+} ($\leq 0.010$ beru, $\leq 33$\,km) & \NevoA & 20.80 & \evoARat
 \begin{table*}[!t]
 \centering
 \caption{Tier-A+ enrichment by evolutionary stage.
-  Null rate $P_0 = 4\%$.}
+  Null rate $P_0 = \NullRateAp{}$.}
 \label{tab:evostages1b}
 \begin{tabular}{lrrrrl}
 \toprule
 Stage & $N$ & A+ & Rate & Enrichment & $p$ (binomial) \\
 \midrule
-Mound (tumulus/barrow/kofun) & \NevoMound & \NevoMoundAp & \evoMoundApRate\% & $1.55\times$ & \pEvoMound~ns \\
-Stupa (stupa/stupas)         & \NevoStupa & \NevoStupaAp & \evoStupaApRate\% & $5.56\times$ & \pEvoStupa~** \\
+Mound (tumulus/barrow/kofun) & \NevoMound & \NevoMoundAp & \evoMoundApRate\% & $\evoMoundEnrich\times$ & \pEvoMound~ns \\
+Stupa (stupa/stupas)         & \NevoStupa & \NevoStupaAp & \evoStupaApRate\% & $\evoStupaEnrich\times$ & \pEvoStupa~** \\
 Dome (dome/tholos/spherical) & \NevoDome  & \NevoDomeAp  & \evoDomeApRate\%  & $2.68\times$ & \pEvoDome~* \\
 \midrule
 \textbf{Combined}            & \textbf{\NevoTotal} & \textbf{\NevoAp} & \textbf{\evoApRate\%} & $\mathbf{\evoEnrichAp}\times$ & \textbf{\pEvoAp~***} \\
@@ -604,9 +599,9 @@ Dome (dome/tholos/spherical) & \NevoDome  & \NevoDomeAp  & \evoDomeApRate\%  & $
 \end{table*}
 
 \noindent The combined population ($N = \NevoTotal$, A+ = \evoApRate\%,
-$p = \pEvoAp$~***) is consistent with Test~2. The mound stage does not reach
+$p = \pEvoAp$ ***; Table~\ref{tab:evolution1b}) is consistent with Test~2. The mound stage does not reach
 significance (\evoMoundApRate\%, $p = \pEvoMound$, ns). The signal is carried
-by the stupa ($5.56\times$, $p = \pEvoStupa$~**) and dome sub-stages.
+by the stupa ($\evoStupaEnrich\times$, $p = \pEvoStupa$~**) and dome sub-stages.
 Leave-one-out checks confirm stability for all sub-stages.
 
 \textbf{Stupa geographic-concentration null.}
@@ -615,9 +610,6 @@ Stupa sites are concentrated in South/Southeast Asia
 (\stupaHeartlandFrac\% in 70\textdegree--110\textdegree{}E).
 Null~A (within-stupa bootstrap): $p = \stupaGeoBootP$ (ns).
 Null~C (restricted $\pm 5$\textdegree{} draw): $p = \stupaGeoRestrictedP$ (*).
-The structure parallels the dome result: geographic proximity to harmonic
-longitudes is necessary but not sufficient to explain the morphological
-specificity.
 
 \subsection{Cluster Asymmetry (Test~3, Primary)}
 \label{sec:resultscluster}
@@ -643,7 +635,7 @@ Mean cluster size (sites within $\pm 0.3$\textdegree{} lon)
   & \clusterApMean & \clusterNonApMean & \clusterRatio$\times$ & \\
 Mann-Whitney $U$ (one-tailed)
   & & & & \clusterMWp~* \\
-Permutation (10{,}000 shuffles)
+Permutation (\NpermCluster{} shuffles)
   & & & $Z = \clusterPermZ$ & \clusterPermP~** \\
 \midrule
 \multicolumn{5}{l}{\textit{Harmonic-level density (all Tier $\leq$ B sites per 0.1-beru harmonic):}} \\
@@ -659,7 +651,8 @@ Harmonics with 0 A+ sites (\NclusterNonApHarmonics{})
 \end{table*}
 
 \noindent A+-bearing harmonics host \clusterHarmonicRatio$\times$ more sites
-on average than non-A+ harmonics ($p\ \clusterHarmonicMWpStr$).
+on average than non-A+ harmonics ($p\ \clusterHarmonicMWpStr$;
+Table~\ref{tab:clusterasym}).
 Sites at harmonic nodes cluster more densely than sites at harmonic midpoints
 (\clusterNodeApMean{} vs.\ \clusterAntiApMean{} neighbors;
 $\clusterNodeVsAntiApRatio\times$, $p = \clusterNodeVsAntiApMWp$).
@@ -681,7 +674,7 @@ enrichment (Test~2, $p = \simDomePermP$).
 The near-perfect Rayleigh $R$ of the A+ sub-sample is a mathematical
 consequence of the A+ classification criterion (\S\ref{sec:circularity})
 and is reported as a structural description, not independent evidence.
-Three formal permutation tests (10{,}000 shuffles each, seed~42;
+Three formal permutation tests (\NpermRayleigh{} shuffles each, seed~\simSeed{};
 \texttt{x18\_periodicity\_formal\_test.py}) address distinct aspects of the
 periodicity:
 
@@ -722,32 +715,35 @@ specific Gerizim anchor rather than geographic concentration alone.
 \end{figure*}
 
 The full UNESCO Cultural/Mixed corpus ($N = \NclusterTotal$) shows a
-Tier-A+ rate of \clusterApRate\%
+Tier-A+ rate of \clusterApRate\% (Figure~\ref{fig:devhist})
 (\NclusterAp/\NclusterTotal; Clopper-Pearson 95\% CI [4.2\%, 7.1\%]),
-above the 4\% null
+above the \NullRateAp{} null
 (binomial $p = \clusterApBinom$; Bonferroni $p_\mathrm{adj} = \pAdjTestOne$,
 $k = \BonfK$).
 Both Gerizim (external) and Jerusalem (inscribed, self-excluded to
 $N = \NjerSelfExclCorpus$) produce $p = \pJerusalemAp$; the signal belongs to the
 $\sim$35\textdegree{}E corridor, not to either anchor individually
 (\S\ref{sec:sensitivity_global}).
-The full-corpus enrichment ratio (1.38$\times$) is modest compared to
-the dome ($3.06\times$) and cluster asymmetry results, consistent with
+The full-corpus enrichment ratio ($\clusterEnrichAp\times$) is modest compared to
+the dome ($\circEnrichAp\times$) and cluster asymmetry results, consistent with
 only a fraction of sites driving the periodicity.
 
 \textbf{Region-stratified robustness.}
 Mantel-Haenszel analysis by UNESCO region: OR~$= \MHcommonOR$,
-$p = \pCMH$ (trend-level). Tested against region-specific empirical null
-rates, enrichment remains significant ($p = \pRegionEmpAll$; pre-2000: $p = \pRegionEmpPreTwoK$).
+$p = \pCMH$ (trend-level, ns). A region-specific empirical null test
+(Fisher combination of per-region binomials) yields $p = \pRegionEmpAll$
+(ns; pre-2000: $p = \pRegionEmpPreTwoK$, ns): when each region's own
+A+ rate is the null, the stratified signal does not reach significance.
+The pre-2000 cohort remains significant against the geometric null
+($p = \pPreTwoK$~**).
 
 \subsubsection*{World religion sites}
-
+Religion-keyword sub-populations show consistent enrichment directionality
+(religion-name matching only):
 Sites associated with any world religion ($N = \NreligUnion$): \religUnionApRate\%
 A+ ($\religUnionEnrich\times$, $p = \pReligUnion$~*).
 Christianity ($N = \NchristSites$): \christApRate\% A+, $p = \pChrist$~*.
 Buddhism ($N = \NbudSitesRelig$): \budApRateRelig\% A+ ($p = \pBudRelig$, ns).
-These populations were defined by religion-name matching only.
-
 \subsubsection*{Inscription-year stratification and formal trend test}
 \label{sec:resultstemporal}
 
@@ -755,7 +751,7 @@ These populations were defined by religion-name matching only.
 \centering
 \caption{Tier-A+ enrichment by UNESCO inscription-year cohort
   ($N = \NoriginCorpus$ Cultural/Mixed sites).
-  Null rate $P_0 = 4\%$.}
+  Null rate $P_0 = \NullRateAp{}$.}
 \label{tab:inscriptionyear}
 \begin{tabular}{lrrrrl}
 \toprule
@@ -780,7 +776,7 @@ $\canonEnrich\times$, $p = \pCanon$) and dilutes to the null in the modern era
 \includegraphics[width=0.9\textwidth]{../figures/fig_temporal}
 \caption{Tier-A+ rate declines monotonically with UNESCO inscription year.
   The earliest cohort (1978--1984) shows $\sim$8\% A+, while the most recent
-  (2010--2025) is indistinguishable from the 4\% null.
+  (2010--2025) is indistinguishable from the \NullRateAp{} null.
   Cochran-Armitage trend test (three-cohort):
   $Z = \ZcochranThree$, $p = \pCochranThree$, one-sided.
   Five-cohort result: $Z = \ZcochranFive$, $p = \pCochranFive$.}
@@ -810,7 +806,7 @@ fully post-hoc. The two primary results (Tests~2 and~3) are unaffected.
 Varying harmonic spacing from 0.05 to 0.20~beru (physical threshold
 fixed at 6.7~km), the 0.1-beru spacing produces the strongest joint
 significance across both the dome and full-corpus populations
-(Table~\ref{tab:unitsweep}). The 0.05-beru and 0.20-beru spacings also
+(Table~\ref{tab:unitsweep}) Figure~\ref{fig:unitsweep}). The 0.05-beru and 0.20-beru spacings also
 reach significance, as expected structurally: every 0.10-beru harmonic is
 also a 0.05-beru harmonic ($0.10 = 2 \times 0.05$), and 0.20-beru harmonics
 are a strict subset. Adjacent non-harmonic spacings (0.06, 0.07, 0.09, 0.11,
@@ -839,16 +835,16 @@ reflecting unsystematic local overlap with the 0.10-beru grid.
 \toprule
 Spacing & Null & Dome hits/$N_D$ & $p$(Dome) && Full hits/$N$ & $p$(Full) \\
 \midrule
-0.05 & 8.0\% & 12/\NcircValidated & 0.032~* && 102/\NclusterTotal & 0.010~* \\
-0.06 & 6.7\% & 6/\NcircValidated & 0.480~ns && 60/\NclusterTotal & 0.841~ns \\
-0.07 & 5.7\% & 8/\NcircValidated & 0.102~ns && 55/\NclusterTotal & 0.665~ns \\
-0.08 & 5.0\% & 9/\NcircValidated & 0.023~* && 52/\NclusterTotal & 0.437~ns \\
-0.09 & 4.4\% & 4/\NcircValidated & 0.507~ns && 41/\NclusterTotal & 0.747~ns \\
+0.05 & \sweepZeroFiveNull & \sweepZeroFiveDomeHits/\NcircValidated & \sweepZeroFiveDomeP~* && \sweepZeroFiveFullHits/\NclusterTotal & \sweepZeroFiveFullP~* \\
+0.06 & \sweepZeroSixNull & \sweepZeroSixDomeHits/\NcircValidated & \sweepZeroSixDomeP~ns && \sweepZeroSixFullHits/\NclusterTotal & \sweepZeroSixFullP~ns \\
+0.07 & \sweepZeroSevenNull & \sweepZeroSevenDomeHits/\NcircValidated & \sweepZeroSevenDomeP~ns && \sweepZeroSevenFullHits/\NclusterTotal & \sweepZeroSevenFullP~ns \\
+0.08 & \sweepZeroEightNull & \sweepZeroEightDomeHits/\NcircValidated & \sweepEightDomeP~* && \sweepZeroEightFullHits/\NclusterTotal & \sweepEightFullP~ns \\
+0.09 & \sweepZeroNineNull & \sweepZeroNineDomeHits/\NcircValidated & \sweepZeroNineDomeP~ns && \sweepZeroNineFullHits/\NclusterTotal & \sweepZeroNineFullP~ns \\
 \textbf{0.10} & \textbf{4.0\%} & \textbf{\NcircTierAp/\NcircValidated} & \textbf{0.0005~***} && \textbf{\NclusterAp/\NclusterTotal} & \textbf{\clusterApBinom~*} \\
-0.11 & 3.6\% & 6/\NcircValidated & 0.082~$^\dagger$ && 38/\NclusterTotal & 0.441~ns \\
-0.12 & 3.3\% & 4/\NcircValidated & 0.300~ns && 30/\NclusterTotal & 0.765~ns \\
-0.15 & 2.7\% & 6/\NcircValidated & 0.024~* && 33/\NclusterTotal & 0.141~ns \\
-0.20 & 2.0\% & 8/\NcircValidated & $<$0.001~*** && 28/\NclusterTotal & 0.056~$^\dagger$ \\
+0.11 & \sweepZeroElevenNull & \sweepZeroElevenDomeHits/\NcircValidated & \sweepZeroElevenDomeP~$^\dagger$ && \sweepZeroElevenFullHits/\NclusterTotal & \sweepZeroElevenFullP~ns \\
+0.12 & \sweepZeroTwelveNull & \sweepZeroTwelveDomeHits/\NcircValidated & \sweepZeroTwelveDomeP~ns && \sweepZeroTwelveFullHits/\NclusterTotal & \sweepZeroTwelveFullP~ns \\
+0.15 & \sweepZeroFifteenNull & \sweepZeroFifteenDomeHits/\NcircValidated & \sweepZeroFifteenDomeP~* && \sweepZeroFifteenFullHits/\NclusterTotal & \sweepZeroFifteenFullP~ns \\
+0.20 & \sweepZeroTwentyNull & \sweepZeroTwentyDomeHits/\NcircValidated & $<$0.001~*** && \sweepZeroTwentyFullHits/\NclusterTotal & \sweepZeroTwentyFullP~$^\dagger$ \\
 \bottomrule
 \end{tabular}}% end adjustbox
 \end{table*}
@@ -881,13 +877,13 @@ value beyond Tests~2 and~3.
 \toprule
 Spacing & Null & Dome hits/$N_D$ & $p$(Dome) && Full hits/$N$ & $p$(Full) \\
 \midrule
-0.0990 & 4.04\% & 3/\NcircValidated & 0.657~ns && 41/\NclusterTotal & 0.512~ns \\
-0.0993 & 4.03\% & 5/\NcircValidated & 0.243~ns && 47/\NclusterTotal & 0.177~ns \\
-0.0995 & 4.02\% & 6/\NcircValidated & 0.117~ns && 48/\NclusterTotal & 0.137~ns \\
+0.0990 & \fineNineNineZeroNull & \fineNineNineZeroDomeHits/\NcircValidated & \fineNineNineZeroDomeP~ns && \fineNineNineZeroFullHits/\NclusterTotal & \fineNineNineZeroFullP~ns \\
+0.0993 & \fineNineNineThreeNull & \fineNineNineThreeDomeHits/\NcircValidated & \fineNineNineThreeDomeP~ns && \fineNineNineThreeFullHits/\NclusterTotal & \fineNineNineThreeFullP~ns \\
+0.0995 & \fineNineNineFiveNull & \fineNineNineFiveDomeHits/\NcircValidated & \fineNineNineFiveDomeP~ns && \fineNineNineFiveFullHits/\NclusterTotal & \fineNineNineFiveFullP~ns \\
 \textbf{0.1000} & \textbf{4.00\%} & \textbf{\NcircTierAp/\NcircValidated} & \textbf{0.0005~***} && \textbf{\NclusterAp/\NclusterTotal} & \textbf{\clusterApBinom~*} \\
-0.1001 & 4.00\% & 9/\NcircValidated & 0.006~** && 51/\NclusterTotal & 0.056~$^\dagger$ \\
-0.1003 & 3.99\% & 5/\NcircValidated & 0.237~ns && 38/\NclusterTotal & 0.668~ns \\
-0.1010 & 3.96\% & 5/\NcircValidated & 0.232~ns && 47/\NclusterTotal & 0.149~ns \\
+0.1001 & \fineOneZeroZeroOneNull & \fineOneZeroZeroOneDomeHits/\NcircValidated & \fineOneZeroZeroOneDomeP~** && \fineOneZeroZeroOneFullHits/\NclusterTotal & \fineOneZeroZeroOneFullP~$^\dagger$ \\
+0.1003 & \fineOneZeroZeroThreeNull & \fineOneZeroZeroThreeDomeHits/\NcircValidated & \fineOneZeroZeroThreeDomeP~ns && \fineOneZeroZeroThreeFullHits/\NclusterTotal & \fineOneZeroZeroThreeFullP~ns \\
+0.1010 & \fineOneZeroOneZeroNull & \fineOneZeroOneZeroDomeHits/\NcircValidated & \fineOneZeroOneZeroDomeP~ns && \fineOneZeroOneZeroFullHits/\NclusterTotal & \fineOneZeroOneZeroFullP~ns \\
 \bottomrule
 \end{tabular}}% end adjustbox
 \end{table*}
@@ -933,9 +929,10 @@ B (Jerusalem corpus) & Jerusalem (35.2317\textdegree{}E)    & \JerusalemSweepApp
 \end{tabular}}% end adjustbox
 \end{table*}
 
-Both anchors place the corridor in the global top 3\%, and the result
+Both anchors place the corridor in the global top \anchorSweepTopPct\% 
+(Table~\ref{tab:sweep_summary}), and the result
 is anchor-invariant within the \GerizimJerusalemKm\,km corridor window.
-The single-site difference between sweeps (55 vs.\ 56 A+) is precisely
+The single-site difference between sweeps (\GerizimSweepAp{} vs.\ \JerusalemSweepAp{} A+) is precisely
 the Old City of Jerusalem ($\delta = 0.0012$~beru from Gerizim's
 harmonic). No other historical meridian reaches significance except
 Mecca (\MeccaAp{} A+, $p = \pMeccaAnchor$~$^\dagger$).
@@ -944,7 +941,7 @@ Mecca (\MeccaAp{} A+, $p = \pMeccaAnchor$~$^\dagger$).
 \label{sec:x18artifact}
 
 The most striking result of the global sweep is that every longitude of
-the form $x.18$\textdegree{}E (all 120 such anchors) produces identically
+the form $x.18$\textdegree{}E (all \NharmonicsCoarse{} such anchors) produces identically
 the maximum A+ count. The spacing between consecutive $x.18$\textdegree{}E
 anchors is exactly 3\textdegree{} = 0.1~beru.
 
@@ -975,7 +972,7 @@ Code: \texttt{peak\_geography\_audit.py}, \texttt{verify\_x18\_periodicity.py}.
 \subsubsection*{Formal statistical tests for the $x.18$\textdegree{} periodicity}
 \label{sec:x18_formal}
 
-Four permutation tests (10,000 shuffles, seed~42;
+Four permutation tests (\NpermRayleigh{} shuffles, seed~\simSeed{};
 code: \texttt{x18\_periodicity\_formal\_test.py}):
 the full-corpus Rayleigh $R = \fullRayleighR$ ($p_\mathrm{perm} = \fullRayleighPermP$, ns)
 confirms no spurious global periodicity in the raw longitude file.
@@ -988,7 +985,7 @@ $p_\mathrm{perm} = \anchorShiftPermP$, *), providing the only positive evidence 
 the enrichment depends on the Gerizim anchor rather than geographic concentration; 
 the discovery-corrected max‑permutation (Test~D) places the sweep 
 optimum within the expected range after accounting for 
-the \anchorSweepNanchors{}‑anchor search.($p = \anchorMaxPermP$, ns).
+the \anchorSweepNanchors{}‑anchor search ($p = \anchorMaxPermP$, ns).
 
 The dome-periodicity audit (\texttt{dome\_periodicity\_audit.py}) is consistent
 with beru-alignment but equally consistent with geographic concentration:
@@ -1015,8 +1012,8 @@ sites as non-A+ harmonics ($p\ \clusterHarmonicMWpStr$).
 DEFF correction via ICC ($\pm 0.5$\textdegree{}, $\rho = \ICChalf$):
 DEFF~$= \DEFFhalf$, $N_\mathrm{eff} = \NeffHalf$,
 corrected $p = \pNeffHalf$.
-Block bootstrap (3\textdegree{} blocks, 100{,}000 resamples):
-95\% CI $[\blockBootCIlo\%, \blockBootCIhi\%]$ excludes the 4\% null.
+Block bootstrap (3\textdegree{} blocks, \simNperms{} resamples):
+95\% CI $[\blockBootCIlo\%, \blockBootCIhi\%]$ excludes the \NullRateAp{} null.
 Within-group permutation using UNESCO-region $\times$ longitude bins
 reproduced the observed A+ count exactly in every trial, confirming this
 test cannot discriminate alignment from geographic concentration;
@@ -1026,7 +1023,7 @@ address that question directly.
 \subsection{Null Model Validation}
 \label{sec:simulation_null}
 
-Three simulation nulls (100{,}000 trials each, seed~$= 42$,
+Three simulation nulls (\simNperms{} trials each, seed~$= \simSeed{}$,
 \citealt{good2005permutation}):
 (1)~Longitude permutation: dome ($N = \NcircValidated$)
 $p_\mathrm{perm} = \simDomePermP$~(**);
@@ -1050,16 +1047,6 @@ The meta-keyword test (\NmetaKeywords{} candidates) finds only \NmetaBeatingChi{
 matching the curated set's enrichment.
 FDR audit (\NtotalTests{} tests) retains \NsurviveFDR{} at $q < 0.05$;
 \NsurviveBonfAll{} survive Bonferroni at $k = \NtotalTests$.
-
-\subsection{Americas Negative Control}
-\label{sec:americas_control}
-
-The Americas sub-corpus ($N = \AmericasN$, A+ = \AmericasApRate\%, $p = \AmericasOneSidedP$
-one-sided, \AmericasOneSidedStar) shows directional \emph{depletion}
-relative to the 4\% null. This direction is consistent with what an
-Eurasian-anchored grid would predict for the western hemisphere, though the
-result does not reach conventional significance ($p = \AmericasOneSidedP$, \AmericasOneSidedStar).
-It is reported as a directional consistency check only.
 
 \section{Limitations}
 \label{sec:limitations}
@@ -1091,10 +1078,10 @@ framing would not have been adopted.
 \begin{itemize}
   \item \emph{The existence of a 3\textdegree{} periodic structure in the
     UNESCO longitude file.}
-    Any investigator running an unanchored 120-phase scan will recover it
+    Any investigator running an unanchored \NharmonicsCoarse-phase scan will recover it
     without reference to Gerizim.
   \item \emph{The dome enrichment (Test~2).}
-    All 120 $x.18$\textdegree{}E anchors produce identical A+ counts for
+    All \NharmonicsCoarse{} $x.18$\textdegree{}E anchors produce identical A+ counts for
     the dome population.
   \item \emph{The cluster asymmetry (Test~3).}
     This is a full-corpus result requiring no keyword filter.
@@ -1124,43 +1111,43 @@ motivated entry point, not as independent evidence.
 Geographic and cultural selection bias is the most important alternative
 explanation. The UNESCO list over-represents Europe and the
 Mediterranean-to-South-Asian corridor
-(Europe: $\sim$44\% of Cultural/Mixed sites; Arab States: $\sim$7\%;
-Asia-Pacific: $\sim$26\%; Americas: $\sim$13\%; Africa: $\sim$9\%).
+(Europe \& North America: \CorpusPctEurope\% of Cultural/Mixed sites;
+Arab States: \CorpusPctArabStates\%;
+Asia-Pacific: \CorpusPctAsiaPac\%;
+Americas: \CorpusPctLatAm\%;
+Africa: \CorpusPctAfrica\%).
 Permutation tests show geographic concentration can reproduce the
 sensitivity peak (\S\ref{sec:sensitivity_slope_perm}). The dome
 enrichment surviving the restricted geographic draw (Null~C,
 $p = \geoNullDomeRestrictedP$, **) remains the primary evidence against
 a purely geographic account.
 
+
+\subsection{Americas Negative Control}
+\label{sec:americas_negative_control}
+The UNESCO Americas sub-corpus ($N = 145$) shows directional 
+depletion (A+ = 2.1\%, $p = 0.164$, ns) relative to the 
+\NullRateAp{} null, consistent with a Eurasian-anchored grid 
+predicting reduced harmonic occupancy in the western hemisphere.
+
 \subsection{Other Limitations}
 
 \textbf{Spatial autocorrelation.}
 DEFF correction: $N_\mathrm{eff} = \NeffHalf$ (DEFF $= \DEFFhalf$,
 corrected $p = \pNeffHalf$). Block bootstrap CI
-$[\blockBootCIlo\%, \blockBootCIhi\%]$ excludes the 4\% null.
+$[\blockBootCIlo\%, \blockBootCIhi\%]$ excludes the \NullRateAp{} null.
 
 \textbf{Geocoding precision.}
 UNESCO XML coordinates are administrative centroids, introducing
 unsystematic noise but not directional bias. Dome enrichment is robust
 across raw and context-validated populations and all three simulation nulls.
 
-\textbf{Wikidata P1435 control.}
-The P1435 corpus ($N = \WDctrlN$) is not directly comparable: 
-P1435 is self-reported, less consistently curated, and encompasses 
-a broader and more heterogeneous monument typology than the UNESCO corpus
-OR~$= \WDctrlOR$ [95\% CI: \WDctrlORlo--\WDctrlORhi],
-$p = \WDctrlZp$; MH OR~$= \WDctrlMHOR$, $p = \WDctrlMHp$ and is provided
-as a coarse directional symmetry check.
-
 \textbf{Metrological evidence.}
 No physical surveying instrument calibrated in beru subdivisions has been 
 recovered; documentary sources attest the beru 
-system \citep{hunger2019mul,robson2008mathematics,powell1987metrological}. 
-Notably, P1435 Arab States sites (N = \WDctrlArabN) show a \WDctrlArabRate\% 
-A+ rate (binomial vs.\ 4\%: \WDctrlArabBinomP), a pattern consistent with the 
-possibility that urban layouts in the Levant–Arabian corridor encode beru‑
-derived reference meridians, but not constituting direct proof.
-
+system \citep{hunger2019mul,robson2008mathematics,powell1987metrological}.
+This study therefore treats the coordinate alignment of Mount Gerizim as
+a novel empirical observation.
 
 %──────────────────────────────────────────────────────────────────────────────
 \section{Discussion}
@@ -1249,8 +1236,8 @@ reproducibility at the cost of known false negatives in specificity.
 \textbf{Test~2x (context-validated robustness check):} Unambiguous keywords
 are accepted without validation. Ambiguous keywords (\textit{dome, domed,
 domes, spherical}) are subject to a two-gate context check: Gate~1
-(28 negative patterns) rejects non-architectural uses; Gate~2
-(86 positive patterns) requires architectural confirmation. Full gate
+(\NdomeGateNeg{} negative patterns) rejects non-architectural uses; Gate~2
+(\NdomeGatePos{} positive patterns) requires architectural confirmation. Full gate
 lists: \texttt{lib/dome\_filter.py}. The gates reduce false positives
 but cannot eliminate interpretive ambiguity at the boundary between
 architectural and non-architectural uses.
@@ -1288,7 +1275,7 @@ civilizational and religious traditions.
 
 \textbf{Keyword enrichment result.}
 Applied to the full corpus ($N = \NoriginCorpus$), the classifier finds
-\NfoundKwAp{} keyword-founding sites among the 56 A+ sites
+\NfoundKwAp{} keyword-founding sites among the \NclusterAp{} A+ sites
 (\foundKwApRate\%; $N_{\mathrm{kw}} = \NfoundKwAll$, base rate
 \foundKwBaseRate\%). Fisher exact test: OR~$= \foundKwFisherOR$,
 $p = \pFoundKwFisher$~*. The complete version history is preserved in
@@ -1391,7 +1378,7 @@ Springer.
 \bibitem[Powell(1987)]{powell1987metrological}
 Powell, M.~A. (1987).
 Masse und Gewichte.
-In: Edzard, D.~O. (Ed.),
+In D. O. Edzard (Ed.),
 \textit{Reallexikon der Assyriologie und Vorderasiatischen Arch\"aologie},
 vol.~7, pp.~457--517. Walter de Gruyter.
 
@@ -1461,7 +1448,7 @@ World's Work.
 \end{thebibliography}
 
 
-\section*{Data and Code Availability}
+\section*{Data Availability Statement}
 \label{sec:data_code}
 All data and analysis code are openly available. A permanent archival
 snapshot (v1.1.0) is deposited at Zenodo
@@ -1469,8 +1456,8 @@ snapshot (v1.1.0) is deposited at Zenodo
 
 \section*{Acknowledgements}
 The UNESCO World Heritage Centre maintains the publicly accessible XML
-dataset on which this study depends. This research was conducted
-independently without institutional affiliation.
+dataset on which this study depends. This research was conducted at Fourth
+Temple Research, independently and without external institutional affiliation.
 
 \section*{Conflict of Interest}
 The author declares no conflict of interest.

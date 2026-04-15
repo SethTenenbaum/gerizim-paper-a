@@ -1,4 +1,4 @@
-% Generated macros — 2026-04-14T17:34:46Z
+% Generated macros — 2026-04-15T03:42:27Z
 % Source: bash manuscript/reproduce_all_macros.sh --macros-only
 % IMPORTANT: values are computed fresh each run — do NOT hardcode
 
@@ -14,6 +14,16 @@
   \newcommand{\NexcNatural}{235}  % Natural-only sites excluded from analysis corpus
   \newcommand{\NexcNoCoord}{2}  % Cultural/Mixed sites excluded for missing coordinates
   \newcommand{\NfineSweepSpacings}{7}  % number of spacings in the fine unit sweep (Table tab:unitsweep_fine)
+  \newcommand{\NharmonicsCoarse}{120}  % number of 0.1-beru harmonics in 360 degrees
+  \newcommand{\simSeed}{42}  % random seed used in all permutation/simulation tests
+  \newcommand{\NullRateApp}{0.4\%}  % geometric null rate for Tier-A++
+  \newcommand{\NullRateAp}{4\%}  % geometric null rate for Tier-A+
+  \newcommand{\NullRateA}{20\%}  % geometric null rate for Tier-A
+  \newcommand{\CorpusPctEurope}{50}  % pct Europe & North America in analysis corpus
+  \newcommand{\CorpusPctAsiaPac}{23}  % pct Asia and the Pacific in analysis corpus
+  \newcommand{\CorpusPctLatAm}{11}  % pct Latin America & Caribbean in analysis corpus
+  \newcommand{\CorpusPctArabStates}{9}  % pct Arab States in analysis corpus
+  \newcommand{\CorpusPctAfrica}{7}  % pct Africa in analysis corpus
 
 % --- analysis/global/geodesic_sensitivity.py
   \newcommand{\GeodesicApCurrent}{56}  % A+ count under angular criterion
@@ -49,16 +59,24 @@
   \newcommand{\circApCIhi}{20.8}         % Clopper-Pearson 95% CI upper, A+ rate (%)
   \newcommand{\circACIlo}{22.8}          % Clopper-Pearson 95% CI lower, A rate (%)
   \newcommand{\circACIhi}{42.9}          % Clopper-Pearson 95% CI upper, A rate (%)
+  \newcommand{\circEnrichCIlo}{1.58}        % Clopper-Pearson 95% CI lower, A+ enrichment ratio
+  \newcommand{\circEnrichCIhi}{5.2}        % Clopper-Pearson 95% CI upper, A+ enrichment ratio
+  \newcommand{\NcircValidatedApRate}{13.3}  % A+ rate (%) = 11/83, validated pop
 
 % --- analysis/unesco/spherical_monument_test.py
   \newcommand{\pCircApValidated}{0.0005}  % p-value, A+ binomial (context-validated dome corpus)
   \newcommand{\pCircAValidated}{0.0098}   % p-value, A binomial (context-validated dome corpus)
   \newcommand{\circEnrichApValidated}{3.31}  % enrichment ratio, A+ (context-validated dome corpus)
+  \newcommand{\NdomeGateNeg}{28}  % number of negative-context gate patterns (Gate 1)
+  \newcommand{\NdomeGatePos}{86}  % number of positive-context gate patterns (Gate 2)
 
 % --- analysis/unesco/cluster_asymmetry_test.py
   \newcommand{\NclusterTotal}{1011}          % full Cultural/Mixed corpus
   \newcommand{\NclusterAp}{56}              % Tier-A+ sites
   \newcommand{\clusterApRate}{5.5}           % A+ rate (%)
+  \newcommand{\clusterEnrichAp}{1.38}          % enrichment ratio, A+ vs 4% null
+  \newcommand{\NclusterExpAp}{40.4}           % expected A+ count under 4% null
+  \newcommand{\NclusterExcessAp}{16}          % excess A+ above chance (observed - expected)
   \newcommand{\clusterApBinom}{0.0103}        % binomial p, A+
   \newcommand{\clusterApMean}{6.77}          % mean cluster size, A+ sites
   \newcommand{\clusterNonApMean}{5.08}          % mean cluster size, non-A+ sites
@@ -66,6 +84,7 @@
   \newcommand{\clusterMWp}{0.0182}        % Mann-Whitney p (site-level)
   \newcommand{\clusterPermP}{0.0033}        % permutation p (site-level)
   \newcommand{\clusterPermZ}{2.82}          % permutation Z-score
+  \newcommand{\NpermCluster}{10,000}         % permutation draws, cluster asymmetry test
   \newcommand{\NclusterApHarmonics}{28}              % harmonics with ≥1 A+ site
   \newcommand{\NclusterNonApHarmonics}{27}              % harmonics with 0 A+ sites
   \newcommand{\clusterHarmonicApMean}{29.4}          % mean UNESCO sites/harmonic (A+ harmonics)
@@ -478,54 +497,59 @@
   \newcommand{\pRegionEmpPreTwoK}{0.4205}  % region-specific empirical null, pre-2000
 
 % --- analysis/unesco/tumulus_dome_evolution_raw_sweep.py
-  \newcommand{\NevoTotal}{132}            % total dome-evolution corpus
-  \newcommand{\NevoAp}{14}             % A+ sites in dome-evolution corpus
-  \newcommand{\evoApRate}{10.6}           % A+ rate, dome-evolution corpus (%)
-  \newcommand{\evoEnrichAp}{2.65}          % enrichment ratio, A+ in dome corpus
-  \newcommand{\pEvoAp}{0.0009}          % p-value, A+ binomial (dome corpus)
-  \newcommand{\NevoA}{41}             % Tier-A sites in dome-evolution corpus
-  \newcommand{\evoARate}{31.1}           % A rate, dome-evolution corpus (%)
-  \newcommand{\evoEnrichA}{1.55}           % enrichment ratio, A in dome corpus
-  \newcommand{\pEvoA}{0.0017}          % p-value, A binomial (dome corpus)
-  \newcommand{\NevoMound}{48}           % sites with mound stage
-  \newcommand{\NevoMoundAp}{3}            % A+ sites with mound stage
-  \newcommand{\evoMoundApRate}{6.2}           % A+ rate, mound stage (%)
-  \newcommand{\pEvoMound}{0.3012}          % p-value, A+ binomial in mound stage
+  \newcommand{\NevoTotal}{110}            % total dome-evolution corpus
+  \newcommand{\NevoAp}{13}             % A+ sites in dome-evolution corpus
+  \newcommand{\evoApRate}{11.8}           % A+ rate, dome-evolution corpus (%)
+  \newcommand{\evoEnrichAp}{2.95}          % enrichment ratio, A+ in dome corpus
+  \newcommand{\pEvoAp}{0.0005}          % p-value, A+ binomial (dome corpus)
+  \newcommand{\NevoA}{35}             % Tier-A sites in dome-evolution corpus
+  \newcommand{\evoARate}{31.8}           % A rate, dome-evolution corpus (%)
+  \newcommand{\evoEnrichA}{1.59}           % enrichment ratio, A in dome corpus
+  \newcommand{\pEvoA}{0.0023}          % p-value, A binomial (dome corpus)
+  \newcommand{\evoExpAp}{4.40}          % expected A+ count at 4% null (dome-evolution corpus)
+  \newcommand{\evoExpA}{22.00}           % expected A count at 20% null (dome-evolution corpus)
+  \newcommand{\NevoMound}{24}           % sites with mound stage
+  \newcommand{\NevoMoundAp}{2}            % A+ sites with mound stage
+  \newcommand{\evoMoundApRate}{8.3}           % A+ rate, mound stage (%)
+  \newcommand{\evoMoundEnrich}{2.08}          % enrichment ratio, mound stage
+  \newcommand{\pEvoMound}{0.2492}          % p-value, A+ binomial in mound stage
   \newcommand{\NevoStupa}{18}            % sites with stupa stage
   \newcommand{\NevoStupaAp}{4}             % A+ sites with stupa stage
   \newcommand{\evoStupaApRate}{22.2}            % A+ rate, stupa stage (%)
+  \newcommand{\evoStupaEnrich}{5.56}           % enrichment ratio, stupa stage
   \newcommand{\pEvoStupa}{0.0050}          % p-value, A+ binomial in stupa stage
   \newcommand{\NevoDome}{75}            % sites with dome stage
   \newcommand{\NevoDomeAp}{8}             % A+ sites with dome stage
   \newcommand{\evoDomeApRate}{10.7}            % A+ rate, dome stage (%)
+  \newcommand{\evoDomeEnrich}{2.67}           % enrichment ratio, dome stage
   \newcommand{\pEvoDome}{0.0102}          % p-value, A+ binomial in dome stage
-  \newcommand{\NevoMoundOnly}{42}          % mound-only sites (no later dome/stupa)
-  \newcommand{\NevoMoundOnlyAp}{3}           % A+ in mound-only sites
-  \newcommand{\NevoOverlap}{6}            % sites with both mound and dome/stupa stages
+  \newcommand{\NevoMoundOnly}{20}          % mound-only sites (no later dome/stupa)
+  \newcommand{\NevoMoundOnlyAp}{2}           % A+ in mound-only sites
+  \newcommand{\NevoOverlap}{4}            % sites with both mound and dome/stupa stages
 
 % --- analysis/unesco/tumulus_dome_evolution_test.py
-  \newcommand{\NevoValidTotal}{116}              % total dome-evolution corpus (context-validated)
-  \newcommand{\NevoValidAp}{14}               % A+ sites (context-validated)
-  \newcommand{\evoValidApRate}{12.1}             % A+ rate, context-validated (%)
-  \newcommand{\evoValidEnrichAp}{3.02}            % enrichment ratio A+ (context-validated)
-  \newcommand{\pEvoApValidated}{0.0002}          % p-value A+ binomial, context-validated (Exploratory)
-  \newcommand{\pEvoAValidated}{0.0032}           % p-value A  binomial, context-validated (Exploratory)
-  \newcommand{\NevoValidRejected}{16}           % sites rejected by context validation
+  \newcommand{\NevoValidTotal}{104}              % total dome-evolution corpus (context-validated)
+  \newcommand{\NevoValidAp}{13}               % A+ sites (context-validated)
+  \newcommand{\evoValidApRate}{12.5}             % A+ rate, context-validated (%)
+  \newcommand{\evoValidEnrichAp}{3.12}            % enrichment ratio A+ (context-validated)
+  \newcommand{\pEvoApValidated}{0.0003}          % p-value A+ binomial, context-validated (Exploratory)
+  \newcommand{\pEvoAValidated}{0.0061}           % p-value A  binomial, context-validated (Exploratory)
+  \newcommand{\NevoValidRejected}{6}           % sites rejected by context validation
 
 % --- analysis/unesco/mound_keyword_context_audit.py
-  \newcommand{\NmoundRaw}{132}           % raw-sweep population (no context filter)
-  \newcommand{\NmoundAccepted}{116}       % context-validated population
-  \newcommand{\NmoundRejected}{16}        % sites failing all context validation
-  \newcommand{\moundFPRate}{12.1}      % site-level FP rate (%) for mound-evo keywords
-  \newcommand{\moundKwFPRate}{45.5}     % FP rate (%) for 'mound' keyword specifically
-  \newcommand{\NmoundDeciding}{22}       % sites where 'mound' is the deciding inclusion factor
-  \newcommand{\NmoundDecidingRej}{10}    % of those, rejected by context validation
-  \newcommand{\NmoundRawAp}{14}        % Tier-A+ in raw sweep
-  \newcommand{\NmoundAccAp}{14}       % Tier-A+ in validated population
-  \newcommand{\pmoundRawAp}{0.0009}   % p-value A+ (raw sweep)
-  \newcommand{\pmoundAccAp}{0.0002}   % p-value A+ (validated)
-  \newcommand{\moundEnrichRaw}{2.65}  % enrichment A+ (raw sweep)
-  \newcommand{\moundEnrichAcc}{3.02}  % enrichment A+ (validated)
+  \newcommand{\NmoundRaw}{110}           % raw-sweep population (no context filter)
+  \newcommand{\NmoundAccepted}{104}       % context-validated population
+  \newcommand{\NmoundRejected}{6}        % sites failing all context validation
+  \newcommand{\moundFPRate}{5.5}      % site-level FP rate (%) for mound-evo keywords
+  \newcommand{\moundKwFPRate}{0.0}     % FP rate (%) for 'mound' keyword specifically
+  \newcommand{\NmoundDeciding}{0}       % sites where 'mound' is the deciding inclusion factor
+  \newcommand{\NmoundDecidingRej}{0}    % of those, rejected by context validation
+  \newcommand{\NmoundRawAp}{13}        % Tier-A+ in raw sweep
+  \newcommand{\NmoundAccAp}{13}       % Tier-A+ in validated population
+  \newcommand{\pmoundRawAp}{0.0005}   % p-value A+ (raw sweep)
+  \newcommand{\pmoundAccAp}{0.0003}   % p-value A+ (validated)
+  \newcommand{\moundEnrichRaw}{2.95}  % enrichment A+ (raw sweep)
+  \newcommand{\moundEnrichAcc}{3.12}  % enrichment A+ (validated)
 
 % --- analysis/unesco/leave_one_out_sensitivity.py
   \newcommand{\LOOdomeN}{89}               % LOO dome: N after removing one A+ site
@@ -558,25 +582,6 @@
   \newcommand{\LKOnAp}{11}  % LKO: total A+ sites in dome corpus (n for C(n,k))
   \newcommand{\LKOnCombosTwo}{55}  % LKO: C(11,2) leave-2-out combinations
   \newcommand{\LKOnCombosThree}{165}  % LKO: C(11,3) leave-3-out combinations
-
-% --- analysis/global/wikidata_p1435_control_analysis.py
-  \newcommand{\WDctrlN}{62{,}785}           % Wikidata P1435 control corpus size
-  \newcommand{\WDctrlAp}{2361}            % A+ hits in Wikidata P1435 control
-  \newcommand{\WDctrlRate}{3.76}          % A+ rate, Wikidata P1435 control (%)
-  \newcommand{\WDctrlBinomP}{0.002}          % p-value, binomial test P1435 control
-  \newcommand{\WDctrlOR}{1.50}           % global odds ratio, P1435 control
-  \newcommand{\WDctrlORlo}{1.14}           % OR 95% CI lower bound
-  \newcommand{\WDctrlORhi}{1.97}           % OR 95% CI upper bound
-  \newcommand{\WDctrlZp}{0.0016}          % p-value, Z-test OR significance
-  \newcommand{\WDctrlPermP}{0.003}          % permutation p, Wikidata P1435 control
-  \newcommand{\WDctrlMHOR}{1.588}           % Mantel-Haenszel OR, stratified
-  \newcommand{\WDctrlMHchi}{10.291}          % Mantel-Haenszel chi-sq
-  \newcommand{\WDctrlMHp}{0.0013}           % p-value, Mantel-Haenszel test
-  \newcommand{\WDctrlDropEuropeOR}{1.66}     % OR after dropping European sites
-  \newcommand{\WDctrlArabN}{2{,}932}           % P1435 control: Arab States site count
-  \newcommand{\WDctrlArabAp}{209}            % P1435 control: Arab States A+ count
-  \newcommand{\WDctrlArabRate}{7.13}          % P1435 control: Arab States A+ rate (%)
-  \newcommand{\WDctrlArabBinomP}{$< 0.001$}  % P1435 Arab States binom p vs 4% null
 
 % --- analysis/global/dome_periodicity_audit.py
 \newcommand{\domePhaseChiSq}{14.89}     % chi-sq for dome phase uniformity
@@ -618,6 +623,7 @@
 \newcommand{\anchorShiftNullMu}{40.36}
 \newcommand{\anchorShiftZ}{2.23}
 \newcommand{\anchorShiftPermP}{0.0287}
+\newcommand{\NpermRayleigh}{10,000}
 \newcommand{\Nap}{56}  % Tier-A+ count (alias for NclusterAp)
 \newcommand{\rayleighRPctPhrasing}{essentially all}  % prose for R=0.9972: 'essentially all / nearly all / most'
 
@@ -641,14 +647,6 @@
 \newcommand{\xOptBandBinomPB}{0.0019}
 \newcommand{\xOptBandEnrich}{1.46}
 \newcommand{\xOptBandEnrichB}{1.49}
-
-% --- analysis/americas/americas_harmonic_depletion_audit.py
-  \newcommand{\AmericasCtrlN}{20469}          % Americas control corpus size
-  \newcommand{\AmericasCtrlAp}{104}           % A+ hits in Americas control
-  \newcommand{\AmericasCtrlRate}{0.508}         % A+ rate, Americas control (%)
-  \newcommand{\AmericasCtrlExpected}{819}       % expected A+ hits under null
-  \newcommand{\AmericasCtrlDeplFactor}{0.127}      % harmonic depletion factor (observed/expected)
-  \newcommand{\pAmericasDepl}{$< 10^{-200}$}   % p-value, Americas harmonic depletion
 
 % --- analysis/unesco/dome_footprint_window_sensitivity.py
   \newcommand{\geoNullDomeTwoDegN}{761}
@@ -690,8 +688,83 @@
   \newcommand{\simKDEStd}{6.2}            % KDE null-model std A+
 
 % --- analysis/unesco/unit_sweep_fill.py
-  \newcommand{\sweepEightDomeP}{0.0229}   % p(Dome), 0.08-beru spacing
-  \newcommand{\sweepEightFullP}{0.4371}   % p(Full), 0.08-beru spacing
+  \newcommand{\sweepZeroFiveNull}{8.0\%}   % null rate, 0.05-beru
+  \newcommand{\sweepZeroFiveDomeHits}{12}   % dome hits, 0.05-beru
+  \newcommand{\sweepZeroFiveDomeP}{0.0323}   % p(Dome), 0.05-beru
+  \newcommand{\sweepZeroFiveFullHits}{102}   % full hits, 0.05-beru
+  \newcommand{\sweepZeroFiveFullP}{0.0101}   % p(Full), 0.05-beru
+  \newcommand{\sweepZeroSixNull}{6.7\%}   % null rate, 0.06-beru
+  \newcommand{\sweepZeroSixDomeHits}{6}   % dome hits, 0.06-beru
+  \newcommand{\sweepZeroSixDomeP}{0.4799}   % p(Dome), 0.06-beru
+  \newcommand{\sweepZeroSixFullHits}{60}   % full hits, 0.06-beru
+  \newcommand{\sweepZeroSixFullP}{0.8405}   % p(Full), 0.06-beru
+  \newcommand{\sweepZeroSevenNull}{5.7\%}   % null rate, 0.07-beru
+  \newcommand{\sweepZeroSevenDomeHits}{8}   % dome hits, 0.07-beru
+  \newcommand{\sweepZeroSevenDomeP}{0.1017}   % p(Dome), 0.07-beru
+  \newcommand{\sweepZeroSevenFullHits}{55}   % full hits, 0.07-beru
+  \newcommand{\sweepZeroSevenFullP}{0.6653}   % p(Full), 0.07-beru
+  \newcommand{\sweepZeroEightNull}{5.0\%}   % null rate, 0.08-beru
+  \newcommand{\sweepZeroEightDomeHits}{9}   % dome hits, 0.08-beru
+  \newcommand{\sweepZeroEightDomeP}{0.0229}   % p(Dome), 0.08-beru
+  \newcommand{\sweepZeroEightFullHits}{52}   % full hits, 0.08-beru
+  \newcommand{\sweepZeroEightFullP}{0.4371}   % p(Full), 0.08-beru
+  \newcommand{\sweepZeroNineNull}{4.4\%}   % null rate, 0.09-beru
+  \newcommand{\sweepZeroNineDomeHits}{4}   % dome hits, 0.09-beru
+  \newcommand{\sweepZeroNineDomeP}{0.5068}   % p(Dome), 0.09-beru
+  \newcommand{\sweepZeroNineFullHits}{41}   % full hits, 0.09-beru
+  \newcommand{\sweepZeroNineFullP}{0.7466}   % p(Full), 0.09-beru
+  \newcommand{\sweepZeroElevenNull}{3.6\%}   % null rate, 0.11-beru
+  \newcommand{\sweepZeroElevenDomeHits}{6}   % dome hits, 0.11-beru
+  \newcommand{\sweepZeroElevenDomeP}{0.0820}   % p(Dome), 0.11-beru
+  \newcommand{\sweepZeroElevenFullHits}{38}   % full hits, 0.11-beru
+  \newcommand{\sweepZeroElevenFullP}{0.4407}   % p(Full), 0.11-beru
+  \newcommand{\sweepZeroTwelveNull}{3.3\%}   % null rate, 0.12-beru
+  \newcommand{\sweepZeroTwelveDomeHits}{4}   % dome hits, 0.12-beru
+  \newcommand{\sweepZeroTwelveDomeP}{0.2997}   % p(Dome), 0.12-beru
+  \newcommand{\sweepZeroTwelveFullHits}{30}   % full hits, 0.12-beru
+  \newcommand{\sweepZeroTwelveFullP}{0.7653}   % p(Full), 0.12-beru
+  \newcommand{\sweepZeroFifteenNull}{2.7\%}   % null rate, 0.15-beru
+  \newcommand{\sweepZeroFifteenDomeHits}{6}   % dome hits, 0.15-beru
+  \newcommand{\sweepZeroFifteenDomeP}{0.0237}   % p(Dome), 0.15-beru
+  \newcommand{\sweepZeroFifteenFullHits}{33}   % full hits, 0.15-beru
+  \newcommand{\sweepZeroFifteenFullP}{0.1405}   % p(Full), 0.15-beru
+  \newcommand{\sweepZeroTwentyNull}{2.0\%}   % null rate, 0.20-beru
+  \newcommand{\sweepZeroTwentyDomeHits}{8}   % dome hits, 0.20-beru
+  \newcommand{\sweepZeroTwentyDomeP}{0.0003}   % p(Dome), 0.20-beru
+  \newcommand{\sweepZeroTwentyFullHits}{28}   % full hits, 0.20-beru
+  \newcommand{\sweepZeroTwentyFullP}{0.0564}   % p(Full), 0.20-beru
+  \newcommand{\sweepEightDomeP}{0.0229}   % p(Dome), 0.08-beru
+  \newcommand{\sweepEightFullP}{0.4371}   % p(Full), 0.08-beru
+  \newcommand{\fineNineNineZeroNull}{4.04\%}   % null rate, 0.0990-beru
+  \newcommand{\fineNineNineZeroDomeHits}{3}   % dome hits, 0.0990-beru
+  \newcommand{\fineNineNineZeroDomeP}{0.6567}   % p(Dome), 0.0990-beru
+  \newcommand{\fineNineNineZeroFullHits}{41}   % full hits, 0.0990-beru
+  \newcommand{\fineNineNineZeroFullP}{0.5124}   % p(Full), 0.0990-beru
+  \newcommand{\fineNineNineThreeNull}{4.03\%}   % null rate, 0.0993-beru
+  \newcommand{\fineNineNineThreeDomeHits}{5}   % dome hits, 0.0993-beru
+  \newcommand{\fineNineNineThreeDomeP}{0.2428}   % p(Dome), 0.0993-beru
+  \newcommand{\fineNineNineThreeFullHits}{47}   % full hits, 0.0993-beru
+  \newcommand{\fineNineNineThreeFullP}{0.1767}   % p(Full), 0.0993-beru
+  \newcommand{\fineNineNineFiveNull}{4.02\%}   % null rate, 0.0995-beru
+  \newcommand{\fineNineNineFiveDomeHits}{6}   % dome hits, 0.0995-beru
+  \newcommand{\fineNineNineFiveDomeP}{0.1174}   % p(Dome), 0.0995-beru
+  \newcommand{\fineNineNineFiveFullHits}{48}   % full hits, 0.0995-beru
+  \newcommand{\fineNineNineFiveFullP}{0.1370}   % p(Full), 0.0995-beru
+  \newcommand{\fineOneZeroZeroOneNull}{4.00\%}   % null rate, 0.1001-beru
+  \newcommand{\fineOneZeroZeroOneDomeHits}{9}   % dome hits, 0.1001-beru
+  \newcommand{\fineOneZeroZeroOneDomeP}{0.0059}   % p(Dome), 0.1001-beru
+  \newcommand{\fineOneZeroZeroOneFullHits}{51}   % full hits, 0.1001-beru
+  \newcommand{\fineOneZeroZeroOneFullP}{0.0563}   % p(Full), 0.1001-beru
+  \newcommand{\fineOneZeroZeroThreeNull}{3.99\%}   % null rate, 0.1003-beru
+  \newcommand{\fineOneZeroZeroThreeDomeHits}{5}   % dome hits, 0.1003-beru
+  \newcommand{\fineOneZeroZeroThreeDomeP}{0.2366}   % p(Dome), 0.1003-beru
+  \newcommand{\fineOneZeroZeroThreeFullHits}{38}   % full hits, 0.1003-beru
+  \newcommand{\fineOneZeroZeroThreeFullP}{0.6676}   % p(Full), 0.1003-beru
+  \newcommand{\fineOneZeroOneZeroNull}{3.96\%}   % null rate, 0.1010-beru
+  \newcommand{\fineOneZeroOneZeroDomeHits}{5}   % dome hits, 0.1010-beru
+  \newcommand{\fineOneZeroOneZeroDomeP}{0.2324}   % p(Dome), 0.1010-beru
+  \newcommand{\fineOneZeroOneZeroFullHits}{47}   % full hits, 0.1010-beru
+  \newcommand{\fineOneZeroOneZeroFullP}{0.1490}   % p(Full), 0.1010-beru
 
 % --- analysis/unesco/sensitivity_slope_permutation_test.py
   \newcommand{\permSlopeNperms}{10{,}000}
@@ -718,16 +791,17 @@
   \newcommand{\geoNullDomeRestrictedP}{0.0080}   % restricted-pool p
   \newcommand{\geoNullDomeRestrictedZ}{2.91}    % restricted-pool Z
   \newcommand{\geoNullDomeRestrictedMean}{4.80}   % restricted-pool mean A+
-  \newcommand{\geoNullDomeRestrictedN}{881}      % Null C ±5° pool size (primary window)
+  \newcommand{\geoNullDomeRestrictedN}{881}   % restricted pool size
+  \newcommand{\geoNullDomeRestrictedRate}{5.8}   % A+ base rate in restricted pool (%)
   \newcommand{\geoNullDomeRestrictedNtwo}{761}   % Null C ±2° pool size
   \newcommand{\geoNullDomeRestrictedPtwo}{0.0113}   % Null C ±2° p-value
-  \newcommand{\geoNullDomeRestrictedMeantwo}{5.01}  % Null C ±2° mean A+
-  \newcommand{\geoNullDomeRestrictedNfive}{881}     % Null C ±5° pool size (alias)
-  \newcommand{\geoNullDomeRestrictedPfive}{0.0083}  % Null C ±5° p-value
-  \newcommand{\geoNullDomeRestrictedMeanfive}{4.81} % Null C ±5° mean A+
-  \newcommand{\geoNullDomeRestrictedNten}{967}      % Null C ±10° pool size
+  \newcommand{\geoNullDomeRestrictedMeantwo}{5.01}   % Null C ±2° mean A+
+  \newcommand{\geoNullDomeRestrictedNfive}{881}   % Null C ±5° pool size
+  \newcommand{\geoNullDomeRestrictedPfive}{0.0083}   % Null C ±5° p-value
+  \newcommand{\geoNullDomeRestrictedMeanfive}{4.81}   % Null C ±5° mean A+
+  \newcommand{\geoNullDomeRestrictedNten}{967}   % Null C ±10° pool size
   \newcommand{\geoNullDomeRestrictedPten}{0.0077}   % Null C ±10° p-value
-  \newcommand{\geoNullDomeRestrictedMeantten}{4.73} % Null C ±10° mean A+
+  \newcommand{\geoNullDomeRestrictedMeanten}{4.73}   % Null C ±10° mean A+
   \newcommand{\domeEurasianFraction}{77}   % % dome sites in 20-120E
   \newcommand{\fullCorpusEurasianFraction}{41}   % % full corpus in 20-120E
 
@@ -796,7 +870,7 @@
   \newcommand{\pHolmTestThree}{0.007}  % Holm-adj p, Test 3 (Cluster asymmetry — permutation p)
   \newcommand{\FDRqTestTwoB}{---}  % FDR q: N/A (excluded from family)
   \newcommand{\BonfAllTestTwoB}{---}  % Bonf adj: N/A (excluded from family)
-  \newcommand{\pRawTestTwoB}{0.0009}  % raw p, Test 2b (Hemispherical mound evolution A+ — RAW sweep (binomial))
+  \newcommand{\pRawTestTwoB}{0.0005}  % raw p, Test 2b (Hemispherical mound evolution A+ — RAW sweep (binomial))
   \newcommand{\FDRqTestFour}{---}  % FDR q: N/A (excluded from family)
   \newcommand{\BonfAllTestFour}{---}  % Bonf adj: N/A (excluded from family)
   \newcommand{\pRawTestFour}{0.0481}  % raw p, Test 4 (Temporal gradient (Cochran-Armitage 3-cohort))

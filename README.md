@@ -101,14 +101,12 @@ gerizim-paper-a/
 │   │   ├── corridor_precision_test.py             # Corridor precision test
 │   │   ├── geodesic_sensitivity.py                # Geodesic vs. planar sensitivity
 │   │   ├── landmark_anchor_ranking.py             # Gerizim vs. other anchors
-│   │   ├── wikidata_p1435_control_analysis.py     # Wikidata P1435 control analysis
 │   │   ├── x18_periodicity_formal_test.py         # x.18°E formal periodicity test
 │   │   ├── x18_max_permutation_test.py            # x.18°E max permutation test
 │   │   ├── x18_optimal_band_significance.py       # x.18°E optimal band significance
 │   │   └── emit_constants.py                      # Emit pure constants as LaTeX macros
 │   │
 │   └── americas/                     # Control comparison
-│       └── americas_harmonic_depletion_audit.py   # Americas P1435 depletion control
 │
 ├── lib/                              # Shared analysis library
 │   ├── beru.py               # Beru-unit calculations, tier classification
@@ -126,7 +124,6 @@ gerizim-paper-a/
 │   ├── scripts/
 │   │   ├── unesco_corpus.py          # Canonical UNESCO data loader
 │   │   ├── fetch_extended.py         # Fetch extended descriptions from UNESCO
-│   │   └── fetch_p1435_global.py     # Fetch Wikidata P1435 global control
 │   └── store/
 │       ├── results.json                    # Aggregated pipeline results
 │       ├── unesco/
@@ -134,7 +131,6 @@ gerizim-paper-a/
 │       │   ├── extended_cache.json         # Cached extended descriptions
 │       │   └── meta_keyword_results.json   # Pre-computed keyword results
 │       └── wikidata/
-│           └── p1435_global_control.csv    # Wikidata P1435 global heritage control
 │
 ├── supplementary/
 │   ├── audit/                        # Keyword-classification audit files (reproducible)
@@ -397,7 +393,6 @@ the pipeline.
 |---------|--------|---|
 | UNESCO World Heritage List | [whc.unesco.org/en/list/xml](https://whc.unesco.org/en/list/xml) | 1,248 sites |
 | Extended descriptions | Scraped from individual UNESCO site pages | 1,248 entries |
-| Wikidata P1435 global control | SPARQL query on `wdt:P1435` | ~161k monuments |
 
 The UNESCO XML is included in `data/store/unesco/unesco.xml`. To refresh
 the extended descriptions cache, run `python3 data/scripts/fetch_extended.py`

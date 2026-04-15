@@ -22,9 +22,19 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
 import json
+import collections
 from data.unesco_corpus import load_corpus
 
 _cfg = json.loads((ROOT / "config.json").read_text())
+
+# ── Metrological constants from config ────────────────────────────────────────
+BERU_DEG         = _cfg["units"]["beru"]["degrees"]          # 30.0
+HARMONIC_STEP    = _cfg["units"]["harmonic_step"]            # 0.1
+N_HARMONICS      = int(round(360.0 / (BERU_DEG * HARMONIC_STEP)))   # 120
+NULL_RATE_APP    = _cfg["null_rates"]["tier_app"]            # 0.004
+NULL_RATE_AP     = _cfg["null_rates"]["tier_aplus"]          # 0.04
+NULL_RATE_A      = _cfg["null_rates"]["tier_a"]              # 0.2
+SIM_SEED         = _cfg["simulation"]["random_seed"]         # 42
 
 GER_LON     = _cfg["anchors"]["gerizim"]["longitude"]
 GER_LAT_DMS = _cfg["anchors"]["gerizim"]["lat_dms"]       # e.g. "N32~12~44"
@@ -41,7 +51,18 @@ from data.unesco_corpus import cultural_sites_with_coords
 corpus    = load_corpus()
 n_whc     = len(corpus)
 n_cult_mixed         = sum(1 for s in corpus if s.is_cultural_or_mixed)   # after category filter, before coord filter
-n_cult_mixed_coords  = len(cultural_sites_with_coords(corpus))             # final analysis corpus
+_cm_coords = cultural_sites_with_coords(corpus)
+n_cult_mixed_coords  = len(_cm_coords)             # final analysis corpus
+
+# Regional breakdown of the analysis corpus (Cultural/Mixed with coordinates)
+_region_counts = collections.Counter(s.regions for s in _cm_coords)
+_n_corpus = n_cult_mixed_coords
+# Primary UNESCO regions
+_n_europe = _region_counts.get("Europe and North America", 0)
+_n_asia   = _region_counts.get("Asia and the Pacific", 0)
+_n_latam  = _region_counts.get("Latin America and the Caribbean", 0)
+_n_arab   = _region_counts.get("Arab States", 0)
+_n_africa = _region_counts.get("Africa", 0)
 
 print("=" * 72)
 print("  EMIT CONSTANTS — GROUP 0")
@@ -62,6 +83,18 @@ print(f"  \\newcommand{{\\NclusterTotal}}{{{n_cult_mixed_coords}}}  % Cultural+M
 print(f"  \\newcommand{{\\NexcNatural}}{{{n_whc - n_cult_mixed}}}  % Natural-only sites excluded from analysis corpus")
 print(f"  \\newcommand{{\\NexcNoCoord}}{{{n_cult_mixed - n_cult_mixed_coords}}}  % Cultural/Mixed sites excluded for missing coordinates")
 print(f"  \\newcommand{{\\NfineSweepSpacings}}{{7}}  % number of spacings in the fine unit sweep (Table tab:unitsweep_fine)")
+print(f"  \\newcommand{{\\NharmonicsCoarse}}{{{N_HARMONICS}}}  % number of 0.1-beru harmonics in 360 degrees")
+print(f"  \\newcommand{{\\simSeed}}{{{SIM_SEED}}}  % random seed used in all permutation/simulation tests")
+print(f"  \\newcommand{{\\NullRateApp}}{{{NULL_RATE_APP*100:.1f}\\%}}  % geometric null rate for Tier-A++")
+print(f"  \\newcommand{{\\NullRateAp}}{{{NULL_RATE_AP*100:.0f}\\%}}  % geometric null rate for Tier-A+")
+print(f"  \\newcommand{{\\NullRateA}}{{{NULL_RATE_A*100:.0f}\\%}}  % geometric null rate for Tier-A")
+
+# ── Regional fractions (Cultural/Mixed analysis corpus) ───────────────────────
+print(f"  \\newcommand{{\\CorpusPctEurope}}{{{round(100*_n_europe/_n_corpus)}}}  % pct Europe & North America in analysis corpus")
+print(f"  \\newcommand{{\\CorpusPctAsiaPac}}{{{round(100*_n_asia/_n_corpus)}}}  % pct Asia and the Pacific in analysis corpus")
+print(f"  \\newcommand{{\\CorpusPctLatAm}}{{{round(100*_n_latam/_n_corpus)}}}  % pct Latin America & Caribbean in analysis corpus")
+print(f"  \\newcommand{{\\CorpusPctArabStates}}{{{round(100*_n_arab/_n_corpus)}}}  % pct Arab States in analysis corpus")
+print(f"  \\newcommand{{\\CorpusPctAfrica}}{{{round(100*_n_africa/_n_corpus)}}}  % pct Africa in analysis corpus")
 
 print()
 print("  ✓ All GROUP 0 constants emitted.")
