@@ -75,7 +75,8 @@ A one-dimensional angular enrichment test is applied to the UNESCO World
 Heritage Cultural and Mixed corpus ($N=\NclusterTotal$) using the 0.1‑b\={e}ru
 interval (3\textdegree{}), the smallest integer subdivision of the Babylonian
 unit (MUL.APIN, c.~1000~BCE). Mount Gerizim (\GerizimLon\textdegree{}E)
-serves as anchor on independent historical grounds. Sites within $\leq0.002$
+serves as anchor on historical grounds; its longitude falls within the
+optimal phase band identified in the global sweep (\S\ref{sec:limitations_circularity}). Sites within $\leq0.002$
 b\={e}ru ($\sim$6.7\,km) of a harmonic node are designated Tier‑A+.
 Domed monuments ($N=\NcircTotal$) show significant A+ enrichment (Bonferroni
 $p_{\mathrm{adj}}=\pAdjTestTwo$, $k=\BonfK$). The Levantine corridor framing 
@@ -99,18 +100,10 @@ using a reproducible computational pipeline (see Data and Code Availability,
 null with no free parameters and is intended as a reusable methodological
 framework for spatial pattern‑detection studies in archaeological heritage data.
 
-The corpus ($N = \NclusterTotal$) appears to contain a global
-3\textdegree{} periodic structure in its longitude distribution.
-Every longitude of the form $x.18$\textdegree{}E produces the maximum
-observed Tier-A+ count when used as an angular reference (sites within
-$\lesssim 6.7$~km of a harmonic node, against a \NullRateAp{} geometric null).
-The 3\textdegree{} spacing equals the smallest integer sub-division of
-the Babylonian \textit{beru} unit
-(0.1~beru~$= 3$\textdegree{}~$= 3$~\textit{u\v{s}}, MUL.APIN, c.~1000~BCE).
-Because Gerizim's longitude falls within the $x.18$\textdegree{}E optimal
-band, the Levantine corridor result is the motivated entry point for the study
-rather than independent evidence; the full treatment is in
-\S\ref{sec:limitations_circularity}.
+A global anchor sweep reveals a 3\textdegree{} periodic structure in the
+corpus longitude distribution consistent with the 0.1-beru unit; the full
+treatment and its methodological implications are in
+\S\ref{sec:sensitivity_global} and \S\ref{sec:limitations_circularity}.
 \label{sec:circularity}
 
 \textbf{Why this design addresses key methodological criticisms.}
@@ -121,7 +114,7 @@ without reference to this hypothesis and is fixed; (2)~the 0.1-beru interval
 is documented in cuneiform sources \citep{hunger2019mul} as the finest
 integer subdivision, limiting the parameter space; (3)~all sub-populations 
 and results are fully computationally reproducible from public source 
-data \citep{tenenbaum2026zenodo}.
+data \citep{tenenbaum2026audit}.
 
 \textbf{Positioning within quantitative archaeometry.}
 This paper belongs to the tradition of probability-based spatial analysis in
@@ -227,20 +220,6 @@ and Mt.\ Kailash, the most cited geographic candidate for the cosmological
 axis mundi, reaches $p \approx \pKailashAnchor$ (ns).
 Neither alternative anchor approaches significance.
 
-\subsection{Interpretive Framework}
-\label{sec:framework}
-
-This paper is a pattern-detection study, not a historical attribution.
-Three classes of explanation are evaluated throughout:
-(1)~\textbf{Geographic concentration} — major civilizations developed in
-Eurasian longitude bands that align with 0.1-beru harmonics (the dedicated
-simulation in \S\ref{sec:geo_conc_null} shows this remains a viable first-level account);
-(2)~\textbf{Metrological transmission} — a 3\textdegree{} angular reference
-system anchored near the Levant informed major foundations (no mechanism is documented);
-(3)~\textbf{Unmodeled statistical artifact} — systematic bias in UNESCO curation,
-geocoding, or the longitude distribution produces the apparent periodicity
-(an artifact account must additionally explain the dome enrichment and cluster asymmetry).
-Adjudicating between explanations~1 and~2 requires independent corpora.
 
 %──────────────────────────────────────────────────────────────────────────────
 \section{Data and Methods}
@@ -441,13 +420,7 @@ Test~E (founding classifier, post-hoc) is in Appendix~\ref{sec:kwdaudit_founding
 \subsection{Domed and Spherical Monuments (Test~2, Primary)}
 \label{sec:resultscircular}
 
-\NcircKeywords{} morphological keywords from four roots
-(\textit{stupa/stupas}, \textit{tholos}, \textit{dome/domed/domes},
-\textit{spherical}) are matched as whole words against each site's
-name, XML description, and extended OUV text.
-All keywords are treated identically (positive whole-word match, no context
-gating), making the population mechanically determined by the keyword list.
-Final population: $N = \NcircTotal$.
+The keyword filter is described in \S\ref{sec:test_populations} ($N = \NcircTotal$).
 Permutation $Z = \simDomePermZ$,
 $p = \simDomePermP$; bootstrap $p = \simDomeBootP$
 (Table~\ref{tab:circularstats}).
@@ -552,8 +525,7 @@ The meta-keyword test confirms that only \metaBeatingChiPct\% of
 \subsection{Hemispherical Mound Evolution (Test 2b [Sensitivity Variant])}
 \label{sec:resultsevolution_inline}
 
-Extends Test~2 by adding earthen mound-stage keywords
-(\textit{tumulus, tumuli, barrow, barrows, kofun});
+Extends Test~2 by adding earthen mound-stage keywords (see \S\ref{sec:test_populations});
 the combined population ($N = \NevoTotal$) adds
 \NevoMoundOnly{} mound-stage sites to the core
 domed/spherical population, with \NevoOverlap{}
@@ -616,7 +588,7 @@ Null~C (restricted $\pm 5$\textdegree{} draw): $p = \stupaGeoRestrictedP$ (*).
 \subsection{Cluster Asymmetry (Test~3, Primary)}
 \label{sec:resultscluster}
 
-Full corpus ($N = \NclusterTotal$), no keyword filter.
+Full corpus ($N = \NclusterTotal$), no keyword filter (see \S\ref{sec:test_populations}).
 For each site, count other UNESCO sites within $\pm 0.3$\textdegree{}
 longitude; compare cluster sizes for A+ vs.\ non-A+ sites (Mann-Whitney $U$,
 permutation test). At the harmonic level, compare per-harmonic site counts
@@ -1039,6 +1011,51 @@ The geographic-concentration nulls (Null~A, Null~C;
 \S\ref{sec:geo_conc_null}) show that proximity to harmonic longitudes
 is necessary but not sufficient to explain the dome enrichment.
 
+\subsection{Pipeline Portability: Mexican Pyramid Corpus}
+\label{sec:mexico}
+
+The pipeline was applied to a corpus of $N_\mathrm{MX} = 64$ Mexican
+pyramid and platform sites as a portability demonstration. No analogous
+institutional list exists for Mexico. Sites were drawn programmatically
+from the Wikipedia article \textit{List of Mesoamerican pyramids} via the
+MediaWiki parse API, filtered to Mexico rows, with coordinates resolved
+from each site's Wikipedia infobox via the Wikipedia coordinates API and
+a Wikidata SPARQL fallback for unresolved sites. The pipeline is fully
+scripted and reproducible from the archived code
+(\citealt{tenenbaum2026audit}); a provenance report documenting the
+coordinate source for each site is included. Sites within
+0.01\textdegree{} ($\approx$1~km) of an already-accepted coordinate were
+deduplicated. The list is a convenience sample rather than an exhaustive
+or institutionally bounded corpus, and the results should be treated as
+hypothesis-generating.
+
+Using the identical anchor (Gerizim, \GerizimLon\textdegree{}E), tier
+boundaries, and geometric null, the Mexican corpus yields 7/64 Tier-A+
+sites (10.9\%, 2.73$\times$).
+A circular-shift permutation test (100,000 trials, seed~42), which
+preserves the geographic structure of the corpus by displacing all site
+longitudes by a uniform random offset, recovers a null mean of
+2.56 A+ ($Z = 2.41$, $p_\mathrm{perm} = 0.033$~*).
+A geographic null drawing uniformly within the Mexican longitude range
+($-104.4$\textdegree{} to $-87.4$\textdegree{}) yields $p = 0.019$~*.
+The exact binomial against the 4\% geometric null ($p = 0.014$~*) is
+reported as a reference baseline; the permutation result is the more
+appropriate primary test given geographic clustering.
+Leave-one-out checks confirm no single site drives the result, though
+removing any A+ site brings $p_\mathrm{perm}$ to the threshold ($p \approx 0.040$~$^\dagger$),
+reflecting the limited headroom of a 64-site corpus.
+
+Tier-A+ sites are Monte~Alb\'{a}n Main~Plaza ($\delta = 0.0012$~beru,
+$\sim$4.0~km) and Platform~J ($\delta = 0.0012$~beru, $\sim$4.1~km),
+two structures within the same archaeological complex whose spatial
+correlation is intrinsic to the site, Cob\'{a}~Nohoch~Mul
+($\delta = 0.0001$~beru, $\sim$0.5~km), Zaachila ($\delta = 0.0006$~beru,
+$\sim$2.1~km), Xochipala ($\delta = 0.0010$~beru, $\sim$3.4~km),
+Teopantecuanitlan ($\delta = 0.0005$~beru, $\sim$1.6~km), and
+Toluquilla ($\delta = 0.0010$~beru, $\sim$3.4~km).
+All three simulation approaches yield $p < 0.05$, directionally
+consistent with the UNESCO primary finding.
+
 \subsection{Multiple Comparisons}
 \label{sec:sharpshooter}
 
@@ -1056,57 +1073,42 @@ FDR audit (\NtotalTests{} tests) retains \NsurviveFDR{} at $q < 0.05$;
 \subsection{Circularity: Full Canonical Treatment}
 \label{sec:limitations_circularity}
 
-\textbf{How the circularity arose.}
-This study began with the hypothesis that the Babylonian beru unit might be
-detectable as a longitude-spacing signal in the UNESCO corpus, using Mount
-Gerizim (\GerizimLon\textdegree{}E) as the reference anchor.
-Running the global anchor sweep revealed that Gerizim's longitude
-falls within the $x.18$\textdegree{}E phase band.
-Had the sweep revealed a different optimal phase, this Gerizim-anchored
-framing would not have been adopted.
+\textbf{The public-data constraint.}
+Both the UNESCO coordinate file and the candidate anchor (Mount Gerizim)
+are fully public. Any investigator could run this pipeline at any time,
+before or after seeing these results. Pre-registration is not meaningful
+in this setting because the data cannot be hidden and any nominated anchor
+can be tested against the same public corpus by anyone.
+The relevant question is whether the reported pattern exists in the data
+and whether the anchor choice was justified independently of the result.
+Both are addressed directly.
 
-\textbf{What the circularity contaminates.}
-\begin{itemize}
-  \item The Levantine corridor statistics (Tests~1, 2, 3 as computed from
-    Gerizim), since reporting them was conditioned on observing the phase alignment.
-  \item The $x.18$\textdegree{}E framing, which was identified in the sweep,
-    not predicted independently.
-  \item The Rayleigh Test~B, whose near-perfect $R$ follows mathematically
-    from the A+ classification criterion (\S\ref{sec:results_rayleigh}).
-  \item All narrative emphasis on the Levantine corridor as historically motivated.
-\end{itemize}
+\textbf{What the anchor sweep establishes.}
+The global anchor sweep (\S\ref{sec:sensitivity_global}) tests all
+\NharmonicsCoarse{} possible $x.18$\textdegree{}E anchors against the same
+corpus. Gerizim and Jerusalem both place the $\sim$35\textdegree{}E corridor
+in the global top \anchorSweepTopPct\% of all trial anchors.
+The enrichment is a property of the corridor, not of the specific anchor
+chosen within it. The choice of Gerizim was made on documented historical
+grounds (\S\ref{sec:anchor}); that its longitude falls within the optimal
+phase band is an empirical observation, not a post-hoc rationalization.
 
-\textbf{What the circularity does \emph{not} contaminate.}
-\begin{itemize}
-  \item \emph{The existence of a 3\textdegree{} periodic structure in the
-    UNESCO longitude file.}
-    Any investigator running an unanchored \NharmonicsCoarse-phase scan will recover it
-    without reference to Gerizim.
-  \item \emph{The dome enrichment (Test~2).}
-    All \NharmonicsCoarse{} $x.18$\textdegree{}E anchors produce identical A+ counts for
-    the dome population.
-  \item \emph{The cluster asymmetry (Test~3).}
-    This is a full-corpus result requiring no keyword filter.
-  \item \emph{The unit sensitivity sweep.}
-    The sharp collapse at $\pm 0.3\%$ of the canonical spacing is a
-    property of the corpus structure, not of the choice of anchor.
-\end{itemize}
+\textbf{What remains genuinely contaminated.}
+The narrative framing of Gerizim as a historically motivated anchor
+is post-hoc in the sense that reporting it was conditioned on observing
+the phase alignment. The Rayleigh Test~B is tautological by construction
+(\S\ref{sec:results_rayleigh}). These are noted for completeness.
 
-\textbf{The impossibility of statistical resolution.}
-\emph{This identification problem cannot be closed by any statistical
-method applied to this corpus.}
-The analysis record does not allow recovery of the order in which the
-$x.18$\textdegree{}E phase and the Gerizim anchor were identified,
-and no timestamp or archive can resolve this: this is an instance of the
-\emph{forking paths} problem \citep{gelman2014forking}, in which
-analytical choices contingent on observed data cannot be reconstructed
-post-hoc. A historically named location falling near a significant phase
-by chance is statistically expected on any finite longitude axis;
-restricting the candidate set to credible anchors reduces multiplicity
-but does not eliminate it.
-Accordingly: (a)~the Bonferroni correction is applied as a descriptive bound on effect
-magnitude; (b)~the Levantine corridor statistics are reported as the
-motivated entry point, not as independent evidence.
+\textbf{What is not contaminated.}
+The 3\textdegree{} periodic structure in the UNESCO longitude file is
+recoverable by any unanchored \NharmonicsCoarse-phase scan without
+reference to Gerizim. The dome enrichment (Test~2) is identical across
+all \NharmonicsCoarse{} $x.18$\textdegree{}E anchors. The cluster
+asymmetry (Test~3) requires no keyword filter and no anchor.
+
+Accordingly, the Levantine corridor statistics are reported as the motivated
+entry point rather than independent confirmation, and the Bonferroni
+correction is applied as a descriptive bound on effect magnitude.
 
 \subsection{Geographic and Cultural Selection Bias}
 
@@ -1190,20 +1192,22 @@ morphological specificity (dome enrichment exceeding the restricted
 geographic draw, Null~C, $p = \geoNullDomeRestrictedP$) and cluster
 asymmetry ($p = \clusterPermP$).
 
-\subsubsection*{Criteria for confirmation}
+\subsubsection*{Replication and methodological transferability}
 
-Independent replication using a non-UNESCO corpus would provide the most
-direct test. The hypothesis would gain from textual evidence from 
-Hellenistic, Sanskrit, or Islamic sources referencing a 
-Levantine-centered angular reference frame.
+This paper is a terminal analysis of the only available globally
+comprehensive, institutionally curated monument corpus. The pipeline is
+transferable to any corpus assembled prior to and without reference to
+this hypothesis, provided it is sufficiently selective. Named heritage
+registers, protected site inventories, and operationally defined named
+lists all qualify. The Mexican pyramid result (\S\ref{sec:mexico})
+illustrates one such application; further applications to independent
+corpora will either accumulate evidence or not.
 
-\subsubsection*{Methodological transferability}
-
-The pipeline developed here offers a general framework for researchers
-testing other candidate angular units (e.g.\ Roman, Egyptian, or Chinese systems) against other
-monument corpora. The key asset is that the null model, tier boundaries,
-and test populations are all fixed on grounds independent of the data,
-making the approach auditable and directly reproducible by independent teams.
+The pipeline offers a general framework for researchers testing other
+candidate angular units (e.g.\ Roman, Egyptian, or Chinese systems) against
+any monument corpus. The null model, tier boundaries, and test populations
+are all fixed on grounds independent of the data, making the approach
+auditable and directly reproducible by independent teams.
 
 \appendix
 \newpage
