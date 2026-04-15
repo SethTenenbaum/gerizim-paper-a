@@ -1,15 +1,15 @@
 UNESCO DOME + HEMISPHERICAL MOUND EVOLUTION KEYWORD AUDIT
-Generated  : Mon Apr 13 22:08:23 UTC 2026
+Generated  : Wed Apr 15 19:16:38 UTC 2026
 Script     : tools/generate_audit_dome_mound.py
 Dome unamb : ['stupa', 'stupas', 'tholos']
 Dome amb   : ['dome', 'domed', 'domes', 'spherical']  (context-validated)
 Mound unamb: ['barrow', 'barrows', 'kofun', 'tumuli', 'tumulus']
-Mound amb  : ['mound']  (requires archaeological context)
+Mound amb  : []  (requires archaeological context)
 
-INCLUDED   : 117
-REJECTED   : 15
-FP rate    : 11.4%
-A+ included: 14
+INCLUDED   : 104
+REJECTED   : 6
+FP rate    : 5.5%
+A+ included: 13
 
 INCLUDED SITES:
 ────────────────────────────────────────────────────────────────────────────────────────
@@ -57,11 +57,9 @@ INCLUDED SITES:
 
   Archaeological Site of Troy ★
     LON  : 26.2390°E  |  dev 0.0010 beru  (3.3 km)  |  Tier A+
-    KEYS : ['tumuli', 'mound']
-    VALID: {'tumuli': 'unambiguous', 'mound': 'mound+arch.context'}
+    KEYS : ['tumuli']
+    VALID: {'tumuli': 'unambiguous'}
     [tumuli] "The surrounding landscape contains many important archaeological and historical sites, including prehistoric settlements and cemeteries, Hel"
-    [mound] "Troy is located on the mound of Hisarlık, which overlooks the plain along the Turkish Aegean coast, 4.8 km from the southern entrance to the"
-    [mound] "In the last 15 years, it has become clear that a Lower City existed south of the mound in all prehistoric periods and extended to about 30 h"
 
   The <I>Trulli</I> of Alberobello ★
     LON  : 17.2369°E  |  dev 0.0011 beru  (3.6 km)  |  Tier A+
@@ -69,12 +67,6 @@ INCLUDED SITES:
     VALID: {'domed': 'context-validated'}
     [domed] "Characteristically, they feature pyramidal, domed or conical roofs built up of corbelled limestone slabs."
     [domed] "These structures, dating from as early as the mid-14th century, characteristically feature pyramidal, domed, or conical roofs built up of co"
-
-  Takht-e Soleyman ★
-    LON  : 47.2350°E  |  dev 0.0011 beru  (3.8 km)  |  Tier A+
-    KEYS : ['mound']
-    VALID: {'mound': 'mound+arch.context'}
-    [mound] "The 10-ha property also includes Tepe Majid, an archaeological mound culturally related to Zendan-e Soleyman; the mountain to the east of Ta"
 
   Old City of Jerusalem and its Walls ★
     LON  : 35.2317°E  |  dev 0.0012 beru  (4.1 km)  |  Tier A+
@@ -104,11 +96,10 @@ INCLUDED SITES:
 
   Gaya Tumuli ★
     LON  : 128.3213°E  |  dev 0.0017 beru  (5.8 km)  |  Tier A+
-    KEYS : ['tumuli', 'mound']
-    VALID: {'tumuli': 'unambiguous', 'mound': 'mound+arch.context'}
+    KEYS : ['tumuli']
+    VALID: {'tumuli': 'unambiguous'}
     [tumuli] "Gaya Tumuli This serial property includes archaeological cemetery sites with burial mounds attributed to the Gaya Confederacy, which develop"
     [tumuli] "The introduction of new forms of tombs and the intensification of the spatial hierarchy in the tumuli sites reflect the structural changes e"
-    [mound] "The excavations conducted to date have confirmed the authenticity of the burial structures, burial-mound construction methods and building m"
 
   Cathedral and Churches of Echmiatsin and the Archaeological Site of Zvartnots ★
     LON  : 44.3246°E  |  dev 0.0019 beru  (6.2 km)  |  Tier A+
@@ -118,13 +109,6 @@ INCLUDED SITES:
     [dome] "From 1712 to 1721 Naghash Hovnatan worked there (the paintings on the upper part of the dome and the Holy Mother of God painted on the inter"
     [domed] "Cathedral and Churches of Echmiatsin and the Archaeological Site of Zvartnots The cathedral and churches of Echmiatsin and the archaeologica"
     [domed] "They graphically illustrate the evolution and flowering of the Armenian central-domed cross-hall type of church."
-
-  Arslantepe Mound
-    LON  : 38.3611°E  |  dev 0.0031 beru  (10.2 km)  |  Tier A
-    KEYS : ['mound']
-    VALID: {'mound': 'mound+arch.context'}
-    [mound] "Arslantepe Mound Arslantepe Mound is a 30-metre-tall archaeological tell located in the Malatya plain, 15 km south-west of the Euphrates Riv"
-    [mound] "Brief synthesis Arslantepe Mound is an archaeological tell of about 4.5 ha in extension, and 30 m high, at the heart of the fertile Malatya "
 
   Kunya-Urgench
     LON  : 59.1417°E  |  dev 0.0042 beru  (14.1 km)  |  Tier A
@@ -173,13 +157,6 @@ INCLUDED SITES:
     [domes] "Speyer Cathedral Speyer Cathedral, a basilica with four towers and two domes, was founded by Conrad II in 1030 and remodelled at the end of "
     [domes] "Brief synthesis Speyer Cathedral in the southwest of Germany, a basilica with four towers and two domes, was founded as a flat-ceiling basil"
 
-  Ancient Jericho/Tell es-Sultan
-    LON  : 35.4441°E  |  dev 0.0058 beru  (19.4 km)  |  Tier A
-    KEYS : ['mound']
-    VALID: {'mound': 'mound+arch.context'}
-    [mound] "Ancient Jericho/Tell es-Sultan Ancient Jerico/Tell es-Sultan is located northwest of present-day Jericho in the Jordan Valley in Palestine, "
-    [mound] "Brief synthesis Located northwest of present-day Jericho in the Jordan Valley in Palestine, Ancient Jericho/Tell es-Sultan consists of an ov"
-
   Sanctuary of Asklepios at Epidaurus
     LON  : 23.0806°E  |  dev 0.0063 beru  (20.9 km)  |  Tier A
     KEYS : ['tholos']
@@ -216,26 +193,10 @@ INCLUDED SITES:
 
   Dilmun Burial Mounds
     LON  : 50.5056°E  |  dev 0.0079 beru  (26.3 km)  |  Tier A
-    KEYS : ['tumuli', 'mound']
-    VALID: {'tumuli': 'unambiguous', 'mound': 'mound+arch.context'}
+    KEYS : ['tumuli']
+    VALID: {'tumuli': 'unambiguous'}
     [tumuli] "Six of these sites are burial mound fields consisting of a few dozen to several thousand tumuli."
     [tumuli] "Six of the selected site components are burial mound fields consisting of some dozen to several thousand tumuli."
-    [mound] "Six of these sites are burial mound fields consisting of a few dozen to several thousand tumuli."
-    [mound] "Six of the selected site components are burial mound fields consisting of some dozen to several thousand tumuli."
-
-  Qal’at al-Bahrain – Ancient Harbour and Capital of Dilmun
-    LON  : 50.5183°E  |  dev 0.0083 beru  (27.7 km)  |  Tier A
-    KEYS : ['mound']
-    VALID: {'mound': 'mound+arch.context'}
-    [mound] "Qal’at al-Bahrain – Ancient Harbour and Capital of Dilmun Qal’at al-Bahrain is a typical tell – an artificial mound created by many successi"
-    [mound] "On the top of the 12 m mound there is the impressive Portuguese fort, which gave the whole site its name, qal’a (fort)."
-
-  Erbil Citadel
-    LON  : 44.0092°E  |  dev 0.0087 beru  (28.8 km)  |  Tier A
-    KEYS : ['mound']
-    VALID: {'mound': 'mound+arch.context'}
-    [mound] "Written and iconographic historical records document the antiquity of settlement on the site – Erbil corresponds to ancient Arbela, an impor"
-    [mound] "The artificial topography of the archaeological mound conditioned the urban form of the settlement, the structure of the Ottoman period urba"
 
   Studenica Monastery
     LON  : 20.5317°E  |  dev 0.0088 beru  (29.2 km)  |  Tier A
@@ -252,13 +213,11 @@ INCLUDED SITES:
 
   Gordion
     LON  : 31.9861°E  |  dev 0.0094 beru  (31.4 km)  |  Tier A
-    KEYS : ['tumulus', 'tumuli', 'mound']
-    VALID: {'tumulus': 'unambiguous', 'tumuli': 'unambiguous', 'mound': 'mound+arch.context'}
+    KEYS : ['tumulus', 'tumuli']
+    VALID: {'tumulus': 'unambiguous', 'tumuli': 'unambiguous'}
     [tumulus] "The largest of the tumuli, the “Midas Mound” (Tumulus MM), rises to a height of fifty-three metres and the burial chamber within is the olde"
     [tumuli] "The key elements of this archaeological site include the Citadel Mound, the Lower Town, the Outer Town and Fortifications, and several buria"
     [tumuli] "The large concentration of monumental tumuli in the vicinity of Gordion creates an exceptional landscape of power, different from any other "
-    [mound] "The key elements of this archaeological site include the Citadel Mound, the Lower Town, the Outer Town and Fortifications, and several buria"
-    [mound] "The largest of the tumuli, the “Midas Mound” (Tumulus MM), rises to a height of fifty-three metres and the burial chamber within is the olde"
 
   Historic Areas of Istanbul
     LON  : 28.9833°E  |  dev 0.0095 beru  (31.7 km)  |  Tier A
@@ -305,13 +264,6 @@ INCLUDED SITES:
     VALID: {'dome': 'context-validated'}
     [dome] "The churches are built on a cross-in-square plan with a large dome supported by squinches defining an octagonal space."
     [dome] "The churches are built on a cross-in-square plan with a large dome supported by squinches defining an octagonal space."
-
-  Moidams – the Mound-Burial System of the Ahom Dynasty
-    LON  : 94.8764°E  |  dev 0.0131 beru  (43.6 km)  |  Tier B
-    KEYS : ['mound']
-    VALID: {'mound': 'mound+arch.context'}
-    [mound] "Moidams – the Mound-Burial System of the Ahom Dynasty Set in the foothills of the Patkai Ranges in eastern Assam, the property contains the "
-    [mound] "Brief synthesis Moidams – the Mound-Burial System of the Ahom Dynasty are a royal mound burial necropolis established by the Tai-Ahom in nor"
 
   Monasteries of Haghpat and Sanahin
     LON  : 44.6664°E  |  dev 0.0132 beru  (44.1 km)  |  Tier B
@@ -367,11 +319,10 @@ INCLUDED SITES:
 
   Nemrut Dağ
     LON  : 38.7410°E  |  dev 0.0157 beru  (52.4 km)  |  Tier B
-    KEYS : ['tumulus', 'mound']
-    VALID: {'tumulus': 'unambiguous', 'mound': 'mound+arch.context'}
+    KEYS : ['tumulus']
+    VALID: {'tumulus': 'unambiguous'}
     [tumulus] "Five giant seated limestone statues, identified by their inscriptions as deities, face outwards from the tumulus on the upper level of the e"
     [tumulus] "Criterion (iv): More so than the tombs at Karakus and Eski Kahta, the tumulus at Nemrut Dağ illustrates, through the liberal syncretism of a"
-    [mound] "With a diameter of 145 m, the 50 m high funerary mound of stone chips is surrounded on three sides by terraces to the east, west and north d"
 
   Millenary Benedictine Abbey of Pannonhalma and its Natural Environment
     LON  : 17.7844°E  |  dev 0.0172 beru  (57.2 km)  |  Tier B
@@ -384,12 +335,6 @@ INCLUDED SITES:
     KEYS : ['dome']
     VALID: {'dome': 'context-validated'}
     [dome] "The Kathoghikè (main church) is in the classic Armenian form, an equal-armed cross inscribed in a square in plan and covered with a dome on "
-
-  San Agustín Archaeological Park
-    LON  : -76.2977°E  |  dev 0.0189 beru  (62.9 km)  |  Tier B
-    KEYS : ['mound']
-    VALID: {'mound': 'mound+arch.context'}
-    [mound] "The open air public exhibition of 16 reconstructed funerary mound and hundreds of megalithic sculptures as well as related archaeological ma"
 
   Church of the Ascension, Kolomenskoye
     LON  : 37.6739°E  |  dev 0.0198 beru  (66.1 km)  |  Tier B
@@ -410,12 +355,6 @@ INCLUDED SITES:
     [dome] "The kitchen is topped by a saucer dome and small lantern."
     [dome] "It is the chapel, however, that is the visually dominant feature of the hospice with its imposing dome rising 32.5 metres."
 
-  El Tajin, Pre-Hispanic City
-    LON  : -97.3776°E  |  dev 0.0216 beru  (71.8 km)  |  Tier B
-    KEYS : ['mound']
-    VALID: {'mound': 'mound+arch.context'}
-    [mound] "The Tajín complex communicates directly with Tajín Chico, which is constructed on an artificial mound 7 m high."
-
   Kremlin and Red Square, Moscow
     LON  : 37.6204°E  |  dev 0.0216 beru  (72.0 km)  |  Tier B
     KEYS : ['domed', 'domes']
@@ -426,18 +365,9 @@ INCLUDED SITES:
 
   Cahokia Mounds State Historic Site
     LON  : -90.0614°E  |  dev 0.0223 beru  (74.3 km)  |  Tier B
-    KEYS : ['tumuli', 'mound']
-    VALID: {'tumuli': 'unambiguous', 'mound': 'mound+arch.context'}
+    KEYS : ['tumuli']
+    VALID: {'tumuli': 'unambiguous'}
     [tumuli] "The mounds served variously as construction foundations for public buildings and as funerary tumuli."
-    [mound] "It is a striking example of a complex chiefdom society, with many satellite mound centres and numerous outlying hamlets and villages."
-    [mound] "Primary features at the site include Monks Mound, the largest prehistoric earthwork in the Americas, covering over 5 ha and standing 30 m hi"
-
-  Monumental Earthworks of Poverty Point
-    LON  : -91.4064°E  |  dev 0.0225 beru  (75.0 km)  |  Tier B
-    KEYS : ['mound']
-    VALID: {'mound': 'mound+arch.context'}
-    [mound] "Mound A, one of the largest constructed earthen mounds in North America, dominates the site."
-    [mound] "The mound complex is a singular achievement in earthen construction in North America: it was not surpassed for at least 2,000 years (and onl"
 
   Episcopal Complex of the Euphrasian Basilica in the Historic Centre of Poreč
     LON  : 13.5933°E  |  dev 0.0225 beru  (75.0 km)  |  Tier B
@@ -447,11 +377,10 @@ INCLUDED SITES:
 
   Buddhist Ruins of Takht-i-Bahi and Neighbouring City Remains at Sahr-i-Bahlol
     LON  : 71.9506°E  |  dev 0.0227 beru  (75.7 km)  |  Tier B
-    KEYS : ['stupa', 'stupas', 'mound']
-    VALID: {'stupa': 'unambiguous', 'stupas': 'unambiguous', 'mound': 'REJECTED'}
+    KEYS : ['stupa', 'stupas']
+    VALID: {'stupa': 'unambiguous', 'stupas': 'unambiguous'}
     [stupa] "Today the ruins comprise a main stupa court, votive stupas court, a group of three stupas, the monastic quadrangle with meditation cells, co"
     [stupas] "Today the ruins comprise a main stupa court, votive stupas court, a group of three stupas, the monastic quadrangle with meditation cells, co"
-    [mound] "The town is set on an elongated mound up to 9 metres high and surrounded by portions of the defensive walls in “diaper” style characteristic"
 
   Painted Churches in the Troodos Region
     LON  : 32.9663°E  |  dev 0.0232 beru  (77.4 km)  |  Tier B
@@ -582,10 +511,9 @@ INCLUDED SITES:
 
   Capital Cities and Tombs of the Ancient Koguryo Kingdom
     LON  : 126.1762°E  |  dev 0.0302 beru  (100.7 km)  |  Tier B
-    KEYS : ['tumulus', 'mound']
-    VALID: {'tumulus': 'unambiguous', 'mound': 'mound+arch.context'}
+    KEYS : ['tumulus']
+    VALID: {'tumulus': 'unambiguous'}
     [tumulus] "Some of the tombs show great ingenuity in their elaborate ceilings, designed to roof wide spaces without columns and carry the heavy load of"
-    [mound] "Some of the tombs show great ingenuity in their elaborate ceilings, designed to roof wide spaces without columns and carry the heavy load of"
 
   Churches of the Pskov School of Architecture
     LON  : 28.3341°E  |  dev 0.0312 beru  (103.8 km)  |  Tier B
@@ -611,13 +539,6 @@ INCLUDED SITES:
     [tumuli] "The Tumuli Park Belt consists of three groups of Royal Tombs."
     [tumuli] "Protection and management requirements Gyeongju Historic Areas consists of five different sub-areas of Mount Namsan, Wolseong, Tumuli, Hwang"
 
-  Mausoleum of the First Qin Emperor
-    LON  : 109.2600°E  |  dev 0.0336 beru  (112.0 km)  |  Tier B
-    KEYS : ['mound']
-    VALID: {'mound': 'mound+arch.context'}
-    [mound] "Begun in 246 BCE the grave mound survives to a height of 51.3 meters within a rectangular, double-walled enclosure oriented north-south."
-    [mound] "145-95 BCE), workers from every province of the Empire toiled unceasingly until the death of the Emperor in 210 in order to construct a subt"
-
   Archaeological Site of Philippi
     LON  : 24.2853°E  |  dev 0.0339 beru  (112.8 km)  |  Tier B
     KEYS : ['domed']
@@ -630,13 +551,6 @@ INCLUDED SITES:
     VALID: {'dome': 'context-validated'}
     [dome] "The large stone church had a fine dome and impressive decoration."
 
-  Ban Chiang Archaeological Site
-    LON  : 103.2376°E  |  dev 0.0344 beru  (114.5 km)  |  Tier B
-    KEYS : ['mound']
-    VALID: {'mound': 'mound+arch.context'}
-    [mound] "Brief synthesis The Ban Chiang Archaeological Site is a large, prehistoric earthen mound located in an agricultural area in the Ban Chiang S"
-    [mound] "It is an oval-shaped mound formed by human habitation 500 meters x 1,350 meters and 8 meters high."
-
   Historic Cairo
     LON  : 31.2334°E  |  dev 0.0345 beru  (114.9 km)  |  Tier B
     KEYS : ['dome', 'domes']
@@ -646,11 +560,9 @@ INCLUDED SITES:
 
   Ephesus
     LON  : 27.3336°E  |  dev 0.0355 beru  (118.2 km)  |  Tier B
-    KEYS : ['domed', 'mound']
-    VALID: {'domed': 'context-validated', 'mound': 'REJECTED'}
+    KEYS : ['domed']
+    VALID: {'domed': 'context-validated'}
     [domed] "Since the 5 th  century, the House of the Virgin Mary, a domed cruciform chapel seven kilometres from Ephesus, became a major place of Chris"
-    [mound] "Brief synthesis Within what was once the estuary of the river Kaystros, a continuous and complex settlement history can be traced in Ephesus"
-    [mound] "The Neolithic settlement of Cukurici Mound marking the southern edge of the former estuary is now well inland, and was abandoned prior to se"
 
   Wooden <em>Tserkvas</em> of the Carpathian Region in Poland and Ukraine
     LON  : 24.3446°E  |  dev 0.0359 beru  (119.4 km)  |  Tier B
@@ -675,13 +587,11 @@ INCLUDED SITES:
 
   Stonehenge, Avebury and Associated Sites
     LON  : -1.8254°E  |  dev 0.0365 beru  (121.5 km)  |  Tier B
-    KEYS : ['barrow', 'barrows', 'mound']
-    VALID: {'barrow': 'unambiguous', 'barrows': 'unambiguous', 'mound': 'mound+arch.context'}
+    KEYS : ['barrow', 'barrows']
+    VALID: {'barrow': 'unambiguous', 'barrows': 'unambiguous'}
     [barrow] "At Avebury they include Windmill Hill, the West Kennet Long Barrow, the Sanctuary, Silbury Hill, the West Kennet and Beckhampton Avenues, th"
     [barrow] "A profound insight into the changing mortuary culture of the periods is provided by the use of Stonehenge as a cremation cemetery, by the We"
     [barrows] "At Avebury they include Windmill Hill, the West Kennet Long Barrow, the Sanctuary, Silbury Hill, the West Kennet and Beckhampton Avenues, th"
-    [mound] "At Avebury, the massive Henge, containing the largest prehistoric stone circle in the world, and Silbury Hill, the largest prehistoric mound"
-    [mound] "Another outstanding monument, Silbury Hill, is the largest prehistoric mound in Europe."
 
   Historic City of Yazd
     LON  : 54.3731°E  |  dev 0.0368 beru  (122.6 km)  |  Tier B
@@ -706,11 +616,9 @@ INCLUDED SITES:
 
   Jelling Mounds, Runic Stones and Church
     LON  : 9.4200°E  |  dev 0.0384 beru  (127.8 km)  |  Tier B
-    KEYS : ['barrow', 'mound']
-    VALID: {'barrow': 'unambiguous', 'mound': 'mound+arch.context'}
+    KEYS : ['barrow']
+    VALID: {'barrow': 'unambiguous'}
     [barrow] "The North mound was constructed over an impressive burial chamber of oak that was cut into an earlier Bronze Age barrow of much smaller dime"
-    [mound] "The North mound was constructed over an impressive burial chamber of oak that was cut into an earlier Bronze Age barrow of much smaller dime"
-    [mound] "The South mound contains no burial chamber."
 
   Sardis and the Lydian Tumuli of Bin Tepe
     LON  : 28.0453°E  |  dev 0.0408 beru  (135.8 km)  |  Tier B
@@ -729,12 +637,10 @@ INCLUDED SITES:
 
   Mozu-Furuichi Kofun Group: Mounded Tombs of Ancient Japan
     LON  : 135.4994°E  |  dev 0.0410 beru  (136.6 km)  |  Tier B
-    KEYS : ['kofun', 'mound']
-    VALID: {'kofun': 'unambiguous', 'mound': 'mound+arch.context'}
+    KEYS : ['kofun']
+    VALID: {'kofun': 'unambiguous'}
     [kofun] "Mozu-Furuichi Kofun Group: Mounded Tombs of Ancient Japan Located on a plateau above the Osaka Plain, this property includes 49  kofun  (“ol"
     [kofun] "These  kofun  have been selected from among a total of 160,000 in Japan and form the richest material representation of the Kofun period, fr"
-    [mound] "Brief synthesis Located on a plateau above the Osaka Plain, the Mozu-Furuichi Kofun Group is a serial property of 45 components which contai"
-    [mound] "Criterion (iv): The Mozu-Furuichi Kofun Group demonstrates an outstanding type of ancient East Asian burial mound construction."
 
   Ruins of Kilwa Kisiwani and Ruins of Songo Mnara
     LON  : 39.5228°E  |  dev 0.0418 beru  (139.2 km)  |  Tier B
@@ -794,21 +700,13 @@ INCLUDED SITES:
 
   Taxila
     LON  : 72.8805°E  |  dev 0.0463 beru  (154.1 km)  |  Tier B
-    KEYS : ['stupa', 'stupas', 'domed', 'tumulus', 'mound']
-    VALID: {'stupa': 'unambiguous', 'stupas': 'unambiguous', 'domed': 'context-validated', 'tumulus': 'unambiguous', 'mound': 'mound+arch.context'}
+    KEYS : ['stupa', 'stupas', 'domed', 'tumulus']
+    VALID: {'stupa': 'unambiguous', 'stupas': 'unambiguous', 'domed': 'context-validated', 'tumulus': 'unambiguous'}
     [stupa] "The Buddhist archaeological sites at Taxila include the Dharmarajika complex and stupa, the Khader Mohra grouping, the Kalawan grouping, the"
     [stupas] "The many private houses, stupas, and temples were laid out on the Hellenistic grid system and show the strong Western classical influence on"
     [stupas] "The Taxila serial site also includes Khanpur cave, which has produced stratified microlithic tools of the Mesolithic period, and a number of"
     [domed] "The Giri complex also includes the remains of a three-domed Muslim mosque, ziarat (tomb), and madrassa (school) of the medieval period."
     [tumulus] "Taxila From the ancient Neolithic tumulus of Saraikala to the ramparts of Sirkap (2nd century B.C.) and the city of Sirsukh (1st century A.D"
-    [mound] "One of these sites, the Bihr mound, is associated with the historic event of the triumphant entry of Alexander the Great into Taxila.The arc"
-    [mound] "The prehistoric mound of Saraikala represents the earliest settlement of Taxila, with evidence of Neolithic, Bronze Age, and Iron Age occupa"
-
-  Maya Site of Copan
-    LON  : -89.1333°E  |  dev 0.0467 beru  (155.7 km)  |  Tier B
-    KEYS : ['mound']
-    VALID: {'mound': 'mound+arch.context'}
-    [mound] "Among the five plazas are the Ceremonial Plaza, with an impressive stadium opening onto a mound with numerous richly sculptured monoliths an"
 
   Meidan Emam, Esfahan
     LON  : 51.6778°E  |  dev 0.0470 beru  (156.4 km)  |  Tier B
@@ -845,51 +743,14 @@ INCLUDED SITES:
     [dome] "The octagonal building is crowned with a 50 m tall dome covered in turquoise-blue faience and surrounded by eight slender minarets."
     [dome] "It is the earliest existing example of the double-shelled dome in Iran."
 
-  Hopewell Ceremonial Earthworks
-    LON  : -83.2198°E  |  dev 0.0496 beru  (165.3 km)  |  Tier B
-    KEYS : ['mound']
-    VALID: {'mound': 'mound+arch.context'}
-    [mound] "High-resolution remote-sensing data for the Seip Earthworks, Hopewell Mound Group, Hopeton Earthworks, and High Bank Works component parts c"
-
 
 CONTEXT-REJECTED SITES:
 ────────────────────────────────────────────────────────────────────────────────────────
-  Archaeological Monuments Zone of Xochicalco
-    KEYS : ['mound']  →  {'mound': 'REJECTED'}
-    REASON [mound]: no archaeological-context co-occurrence
-    [mound] "The Main Plaza itself is built on an enormous artificial mound, accessible only through the two defended porticoes."
-
-  Diyarbakır Fortress and Hevsel Gardens Cultural Landscape
-    KEYS : ['mound']  →  {'mound': 'REJECTED'}
-    REASON [mound]: no archaeological-context co-occurrence
-    [mound] "The site encompasses the Inner castle, known as İçkale and including the Amida Mound, and the 5.8 km-long city walls of Diyarbakır with thei"
-
-  Gonbad-e Qābus
-    KEYS : ['mound']  →  {'mound': 'REJECTED'}
-    REASON [mound]: no archaeological-context co-occurrence
-    [mound] "The exterior flanges and inscription bands are in good condition, but the insertion of the ramp and the design of the retaining wall on the "
-
   Hiroshima Peace Memorial (Genbaku Dome)
     KEYS : ['dome']  →  {'dome': 'REJECTED'}
     REASON [dome]: negative-context: «atomic bomb» matched /\batomic bomb\b/
     [dome] "Hiroshima Peace Memorial (Genbaku Dome) The Hiroshima Peace Memorial (Genbaku Dome) was the only structure left standing in the area where t"
     [dome] "The Committee decided to inscribe the Hiroshima Peace Memorial (Genbaku Dome) on the World Heritage List, exceptionally on the basis of cult"
-
-  Neolithic Site of Çatalhöyük
-    KEYS : ['mound']  →  {'mound': 'REJECTED'}
-    REASON [mound]: no archaeological-context co-occurrence
-    [mound] "The taller eastern mound contains eighteen levels of Neolithic occupation between 7400&nbsp;bc and 6200&nbsp;bc, including wall paintings, r"
-    [mound] "The western mound shows the evolution of cultural practices in the Chalcolithic period, from 6200&nbsp;bc to 5200&nbsp;bc."
-
-  Old and New Towns of Edinburgh
-    KEYS : ['mound']  →  {'mound': 'REJECTED'}
-    REASON [mound]: no archaeological-context co-occurrence
-    [mound] "The juxtaposition of these two distinctive townscapes, each of exceptional historic and architectural interest, which are linked across the "
-
-  Old town of Kuldīga
-    KEYS : ['mound']  →  {'mound': 'REJECTED'}
-    REASON [mound]: no archaeological-context co-occurrence
-    [mound] "Integrity The property encompasses the medieval castle mound plateau, the medieval area known as Kalnamiests, and the urban areas which deve"
 
   Precolumbian Chiefdom Settlements with Stone Spheres of the Diquís
     KEYS : ['spherical']  →  {'spherical': 'REJECTED'}
@@ -905,22 +766,6 @@ CONTEXT-REJECTED SITES:
     KEYS : ['dome']  →  {'dome': 'REJECTED'}
     REASON [dome]: negative-context: «Rock Island» matched /\brock island/
     [dome] "The maze of dome-shaped and green Rock Islands seemingly floating in the turquoise lagoon surrounded by coral reef is of exceptional aesthet"
-
-  Temple of Heaven: an Imperial Sacrificial Altar in Beijing
-    KEYS : ['mound']  →  {'mound': 'REJECTED'}
-    REASON [mound]: no archaeological-context co-occurrence
-    [mound] "Brief synthesis The Temple of Heaven is an axial arrangement of Circular Mound Altar to the south open to the sky with the conically roofed "
-    [mound] "In the ninth year of the reign of Emperor Jiajing (1530) the decision was taken to offer separate sacrifices to heaven and earth, and so the"
-
-  The par force hunting landscape in North Zealand
-    KEYS : ['mound']  →  {'mound': 'REJECTED'}
-    REASON [mound]: no archaeological-context co-occurrence
-    [mound] "The king's monogram, crown and initials document the authenticity of Kongestenen, but the mound it was placed on has been disturbed."
-
-  Thracian Tomb of Sveshtari
-    KEYS : ['mound']  →  {'mound': 'REJECTED'}
-    REASON [mound]: no archaeological-context co-occurrence
-    [mound] "Authenticity The Property retains its authenticity, being preserved in its original location by a moisture-isolating protective shell when t"
 
   Ulu<U>r</U>u-Kata Tju<U>t</U>a National Park
     KEYS : ['domes']  →  {'domes': 'REJECTED'}

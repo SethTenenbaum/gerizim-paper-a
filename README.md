@@ -1,6 +1,6 @@
 # Longitude Quantization in the UNESCO World Heritage Corpus: Domes, Stupas, and the Babylonian Beru
 
-**Paper A — Primary UNESCO Analysis** · `v1.1.0`
+**Paper A — Primary UNESCO Analysis** · `v1.2.0`
 
 Seth Tenenbaum · Independent Scholar  
 ORCID: [0009-0008-5797-2498](https://orcid.org/0009-0008-5797-2498)
@@ -90,6 +90,7 @@ gerizim-paper-a/
 │   │   ├── sensitivity_slope_specificity_test.py  # Sensitivity slope specificity
 │   │   ├── americas_directional_test.py           # Americas directional control
 │   │   ├── mound_keyword_context_audit.py         # Mound keyword context audit
+│   │   ├── wikidata_q180987_stupa_audit.py        # Wikidata Q180987 stupa corpus audit (Test 6)
 │   │   └── verify_x18_periodicity.py              # x.18°E artifact check
 │   │
 │   ├── global/                       # Global robustness checks
@@ -106,7 +107,7 @@ gerizim-paper-a/
 │   │   ├── x18_optimal_band_significance.py       # x.18°E optimal band significance
 │   │   └── emit_constants.py                      # Emit pure constants as LaTeX macros
 │   │
-│   └── americas/                     # Control comparison
+│   └── americas/                     # Control comparison (directional test scripts only)
 │
 ├── lib/                              # Shared analysis library
 │   ├── beru.py               # Beru-unit calculations, tier classification
@@ -122,21 +123,24 @@ gerizim-paper-a/
 ├── data/
 │   ├── unesco_corpus.py              # Shim for backward-compatible imports
 │   ├── scripts/
-│   │   ├── unesco_corpus.py          # Canonical UNESCO data loader
-│   │   ├── fetch_extended.py         # Fetch extended descriptions from UNESCO
+│   │   ├── unesco_corpus.py                # Canonical UNESCO data loader
+│   │   ├── fetch_extended.py               # Fetch extended descriptions from UNESCO
+│   │   └── fetch_wikidata_q180987.py       # Fetch / validate Wikidata Q180987 stupa corpus
 │   └── store/
 │       ├── results.json                    # Aggregated pipeline results
 │       ├── unesco/
 │       │   ├── unesco.xml                  # UNESCO WHC XML export (1,248 sites)
 │       │   ├── extended_cache.json         # Cached extended descriptions
-│       │   └── meta_keyword_results.json   # Pre-computed keyword results
-│       └── wikidata/
+│       │   ├── meta_keyword_results.json   # Pre-computed keyword results
+│       │   └── wikidata_stupas_q180987.csv # Wikidata Q180987 stupa corpus (229 sites)
+│       └── wikidata/                       # (empty — P1435 corpus removed in v1.2.0)
 │
 ├── supplementary/
 │   ├── audit/                        # Keyword-classification audit files (reproducible)
 │   │   ├── dome_keyword_audit.txt         # Dome/spherical monument sweep (Test 2)
 │   │   ├── dome_mound_keyword_audit.txt   # Dome + mound evolution sweep (Test 2b)
 │   │   ├── founding_keyword_audit.txt     # Founding/sacred-origin classifier (Test E)
+│   │   ├── fdr.txt                        # FDR multiple-comparisons output
 │   │   ├── unesco_site_by_site_audit.txt  # Site-by-site manual audit notes
 │   │   └── README_audit.txt              # Audit provenance and reproducibility notes
 │   └── UNESCO/                       # Archived source materials for anchor citation (ref. 5706)
@@ -181,6 +185,46 @@ gerizim-paper-a/
 ```
 
 ## Changelog
+
+### v1.2.0 — 2026-04-15
+**DOI:** (this release — Zenodo will assign DOI automatically on publication)
+
+#### Analysis changes
+- **P1435 (Wikidata heritage property) corpus removed:** `data/store/wikidata/p1435_global_control.csv`,
+  `data/store/wikidata/p1435_mesoamerica.csv`, `data/scripts/fetch_p1435_global.py`,
+  `analysis/global/wikidata_p1435_control_analysis.py`, and
+  `analysis/americas/americas_harmonic_depletion_audit.py` deleted from the
+  repository. All manuscript references to the P1435 control analysis removed.
+  `data/store/wikidata/` is now empty.
+- **Ambiguous "mound" keyword removed:** `mound` removed from `keywords.json`
+  keyword lists (was causing ambiguous matches in the tumulus→dome morphological
+  evolution test). Manuscript prose for Test 2b updated to list only unambiguous
+  keywords (`tumulus`, `tumuli`, `barrow`, `barrows`, `kofun`). All affected
+  macros regenerated.
+- **Missing macro emissions added** to `analysis/unesco/spherical_monument_raw_sweep.py`,
+  `cluster_asymmetry_test.py`, `regional_temporal_gradient.py`,
+  `dome_geographic_concentration_test.py`, `origin_sites_test.py`,
+  `unit_sweep_fill.py`, `tumulus_dome_evolution_raw_sweep.py`,
+  `analysis/global/anchor_site_comparison.py`, `anchor_uniqueness_audit.py`,
+  `emit_constants.py`, and `x18_periodicity_formal_test.py`.
+- **Wikidata Q180987 stupa fetch/validate script added:**
+  `data/scripts/fetch_wikidata_q180987.py` — single authoritative source for
+  `data/store/unesco/wikidata_stupas_q180987.csv` (229-site global stupa corpus).
+  Supports `--validate` (default) and `--fetch` modes with checksum verification.
+- **`analysis/unesco/wikidata_q180987_stupa_audit.py` added:** corpus audit
+  script for the Q180987 stupa dataset used in Test 6.
+
+#### Manuscript
+- **`manuscript/archaeometry/paper_a_archaeometry.tex` updated:** P1435 control
+  analysis section removed; Test 2b mound keyword prose updated; all macros
+  now reflect the mound-free keyword set.
+- **`manuscript/generated_macros.tex` regenerated** with updated values
+  (mound-free tumulus/dome evolution macros; P1435 macros removed).
+
+#### Housekeeping
+- All version references (`CITATION.cff`, `README.md`, both `.tex` files)
+  bumped to `v1.2.0`.
+- `data/store/wikidata/` directory retained (empty) to preserve structure.
 
 ### v1.1.0 — 2026-04-14
 **DOI:** [10.5281/zenodo.19574076](https://doi.org/10.5281/zenodo.19574076)
@@ -385,7 +429,7 @@ hand-curated. As of v1.1.0 the manuscripts contain 439 macros, all emitted
 by analysis scripts, with zero value mismatches between the manuscripts and
 the pipeline.
 
-> **Pipeline status:** 493 macros emitted · 439 used in manuscript · 0 mismatches
+> **Pipeline status:** macros emitted by analysis scripts · all used values in manuscript are pipeline-driven · 0 hardcoded values
 
 ## Data Sources
 
@@ -393,6 +437,7 @@ the pipeline.
 |---------|--------|---|
 | UNESCO World Heritage List | [whc.unesco.org/en/list/xml](https://whc.unesco.org/en/list/xml) | 1,248 sites |
 | Extended descriptions | Scraped from individual UNESCO site pages | 1,248 entries |
+| Wikidata Q180987 stupa corpus | [query.wikidata.org](https://query.wikidata.org) (P31/P279* wd:Q180987, with P625) | 229 sites |
 
 The UNESCO XML is included in `data/store/unesco/unesco.xml`. To refresh
 the extended descriptions cache, run `python3 data/scripts/fetch_extended.py`

@@ -104,6 +104,7 @@ if [ "${1:-}" = "--macros-only" ]; then
         analysis/unesco/dome_footprint_window_sensitivity.py   # → geoNullDomeTwoDeg*, geoNullDomeTenDeg*
         analysis/unesco/stupa_coordinate_perturbation.py       # → stupaCoordPerturb*
         analysis/unesco/americas_directional_test.py           # → AmericasN, AmericasApCount, AmericasOneSidedP, AmericasDirectional
+        analysis/unesco/wikidata_q180987_stupa_audit.py        # → wikiStupaTotal, wikiStupaATierCount/Rate/Enrich/BinomP, wikiStupaPermZ/P, wikiStupaAp*, wikiStupaJava*, wikiStupaCluster*, named-site dev_km
         # ── Simulation (slow — writes simDomePermP etc.) ──────────────────
         analysis/unesco/simulation_null_model.py
         # ── Cluster asymmetry + conditional sensitivity subtest ───────────
@@ -325,6 +326,9 @@ run_script "GROUP 26c: Stupa coordinate-perturbation sensitivity"      \
 
 run_script "GROUP 26d: Americas UNESCO directional test"               \
            analysis/unesco/americas_directional_test.py
+
+run_script "GROUP 26e: Wikidata Q180987 stupa corpus portability audit" \
+           analysis/unesco/wikidata_q180987_stupa_audit.py
 
 run_script "GROUP 27: Unit Sweep (spacing sensitivity)"            \
            analysis/unesco/unit_sweep_fill.py
