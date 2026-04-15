@@ -68,9 +68,9 @@ VALIDATION RESULTS (April 2, 2026)
 
 USAGE
 -----
-    python3 data/fetch_wikidata_q180987.py             # validate
-    python3 data/fetch_wikidata_q180987.py --validate  # validate (explicit)
-    python3 data/fetch_wikidata_q180987.py --fetch     # download & overwrite
+    python3 data/scripts/fetch_wikidata_q180987.py             # validate
+    python3 data/scripts/fetch_wikidata_q180987.py --validate  # validate (explicit)
+    python3 data/scripts/fetch_wikidata_q180987.py --fetch     # download & overwrite
 
 Requires:  requests  (pip install requests)
 """
@@ -91,9 +91,9 @@ except ImportError:
     sys.exit("pip install requests  (required)")
 
 # ── Paths ─────────────────────────────────────────────────────────────────────
-ROOT       = Path(__file__).resolve().parent.parent
+ROOT       = Path(__file__).resolve().parents[2]          # data/scripts/ → repo root
 DATA_DIR   = ROOT / "data"
-OUTPUT_CSV = DATA_DIR / "wikidata_stupas_q180987.csv"
+OUTPUT_CSV = DATA_DIR / "store" / "unesco" / "wikidata_stupas_q180987.csv"
 
 # ── Stored snapshot checksums ─────────────────────────────────────────────────
 # These reflect the --fetch output (7-line comment header + data rows).
