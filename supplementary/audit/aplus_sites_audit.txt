@@ -1,0 +1,580 @@
+UNESCO A-TIER SITES: GERIZIM vs JERUSALEM ANCHOR COMPARISON
+Generated : Thu Apr 16 20:34:25 UTC 2026
+Script    : tools/generate_audit_aplus_sites.py
+Corpus    : 1011 Cultural/Mixed UNESCO sites with coordinates
+Beru      : 30.0°  |  A+ threshold: <= 0.002 beru (6.7 km)  |  A threshold: <= 0.01 beru (33 km)
+Gerizim   : 35.269°E  (external; N=1011, no exclusion)
+Jerusalem : 35.2317°E  (self-excluded as anchor; N=1010)  [0.0373° = 4.1 km separation]
+
+────────────────────────────────────────────────────────────────────────────────────────────────
+SUMMARY
+
+  Anchor           N corpus    A++     A+   A (all)    A+ %       A+ p           A %        A p      
+  --------------------------------------------------------------------------------------
+  Gerizim              1011      7     56       228    5.5%     0.0103     *   22.6%     0.0246     *
+  Jerusalem            1010      7     56       217    5.5%     0.0101     *   21.5%     0.1275    ns
+
+  A+ null rate: 4%   A null rate: 20%
+  A+ overlap (both anchors): 38 sites
+  A+ unique to Gerizim: 18 sites
+  A+ unique to Jerusalem: 18 sites
+
+────────────────────────────────────────────────────────────────────────────────────────────────
+GERIZIM (35.269°E) — ALL A-TIER SITES  (A++=7, A+=56, A=172, total=228)
+  Tier   Dev (beru)      km  Dir  Harmonic      Lon°E  Site
+  ----------------------------------------------------------------------------------------
+  --- A++ ---
+  A++      0.000024     0.1    W       0.9     8.2697  <I>Sacri Monti</I> of Piedmont and Lombardy
+  A++      0.000069     0.2    E       1.1    68.2711  Mausoleum of Khoja Ahmed Yasawi
+  A++      0.000078     0.3    E       0.1    38.2667  Site of Palmyra
+  A++      0.000094     0.3    W       0.4    23.2662  Boyana Church
+  A++      0.000095     0.3    W       4.2   -90.7282  Antigua Guatemala
+  A++      0.000120     0.4    W       0.7    14.2726  Holašovice Historic Village
+  A++      0.000180     0.6    W       1.3    -3.7364  Historic Town of Grand-Bassam
+
+  --- A+ ---
+  A+       0.000237     0.8    E       1.6    83.2761  Lumbini, the Birthplace of the Lord Buddha
+  A+       0.000326     1.1    W       0.4    23.2788  Brâncuși Monumental Ensemble of Târgu Jiu
+  A+       0.000430     1.4    W       0.8    11.2561  Historic Centre of Florence
+  A+       0.000478     1.6    W       1.2    -0.7167  Palmeral of Elche
+  A+       0.000541     1.8    W       0.4    23.2528  Old City of Zamość
+  A+       0.000615     2.0    E       1.4    77.2506  Humayun's Tomb, Delhi
+  A+       0.000618     2.1    W       0.6    17.2505  Holy Trinity Column in Olomouc
+  A+       0.000626     2.1    E       0.1    38.2878  The Gedeo Cultural Landscape
+  A+       0.000643     2.1    W       0.7    14.2497  Mbanza Kongo, Vestiges of the Capital of the former Kingdom of Kongo
+  A+       0.000700     2.3    E       2.0    95.2900  Pyu Ancient Cities
+  A+       0.000707     2.4    W       0.8    11.2478  Medici Villas and Gardens in Tuscany
+  A+       0.000737     2.5    E       2.4   107.2911  Silk Roads: the Routes Network of Chang'an-Tianshan Corridor
+  A+       0.000802     2.7    W       0.7    14.2931  Archaeological Site of Leptis Magna
+  A+       0.000896     3.0    W       0.6    17.2421  Via Appia. <em>Regina Viarum</em>
+  A+       0.000900     3.0    W       1.3    -3.7040  Burgos Cathedral
+  A+       0.000913     3.0    W       1.1     2.2964  Belfries of Belgium and France
+  A+       0.000939     3.1    E       1.4    77.2408  Red Fort Complex
+  A+       0.000955     3.2    W       0.2    29.2976  Xanthos-Letoon
+  A+       0.001000     3.3    W       0.3    26.2390  Archaeological Site of Troy
+  A+       0.001004     3.3    W       0.2    29.2389  Mapungubwe Cultural Landscape
+  A+       0.001069     3.6    W       0.6    17.2369  The <I>Trulli</I> of Alberobello
+  A+       0.001078     3.6    W       1.3    -3.6987  Cliff of Bandiagara (Land of the Dogons)
+  A+       0.001089     3.6    W       1.1     2.3017  Amiens Cathedral
+  A+       0.001097     3.7    W       0.8    11.3019  The Porticoes of Bologna
+  A+       0.001121     3.7    E       2.9   122.2354  Baroque Churches of the Philippines
+  A+       0.001133     3.8    E       0.4    47.2350  Takht-e Soleyman
+  A+       0.001238     4.1    W       4.4   -96.7681  Historic Centre of Oaxaca and Archaeological Site of Monte Albán
+  A+       0.001244     4.1    W       0.0    35.2317  Old City of Jerusalem and its Walls
+  A+       0.001281     4.3    E       3.7   146.2306  Tasmanian Wilderness
+  A+       0.001296     4.3    E       2.5   110.2301  Borobudur Temple Compounds
+  A+       0.001318     4.4    W       0.4    23.3086  Rila Monastery
+  A+       0.001439     4.8    E       2.2   101.2258  Deer Stone Monuments and Related Bronze Age Sites
+  A+       0.001465     4.9    W       1.3    -3.6871  Paseo del Prado and Buen Retiro, a landscape of Arts and Sciences
+  A+       0.001467     4.9    E       2.1    98.2250  The Great Wall
+  A+       0.001488     5.0    W       0.0    35.2244  Kizhi Pogost
+  A+       0.001505     5.0    W       1.4    -6.7761  Las Médulas
+  A+       0.001534     5.1    W       0.7    14.3150  Historic Centre of Český Krumlov
+  A+       0.001726     5.7    W       3.5   -69.6792  Coro and its Port
+  A+       0.001735     5.8    W       1.3    -3.7831  New Lanark
+  A+       0.001738     5.8    W       1.1     2.3211  Paris, Banks of the Seine
+  A+       0.001744     5.8    E       3.1   128.3213  Gaya Tumuli
+  A+       0.001744     5.8    W       0.4    23.2167  Dacian Fortresses of the Orastie Mountains
+  A+       0.001744     5.8    W       0.5    20.2167  Wooden Churches of Southern Małopolska
+  A+       0.001755     5.8    E       1.5    80.2163  Old Town of Galle and its Fortifications
+  A+       0.001855     6.2    E       0.3    44.3246  Cathedral and Churches of Echmiatsin and the Archaeological Site of Zvartnots
+  A+       0.001856     6.2    W       1.5    -9.7867  Medina of Essaouira (formerly Mogador)
+  A+       0.001897     6.3    W       1.0     5.3259  Bryggen
+  A+       0.001913     6.4    W       0.7    14.3264  18th-Century Royal Palace at Caserta with the Park, the Aqueduct of Vanvitelli, and the San Leucio Complex
+  A+       0.001987     6.6    W       0.8    11.3286  Classical Weimar
+
+  --- A ---
+  A        0.002030     6.8    E       0.9    62.2081  Silk Roads: Zarafshan-Karakum Corridor
+  A        0.002031     6.8    E       0.3    44.2081  Old City of Sana'a
+  A        0.002050     6.8    W       0.0    35.2075  Birthplace of Jesus: Church of the Nativity and the Pilgrimage Route, Bethlehem
+  A        0.002061     6.9    E       4.1   158.3308  Nan Madol: Ceremonial Centre of Eastern Micronesia
+  A        0.002089     7.0    W       0.8    11.3317  Historic Centre of Siena
+  A        0.002102     7.0    W       3.5   -69.7941  Humberstone and Santa Laura Saltpeter Works
+  A        0.002170     7.2    W       0.6    17.2039  Richtersveld Cultural and Botanical Landscape
+  A        0.002172     7.2    W       0.7    14.3342  Villa Romana del Casale
+  A        0.002207     7.4    W       3.6   -72.7972  Chiribiquete National Park – “The Maloca of the Jaguar”
+  A        0.002327     7.7    W       1.7   -15.6612  Risco Caido and the Sacred Mountains of Gran Canaria Cultural Landscape
+  A        0.002330     7.8    W       1.4    -6.6611  Prehistoric Rock Art Sites in the Côa Valley and Siega Verde
+  A        0.002337     7.8    E       1.5    80.1989  Group of Monuments at Mahabalipuram
+  A        0.002356     7.8    W       0.8    11.3397  Bauhaus and its Sites in Weimar, Dessau and Bernau
+  A        0.002404     8.0    W       0.8    11.3411  Rock Carvings in Tanum
+  A        0.002439     8.1    W       0.0    35.1958  Tyre
+  A        0.002514     8.4    W       5.8  -138.6556  Te Henua Enata – The Marquesas Islands
+  A        0.002565     8.5    W       0.7    14.1921  Historic Centre of Naples
+  A        0.002619     8.7    W       2.6   -42.6524  Serra da Capivara National Park
+  A        0.002681     8.9    E       2.6   113.3494  Mount Wutai
+  A        0.002717     9.0    E       0.4    47.1875  Historic Centre of Sheki with the Khan’s Palace
+  A        0.002733     9.1    W       0.4    23.1870  Rock Art of Alta
+  A        0.002783     9.3    E       3.3   134.3525  Rock Islands Southern Lagoon
+  A        0.002791     9.3    E       1.4    77.1853  Qutb Minar and its Monuments, Delhi
+  A        0.002796     9.3    E       2.7   116.1851  Site of Xanadu
+  A        0.002820     9.4    E       0.0    35.3536  Masada
+  A        0.002983     9.9    W       3.3   -63.8205  Fuerte de Samaipata
+  A        0.003069    10.2    W       0.2    29.1769  Fossil Hominid Sites of South Africa
+  A        0.003070    10.2    E       0.1    38.3611  Arslantepe Mound
+  A        0.003133    10.4    W       1.1     2.1750  Palau de la Música Catalana and Hospital de Sant Pau, Barcelona
+  A        0.003155    10.5    W       1.1     2.3637  Historic Fortified City of Carcassonne
+  A        0.003193    10.6    E       2.5   110.3648  The Cosmological Axis of Yogyakarta and its Historic Landmarks
+  A        0.003198    10.6    W       0.2    29.1731  Bursa and Cumalıkızık: the Birth of the Ottoman Empire
+  A        0.003213    10.7    E       0.1    38.1726  Cultural Landscape of Kenozero Lake
+  A        0.003256    10.8    W       4.9  -111.6333  Writing-on-Stone / Áísínai’pi
+  A        0.003343    11.1    W       3.7   -75.6307  Archaeological Landscape of the First Coffee Plantations in the South-East of Cuba
+  A        0.003390    11.3    E       0.6    53.1673  Pasargadae
+  A        0.003448    11.5    W       2.7   -45.8344  Kujataa Greenland: Norse and Inuit Farming at the Edge of the Ice Cap
+  A        0.003519    11.7    W       0.5    20.3746  ǂKhomani Cultural Landscape
+  A        0.003537    11.8    W       0.7    14.3751  Twyfelfontein or /Ui-//aes
+  A        0.003637    12.1    E       0.8    59.3781  Ancient City of Qalhat
+  A        0.003670    12.2    W       0.0    35.1589  Palestine: Land of Olives and Vines – Cultural Landscape of Southern Jerusalem, Battir
+  A        0.003762    12.5    W       0.6    17.3819  Gardens and Castle at Kroměříž
+  A        0.003771    12.6    E       1.3    74.3821  Fort and Shalamar Gardens in Lahore
+  A        0.003811    12.7    E       1.5    80.3833  Sacred City of Anuradhapura
+  A        0.003819    12.7    W       4.9  -111.8456  The 20th-Century Architecture of Frank Lloyd Wright
+  A        0.003865    12.9    W       1.4    -6.8469  Rabat, Modern Capital and Historic City: a Shared Heritage
+  A        0.003930    13.1    E       2.2   101.1511  The Ancient Town of Si Thep and its Associated Dvaravati Monuments
+  A        0.003963    13.2    W       3.1   -57.8499  Historic Quarter of the City of Colonia del Sacramento
+  A        0.004048    13.5    W       1.0     5.1476  Rietveld Schröderhuis (Rietveld Schröder House)
+  A        0.004055    13.5    W       1.3    -3.6093  Aranjuez Cultural Landscape
+  A        0.004080    13.6    E       2.7   116.3914  Beijing Central Axis: A Building Ensemble Exhibiting the Ideal Order of the Chinese Capital
+  A        0.004161    13.9    W       1.1     2.1442  Episcopal City of Albi
+  A        0.004244    14.1    E       0.8    59.1417  Kunya-Urgench
+  A        0.004259    14.2    E       2.6   113.1412  Historic Monuments of Dengfeng in “The Centre of Heaven and Earth”
+  A        0.004263    14.2    E       2.7   116.1411  Summer Palace, an Imperial Garden in Beijing
+  A        0.004272    14.2    E       2.7   116.3972  Imperial Palaces of the Ming and Qing Dynasties in Beijing and Shenyang
+  A        0.004272    14.2    W       0.5    20.1408  Historic Centres of Berat and Gjirokastra
+  A        0.004311    14.4    W       1.1     2.3983  Bourges Cathedral
+  A        0.004337    14.4    E       1.1    68.1389  Archaeological Ruins at Moenjodaro
+  A        0.004383    14.6    E       3.1   128.1375  Mount Kumgang – Diamond Mountain from the Sea
+  A        0.004522    15.1    W       0.8    11.1333  Ecosystem and Relict Cultural Landscape of Lopé-Okanda
+  A        0.004593    15.3    E       0.1    38.1312  Architectural Ensemble of the Trinity Sergius Lavra in Sergiev Posad
+  A        0.004609    15.3    W       1.0     5.4073  Dutch Water Defence Lines
+  A        0.004615    15.4    W       0.4    23.1306  Roșia Montană Mining Landscape
+  A        0.004624    15.4    W       0.8    11.1303  Collegiate Church, Castle and Old Town of Quedlinburg
+  A        0.004648    15.5    W       3.7   -75.8704  San Pedro de la Roca Castle, Santiago de Cuba
+  A        0.004703    15.7    W       1.3    -3.5899  Alhambra, Generalife and Albayzín, Granada
+  A        0.004735    15.8    W       0.0    35.1269  Necropolis of Bet She’arim: A Landmark of Jewish Renewal
+  A        0.004856    16.2    W       0.2    29.1233  Hierapolis-Pamukkale
+  A        0.004893    16.3    E       2.6   113.1222  Yungang Grottoes
+  A        0.004906    16.3    E       0.1    38.1218  Great Mosque and Hospital of Divriği
+  A        0.004922    16.4    W       1.3    -3.5833  Ruins of Loropéni
+  A        0.004950    16.5    W       0.5    20.4175  Wieliczka and Bochnia Royal Salt Mines
+  A        0.004976    16.6    W       1.1     2.1197  Fortifications of Vauban
+  A        0.004985    16.6    W       1.1     2.1194  Palace and Park of Versailles
+  A        0.004996    16.6    W       0.8    11.4189  Schwerin Residence Ensemble
+  A        0.005061    16.9    E       0.3    44.4208  Babylon
+  A        0.005126    17.1    W       0.5    20.4228  Stari Ras and Sopoćani
+  A        0.005161    17.2    W       3.5   -69.8858  Colonial City of Santo Domingo
+  A        0.005207    17.3    W       0.8    11.1128  The Palaces of King Ludwig II of Bavaria: Neuschwanstein, Linderhof, Schachen and Herrenchiemsee
+  A        0.005249    17.5    W       4.6  -102.5735  Historic Centre of Zacatecas
+  A        0.005293    17.6    W       1.2    -0.5722  Bordeaux, Port of the Moon
+  A        0.005323    17.7    W       3.4   -66.8907  Ciudad Universitaria de Caracas
+  A        0.005356    17.8    W       0.0    35.1083  Hebron/Al-Khalil Old Town
+  A        0.005365    17.9    W       1.3    -3.8919  Ancient Ferrous Metallurgy Sites of Burkina Faso
+  A        0.005496    18.3    E       0.0    35.4339  Wadi Rum Protected Area
+  A        0.005589    18.6    E       0.4    47.4367  Bisotun
+  A        0.005592    18.6    W       0.7    14.4368  Megalithic Temples of Malta
+  A        0.005654    18.8    E       0.4    47.4386  The Ahwar of Southern Iraq: Refuge of Biodiversity and the Relict Landscape of the Mesopotamian Cities
+  A        0.005661    18.9    W       0.8    11.0992  Punic Town of Kerkuane and its Necropolis
+  A        0.005676    18.9    E       3.1   128.0987  Haeinsa Temple Janggyeong Panjeon, the Depositories for the <I>Tripitaka Koreana</I> Woodblocks
+  A        0.005685    18.9    W       0.9     8.4395  ShUM Sites of Speyer, Worms and Mainz
+  A        0.005780    19.2    W       0.9     8.4424  Speyer Cathedral
+  A        0.005809    19.3    E       1.7    86.0947  Sun Temple, Konârak
+  A        0.005811    19.4    E       0.0    35.4433  Petra
+  A        0.005835    19.4    E       0.0    35.4441  Ancient Jericho/Tell es-Sultan
+  A        0.005857    19.5    E       2.7   116.4447  Temple of Heaven: an Imperial Sacrificial Altar in Beijing
+  A        0.006129    20.4    E       3.1   128.4529  Royal Tombs of the Joseon Dynasty
+  A        0.006167    20.5    W       4.7  -105.5460  Taos Pueblo
+  A        0.006281    20.9    W       0.4    23.0806  Sanctuary of Asklepios at Epidaurus
+  A        0.006400    21.3    W       0.6    17.0770  Centennial Hall in Wrocław
+  A        0.006459    21.5    W       4.2   -90.5372  Historic Fortified Town of Campeche
+  A        0.006462    21.5    E       0.3    44.4629  Ḥimā Cultural Area
+  A        0.006585    21.9    W       3.6   -72.5334  Historic Sanctuary of Machu Picchu
+  A        0.006589    21.9    W       0.8    11.4667  Historic Centres of Stralsund and Wismar
+  A        0.006589    21.9    W       3.7   -75.5333  Port, Fortresses and Group of Monuments, Cartagena
+  A        0.006670    22.2    W       0.0    35.0689  Old City of Acre
+  A        0.006671    22.2    W       1.0     5.4691  Flemish Béguinages
+  A        0.006744    22.5    E       0.9    62.0667  State Historical and Cultural Park “Ancient Merv”
+  A        0.006791    22.6    W       0.3    26.4727  Mir Castle Complex
+  A        0.007027    23.4    W       3.1   -57.9418  The Architectural Work of Le Corbusier, an Outstanding Contribution to the Modern Movement
+  A        0.007144    23.8    W       1.7   -15.5167  Stone Circles of Senegambia
+  A        0.007191    23.9    W       1.3    -3.5153  Archaeological Site of Atapuerca
+  A        0.007237    24.1    W       0.7    14.4861  Archaeological Areas of Pompei, Herculaneum and Torre Annunziata
+  A        0.007297    24.3    W       3.8   -78.5121  City of Quito
+  A        0.007422    24.7    E       2.5   110.4917  Prambanan Temple Compounds
+  A        0.007578    25.2    W       0.8    11.0417  Historic Centre of San Gimignano
+  A        0.007695    25.6    W       1.2    -0.9619  Royal Court of Tiébélé
+  A        0.007800    26.0    E       3.6   143.0350  Willandra Lakes Region
+  A        0.007828    26.1    W       1.3    -3.9658  The Slate Landscape of Northwest Wales
+  A        0.007885    26.3    E       0.5    50.5056  Dilmun Burial Mounds
+  A        0.007894    26.3    W       0.7    14.5058  The works of Jože Plečnik in Ljubljana – Human Centred Urban Design
+  A        0.007913    26.4    W       1.2    -0.4936  Forts and Castles, Volta, Greater Accra, Central and Western Regions
+  A        0.007920    26.4    E       2.4   107.0314  Zuojiang Huashan Rock Art Cultural Landscape
+  A        0.007929    26.4    W       0.7    14.5069  Ħal Saflieni Hypogeum
+  A        0.007950    26.5    E       3.0   125.5075  Complex of Koguryo Tombs
+  A        0.007970    26.5    W       0.8    11.0299  Jewish-Medieval Heritage of Erfurt
+  A        0.008035    26.8    W       1.1     2.0279  Works of Antoni Gaudí
+  A        0.008181    27.2    W       0.7    14.5144  City of Valletta
+  A        0.008181    27.2    W       4.8  -108.4856  Mesa Verde National Park
+  A        0.008189    27.3    W       0.7    14.0233  Arab-Norman Palermo and the Cathedral Churches of Cefalú and Monreale
+  A        0.008257    27.5    W       3.0   -54.9787  Jodensavanne Archaeological Site: Jodensavanne Settlement and Cassipora Creek Cemetery
+  A        0.008268    27.5    W       0.5    20.0209  Butrint
+  A        0.008311    27.7    E       0.5    50.5183  Qal’at al-Bahrain – Ancient Harbour and Capital of Dilmun
+  A        0.008517    28.4    W       1.4    -6.4755  Brú na Bóinne - Archaeological Ensemble of the Bend of the Boyne
+  A        0.008661    28.8    W       0.0    35.0092  Incense Route - Desert Cities in the Negev
+  A        0.008661    28.8    E       0.3    44.0092  Erbil Citadel
+  A        0.008733    29.1    W       1.3    -3.4690  Renaissance Monumental Ensembles of Úbeda and Baeza
+  A        0.008756    29.2    W       0.5    20.5317  Studenica Monastery
+  A        0.008913    29.7    E       2.6   113.5364  Historic Centre of Macao
+  A        0.008941    29.8    E       2.3   104.5372  Koh Ker: Archaeological Site of Ancient Lingapura or Chok Gargyar
+  A        0.008967    29.9    E       3.2   131.0000  Ulu<U>r</U>u-Kata Tju<U>t</U>a National Park
+  A        0.009052    30.1    W       0.2    29.5406  Maloti-Drakensberg Park
+  A        0.009061    30.2    E       0.0    35.5408  Ngorongoro Conservation Area
+  A        0.009113    30.3    W       3.8   -79.0044  Historic Centre of Santa Ana de los Ríos de Cuenca
+  A        0.009121    30.4    W       0.6    17.5426  Birka and Hovgården
+  A        0.009158    30.5    W       1.0     5.5438  Eisinga Planetarium in Franeker
+  A        0.009170    30.5    W       0.8    10.9939  City of Verona
+  A        0.009189    30.6    W       0.6    16.9933  Decorated Farmhouses of Hälsingland
+  A        0.009226    30.7    W       1.1     1.9922  Royal Palaces of Abomey
+  A        0.009254    30.8    W       0.9     7.9914  Historic Centre of Agadez
+  A        0.009367    31.2    W       0.8    11.5500  Val d'Orcia
+  A        0.009367    31.2    W       0.3    26.5500  The Historic Centre (Chorá) with the Monastery of Saint-John the Theologian and the Cave of the Apocalypse on the Island of Pátmos
+  A        0.009367    31.2    W       0.7    14.5500  Historic Centre of Prague
+  A        0.009370    31.2    W       0.3    25.9879  Rock-Hewn Churches of Ivanovo
+  A        0.009378    31.2    W       0.8    11.5503  Luther Memorials in Eisleben and Wittenberg
+  A        0.009391    31.3    W       0.0    34.9873  Bahá’i Holy Places in Haifa and the Western Galilee
+  A        0.009413    31.3    W       0.1    32.5514  Tombs of Buganda Kings at Kasubi
+  A        0.009430    31.4    W       0.1    31.9861  Gordion
+  A        0.009459    31.5    E       0.0    35.5528  Baptism Site “Bethany Beyond the Jordan” (Al-Maghtas)
+  A        0.009472    31.5    W       1.1     2.5532  Tipasa
+  A        0.009522    31.7    W       0.2    28.9833  Historic Areas of Istanbul
+  A        0.009522    31.7    E       1.8    88.9833  Ruins of the Buddhist Vihara at Paharpur
+  A        0.009681    32.2    W       0.3    26.5594  Selimiye Mosque and its Social Complex
+  A        0.009781    32.6    W       1.3    -4.0244  Historic City of Toledo
+  A        0.009793    32.6    E       0.4    47.5628  Royal Hill of Ambohimanga
+  A        0.009833    32.7    E       2.3   103.9740  Angkor
+  A        0.009889    32.9    E       2.2   100.9723  Archaeological Heritage of the Lenggong Valley
+  A        0.009922    33.0    E       0.1    38.5667  Ensemble of the Ferapontov Monastery
+  A        0.009926    33.1    W       2.9   -51.4332  Aasivissuit – Nipisat. Inuit Hunting Ground between Ice and Sea
+  A        0.009956    33.2    W       0.4    22.9703  Paleochristian and Byzantine Monuments of Thessalonika
+  A        0.009986    33.3    W       0.9     8.5686  Abbey and Altenmünster of Lorsch
+
+────────────────────────────────────────────────────────────────────────────────────────────────
+JERUSALEM (35.2317°E) — ALL A-TIER SITES  (A++=7, A+=56, A=161, total=217)
+  Tier   Dev (beru)      km  Dir  Harmonic      Lon°E  Site
+  ----------------------------------------------------------------------------------------
+  --- A++ ---
+  A++      0.000006     0.0    W       4.4   -96.7681  Historic Centre of Oaxaca and Archaeological Site of Monte Albán
+  A++      0.000038     0.1    E       3.7   146.2306  Tasmanian Wilderness
+  A++      0.000053     0.2    E       2.5   110.2301  Borobudur Temple Compounds
+  A++      0.000110     0.4    E       0.4    47.2350  Takht-e Soleyman
+  A++      0.000123     0.4    E       2.9   122.2354  Baroque Churches of the Philippines
+  A++      0.000175     0.6    W       0.6    17.2369  The <I>Trulli</I> of Alberobello
+  A++      0.000196     0.7    E       2.2   101.2258  Deer Stone Monuments and Related Bronze Age Sites
+
+  --- A+ ---
+  A+       0.000223     0.7    E       2.1    98.2250  The Great Wall
+  A+       0.000240     0.8    W       0.2    29.2389  Mapungubwe Cultural Landscape
+  A+       0.000243     0.8    W       0.3    26.2390  Archaeological Site of Troy
+  A+       0.000245     0.8    W       0.0    35.2244  Kizhi Pogost
+  A+       0.000261     0.9    W       1.4    -6.7761  Las Médulas
+  A+       0.000304     1.0    E       1.4    77.2408  Red Fort Complex
+  A+       0.000347     1.2    W       0.6    17.2421  Via Appia. <em>Regina Viarum</em>
+  A+       0.000492     1.6    W       1.3    -3.7831  New Lanark
+  A+       0.000501     1.7    W       0.5    20.2167  Wooden Churches of Southern Małopolska
+  A+       0.000501     1.7    W       0.4    23.2167  Dacian Fortresses of the Orastie Mountains
+  A+       0.000512     1.7    E       1.5    80.2163  Old Town of Galle and its Fortifications
+  A+       0.000536     1.8    W       0.8    11.2478  Medici Villas and Gardens in Tuscany
+  A+       0.000601     2.0    W       0.7    14.2497  Mbanza Kongo, Vestiges of the Capital of the former Kingdom of Kongo
+  A+       0.000612     2.0    W       1.5    -9.7867  Medina of Essaouira (formerly Mogador)
+  A+       0.000625     2.1    W       0.6    17.2505  Holy Trinity Column in Olomouc
+  A+       0.000629     2.1    E       1.4    77.2506  Humayun's Tomb, Delhi
+  A+       0.000703     2.3    W       0.4    23.2528  Old City of Zamość
+  A+       0.000787     2.6    E       0.9    62.2081  Silk Roads: Zarafshan-Karakum Corridor
+  A+       0.000788     2.6    E       0.3    44.2081  Old City of Sana'a
+  A+       0.000807     2.7    W       0.0    35.2075  Birthplace of Jesus: Church of the Nativity and the Pilgrimage Route, Bethlehem
+  A+       0.000814     2.7    W       0.8    11.2561  Historic Centre of Florence
+  A+       0.000859     2.9    W       3.5   -69.7941  Humberstone and Santa Laura Saltpeter Works
+  A+       0.000927     3.1    W       0.6    17.2039  Richtersveld Cultural and Botanical Landscape
+  A+       0.000964     3.2    W       3.6   -72.7972  Chiribiquete National Park – “The Maloca of the Jaguar”
+  A+       0.001064     3.5    W       1.3    -3.7364  Historic Town of Grand-Bassam
+  A+       0.001094     3.6    E       1.5    80.1989  Group of Monuments at Mahabalipuram
+  A+       0.001150     3.8    W       0.4    23.2662  Boyana Church
+  A+       0.001166     3.9    E       0.1    38.2667  Site of Palmyra
+  A+       0.001196     4.0    W       0.0    35.1958  Tyre
+  A+       0.001267     4.2    W       0.9     8.2697  <I>Sacri Monti</I> of Piedmont and Lombardy
+  A+       0.001312     4.4    E       1.1    68.2711  Mausoleum of Khoja Ahmed Yasawi
+  A+       0.001322     4.4    W       0.7    14.1921  Historic Centre of Naples
+  A+       0.001338     4.5    W       4.2   -90.7282  Antigua Guatemala
+  A+       0.001364     4.5    W       0.7    14.2726  Holašovice Historic Village
+  A+       0.001473     4.9    E       0.4    47.1875  Historic Centre of Sheki with the Khan’s Palace
+  A+       0.001480     4.9    E       1.6    83.2761  Lumbini, the Birthplace of the Lord Buddha
+  A+       0.001490     5.0    W       0.4    23.1870  Rock Art of Alta
+  A+       0.001547     5.2    E       1.4    77.1853  Qutb Minar and its Monuments, Delhi
+  A+       0.001552     5.2    E       2.7   116.1851  Site of Xanadu
+  A+       0.001569     5.2    W       0.4    23.2788  Brâncuși Monumental Ensemble of Târgu Jiu
+  A+       0.001721     5.7    W       1.2    -0.7167  Palmeral of Elche
+  A+       0.001739     5.8    W       3.3   -63.8205  Fuerte de Samaipata
+  A+       0.001825     6.1    W       0.2    29.1769  Fossil Hominid Sites of South Africa
+  A+       0.001869     6.2    E       0.1    38.2878  The Gedeo Cultural Landscape
+  A+       0.001890     6.3    W       1.1     2.1750  Palau de la Música Catalana and Hospital de Sant Pau, Barcelona
+  A+       0.001943     6.5    E       2.0    95.2900  Pyu Ancient Cities
+  A+       0.001955     6.5    W       0.2    29.1731  Bursa and Cumalıkızık: the Birth of the Ottoman Empire
+  A+       0.001970     6.6    E       0.1    38.1726  Cultural Landscape of Kenozero Lake
+  A+       0.001980     6.6    E       2.4   107.2911  Silk Roads: the Routes Network of Chang'an-Tianshan Corridor
+
+  --- A ---
+  A        0.002045     6.8    W       0.7    14.2931  Archaeological Site of Leptis Magna
+  A        0.002143     7.1    W       1.3    -3.7040  Burgos Cathedral
+  A        0.002147     7.1    E       0.6    53.1673  Pasargadae
+  A        0.002156     7.2    W       1.1     2.2964  Belfries of Belgium and France
+  A        0.002198     7.3    W       0.2    29.2976  Xanthos-Letoon
+  A        0.002205     7.3    W       2.7   -45.8344  Kujataa Greenland: Norse and Inuit Farming at the Edge of the Ice Cap
+  A        0.002321     7.7    W       1.3    -3.6987  Cliff of Bandiagara (Land of the Dogons)
+  A        0.002332     7.8    W       1.1     2.3017  Amiens Cathedral
+  A        0.002341     7.8    W       0.8    11.3019  The Porticoes of Bologna
+  A        0.002427     8.1    W       0.0    35.1589  Palestine: Land of Olives and Vines – Cultural Landscape of Southern Jerusalem, Battir
+  A        0.002562     8.5    W       0.4    23.3086  Rila Monastery
+  A        0.002575     8.6    W       4.9  -111.8456  The 20th-Century Architecture of Frank Lloyd Wright
+  A        0.002621     8.7    W       1.4    -6.8469  Rabat, Modern Capital and Historic City: a Shared Heritage
+  A        0.002686     8.9    E       2.2   101.1511  The Ancient Town of Si Thep and its Associated Dvaravati Monuments
+  A        0.002708     9.0    W       1.3    -3.6871  Paseo del Prado and Buen Retiro, a landscape of Arts and Sciences
+  A        0.002720     9.1    W       3.1   -57.8499  Historic Quarter of the City of Colonia del Sacramento
+  A        0.002778     9.2    W       0.7    14.3150  Historic Centre of Český Krumlov
+  A        0.002805     9.3    W       1.0     5.1476  Rietveld Schröderhuis (Rietveld Schröder House)
+  A        0.002918     9.7    W       1.1     2.1442  Episcopal City of Albi
+  A        0.002969     9.9    W       3.5   -69.6792  Coro and its Port
+  A        0.002981     9.9    W       1.1     2.3211  Paris, Banks of the Seine
+  A        0.002987     9.9    E       3.1   128.3213  Gaya Tumuli
+  A        0.003001    10.0    E       0.8    59.1417  Kunya-Urgench
+  A        0.003015    10.0    E       2.6   113.1412  Historic Monuments of Dengfeng in “The Centre of Heaven and Earth”
+  A        0.003020    10.1    E       2.7   116.1411  Summer Palace, an Imperial Garden in Beijing
+  A        0.003029    10.1    W       0.5    20.1408  Historic Centres of Berat and Gjirokastra
+  A        0.003094    10.3    E       1.1    68.1389  Archaeological Ruins at Moenjodaro
+  A        0.003098    10.3    E       0.3    44.3246  Cathedral and Churches of Echmiatsin and the Archaeological Site of Zvartnots
+  A        0.003140    10.5    E       3.1   128.1375  Mount Kumgang – Diamond Mountain from the Sea
+  A        0.003140    10.5    W       1.0     5.3259  Bryggen
+  A        0.003156    10.5    W       0.7    14.3264  18th-Century Royal Palace at Caserta with the Park, the Aqueduct of Vanvitelli, and the San Leucio Complex
+  A        0.003230    10.8    W       0.8    11.3286  Classical Weimar
+  A        0.003279    10.9    W       0.8    11.1333  Ecosystem and Relict Cultural Landscape of Lopé-Okanda
+  A        0.003304    11.0    E       4.1   158.3308  Nan Madol: Ceremonial Centre of Eastern Micronesia
+  A        0.003332    11.1    W       0.8    11.3317  Historic Centre of Siena
+  A        0.003350    11.2    E       0.1    38.1312  Architectural Ensemble of the Trinity Sergius Lavra in Sergiev Posad
+  A        0.003371    11.2    W       0.4    23.1306  Roșia Montană Mining Landscape
+  A        0.003381    11.3    W       0.8    11.1303  Collegiate Church, Castle and Old Town of Quedlinburg
+  A        0.003405    11.3    W       3.7   -75.8704  San Pedro de la Roca Castle, Santiago de Cuba
+  A        0.003416    11.4    W       0.7    14.3342  Villa Romana del Casale
+  A        0.003492    11.6    W       0.0    35.1269  Necropolis of Bet She’arim: A Landmark of Jewish Renewal
+  A        0.003570    11.9    W       1.7   -15.6612  Risco Caido and the Sacred Mountains of Gran Canaria Cultural Landscape
+  A        0.003573    11.9    W       1.4    -6.6611  Prehistoric Rock Art Sites in the Côa Valley and Siega Verde
+  A        0.003599    12.0    W       0.8    11.3397  Bauhaus and its Sites in Weimar, Dessau and Bernau
+  A        0.003612    12.0    W       0.2    29.1233  Hierapolis-Pamukkale
+  A        0.003647    12.1    W       0.8    11.3411  Rock Carvings in Tanum
+  A        0.003649    12.2    E       2.6   113.1222  Yungang Grottoes
+  A        0.003662    12.2    E       0.1    38.1218  Great Mosque and Hospital of Divriği
+  A        0.003733    12.4    W       1.1     2.1197  Fortifications of Vauban
+  A        0.003742    12.5    W       1.1     2.1194  Palace and Park of Versailles
+  A        0.003757    12.5    W       5.8  -138.6556  Te Henua Enata – The Marquesas Islands
+  A        0.003862    12.9    W       2.6   -42.6524  Serra da Capivara National Park
+  A        0.003918    13.0    W       3.5   -69.8858  Colonial City of Santo Domingo
+  A        0.003925    13.1    E       2.6   113.3494  Mount Wutai
+  A        0.003964    13.2    W       0.8    11.1128  The Palaces of King Ludwig II of Bavaria: Neuschwanstein, Linderhof, Schachen and Herrenchiemsee
+  A        0.004027    13.4    E       3.3   134.3525  Rock Islands Southern Lagoon
+  A        0.004064    13.5    E       0.0    35.3536  Masada
+  A        0.004079    13.6    W       3.4   -66.8907  Ciudad Universitaria de Caracas
+  A        0.004112    13.7    W       0.0    35.1083  Hebron/Al-Khalil Old Town
+  A        0.004121    13.7    W       1.3    -3.8919  Ancient Ferrous Metallurgy Sites of Burkina Faso
+  A        0.004313    14.4    E       0.1    38.3611  Arslantepe Mound
+  A        0.004399    14.6    W       1.1     2.3637  Historic Fortified City of Carcassonne
+  A        0.004418    14.7    W       0.8    11.0992  Punic Town of Kerkuane and its Necropolis
+  A        0.004433    14.8    E       3.1   128.0987  Haeinsa Temple Janggyeong Panjeon, the Depositories for the <I>Tripitaka Koreana</I> Woodblocks
+  A        0.004436    14.8    E       2.5   110.3648  The Cosmological Axis of Yogyakarta and its Historic Landmarks
+  A        0.004499    15.0    W       4.9  -111.6333  Writing-on-Stone / Áísínai’pi
+  A        0.004566    15.2    E       1.7    86.0947  Sun Temple, Konârak
+  A        0.004587    15.3    W       3.7   -75.6307  Archaeological Landscape of the First Coffee Plantations in the South-East of Cuba
+  A        0.004763    15.9    W       0.5    20.3746  ǂKhomani Cultural Landscape
+  A        0.004780    15.9    W       0.7    14.3751  Twyfelfontein or /Ui-//aes
+  A        0.004880    16.3    E       0.8    59.3781  Ancient City of Qalhat
+  A        0.005005    16.7    W       0.6    17.3819  Gardens and Castle at Kroměříž
+  A        0.005014    16.7    E       1.3    74.3821  Fort and Shalamar Gardens in Lahore
+  A        0.005038    16.8    W       0.4    23.0806  Sanctuary of Asklepios at Epidaurus
+  A        0.005054    16.8    E       1.5    80.3833  Sacred City of Anuradhapura
+  A        0.005156    17.2    W       0.6    17.0770  Centennial Hall in Wrocław
+  A        0.005299    17.6    W       1.3    -3.6093  Aranjuez Cultural Landscape
+  A        0.005323    17.7    E       2.7   116.3914  Beijing Central Axis: A Building Ensemble Exhibiting the Ideal Order of the Chinese Capital
+  A        0.005427    18.1    W       0.0    35.0689  Old City of Acre
+  A        0.005501    18.3    E       0.9    62.0667  State Historical and Cultural Park “Ancient Merv”
+  A        0.005515    18.4    E       2.7   116.3972  Imperial Palaces of the Ming and Qing Dynasties in Beijing and Shenyang
+  A        0.005554    18.5    W       1.1     2.3983  Bourges Cathedral
+  A        0.005784    19.3    W       3.1   -57.9418  The Architectural Work of Le Corbusier, an Outstanding Contribution to the Modern Movement
+  A        0.005852    19.5    W       1.0     5.4073  Dutch Water Defence Lines
+  A        0.005946    19.8    W       1.3    -3.5899  Alhambra, Generalife and Albayzín, Granada
+  A        0.006165    20.5    W       1.3    -3.5833  Ruins of Loropéni
+  A        0.006193    20.6    W       0.5    20.4175  Wieliczka and Bochnia Royal Salt Mines
+  A        0.006240    20.8    W       0.8    11.4189  Schwerin Residence Ensemble
+  A        0.006304    21.0    E       0.3    44.4208  Babylon
+  A        0.006334    21.1    W       0.8    11.0417  Historic Centre of San Gimignano
+  A        0.006369    21.2    W       0.5    20.4228  Stari Ras and Sopoćani
+  A        0.006452    21.5    W       1.2    -0.9619  Royal Court of Tiébélé
+  A        0.006492    21.6    W       4.6  -102.5735  Historic Centre of Zacatecas
+  A        0.006536    21.8    W       1.2    -0.5722  Bordeaux, Port of the Moon
+  A        0.006557    21.8    E       3.6   143.0350  Willandra Lakes Region
+  A        0.006584    21.9    W       1.3    -3.9658  The Slate Landscape of Northwest Wales
+  A        0.006677    22.2    E       2.4   107.0314  Zuojiang Huashan Rock Art Cultural Landscape
+  A        0.006727    22.4    W       0.8    11.0299  Jewish-Medieval Heritage of Erfurt
+  A        0.006740    22.4    E       0.0    35.4339  Wadi Rum Protected Area
+  A        0.006792    22.6    W       1.1     2.0279  Works of Antoni Gaudí
+  A        0.006832    22.8    E       0.4    47.4367  Bisotun
+  A        0.006836    22.8    W       0.7    14.4368  Megalithic Temples of Malta
+  A        0.006897    23.0    E       0.4    47.4386  The Ahwar of Southern Iraq: Refuge of Biodiversity and the Relict Landscape of the Mesopotamian Cities
+  A        0.006928    23.1    W       0.9     8.4395  ShUM Sites of Speyer, Worms and Mainz
+  A        0.006946    23.1    W       0.7    14.0233  Arab-Norman Palermo and the Cathedral Churches of Cefalú and Monreale
+  A        0.007014    23.4    W       3.0   -54.9787  Jodensavanne Archaeological Site: Jodensavanne Settlement and Cassipora Creek Cemetery
+  A        0.007023    23.4    W       0.9     8.4424  Speyer Cathedral
+  A        0.007025    23.4    W       0.5    20.0209  Butrint
+  A        0.007054    23.5    E       0.0    35.4433  Petra
+  A        0.007079    23.6    E       0.0    35.4441  Ancient Jericho/Tell es-Sultan
+  A        0.007101    23.6    E       2.7   116.4447  Temple of Heaven: an Imperial Sacrificial Altar in Beijing
+  A        0.007372    24.5    E       3.1   128.4529  Royal Tombs of the Joseon Dynasty
+  A        0.007410    24.7    W       4.7  -105.5460  Taos Pueblo
+  A        0.007418    24.7    W       0.0    35.0092  Incense Route - Desert Cities in the Negev
+  A        0.007418    24.7    E       0.3    44.0092  Erbil Citadel
+  A        0.007703    25.6    W       4.2   -90.5372  Historic Fortified Town of Campeche
+  A        0.007705    25.7    E       0.3    44.4629  Ḥimā Cultural Area
+  A        0.007723    25.7    E       3.2   131.0000  Ulu<U>r</U>u-Kata Tju<U>t</U>a National Park
+  A        0.007829    26.1    W       3.6   -72.5334  Historic Sanctuary of Machu Picchu
+  A        0.007832    26.1    W       0.8    11.4667  Historic Centres of Stralsund and Wismar
+  A        0.007832    26.1    W       3.7   -75.5333  Port, Fortresses and Group of Monuments, Cartagena
+  A        0.007869    26.2    W       3.8   -79.0044  Historic Centre of Santa Ana de los Ríos de Cuenca
+  A        0.007915    26.4    W       1.0     5.4691  Flemish Béguinages
+  A        0.007927    26.4    W       0.8    10.9939  City of Verona
+  A        0.007946    26.5    W       0.6    16.9933  Decorated Farmhouses of Hälsingland
+  A        0.007983    26.6    W       1.1     1.9922  Royal Palaces of Abomey
+  A        0.008010    26.7    W       0.9     7.9914  Historic Centre of Agadez
+  A        0.008034    26.8    W       0.3    26.4727  Mir Castle Complex
+  A        0.008127    27.1    W       0.3    25.9879  Rock-Hewn Churches of Ivanovo
+  A        0.008147    27.1    W       0.0    34.9873  Bahá’i Holy Places in Haifa and the Western Galilee
+  A        0.008186    27.3    W       0.1    31.9861  Gordion
+  A        0.008279    27.6    W       0.2    28.9833  Historic Areas of Istanbul
+  A        0.008279    27.6    E       1.8    88.9833  Ruins of the Buddhist Vihara at Paharpur
+  A        0.008388    27.9    W       1.7   -15.5167  Stone Circles of Senegambia
+  A        0.008434    28.1    W       1.3    -3.5153  Archaeological Site of Atapuerca
+  A        0.008480    28.2    W       0.7    14.4861  Archaeological Areas of Pompei, Herculaneum and Torre Annunziata
+  A        0.008538    28.4    W       1.3    -4.0244  Historic City of Toledo
+  A        0.008541    28.4    W       3.8   -78.5121  City of Quito
+  A        0.008590    28.6    E       2.3   103.9740  Angkor
+  A        0.008646    28.8    E       2.2   100.9723  Archaeological Heritage of the Lenggong Valley
+  A        0.008666    28.9    E       2.5   110.4917  Prambanan Temple Compounds
+  A        0.008713    29.0    W       0.4    22.9703  Paleochristian and Byzantine Monuments of Thessalonika
+  A        0.008788    29.3    W       0.0    34.9681  Sites of Human Evolution at Mount Carmel: The Nahal Me’arot / Wadi el-Mughara Caves
+  A        0.008834    29.4    W       1.4    -7.0333  Ancient <I>Ksour</I> of Ouadane, Chinguetti, Tichitt and Oualata
+  A        0.008918    29.7    E       2.0    94.9642  Bagan
+  A        0.008936    29.8    W       0.9     7.9636  Vineyard Landscape of Piedmont: Langhe-Roero and Monferrato
+  A        0.009129    30.4    E       0.5    50.5056  Dilmun Burial Mounds
+  A        0.009138    30.4    W       0.7    14.5058  The works of Jože Plečnik in Ljubljana – Human Centred Urban Design
+  A        0.009156    30.5    W       1.2    -0.4936  Forts and Castles, Volta, Greater Accra, Central and Western Regions
+  A        0.009173    30.5    W       0.7    14.5069  Ħal Saflieni Hypogeum
+  A        0.009193    30.6    E       3.0   125.5075  Complex of Koguryo Tombs
+  A        0.009223    30.7    E       0.1    37.9550  Hegra Archaeological Site (al-Hijr / Madā ͐ in Ṣāliḥ)
+  A        0.009358    31.2    W       3.7   -76.0490  National Archeological Park of Tierradentro
+  A        0.009425    31.4    W       0.7    14.5144  City of Valletta
+  A        0.009425    31.4    W       4.8  -108.4856  Mesa Verde National Park
+  A        0.009554    31.8    E       0.5    50.5183  Qal’at al-Bahrain – Ancient Harbour and Capital of Dilmun
+  A        0.009616    32.0    E       1.5    79.9432  Kakatiya Rudreshwara (Ramappa) Temple, Telangana
+  A        0.009760    32.5    W       1.4    -6.4755  Brú na Bóinne - Archaeological Ensemble of the Bend of the Boyne
+  A        0.009816    32.7    W       0.5    19.9372  Historic Centre of Kraków
+  A        0.009977    33.2    W       1.3    -3.4690  Renaissance Monumental Ensembles of Úbeda and Baeza
+  A        0.009999    33.3    W       0.5    20.5317  Studenica Monastery
+
+────────────────────────────────────────────────────────────────────────────────────────────────
+A+ OVERLAP: SITES IN A+ BAND FOR BOTH ANCHORS  (N=38)
+
+  These sites fall within 6.7 km of a 0.1-beru harmonic
+  under both Gerizim and Jerusalem.  They do not discriminate between anchors.
+
+  Site                                                     Ger tier   Ger km  Jer tier   Jer km
+  ------------------------------------------------------------------------------------------
+  <I>Sacri Monti</I> of Piedmont and Lombardy                   A++      0.1        A+      4.2
+  Antigua Guatemala                                             A++      0.3        A+      4.5
+  Archaeological Site of Troy                                    A+      3.3        A+      0.8
+  Baroque Churches of the Philippines                            A+      3.7       A++      0.4
+  Borobudur Temple Compounds                                     A+      4.3       A++      0.2
+  Boyana Church                                                 A++      0.3        A+      3.8
+  Brâncuși Monumental Ensemble of Târgu Jiu                      A+      1.1        A+      5.2
+  Dacian Fortresses of the Orastie Mountains                     A+      5.8        A+      1.7
+  Deer Stone Monuments and Related Bronze Age Sites              A+      4.8       A++      0.7
+  Historic Centre of Florence                                    A+      1.4        A+      2.7
+  Historic Centre of Oaxaca and Archaeological Site of M         A+      4.1       A++      0.0
+  Historic Town of Grand-Bassam                                 A++      0.6        A+      3.5
+  Holašovice Historic Village                                   A++      0.4        A+      4.5
+  Holy Trinity Column in Olomouc                                 A+      2.1        A+      2.1
+  Humayun's Tomb, Delhi                                          A+      2.0        A+      2.1
+  Kizhi Pogost                                                   A+      5.0        A+      0.8
+  Las Médulas                                                    A+      5.0        A+      0.9
+  Lumbini, the Birthplace of the Lord Buddha                     A+      0.8        A+      4.9
+  Mapungubwe Cultural Landscape                                  A+      3.3        A+      0.8
+  Mausoleum of Khoja Ahmed Yasawi                               A++      0.2        A+      4.4
+  Mbanza Kongo, Vestiges of the Capital of the former Ki         A+      2.1        A+      2.0
+  Medici Villas and Gardens in Tuscany                           A+      2.4        A+      1.8
+  Medina of Essaouira (formerly Mogador)                         A+      6.2        A+      2.0
+  New Lanark                                                     A+      5.8        A+      1.6
+  Old City of Zamość                                             A+      1.8        A+      2.3
+  Old Town of Galle and its Fortifications                       A+      5.8        A+      1.7
+  Palmeral of Elche                                              A+      1.6        A+      5.7
+  Pyu Ancient Cities                                             A+      2.3        A+      6.5
+  Red Fort Complex                                               A+      3.1        A+      1.0
+  Silk Roads: the Routes Network of Chang'an-Tianshan Co         A+      2.5        A+      6.6
+  Site of Palmyra                                               A++      0.3        A+      3.9
+  Takht-e Soleyman                                               A+      3.8       A++      0.4
+  Tasmanian Wilderness                                           A+      4.3       A++      0.1
+  The <I>Trulli</I> of Alberobello                               A+      3.6       A++      0.6
+  The Gedeo Cultural Landscape                                   A+      2.1        A+      6.2
+  The Great Wall                                                 A+      4.9        A+      0.7
+  Via Appia. <em>Regina Viarum</em>                              A+      3.0        A+      1.2
+  Wooden Churches of Southern Małopolska                         A+      5.8        A+      1.7
+
+────────────────────────────────────────────────────────────────────────────────────────────────
+A+ UNIQUE TO GERIZIM  (N=18) — not A+ under Jerusalem
+
+  Site                                                     Ger tier   Ger km  Jer tier   Jer km
+  ------------------------------------------------------------------------------------------
+  Archaeological Site of Leptis Magna                            A+      2.7         A      6.8
+  Burgos Cathedral                                               A+      3.0         A      7.1
+  Belfries of Belgium and France                                 A+      3.0         A      7.2
+  Xanthos-Letoon                                                 A+      3.2         A      7.3
+  Cliff of Bandiagara (Land of the Dogons)                       A+      3.6         A      7.7
+  Amiens Cathedral                                               A+      3.6         A      7.8
+  The Porticoes of Bologna                                       A+      3.7         A      7.8
+  Old City of Jerusalem and its Walls                            A+      4.1         —        —
+  Rila Monastery                                                 A+      4.4         A      8.5
+  Paseo del Prado and Buen Retiro, a landscape of Arts a         A+      4.9         A      9.0
+  Historic Centre of Český Krumlov                               A+      5.1         A      9.2
+  Coro and its Port                                              A+      5.7         A      9.9
+  Paris, Banks of the Seine                                      A+      5.8         A      9.9
+  Gaya Tumuli                                                    A+      5.8         A      9.9
+  Cathedral and Churches of Echmiatsin and the Archaeolo         A+      6.2         A     10.3
+  Bryggen                                                        A+      6.3         A     10.5
+  18th-Century Royal Palace at Caserta with the Park, th         A+      6.4         A     10.5
+  Classical Weimar                                               A+      6.6         A     10.8
+
+────────────────────────────────────────────────────────────────────────────────────────────────
+A+ UNIQUE TO JERUSALEM  (N=18) — not A+ under Gerizim
+
+  Site                                                     Jer tier   Jer km  Ger tier   Ger km
+  ------------------------------------------------------------------------------------------
+  Silk Roads: Zarafshan-Karakum Corridor                         A+      2.6         A      6.8
+  Old City of Sana'a                                             A+      2.6         A      6.8
+  Birthplace of Jesus: Church of the Nativity and the Pi         A+      2.7         A      6.8
+  Humberstone and Santa Laura Saltpeter Works                    A+      2.9         A      7.0
+  Richtersveld Cultural and Botanical Landscape                  A+      3.1         A      7.2
+  Chiribiquete National Park – “The Maloca of the Jaguar         A+      3.2         A      7.4
+  Group of Monuments at Mahabalipuram                            A+      3.6         A      7.8
+  Tyre                                                           A+      4.0         A      8.1
+  Historic Centre of Naples                                      A+      4.4         A      8.5
+  Historic Centre of Sheki with the Khan’s Palace                A+      4.9         A      9.0
+  Rock Art of Alta                                               A+      5.0         A      9.1
+  Qutb Minar and its Monuments, Delhi                            A+      5.2         A      9.3
+  Site of Xanadu                                                 A+      5.2         A      9.3
+  Fuerte de Samaipata                                            A+      5.8         A      9.9
+  Fossil Hominid Sites of South Africa                           A+      6.1         A     10.2
+  Palau de la Música Catalana and Hospital de Sant Pau,          A+      6.3         A     10.4
+  Bursa and Cumalıkızık: the Birth of the Ottoman Empire         A+      6.5         A     10.6
+  Cultural Landscape of Kenozero Lake                            A+      6.6         A     10.7

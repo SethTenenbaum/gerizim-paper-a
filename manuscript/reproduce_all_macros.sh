@@ -18,8 +18,8 @@
 #
 # USAGE:
 #   cd /path/to/gerizim-paper-a
-#   bash manuscript/reproduce_all_macros.sh
-#   bash manuscript/reproduce_all_macros.sh --macros-only   # LaTeX output only
+#   bash manuscript/reproduce_all_macros.sh          # fast: LaTeX macros only (default)
+#   bash manuscript/reproduce_all_macros.sh --full   # slow: runs all analysis scripts
 #
 # PREREQUISITES:
 #   - Python 3.10+ with numpy, scipy, pandas
@@ -55,11 +55,11 @@ print("  ✓ data/store/results.json cleared")
 PYEOF
 echo ""
 
-# ── --macros-only: run all scripts, collect only \newcommand lines ────────────
-if [ "${1:-}" = "--macros-only" ]; then
+# ── default (no --full): run all scripts, collect only \newcommand lines ─────
+if [ "${1:-}" != "--full" ]; then
     OUT_FILE="manuscript/generated_macros.tex"
     echo "% Generated macros — $(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$OUT_FILE"
-    echo "% Source: bash manuscript/reproduce_all_macros.sh --macros-only" >> "$OUT_FILE"
+    echo "% Source: bash manuscript/reproduce_all_macros.sh" >> "$OUT_FILE"
     echo "% IMPORTANT: values are computed fresh each run — do NOT hardcode" >> "$OUT_FILE"
     echo "" >> "$OUT_FILE"
 
@@ -377,12 +377,12 @@ echo ""
 echo "═══════════════════════════════════════════════════════════════════"
 echo "  ALL SCRIPTS COMPLETE"
 echo "  Results store: data/store/results.json"
-echo "  To regenerate LaTeX macros file:"
-echo "    bash manuscript/reproduce_all_macros.sh --macros-only"
+echo "  To regenerate LaTeX macros file (fast, default):"
+echo "    bash manuscript/reproduce_all_macros.sh"
 echo ""
 echo "  RECOMMENDED FINAL SUBMISSION SEQUENCE:"
-echo "    1. bash manuscript/reproduce_all_macros.sh          # macros + figures"
-echo "    2. bash manuscript/reproduce_all_macros.sh --macros-only  # regen macros"
+echo "    1. bash manuscript/reproduce_all_macros.sh --full   # full pipeline (slow)"
+echo "    2. bash manuscript/reproduce_all_macros.sh          # regen macros (fast)"
 echo "    3. cd manuscript/archaeometry && pdflatex paper_a_archaeometry.tex     # compile"
 echo "    4. pdflatex paper_a_archaeometry.tex                      # resolve refs"
 echo "    5. cd ../primary && pdflatex paper_a_primary_unesco.tex   # compile primary"

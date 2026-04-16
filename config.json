@@ -111,14 +111,32 @@
     "B": {
       "max_deviation_beru": 0.050,
       "approx_km": 167,
-      "note": "Baseline window for null rate calculation"
+      "note": "Middle zone — neither near a harmonic nor near a midpoint"
+    },
+    "C": {
+      "max_dist_from_midpoint_beru": 0.010,
+      "approx_km": 33,
+      "note": "Mirror of A: within 33 km of inter-harmonic midpoint (dev >= 0.040)"
+    },
+    "C-": {
+      "max_dist_from_midpoint_beru": 0.002,
+      "approx_km": 6.7,
+      "note": "Mirror of A+: within 6.7 km of inter-harmonic midpoint (dev >= 0.048)"
+    },
+    "C--": {
+      "max_dist_from_midpoint_beru": 0.0002,
+      "approx_km": 0.67,
+      "note": "Mirror of A++: within 0.67 km of inter-harmonic midpoint (dev >= 0.0498)"
     }
   },
   "null_rates": {
-    "note": "Geometric null rates: tier width / baseline window width",
+    "note": "Geometric null rates: tier width / baseline window width. C-tiers mirror A-tiers by symmetry.",
     "tier_app":   0.004,
     "tier_aplus": 0.04,
-    "tier_a": 0.20
+    "tier_a": 0.20,
+    "tier_c":     0.20,
+    "tier_cminus": 0.04,
+    "tier_cminus2": 0.004
   },
   "arc_test": {
     "note": "Parameters for Framework 2 / 4 / 5 great-circle arc tests (PART XX).",      "gerizim_lat": 32.212,
@@ -276,7 +294,9 @@
         {"label": "Test 5: Evolution combined A+ (binomial)",        "p_key": "pEvoAp",               "cat": "C"},
         {"label": "Test 5: Stupa stage A+ (binomial)",               "p_key": "pEvoStupa",            "cat": "C"},
         {"label": "Test 5: Dome stage A+ (binomial)",                "p_key": "pEvoDome",             "cat": "C"},
-        {"label": "Test 5: Mound stage A+ (binomial)",               "p_key": "pEvoMound",            "cat": "C"}
+        {"label": "Test 5: Mound stage A+ (binomial)",               "p_key": "pEvoMound",            "cat": "C"},
+        {"label": "Judaism A-tier Fisher exact",                      "p_key": "pJudATierFisher",      "cat": "E"},
+        {"label": "Buddhism A+/C-band joint (multivariate hyper.)",  "p_key": "pBudJoint",            "cat": "E"}
       ]
     }
   },

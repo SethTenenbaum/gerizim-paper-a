@@ -1,0 +1,879 @@
+UNESCO WORLD RELIGION KEYWORD AUDIT
+Generated : Thu Apr 16 06:32:19 UTC 2026
+Script    : tools/generate_audit_religion.py
+Full corpus (Cultural/Mixed with year): N = 1011
+A-tier null: 20%   |   A+ null: 4%
+Anchor: Gerizim 35.269°E   |   Beru = 30.0°
+
+────────────────────────────────────────────────────────────────────────────────────────
+SUMMARY TABLE
+  Religion                 N    A+    A+%      A+p          A     A%       Ap     
+  ----------------------------------------------------------------------------------
+  Buddhism                46     4   8.7%   0.1113   ns    11  23.9%   0.3060   ns
+  Christianity           219    15   6.8%   0.0312    *    51  23.3%   0.1297   ns
+  Islam                   98     4   4.1%   0.5545   ns    19  19.4%   0.6002   ns
+  Judaism                 15     1   6.7%   0.4579   ns     9  60.0%   0.0008  ***
+  Hinduism                26     1   3.8%   0.6540   ns     7  26.9%   0.2526   ns
+  Zoroastrianism           9     1  11.1%   0.3075   ns     1  11.1%   0.8658   ns
+  ----------------------------------------------------------------------------------
+  UNION (any)            363    22   6.1%   0.0369    *    82  22.6%   0.1223   ns
+
+  Full corpus: N=1011, A+ null=4%, A null=20%
+
+────────────────────────────────────────────────────────────────────────────────────────
+JUDAISM: SMALL-SAMPLE DETAIL (Fisher exact for A-tier)
+  N = 15  |  A-tier = 9/15 (60.0%)
+  vs rest of corpus: 219/996 (22.0%)
+  Fisher exact (one-sided): p = 0.0018  **   OR = 5.32x
+
+  NOTE: 8 of 9 A-tier Judaism sites are in the outer band (7-33 km, not A+).
+  Geographic concentration in the Levant and Central Europe is a strong
+  confound at this sample size. Reported as observed association only.
+
+────────────────────────────────────────────────────────────────────────────────────────
+BUDDHISM  (N=46, keywords: ['buddha', 'buddhist', 'buddhism', 'lumbini', 'ashoka', 'stupa', 'bodhi', 'nirvana'])
+  A+  : 4/46 = 8.7%  enrich 2.17x  p=0.1113 ns
+  A   : 11/46 = 23.9%  enrich 1.20x  p=0.3060 ns
+
+  A+ SITES (4):
+    A+       0.8 km    83.2761°E  Lumbini, the Birthplace of the Lord Buddha
+    A+       2.3 km    95.2900°E  Pyu Ancient Cities
+    A+       2.5 km   107.2911°E  Silk Roads: the Routes Network of Chang'an-Tianshan Corridor
+    A+       4.3 km   110.2301°E  Borobudur Temple Compounds
+
+  A-TIER SITES (7):
+    A        8.9 km   113.3494°E  Mount Wutai
+    A        9.3 km   116.1851°E  Site of Xanadu
+    A       12.7 km    80.3833°E  Sacred City of Anuradhapura
+    A       14.6 km   128.1375°E  Mount Kumgang – Diamond Mountain from the Sea
+    A       16.3 km   113.1222°E  Yungang Grottoes
+    A       18.9 km   128.0987°E  Haeinsa Temple Janggyeong Panjeon, the Depositories for the <I>Tripitaka Koreana</I> Woodblocks
+    A       31.7 km    88.9833°E  Ruins of the Buddhist Vihara at Paharpur
+
+  B/C SITES (35):
+    B       33.8 km    94.9642°E  Bagan
+    B       41.2 km    80.6403°E  Sacred City of Kandy
+    B       42.2 km    80.6492°E  Rangiri Dambulla Cave Temple
+    B       44.7 km   115.8667°E  Lushan National Park
+    B       50.2 km    94.8167°E  Mogao Caves
+    B       52.2 km    77.7397°E  Buddhist Monuments at Sanchi
+    B       53.9 km   106.7838°E  Yen Tu-Vinh Nghiem-Con Son, Kiep Bac Complex of Monuments and Landscapes
+    B       55.0 km   103.7733°E  Mount Emei Scenic Area, including Leshan Giant Buddha Scenic Area
+    B       75.7 km    71.9506°E  Buddhist Ruins of Takht-i-Bahi and Neighbouring City Remains at Sahr-i-Bahlol
+    B       89.1 km   112.4667°E  Longmen Grottoes
+    B       91.6 km    85.4439°E  Archaeological Site of Nalanda Mahavihara at Nalanda, Bihar
+    B       93.1 km   141.1078°E  Hiraizumi – Temples, Gardens and Archaeological Sites Representing the Buddhist Pure Land
+    B       93.3 km    85.4285°E  Kathmandu Valley
+    B       99.0 km    88.3772°E  Khangchendzonga National Park
+    B      101.0 km    75.1792°E  Ellora Caves
+    B      105.6 km   129.2200°E  Gyeongju Historic Areas
+    B      118.0 km   102.3319°E  Phu Phrabat, a testimony to the Sīma stone tradition of the Dvaravati period
+    B      119.9 km   129.3490°E  Seokguram Grotto and Bulguksa Temple
+    B      120.2 km   127.1864°E  Namhansanseong
+    B      122.2 km    69.3702°E  Cultural Heritage Sites of Ancient Khuttal
+    B      126.0 km    91.1338°E  Historic Ensemble of the Potala Palace, Lhasa
+    B      126.3 km   135.4072°E  Sacred Sites and Pilgrimage Routes in the Kii Mountain Range
+    C      134.7 km   127.0556°E  Baekje Historic Areas
+    C      139.2 km   138.5228°E  Fujisan, sacred place and source of artistic inspiration
+    C      139.8 km   109.0093°E  Great Burkhan Khaldun Mountain and its surrounding sacred landscape
+    C      141.5 km    84.9939°E  Mahabodhi Temple Complex at Bodh Gaya
+    C      142.9 km   126.5565°E  Historic Monuments and Sites in Kaesong
+    C      144.0 km   105.5667°E  Dazu Rock Carvings
+    C      144.1 km   105.9711°E  Xixia Imperial Tombs
+    C      149.6 km   126.6169°E  Sansa, Buddhist Mountain Monasteries in Korea
+    C      154.1 km    72.8805°E  Taxila
+    C      158.2 km    66.8435°E  Cultural Landscape and Archaeological Remains of the Bamiyan Valley
+    C      158.9 km    75.7002°E  Ajanta Caves
+    C-     162.6 km   135.7342°E  Buddhist Monuments in the Horyu-ji Area
+    C-     164.8 km   135.7842°E  Historic Monuments of Ancient Nara
+
+────────────────────────────────────────────────────────────────────────────────────────
+CHRISTIANITY  (N=219, keywords: ['christian', 'cathedral', 'church', 'apostle', 'biblical', 'byzantine', 'crusader', 'orthodox'])
+  A+  : 15/219 = 6.8%  enrich 1.71x  p=0.0312 *
+  A   : 51/219 = 23.3%  enrich 1.16x  p=0.1297 ns
+
+  A+ SITES (15):
+    A++      0.1 km     8.2697°E  <I>Sacri Monti</I> of Piedmont and Lombardy
+    A++      0.3 km    23.2662°E  Boyana Church
+    A+       1.1 km    23.2788°E  Brâncuși Monumental Ensemble of Târgu Jiu
+    A+       1.4 km    11.2561°E  Historic Centre of Florence
+    A+       2.1 km    14.2497°E  Mbanza Kongo, Vestiges of the Capital of the former Kingdom of Kongo
+    A+       3.0 km    -3.7040°E  Burgos Cathedral
+    A+       3.0 km     2.2964°E  Belfries of Belgium and France
+    A+       3.6 km     2.3017°E  Amiens Cathedral
+    A+       3.7 km   122.2354°E  Baroque Churches of the Philippines
+    A+       4.1 km    35.2317°E  Old City of Jerusalem and its Walls
+    A+       4.4 km    23.3086°E  Rila Monastery
+    A+       5.0 km    35.2244°E  Kizhi Pogost
+    A+       5.8 km     2.3211°E  Paris, Banks of the Seine
+    A+       5.8 km    20.2167°E  Wooden Churches of Southern Małopolska
+    A+       6.2 km    44.3246°E  Cathedral and Churches of Echmiatsin and the Archaeological Site of Zvartnots
+
+  A-TIER SITES (36):
+    A        6.8 km    35.2075°E  Birthplace of Jesus: Church of the Nativity and the Pilgrimage Route, Bethlehem
+    A        8.5 km    14.1921°E  Historic Centre of Naples
+    A       10.5 km     2.3637°E  Historic Fortified City of Carcassonne
+    A       10.7 km    38.1726°E  Cultural Landscape of Kenozero Lake
+    A       13.9 km     2.1442°E  Episcopal City of Albi
+    A       14.2 km    20.1408°E  Historic Centres of Berat and Gjirokastra
+    A       14.4 km     2.3983°E  Bourges Cathedral
+    A       15.3 km    38.1312°E  Architectural Ensemble of the Trinity Sergius Lavra in Sergiev Posad
+    A       15.4 km    11.1303°E  Collegiate Church, Castle and Old Town of Quedlinburg
+    A       17.1 km    20.4228°E  Stari Ras and Sopoćani
+    A       17.2 km   -69.8858°E  Colonial City of Santo Domingo
+    A       17.5 km  -102.5735°E  Historic Centre of Zacatecas
+    A       17.8 km    35.1083°E  Hebron/Al-Khalil Old Town
+    A       18.9 km     8.4395°E  ShUM Sites of Speyer, Worms and Mainz
+    A       19.2 km     8.4424°E  Speyer Cathedral
+    A       21.9 km    11.4667°E  Historic Centres of Stralsund and Wismar
+    A       21.9 km   -75.5333°E  Port, Fortresses and Group of Monuments, Cartagena
+    A       22.2 km    35.0689°E  Old City of Acre
+    A       22.2 km     5.4691°E  Flemish Béguinages
+    A       24.3 km   -78.5121°E  City of Quito
+    A       26.3 km    14.5058°E  The works of Jože Plečnik in Ljubljana – Human Centred Urban Design
+    A       26.5 km    11.0299°E  Jewish-Medieval Heritage of Erfurt
+    A       27.2 km    14.5144°E  City of Valletta
+    A       27.3 km    14.0233°E  Arab-Norman Palermo and the Cathedral Churches of Cefalú and Monreale
+    A       27.5 km    20.0209°E  Butrint
+    A       29.2 km    20.5317°E  Studenica Monastery
+    A       30.4 km    17.5426°E  Birka and Hovgården
+    A       31.2 km    26.5500°E  The Historic Centre (Chorá) with the Monastery of Saint-John the Theologian and the Cave of the Apocalypse on the Island of Pátmos
+    A       31.2 km    14.5500°E  Historic Centre of Prague
+    A       31.2 km    25.9879°E  Rock-Hewn Churches of Ivanovo
+    A       31.2 km    11.5503°E  Luther Memorials in Eisleben and Wittenberg
+    A       31.5 km    35.5528°E  Baptism Site “Bethany Beyond the Jordan” (Al-Maghtas)
+    A       31.5 km     2.5532°E  Tipasa
+    A       32.6 km    -4.0244°E  Historic City of Toledo
+    A       33.0 km    38.5667°E  Ensemble of the Ferapontov Monastery
+    A       33.2 km    22.9703°E  Paleochristian and Byzantine Monuments of Thessalonika
+
+  B/C SITES (168):
+    B       36.8 km    19.9372°E  Historic Centre of Kraków
+    B       38.1 km    10.9257°E  Cathedral, Torre Civica and Piazza Grande, Modena
+    B       38.2 km    25.9247°E  Residence of Bukovinian and Dalmatian Metropolitans
+    B       38.9 km   -75.3808°E  Moravian Church Settlements
+    B       39.7 km    73.9117°E  Churches and Convents of Goa
+    B       40.1 km    -6.3700°E  Old Town of Cáceres
+    B       40.8 km    23.6366°E  Monasteries of Daphni, Hosios Loukas and Nea Moni of Chios
+    B       40.9 km    10.9001°E  Pilgrimage Church of Wies
+    B       41.0 km    34.9000°E  Caves of Maresha and Bet-Guvrin in the Judean Lowlands as a Microcosm of the Land of the Caves
+    B       42.8 km    -4.1167°E  Old Town of Segovia and its Aqueduct
+    B       44.1 km    44.6664°E  Monasteries of Haghpat and Sanahin
+    B       44.1 km    35.6667°E  Cultural and Historic Ensemble of the Solovetsky Islands
+    B       44.1 km    29.6667°E  Abu Mena
+    B       45.2 km    20.6761°E  Natural and Cultural Heritage of the Ohrid region
+    B       45.5 km    11.6786°E  Historic Centre of the City of Pienza
+    B       46.9 km    26.6914°E  Architectural, Residential and Cultural Complex of the Radziwill Family at Nesvizh
+    B       47.0 km    -7.1547°E  Garrison Border Town of Elvas and its Fortifications
+    B       47.5 km    34.8408°E  Biblical Tels - Megiddo, Hazor, Beer Sheba
+    B       49.4 km     4.8243°E  Colonies of Benevolence
+    B       51.0 km    35.7283°E  As-Salt - The Place of Tolerance and Urban Hospitality
+    B       51.4 km     4.8061°E  Historic Centre of Avignon: Papal Palace, Episcopal Ensemble and Avignon Bridge
+    B       51.5 km    20.7333°E  Medieval Monuments in Kosovo
+    B       51.6 km    44.7338°E  Historical Monuments of Mtskheta
+    B       52.7 km   -37.2054°E  São Francisco Square in the Town of São Cristóvão
+    B       54.8 km    25.7756°E  Villages with Fortified Churches in Transylvania
+    B       55.3 km    20.7675°E  Levoča, Spišský Hrad and the Associated Cultural Monuments
+    B       55.8 km   -64.2339°E  Jesuit Block and Estancias of Córdoba
+    B       56.8 km    34.7576°E  Göreme National Park and the Rock Sites of Cappadocia
+    B       56.9 km    14.7814°E  Longobards in Italy. Places of the Power (568-774 A.D.)
+    B       57.7 km     7.7489°E  Strasbourg, Grande-Île and <em>Neustadt</em>
+    B       58.7 km     8.7978°E  Maulbronn Monastery Complex
+    B       59.4 km    11.8040°E  Naumburg Cathedral
+    B       59.9 km   -99.1918°E  Franciscan Missions in the Sierra Gorda of Querétaro
+    B       60.8 km    38.8167°E  Rock-Hewn Churches, Lalibela
+    B       61.0 km    44.8185°E  Monastery of Geghard and the Upper Azat Valley
+    B       63.9 km    -0.1553°E  Jurisdiction of Saint-Emilion
+    B       64.5 km   -16.3118°E  San Cristóbal de La Laguna
+    B       65.0 km    10.6833°E  Hanseatic City of Lübeck
+    B       66.1 km    37.6739°E  Church of the Ascension, Kolomenskoye
+    B       67.0 km    -0.1270°E  Palace of Westminster and Westminster Abbey including Saint Margaret’s Church
+    B       70.0 km    -1.3614°E  Blenheim Palace
+    B       71.9 km    35.9167°E  Um er-Rasas (Kastrom Mefa'a)
+    B       72.0 km    37.6204°E  Kremlin and Red Square, Moscow
+    B       73.1 km    16.6103°E  The Sassi and the Park of the Rupestrian Churches of Matera
+    B       73.2 km    23.9283°E  Wooden Churches of Maramureş
+    B       74.0 km    38.9358°E  Asmara: A Modernist African City
+    B       74.5 km   -73.4019°E  Churches of Chiloé
+    B       75.0 km    13.5933°E  Episcopal Complex of the Euphrasian Basilica in the Historic Centre of Poreč
+    B       75.0 km    13.5933°E  Archaeological Area of Agrigento
+    B       77.4 km    32.9663°E  Painted Churches in the Troodos Region
+    B       78.0 km    43.5667°E  Archaeological Site of Ani
+    B       78.3 km   -28.4367°E  Landscape of the Pico Island Vineyard Culture
+    B       81.4 km     4.5353°E  Pont du Gard (Roman Aqueduct)
+    B       82.1 km    -5.9916°E  Cathedral, Alcázar and Archivo de Indias in Seville
+    B       82.6 km    21.0130°E  Historic Centre of Warsaw
+    B       83.5 km   -71.9787°E  City of Cuzco
+    B       85.1 km   -98.9644°E  Historic Centre of Mexico City and Xochimilco
+    B       86.0 km   -43.5056°E  Historic Town of Ouro Preto
+    B       86.3 km    16.4918°E  Churches of Peace in Jawor and Świdnica
+    B       86.6 km    36.0489°E  Ouadi Qadisha (the Holy Valley) and the Forest of the Cedars of God (Horsh Arz el-Rab)
+    B       86.8 km     1.4872°E  Chartres Cathedral
+    B       87.9 km    30.0606°E  Memorial sites of the Genocide: Nyamata, Murambi, Gisozi and Bisesero
+    B       87.9 km     9.0613°E  Monastic Island of Reichenau
+    B       88.7 km    37.4697°E  Fasil Ghebbi, Gondar Region
+    B       89.6 km   -10.5386°E  Sceilg Mhichíl
+    B       90.0 km    12.0799°E  Roskilde Cathedral
+    B       90.5 km     6.0839°E  Aachen Cathedral
+    B       91.2 km    10.4476°E  Benedictine Convent of St John at Müstair
+    B       92.1 km    16.4392°E  Historical Complex of Split with the Palace of Diocletian
+    B       92.1 km    12.0992°E  Old town of Regensburg with Stadtamhof
+    B       93.8 km    -1.5761°E  Durham Castle and Cathedral
+    B       94.2 km    18.1181°E  Old City of Dubrovnik
+    B       94.3 km    27.1189°E  Madara Rider
+    B       94.7 km   -86.8781°E  León Cathedral
+    B       95.2 km    -1.5883°E  Studley Royal Park including the Ruins of Fountains Abbey
+    B       96.1 km    -2.8650°E  San Millán Yuso and Suso Monasteries
+    B       96.8 km    40.3974°E  White Monuments of Vladimir and Suzdal
+    B       96.9 km    10.3964°E  Piazza del Duomo, Pisa
+    B       97.7 km     4.3891°E  Cistercian Abbey of Fontenay
+    B       98.6 km    -2.8424°E  Routes of Santiago de Compostela: <i>Camino Francés</i> and Routes of Northern Spain
+    B      100.0 km    27.1696°E  Pergamon and its Multi-Layered Cultural Landscape
+    B      100.1 km     9.1710°E  Church and Dominican Convent of Santa Maria delle Grazie with “The Last Supper” by Leonardo da Vinci
+    B      100.2 km    22.3667°E  Archaeological Site of Mystras
+    B      100.2 km    34.3664°E  Saint Hilarion Monastery/ Tell Umm Amer
+    B      101.8 km    -5.8143°E  Monuments of Oviedo and the Kingdom of the Asturias
+    B      103.8 km    28.3341°E  Churches of the Pskov School of Architecture
+    B      105.0 km     7.3227°E  Urnes Stave Church
+    B      105.2 km    24.2167°E  Mount Athos
+    B      105.6 km     9.2203°E  Dougga / Thugga
+    B      106.3 km    -4.6885°E  Old Town of Ávila with its Extra-Muros Churches
+    B      106.4 km    18.2278°E  Early Christian Necropolis of Pécs (Sopianae)
+    B      107.0 km    12.2331°E  Early Christian Monuments of Ravenna
+    B      107.1 km   -98.7660°E  Earliest 16th-Century Monasteries on the Slopes of Popocatepetl
+    B      108.9 km   -65.7498°E  City of Potosí
+    B      110.3 km   102.2625°E  Melaka and George Town, Historic Cities of the Straits of Malacca
+    B      110.4 km    31.2746°E  Historic Monuments of Novgorod and Surroundings
+    B      110.8 km    15.2674°E  Kutná Hora: Historical Town Centre with the Church of St Barbara and the Cathedral of Our Lady at Sedlec
+    B      111.3 km    25.2667°E  Delos
+    B      112.7 km  -100.7464°E  Protective town of San Miguel and the Sanctuary of Jesús Nazareno de Atotonilco
+    B      112.8 km    24.2853°E  Archaeological Site of Philippi
+    B      113.0 km    16.2514°E  Historic City of Trogir
+    B      113.4 km   -55.7530°E  Jesuit Missions of La Santísima Trinidad de Paraná and Jesús de Tavarangue
+    B      113.7 km    15.2931°E  Syracuse and the Rocky Necropolis of Pantalica
+    B      113.8 km    36.2944°E  Crac des Chevaliers and Qal’at Salah El-Din
+    B      114.3 km    40.2393°E  Diyarbakır Fortress and Hevsel Gardens Cultural Landscape
+    B      114.9 km   -55.7664°E  The work of engineer Eladio Dieste: Church of Atlántida
+    B      116.4 km    -4.7797°E  Historic Centre of Cordoba
+    B      118.2 km    27.3336°E  Ephesus
+    B      119.4 km    24.3446°E  Wooden <em>Tserkvas</em> of the Carpathian Region in Poland and Ukraine
+    B      120.5 km    25.1833°E  Petäjävesi Old Church
+    B      122.2 km    36.3700°E  Umm Al-Jimāl
+    B      122.4 km   -71.6280°E  Historic Quarter of the Seaport City of Valparaíso
+    B      123.1 km     9.3778°E  Abbey of St Gall
+    B      123.7 km   -34.8450°E  Historic Centre of the Town of Olinda
+    B      123.7 km    19.1547°E  Wooden Churches of the Slovak part of the Carpathian Mountain Area
+    B      123.7 km    -8.6167°E  Historic Centre of Oporto, Luiz I Bridge and Monastery of Serra do Pilar
+    B      124.3 km     3.3893°E  Notre-Dame Cathedral in Tournai
+    B      125.0 km   -23.6052°E  Cidade Velha, Historic Centre of Ribeira Grande
+    B      125.4 km   -43.8608°E  Sanctuary of Bom Jesus do Congonhas
+    B      126.7 km     9.4102°E  Carolingian Westwork and Civitas Corvey
+    B      127.8 km     9.4200°E  Jelling Mounds, Runic Stones and Church
+    B      129.0 km    49.1065°E  Historic and Architectural Complex of the Kazan Kremlin
+    B      130.4 km     1.0940°E  Canterbury Cathedral, St Augustine's Abbey, and St Martin's Church
+    B      130.5 km    -8.5554°E  Santiago de Compostela (Old Town)
+    B      131.7 km     1.0825°E  Poblet Monastery
+    B      131.9 km    12.4574°E  Vatican City
+    B      133.1 km    36.4681°E  Ancient City of Bosra
+    C      134.0 km    12.4761°E  Historic Centre of Rome, the Properties of the Holy See in that City Enjoying Extraterritorial Rights and San Paolo Fuori le Mura
+    C      135.8 km    28.0453°E  Sardis and the Lydian Tumuli of Bin Tepe
+    C      136.4 km    -8.5019°E  Portuguese City of Mazagan (El Jadida)
+    C      136.6 km    27.5000°E  Churches of Moldavia
+    C      136.7 km    33.5008°E  Ancient City of Tauric Chersonese and its Chora
+    C      137.1 km     4.0340°E  Cathedral of Notre-Dame, Former Abbey of Saint-Rémi and Palace of Tau, Reims
+    C      137.7 km    22.0286°E  Church Town of Gammelstad, Luleå
+    C      137.9 km   -43.9736°E  Pampulha Modern Ensemble
+    C      137.9 km    21.5117°E  Old Rauma
+    C      138.0 km   130.0258°E  Hidden Christian Sites in the Nagasaki Region
+    C      142.1 km     6.5495°E  Roman Monuments, Cathedral of St Peter and Church of Our Lady in Trier
+    C      143.1 km    30.5584°E  Kyiv: Saint-Sophia Cathedral and Related Monastic Buildings, Kyiv-Pechersk Lavra
+    C      143.5 km   -62.0234°E  Jesuit Missions of the Chiquitos
+    C      143.6 km    33.9754°E  Saint Catherine Area
+    C      144.2 km   144.9703°E  Royal Exhibition Building and Carlton Gardens
+    C      144.3 km    36.5686°E  Ancient Villages of Northern Syria
+    C      144.7 km    45.5728°E  Armenian Monastic Ensembles of Iran
+    C      144.9 km    -8.4258°E  University of Coimbra – Alta and Sofia
+    C      145.6 km     6.9572°E  Cologne Cathedral
+    C      146.7 km     9.9472°E  St Mary's Cathedral and St Michael's Church at Hildesheim
+    C      147.3 km    15.9421°E  Pilgrimage Church of St John of Nepomuk at Zelená Hora
+    C      150.3 km    -8.3770°E  Sanctuary of Bom Jesus do Monte in Braga
+    C      151.4 km    21.6333°E  Meteora
+    C      152.0 km    18.9000°E  Historic Town of Banská Štiavnica and the Technical Monuments in its Vicinity
+    C      153.2 km    15.8891°E  The Cathedral of St James in Šibenik
+    C      153.6 km    48.6528°E  Assumption Cathedral and Monastery of the town-island of Sviyazhsk
+    C      154.6 km    39.8761°E  Historical Centre of the City of Yaroslavl
+    C      154.9 km    15.8735°E  Jewish Quarter and St Procopius' Basilica in Třebíč
+    C      155.4 km    -2.1310°E  Historic Walled Town of Cuenca
+    C      155.7 km     0.8661°E  Abbey Church of Saint-Savin sur Gartempe
+    C      155.8 km    -5.3275°E  Royal Monastery of Santa María de Guadalupe
+    C      158.8 km    18.7000°E  Natural and Culturo-Historical Region of Kotor
+    C      159.4 km   -98.1667°E  San Antonio Missions
+    C-     162.8 km   -98.1978°E  Historic Centre of Puebla
+    C-     162.8 km     3.7360°E  Vézelay, Church and Hill
+    C-     162.8 km    27.7360°E  Ancient City of Nessebar
+    C-     163.3 km    24.7400°E  Historic Centre (Old Town) of Tallinn
+    C-     163.8 km  -101.2556°E  Historic Town of Guanajuato and Adjacent Mines
+    C-     163.9 km     0.7455°E  Catalan Romanesque Churches of the Vall de Boí
+    C-     164.2 km   -71.2106°E  Historic District of Old Québec
+    C--    166.4 km    42.7683°E  Gelati Monastery
+
+────────────────────────────────────────────────────────────────────────────────────────
+ISLAM  (N=98, keywords: ['islam', 'mosque', 'muslim', 'sufi', 'ottoman', 'caliphate', 'madrasa', 'mihrab', 'quran'])
+  A+  : 4/98 = 4.1%  enrich 1.02x  p=0.5545 ns
+  A   : 19/98 = 19.4%  enrich 0.97x  p=0.6002 ns
+
+  A+ SITES (4):
+    A+       1.6 km    -0.7167°E  Palmeral of Elche
+    A+       3.1 km    77.2408°E  Red Fort Complex
+    A+       3.8 km    47.2350°E  Takht-e Soleyman
+    A+       4.1 km    35.2317°E  Old City of Jerusalem and its Walls
+
+  A-TIER SITES (15):
+    A        6.8 km    44.2081°E  Old City of Sana'a
+    A        9.3 km    77.1853°E  Qutb Minar and its Monuments, Delhi
+    A       10.6 km    29.1731°E  Bursa and Cumalıkızık: the Birth of the Ottoman Empire
+    A       12.6 km    74.3821°E  Fort and Shalamar Gardens in Lahore
+    A       12.9 km    -6.8469°E  Rabat, Modern Capital and Historic City: a Shared Heritage
+    A       14.1 km    59.1417°E  Kunya-Urgench
+    A       14.2 km    20.1408°E  Historic Centres of Berat and Gjirokastra
+    A       16.3 km    38.1218°E  Great Mosque and Hospital of Divriği
+    A       17.8 km    35.1083°E  Hebron/Al-Khalil Old Town
+    A       22.2 km    35.0689°E  Old City of Acre
+    A       27.3 km    14.0233°E  Arab-Norman Palermo and the Cathedral Churches of Cefalú and Monreale
+    A       28.8 km    44.0092°E  Erbil Citadel
+    A       31.7 km    28.9833°E  Historic Areas of Istanbul
+    A       32.2 km    26.5594°E  Selimiye Mosque and its Social Complex
+    A       32.6 km    -4.0244°E  Historic City of Toledo
+
+  B/C SITES (79):
+    B       33.6 km    -7.0333°E  Ancient <I>Ksour</I> of Ouadane, Chinguetti, Tichitt and Oualata
+    B       37.9 km    19.9275°E  Old Town of Corfu
+    B       38.2 km    50.6133°E  Pearling, Testimony of an Island Economy
+    B       39.2 km    43.9156°E  Samarra Archaeological City
+    B       40.1 km    -6.3700°E  Old Town of Cáceres
+    B       41.8 km    -1.1080°E  Mudejar Architecture of Aragon
+    B       44.1 km    77.6665°E  Fatehpur Sikri
+    B       46.2 km    40.8525°E  Lamu Old Town
+    B       47.0 km    32.6926°E  City of Safranbolu
+    B       48.4 km    49.8333°E  Walled City of Baku with the Shirvanshah's Palace and Maiden Tower
+    B       51.0 km    35.7283°E  As-Salt - The Place of Tolerance and Urban Hospitality
+    B       53.5 km     4.7868°E  Al Qal'a of Beni Hammad
+    B       58.9 km    89.8000°E  Historic Mosque City of Bagerhat
+    B       60.6 km    17.8150°E  Old Bridge Area of the Old City of Mostar
+    B       61.1 km    31.7186°E  Wooden Hypostyle Mosques of Medieval Anatolia
+    B       70.0 km    10.6386°E  Medina of Sousse
+    B       71.9 km    35.9167°E  Um er-Rasas (Kastrom Mefa'a)
+    B       74.0 km    38.9358°E  Asmara: A Modernist African City
+    B       75.5 km    73.5889°E  Rohtas Fort
+    B       76.2 km    -0.0446°E  Tomb of Askia
+    B       76.8 km    49.5769°E  Al-Ahsa Oasis, an Evolving Cultural Landscape
+    B       77.3 km    46.5725°E  At-Turaif District in ad-Dir'iyah
+    B       78.0 km    43.5667°E  Archaeological Site of Ani
+    B       81.2 km    -2.9994°E  Timbuktu
+    B       81.7 km    73.5333°E  Champaner-Pavagadh Archaeological Park
+    B       81.7 km    52.5325°E  Sassanid Archaeological Landscape of Fars Region
+    B       83.5 km    78.0215°E  Agra Fort
+    B       84.4 km    51.0297°E  Al Zubarah Archaeological Site
+    B       85.8 km    78.0422°E  Taj Mahal
+    B       87.8 km     3.0603°E  Kasbah of Algiers
+    B       88.5 km    76.4717°E  Group of Monuments at Hampi
+    B       89.8 km    -4.5404°E  Old Towns of Djenné
+    B       91.6 km   118.4442°E  Quanzhou: Emporium of the World in Song-Yuan China
+    B       93.3 km    64.4286°E  Historic Centre of Bukhara
+    B       96.4 km    42.1378°E  Harar Jugol, the Fortified Historic Town
+    B       99.3 km    45.1634°E  The Cultural Landscape of Al-Faw Archaeological Area
+    B      100.0 km    27.1696°E  Pergamon and its Multi-Layered Cultural Landscape
+    B      102.0 km    39.1875°E  Historic Jeddah, the Gate to Makkah
+    B      105.6 km     9.2203°E  Dougga / Thugga
+    B      105.8 km    43.3155°E  Historic Town of Zabid
+    B      107.5 km    46.3008°E  Tabriz Historic Bazaar Complex
+    B      108.9 km    19.2880°E  Mehmed Paša Sokolović Bridge in Višegrad
+    B      110.8 km    16.2709°E  Castel del Monte
+    B      111.0 km    45.2688°E  Landmarks of the Ancient Kingdom of Saba, Marib
+    B      113.5 km    48.2914°E  Sheikh Safi al-din Khānegāh and Shrine Ensemble in Ardabil
+    B      113.7 km    15.2931°E  Syracuse and the Rocky Necropolis of Pantalica
+    B      114.3 km    40.2393°E  Diyarbakır Fortress and Hevsel Gardens Cultural Landscape
+    B      114.9 km    31.2334°E  Historic Cairo
+    B      115.5 km    36.3097°E  Ancient City of Damascus
+    B      115.6 km    28.2278°E  Medieval City of Rhodes
+    B      116.4 km    -4.7797°E  Historic Centre of Cordoba
+    B      121.1 km    60.3603°E  Itchan Kala
+    B      122.1 km    55.1690°E  Gonbad-e Qābus
+    B      122.2 km    36.3700°E  Umm Al-Jimāl
+    B      122.4 km    10.1667°E  Medina of Tunis
+    B      122.6 km    54.3731°E  Historic City of Yazd
+    B      122.8 km    37.1628°E  Ancient City of Aleppo
+    B      126.2 km    -4.8677°E  Caliphate City of Medina Azahara
+    B      129.0 km    49.1065°E  Historic and Architectural Complex of the Kazan Kremlin
+    B      129.8 km    10.1000°E  Kairouan
+    B      130.2 km    -5.5583°E  Historic City of Meknes
+    B      130.5 km    -8.5554°E  Santiago de Compostela (Old Town)
+    B      133.1 km    36.4681°E  Ancient City of Bosra
+    C      134.3 km    49.0589°E  Bolgar Historical and Archaeological Complex
+    C      139.8 km    -4.9904°E  Medina of Fez
+    C      143.3 km    -8.0222°E  Medina of Marrakesh
+    C      143.6 km    33.9754°E  Saint Catherine Area
+    C      144.9 km    66.9639°E  Samarkand – Crossroad of Cultures
+    C      146.4 km    72.5881°E  Historic City of Ahmadabad
+    C      147.0 km    -8.4064°E  Tower of Hercules
+    C      151.4 km    -5.3667°E  Medina of Tétouan (formerly known as Titawin)
+    C      153.6 km    48.8854°E  Cultural Landscape of Khinalig People and “Köç Yolu” Transhumance Route
+    C      155.4 km    -2.1310°E  Historic Walled Town of Cuenca
+    C      156.4 km    51.6778°E  Meidan Emam, Esfahan
+    C      157.2 km    51.6853°E  Masjed-e Jāmé of Isfahan
+    C      158.2 km    66.8435°E  Cultural Landscape and Archaeological Remains of the Bamiyan Valley
+    C-     162.5 km    -5.1949°E  Sudanese style mosques in northern Côte d’Ivoire
+    C-     163.6 km    48.7947°E  Soltaniyeh
+    C-     165.0 km    72.7828°E  Sulaiman-Too Sacred Mountain
+
+────────────────────────────────────────────────────────────────────────────────────────
+JUDAISM  (N=15, keywords: ['jewish', 'judaism', 'synagogue', 'hebrew', 'israelite'])
+  A+  : 1/15 = 6.7%  enrich 1.67x  p=0.4579 ns
+  A   : 9/15 = 60.0%  enrich 3.00x  p=0.0008 ***
+
+  A+ SITES (1):
+    A+       4.1 km    35.2317°E  Old City of Jerusalem and its Walls
+
+  A-TIER SITES (8):
+    A        9.4 km    35.3536°E  Masada
+    A       15.8 km    35.1269°E  Necropolis of Bet She’arim: A Landmark of Jewish Renewal
+    A       17.8 km    35.1083°E  Hebron/Al-Khalil Old Town
+    A       18.9 km     8.4395°E  ShUM Sites of Speyer, Worms and Mainz
+    A       26.5 km    11.0299°E  Jewish-Medieval Heritage of Erfurt
+    A       27.3 km    14.0233°E  Arab-Norman Palermo and the Cathedral Churches of Cefalú and Monreale
+    A       27.5 km   -54.9787°E  Jodensavanne Archaeological Site: Jodensavanne Settlement and Cassipora Creek Cemetery
+    A       32.6 km    -4.0244°E  Historic City of Toledo
+
+  B/C SITES (6):
+    B       36.8 km    19.9372°E  Historic Centre of Kraków
+    B       74.0 km    38.9358°E  Asmara: A Modernist African City
+    B      111.7 km    21.2756°E  Bardejov Town Conservation Reserve
+    B      122.6 km    54.3731°E  Historic City of Yazd
+    C      143.6 km    33.9754°E  Saint Catherine Area
+    C      154.9 km    15.8735°E  Jewish Quarter and St Procopius' Basilica in Třebíč
+
+────────────────────────────────────────────────────────────────────────────────────────
+HINDUISM  (N=26, keywords: ['hindu', 'brahman', 'vedic', 'shiva', 'vishnu', 'ganges'])
+  A+  : 1/26 = 3.8%  enrich 0.96x  p=0.6540 ns
+  A   : 7/26 = 26.9%  enrich 1.35x  p=0.2526 ns
+
+  A+ SITES (1):
+    A+       3.1 km    77.2408°E  Red Fort Complex
+
+  A-TIER SITES (6):
+    A        7.8 km    80.1989°E  Group of Monuments at Mahabalipuram
+    A        9.3 km    77.1853°E  Qutb Minar and its Monuments, Delhi
+    A       11.3 km    53.1673°E  Pasargadae
+    A       18.9 km     8.4395°E  ShUM Sites of Speyer, Worms and Mainz
+    A       19.3 km    86.0947°E  Sun Temple, Konârak
+    A       24.7 km   110.4917°E  Prambanan Temple Compounds
+
+  B/C SITES (19):
+    B       36.2 km    79.9432°E  Kakatiya Rudreshwara (Ramappa) Temple, Telangana
+    B       37.5 km    79.9311°E  Khajuraho Group of Monuments
+    B       43.0 km    76.8818°E  Sacred Ensembles of the Hoysalas
+    B       45.7 km   104.6803°E  Temple of Preah Vihear
+    B       58.9 km    89.8000°E  Historic Mosque City of Bagerhat
+    B       81.2 km    81.0006°E  Ancient City of Polonnaruwa
+    B       81.7 km    73.5333°E  Champaner-Pavagadh Archaeological Park
+    B       88.5 km    76.4717°E  Group of Monuments at Hampi
+    B       88.7 km    37.4697°E  Fasil Ghebbi, Gondar Region
+    B       93.3 km   108.1092°E  My Son Sanctuary
+    B       93.3 km    85.4285°E  Kathmandu Valley
+    B      101.0 km    75.1792°E  Ellora Caves
+    B      126.3 km    79.1316°E  Great Living Chola Temples
+    C      146.4 km    72.5881°E  Historic City of Ahmadabad
+    C      148.0 km    72.9358°E  Elephanta Caves
+    C      159.0 km    72.8362°E  Chhatrapati Shivaji Terminus (formerly Victoria Terminus)
+    C-     160.6 km   105.8222°E  Vat Phou and Associated Ancient Settlements within the Champasak Cultural Landscape
+    C-     160.6 km    75.8219°E  Jaipur City, Rajasthan
+    C-     161.2 km    75.8172°E  Group of Monuments at Pattadakal
+
+────────────────────────────────────────────────────────────────────────────────────────
+ZOROASTRIANISM  (N=9, keywords: ['zoroastrian', 'sassanid', 'sasanian', 'fire temple'])
+  A+  : 1/9 = 11.1%  enrich 2.78x  p=0.3075 ns
+  A   : 1/9 = 11.1%  enrich 0.56x  p=0.8658 ns
+
+  A+ SITES (1):
+    A+       3.8 km    47.2350°E  Takht-e Soleyman
+
+  B/C SITES (8):
+    B       48.4 km    49.8333°E  Walled City of Baku with the Shirvanshah's Palace and Maiden Tower
+    B       81.7 km    52.5325°E  Sassanid Archaeological Landscape of Fars Region
+    B       82.6 km    52.5253°E  The Persian Garden
+    B      112.5 km    48.2828°E  Citadel, Ancient City and Fortress Buildings of Derbent
+    B      114.3 km    40.2393°E  Diyarbakır Fortress and Hevsel Gardens Cultural Landscape
+    B      122.6 km    54.3731°E  Historic City of Yazd
+    C      138.7 km    48.5183°E  Hegmataneh
+    C      157.2 km    51.6853°E  Masjed-e Jāmé of Isfahan
+
+────────────────────────────────────────────────────────────────────────────────────────
+UNION — ALL RELIGION-TAGGED SITES (N=363)
+  A+  : 22/363 = 6.1%  enrich 1.52x  p=0.0369 *
+  A   : 82/363 = 22.6%  enrich 1.13x  p=0.1223 ns
+
+  Site                                                    Tier       km  Religion tags
+  ----------------------------------------------------------------------------------
+  <I>Sacri Monti</I> of Piedmont and Lombardy             A++       0.1  Christianity
+  Boyana Church                                           A++       0.3  Christianity
+  Lumbini, the Birthplace of the Lord Buddha              A+        0.8  Buddhism
+  Brâncuși Monumental Ensemble of Târgu Jiu               A+        1.1  Christianity
+  Historic Centre of Florence                             A+        1.4  Christianity
+  Palmeral of Elche                                       A+        1.6  Islam
+  Mbanza Kongo, Vestiges of the Capital of the former Ki  A+        2.1  Christianity
+  Pyu Ancient Cities                                      A+        2.3  Buddhism
+  Silk Roads: the Routes Network of Chang'an-Tianshan Co  A+        2.5  Buddhism
+  Burgos Cathedral                                        A+        3.0  Christianity
+  Belfries of Belgium and France                          A+        3.0  Christianity
+  Red Fort Complex                                        A+        3.1  Islam, Hinduism
+  Amiens Cathedral                                        A+        3.6  Christianity
+  Baroque Churches of the Philippines                     A+        3.7  Christianity
+  Takht-e Soleyman                                        A+        3.8  Islam, Zoroastrianism
+  Old City of Jerusalem and its Walls                     A+        4.1  Christianity, Islam, Judaism
+  Borobudur Temple Compounds                              A+        4.3  Buddhism
+  Rila Monastery                                          A+        4.4  Christianity
+  Kizhi Pogost                                            A+        5.0  Christianity
+  Paris, Banks of the Seine                               A+        5.8  Christianity
+  Wooden Churches of Southern Małopolska                  A+        5.8  Christianity
+  Cathedral and Churches of Echmiatsin and the Archaeolo  A+        6.2  Christianity
+  Old City of Sana'a                                      A         6.8  Islam
+  Birthplace of Jesus: Church of the Nativity and the Pi  A         6.8  Christianity
+  Group of Monuments at Mahabalipuram                     A         7.8  Hinduism
+  Historic Centre of Naples                               A         8.5  Christianity
+  Mount Wutai                                             A         8.9  Buddhism
+  Qutb Minar and its Monuments, Delhi                     A         9.3  Islam, Hinduism
+  Site of Xanadu                                          A         9.3  Buddhism
+  Masada                                                  A         9.4  Judaism
+  Historic Fortified City of Carcassonne                  A        10.5  Christianity
+  Bursa and Cumalıkızık: the Birth of the Ottoman Empire  A        10.6  Islam
+  Cultural Landscape of Kenozero Lake                     A        10.7  Christianity
+  Pasargadae                                              A        11.3  Hinduism
+  Fort and Shalamar Gardens in Lahore                     A        12.6  Islam
+  Sacred City of Anuradhapura                             A        12.7  Buddhism
+  Rabat, Modern Capital and Historic City: a Shared Heri  A        12.9  Islam
+  Episcopal City of Albi                                  A        13.9  Christianity
+  Kunya-Urgench                                           A        14.1  Islam
+  Historic Centres of Berat and Gjirokastra               A        14.2  Christianity, Islam
+  Bourges Cathedral                                       A        14.4  Christianity
+  Mount Kumgang – Diamond Mountain from the Sea           A        14.6  Buddhism
+  Architectural Ensemble of the Trinity Sergius Lavra in  A        15.3  Christianity
+  Collegiate Church, Castle and Old Town of Quedlinburg   A        15.4  Christianity
+  Necropolis of Bet She’arim: A Landmark of Jewish Renew  A        15.8  Judaism
+  Yungang Grottoes                                        A        16.3  Buddhism
+  Great Mosque and Hospital of Divriği                    A        16.3  Islam
+  Stari Ras and Sopoćani                                  A        17.1  Christianity
+  Colonial City of Santo Domingo                          A        17.2  Christianity
+  Historic Centre of Zacatecas                            A        17.5  Christianity
+  Hebron/Al-Khalil Old Town                               A        17.8  Christianity, Islam, Judaism
+  Haeinsa Temple Janggyeong Panjeon, the Depositories fo  A        18.9  Buddhism
+  ShUM Sites of Speyer, Worms and Mainz                   A        18.9  Christianity, Judaism, Hinduism
+  Speyer Cathedral                                        A        19.2  Christianity
+  Sun Temple, Konârak                                     A        19.3  Hinduism
+  Historic Centres of Stralsund and Wismar                A        21.9  Christianity
+  Port, Fortresses and Group of Monuments, Cartagena      A        21.9  Christianity
+  Old City of Acre                                        A        22.2  Christianity, Islam
+  Flemish Béguinages                                      A        22.2  Christianity
+  City of Quito                                           A        24.3  Christianity
+  Prambanan Temple Compounds                              A        24.7  Hinduism
+  The works of Jože Plečnik in Ljubljana – Human Centred  A        26.3  Christianity
+  Jewish-Medieval Heritage of Erfurt                      A        26.5  Christianity, Judaism
+  City of Valletta                                        A        27.2  Christianity
+  Arab-Norman Palermo and the Cathedral Churches of Cefa  A        27.3  Christianity, Islam, Judaism
+  Jodensavanne Archaeological Site: Jodensavanne Settlem  A        27.5  Judaism
+  Butrint                                                 A        27.5  Christianity
+  Erbil Citadel                                           A        28.8  Islam
+  Studenica Monastery                                     A        29.2  Christianity
+  Birka and Hovgården                                     A        30.4  Christianity
+  The Historic Centre (Chorá) with the Monastery of Sain  A        31.2  Christianity
+  Historic Centre of Prague                               A        31.2  Christianity
+  Rock-Hewn Churches of Ivanovo                           A        31.2  Christianity
+  Luther Memorials in Eisleben and Wittenberg             A        31.2  Christianity
+  Baptism Site “Bethany Beyond the Jordan” (Al-Maghtas)   A        31.5  Christianity
+  Tipasa                                                  A        31.5  Christianity
+  Historic Areas of Istanbul                              A        31.7  Islam
+  Ruins of the Buddhist Vihara at Paharpur                A        31.7  Buddhism
+  Selimiye Mosque and its Social Complex                  A        32.2  Islam
+  Historic City of Toledo                                 A        32.6  Christianity, Islam, Judaism
+  Ensemble of the Ferapontov Monastery                    A        33.0  Christianity
+  Paleochristian and Byzantine Monuments of Thessalonika  A        33.2  Christianity
+  Ancient <I>Ksour</I> of Ouadane, Chinguetti, Tichitt a  B        33.6  Islam
+  Bagan                                                   B        33.8  Buddhism
+  Kakatiya Rudreshwara (Ramappa) Temple, Telangana        B        36.2  Hinduism
+  Historic Centre of Kraków                               B        36.8  Christianity, Judaism
+  Khajuraho Group of Monuments                            B        37.5  Hinduism
+  Old Town of Corfu                                       B        37.9  Islam
+  Cathedral, Torre Civica and Piazza Grande, Modena       B        38.1  Christianity
+  Residence of Bukovinian and Dalmatian Metropolitans     B        38.2  Christianity
+  Pearling, Testimony of an Island Economy                B        38.2  Islam
+  Moravian Church Settlements                             B        38.9  Christianity
+  Samarra Archaeological City                             B        39.2  Islam
+  Churches and Convents of Goa                            B        39.7  Christianity
+  Old Town of Cáceres                                     B        40.1  Christianity, Islam
+  Monasteries of Daphni, Hosios Loukas and Nea Moni of C  B        40.8  Christianity
+  Pilgrimage Church of Wies                               B        40.9  Christianity
+  Caves of Maresha and Bet-Guvrin in the Judean Lowlands  B        41.0  Christianity
+  Sacred City of Kandy                                    B        41.2  Buddhism
+  Mudejar Architecture of Aragon                          B        41.8  Islam
+  Rangiri Dambulla Cave Temple                            B        42.2  Buddhism
+  Old Town of Segovia and its Aqueduct                    B        42.8  Christianity
+  Sacred Ensembles of the Hoysalas                        B        43.0  Hinduism
+  Monasteries of Haghpat and Sanahin                      B        44.1  Christianity
+  Fatehpur Sikri                                          B        44.1  Islam
+  Cultural and Historic Ensemble of the Solovetsky Islan  B        44.1  Christianity
+  Abu Mena                                                B        44.1  Christianity
+  Lushan National Park                                    B        44.7  Buddhism
+  Natural and Cultural Heritage of the Ohrid region       B        45.2  Christianity
+  Historic Centre of the City of Pienza                   B        45.5  Christianity
+  Temple of Preah Vihear                                  B        45.7  Hinduism
+  Lamu Old Town                                           B        46.2  Islam
+  Architectural, Residential and Cultural Complex of the  B        46.9  Christianity
+  City of Safranbolu                                      B        47.0  Islam
+  Garrison Border Town of Elvas and its Fortifications    B        47.0  Christianity
+  Biblical Tels - Megiddo, Hazor, Beer Sheba              B        47.5  Christianity
+  Walled City of Baku with the Shirvanshah's Palace and   B        48.4  Islam, Zoroastrianism
+  Colonies of Benevolence                                 B        49.4  Christianity
+  Mogao Caves                                             B        50.2  Buddhism
+  As-Salt - The Place of Tolerance and Urban Hospitality  B        51.0  Christianity, Islam
+  Historic Centre of Avignon: Papal Palace, Episcopal En  B        51.4  Christianity
+  Medieval Monuments in Kosovo                            B        51.5  Christianity
+  Historical Monuments of Mtskheta                        B        51.6  Christianity
+  Buddhist Monuments at Sanchi                            B        52.2  Buddhism
+  São Francisco Square in the Town of São Cristóvão       B        52.7  Christianity
+  Al Qal'a of Beni Hammad                                 B        53.5  Islam
+  Yen Tu-Vinh Nghiem-Con Son, Kiep Bac Complex of Monume  B        53.9  Buddhism
+  Villages with Fortified Churches in Transylvania        B        54.8  Christianity
+  Mount Emei Scenic Area, including Leshan Giant Buddha   B        55.0  Buddhism
+  Levoča, Spišský Hrad and the Associated Cultural Monum  B        55.3  Christianity
+  Jesuit Block and Estancias of Córdoba                   B        55.8  Christianity
+  Göreme National Park and the Rock Sites of Cappadocia   B        56.8  Christianity
+  Longobards in Italy. Places of the Power (568-774 A.D.  B        56.9  Christianity
+  Strasbourg, Grande-Île and <em>Neustadt</em>            B        57.7  Christianity
+  Maulbronn Monastery Complex                             B        58.7  Christianity
+  Historic Mosque City of Bagerhat                        B        58.9  Islam, Hinduism
+  Naumburg Cathedral                                      B        59.4  Christianity
+  Franciscan Missions in the Sierra Gorda of Querétaro    B        59.9  Christianity
+  Old Bridge Area of the Old City of Mostar               B        60.6  Islam
+  Rock-Hewn Churches, Lalibela                            B        60.8  Christianity
+  Monastery of Geghard and the Upper Azat Valley          B        61.0  Christianity
+  Wooden Hypostyle Mosques of Medieval Anatolia           B        61.1  Islam
+  Jurisdiction of Saint-Emilion                           B        63.9  Christianity
+  San Cristóbal de La Laguna                              B        64.5  Christianity
+  Hanseatic City of Lübeck                                B        65.0  Christianity
+  Church of the Ascension, Kolomenskoye                   B        66.1  Christianity
+  Palace of Westminster and Westminster Abbey including   B        67.0  Christianity
+  Blenheim Palace                                         B        70.0  Christianity
+  Medina of Sousse                                        B        70.0  Islam
+  Um er-Rasas (Kastrom Mefa'a)                            B        71.9  Christianity, Islam
+  Kremlin and Red Square, Moscow                          B        72.0  Christianity
+  The Sassi and the Park of the Rupestrian Churches of M  B        73.1  Christianity
+  Wooden Churches of Maramureş                            B        73.2  Christianity
+  Asmara: A Modernist African City                        B        74.0  Christianity, Islam, Judaism
+  Churches of Chiloé                                      B        74.5  Christianity
+  Episcopal Complex of the Euphrasian Basilica in the Hi  B        75.0  Christianity
+  Archaeological Area of Agrigento                        B        75.0  Christianity
+  Rohtas Fort                                             B        75.5  Islam
+  Buddhist Ruins of Takht-i-Bahi and Neighbouring City R  B        75.7  Buddhism
+  Tomb of Askia                                           B        76.2  Islam
+  Al-Ahsa Oasis, an Evolving Cultural Landscape           B        76.8  Islam
+  At-Turaif District in ad-Dir'iyah                       B        77.3  Islam
+  Painted Churches in the Troodos Region                  B        77.4  Christianity
+  Archaeological Site of Ani                              B        78.0  Christianity, Islam
+  Landscape of the Pico Island Vineyard Culture           B        78.3  Christianity
+  Timbuktu                                                B        81.2  Islam
+  Ancient City of Polonnaruwa                             B        81.2  Hinduism
+  Pont du Gard (Roman Aqueduct)                           B        81.4  Christianity
+  Champaner-Pavagadh Archaeological Park                  B        81.7  Islam, Hinduism
+  Sassanid Archaeological Landscape of Fars Region        B        81.7  Islam, Zoroastrianism
+  Cathedral, Alcázar and Archivo de Indias in Seville     B        82.1  Christianity
+  The Persian Garden                                      B        82.6  Zoroastrianism
+  Historic Centre of Warsaw                               B        82.6  Christianity
+  City of Cuzco                                           B        83.5  Christianity
+  Agra Fort                                               B        83.5  Islam
+  Al Zubarah Archaeological Site                          B        84.4  Islam
+  Historic Centre of Mexico City and Xochimilco           B        85.1  Christianity
+  Taj Mahal                                               B        85.8  Islam
+  Historic Town of Ouro Preto                             B        86.0  Christianity
+  Churches of Peace in Jawor and Świdnica                 B        86.3  Christianity
+  Ouadi Qadisha (the Holy Valley) and the Forest of the   B        86.6  Christianity
+  Chartres Cathedral                                      B        86.8  Christianity
+  Kasbah of Algiers                                       B        87.8  Islam
+  Memorial sites of the Genocide: Nyamata, Murambi, Giso  B        87.9  Christianity
+  Monastic Island of Reichenau                            B        87.9  Christianity
+  Group of Monuments at Hampi                             B        88.5  Islam, Hinduism
+  Fasil Ghebbi, Gondar Region                             B        88.7  Christianity, Hinduism
+  Longmen Grottoes                                        B        89.1  Buddhism
+  Sceilg Mhichíl                                          B        89.6  Christianity
+  Old Towns of Djenné                                     B        89.8  Islam
+  Roskilde Cathedral                                      B        90.0  Christianity
+  Aachen Cathedral                                        B        90.5  Christianity
+  Benedictine Convent of St John at Müstair               B        91.2  Christianity
+  Quanzhou: Emporium of the World in Song-Yuan China      B        91.6  Islam
+  Archaeological Site of Nalanda Mahavihara at Nalanda,   B        91.6  Buddhism
+  Historical Complex of Split with the Palace of Dioclet  B        92.1  Christianity
+  Old town of Regensburg with Stadtamhof                  B        92.1  Christianity
+  Hiraizumi – Temples, Gardens and Archaeological Sites   B        93.1  Buddhism
+  My Son Sanctuary                                        B        93.3  Hinduism
+  Historic Centre of Bukhara                              B        93.3  Islam
+  Kathmandu Valley                                        B        93.3  Buddhism, Hinduism
+  Durham Castle and Cathedral                             B        93.8  Christianity
+  Old City of Dubrovnik                                   B        94.2  Christianity
+  Madara Rider                                            B        94.3  Christianity
+  León Cathedral                                          B        94.7  Christianity
+  Studley Royal Park including the Ruins of Fountains Ab  B        95.2  Christianity
+  San Millán Yuso and Suso Monasteries                    B        96.1  Christianity
+  Harar Jugol, the Fortified Historic Town                B        96.4  Islam
+  White Monuments of Vladimir and Suzdal                  B        96.8  Christianity
+  Piazza del Duomo, Pisa                                  B        96.9  Christianity
+  Cistercian Abbey of Fontenay                            B        97.7  Christianity
+  Routes of Santiago de Compostela: <i>Camino Francés</i  B        98.6  Christianity
+  Khangchendzonga National Park                           B        99.0  Buddhism
+  The Cultural Landscape of Al-Faw Archaeological Area    B        99.3  Islam
+  Pergamon and its Multi-Layered Cultural Landscape       B       100.0  Christianity, Islam
+  Church and Dominican Convent of Santa Maria delle Graz  B       100.1  Christianity
+  Archaeological Site of Mystras                          B       100.2  Christianity
+  Saint Hilarion Monastery/ Tell Umm Amer                 B       100.2  Christianity
+  Ellora Caves                                            B       101.0  Buddhism, Hinduism
+  Monuments of Oviedo and the Kingdom of the Asturias     B       101.8  Christianity
+  Historic Jeddah, the Gate to Makkah                     B       102.0  Islam
+  Churches of the Pskov School of Architecture            B       103.8  Christianity
+  Urnes Stave Church                                      B       105.0  Christianity
+  Mount Athos                                             B       105.2  Christianity
+  Gyeongju Historic Areas                                 B       105.6  Buddhism
+  Dougga / Thugga                                         B       105.6  Christianity, Islam
+  Historic Town of Zabid                                  B       105.8  Islam
+  Old Town of Ávila with its Extra-Muros Churches         B       106.3  Christianity
+  Early Christian Necropolis of Pécs (Sopianae)           B       106.4  Christianity
+  Early Christian Monuments of Ravenna                    B       107.0  Christianity
+  Earliest 16th-Century Monasteries on the Slopes of Pop  B       107.1  Christianity
+  Tabriz Historic Bazaar Complex                          B       107.5  Islam
+  Mehmed Paša Sokolović Bridge in Višegrad                B       108.9  Islam
+  City of Potosí                                          B       108.9  Christianity
+  Melaka and George Town, Historic Cities of the Straits  B       110.3  Christianity
+  Historic Monuments of Novgorod and Surroundings         B       110.4  Christianity
+  Castel del Monte                                        B       110.8  Islam
+  Kutná Hora: Historical Town Centre with the Church of   B       110.8  Christianity
+  Landmarks of the Ancient Kingdom of Saba, Marib         B       111.0  Islam
+  Delos                                                   B       111.3  Christianity
+  Bardejov Town Conservation Reserve                      B       111.7  Judaism
+  Citadel, Ancient City and Fortress Buildings of Derben  B       112.5  Zoroastrianism
+  Protective town of San Miguel and the Sanctuary of Jes  B       112.7  Christianity
+  Archaeological Site of Philippi                         B       112.8  Christianity
+  Historic City of Trogir                                 B       113.0  Christianity
+  Jesuit Missions of La Santísima Trinidad de Paraná and  B       113.4  Christianity
+  Sheikh Safi al-din Khānegāh and Shrine Ensemble in Ard  B       113.5  Islam
+  Syracuse and the Rocky Necropolis of Pantalica          B       113.7  Christianity, Islam
+  Crac des Chevaliers and Qal’at Salah El-Din             B       113.8  Christianity
+  Diyarbakır Fortress and Hevsel Gardens Cultural Landsc  B       114.3  Christianity, Islam, Zoroastrianism
+  The work of engineer Eladio Dieste: Church of Atlántid  B       114.9  Christianity
+  Historic Cairo                                          B       114.9  Islam
+  Ancient City of Damascus                                B       115.5  Islam
+  Medieval City of Rhodes                                 B       115.6  Islam
+  Historic Centre of Cordoba                              B       116.4  Christianity, Islam
+  Phu Phrabat, a testimony to the Sīma stone tradition o  B       118.0  Buddhism
+  Ephesus                                                 B       118.2  Christianity
+  Wooden <em>Tserkvas</em> of the Carpathian Region in P  B       119.4  Christianity
+  Seokguram Grotto and Bulguksa Temple                    B       119.9  Buddhism
+  Namhansanseong                                          B       120.2  Buddhism
+  Petäjävesi Old Church                                   B       120.5  Christianity
+  Itchan Kala                                             B       121.1  Islam
+  Gonbad-e Qābus                                          B       122.1  Islam
+  Umm Al-Jimāl                                            B       122.2  Christianity, Islam
+  Cultural Heritage Sites of Ancient Khuttal              B       122.2  Buddhism
+  Medina of Tunis                                         B       122.4  Islam
+  Historic Quarter of the Seaport City of Valparaíso      B       122.4  Christianity
+  Historic City of Yazd                                   B       122.6  Islam, Judaism, Zoroastrianism
+  Ancient City of Aleppo                                  B       122.8  Islam
+  Abbey of St Gall                                        B       123.1  Christianity
+  Historic Centre of the Town of Olinda                   B       123.7  Christianity
+  Wooden Churches of the Slovak part of the Carpathian M  B       123.7  Christianity
+  Historic Centre of Oporto, Luiz I Bridge and Monastery  B       123.7  Christianity
+  Notre-Dame Cathedral in Tournai                         B       124.3  Christianity
+  Cidade Velha, Historic Centre of Ribeira Grande         B       125.0  Christianity
+  Sanctuary of Bom Jesus do Congonhas                     B       125.4  Christianity
+  Historic Ensemble of the Potala Palace, Lhasa           B       126.0  Buddhism
+  Caliphate City of Medina Azahara                        B       126.2  Islam
+  Great Living Chola Temples                              B       126.3  Hinduism
+  Sacred Sites and Pilgrimage Routes in the Kii Mountain  B       126.3  Buddhism
+  Carolingian Westwork and Civitas Corvey                 B       126.7  Christianity
+  Jelling Mounds, Runic Stones and Church                 B       127.8  Christianity
+  Historic and Architectural Complex of the Kazan Kremli  B       129.0  Christianity, Islam
+  Kairouan                                                B       129.8  Islam
+  Historic City of Meknes                                 B       130.2  Islam
+  Canterbury Cathedral, St Augustine's Abbey, and St Mar  B       130.4  Christianity
+  Santiago de Compostela (Old Town)                       B       130.5  Christianity, Islam
+  Poblet Monastery                                        B       131.7  Christianity
+  Vatican City                                            B       131.9  Christianity
+  Ancient City of Bosra                                   B       133.1  Christianity, Islam
+  Historic Centre of Rome, the Properties of the Holy Se  C       134.0  Christianity
+  Bolgar Historical and Archaeological Complex            C       134.3  Islam
+  Baekje Historic Areas                                   C       134.7  Buddhism
+  Sardis and the Lydian Tumuli of Bin Tepe                C       135.8  Christianity
+  Portuguese City of Mazagan (El Jadida)                  C       136.4  Christianity
+  Churches of Moldavia                                    C       136.6  Christianity
+  Ancient City of Tauric Chersonese and its Chora         C       136.7  Christianity
+  Cathedral of Notre-Dame, Former Abbey of Saint-Rémi an  C       137.1  Christianity
+  Church Town of Gammelstad, Luleå                        C       137.7  Christianity
+  Pampulha Modern Ensemble                                C       137.9  Christianity
+  Old Rauma                                               C       137.9  Christianity
+  Hidden Christian Sites in the Nagasaki Region           C       138.0  Christianity
+  Hegmataneh                                              C       138.7  Zoroastrianism
+  Fujisan, sacred place and source of artistic inspirati  C       139.2  Buddhism
+  Medina of Fez                                           C       139.8  Islam
+  Great Burkhan Khaldun Mountain and its surrounding sac  C       139.8  Buddhism
+  Mahabodhi Temple Complex at Bodh Gaya                   C       141.5  Buddhism
+  Roman Monuments, Cathedral of St Peter and Church of O  C       142.1  Christianity
+  Historic Monuments and Sites in Kaesong                 C       142.9  Buddhism
+  Kyiv: Saint-Sophia Cathedral and Related Monastic Buil  C       143.1  Christianity
+  Medina of Marrakesh                                     C       143.3  Islam
+  Jesuit Missions of the Chiquitos                        C       143.5  Christianity
+  Saint Catherine Area                                    C       143.6  Christianity, Islam, Judaism
+  Dazu Rock Carvings                                      C       144.0  Buddhism
+  Xixia Imperial Tombs                                    C       144.1  Buddhism
+  Royal Exhibition Building and Carlton Gardens           C       144.2  Christianity
+  Ancient Villages of Northern Syria                      C       144.3  Christianity
+  Armenian Monastic Ensembles of Iran                     C       144.7  Christianity
+  Samarkand – Crossroad of Cultures                       C       144.9  Islam
+  University of Coimbra – Alta and Sofia                  C       144.9  Christianity
+  Cologne Cathedral                                       C       145.6  Christianity
+  Historic City of Ahmadabad                              C       146.4  Islam, Hinduism
+  St Mary's Cathedral and St Michael's Church at Hildesh  C       146.7  Christianity
+  Tower of Hercules                                       C       147.0  Islam
+  Pilgrimage Church of St John of Nepomuk at Zelená Hora  C       147.3  Christianity
+  Elephanta Caves                                         C       148.0  Hinduism
+  Sansa, Buddhist Mountain Monasteries in Korea           C       149.6  Buddhism
+  Sanctuary of Bom Jesus do Monte in Braga                C       150.3  Christianity
+  Meteora                                                 C       151.4  Christianity
+  Medina of Tétouan (formerly known as Titawin)           C       151.4  Islam
+  Historic Town of Banská Štiavnica and the Technical Mo  C       152.0  Christianity
+  The Cathedral of St James in Šibenik                    C       153.2  Christianity
+  Cultural Landscape of Khinalig People and “Köç Yolu” T  C       153.6  Islam
+  Assumption Cathedral and Monastery of the town-island   C       153.6  Christianity
+  Taxila                                                  C       154.1  Buddhism
+  Historical Centre of the City of Yaroslavl              C       154.6  Christianity
+  Jewish Quarter and St Procopius' Basilica in Třebíč     C       154.9  Christianity, Judaism
+  Historic Walled Town of Cuenca                          C       155.4  Christianity, Islam
+  Abbey Church of Saint-Savin sur Gartempe                C       155.7  Christianity
+  Royal Monastery of Santa María de Guadalupe             C       155.8  Christianity
+  Meidan Emam, Esfahan                                    C       156.4  Islam
+  Masjed-e Jāmé of Isfahan                                C       157.2  Islam, Zoroastrianism
+  Cultural Landscape and Archaeological Remains of the B  C       158.2  Buddhism, Islam
+  Natural and Culturo-Historical Region of Kotor          C       158.8  Christianity
+  Ajanta Caves                                            C       158.9  Buddhism
+  Chhatrapati Shivaji Terminus (formerly Victoria Termin  C       159.0  Hinduism
+  San Antonio Missions                                    C       159.4  Christianity
+  Vat Phou and Associated Ancient Settlements within the  C-      160.6  Hinduism
+  Jaipur City, Rajasthan                                  C-      160.6  Hinduism
+  Group of Monuments at Pattadakal                        C-      161.2  Hinduism
+  Sudanese style mosques in northern Côte d’Ivoire        C-      162.5  Islam
+  Buddhist Monuments in the Horyu-ji Area                 C-      162.6  Buddhism
+  Historic Centre of Puebla                               C-      162.8  Christianity
+  Vézelay, Church and Hill                                C-      162.8  Christianity
+  Ancient City of Nessebar                                C-      162.8  Christianity
+  Historic Centre (Old Town) of Tallinn                   C-      163.3  Christianity
+  Soltaniyeh                                              C-      163.6  Islam
+  Historic Town of Guanajuato and Adjacent Mines          C-      163.8  Christianity
+  Catalan Romanesque Churches of the Vall de Boí          C-      163.9  Christianity
+  Historic District of Old Québec                         C-      164.2  Christianity
+  Historic Monuments of Ancient Nara                      C-      164.8  Buddhism
+  Sulaiman-Too Sacred Mountain                            C-      165.0  Islam
+  Gelati Monastery                                        C--     166.4  Christianity

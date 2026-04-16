@@ -420,7 +420,8 @@ macros. All macros are collected into `manuscript/generated_macros.tex` by
 running the pipeline build script:
 
 ```bash
-bash manuscript/reproduce_all_macros.sh --macros-only
+bash manuscript/reproduce_all_macros.sh          # fast: regenerates macros only (default)
+bash manuscript/reproduce_all_macros.sh --full   # slow: reruns all analysis scripts first
 ```
 
 Both manuscripts (`primary/` and `archaeometry/`) import `../generated_macros.tex`

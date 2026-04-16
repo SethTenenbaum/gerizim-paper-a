@@ -1,5 +1,5 @@
-% Generated macros — 2026-04-15T19:28:00Z
-% Source: bash manuscript/reproduce_all_macros.sh --macros-only
+% Generated macros — 2026-04-16T21:01:58Z
+% Source: bash manuscript/reproduce_all_macros.sh
 % IMPORTANT: values are computed fresh each run — do NOT hardcode
 
 % --- analysis/global/emit_constants.py
@@ -42,8 +42,8 @@
   \newcommand{\NcircTierAp}{11}             % Tier-A+ hits (raw sweep)
   \newcommand{\NcircApRate}{12.2}     % A+ rate (%) = 11/90, rounded to 1 d.p.
   \newcommand{\NcircTierA}{29}             % Tier-A hits (raw sweep)
-  \newcommand{\NcircTierB}{61}             % Tier-B hits (raw sweep)
-  \newcommand{\NcircTierC}{0}               % Tier-C hits (raw sweep)
+  \newcommand{\NcircTierB}{45}             % Tier-B hits (raw sweep)
+  \newcommand{\NcircTierC}{15}               % Tier-C hits (raw sweep)
   \newcommand{\pCircAp}{0.0009}          % p-value, A+ binomial (raw sweep)
   \newcommand{\pCircA}{0.0043}          % p-value, A  binomial (raw sweep)
   \newcommand{\pCircChi}{0.0732}          % chi-sq uniform, 5 bins, df=4 (raw sweep)
@@ -86,10 +86,10 @@
   \newcommand{\clusterPermZ}{2.82}          % permutation Z-score
   \newcommand{\NpermCluster}{10,000}         % permutation draws, cluster asymmetry test
   \newcommand{\NclusterApHarmonics}{28}              % harmonics with ≥1 A+ site
-  \newcommand{\NclusterNonApHarmonics}{27}              % harmonics with 0 A+ sites
+  \newcommand{\NclusterNonApHarmonics}{26}              % harmonics with 0 A+ sites
   \newcommand{\clusterHarmonicApMean}{29.4}          % mean UNESCO sites/harmonic (A+ harmonics)
-  \newcommand{\clusterHarmonicNonApMean}{7.0}           % mean UNESCO sites/harmonic (non-A+ harmonics)
-  \newcommand{\clusterHarmonicRatio}{4.19}           % harmonic-level density ratio
+  \newcommand{\clusterHarmonicNonApMean}{7.2}           % mean UNESCO sites/harmonic (non-A+ harmonics)
+  \newcommand{\clusterHarmonicRatio}{4.06}           % harmonic-level density ratio
   \newcommand{\clusterHarmonicMWp}{0.0000}        % Mann-Whitney p (harmonic-level)
   \newcommand{\clusterHarmonicMWpStr}{< 0.0001}  % formatted harmonic MW p-value string
   \newcommand{\NclusterNodeAp}{26}              % node-side A+ sites (phase-split)
@@ -185,11 +185,11 @@
   \newcommand{\modernEnrich}{1.13}           % enrichment ratio, modern
   \newcommand{\pFisherCanonModern}{0.0844}         % Fisher p, canon vs modern
   \newcommand{\orCanonModern}{1.83}           % Fisher OR, canon vs modern
-  \newcommand{\NreligUnion}{1011}            % any-religion union N
-  \newcommand{\NreligUnionAp}{56}              % religion-union A+ count
-  \newcommand{\religUnionApRate}{5.5}            % religion-union A+ rate (%)
-  \newcommand{\pReligUnion}{0.0103}         % p-value, religion-union A+ binomial
-  \newcommand{\religUnionEnrich}{1.38}           % enrichment ratio, religion union
+  \newcommand{\NreligUnion}{363}            % any-religion union N
+  \newcommand{\NreligUnionAp}{22}              % religion-union A+ count
+  \newcommand{\religUnionApRate}{6.1}            % religion-union A+ rate (%)
+  \newcommand{\pReligUnion}{0.0369}         % p-value, religion-union A+ binomial
+  \newcommand{\religUnionEnrich}{1.52}           % enrichment ratio, religion union
   \newcommand{\NchristSites}{219}            % Christian sacred sites N
   \newcommand{\NchristAp}{15}              % Christian sites A+ count
   \newcommand{\christApRate}{6.8}            % Christian sites A+ rate (%)
@@ -198,6 +198,17 @@
   \newcommand{\NbudSitesRelig}{46}            % Buddhism religion-tagged sites N
   \newcommand{\budApRateRelig}{8.7}            % Buddhism religion-tagged A+ rate (%)
   \newcommand{\pBudRelig}{0.1113}         % p-value, Buddhism religion-tagged A+ binomial
+  \newcommand{\NbudAntiNode}{13}             % Buddhist C-tier sites (dist_mid <= 0.010 beru)
+  \newcommand{\budAntiNodeRate}{28.3}            % Buddhist C-tier rate (%)
+  \newcommand{\budAntiNodeEnrich}{1.41}           % Buddhist C-tier enrichment vs corpus
+  \newcommand{\NAntiNodeCorpus}{203}           % full-corpus C-tier count
+  \newcommand{\corpusAntiNodeRate}{20.1}           % full-corpus C-tier rate (%)
+  \newcommand{\pBudJoint}{0.0197}         % joint p: Buddhism A+ >= 4 AND C-tier >= 13 (multivariate hypergeometric)
+  \newcommand{\NjudSites}{15}            % Judaism-tagged sites N
+  \newcommand{\judATierCount}{9}              % Judaism A-tier count
+  \newcommand{\judATierRate}{60.0}            % Judaism A-tier rate (%)
+  \newcommand{\pJudATierFisher}{0.0018}         % p-value, Judaism A-tier Fisher exact vs rest
+  \newcommand{\judATierOR}{5.32}           % OR, Judaism A-tier Fisher exact
 
 % --- analysis/unesco/founding_sites_analysis.py
   \newcommand{\NthematicTotal}{56}                 % total A+ sites
@@ -875,18 +886,18 @@
   \newcommand{\regionCondBNblocks}{61}         % Strategy B blocks
 
 % --- analysis/unesco/fdr_multiple_comparisons.py
-  \newcommand{\NtotalTests}{43}           % total tests in FDR analysis
+  \newcommand{\NtotalTests}{45}           % total tests in FDR analysis
   \newcommand{\NconfTests}{38}           % confirmatory tests
-  \newcommand{\NexplTests}{5}           % exploratory tests
-  \newcommand{\NsurviveFDR}{25}           % tests surviving BH FDR (q<0.05)
+  \newcommand{\NexplTests}{7}           % exploratory tests
+  \newcommand{\NsurviveFDR}{26}           % tests surviving BH FDR (q<0.05)
   \newcommand{\NsurviveBonfAll}{6}           % tests surviving Bonferroni (all tests)
-  \newcommand{\NtotalTestsP}{0.0012}  % Bonferroni threshold = 0.05/43 (used in FDR table header)
-  \newcommand{\FDRqTestOne}{0.0233}  % BH q, Test 1: Global enrichment — full corpus A+ (binomial)
-  \newcommand{\BonfAllTestOne}{0.4429}  % Bonf adj (k=43), Test 1: Global enrichment — full corpus A+ (binomial)
-  \newcommand{\FDRqTestTwo}{0.0068}  % BH q, Test 2: Domed/spherical A+ — RAW sweep (binomial)
-  \newcommand{\BonfAllTestTwo}{0.0407}  % Bonf adj (k=43), Test 2: Domed/spherical A+ — RAW sweep (binomial)
-  \newcommand{\FDRqTestThree}{0.0164}  % BH q, Test 3: Cluster asymmetry — permutation p
-  \newcommand{\BonfAllTestThree}{0.1419}  % Bonf adj (k=43), Test 3: Cluster asymmetry — permutation p
+  \newcommand{\NtotalTestsP}{0.0011}  % Bonferroni threshold = 0.05/45 (used in FDR table header)
+  \newcommand{\FDRqTestOne}{0.0244}  % BH q, Test 1: Global enrichment — full corpus A+ (binomial)
+  \newcommand{\BonfAllTestOne}{0.4635}  % Bonf adj (k=45), Test 1: Global enrichment — full corpus A+ (binomial)
+  \newcommand{\FDRqTestTwo}{0.0071}  % BH q, Test 2: Domed/spherical A+ — RAW sweep (binomial)
+  \newcommand{\BonfAllTestTwo}{0.0425}  % Bonf adj (k=45), Test 2: Domed/spherical A+ — RAW sweep (binomial)
+  \newcommand{\FDRqTestThree}{0.0159}  % BH q, Test 3: Cluster asymmetry — permutation p
+  \newcommand{\BonfAllTestThree}{0.1485}  % Bonf adj (k=45), Test 3: Cluster asymmetry — permutation p
 
 % --- analysis/unesco/bonferroni_correction.py
   \newcommand{\BonfK}{3}  % k = confirmatory tests (Tests 1, 2, 3)

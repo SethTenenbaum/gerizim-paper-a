@@ -1,5 +1,5 @@
 UNESCO DOME / SPHERICAL MONUMENT KEYWORD AUDIT
-Generated : Wed Apr 15 19:16:31 UTC 2026
+Generated : Thu Apr 16 06:32:24 UTC 2026
 Script    : tools/generate_audit_dome.py
 Keywords  : ['dome', 'domed', 'domes', 'spherical', 'stupa', 'stupas', 'tholos']
 Unambiguous (always included): ['stupa', 'stupas', 'tholos']
@@ -417,60 +417,60 @@ INCLUDED SITES:
     [domes] "It is characterised by a semi-circular façade and three towers with domes built to house astronomical instruments."
 
   Historic Centre of the City of Salzburg
-    LON  : 13.0433°E  |  dev 0.0409 beru  (136.0 km)  |  Tier B
+    LON  : 13.0433°E  |  dev 0.0409 beru  (136.0 km)  |  Tier C
     KEYS : ['domes']  →  {'domes': 'context-validated'}
     [domes] "The Salzburg skyline, against a backdrop of mountains, is characterized by its profusion of spires and domes, dominated by the fortress of H"
 
   Ruins of Kilwa Kisiwani and Ruins of Songo Mnara
-    LON  : 39.5228°E  |  dev 0.0418 beru  (139.2 km)  |  Tier B
+    LON  : 39.5228°E  |  dev 0.0418 beru  (139.2 km)  |  Tier C
     KEYS : ['dome', 'domed', 'domes']  →  {'dome': 'REJECTED', 'domed': 'context-validated', 'domes': 'context-validated'}
     [dome] "Its true great dome dating from the 13th was the largest dome in East Africa until the 19th century."
     [domed] "The Great Mosque of Kilwa Kisiwani is the oldest standing mosque on the East African coast and, with its sixteen domed and vaulted bays, has"
     [domes] "The substantial standing ruins, built of coral and lime mortar, include the Great Mosque constructed in the 11th century and considerably en"
 
   Mahabodhi Temple Complex at Bodh Gaya
-    LON  : 84.9939°E  |  dev 0.0425 beru  (141.5 km)  |  Tier B
+    LON  : 84.9939°E  |  dev 0.0425 beru  (141.5 km)  |  Tier C
     KEYS : ['stupas']  →  {'stupas': 'unambiguous'}
     [stupas] "The present Mahabodhi Temple Complex at Bodh Gaya comprises the 50 m high grand Temple, the Vajrasana, sacred Bodhi Tree and other six sacre"
     [stupas] "Along this path there are significant places associated with events that immediately followed the Buddha’s Enlightment, together with votive"
 
   Kyiv: Saint-Sophia Cathedral and Related Monastic Buildings, Kyiv-Pechersk Lavra
-    LON  : 30.5584°E  |  dev 0.0430 beru  (143.1 km)  |  Tier B
+    LON  : 30.5584°E  |  dev 0.0430 beru  (143.1 km)  |  Tier C
     KEYS : ['dome']  →  {'dome': 'context-validated'}
     [dome] "The Cathedral’s architecture is distinguished by supplementary naves added to the five-nave core and pyramidal spatial composition of the cr"
 
   Royal Exhibition Building and Carlton Gardens
-    LON  : 144.9703°E  |  dev 0.0433 beru  (144.2 km)  |  Tier B
+    LON  : 144.9703°E  |  dev 0.0433 beru  (144.2 km)  |  Tier C
     KEYS : ['dome']  →  {'dome': 'context-validated'}
     [dome] "This building is cruciform in plan and incorporates the typical architectural template of earlier exhibition buildings: namely a dome, great"
     [dome] "Conservation work has recently been undertaken on the building’s dome and structure, the external joinery and stonework, and timber floors."
 
   Convent of Christ in Tomar
-    LON  : -8.4175°E  |  dev 0.0438 beru  (145.8 km)  |  Tier B
+    LON  : -8.4175°E  |  dev 0.0438 beru  (145.8 km)  |  Tier C
     KEYS : ['dome']  →  {'dome': 'context-validated'}
     [dome] "The paintings and frescos depicting mainly 16th century biblical scenes, as well as the gilt statuary under the Byzantine dome were carefull"
 
   Quseir Amra
-    LON  : 36.5873°E  |  dev 0.0439 beru  (146.3 km)  |  Tier B
+    LON  : 36.5873°E  |  dev 0.0439 beru  (146.3 km)  |  Tier C
     KEYS : ['dome', 'domed']  →  {'dome': 'context-validated', 'domed': 'context-validated'}
     [dome] "The representation of the zodiac on the domed ceiling of the caldarium (hot room) is one of the earliest known, surviving portrayals of a ma"
     [dome] "The zodiac dome, human portraits and depictions of animals and birds in the hunting scenes are found only in this early period of Islamic ar"
     [domed] "The representation of the zodiac on the domed ceiling of the caldarium (hot room) is one of the earliest known, surviving portrayals of a ma"
 
   Elephanta Caves
-    LON  : 72.9358°E  |  dev 0.0444 beru  (148.0 km)  |  Tier B
+    LON  : 72.9358°E  |  dev 0.0444 beru  (148.0 km)  |  Tier C
     KEYS : ['stupas']  →  {'stupas': 'unambiguous'}
     [stupas] "There is further scope to reveal archaeological material and enhance information by exposing the buried stupas."
     [stupas] "Besides the caves, Elephanta Island possesses archaeological remains from as early as the 2nd century BC and from the Portuguese period, as "
 
   The Cathedral of St James in Šibenik
-    LON  : 15.8891°E  |  dev 0.0460 beru  (153.2 km)  |  Tier B
+    LON  : 15.8891°E  |  dev 0.0460 beru  (153.2 km)  |  Tier C
     KEYS : ['dome']  →  {'dome': 'context-validated'}
     [dome] "The three architects who succeeded one another in the construction of the Cathedral - Francesco di Giacomo, Georgius Mathei Dalmaticus and N"
     [dome] "These interchanges created the conditions for unique and outstanding solutions to the technical and structural problems of constructing the "
 
   Taxila
-    LON  : 72.8805°E  |  dev 0.0463 beru  (154.1 km)  |  Tier B
+    LON  : 72.8805°E  |  dev 0.0463 beru  (154.1 km)  |  Tier C
     KEYS : ['stupa', 'stupas', 'domed']  →  {'stupa': 'unambiguous', 'stupas': 'unambiguous', 'domed': 'context-validated'}
     [stupa] "The Buddhist archaeological sites at Taxila include the Dharmarajika complex and stupa, the Khader Mohra grouping, the Kalawan grouping, the"
     [stupas] "The many private houses, stupas, and temples were laid out on the Hellenistic grid system and show the strong Western classical influence on"
@@ -478,12 +478,12 @@ INCLUDED SITES:
     [domed] "The Giri complex also includes the remains of a three-domed Muslim mosque, ziarat (tomb), and madrassa (school) of the medieval period."
 
   Meidan Emam, Esfahan
-    LON  : 51.6778°E  |  dev 0.0470 beru  (156.4 km)  |  Tier B
+    LON  : 51.6778°E  |  dev 0.0470 beru  (156.4 km)  |  Tier C
     KEYS : ['dome']  →  {'dome': 'context-validated'}
     [dome] "Of particular interest is the Royal Mosque, which is connected to the south side of the square by means of an immense, deep entrance portal "
 
   Masjed-e Jāmé of Isfahan
-    LON  : 51.6853°E  |  dev 0.0472 beru  (157.2 km)  |  Tier B
+    LON  : 51.6853°E  |  dev 0.0472 beru  (157.2 km)  |  Tier C
     KEYS : ['dome', 'domes']  →  {'dome': 'context-validated', 'domes': 'context-validated'}
     [dome] "The prototype character is well illustrated in the earliest double-shell ribbed Nezam al-Molk dome, the first use of the four iwan (Chahar A"
     [dome] "The Nezam al-Molk Dome is the first double-shell ribbed dome structure in the Islamic empire, which introduced new engineering skills, allow"
@@ -491,18 +491,18 @@ INCLUDED SITES:
     [domes] "Following its Seljuq expansion and the characteristic introduction of the four iwans (Chahar Ayvān) around the courtyard as well as two extr"
 
   Ajanta Caves
-    LON  : 75.7002°E  |  dev 0.0477 beru  (158.9 km)  |  Tier B
+    LON  : 75.7002°E  |  dev 0.0477 beru  (158.9 km)  |  Tier C
     KEYS : ['stupa']  →  {'stupa': 'unambiguous'}
     [stupa] "At the centre of the apse stands the object of worship in the form of a chaitya or stupa, also hewn out of the rock."
 
   Chhatrapati Shivaji Terminus (formerly Victoria Terminus)
-    LON  : 72.8362°E  |  dev 0.0478 beru  (159.0 km)  |  Tier B
+    LON  : 72.8362°E  |  dev 0.0478 beru  (159.0 km)  |  Tier C
     KEYS : ['dome']  →  {'dome': 'context-validated'}
     [dome] "Its remarkable stone dome, turrets, pointed arches and eccentric ground plan are close to traditional Indian palace architecture."
     [dome] "Its remarkable stone dome, turrets, pointed arches and eccentric ground plan are close to traditional Indian palace architecture."
 
   Soltaniyeh
-    LON  : 48.7947°E  |  dev 0.0491 beru  (163.6 km)  |  Tier B
+    LON  : 48.7947°E  |  dev 0.0491 beru  (163.6 km)  |  Tier C-
     KEYS : ['dome']  →  {'dome': 'context-validated'}
     [dome] "The octagonal building is crowned with a 50 m tall dome covered in turquoise-blue faience and surrounded by eight slender minarets."
     [dome] "It is the earliest existing example of the double-shelled dome in Iran."

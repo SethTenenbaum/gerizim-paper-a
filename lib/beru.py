@@ -35,16 +35,28 @@ BERU = CONFIG["units"]["beru"]["degrees"]            # 30.0
 HARMONIC_STEP = CONFIG["units"]["harmonic_step"]      # 0.1
 KM_PER_DEGREE = CONFIG["units"]["km_per_degree"]      # 111.0
 
-# Tier thresholds (beru deviation)
-TIER_APP = CONFIG["tiers"]["A++"]["max_deviation_beru"]   # 0.0002
-TIER_APLUS = CONFIG["tiers"]["A+"]["max_deviation_beru"]  # 0.002
-TIER_A_MAX = CONFIG["tiers"]["A"]["max_deviation_beru"]   # 0.010
-TIER_B_MAX = CONFIG["tiers"]["B"]["max_deviation_beru"]   # 0.050
+# Tier thresholds (beru deviation from harmonic)
+TIER_APP   = CONFIG["tiers"]["A++"]["max_deviation_beru"]   # 0.0002
+TIER_APLUS = CONFIG["tiers"]["A+"]["max_deviation_beru"]    # 0.002
+TIER_A_MAX = CONFIG["tiers"]["A"]["max_deviation_beru"]     # 0.010
+TIER_B_MAX = CONFIG["tiers"]["B"]["max_deviation_beru"]     # 0.050
+
+# Midpoint = 0.5 × harmonic spacing (0.1 beru); maximum possible deviation
+MIDPOINT   = 0.05   # beru — perfect inter-harmonic midpoint
+
+# C-tier thresholds (distance from the inter-harmonic midpoint)
+# Mirrors: TIER_C_MAX mirrors TIER_A_MAX, TIER_CMINUS mirrors TIER_APLUS, etc.
+TIER_C_MAX    = CONFIG["tiers"]["C"]["max_dist_from_midpoint_beru"]    # 0.010
+TIER_CMINUS   = CONFIG["tiers"]["C-"]["max_dist_from_midpoint_beru"]   # 0.002
+TIER_CMINUS2  = CONFIG["tiers"]["C--"]["max_dist_from_midpoint_beru"]  # 0.0002
 
 # Geometric null rates
-P_NULL_APP = CONFIG["null_rates"]["tier_app"]    # 0.004
-P_NULL_AP  = CONFIG["null_rates"]["tier_aplus"]  # 0.04
-P_NULL_A   = CONFIG["null_rates"]["tier_a"]      # 0.20
+P_NULL_APP    = CONFIG["null_rates"]["tier_app"]      # 0.004
+P_NULL_AP     = CONFIG["null_rates"]["tier_aplus"]    # 0.04
+P_NULL_A      = CONFIG["null_rates"]["tier_a"]        # 0.20
+P_NULL_C      = CONFIG["null_rates"]["tier_c"]        # 0.20  (symmetric with A)
+P_NULL_CMINUS = CONFIG["null_rates"]["tier_cminus"]   # 0.04  (symmetric with A+)
+P_NULL_CMINUS2= CONFIG["null_rates"]["tier_cminus2"]  # 0.004 (symmetric with A++)
 
 
 # ---------------------------------------------------------------------------
@@ -154,12 +166,22 @@ def tier_label(dev: float) -> str:
     """
     Classify a beru deviation into a tier.
 
-    Tiers (from closest to farthest from a harmonic):
-        A++  deviation ≤ 0.0002 beru  (about 0.67 km)
-        A+   deviation ≤ 0.002  beru  (about 6.7 km)
-        A    deviation ≤ 0.010  beru  (about 33 km)
-        B    deviation ≤ 0.050  beru  (about 167 km)
-        C    deviation > 0.050  beru
+    The scale runs from 0.000 (perfect harmonic) to 0.050 (perfect midpoint).
+    A-tiers measure closeness to a harmonic line.
+    C-tiers mirror the A-tiers, measuring closeness to the inter-harmonic midpoint.
+
+    Tiers (harmonic side, closest first):
+        A++  deviation ≤ 0.0002 beru  (~0.67 km from harmonic)
+        A+   deviation ≤ 0.002  beru  (~6.7 km from harmonic)
+        A    deviation ≤ 0.010  beru  (~33 km from harmonic)
+
+    Middle zone:
+        B    all other sites
+
+    Tiers (midpoint side, closest first):
+        C--  distance from midpoint ≤ 0.0002 beru  (~0.67 km from midpoint)
+        C-   distance from midpoint ≤ 0.002  beru  (~6.7 km from midpoint)
+        C    distance from midpoint ≤ 0.010  beru  (~33 km from midpoint)
     """
     if dev <= TIER_APP:
         return "A++"
@@ -167,9 +189,14 @@ def tier_label(dev: float) -> str:
         return "A+"
     if dev <= TIER_A_MAX:
         return "A"
-    if dev <= TIER_B_MAX:
-        return "B"
-    return "C"
+    dist_mid = MIDPOINT - dev
+    if dist_mid <= TIER_CMINUS2:
+        return "C--"
+    if dist_mid <= TIER_CMINUS:
+        return "C-"
+    if dist_mid <= TIER_C_MAX:
+        return "C"
+    return "B"
 
 
 def is_aplus(tier: str) -> bool:
@@ -180,6 +207,16 @@ def is_aplus(tier: str) -> bool:
 def is_a_or_better(tier: str) -> bool:
     """Is the site in tier A, A+, or A++?"""
     return tier in ("A++", "A+", "A")
+
+
+def is_c_or_better(tier: str) -> bool:
+    """Is the site in the C-tier band (close to inter-harmonic midpoint)?"""
+    return tier in ("C", "C-", "C--")
+
+
+def is_cminus_or_better(tier: str) -> bool:
+    """Is the site in the C- or C-- tier (very close to midpoint)?"""
+    return tier in ("C-", "C--")
 
 
 def dev_to_km(dev: float) -> float:
@@ -236,7 +273,7 @@ def load_religion_sets() -> list:
     in the order they appear in config.json.
     """
     sets = CONFIG["keywords"]["religion_sets"]
-    return list(sets.items())
+    return [(k, v) for k, v in sets.items() if isinstance(v, list)]
 
 
 def load_notable_anchors() -> dict:

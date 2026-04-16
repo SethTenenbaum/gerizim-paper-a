@@ -108,7 +108,7 @@ def run():
             included.append(record)
 
     # sort included by tier then dev
-    tier_order = {"A++": 0, "A+": 1, "A": 2, "B": 3, "C": 4}
+    tier_order = {"A++": 0, "A+": 1, "A": 2, "B": 3, "C": 4, "C-": 5, "C--": 6}
     included.sort(key=lambda r: (tier_order.get(r["tier"], 9), r["dev"]))
     rejected.sort(key=lambda r: r["name"])
 
