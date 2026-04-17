@@ -1,0 +1,285 @@
+UNESCO HARMONIC INTER-HARMONIC ZONE AUDIT
+Generated  : Fri Apr 17 20:52:18 UTC 2026
+Script     : tools/generate_audit_interharmonic.py
+Corpus     : 1011 Cultural/Mixed UNESCO sites with year
+Anchor     : Gerizim 35.269°E   |   Beru = 30.0°
+Harmonics  : 0.0, 0.1, 0.2 ... beru (step = 0.1 beru = 333.0 km)
+Midpoints  : 0.05, 0.15, 0.25 ... beru (inter-harmonic midpoints)
+Max dev    : 0.050 beru = 166.5 km  (perfect midpoint = C-- if dist_mid=0)
+
+C-tier  (dist_mid <= 0.01 beru): within 33.3 km of a midpoint  [null rate = 20%]
+C- tier (dist_mid <= 0.002 beru): within 6.7 km of a midpoint  [null rate = 4%]
+C-- tier(dist_mid <= 0.0002 beru): within 0.67 km of a midpoint
+
+Keyword categories used for site tagging:
+  dome     — dome_forms keyword set
+  founding — founding_capital + sacred_origin + founding_monument + founding_axis + ancient_landscape
+  mound    — mound_evolution (tumulus/barrow/stupa/dome forms)
+  religion — any religion set (Buddhism, Christianity, Islam, Judaism, Hinduism, Zoroastrianism)
+  (See keywords.json for full keyword lists; per-religion detail in religion_keyword_audit.txt)
+
+────────────────────────────────────────────────────────────────────────────────────────────────
+TIER DISTRIBUTION (all sites)
+
+  Tier        N       %  Description
+  ----------------------------------------------------------------------
+  A++         7    0.7%  dev <= 0.0002 beru  (~0.67 km from harmonic)
+  A+         49    4.8%  dev <= 0.002  beru  (~6.7 km from harmonic)
+  A         172   17.0%  dev <= 0.010  beru  (~33 km from harmonic)
+  B         580   57.4%  middle zone
+  C         157   15.5%  dist_mid <= 0.010 beru  (~33 km from midpoint)
+  C-         41    4.1%  dist_mid <= 0.002 beru  (~6.7 km from midpoint)
+  C--         5    0.5%  dist_mid <= 0.0002 beru (~0.67 km from midpoint)
+
+  C-tier total (C + C- + C--):    203   20.1%  (null rate = 20%)
+  C-/C-- total:                    46    4.5%  (null rate = 4%)
+
+────────────────────────────────────────────────────────────────────────────────────────────────
+PER-CATEGORY INTER-HARMONIC SUMMARY
+
+  How many C-tier sites fall into each keyword category?
+  H0: each category has the same C-tier rate as the full corpus (20.1%).
+  Fisher exact (one-tailed, greater): category over-represented in C-tier.
+
+  Category         N total   N C-tier      C%      OR   Fisher p  
+  ------------------------------------------------------------------------
+  dome                 172         34   19.8%    0.98     0.5805  ns
+  founding             550        108   19.6%    0.94     0.6786  ns
+  mound                192         36   18.8%    0.90     0.7267  ns
+  religion             577        119   20.6%    1.08     0.3382  ns
+  ------------------------------------------------------------------------
+  Full corpus         1011        203   20.1%
+
+────────────────────────────────────────────────────────────────────────────────────────────────
+SPECTRUM SYMMETRY: TIGHTEST HARMONIC vs TIGHTEST INTER-HARMONIC
+
+  Top-5 sites closest to a harmonic and top-5 closest to a midpoint.
+  Tags show which keyword categories matched each site.
+
+  Tightest harmonic and inter-harmonic across all UNESCO sites:
+
+  Site                                                      Rank   Dist harmonic   Dist midpoint
+  ------------------------------------------------------------------------------------------------
+  <I>Sacri Monti</I> of Piedmont and Lombardy              #1            0.08 km       166.42 km  [founding, Christianity, Islam, Judaism]
+  Mausoleum of Khoja Ahmed Yasawi                          #2            0.23 km       166.27 km  [dome, founding, mound, Islam]
+  Site of Palmyra                                          #3            0.26 km       166.24 km  [founding]
+  Boyana Church                                            #4            0.31 km       166.19 km  [dome, mound, Christianity]
+  Antigua Guatemala                                        #5            0.32 km       166.18 km  [dome, founding, mound, Christianity]
+  ...
+  Gelati Monastery                                         #1          166.43 km         0.07 km  [Christianity]  (inter-harmonic rank)
+  <i>Aflaj</i> Irrigation Systems of Oman                  #2          166.24 km         0.26 km  [dome, founding, mound]  (inter-harmonic rank)
+  Venetian Works of Defence between the 16th and 17th Ce   #3          166.17 km         0.33 km  [Islam]  (inter-harmonic rank)
+  Villa Adriana (Tivoli)                                   #4          166.17 km         0.33 km  [—]  (inter-harmonic rank)
+  Caves and Ice Age Art in the Swabian Jura                #5          166.12 km         0.38 km  [—]  (inter-harmonic rank)
+
+────────────────────────────────────────────────────────────────────────────────────────────────
+FULL C-TIER LISTING  (dist_mid <= 0.01 beru, N=203)
+Sorted by deviation descending (closest to midpoint first).
+'Dist midpt' = km from the perfect inter-harmonic midpoint.
+Tags show keyword categories: dome / founding / mound / religion name(s).
+
+  Tier        Dev      km  Dist midpt  Near harm      Lon°E  Tags                        Site
+  --------------------------------------------------------------------------------------------------------------
+  C--     0.04998   166.4     0.07 km        0.2    42.7683  Christianity                Gelati Monastery
+  C--     0.04992   166.2     0.26 km        0.7    57.7667  dome, founding, mound       <i>Aflaj</i> Irrigation Systems of Oman
+  C--     0.04990   166.2     0.33 km        0.5    18.7719  Islam                       Venetian Works of Defence between the 16th a
+  C--     0.04990   166.2     0.33 km        0.7    12.7720  —                           Villa Adriana (Tivoli)
+  C--     0.04989   166.1     0.38 km        0.9     9.7656  —                           Caves and Ice Age Art in the Swabian Jura
+  C-      0.04972   165.6     0.94 km        0.4    21.7775  founding, Christianity      Bronze Age Burial Site of Sammallahdenmäki
+  C-      0.04968   165.4     1.07 km        0.8     9.7786  —                           Frontiers of the Roman Empire
+  C-      0.04964   165.3     1.19 km        5.5  -131.2203  —                           S<U>G</U>ang Gwaay
+  C-      0.04963   165.3     1.22 km        2.3   102.7800  dome, founding, mound       Cultural Landscape of Honghe Hani Rice Terra
+  C-      0.04963   165.3     1.24 km        3.9   -83.2198  —                           Hopewell Ceremonial Earthworks
+  C-      0.04954   165.0     1.53 km        1.3    72.7828  founding, Islam, Hinduism   Sulaiman-Too Sacred Mountain
+  C-      0.04949   164.8     1.68 km        3.4   135.7842  founding, Buddhism          Historic Monuments of Ancient Nara
+  C-      0.04942   164.6     1.92 km        3.0   126.7517  —                           Seowon, Korean Neo-Confucian Academies
+  C-      0.04942   164.6     1.92 km        1.1     3.7517  founding, Islam             M'Zab Valley
+  C-      0.04937   164.4     2.11 km        3.8   -77.2500  dome, founding, mound       Río Abiseo National Park
+  C-      0.04935   164.3     2.16 km        1.0     6.7496  —                           La Chaux-de-Fonds / Le Locle, Watchmaking To
+  C-      0.04932   164.2     2.27 km        3.5   -71.2106  founding, Christianity      Historic District of Old Québec
+  C-      0.04924   164.0     2.54 km        1.0     6.7461  founding                    Lavaux, Vineyard Terraces
+  C-      0.04923   163.9     2.58 km        0.3    24.7922  Christianity                Historic Centre of Sighişoara
+  C-      0.04922   163.9     2.61 km        1.2     0.7455  founding, Christianity      Catalan Romanesque Churches of the Vall de B
+  C-      0.04918   163.8     2.73 km        4.6  -101.2556  founding, Christianity      Historic Town of Guanajuato and Adjacent Min
+  C-      0.04914   163.6     2.85 km        0.5    48.7947  dome, founding, mound, Islam  Soltaniyeh
+  C-      0.04909   163.5     3.02 km        0.7    12.7963  founding                    Villa d'Este, Tivoli
+  C-      0.04909   163.5     3.04 km        0.2    30.7416  —                           The Historic Centre of Odesa
+  C-      0.04905   163.3     3.17 km        3.4   -65.2596  founding, Christianity      Historic City of Sucre
+  C-      0.04903   163.3     3.22 km        0.4    24.7400  dome, founding, mound, Christianity  Historic Centre (Old Town) of Tallinn
+  C-      0.04890   162.8     3.65 km        0.1    39.7361  dome, founding, mound       Sacred Mijikenda Kaya Forests
+  C-      0.04890   162.8     3.66 km        0.3    27.7360  Christianity                Ancient City of Nessebar
+  C-      0.04890   162.8     3.67 km        1.1     3.7360  founding, Christianity, Judaism  Vézelay, Church and Hill
+  C-      0.04889   162.8     3.69 km        4.4   -98.1978  founding, Christianity      Historic Centre of Puebla
+  C-      0.04884   162.6     3.86 km        3.3   135.7342  founding, Buddhism          Buddhist Monuments in the Horyu-ji Area
+  C-      0.04881   162.5     3.96 km        0.5    21.7333  founding                    Tsodilo
+  C-      0.04880   162.5     4.01 km        1.3    -5.1949  founding, Islam             Sudanese style mosques in northern Côte d’Iv
+  C-      0.04871   162.2     4.29 km        3.4   135.8077  founding                    Historic Monuments of Ancient Kyoto (Kyoto, 
+  C-      0.04865   162.0     4.51 km        4.5  -101.1904  founding, Christianity      Historic Centre of Morelia
+  C-      0.04856   161.7     4.80 km        0.8     9.8122  —                           Fagus Factory in Alfeld
+  C-      0.04852   161.6     4.93 km        1.3    -2.2754  —                           Cave of Altamira and Paleolithic Cave Art of
+  C-      0.04849   161.5     5.01 km        0.3    24.8142  —                           Minoan Palatial Centres
+  C-      0.04839   161.2     5.35 km        1.4    75.8172  Hinduism                    Group of Monuments at Pattadakal
+  C-      0.04838   161.1     5.39 km        2.8   120.7204  founding                    Classical Gardens of Suzhou
+  C-      0.04831   160.9     5.62 km        0.2    42.7183  founding, Islam, Zoroastrianism  Hatra
+  C-      0.04825   160.7     5.83 km        3.7   -77.1785  founding                    Chavin (Archaeological Site)
+  C-      0.04824   160.6     5.87 km        1.4    75.8219  founding, Hinduism          Jaipur City, Rajasthan
+  C-      0.04823   160.6     5.91 km        2.4   105.8222  founding, Hinduism          Vat Phou and Associated Ancient Settlements 
+  C-      0.04813   160.3     6.22 km        1.4    75.8250  founding                    The Jantar Mantar, Jaipur
+  C-      0.04803   160.0     6.55 km        0.6    15.8280  —                           Semmering Railway
+  C       0.04796   159.7     6.78 km        1.3    72.8301  —                           Victorian Gothic and Art Deco Ensembles of M
+  C       0.04794   159.6     6.86 km        1.5    -8.2928  founding                    Historic Centre of Guimarães and Couros Zone
+  C       0.04786   159.4     7.14 km        1.1    66.8333  founding, Islam             Historic Centre of Shakhrisyabz
+  C       0.04786   159.4     7.14 km        4.4   -98.1667  Christianity                San Antonio Missions
+  C       0.04779   159.1     7.35 km        1.2     0.7028  founding, Christianity      The Loire Valley between Sully-sur-Loire and
+  C       0.04777   159.1     7.42 km        0.5    48.8358  Islam                       Shushtar Historical Hydraulic System
+  C       0.04776   159.0     7.46 km        1.3    72.8362  dome, mound, Hinduism       Chhatrapati Shivaji Terminus (formerly Victo
+  C       0.04771   158.9     7.63 km        1.3    75.7002  dome, mound, Buddhism       Ajanta Caves
+  C       0.04770   158.8     7.66 km        0.6    18.7000  founding, Christianity      Natural and Culturo-Historical Region of Kot
+  C       0.04768   158.8     7.73 km        2.4   105.8386  founding                    Central Sector of the Imperial Citadel of Th
+  C       0.04759   158.5     8.03 km        2.7   -44.3034  founding                    Historic Centre of São Luís
+  C       0.04757   158.4     8.09 km        1.3    -2.3039  —                           Jodrell Bank Observatory
+  C       0.04752   158.2     8.27 km        1.1    66.8435  founding, Buddhism, Islam, Hinduism, Zoroastrianism  Cultural Landscape and Archaeological Remain
+  C       0.04749   158.2     8.35 km        0.9     6.8442  founding, Christianity      Völklingen Ironworks
+  C       0.04742   157.9     8.59 km        0.8     9.8464  —                           Rhaetian Railway in the Albula / Bernina Lan
+  C       0.04727   157.4     9.11 km        0.8     9.8510  founding, Christianity      Portovenere, Cinque Terre, and the Islands (
+  C       0.04726   157.4     9.13 km        0.5    18.8512  —                           Tarnowskie Góry Lead-Silver-Zinc Mine and it
+  C       0.04721   157.2     9.29 km        0.5    51.6853  dome, founding, mound, Islam, Zoroastrianism  Masjed-e Jāmé of Isfahan
+  C       0.04720   157.2     9.32 km        0.3    24.8530  Christianity                Kernavė Archaeological Site (Cultural Reserv
+  C       0.04720   157.2     9.33 km        1.7    87.6850  Hinduism                    Santiniketan
+  C       0.04716   157.0     9.45 km        6.8  -170.1458  —                           Papahānaumokuākea
+  C       0.04702   156.6     9.92 km        0.4    21.8583  —                           Archaeological Site of Cyrene
+  C       0.04701   156.6     9.94 km        0.1    39.6794  founding                    Fort Jesus, Mombasa
+  C       0.04698   156.5    10.05 km        2.2   102.6785  founding, Buddhism          Orkhon Valley Cultural Landscape
+  C       0.04697   156.4    10.08 km        2.8   -50.1402  Christianity                Historic Centre of the Town of Goiás
+  C       0.04696   156.4    10.13 km        0.5    51.6778  dome, mound, Islam          Meidan Emam, Esfahan
+  C       0.04687   156.1    10.41 km        0.4    21.8628  founding                    Ennedi Massif: Natural and Cultural Landscap
+  C       0.04678   155.8    10.71 km        1.4    -5.3275  Christianity, Islam         Royal Monastery of Santa María de Guadalupe
+  C       0.04676   155.7    10.78 km        1.1     0.8661  Christianity, Judaism       Abbey Church of Saint-Savin sur Gartempe
+  C       0.04674   155.7    10.84 km        4.1   -89.1333  —                           Maya Site of Copan
+  C       0.04667   155.4    11.10 km        1.2    -2.1310  Christianity, Islam         Historic Walled Town of Cuenca
+  C       0.04652   154.9    11.60 km        0.6    15.8735  founding, Christianity, Judaism  Jewish Quarter and St Procopius' Basilica in
+  C       0.04643   154.6    11.89 km        0.2    39.8761  founding, Christianity      Historical Centre of the City of Yaroslavl
+  C       0.04630   154.2    12.33 km        1.4    -5.3421  —                           Gorham's Cave Complex
+  C       0.04628   154.1    12.38 km        1.3    72.8805  dome, founding, mound, Buddhism, Islam  Taxila
+  C       0.04613   153.6    12.90 km        0.4    48.6528  founding, Christianity, Islam  Assumption Cathedral and Monastery of the to
+  C       0.04612   153.6    12.91 km        3.6   141.8853  founding                    Budj Bim Cultural Landscape
+  C       0.04612   153.6    12.92 km        0.5    48.8854  founding, Islam             Cultural Landscape of Khinalig People and “K
+  C       0.04607   153.4    13.08 km        3.4   -65.3489  founding, Christianity      Quebrada de Humahuaca
+  C       0.04600   153.2    13.33 km        0.6    15.8891  dome, mound, Christianity   The Cathedral of St James in Šibenik
+  C       0.04591   152.9    13.62 km        0.2    39.8917  —                           Rock Art in the Hail Region of Saudi Arabia
+  C       0.04575   152.4    14.14 km        2.4   105.8964  founding                    Trang An Landscape Complex
+  C       0.04574   152.3    14.20 km        0.4    21.8969  founding                    Temple of Apollo Epicurius at Bassae
+  C       0.04573   152.3    14.21 km        1.3    -2.3591  Christianity                City of Bath
+  C       0.04563   152.0    14.54 km        0.5    18.9000  Christianity                Historic Town of Banská Štiavnica and the Te
+  C       0.04554   151.7    14.84 km        1.4    -5.3647  dome, founding, mound       Cornwall and West Devon Mining Landscape
+  C       0.04550   151.5    14.98 km        0.5    21.6340  Christianity                Archaeological Site of Olympia
+  C       0.04548   151.4    15.06 km        1.4    -5.3667  Islam                       Medina of Tétouan (formerly known as Titawin
+  C       0.04548   151.4    15.06 km        0.5    21.6333  Christianity                Meteora
+  C       0.04548   151.4    15.06 km        0.8    12.6333  founding, Christianity      Historic Centre of Urbino
+  C       0.04539   151.2    15.34 km        4.2   -89.3692  —                           Joya de Cerén Archaeological Site
+  C       0.04539   151.2    15.34 km        0.7    15.6308  dome, founding, mound, Christianity  Mining Area of the Great Copper Mountain in 
+  C       0.04531   150.9    15.63 km        0.9     6.9098  founding                    Castles of Augustusburg and Falkenlust at Br
+  C       0.04526   150.7    15.80 km        0.4    48.6267  dome, founding, mound, Islam  Old Walled City of Shibam
+  C       0.04513   150.3    16.21 km        1.5    -8.3770  founding, Christianity      Sanctuary of Bom Jesus do Monte in Braga
+  C       0.04507   150.1    16.42 km        2.3   105.6211  founding, Buddhism          Citadel of the Ho Dynasty
+  C       0.04506   150.1    16.45 km        3.1   126.9172  —                           Gochang, Hwasun and Ganghwa Dolmen Sites
+  C       0.04506   150.1    16.45 km        0.8    12.6208  —                           Kronborg Castle
+  C       0.04493   149.6    16.88 km        3.0   126.6169  Buddhism                    Sansa, Buddhist Mountain Monasteries in Kore
+  C       0.04452   148.3    18.23 km        0.1    30.9333  founding, Christianity, Judaism  Great Zimbabwe National Monument
+  C       0.04451   148.2    18.30 km        0.6    18.6042  founding, Christianity      Medieval Town of Toruń
+  C       0.04444   148.0    18.52 km        1.3    72.9358  dome, mound, Buddhism, Hinduism  Elephanta Caves
+  C       0.04436   147.7    18.80 km        2.8   117.9383  Buddhism                    Mountain Resort and its Outlying Temples, Ch
+  C       0.04434   147.6    18.85 km        1.8   -17.4008  —                           Island of Gorée
+  C       0.04434   147.6    18.86 km        0.8     9.9389  —                           Würzburg Residence with the Court Gardens an
+  C       0.04423   147.3    19.21 km        0.6    15.9421  founding, Christianity      Pilgrimage Church of St John of Nepomuk at Z
+  C       0.04415   147.0    19.47 km        1.5    -8.4064  Islam                       Tower of Hercules
+  C       0.04406   146.7    19.78 km        0.8     9.9472  Christianity                St Mary's Cathedral and St Michael's Church 
+  C       0.04399   146.5    20.01 km        4.4   -95.4113  founding                    Pimachiowin Aki
+  C       0.04397   146.4    20.08 km        0.7    15.5881  founding, Christianity      Naval Port of Karlskrona
+  C       0.04397   146.4    20.08 km        1.2    72.5881  dome, founding, mound, Buddhism, Christianity, Islam, Judaism, Hinduism, Zoroastrianism  Historic City of Ahmadabad
+  C       0.04397   146.4    20.09 km        1.0     3.9500  —                           Champagne Hillsides, Houses and Cellars
+  C       0.04397   146.4    20.09 km        4.2   -92.0500  Christianity                Pre-Hispanic City and National Park of Palen
+  C       0.04394   146.3    20.17 km        0.0    36.5873  dome, mound, Christianity, Islam  Quseir Amra
+  C       0.04385   146.0    20.47 km        0.7    12.9534  founding                    Erzgebirge/Krušnohoří Mining Region
+  C       0.04379   145.8    20.68 km        3.6   -74.0447  —                           Statue of Liberty
+  C       0.04378   145.8    20.70 km        1.5    -8.4175  dome, mound, Christianity, Judaism  Convent of Christ in Tomar
+  C       0.04373   145.6    20.89 km        0.9     6.9572  Christianity                Cologne Cathedral
+  C       0.04371   145.6    20.95 km        0.8    12.5803  founding, Christianity      Assisi, the Basilica of San Francesco and Ot
+  C       0.04364   145.3    21.17 km        4.1   -89.0403  founding                    Archaeological Park and Ruins of Quirigua
+  C       0.04360   145.2    21.32 km        3.7   -74.4231  dome, founding, mound, Christianity  Historic Centre of Santa Cruz de Mompox
+  C       0.04351   144.9    21.62 km        1.5    -8.4258  Christianity                University of Coimbra – Alta and Sofia
+  C       0.04350   144.9    21.63 km        1.1    66.9639  founding, Islam             Samarkand – Crossroad of Cultures
+  C       0.04346   144.7    21.78 km        0.3    45.5728  founding, Christianity, Islam  Armenian Monastic Ensembles of Iran
+  C       0.04341   144.6    21.94 km        0.3    24.9667  —                           Frontiers of the Roman Empire – Dacia
+  C       0.04339   144.5    22.02 km        3.7   -77.0326  dome, founding, mound, Christianity  Historic Centre of Lima
+  C       0.04338   144.5    22.04 km        3.1   -56.4295  —                           Red Bay Basque Whaling Station
+  C       0.04332   144.3    22.24 km        0.0    36.5686  founding, Christianity      Ancient Villages of Northern Syria
+  C       0.04329   144.2    22.34 km        3.7   144.9703  dome, mound, Christianity   Royal Exhibition Building and Carlton Garden
+  C       0.04326   144.1    22.43 km        2.4   105.9711  founding, Buddhism          Xixia Imperial Tombs
+  C       0.04326   144.0    22.46 km        0.8    12.5667  founding                    The par force hunting landscape in North Zea
+  C       0.04326   144.0    22.46 km        2.3   105.5667  founding, Buddhism          Dazu Rock Carvings
+  C       0.04325   144.0    22.48 km        0.4    21.9715  founding                    Old town of Kuldīga
+  C       0.04312   143.6    22.91 km        0.0    33.9754  dome, mound, Christianity, Islam, Judaism  Saint Catherine Area
+  C       0.04308   143.5    23.04 km        3.2   -62.0234  founding, Christianity      Jesuit Missions of the Chiquitos
+  C       0.04304   143.3    23.17 km        1.4    -8.0222  founding, Islam             Medina of Marrakesh
+  C       0.04298   143.1    23.37 km        4.9  -113.0204  —                           Rock Paintings of the Sierra de San Francisc
+  C       0.04298   143.1    23.38 km        0.2    30.5584  dome, founding, mound, Christianity  Kyiv: Saint-Sophia Cathedral and Related Mon
+  C       0.04292   142.9    23.59 km        3.0   126.5565  founding, Buddhism          Historic Monuments and Sites in Kaesong
+  C       0.04289   142.8    23.67 km        1.0     3.9823  founding                    Neolithic Flint Mines at Spiennes (Mons)
+  C       0.04273   142.3    24.22 km        0.3    24.9872  founding, Christianity      Fortress of Suomenlinna
+  C       0.04272   142.2    24.25 km        2.8   117.9875  —                           Ancient Villages in Southern Anhui – Xidi an
+  C       0.04268   142.1    24.36 km        1.0     6.5495  founding, Christianity      Roman Monuments, Cathedral of St Peter and C
+  C       0.04263   141.9    24.55 km        3.9   -80.4522  Christianity                Urban Historic Centre of Cienfuegos
+  C       0.04260   141.8    24.65 km        3.1   126.9911  founding                    Changdeokgung Palace Complex
+  C       0.04251   141.6    24.93 km        3.1   126.9936  —                           Jongmyo Shrine
+  C       0.04250   141.5    24.96 km        1.7    84.9939  dome, founding, mound, Buddhism, Hinduism  Mahabodhi Temple Complex at Bodh Gaya
+  C       0.04240   141.2    25.30 km        3.8   -80.0031  —                           Fortifications on the Caribbean Side of Pana
+  C       0.04232   140.9    25.58 km        0.8     9.9994  —                           Speicherstadt and Kontorhaus District with C
+  C       0.04231   140.9    25.60 km        0.9     9.5383  Christianity                Crespi d'Adda
+  C       0.04220   140.5    25.97 km        1.3    75.5350  founding                    Petroglyphs of the Archaeological Landscape 
+  C       0.04205   140.0    26.47 km        2.2   100.0075  founding                    Cultural Landscape of Old Tea Forests of the
+  C       0.04202   139.9    26.57 km        3.1   127.0083  —                           Hwaseong Fortress
+  C       0.04200   139.9    26.64 km        0.3    43.0090  dome, mound, Christianity   Upper Svaneti
+  C       0.04200   139.8    26.65 km        0.5    21.5289  —                           Krzemionki Prehistoric Striped Flint Mining 
+  C       0.04199   139.8    26.68 km        2.5   109.0093  Buddhism                    Great Burkhan Khaldun Mountain and its surro
+  C       0.04198   139.8    26.71 km        1.3    -4.9904  founding, Islam             Medina of Fez
+  C       0.04197   139.7    26.75 km        0.6    16.0100  —                           Engelsberg Ironworks
+  C       0.04194   139.7    26.84 km        1.3    -2.4728  —                           Ironbridge Gorge
+  C       0.04179   139.2    27.33 km        3.4   138.5228  founding, Buddhism          Fujisan, sacred place and source of artistic
+  C       0.04179   139.2    27.33 km        0.1    39.5228  dome, mound, Islam          Ruins of Kilwa Kisiwani and Ruins of Songo M
+  C       0.04178   139.1    27.37 km        3.8   -79.9844  dome, mound                 Trinidad and the Valley de los Ingenios
+  C       0.04177   139.1    27.40 km        0.4    48.5221  founding                    Tchogha Zanbil
+  C       0.04174   139.0    27.51 km        4.0   -83.4789  dome, mound                 Precolumbian Chiefdom Settlements with Stone
+  C       0.04172   138.9    27.56 km        0.2    40.0173  dome, mound, Islam          The Historic Town and Archaeological Site of
+  C       0.04164   138.7    27.82 km        0.4    48.5183  founding, Islam, Zoroastrianism  Hegmataneh
+  C       0.04161   138.6    27.93 km        1.1     1.0206  —                           Prehistoric Sites and Decorated Caves of the
+  C       0.04144   138.0    28.51 km        3.2   130.0258  Christianity                Hidden Christian Sites in the Nagasaki Regio
+  C       0.04142   137.9    28.56 km        0.5    21.5117  Christianity                Old Rauma
+  C       0.04142   137.9    28.57 km        2.6   -43.9736  founding, Christianity      Pampulha Modern Ensemble
+  C       0.04139   137.8    28.67 km        2.1    99.5107  dome, founding, mound, Buddhism  Historic Town of Sukhothai and Associated Hi
+  C       0.04135   137.7    28.82 km        0.4    22.0286  Christianity                Church Town of Gammelstad, Luleå
+  C       0.04131   137.6    28.94 km        0.5    19.0297  founding, Christianity      Castle of the Teutonic Order in Malbork
+  C       0.04124   137.3    29.16 km        3.5   139.0317  —                           Tomioka Silk Mill and Related Sites
+  C       0.04119   137.2    29.34 km        0.7    13.0333  founding, Christianity      Palaces and Parks of Potsdam and Berlin
+  C       0.04117   137.1    29.42 km        1.0     4.0340  Christianity                Cathedral of Notre-Dame, Former Abbey of Sai
+  C       0.04114   137.0    29.51 km        0.7    57.5032  founding                    Aapravasi Ghat
+  C       0.04106   136.7    29.77 km        0.1    33.5008  founding, Christianity      Ancient City of Tauric Chersonese and its Ch
+  C       0.04103   136.6    29.86 km        0.3    27.5000  Christianity                Churches of Moldavia
+  C       0.04103   136.6    29.86 km        0.9     9.5000  dome, mound, Christianity, Islam  Old Town of Ghadamès
+  C       0.04101   136.6    29.92 km        3.3   135.4994  mound                       Mozu-Furuichi Kofun Group: Mounded Tombs of 
+  C       0.04097   136.4    30.07 km        1.5    -8.5019  founding, Christianity, Islam  Portuguese City of Mazagan (El Jadida)
+  C       0.04087   136.1    30.40 km        0.5    19.0429  founding                    Budapest, including the Banks of the Danube,
+  C       0.04086   136.1    30.42 km        2.8   118.0431  dome, founding, mound       Mount Wuyi
+  C       0.04086   136.0    30.45 km        0.7    13.0433  dome, mound, Christianity   Historic Centre of the City of Salzburg
+  C       0.04079   135.8    30.67 km        0.2    28.0453  founding, mound, Christianity  Sardis and the Lydian Tumuli of Bin Tepe
+  C       0.04076   135.7    30.76 km        0.9     7.0461  —                           Zollverein Coal Mine Industrial Complex in E
+  C       0.04060   135.2    31.30 km        2.5   -38.5130  founding, Christianity      Historic Centre of Salvador de Bahia
+  C       0.04053   135.0    31.52 km        0.8    12.4850  —                           Archaeological Site of Sabratha
+  C       0.04051   134.9    31.61 km        0.7    15.4843  founding                    Landscape for Breeding and Training of Cerem
+  C       0.04045   134.7    31.81 km        3.1   127.0556  Buddhism                    Baekje Historic Areas
+  C       0.04034   134.3    32.18 km        0.5    49.0589  founding, Christianity, Islam  Bolgar Historical and Archaeological Complex
+  C       0.04032   134.3    32.23 km        3.8   -77.5214  founding                    Sacred City of Caral-Supe
+  C       0.04028   134.1    32.36 km        2.9   121.0606  founding, Christianity      Rice Terraces of the Philippine Cordilleras
+  C       0.04024   134.0    32.51 km        0.8    12.4761  founding, Christianity      Historic Centre of Rome, the Properties of t
+  C       0.04024   134.0    32.52 km        2.8   118.0619  —                           Kulangsu, a Historic International Settlemen
+  C       0.04014   133.7    32.85 km        1.1     3.4731  founding                    The Causses and the Cévennes, Mediterranean 

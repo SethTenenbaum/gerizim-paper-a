@@ -75,8 +75,7 @@ if [ "${1:-}" != "--full" ]; then
         analysis/unesco/spherical_monument_test.py            # → pCircAp_validated (context-validated, Exploratory 2x)
         analysis/unesco/cluster_asymmetry_test.py            # → clusterApBinom, clusterPermP, clusterHarmonicMWpStr
         analysis/unesco/harmonic_density_attractor_test.py
-        analysis/unesco/unesco_buddhist_heritage_test.py     # → pBudAp, pBudA
-        analysis/unesco/origin_sites_test.py                 # → pCanon, pPreTwoK, pModern
+        analysis/unesco/origin_sites_test.py                 # → pCanon, pPreTwoK, pModern, pReligUnion, pChrist, pBudRelig, pJudATierFisher
         analysis/unesco/founding_sites_analysis.py           # → pFoundKwFisher
         analysis/unesco/sacred_origin_test.py
         analysis/unesco/meta_keyword_test.py
@@ -236,13 +235,10 @@ run_script "GROUP 2: Cluster Asymmetry (Tests 1 & 3) + conditional sensitivity s
 run_script "GROUP 3: Harmonic Density Attractor"                   \
            analysis/unesco/harmonic_density_attractor_test.py
 
-run_script "GROUP 4: Buddhist Heritage"                            \
-           analysis/unesco/unesco_buddhist_heritage_test.py
-
-run_script "GROUP 5: Origin Sites (canon/pre-2000/modern)"        \
+run_script "GROUP 4: Origin Sites (canon/pre-2000/modern/religion)" \
            analysis/unesco/origin_sites_test.py
 
-run_script "GROUP 6: Founding Sites Analysis (keyword enrichment)" \
+run_script "GROUP 5: Founding Sites Analysis (keyword enrichment)" \
            analysis/unesco/founding_sites_analysis.py
 
 run_script "GROUP 7: Sacred Origin Test"                           \

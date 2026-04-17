@@ -1,4 +1,4 @@
-% Generated macros — 2026-04-16T21:01:58Z
+% Generated macros — 2026-04-17T19:22:10Z
 % Source: bash manuscript/reproduce_all_macros.sh
 % IMPORTANT: values are computed fresh each run — do NOT hardcode
 
@@ -123,45 +123,6 @@
   \newcommand{\attractorEUMWp}{0.0224}        % Mann-Whitney p, Europe-only sub-analysis
   \newcommand{\NaraKyotoMaxDist}{34.2}          % max pairwise distance (km), Nara/Kyoto cluster
 
-% --- analysis/unesco/unesco_buddhist_heritage_test.py
-  \newcommand{\NbudTotal}{95}              % total UNESCO Buddhist heritage sites
-  \newcommand{\NbudTierAp}{4}               % Tier-A+ Buddhist sites
-  \newcommand{\budApRate}{4.2}            % A+ rate (%)
-  \newcommand{\pBudAp}{0.5299}         % p-value, A+ binomial
-  \newcommand{\budApEnrich}{1.05}           % A+ enrichment ratio
-  \newcommand{\NbudTierA}{24}              % Tier-A Buddhist sites
-  \newcommand{\budARate}{25.3}           % A rate (%)
-  \newcommand{\pBudA}{0.1256}         % p-value, A binomial
-  \newcommand{\budAEnrich}{1.26}           % A enrichment ratio
-  \newcommand{\NbudMauryan}{39}              % Mauryan-lineage sub-group N
-  \newcommand{\NbudMauryanAp}{3}               % Mauryan-lineage A+
-  \newcommand{\budMauryanApRate}{7.7}            % Mauryan A+ rate (%)
-  \newcommand{\NbudEastAsian}{36}              % East Asian sub-group N
-  \newcommand{\NbudEastAsianAp}{0}               % East Asian A+
-  \newcommand{\NbudSilkRoad}{6}               % Silk Road sub-group N
-  \newcommand{\NbudSilkRoadAp}{1}               % Silk Road A+
-  \newcommand{\budSilkRoadApRate}{16.7}           % Silk Road A+ rate (%)
-  \newcommand{\NbudAntiEligible}{56}              % anti-node-eligible Buddhist sites
-  \newcommand{\NbudAntiAp}{4}               % anti-node A+ Buddhist sites
-  \newcommand{\budAntiApRate}{7.1}            % anti-node A+ rate (%)
-  \newcommand{\pBudAntiAp}{0.1854}         % p-value, anti-node A+ binomial
-  \newcommand{\NbudAntiA}{24}              % anti-node Tier-A Buddhist sites
-  \newcommand{\budAntiARate}{42.9}           % anti-node A rate (%)
-  \newcommand{\pBudAntiA}{0.0001}         % p-value, anti-node A binomial
-  \newcommand{\budNodeApRate}{10.3}           % node-side A+ rate (%)
-  \newcommand{\budFisherOR}{1.49}           % Fisher OR, node vs anti-node
-  \newcommand{\budFisherP}{0.4288}         % Fisher p, node vs anti-node
-  \newcommand{\budMauryanFisherOR}{\infty}          % Fisher OR, Mauryan node vs anti-node
-  \newcommand{\budMauryanFisherP}{0.1060}         % Fisher p, Mauryan node vs anti-node
-  \newcommand{\NaraAntiDev}{0.00051}      % Nara anti-node deviation (beru)
-  \newcommand{\NaraAntiKm}{1.7}            % Nara anti-node deviation (km)
-  \newcommand{\KyotoAntiDev}{0.00129}      % Kyoto anti-node deviation (beru)
-  \newcommand{\KyotoAntiKm}{4.3}            % Kyoto anti-node deviation (km)
-  \newcommand{\HoryuAntiDev}{0.00116}      % Hōryū-ji anti-node deviation (beru)
-  \newcommand{\HoryuAntiKm}{3.9}            % Hōryū-ji anti-node deviation (km)
-  \newcommand{\SulaimanAntiDev}{0.00046}      % Sulaiman-Too anti-node deviation (beru)
-  \newcommand{\SulaimanAntiKm}{1.5}            % Sulaiman-Too anti-node deviation (km)
-
 % --- analysis/unesco/origin_sites_test.py
   \newcommand{\NoriginCorpus}{1011}          % full Cultural/Mixed corpus
   \newcommand{\NoriginAp}{56}              % full-corpus A+ count
@@ -185,30 +146,51 @@
   \newcommand{\modernEnrich}{1.13}           % enrichment ratio, modern
   \newcommand{\pFisherCanonModern}{0.0844}         % Fisher p, canon vs modern
   \newcommand{\orCanonModern}{1.83}           % Fisher OR, canon vs modern
-  \newcommand{\NreligUnion}{363}            % any-religion union N
-  \newcommand{\NreligUnionAp}{22}              % religion-union A+ count
+  \newcommand{\NreligUnion}{577}            % any-religion union N
+  \newcommand{\NreligUnionAp}{35}              % religion-union A+ count
   \newcommand{\religUnionApRate}{6.1}            % religion-union A+ rate (%)
-  \newcommand{\pReligUnion}{0.0369}         % p-value, religion-union A+ binomial
+  \newcommand{\pReligUnion}{0.0108}         % p-value, religion-union A+ binomial
   \newcommand{\religUnionEnrich}{1.52}           % enrichment ratio, religion union
-  \newcommand{\NchristSites}{219}            % Christian sacred sites N
-  \newcommand{\NchristAp}{15}              % Christian sites A+ count
+  \newcommand{\NchristSites}{397}            % Christian sacred sites N
+  \newcommand{\NchristAp}{27}              % Christian sites A+ count
   \newcommand{\christApRate}{6.8}            % Christian sites A+ rate (%)
-  \newcommand{\pChrist}{0.0312}         % p-value, Christian sites A+ binomial
-  \newcommand{\christEnrich}{1.71}           % enrichment ratio, Christian sites
-  \newcommand{\NbudSitesRelig}{46}            % Buddhism religion-tagged sites N
-  \newcommand{\budApRateRelig}{8.7}            % Buddhism religion-tagged A+ rate (%)
-  \newcommand{\pBudRelig}{0.1113}         % p-value, Buddhism religion-tagged A+ binomial
-  \newcommand{\NbudAntiNode}{13}             % Buddhist C-tier sites (dist_mid <= 0.010 beru)
-  \newcommand{\budAntiNodeRate}{28.3}            % Buddhist C-tier rate (%)
-  \newcommand{\budAntiNodeEnrich}{1.41}           % Buddhist C-tier enrichment vs corpus
-  \newcommand{\NAntiNodeCorpus}{203}           % full-corpus C-tier count
-  \newcommand{\corpusAntiNodeRate}{20.1}           % full-corpus C-tier rate (%)
-  \newcommand{\pBudJoint}{0.0197}         % joint p: Buddhism A+ >= 4 AND C-tier >= 13 (multivariate hypergeometric)
-  \newcommand{\NjudSites}{15}            % Judaism-tagged sites N
-  \newcommand{\judATierCount}{9}              % Judaism A-tier count
-  \newcommand{\judATierRate}{60.0}            % Judaism A-tier rate (%)
-  \newcommand{\pJudATierFisher}{0.0018}         % p-value, Judaism A-tier Fisher exact vs rest
-  \newcommand{\judATierOR}{5.32}           % OR, Judaism A-tier Fisher exact
+  \newcommand{\pChrist}{0.0058}         % p-value, Christian sites A+ binomial
+  \newcommand{\christEnrich}{1.70}           % enrichment ratio, Christian sites
+  \newcommand{\NchristA}{93}              % Christian sites A-tier count
+  \newcommand{\christARate}{23.4}            % Christian sites A-tier rate (%)
+  \newcommand{\pChristA}{0.0522}         % p-value, Christian sites A-tier binomial
+  \newcommand{\NIslam}{178}            % Islam sacred sites N
+  \newcommand{\IslamApCount}{12}              % Islam A+ count
+  \newcommand{\IslamApRate}{6.7}            % Islam A+ rate (%)
+  \newcommand{\pIslam}{0.0552}         % p-value, Islam A+ binomial
+  \newcommand{\NbudSitesRelig}{71}            % Buddhism religion-tagged sites N
+  \newcommand{\NbudATier}{20}              % Buddhism A-tier count (dev <= 0.010 beru)
+  \newcommand{\budATierRate}{28.2}            % Buddhism A-tier rate (%)
+  \newcommand{\budApRateRelig}{5.6}            % Buddhism religion-tagged A+ rate (%)
+  \newcommand{\pBudRelig}{0.3162}         % p-value, Buddhism religion-tagged A+ binomial
+  \newcommand{\NbudInterHarmonic}{19}             % Buddhist C-tier sites (dist_mid <= 0.010 beru)
+  \newcommand{\budInterHarmonicRate}{26.8}            % Buddhist C-tier rate (%)
+  \newcommand{\budInterHarmonicEnrich}{1.33}           % Buddhist C-tier enrichment vs corpus
+  \newcommand{\NInterHarmonicCorpus}{203}           % full-corpus C-tier count
+  \newcommand{\corpusInterHarmonicRate}{20.1}           % full-corpus C-tier rate (%)
+  \newcommand{\pBudJoint}{0.0052}         % joint p: Buddhism A >= 20 AND C-tier >= 19 (multivariate hypergeometric)
+  \newcommand{\NhinSites}{39}            % Hinduism-tagged sites N
+  \newcommand{\hinApCount}{1}               % Hinduism A+ count
+  \newcommand{\hinApRate}{2.6}            % Hinduism A+ rate (%)
+  \newcommand{\NhinInterHarmonic}{10}             % Hinduism C-tier sites
+  \newcommand{\hinInterHarmonicRate}{25.6}            % Hinduism C-tier rate (%)
+  \newcommand{\pHinJoint}{0.0324}         % joint p: Hinduism A >= 11 AND C-tier >= 10 (multivariate hypergeometric)
+  \newcommand{\NjudSites}{50}            % Judaism-tagged sites N
+  \newcommand{\judATierCount}{16}              % Judaism A-tier count
+  \newcommand{\judATierRate}{32.0}            % Judaism A-tier rate (%)
+  \newcommand{\pJudATierBinom}{0.0308}         % p-value, Judaism A-tier binomial
+  \newcommand{\pJudATierFisher}{0.0749}         % p-value, Judaism A-tier Fisher exact vs rest
+  \newcommand{\judATierOR}{1.66}           % OR, Judaism A-tier Fisher exact
+  \newcommand{\judApCount}{5}               % Judaism A+ count
+  \newcommand{\judApRate}{10.0}            % Judaism A+ rate (%)
+  \newcommand{\pJudAp}{0.0490}         % p-value, Judaism A+ binomial
+  \newcommand{\pJudApFisher}{0.1370}      % p-value, Judaism A+ Fisher exact vs rest
+  \newcommand{\judApFisherOR}{1.98}        % OR, Judaism A+ Fisher exact vs rest
 
 % --- analysis/unesco/founding_sites_analysis.py
   \newcommand{\NthematicTotal}{56}                 % total A+ sites
@@ -335,23 +317,23 @@
 
 % --- analysis/global/anchor_uniqueness_audit.py
   \newcommand{\anchorSweepNanchors}{36{,}000}          % number of anchor points in sweep
-  \newcommand{\anchorSweepApMean}{40.4}           % mean A+ count across all anchors
-  \newcommand{\anchorSweepApStd}{6.9}            % std A+ count across all anchors
-  \newcommand{\anchorSweepGlobalMax}{60}           % global max A+ at any anchor (symmetric corpus)
-  \newcommand{\anchorSweepGlobalMaxA}{60}           % global max A+ (symmetric corpus, alias)
-  \newcommand{\optimalPhaseApA}{60}           % max A+ at any x.18°E anchor (symmetric corpus)
+  \newcommand{\anchorSweepApMean}{40.5}           % mean A+ count across all anchors
+  \newcommand{\anchorSweepApStd}{7.0}            % std A+ count across all anchors
+  \newcommand{\anchorSweepGlobalMax}{60}           % global max A+ at any anchor
+  \newcommand{\anchorSweepGlobalMaxA}{60}           % global max A+ (symmetric corpus)
+  \newcommand{\optimalPhaseApA}{60}           % max A+ at any x.18°E anchor
   \newcommand{\GerizimSweepApp}{7}             % Gerizim A++ in sweep
-  \newcommand{\GerizimSweepAp}{56}              % Gerizim A+ in sweep (N=1011, matches Test 1)
+  \newcommand{\GerizimSweepAp}{56}              % Gerizim A+ in sweep
   \newcommand{\GerizimSweepA}{228}             % Gerizim A in sweep
   \newcommand{\anchorSweepPctile}{97.2}          % Gerizim percentile in A+ anchor sweep
   \newcommand{\anchorSweepGeApPct}{3.99}          % % of anchors beating Gerizim A+
   \newcommand{\JerusalemSweepApp}{7}           % Jerusalem A++ in sweep
-  \newcommand{\JerusalemSweepAp}{57}            % Jerusalem A+ in sweep (N=1011, incl. Gerizim)
+  \newcommand{\JerusalemSweepAp}{57}            % Jerusalem A+ in sweep
   \newcommand{\JerusalemSweepA}{218}           % Jerusalem A in sweep
   \newcommand{\JerusalemSweepPctile}{98.7}        % Jerusalem percentile in A+ anchor sweep
   \newcommand{\anchorSweepJerApPct}{2.77}          % % of anchors beating Jerusalem A+
   \newcommand{\anchorSweepTopPct}{2.8}          % top-N% globally (corridor, both anchors)
-  \newcommand{\sweepABDiff}{1}          % A+ count difference Gerizim vs Jerusalem (Mount Gerizim itself)
+  \newcommand{\sweepABDiff}{1}          % A+ count difference Gerizim vs Jerusalem
 
 % --- analysis/unesco/verify_x18_periodicity.py
   \newcommand{\optimalPhase}{2.18}          % optimal x.18° phase (degrees mod 3)
@@ -362,7 +344,7 @@
 
 % --- analysis/global/peak_geography_audit.py
   \newcommand{\JerichoAnchorAp}{36}           % A+ count with Jericho as anchor
-  \newcommand{\DeadSeaAnchorAp}{43}          % A+ count with Dead Sea centre as anchor
+  \newcommand{\DeadSeaAnchorAp}{43}          % A+ count with Dead Sea center as anchor
   \newcommand{\MtNeboAnchorAp}{43}           % A+ count with Mt Nebo as anchor
   \newcommand{\DamascusAnchorAp}{55}          % A+ count with Damascus as anchor
   \newcommand{\localBestLon}{35.179}          % longitude of local peak A+ in Levant sweep
@@ -370,7 +352,7 @@
 
 % --- analysis/global/landmark_anchor_ranking.py
   \newcommand{\GerizimTempleAp}{56}          % A+ count at Gerizim Temple anchor
-  \newcommand{\GerizimTempleRank}{28}          % rank of Gerizim among all 1012 sites as anchor (extended corpus)
+  \newcommand{\GerizimTempleRank}{41}          % rank of Gerizim Temple among all landmarks
 
 % --- analysis/global/global_corridor_comparison.py
   \newcommand{\corridorJeruN}{5}              % Levantine corridor matches (Jerusalem anchor)
@@ -473,10 +455,10 @@
   \newcommand{\appSiteDevBeruSeven}{0.000180}  % A++ table rank Seven: beru deviation
   \newcommand{\appSiteDevKmSeven}{0.60}  % A++ table rank Seven: km
   \newcommand{\appSiteDevMSeven}{598}  % A++ table rank Seven: m
-  \newcommand{\JerusalemAp}{57}  % Jerusalem A+ count (symmetric self-excl, N=1011, incl. Gerizim)
-  \newcommand{\NjerSelfExclCorpus}{1011}  % corpus size, Jerusalem self-excluded (symmetric sweep)
-  \newcommand{\NgerizimSweepCorpus}{1011}  % corpus size, Gerizim self-excluded (symmetric sweep)
-  \newcommand{\pJerusalemAp}{0.0070}  % p-value, Jerusalem A+ binomial (N=1011, symmetric)
+  \newcommand{\JerusalemAp}{56}  % Jerusalem A+ count (self-excluded corpus)
+  \newcommand{\NjerSelfExclCorpus}{1010}  % corpus size, Jerusalem self-excluded (Sweep B)
+  \newcommand{\NgerizimSweepCorpus}{1010}  % corpus size, Gerizim sweep (Jerusalem removed, Sweep A)
+  \newcommand{\pJerusalemAp}{0.0101}  % p-value, Jerusalem A+ binomial (self-excluded)
   \newcommand{\MeccaAp}{51}  % Mecca A+ count (full corpus)
   \newcommand{\pMeccaAnchor}{0.057}  % p-value, Mecca binomial (A+, one-sided)
   \newcommand{\MeruAp}{44}  % Mt. Meru (Tanzania, 36.750E) A+ count
@@ -639,25 +621,25 @@
 \newcommand{\rayleighRPctPhrasing}{essentially all}  % prose for R=0.9972: 'essentially all / nearly all / most'
 
 % --- analysis/global/x18_max_permutation_test.py
-\newcommand{\anchorMaxPermObsMax}{59}
+\newcommand{\anchorMaxPermObsMax}{60}
 \newcommand{\anchorMaxPermNullMu}{57.17}
 \newcommand{\anchorMaxPermNullSD}{3.17}
-\newcommand{\anchorMaxPermZ}{0.58}
-\newcommand{\anchorMaxPermP}{0.2966}
+\newcommand{\anchorMaxPermZ}{0.89}
+\newcommand{\anchorMaxPermP}{0.2061}
 \newcommand{\anchorMaxPermNperms}{10{,}000}
 \newcommand{\anchorMaxPermBootMu}{66.32}
 \newcommand{\anchorMaxPermBootSD}{4.72}
-\newcommand{\anchorMaxPermBootZ}{-1.55}
-\newcommand{\anchorMaxPermBootP}{0.9783}
+\newcommand{\anchorMaxPermBootZ}{-1.34}
+\newcommand{\anchorMaxPermBootP}{0.9533}
 
 % --- analysis/global/x18_optimal_band_significance.py
-\newcommand{\xOptBandApCount}{59}
+\newcommand{\xOptBandApCount}{60}
 \newcommand{\xOptBandApCountB}{60}
-\newcommand{\xOptBandN}{1010}
-\newcommand{\xOptBandBinomP}{0.0030}
+\newcommand{\xOptBandN}{1011}
+\newcommand{\xOptBandBinomP}{0.0019}
 \newcommand{\xOptBandBinomPB}{0.0019}
-\newcommand{\xOptBandEnrich}{1.46}
-\newcommand{\xOptBandEnrichB}{1.49}
+\newcommand{\xOptBandEnrich}{1.48}
+\newcommand{\xOptBandEnrichB}{1.48}
 
 % --- analysis/unesco/dome_footprint_window_sensitivity.py
   \newcommand{\geoNullDomeTwoDegN}{761}
@@ -886,18 +868,18 @@
   \newcommand{\regionCondBNblocks}{61}         % Strategy B blocks
 
 % --- analysis/unesco/fdr_multiple_comparisons.py
-  \newcommand{\NtotalTests}{45}           % total tests in FDR analysis
-  \newcommand{\NconfTests}{38}           % confirmatory tests
+  \newcommand{\NtotalTests}{43}           % total tests in FDR analysis
+  \newcommand{\NconfTests}{36}           % confirmatory tests
   \newcommand{\NexplTests}{7}           % exploratory tests
   \newcommand{\NsurviveFDR}{26}           % tests surviving BH FDR (q<0.05)
   \newcommand{\NsurviveBonfAll}{6}           % tests surviving Bonferroni (all tests)
-  \newcommand{\NtotalTestsP}{0.0011}  % Bonferroni threshold = 0.05/45 (used in FDR table header)
-  \newcommand{\FDRqTestOne}{0.0244}  % BH q, Test 1: Global enrichment — full corpus A+ (binomial)
-  \newcommand{\BonfAllTestOne}{0.4635}  % Bonf adj (k=45), Test 1: Global enrichment — full corpus A+ (binomial)
-  \newcommand{\FDRqTestTwo}{0.0071}  % BH q, Test 2: Domed/spherical A+ — RAW sweep (binomial)
-  \newcommand{\BonfAllTestTwo}{0.0425}  % Bonf adj (k=45), Test 2: Domed/spherical A+ — RAW sweep (binomial)
-  \newcommand{\FDRqTestThree}{0.0159}  % BH q, Test 3: Cluster asymmetry — permutation p
-  \newcommand{\BonfAllTestThree}{0.1485}  % Bonf adj (k=45), Test 3: Cluster asymmetry — permutation p
+  \newcommand{\NtotalTestsP}{0.0012}  % Bonferroni threshold = 0.05/43 (used in FDR table header)
+  \newcommand{\FDRqTestOne}{0.0233}  % BH q, Test 1: Global enrichment — full corpus A+ (binomial)
+  \newcommand{\BonfAllTestOne}{0.4429}  % Bonf adj (k=43), Test 1: Global enrichment — full corpus A+ (binomial)
+  \newcommand{\FDRqTestTwo}{0.0068}  % BH q, Test 2: Domed/spherical A+ — RAW sweep (binomial)
+  \newcommand{\BonfAllTestTwo}{0.0407}  % Bonf adj (k=43), Test 2: Domed/spherical A+ — RAW sweep (binomial)
+  \newcommand{\FDRqTestThree}{0.016}  % BH q, Test 3: Cluster asymmetry — permutation p
+  \newcommand{\BonfAllTestThree}{0.1419}  % Bonf adj (k=43), Test 3: Cluster asymmetry — permutation p
 
 % --- analysis/unesco/bonferroni_correction.py
   \newcommand{\BonfK}{3}  % k = confirmatory tests (Tests 1, 2, 3)

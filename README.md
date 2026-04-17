@@ -20,7 +20,9 @@ non-randomly concentrated near integer-multiple longitudes of the Babylonian
 
 The primary exploratory test finds that **domed/spherical UNESCO monuments** cluster
 on beru harmonics at rates significantly exceeding the geometric null
-(binomial *p* < 0.001), with supporting evidence from a temporal gradient
+(binomial *p* < 0.001), with supporting evidence from cluster asymmetry
+(harmonics containing a site within ≤6.7 km host more total sites than
+harmonics without one), a temporal gradient
 (pre-2000 vs. post-2000 inscription cohorts), morphological evolution
 (hemispherical mound → dome), unit-sensitivity sweep, and global robustness
 checks.
@@ -49,6 +51,7 @@ gerizim-paper-a/
 │   │   ├── allergy.eps                       # Template asset
 │   │   └── images/                           # Template icon assets (ORCID, logos, etc.)
 │   │
+│   ├── shared_content.tex            # Body content (single source of truth for both manuscripts)
 │   ├── generated_macros.tex          # All pipeline-emitted LaTeX macros (single source of truth)
 │   ├── reproduce_all_macros.sh       # Shell script to regenerate all macros + figures
 │   ├── generate_figures.py           # Generates all 3 manuscript figures
@@ -274,23 +277,28 @@ the extended descriptions cache, run `python3 data/scripts/fetch_extended.py`
 
 ## Manuscripts
 
+Both manuscripts share the same body content via `manuscript/shared_content.tex`.
+Each `.tex` file is a thin wrapper providing only the template-specific
+preamble, title/author block, and abstract. Edits to the paper body go in
+`shared_content.tex` and appear in both PDFs.
+
 ### Primary UNESCO analysis
-- **LaTeX source:** `manuscript/primary/paper_a_primary_unesco.tex`
+- **Wrapper:** `manuscript/primary/paper_a_primary_unesco.tex` (standard `article` class)
 - **Compiled PDF:** `manuscript/primary/paper_a_primary_unesco.pdf`
 
 ### Archaeometry submission
-- **LaTeX source:** `manuscript/archaeometry/paper_a_archaeometry.tex`
+- **Wrapper:** `manuscript/archaeometry/paper_a_archaeometry.tex` (Wiley USG.cls)
 - **Compiled PDF:** `manuscript/archaeometry/paper_a_archaeometry.pdf`
 - Template files (`USG.cls`, `*.sty`, `images/`) live alongside the `.tex` in `manuscript/archaeometry/`.
 
 ### Shared resources
-- **Macros:** `manuscript/generated_macros.tex` — single source of truth; both manuscripts `\input` this file via `../generated_macros.tex`
+- **Body content:** `manuscript/shared_content.tex` — single source of truth for all paper content
+- **Macros:** `manuscript/generated_macros.tex` — pipeline-emitted numerical values
 - **Figures:** `manuscript/figures/` — referenced as `../figures/` from each subdirectory
 
-Both manuscripts are self-contained: all statistical results are embedded as
-LaTeX macros imported from `generated_macros.tex`, each annotated with
-the script that produced it. This ensures the PDF can be compiled without
-running any code.
+All statistical results are embedded as LaTeX macros imported from
+`generated_macros.tex`, each annotated with the script that produced it.
+This ensures the PDF can be compiled without running any code.
 
 ## License
 

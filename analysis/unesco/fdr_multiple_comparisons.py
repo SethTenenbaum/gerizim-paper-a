@@ -190,6 +190,7 @@ def main():
         if bh_q[i] < 0.05:
             print(f"    • {names[i]:<45s}  p = {pvals[i]:.4f}  q = {bh_q[i]:.4f}")
 
+
     # ── LaTeX macros (GROUP 19) ───────────────────────────────────────────────
     n_conf        = len(conf_idx)
     n_expl        = m - n_conf

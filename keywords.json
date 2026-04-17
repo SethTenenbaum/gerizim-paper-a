@@ -434,7 +434,7 @@
     ]
   },
   "religion_sets": {
-    "_note": "Keyword sets for per-religion enrichment tests (origin_sites_test.py, unesco_buddhist_heritage_test.py).",
+    "_note": "Keyword sets for per-religion enrichment tests (origin_sites_test.py, generate_audit_religion.py).",
     "Buddhism": [
       "buddha",
       "buddhist",
@@ -471,7 +471,8 @@
       "judaism",
       "synagogue",
       "hebrew",
-      "israelite"
+      "israelite",
+      "biblical"
     ],
     "Hinduism": [
       "hindu",

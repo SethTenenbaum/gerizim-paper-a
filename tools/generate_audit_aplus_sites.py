@@ -14,6 +14,7 @@ Run from repo root:
     python3 tools/generate_audit_aplus_sites.py
 """
 
+import json as _json
 import sys
 from pathlib import Path
 from datetime import datetime, timezone
@@ -21,6 +22,7 @@ from datetime import datetime, timezone
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from data.unesco_corpus import (
     load_corpus,
+    cultural_sites_with_coords,
     cultural_sites_with_coords_extended,
     GERIZIM_SYNTHETIC,
 )
@@ -28,8 +30,39 @@ from lib.beru import (
     GERIZIM, BERU, TIER_APP, TIER_APLUS, TIER_A_MAX,
     P_NULL_AP, P_NULL_A,
     tier_label, is_aplus, is_a_or_better,
+    load_keywords, load_religion_sets,
 )
 from scipy.stats import binomtest
+
+
+def _load_mound_keywords():
+    kw = _json.loads((Path(__file__).parent.parent / "keywords.json").read_text())
+    m = kw.get("mound_evolution", {})
+    return (
+        m.get("mound_unambiguous", []) +
+        m.get("mound_ambiguous", []) +
+        m.get("stupa", []) +
+        m.get("dome", [])
+    )
+
+
+def _build_detail_tags():
+    """Tag categories: dome, founding, mound, then each religion by name."""
+    founding_kws = (
+        load_keywords("founding_capital") +
+        load_keywords("sacred_origin") +
+        load_keywords("founding_monument") +
+        load_keywords("founding_axis") +
+        load_keywords("ancient_landscape")
+    )
+    tags = [
+        ("dome",     load_keywords("dome_forms")),
+        ("founding", founding_kws),
+        ("mound",    _load_mound_keywords()),
+    ]
+    for rname, kws in load_religion_sets():
+        tags.append((rname, kws))
+    return tags
 
 OUT = Path(__file__).parent.parent / "supplementary" / "audit" / "aplus_sites_audit.txt"
 SEP = "─" * 96
@@ -79,6 +112,17 @@ def run():
     N_EXT         = len(all_sites_ext)   # 1012
     N_ALL         = N_EXT - 1           # 1011 inscribed only
 
+    # Build text lookup for keyword tagging
+    DETAIL_TAGS = _build_detail_tags()
+    text_by_name = {}
+    for s in cultural_sites_with_coords(corpus):
+        ext  = s.extended_description if s.extended_description else ""
+        text_by_name[s.site] = (s.site + " " + s.short_description + " " + ext).lower()
+
+    def get_tags(name):
+        text = text_by_name.get(name, name.lower())
+        return [tname for tname, kws in DETAIL_TAGS if any(k in text for k in kws)]
+
     ger_corpus = [s for s in all_sites_ext if abs(s.longitude - GERIZIM)    >= 0.001]
     jer_corpus = [s for s in all_sites_ext if abs(s.longitude - JERUSALEM)  >= 0.001]
     N_GER = len(ger_corpus)   # 1011
@@ -86,6 +130,10 @@ def run():
 
     ger = classify_sites(ger_corpus, GERIZIM)
     jer = classify_sites(jer_corpus, JERUSALEM)
+
+    # Attach keyword tags to each record
+    for s in ger + jer:
+        s["tags"] = get_tags(s["name"])
 
     def counts(sites):
         app = sum(1 for s in sites if s["tier"] == "A++")
@@ -162,9 +210,9 @@ def run():
                     f"(A++={app_c}, A+={ap_c}, A={a_c - ap_c}, total={a_c})")
         rows.append(
             f"  {'Tier':<5}  {'Dev (beru)':>10}  {'km':>6}  "
-            f"{'Dir':>3}  {'Harmonic':>8}  {'Lon°E':>9}  Site"
+            f"{'Dir':>3}  {'Harmonic':>8}  {'Lon°E':>9}  {'Tags':<28}  Site"
         )
-        rows.append("  " + "-" * 88)
+        rows.append("  " + "-" * 116)
         prev_tier = None
         for s in sites:
             if s["tier"] != prev_tier:
@@ -172,9 +220,11 @@ def run():
                     rows.append("")
                 rows.append(f"  --- {s['tier']} ---")
                 prev_tier = s["tier"]
+            tag_str = ", ".join(s.get("tags", [])) or "—"
             rows.append(
                 f"  {s['tier']:<5}  {s['dev']:>10.6f}  {s['km']:>6.1f}  "
-                f"{s['direction']:>3}  {s['harmonic']:>8.1f}  {s['lon']:>9.4f}  {s['name']}"
+                f"{s['direction']:>3}  {s['harmonic']:>8.1f}  {s['lon']:>9.4f}  "
+                f"{tag_str:<28}  {s['name']}"
             )
         rows.append("")
         return rows

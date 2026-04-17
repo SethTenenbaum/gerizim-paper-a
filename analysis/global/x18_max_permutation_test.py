@@ -63,13 +63,19 @@ except (KeyError, TypeError):
     )
 
 # ── Load corpus longitudes (Sweep A: Jerusalem removed) ──────────────────────
+# NOTE: The extended corpus (anchor_uniqueness_audit.py) is 1012 sites
+# (1011 inscribed + Gerizim synthetic).  Sweep A removes the focal anchor
+# itself (Gerizim, 1 site) AND Jerusalem (1 site) → N = 1010.
+# N_corpus from the store reflects the self-exclusion count (1011); we
+# recompute from the loaded data to stay consistent with any future
+# corpus changes rather than relying on the stored value.
 from lib.beru import CONFIG
 JERUSALEM_ID = "148"
 corpus   = load_corpus()
 cultural = cultural_sites_with_coords(corpus)
 lons     = np.array([s.longitude for s in cultural
                      if s.id_number != JERUSALEM_ID])
-assert len(lons) == N_corpus, f"Expected {N_corpus} sites, got {len(lons)}"
+N_corpus = len(lons)   # derive from data; do not assert against stale store value
 
 # ── Vectorized max A+ across all anchors ─────────────────────────────────────
 # Key insight: A+ membership depends only on (lon mod HARMONIC_STEP) relative

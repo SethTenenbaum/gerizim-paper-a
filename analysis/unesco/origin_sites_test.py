@@ -42,7 +42,7 @@ from scipy.stats import binomtest, fisher_exact
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus, cultural_sites_with_coords
 from lib.beru import (
-    GERIZIM, BERU, TIER_APLUS, TIER_A_MAX, TIER_B_MAX, P_NULL_AP,
+    GERIZIM, BERU, TIER_APLUS, TIER_A_MAX, TIER_B_MAX, P_NULL_AP, P_NULL_A,
     deviation as beru_deviation, tier_label, is_aplus, is_a_or_better,
     is_c_or_better, P_NULL_C,
     load_religion_sets,
@@ -87,7 +87,8 @@ for s in _cultural:
     if yr is None:
         continue
     d    = beru_dev(s.longitude)
-    text = (s.short_description + " " + s.site).lower()
+    ext  = s.extended_description if s.extended_description else ""
+    text = (s.site + " " + s.short_description + " " + ext).lower()
     sites.append({
         "name": s.site, "lon": s.longitude, "yr": yr,
         "dev": d, "tier": tier(d), "km": d * BERU * 111.0,
@@ -306,7 +307,12 @@ n_modern, nap_modern, _, p_modern, enr_modern = stats(late)
 # religion subsets
 christian_kws = next(kws for name, kws in RELIGION_SETS if name.lower().startswith("christ"))
 christian = [s for s in sites if any(k in s["text"] for k in christian_kws)]
-n_chr, nap_chr, _, p_chr, enr_chr = stats(christian)
+n_chr, nap_chr, na_chr, p_chr, enr_chr = stats(christian)
+p_chr_a = binomtest(na_chr, n_chr, P_NULL_A, alternative="greater").pvalue
+
+islam_kws = next(kws for name, kws in RELIGION_SETS if name.lower().startswith("islam"))
+islamic = [s for s in sites if any(k in s["text"] for k in islam_kws)]
+n_isl, nap_isl, na_isl, p_isl, enr_isl = stats(islamic)
 
 buddhist_kws = next(kws for name, kws in RELIGION_SETS if name.lower().startswith("buddh"))
 buddhist_relig = [s for s in sites if any(k in s["text"] for k in buddhist_kws)]
@@ -319,11 +325,11 @@ n_bud_r, nap_bud_r, _, p_bud_r, enr_bud_r = stats(buddhist_relig)
 # Joint probability uses the exact multivariate hypergeometric.
 from math import lgamma, log, exp
 
-N_anti_corpus = sum(1 for s in sites if is_c_or_better(s["tier"]))
-bud_anti      = [s for s in buddhist_relig if is_c_or_better(s["tier"])]
-n_bud_anti    = len(bud_anti)
-bud_anti_rate = 100 * n_bud_anti / n_bud_r
-bud_anti_enr  = (n_bud_anti / n_bud_r) / (N_anti_corpus / N_ALL)
+N_inter_corpus = sum(1 for s in sites if is_c_or_better(s["tier"]))
+bud_inter      = [s for s in buddhist_relig if is_c_or_better(s["tier"])]
+n_bud_inter    = len(bud_inter)
+bud_inter_rate = 100 * n_bud_inter / n_bud_r
+bud_inter_enr  = (n_bud_inter / n_bud_r) / (N_inter_corpus / N_ALL)
 
 # Rank Buddhism's A+% and C-tier% among religion sub-corpora (N>=10)
 _all_relig_stats = []
@@ -332,19 +338,23 @@ for rname, kws in RELIGION_SETS:
     if len(rel) < 10:
         continue
     nap_ = sum(1 for s in rel if is_aplus(s["tier"]))
-    nanti_ = sum(1 for s in rel if is_c_or_better(s["tier"]))
-    _all_relig_stats.append((rname, len(rel), nap_, nanti_))
+    ninter_ = sum(1 for s in rel if is_c_or_better(s["tier"]))
+    _all_relig_stats.append((rname, len(rel), nap_, ninter_))
 
 bud_ap_rank    = 1 + sum(1 for _, n_, nap_, _ in _all_relig_stats
                          if nap_ / n_ > nap_bud_r / n_bud_r)
-bud_anti_rank  = 1 + sum(1 for _, n_, _, nanti_ in _all_relig_stats
-                         if nanti_ / n_ > n_bud_anti / n_bud_r)
+bud_inter_rank = 1 + sum(1 for _, n_, _, ninter_ in _all_relig_stats
+                         if ninter_ / n_ > n_bud_inter / n_bud_r)
 
-# Exact joint P(A+>=obs AND anti-node>=obs) via multivariate hypergeometric
-# Groups: K_ap A+ sites, K_anti anti-node sites, K_rest = neither
-K_ap_g   = sum(1 for s in sites if is_aplus(s["tier"]))   # =N_AP_global
-K_anti_g = N_anti_corpus
-K_rest_g = N_ALL - K_ap_g - K_anti_g
+# Exact joint P(A>=obs AND C>=obs) via multivariate hypergeometric
+# A-tier (full band, dev <= 0.010 beru) paired with C-tier (inter-harmonic)
+# Groups: K_a A-tier sites, K_inter C-tier sites, K_rest = neither
+K_a_g     = sum(1 for s in sites if is_a_or_better(s["tier"]))  # A++ + A+ + A
+K_inter_g = N_inter_corpus
+K_rest_g  = N_ALL - K_a_g - K_inter_g
+
+# Buddhism: use A-tier count (na_bud_r), not A+
+na_bud_r  = sum(1 for s in buddhist_relig if is_a_or_better(s["tier"]))
 
 def _lc(n, k):
     if k < 0 or k > n: return float('-inf')
@@ -352,22 +362,47 @@ def _lc(n, k):
 
 _log_denom = _lc(N_ALL, n_bud_r)
 _log_joint = float('-inf')
-for _x1 in range(nap_bud_r, min(K_ap_g, n_bud_r) + 1):
-    for _x2 in range(n_bud_anti, min(K_anti_g, n_bud_r - _x1) + 1):
+for _x1 in range(na_bud_r, min(K_a_g, n_bud_r) + 1):
+    for _x2 in range(n_bud_inter, min(K_inter_g, n_bud_r - _x1) + 1):
         _x3 = n_bud_r - _x1 - _x2
         if _x3 < 0 or _x3 > K_rest_g:
             continue
-        _lp = _lc(K_ap_g, _x1) + _lc(K_anti_g, _x2) + _lc(K_rest_g, _x3) - _log_denom
+        _lp = _lc(K_a_g, _x1) + _lc(K_inter_g, _x2) + _lc(K_rest_g, _x3) - _log_denom
         if _lp > _log_joint:
             _log_joint = _lp + log(1 + exp(_log_joint - _lp)) if _log_joint > float('-inf') else _lp
         elif _lp > _log_joint - 50:
             _log_joint = _log_joint + log(1 + exp(_lp - _log_joint))
 p_bud_joint = exp(_log_joint)
 
+# ── Hinduism: A-tier + C-tier enrichment + joint probability ─────────────────
+hindu_kws  = next(kws for name, kws in RELIGION_SETS if name.lower().startswith("hind"))
+hindu      = [s for s in sites if any(k in s["text"] for k in hindu_kws)]
+n_hin_r, nap_hin_r, na_hin_r, p_hin_r, enr_hin_r = stats(hindu)
+hin_inter  = [s for s in hindu if is_c_or_better(s["tier"])]
+n_hin_inter = len(hin_inter)
+hin_inter_rate = 100 * n_hin_inter / n_hin_r
+hin_inter_enr  = (n_hin_inter / n_hin_r) / (N_inter_corpus / N_ALL)
+
+# Exact joint P(A>=obs AND C>=obs) — A-tier paired with C-tier
+_log_denom_h = _lc(N_ALL, n_hin_r)
+_log_joint_h = float('-inf')
+for _x1 in range(na_hin_r, min(K_a_g, n_hin_r) + 1):
+    for _x2 in range(n_hin_inter, min(K_inter_g, n_hin_r - _x1) + 1):
+        _x3 = n_hin_r - _x1 - _x2
+        if _x3 < 0 or _x3 > K_rest_g:
+            continue
+        _lp = _lc(K_a_g, _x1) + _lc(K_inter_g, _x2) + _lc(K_rest_g, _x3) - _log_denom_h
+        if _lp > _log_joint_h:
+            _log_joint_h = _lp + log(1 + exp(_log_joint_h - _lp)) if _log_joint_h > float('-inf') else _lp
+        elif _lp > _log_joint_h - 50:
+            _log_joint_h = _log_joint_h + log(1 + exp(_lp - _log_joint_h))
+p_hin_joint = exp(_log_joint_h)
+
 jewish_kws = next(kws for name, kws in RELIGION_SETS if name.lower().startswith("jud"))
 jewish = [s for s in sites if any(k in s["text"] for k in jewish_kws)]
 n_jud = len(jewish)
 na_jud = sum(1 for s in jewish if is_a_or_better(s["tier"]))  # A-tier count
+p_jud_a_binom = binomtest(na_jud, n_jud, P_NULL_A, alternative="greater").pvalue
 na_corpus = sum(1 for s in sites if is_a_or_better(s["tier"]))
 # Fisher's exact: Judaism A-tier vs rest of corpus
 _jud_table = [[na_jud, n_jud - na_jud],
@@ -409,34 +444,65 @@ print(f"  \\newcommand{{\\NchristAp}}{{{nap_chr}}}              % Christian site
 print(f"  \\newcommand{{\\christApRate}}{{{100*nap_chr/n_chr:.1f}}}            % Christian sites A+ rate (%)")
 print(f"  \\newcommand{{\\pChrist}}{{{p_chr:.4f}}}         % p-value, Christian sites A+ binomial")
 print(f"  \\newcommand{{\\christEnrich}}{{{enr_chr:.2f}}}           % enrichment ratio, Christian sites")
+print(f"  \\newcommand{{\\NchristA}}{{{na_chr}}}              % Christian sites A-tier count")
+print(f"  \\newcommand{{\\christARate}}{{{100*na_chr/n_chr:.1f}}}            % Christian sites A-tier rate (%)")
+print(f"  \\newcommand{{\\pChristA}}{{{p_chr_a:.4f}}}         % p-value, Christian sites A-tier binomial")
+print(f"  \\newcommand{{\\NIslam}}{{{n_isl}}}            % Islam sacred sites N")
+print(f"  \\newcommand{{\\IslamApCount}}{{{nap_isl}}}              % Islam A+ count")
+print(f"  \\newcommand{{\\IslamApRate}}{{{100*nap_isl/n_isl:.1f}}}            % Islam A+ rate (%)")
+print(f"  \\newcommand{{\\pIslam}}{{{p_isl:.4f}}}         % p-value, Islam A+ binomial")
 print(f"  \\newcommand{{\\NbudSitesRelig}}{{{n_bud_r}}}            % Buddhism religion-tagged sites N")
+print(f"  \\newcommand{{\\NbudATier}}{{{na_bud_r}}}              % Buddhism A-tier count (dev <= 0.010 beru)")
+print(f"  \\newcommand{{\\budATierRate}}{{{100*na_bud_r/n_bud_r:.1f}}}            % Buddhism A-tier rate (%)")
 print(f"  \\newcommand{{\\budApRateRelig}}{{{100*nap_bud_r/n_bud_r:.1f}}}            % Buddhism religion-tagged A+ rate (%)")
 print(f"  \\newcommand{{\\pBudRelig}}{{{p_bud_r:.4f}}}         % p-value, Buddhism religion-tagged A+ binomial")
-print(f"  \\newcommand{{\\NbudAntiNode}}{{{n_bud_anti}}}             % Buddhist C-tier sites (dist_mid <= 0.010 beru)")
-print(f"  \\newcommand{{\\budAntiNodeRate}}{{{bud_anti_rate:.1f}}}            % Buddhist C-tier rate (%)")
-print(f"  \\newcommand{{\\budAntiNodeEnrich}}{{{bud_anti_enr:.2f}}}           % Buddhist C-tier enrichment vs corpus")
-print(f"  \\newcommand{{\\NAntiNodeCorpus}}{{{N_anti_corpus}}}           % full-corpus C-tier count")
-print(f"  \\newcommand{{\\corpusAntiNodeRate}}{{{100*N_anti_corpus/N_ALL:.1f}}}           % full-corpus C-tier rate (%)")
-print(f"  \\newcommand{{\\pBudJoint}}{{{p_bud_joint:.4f}}}         % joint p: Buddhism A+ >= {nap_bud_r} AND C-tier >= {n_bud_anti} (multivariate hypergeometric)")
+print(f"  \\newcommand{{\\NbudInterHarmonic}}{{{n_bud_inter}}}             % Buddhist C-tier sites (dist_mid <= 0.010 beru)")
+print(f"  \\newcommand{{\\budInterHarmonicRate}}{{{bud_inter_rate:.1f}}}            % Buddhist C-tier rate (%)")
+print(f"  \\newcommand{{\\budInterHarmonicEnrich}}{{{bud_inter_enr:.2f}}}           % Buddhist C-tier enrichment vs corpus")
+print(f"  \\newcommand{{\\NInterHarmonicCorpus}}{{{N_inter_corpus}}}           % full-corpus C-tier count")
+print(f"  \\newcommand{{\\corpusInterHarmonicRate}}{{{100*N_inter_corpus/N_ALL:.1f}}}           % full-corpus C-tier rate (%)")
+print(f"  \\newcommand{{\\pBudJoint}}{{{p_bud_joint:.4f}}}         % joint p: Buddhism A >= {na_bud_r} AND C-tier >= {n_bud_inter} (multivariate hypergeometric)")
+print(f"  \\newcommand{{\\NhinSites}}{{{n_hin_r}}}            % Hinduism-tagged sites N")
+print(f"  \\newcommand{{\\hinApCount}}{{{nap_hin_r}}}               % Hinduism A+ count")
+print(f"  \\newcommand{{\\hinApRate}}{{{100*nap_hin_r/n_hin_r:.1f}}}            % Hinduism A+ rate (%)")
+print(f"  \\newcommand{{\\NhinInterHarmonic}}{{{n_hin_inter}}}             % Hinduism C-tier sites")
+print(f"  \\newcommand{{\\hinInterHarmonicRate}}{{{hin_inter_rate:.1f}}}            % Hinduism C-tier rate (%)")
+print(f"  \\newcommand{{\\pHinJoint}}{{{p_hin_joint:.4f}}}         % joint p: Hinduism A >= {na_hin_r} AND C-tier >= {n_hin_inter} (multivariate hypergeometric)")
 print(f"  \\newcommand{{\\NjudSites}}{{{n_jud}}}            % Judaism-tagged sites N")
 print(f"  \\newcommand{{\\judATierCount}}{{{na_jud}}}              % Judaism A-tier count")
 print(f"  \\newcommand{{\\judATierRate}}{{{100*na_jud/n_jud:.1f}}}            % Judaism A-tier rate (%)")
+print(f"  \\newcommand{{\\pJudATierBinom}}{{{p_jud_a_binom:.4f}}}         % p-value, Judaism A-tier binomial")
 print(f"  \\newcommand{{\\pJudATierFisher}}{{{p_jud_fisher:.4f}}}         % p-value, Judaism A-tier Fisher exact vs rest")
 print(f"  \\newcommand{{\\judATierOR}}{{{jud_fisher_or:.2f}}}           % OR, Judaism A-tier Fisher exact")
+nap_jud = sum(1 for s in jewish if is_aplus(s["tier"]))
+p_jud_ap = binomtest(nap_jud, n_jud, P_NULL_AP, alternative="greater").pvalue
+# Fisher's exact: Judaism A+ vs rest of corpus
+nap_corpus = sum(1 for s in sites if is_aplus(s["tier"]))
+_jud_ap_table = [[nap_jud, n_jud - nap_jud],
+                 [nap_corpus - nap_jud, (N_ALL - n_jud) - (nap_corpus - nap_jud)]]
+jud_ap_fisher_or, p_jud_ap_fisher = fisher_exact(_jud_ap_table, alternative="greater")
+print(f"  \\newcommand{{\\judApCount}}{{{nap_jud}}}               % Judaism A+ count")
+print(f"  \\newcommand{{\\judApRate}}{{{100*nap_jud/n_jud:.1f}}}            % Judaism A+ rate (%)")
+print(f"  \\newcommand{{\\pJudAp}}{{{p_jud_ap:.4f}}}         % p-value, Judaism A+ binomial")
+print(f"  \\newcommand{{\\pJudApFisher}}{{{p_jud_ap_fisher:.4f}}}      % p-value, Judaism A+ Fisher exact vs rest")
+print(f"  \\newcommand{{\\judApFisherOR}}{{{jud_ap_fisher_or:.2f}}}        % OR, Judaism A+ Fisher exact vs rest")
 
 # ── Write to results store ────────────────────────────────────────────────────
 ResultsStore().write_many({
-    "pCanon":             p_canon,      # binomial p, canon cohort (1978-1984)
-    "pPreTwoK":           p_pre2k,      # binomial p, pre-2000 cohort
-    "pModern":            p_modern,     # binomial p, modern cohort (2000+)
-    "pFisherCanonModern": p_fl,         # Fisher p, canon vs modern
-    "pReligUnion":        p_rel,        # any-religion A+ binomial p
-    "pChrist":            p_chr,        # Christian A+ binomial p
-    "pBudRelig":          p_bud_r,      # Buddhism religion-tagged A+ binomial p
-    "pBudJoint":          p_bud_joint,  # joint p: A+ and anti-node both enriched
-    "NbudAntiNode":       n_bud_anti,   # Buddhist anti-node site count
-    "budAntiNodeRate":    bud_anti_rate,# Buddhist anti-node rate (%)
-    "budAntiNodeEnrich":  bud_anti_enr, # Buddhist anti-node enrichment ratio
-    "pJudATierFisher":    p_jud_fisher, # Judaism A-tier Fisher exact p
-    "judATierOR":         jud_fisher_or,# Judaism A-tier odds ratio
+    "pCanon":             p_canon,          # binomial p, canon cohort (1978-1984)
+    "pPreTwoK":           p_pre2k,          # binomial p, pre-2000 cohort
+    "pModern":            p_modern,         # binomial p, modern cohort (2000+)
+    "pFisherCanonModern": p_fl,             # Fisher p, canon vs modern
+    "pReligUnion":        p_rel,            # any-religion A+ binomial p
+    "pChrist":            p_chr,            # Christian A+ binomial p
+    "pBudRelig":          p_bud_r,          # Buddhism religion-tagged A+ binomial p
+    "pBudJoint":              p_bud_joint,       # joint p: Buddhism A+ and C-tier both enriched
+    "pHinJoint":              p_hin_joint,       # joint p: Hinduism A+ and C-tier both enriched
+    "NbudInterHarmonic":      n_bud_inter,       # Buddhist inter-harmonic site count
+    "budInterHarmonicRate":   bud_inter_rate,    # Buddhist inter-harmonic rate (%)
+    "budInterHarmonicEnrich": bud_inter_enr,     # Buddhist inter-harmonic enrichment ratio
+    "pJudATierFisher":    p_jud_fisher,     # Judaism A-tier Fisher exact p
+    "judATierOR":         jud_fisher_or,    # Judaism A-tier odds ratio
+    "pJudApFisher":       p_jud_ap_fisher,  # Judaism A+ Fisher exact p
+    "judApFisherOR":      jud_ap_fisher_or, # Judaism A+ Fisher exact OR
 })

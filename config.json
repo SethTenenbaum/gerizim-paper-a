@@ -6,78 +6,78 @@
       "lon_dms": "E35~16~08",
       "lat_dms": "N32~12~44",
       "label": "Mount Gerizim",
-      "note": "UNESCO tentative list (ref. 5706), DMS E35 16 08 = 35.2689°E, rounded to 35.269°E"
+      "note": "UNESCO tentative list (ref. 5706), DMS E35 16 08 = 35.2689\u00b0E, rounded to 35.269\u00b0E"
     },
     "jerusalem": {
       "longitude": 35.2317,
       "label": "Jerusalem (Old City)",
-      "note": "UNESCO XML coordinate — Temple Mount, 35.2317°E"
+      "note": "UNESCO XML coordinate \u2014 Temple Mount, 35.2317\u00b0E"
     },
     "megiddo": {
       "longitude": 35.184,
       "label": "Tel Megiddo",
-      "note": "Bronze Age Canaanite city, 35.184°E"
+      "note": "Bronze Age Canaanite city, 35.184\u00b0E"
     },
     "meru": {
       "longitude": 36.75,
       "label": "Mount Meru",
-      "note": "Axis mundi of Hindu-Buddhist cosmography; Mt Meru, Tanzania, 36.75°E. Grid spacing 3° = 0.1 beru, same as Gerizim grid."
+      "note": "Axis mundi of Hindu-Buddhist cosmography; Mt Meru, Tanzania, 36.75\u00b0E. Grid spacing 3\u00b0 = 0.1 beru, same as Gerizim grid."
     }
   },
   "notable_anchors": {
     "note": "Historical/archaeological anchors used in global comparison tables. All coordinates in decimal degrees East.",
-    "Lumbini (83.2761°E)":   83.2761,
-    "Bethel (35.225°E)":     35.225,
-    "Gerizim (35.269°E)":    35.269,
-    "Jerusalem (35.2317°E)":  35.2317,
-    "Mecca (39.826°E)":      39.826,
-    "Giza (31.134°E)":       31.134,
-    "Babylon (44.421°E)":    44.421,
-    "Persepolis (52.890°E)": 52.890,
-    "Greenwich (0.000°E)":    0.000,
-    "Ujjain (75.784°E)":     75.784,
-    "Baghdad (44.366°E)":    44.366,
-    "Damascus (36.335°E)":   36.335,
-    "Rome (12.453°E)":       12.453,
-    "Athens (23.726°E)":     23.726,
-    "Alexandria (29.918°E)": 29.918,
-    "Angkor Wat (103.867°E)":103.867,
-    "Beijing (116.397°E)":   116.397,
-    "Varanasi (82.997°E)":   82.997
+    "Lumbini (83.2761\u00b0E)": 83.2761,
+    "Bethel (35.225\u00b0E)": 35.225,
+    "Gerizim (35.269\u00b0E)": 35.269,
+    "Jerusalem (35.2317\u00b0E)": 35.2317,
+    "Mecca (39.826\u00b0E)": 39.826,
+    "Giza (31.134\u00b0E)": 31.134,
+    "Babylon (44.421\u00b0E)": 44.421,
+    "Persepolis (52.890\u00b0E)": 52.89,
+    "Greenwich (0.000\u00b0E)": 0.0,
+    "Ujjain (75.784\u00b0E)": 75.784,
+    "Baghdad (44.366\u00b0E)": 44.366,
+    "Damascus (36.335\u00b0E)": 36.335,
+    "Rome (12.453\u00b0E)": 12.453,
+    "Athens (23.726\u00b0E)": 23.726,
+    "Alexandria (29.918\u00b0E)": 29.918,
+    "Angkor Wat (103.867\u00b0E)": 103.867,
+    "Beijing (116.397\u00b0E)": 116.397,
+    "Varanasi (82.997\u00b0E)": 82.997
   },
   "levant_landmarks": {
-    "note": "Key Levant sites used in local anchor-sweep comparison (34–37°E corridor).",
-    "Gerizim":       35.269,
-    "Jerusalem":     35.2317,
-    "Tel Megiddo":   35.184,
-    "Nablus":        35.261,
-    "Mount Ebal":    35.280,
-    "Bethlehem":     35.207,
-    "Jericho":       35.444,
-    "Dead Sea center":35.515,
-    "Mount Nebo":    35.725,
-    "Damascus":      36.335,
-    "Tyre":          35.196
+    "note": "Key Levant sites used in local anchor-sweep comparison (34\u201337\u00b0E corridor).",
+    "Gerizim": 35.269,
+    "Jerusalem": 35.2317,
+    "Tel Megiddo": 35.184,
+    "Nablus": 35.261,
+    "Mount Ebal": 35.28,
+    "Bethlehem": 35.207,
+    "Jericho": 35.444,
+    "Dead Sea center": 35.515,
+    "Mount Nebo": 35.725,
+    "Damascus": 36.335,
+    "Tyre": 35.196
   },
   "units": {
     "beru": {
       "degrees": 30.0,
       "metres": 10692.0,
-      "note": "1 beru = 30° of arc, attested in MUL.APIN (c. 1000 BCE). Linear value from Powell (1990) RlA Vol.7."
+      "note": "1 beru = 30\u00b0 of arc, attested in MUL.APIN (c. 1000 BCE). Linear value from Powell (1990) RlA Vol.7."
     },
     "nindanu": {
       "metres": 5.94,
       "per_beru": 1800,
-      "note": "1 nindānu = 1/1800 beru = 5.94 m. Powell (1990)."
+      "note": "1 nind\u0101nu = 1/1800 beru = 5.94 m. Powell (1990)."
     },
     "geodetic_dhanus": {
       "metres": 46.2494,
-      "derivation": "Gerizim–Lumbini great-circle arc / 99950 = 46.2494 m",
+      "derivation": "Gerizim\u2013Lumbini great-circle arc / 99950 = 46.2494 m",
       "thom_megalithic_yard_multiple": 56,
       "thom_my_metres": 0.8296,
       "thom_my_56x_metres": 46.4576,
       "thom_my_deviation_pct": 0.45,
-      "note": "56 × Thom Megalithic Yard = 46.4576 m; Geodetic Dhanus = 46.2494 m; deviation 0.45%"
+      "note": "56 \u00d7 Thom Megalithic Yard = 46.4576 m; Geodetic Dhanus = 46.2494 m; deviation 0.45%"
     },
     "megalithic_yard": {
       "metres": 0.8296,
@@ -104,17 +104,17 @@
       "note": "Primary threshold for significance testing"
     },
     "A": {
-      "max_deviation_beru": 0.010,
+      "max_deviation_beru": 0.01,
       "approx_km": 33,
       "note": "Secondary threshold"
     },
     "B": {
-      "max_deviation_beru": 0.050,
+      "max_deviation_beru": 0.05,
       "approx_km": 167,
-      "note": "Middle zone — neither near a harmonic nor near a midpoint"
+      "note": "Middle zone \u2014 neither near a harmonic nor near a midpoint"
     },
     "C": {
-      "max_dist_from_midpoint_beru": 0.010,
+      "max_dist_from_midpoint_beru": 0.01,
       "approx_km": 33,
       "note": "Mirror of A: within 33 km of inter-harmonic midpoint (dev >= 0.040)"
     },
@@ -131,22 +131,23 @@
   },
   "null_rates": {
     "note": "Geometric null rates: tier width / baseline window width. C-tiers mirror A-tiers by symmetry.",
-    "tier_app":   0.004,
+    "tier_app": 0.004,
     "tier_aplus": 0.04,
-    "tier_a": 0.20,
-    "tier_c":     0.20,
+    "tier_a": 0.2,
+    "tier_c": 0.2,
     "tier_cminus": 0.04,
     "tier_cminus2": 0.004
   },
   "arc_test": {
-    "note": "Parameters for Framework 2 / 4 / 5 great-circle arc tests (PART XX).",      "gerizim_lat": 32.212,
-      "gerizim_lon": 35.269,
+    "note": "Parameters for Framework 2 / 4 / 5 great-circle arc tests (PART XX).",
+    "gerizim_lat": 32.212,
+    "gerizim_lon": 35.269,
     "tolerance_standard_beru": 0.01,
     "tolerance_ultra_beru": 0.002,
     "null_rate_standard": 0.02,
     "null_rate_ultra": 0.004,
     "min_distance_km": 200,
-    "note_tolerance": "±0.01 beru absolute = ±107 m arc window (P₀=0.02). Derived from Powell rod ±0.3% mfg tolerance."
+    "note_tolerance": "\u00b10.01 beru absolute = \u00b1107 m arc window (P\u2080=0.02). Derived from Powell rod \u00b10.3% mfg tolerance."
   },
   "quantum_unit_test": {
     "note": "Parameters for Framework 3 Thom-style quantum unit test.",
@@ -181,7 +182,7 @@
     "note": "Parameters for permutation / bootstrap / KDE null models"
   },
   "corridor": {
-    "note": "Gerizim→Lumbini corridor definition for corridor_precision_test.py.",
+    "note": "Gerizim\u2192Lumbini corridor definition for corridor_precision_test.py.",
     "lumbini_lon": 83.2761,
     "lumbini_beru_label": "1.6001",
     "corridor_max_beru": 1.6,
@@ -189,62 +190,94 @@
     "jerusalem_corridor_lon_min": 34.5,
     "jerusalem_corridor_lon_max": 36.0,
     "anchor_comparison": [
-      {"label": "Gerizim",   "lon": 35.269,  "note": "proposed anchor"},
-      {"label": "Jerusalem", "lon": 35.2317, "note": "35.232°E"},
-      {"label": "Megiddo",   "lon": 35.184,  "note": "35.183°E, Tel Megiddo"},
-      {"label": "Bethel",    "lon": 35.225,  "note": "35.225°E"}
+      {
+        "label": "Gerizim",
+        "lon": 35.269,
+        "note": "proposed anchor"
+      },
+      {
+        "label": "Jerusalem",
+        "lon": 35.2317,
+        "note": "35.232\u00b0E"
+      },
+      {
+        "label": "Megiddo",
+        "lon": 35.184,
+        "note": "35.183\u00b0E, Tel Megiddo"
+      },
+      {
+        "label": "Bethel",
+        "lon": 35.225,
+        "note": "35.225\u00b0E"
+      }
     ]
   },
   "tests": {
-    "note": "Registry of all hypothesis tests. Scripts write results to the store under 'p_key'. bonferroni_correction.py and fdr_multiple_comparisons.py read from the store — no hardcoded p-values.",
+    "note": "Registry of all hypothesis tests. Scripts write results to the store under 'p_key'. bonferroni_correction.py and fdr_multiple_comparisons.py read from the store \u2014 no hardcoded p-values.",
     "family_alpha": 0.05,
     "confirmatory": [
       {
-        "id": "1",   "label": "Global enrichment — full corpus A+ (binomial)",
-        "p_key": "clusterApBinom",  "macro": "One",
+        "id": "1",
+        "label": "Global enrichment \u2014 full corpus A+ (binomial)",
+        "p_key": "clusterApBinom",
+        "macro": "One",
         "script": "analysis/unesco/cluster_asymmetry_test.py"
       },
       {
-        "id": "2",   "label": "Domed/spherical A+ — RAW sweep (binomial)",
-        "p_key": "pCircAp",         "macro": "Two",
+        "id": "2",
+        "label": "Domed/spherical A+ \u2014 RAW sweep (binomial)",
+        "p_key": "pCircAp",
+        "macro": "Two",
         "script": "analysis/unesco/spherical_monument_raw_sweep.py"
       },
       {
-        "id": "3",   "label": "Cluster asymmetry — permutation p",
-        "p_key": "clusterPermP",    "macro": "Three",
+        "id": "3",
+        "label": "Cluster asymmetry \u2014 permutation p",
+        "p_key": "clusterPermP",
+        "macro": "Three",
         "script": "analysis/unesco/cluster_asymmetry_test.py"
       }
     ],
     "sensitivity": [
       {
-        "id": "2b",  "label": "Hemispherical mound evolution A+ — RAW sweep (binomial)",
-        "p_key": "pEvoAp",          "macro": "TwoB",
+        "id": "2b",
+        "label": "Hemispherical mound evolution A+ \u2014 RAW sweep (binomial)",
+        "p_key": "pEvoAp",
+        "macro": "TwoB",
         "note": "Sensitivity variant of Test 2; shares dome population. Reported but excluded from Bonferroni family.",
         "script": "analysis/unesco/tumulus_dome_evolution_raw_sweep.py"
       }
     ],
     "exploratory": [
       {
-        "id": "4",   "label": "Temporal gradient (Cochran-Armitage 3-cohort)",
-        "p_key": "pCochranThree",   "macro": "Four",
+        "id": "4",
+        "label": "Temporal gradient (Cochran-Armitage 3-cohort)",
+        "p_key": "pCochranThree",
+        "macro": "Four",
         "note": "Demoted from primary family (JAS submission); descriptive trend only.",
         "script": "analysis/unesco/temporal_gradient_test.py"
       },
       {
-        "id": "E",   "label": "Founding-site classifier enrichment",
-        "p_key": "pFoundKwFisher",  "macro": "TestE",
+        "id": "E",
+        "label": "Founding-site classifier enrichment",
+        "p_key": "pFoundKwFisher",
+        "macro": "TestE",
         "note": "Founding-site classifier iteratively tuned post-hoc.",
         "script": "analysis/unesco/founding_sites_analysis.py"
       },
       {
-        "id": "2x",  "label": "Dome/spherical context-validated (robustness check)",
-        "p_key": "pCircAp_validated", "macro": null,
+        "id": "2x",
+        "label": "Dome/spherical context-validated (robustness check)",
+        "p_key": "pCircAp_validated",
+        "macro": null,
         "note": "Context-validation rules developed after initial sweep (post-hoc filter).",
         "script": "analysis/unesco/spherical_monument_test.py"
       },
       {
-        "id": "2bx", "label": "Evolution context-validated (robustness check)",
-        "p_key": "pEvoAp_validated", "macro": null,
+        "id": "2bx",
+        "label": "Evolution context-validated (robustness check)",
+        "p_key": "pEvoAp_validated",
+        "macro": null,
         "note": "Same reasoning as 2x for the evolution test. Mound keywords treated as unambiguous; dome/domed/spherical context-validated via dome_filter. Should be equal or stronger than raw sweep.",
         "script": "analysis/unesco/tumulus_dome_evolution_test.py"
       }
@@ -252,59 +285,243 @@
     "fdr_all": {
       "note": "Full list of tests for the FDR omnibus table. Each entry maps a human label to a store key. Category: C=Confirmatory, E=Exploratory.",
       "tests": [
-        {"label": "Test 1: Dome/spherical A+ (binomial)",            "p_key": "pCircAp",              "cat": "C"},
-        {"label": "Test 1: Dome/spherical A (binomial)",             "p_key": "pCircA",               "cat": "C"},
-        {"label": "Test 1: Dome chi-sq uniform",                     "p_key": "pCircChi",             "cat": "C"},
-        {"label": "Test 2/4: Full corpus A+ (binomial)",             "p_key": "clusterApBinom",       "cat": "C"},
-        {"label": "Test 2: Cluster MWU (one-tailed)",                "p_key": "clusterMWp",           "cat": "C"},
-        {"label": "Test 2: Cluster permutation",                     "p_key": "clusterPermP",         "cat": "C"},
-        {"label": "Test 2: Harmonic-level MWU",                      "p_key": "clusterHarmonicMWp",   "cat": "C"},
-        {"label": "Test 3: Buddhist A+ (binomial)",                  "p_key": "pBudAp",               "cat": "C"},
-        {"label": "Test 3: Buddhist A (binomial)",                   "p_key": "pBudA",                "cat": "C"},
-        {"label": "Cochran-Armitage 3-cohort",                       "p_key": "pCochranThree",        "cat": "C"},
-        {"label": "Cochran-Armitage 5-cohort",                       "p_key": "pCochranFive",         "cat": "C"},
-        {"label": "Canon (1978-84) A+ binomial",                     "p_key": "pCanon",               "cat": "C"},
-        {"label": "Pre-2000 A+ binomial",                            "p_key": "pPreTwoK",             "cat": "C"},
-        {"label": "Modern (2000+) A+ binomial",                      "p_key": "pModern",              "cat": "C"},
-        {"label": "Fisher canon vs modern",                          "p_key": "pFisherCanonModern",   "cat": "C"},
-        {"label": "First-half A+ binomial",                          "p_key": "pFirstHalf",           "cat": "C"},
-        {"label": "Second-half A+ binomial",                         "p_key": "pSecondHalf",          "cat": "C"},
-        {"label": "Fisher first-half vs second-half",                "p_key": "pHalfFisher",          "cat": "C"},
-        {"label": "Sequential peak",                                  "p_key": "peakSigP",             "cat": "E"},
-        {"label": "Any-religion A+ binomial",                        "p_key": "pReligUnion",          "cat": "C"},
-        {"label": "Christian A+ binomial",                           "p_key": "pChrist",              "cat": "E"},
-        {"label": "Pre-CE A+ binomial",                              "p_key": "pPreCEbinom",          "cat": "E"},
-        {"label": "Deep temporal: Spearman (founding date vs A+)",   "p_key": "pFoundDateSpearman",   "cat": "E"},
-        {"label": "Deep temporal: Fisher (pre-CE vs post-CE rate)",  "p_key": "pPreCEfisher",         "cat": "E"},
-        {"label": "Founding keyword Fisher exact",                   "p_key": "pFoundKwFisher",       "cat": "C"},
-        {"label": "Spatial: DEFF-corrected binomial (0.25° band)",   "p_key": "pNeffQuarter",         "cat": "C"},
-        {"label": "Spatial: DEFF-corrected binomial (0.50° band)",   "p_key": "pNeffHalf",            "cat": "C"},
-        {"label": "Spatial: block-bootstrap Z-test",                 "p_key": "blockBootZ_p",         "cat": "C"},
-        {"label": "CMH stratified test (early vs late, by region)",  "p_key": "pCMH",                 "cat": "C"},
-        {"label": "Sim: Dome permutation",                           "p_key": "simDomePermP",         "cat": "C"},
-        {"label": "Sim: Dome bootstrap",                             "p_key": "simDomeBootP",         "cat": "C"},
-        {"label": "Sim: KDE full corpus",                            "p_key": "simKDEP",              "cat": "C"},
-        {"label": "Sim: Canon permutation",                          "p_key": "simCanonPermP",        "cat": "C"},
-        {"label": "Sim: Pre-2000 permutation",                       "p_key": "simPreTwoKPermP",      "cat": "C"},
-        {"label": "Sim: Post-2000 permutation",                      "p_key": "simPostTwoKPermP",     "cat": "C"},
-        {"label": "Corridor: Occupancy binomial (17/17)",            "p_key": "pCorridorBinom",       "cat": "C"},
-        {"label": "Corridor: Fisher combined p",                     "p_key": "pCorridorFisher",      "cat": "C"},
-        {"label": "Corridor: A++ enrichment (Fisher)",               "p_key": "pCorridorAppFisher",   "cat": "C"},
-        {"label": "Corridor: Precision MW (corridor < global)",      "p_key": "pCorridorMW",          "cat": "C"},
-        {"label": "Test 5: Evolution combined A+ (binomial)",        "p_key": "pEvoAp",               "cat": "C"},
-        {"label": "Test 5: Stupa stage A+ (binomial)",               "p_key": "pEvoStupa",            "cat": "C"},
-        {"label": "Test 5: Dome stage A+ (binomial)",                "p_key": "pEvoDome",             "cat": "C"},
-        {"label": "Test 5: Mound stage A+ (binomial)",               "p_key": "pEvoMound",            "cat": "C"},
-        {"label": "Judaism A-tier Fisher exact",                      "p_key": "pJudATierFisher",      "cat": "E"},
-        {"label": "Buddhism A+/C-band joint (multivariate hyper.)",  "p_key": "pBudJoint",            "cat": "E"}
+        {
+          "label": "Test 1: Dome/spherical A+ (binomial)",
+          "p_key": "pCircAp",
+          "cat": "C"
+        },
+        {
+          "label": "Test 1: Dome/spherical A (binomial)",
+          "p_key": "pCircA",
+          "cat": "C"
+        },
+        {
+          "label": "Test 1: Dome chi-sq uniform",
+          "p_key": "pCircChi",
+          "cat": "C"
+        },
+        {
+          "label": "Test 2/4: Full corpus A+ (binomial)",
+          "p_key": "clusterApBinom",
+          "cat": "C"
+        },
+        {
+          "label": "Test 2: Cluster MWU (one-tailed)",
+          "p_key": "clusterMWp",
+          "cat": "C"
+        },
+        {
+          "label": "Test 2: Cluster permutation",
+          "p_key": "clusterPermP",
+          "cat": "C"
+        },
+        {
+          "label": "Test 2: Harmonic-level MWU",
+          "p_key": "clusterHarmonicMWp",
+          "cat": "C"
+        },
+        {
+          "label": "Cochran-Armitage 3-cohort",
+          "p_key": "pCochranThree",
+          "cat": "C"
+        },
+        {
+          "label": "Cochran-Armitage 5-cohort",
+          "p_key": "pCochranFive",
+          "cat": "C"
+        },
+        {
+          "label": "Canon (1978-84) A+ binomial",
+          "p_key": "pCanon",
+          "cat": "C"
+        },
+        {
+          "label": "Pre-2000 A+ binomial",
+          "p_key": "pPreTwoK",
+          "cat": "C"
+        },
+        {
+          "label": "Modern (2000+) A+ binomial",
+          "p_key": "pModern",
+          "cat": "C"
+        },
+        {
+          "label": "Fisher canon vs modern",
+          "p_key": "pFisherCanonModern",
+          "cat": "C"
+        },
+        {
+          "label": "First-half A+ binomial",
+          "p_key": "pFirstHalf",
+          "cat": "C"
+        },
+        {
+          "label": "Second-half A+ binomial",
+          "p_key": "pSecondHalf",
+          "cat": "C"
+        },
+        {
+          "label": "Fisher first-half vs second-half",
+          "p_key": "pHalfFisher",
+          "cat": "C"
+        },
+        {
+          "label": "Sequential peak",
+          "p_key": "peakSigP",
+          "cat": "E"
+        },
+        {
+          "label": "Any-religion A+ binomial",
+          "p_key": "pReligUnion",
+          "cat": "C"
+        },
+        {
+          "label": "Christian A+ binomial",
+          "p_key": "pChrist",
+          "cat": "E"
+        },
+        {
+          "label": "Pre-CE A+ binomial",
+          "p_key": "pPreCEbinom",
+          "cat": "E"
+        },
+        {
+          "label": "Deep temporal: Spearman (founding date vs A+)",
+          "p_key": "pFoundDateSpearman",
+          "cat": "E"
+        },
+        {
+          "label": "Deep temporal: Fisher (pre-CE vs post-CE rate)",
+          "p_key": "pPreCEfisher",
+          "cat": "E"
+        },
+        {
+          "label": "Founding keyword Fisher exact",
+          "p_key": "pFoundKwFisher",
+          "cat": "C"
+        },
+        {
+          "label": "Spatial: DEFF-corrected binomial (0.25\u00b0 band)",
+          "p_key": "pNeffQuarter",
+          "cat": "C"
+        },
+        {
+          "label": "Spatial: DEFF-corrected binomial (0.50\u00b0 band)",
+          "p_key": "pNeffHalf",
+          "cat": "C"
+        },
+        {
+          "label": "Spatial: block-bootstrap Z-test",
+          "p_key": "blockBootZ_p",
+          "cat": "C"
+        },
+        {
+          "label": "CMH stratified test (early vs late, by region)",
+          "p_key": "pCMH",
+          "cat": "C"
+        },
+        {
+          "label": "Sim: Dome permutation",
+          "p_key": "simDomePermP",
+          "cat": "C"
+        },
+        {
+          "label": "Sim: Dome bootstrap",
+          "p_key": "simDomeBootP",
+          "cat": "C"
+        },
+        {
+          "label": "Sim: KDE full corpus",
+          "p_key": "simKDEP",
+          "cat": "C"
+        },
+        {
+          "label": "Sim: Canon permutation",
+          "p_key": "simCanonPermP",
+          "cat": "C"
+        },
+        {
+          "label": "Sim: Pre-2000 permutation",
+          "p_key": "simPreTwoKPermP",
+          "cat": "C"
+        },
+        {
+          "label": "Sim: Post-2000 permutation",
+          "p_key": "simPostTwoKPermP",
+          "cat": "C"
+        },
+        {
+          "label": "Corridor: Occupancy binomial (17/17)",
+          "p_key": "pCorridorBinom",
+          "cat": "C"
+        },
+        {
+          "label": "Corridor: Fisher combined p",
+          "p_key": "pCorridorFisher",
+          "cat": "C"
+        },
+        {
+          "label": "Corridor: A++ enrichment (Fisher)",
+          "p_key": "pCorridorAppFisher",
+          "cat": "C"
+        },
+        {
+          "label": "Corridor: Precision MW (corridor < global)",
+          "p_key": "pCorridorMW",
+          "cat": "C"
+        },
+        {
+          "label": "Test 5: Evolution combined A+ (binomial)",
+          "p_key": "pEvoAp",
+          "cat": "C"
+        },
+        {
+          "label": "Test 5: Stupa stage A+ (binomial)",
+          "p_key": "pEvoStupa",
+          "cat": "C"
+        },
+        {
+          "label": "Test 5: Dome stage A+ (binomial)",
+          "p_key": "pEvoDome",
+          "cat": "C"
+        },
+        {
+          "label": "Test 5: Mound stage A+ (binomial)",
+          "p_key": "pEvoMound",
+          "cat": "C"
+        },
+        {
+          "label": "Judaism A-tier Fisher exact",
+          "p_key": "pJudATierFisher",
+          "cat": "E"
+        },
+        {
+          "label": "Buddhism A/C-band joint (multivariate hyper.)",
+          "p_key": "pBudJoint",
+          "cat": "E"
+        },
+        {
+          "label": "Hinduism A/C-band joint (multivariate hyper.)",
+          "p_key": "pHinJoint",
+          "cat": "E"
+        }
       ]
     }
   },
   "temporal_cohorts": {
-    "founding_canon": [1978, 1984],
-    "pre_2000": [1978, 1999],
-    "post_2000": [2000, 2025],
+    "founding_canon": [
+      1978,
+      1984
+    ],
+    "pre_2000": [
+      1978,
+      1999
+    ],
+    "post_2000": [
+      2000,
+      2025
+    ],
     "note": "Inscription-year cohort boundaries"
   },
-  "_keywords_moved": "All keyword lists live in keywords.json — the single source of truth for all keyword content. Load via lib/beru.py:load_keywords() or lib/beru.py:load_religion_sets(). Do NOT add keyword content here."
+  "_keywords_moved": "All keyword lists live in keywords.json \u2014 the single source of truth for all keyword content. Load via lib/beru.py:load_keywords() or lib/beru.py:load_religion_sets(). Do NOT add keyword content here."
 }
