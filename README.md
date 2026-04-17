@@ -293,22 +293,6 @@ LaTeX macros imported from `generated_macros.tex`, each annotated with
 the script that produced it. This ensures the PDF can be compiled without
 running any code.
 
-## What This Repository Does *Not* Include
-
-This is a focused preprint package for Paper A only. The following are
-**excluded** as they belong to separate, in-progress analyses:
-
-- Americas / Mesoamerica regional analysis (Paper B/C)
-- Wikidata angular/arc-distance tests
-- Meru 3° grid analysis
-- Antinode analysis
-- Stupa database construction
-- Arxiv exploratory notebooks
-- Website / visualization code
-
-These will be released in separate repositories when their respective
-manuscripts are complete.
-
 ## License
 
 © 2026 Seth Tenenbaum.
