@@ -49,8 +49,8 @@
 
 \begin{document}
 
-\title{Longitude Periodicity in the UNESCO World Heritage Corpus:
-A Spatial Enrichment Test Using the Babylonian B\={e}ru Unit}
+\title{Domed Monuments Cluster at Babylonian B\={e}ru Harmonics:
+A Longitude Enrichment Test on the UNESCO World Heritage List}
 
 \author[1]{Seth Tenenbaum}[https://orcid.org/0009-0008-5797-2498]
 
@@ -79,9 +79,9 @@ serves as anchor on historical grounds (\S\ref{sec:limitations_circularity}).
 Sites within $\leq0.002$
 b\={e}ru ($\sim$6.7\,km) of a harmonic node are designated Tier‑A+.
 Domed monuments ($N=\NcircTotal$) show significant A+ enrichment (Bonferroni
-$p_{\mathrm{adj}}=\pAdjTestTwo$, $k=\BonfK$). The Levantine corridor framing 
-is treated as the motivated entry point rather than independent confirmation. 
-The pipeline is fully reproducible.
+$p_{\mathrm{adj}}=\pAdjTestTwo$, $k=\BonfK$), and cluster asymmetry
+independently reaches significance ($p_{\mathrm{adj}}=\pAdjTestThree$).
+The anchor is historically motivated; the pipeline is fully reproducible.
 }
 
 \maketitle
@@ -96,17 +96,17 @@ The pipeline is fully reproducible.
 This study applies a one-dimensional angular enrichment test to the
 externally curated UNESCO Cultural and Mixed corpus ($N = \NclusterTotal$),
 using a reproducible computational pipeline (see Data and Code Availability,
-\S\ref{sec:data_code}). The methodological approach employs a geometric
-null with no free parameters and is intended as a reusable methodological
-framework for spatial pattern‑detection studies in archaeological heritage data.
+\S\ref{sec:data_code}). The approach employs a geometric null with no free
+parameters and is intended as a reusable framework for spatial pattern‑detection
+studies in archaeological heritage data.
 
 A global anchor sweep reveals a 3\textdegree{} periodic structure in the
 corpus longitude distribution consistent with the 0.1-beru unit; the full
 treatment and its methodological implications are in
 \S\ref{sec:sensitivity_global} and \S\ref{sec:limitations_circularity}.
-\label{sec:circularity}
 
 \textbf{Why this design addresses key methodological criticisms.}
+\label{sec:circularity}
 Prior metrological investigations were rightly criticized for investigator-assembled
 site lists \citep{williamson1983leylines,freeman1976,kendall1974}.
 Three features distinguish this study: (1)~the UNESCO site list was compiled
@@ -150,7 +150,7 @@ the gnomon, attested across Mesopotamian, Egyptian, and Indian traditions
 \citep{neugebauer1975history,shamasastry1915arthashastra}, provides an independent
 means of establishing true meridian.
 This combination provides the documentary basis for the hypothesis;
-the causal question of precicely how or why this unit is applied is outside scope.
+the causal question of precisely how or why this unit is applied is outside scope.
 
 \subsection{Ancient Metrology and Geodetic Practice}
 
@@ -421,7 +421,13 @@ are described with their results in \S\ref{sec:simulation_null}.
 \section{Results}
 \label{sec:results}
 
-Subsections follow test numbering (Tests~1, 2, 2b, 3, 4, 5).
+Subsections follow test numbering
+(\hyperref[sec:results_global]{Test~1},
+\hyperref[sec:resultscircular]{2},
+\hyperref[sec:resultsevolution_inline]{2b},
+\hyperref[sec:resultscluster]{3},
+\hyperref[sec:resultstemporal]{4},
+\hyperref[sec:results_founding]{5}).
 
 \subsection{Global Enrichment (Test~1, Primary)}
 \label{sec:results_global}
@@ -449,13 +455,13 @@ the dome ($\circEnrichAp\times$) and cluster asymmetry results, consistent with
 only a fraction of sites driving the periodicity.
 
 \textbf{Region-stratified robustness.}
-Mantel-Haenszel analysis by UNESCO region: OR~$= \MHcommonOR$,
-$p = \pCMH$ (trend-level, ns). A region-specific empirical null test
+A region-specific empirical null test
 (Fisher combination of per-region binomials) yields $p = \pRegionEmpAll$
 (ns; pre-2000: $p = \pRegionEmpPreTwoK$, ns): when each region's own
 A+ rate is the null, the stratified signal does not reach significance.
 The pre-2000 cohort remains significant against the geometric null
-($p = \pPreTwoK$~**).
+($p = \pPreTwoK$~**); see Test~4 (\S\ref{sec:resultstemporal}) for the
+full region-adjusted analysis.
 
 \subsubsection*{World religion sites}
 Religion-keyword sub-populations show consistent enrichment directionality
@@ -542,7 +548,7 @@ Code: \texttt{dome\_leave\_k\_out.py}.
 \textbf{Context-validated robustness checks (Tests~2x and~2bx).}
 Applying sentence-level architectural confirmation reduces the dome
 population to $N = \NcircValidated$ (\NcircContextRejected{} non-architectural
-false positives rejected; full list in Appendix~\ref{sec:kwdaudit_dome}).
+false positives rejected; \hyperref[sec:kwdaudit_dome]{filter detail in Appendix~\ref*{sec:kwdaudit_dome}}).
 Test~2x yields $p = \pCircApValidated$, $\circEnrichApValidated\times$ enrichment,
 stronger than the raw sweep, consistent with rejected sites diluting the signal.
 The extended mound-evolution population (Test~2bx, $N = \NevoTotal$ with
@@ -633,7 +639,7 @@ Stage & $N$ & A+ & Rate & Enrichment & $p$ (binomial) \\
 \midrule
 Mound (tumulus/barrow/kofun) & \NevoMound & \NevoMoundAp & \evoMoundApRate\% & $\evoMoundEnrich\times$ & \pEvoMound~ns \\
 Stupa (stupa/stupas)         & \NevoStupa & \NevoStupaAp & \evoStupaApRate\% & $\evoStupaEnrich\times$ & \pEvoStupa~** \\
-Dome (dome/tholos/spherical) & \NevoDome  & \NevoDomeAp  & \evoDomeApRate\%  & $2.68\times$ & \pEvoDome~* \\
+Dome (dome/tholos/spherical) & \NevoDome  & \NevoDomeAp  & \evoDomeApRate\%  & $\evoDomeEnrich\times$ & \pEvoDome~* \\
 \midrule
 \textbf{Combined}            & \textbf{\NevoTotal} & \textbf{\NevoAp} & \textbf{\evoApRate\%} & $\mathbf{\evoEnrichAp}\times$ & \textbf{\pEvoAp~***} \\
 \bottomrule
@@ -744,8 +750,6 @@ Displacing the anchor by a uniform random offset in $[0\textdegree,
 This is the sole positive test that the enrichment depends on the
 specific Gerizim anchor rather than geographic concentration alone.
 
-
-
 \subsection{Temporal Gradient (Test~4, Descriptive)}
 \label{sec:resultstemporal}
 
@@ -793,8 +797,7 @@ explained by regional composition and is treated as descriptive only.
 
 The founding-origin classifier assigns each site to one or more of five
 categories: Founding Capital, Sacred Origin, Founding Monument, Founding
-Axis, and Ancient Continuous Landscape (filter logic in
-Appendix~\ref{sec:kwdaudit_founding}).  Applied to the full corpus
+Axis, and Ancient Continuous Landscape (\hyperref[sec:kwdaudit_founding]{filter logic in Appendix~\ref*{sec:kwdaudit_founding}}).  Applied to the full corpus
 ($N = \NoriginCorpus$), the classifier assigns \NfoundKwAll{} sites
 (\foundKwBaseRate\%) to at least one founding category.  Of the
 \NclusterAp{} A+ sites, \NfoundKwAp{} (\foundKwApRate\%) carry a founding
@@ -1260,12 +1263,14 @@ Vi\~{n}ales Valley, Rock Islands Southern Lagoon, Uluru-Kata Tju\d{t}a,
 and Diqu\'{i}s Stone Spheres.  In every case the exclusion is driven by
 the semantic domain of the keyword match, not by the site's longitude.
 
-Test~2b adds earthen mound-stage keywords (\textit{tumulus, tumuli,
-barrow, barrows, kofun} unambiguous; \textit{mound} context-validated)
-to trace the hemispherical tradition from burial mound through stupa to
-architectural dome.  Test~2bx applies the same architectural context gates
-to the extended population.  Statistics for all four variants are reported
-in the main text.
+\hyperref[sec:resultsevolution_inline]{Test~2b} adds earthen mound-stage
+keywords (\textit{tumulus, tumuli, barrow, barrows, kofun} unambiguous;
+\textit{mound} context-validated) to trace the hemispherical tradition
+from burial mound through stupa to architectural dome.  Test~2bx applies
+the same architectural context gates to the extended population.
+Statistics for all four variants are reported in
+\hyperref[sec:resultscircular]{§\ref*{sec:resultscircular}} and
+\hyperref[sec:resultsevolution_inline]{§\ref*{sec:resultsevolution_inline}}.
 
 \subsection{Founding-Origin Classifier (Test~5, Post-Hoc)}
 \label{sec:kwdaudit_founding}
@@ -1279,7 +1284,8 @@ defined per category in \texttt{keywords.json}.  The classifier was
 iteratively tuned after data inspection to reduce false positives;
 residual interpretive ambiguity at the boundary between founding-related
 and general heritage descriptions is accepted.  Statistics are reported
-in the main text; the full site-by-site listing is in
+in \hyperref[sec:results_founding]{§\ref*{sec:results_founding}}; the
+full site-by-site listing is in
 \texttt{supplementary/audit/founding\_keyword\_audit.txt}.
 
 
