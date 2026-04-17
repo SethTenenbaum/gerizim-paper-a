@@ -15,10 +15,11 @@ import re
 import sys
 from pathlib import Path
 from datetime import datetime, timezone
+from scipy.stats import binomtest
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from data.unesco_corpus import load_corpus
-from lib.beru import GERIZIM, BERU, TIER_APLUS, deviation as beru_dev, tier_label
+from lib.beru import GERIZIM, BERU, TIER_APLUS, P_NULL_AP, deviation as beru_dev, tier_label
 from lib.dome_filter import (
     UNAMBIGUOUS_KEYWORDS, AMBIGUOUS_KEYWORDS, FORM_KEYWORD_RES,
     validate_keyword_match,
@@ -112,8 +113,31 @@ def run():
     included.sort(key=lambda r: (tier_order.get(r["tier"], 9), r["dev"]))
     rejected.sort(key=lambda r: r["name"])
 
+    def tier_stats(sites):
+        n   = len(sites)
+        app = sum(1 for r in sites if r["tier"] == "A++")
+        ap  = sum(1 for r in sites if r["tier"] in ("A++", "A+"))
+        a   = sum(1 for r in sites if r["tier"] in ("A++", "A+", "A"))
+        cm  = sum(1 for r in sites if r["tier"] == "C-")
+        c   = sum(1 for r in sites if r["tier"] == "C")
+        p   = binomtest(ap, n, P_NULL_AP, alternative="greater").pvalue if n > 0 else 1.0
+        sig = "***" if p < 0.001 else ("**" if p < 0.01 else ("*" if p < 0.05 else ("~" if p < 0.10 else "ns")))
+        rate = f"{100*ap/n:.1f}%" if n else "n/a"
+        return n, app, ap, a, cm, c, p, sig, rate
+
+    # Keyword-group breakdown
+    groups = {
+        "stupa/stupas": [r for r in included if any(k in ("stupa","stupas") for k in r["keys"] if r["validated"].get(k) != "REJECTED")],
+        "tholos":       [r for r in included if "tholos" in r["keys"]],
+        "dome/domed/domes": [r for r in included if any(k in ("dome","domed","domes") for k in r["keys"] if r["validated"].get(k) != "REJECTED")],
+        "spherical":    [r for r in included if "spherical" in r["keys"] and r["validated"].get("spherical") != "REJECTED"],
+    }
+
     lines = []
     ts = datetime.now(timezone.utc).strftime("%a %b %d %H:%M:%S UTC %Y")
+    hdr = f"  {'Group':<22}  {'N':>4}  {'A++':>4}  {'A+':>4}  {'A':>4}  {'C-':>4}  {'C':>4}  {'A+%':>6}  {'p(A+)':>10}"
+    div = "  " + "-" * 74
+
     lines += [
         "UNESCO DOME / SPHERICAL MONUMENT KEYWORD AUDIT",
         f"Generated : {ts}",
@@ -127,9 +151,21 @@ def run():
         f"FP rate   : {len(rejected)/(len(included)+len(rejected))*100:.1f}%"
             if (len(included)+len(rejected)) > 0 else "FP rate: n/a",
         "",
-        f"A+ among included : {sum(1 for r in included if r['tier'] in ('A++','A+'))}",
-        "",
+        "STATISTICS SUMMARY", SEP,
+        hdr, div,
     ]
+    n, app, ap, a, cm, c, p, sig, rate = tier_stats(included)
+    lines.append(f"  {'All included (raw)':<22}  {n:>4}  {app:>4}  {ap:>4}  {a:>4}  {cm:>4}  {c:>4}  {rate:>6}  {p:>10.4e}  {sig}")
+
+    n_v = [r for r in included if all(v != "REJECTED" for v in r["validated"].values())]
+    nv, app2, ap2, a2, cm2, c2, p2, sig2, rate2 = tier_stats(n_v)
+    lines.append(f"  {'Context-validated':<22}  {nv:>4}  {app2:>4}  {ap2:>4}  {a2:>4}  {cm2:>4}  {c2:>4}  {rate2:>6}  {p2:>10.4e}  {sig2}")
+    lines.append(div)
+
+    for label, grp in groups.items():
+        gn, gapp, gap, ga, gcm, gc, gp, gsig, grate = tier_stats(grp)
+        lines.append(f"  {label:<22}  {gn:>4}  {gapp:>4}  {gap:>4}  {ga:>4}  {gcm:>4}  {gc:>4}  {grate:>6}  {gp:>10.4e}  {gsig}")
+    lines.append("")
 
     lines += ["INCLUDED SITES:", SEP]
     for r in included:

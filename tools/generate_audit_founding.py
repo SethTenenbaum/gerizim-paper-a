@@ -29,10 +29,11 @@ import re
 import sys
 from pathlib import Path
 from datetime import datetime, timezone
+from scipy.stats import binomtest
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from data.unesco_corpus import load_corpus
-from lib.beru import GERIZIM, BERU, TIER_APLUS, deviation as beru_dev, tier_label
+from lib.beru import GERIZIM, BERU, TIER_APLUS, P_NULL_AP, deviation as beru_dev, tier_label
 from lib.founding_filter import (
     classify_site,
     CATEGORY_LABELS,
@@ -143,11 +144,21 @@ def run():
     n_included = len(included)
     n_ap_incl  = sum(1 for r in included if r["tier"] in ("A++", "A+"))
 
-    # Category breakdown across included sites
-    cat_counts = {c: 0 for c in "FSMLX"}
-    for r in included:
-        for c in r["cats"]:
-            cat_counts[c] = cat_counts.get(c, 0) + 1
+    # Per-category tier breakdown
+    cat_stats = {}
+    for c in "FSMLX":
+        sites_in_cat = [r for r in included if c in r["cats"]]
+        n   = len(sites_in_cat)
+        app = sum(1 for r in sites_in_cat if r["tier"] == "A++")
+        ap  = sum(1 for r in sites_in_cat if r["tier"] in ("A++", "A+"))
+        a   = sum(1 for r in sites_in_cat if r["tier"] in ("A++", "A+", "A"))
+        cm  = sum(1 for r in sites_in_cat if r["tier"] == "C-")
+        c_  = sum(1 for r in sites_in_cat if r["tier"] == "C")
+        p   = binomtest(ap, n, P_NULL_AP, alternative="greater").pvalue if n > 0 else 1.0
+        cat_stats[c] = dict(n=n, app=app, ap=ap, a=a, cm=cm, c_=c_, p=p)
+
+    # Category breakdown (site counts, sites may appear in multiple categories)
+    cat_counts = {c: cat_stats[c]["n"] for c in "FSMLX"}
 
     # ── Compose output ─────────────────────────────────────────────────────────
     ts = datetime.now(timezone.utc).strftime("%a %b %d %H:%M:%S UTC %Y")
@@ -177,9 +188,18 @@ def run():
         f"  A+ among classified            : {n_ap_incl}",
         "",
         "  Category breakdown (sites may appear in multiple categories):",
+        f"  {'Cat':<2}  {'N':>4}  {'A++':>4}  {'A+':>4}  {'A':>4}  {'C-':>4}  {'C':>4}  {'A+%':>6}  {'p(A+)':>10}",
+        "  " + "-" * 60,
     ]
     for c in "FSMLX":
-        lines.append(f"    {c} — {CATEGORY_LABELS[c]}: {cat_counts.get(c, 0)}")
+        st = cat_stats[c]
+        ap_rate = 100.0 * st["ap"] / st["n"] if st["n"] else 0.0
+        sig = "***" if st["p"] < 0.001 else ("**" if st["p"] < 0.01 else ("*" if st["p"] < 0.05 else ("~" if st["p"] < 0.10 else "ns")))
+        lines.append(
+            f"  {c:<2}  {st['n']:>4}  {st['app']:>4}  {st['ap']:>4}  {st['a']:>4}"
+            f"  {st['cm']:>4}  {st['c_']:>4}  {ap_rate:>5.1f}%  {st['p']:>10.4e}  {sig}"
+            f"  ({CATEGORY_LABELS[c]})"
+        )
     lines.append("")
 
     # ── Included sites ─────────────────────────────────────────────────────────

@@ -4,7 +4,7 @@ Unit tests for the anchor sweep module.
 
 import pytest
 import numpy as np
-from lib.sweep import count_hits, run_sweep, percentile_rank, summarise_anchor
+from lib.sweep import count_hits, run_sweep, percentile_rank, summarize_anchor
 from lib.beru import GERIZIM, TIER_APLUS, TIER_A_MAX
 
 
@@ -83,7 +83,7 @@ class TestSummariseAnchor:
     def test_returns_expected_keys(self):
         lons = [35.272, 65.272]
         sweep_result = run_sweep(lons, start=35.0, end=36.0, step=0.1)
-        summary = summarise_anchor(lons, 35.272, sweep_result)
+        summary = summarize_anchor(lons, 35.272, sweep_result)
         assert "count_aplus" in summary
         assert "count_a" in summary
         assert "pctile_aplus" in summary

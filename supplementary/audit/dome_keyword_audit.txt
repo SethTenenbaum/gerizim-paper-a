@@ -1,5 +1,5 @@
 UNESCO DOME / SPHERICAL MONUMENT KEYWORD AUDIT
-Generated : Thu Apr 16 06:32:24 UTC 2026
+Generated : Fri Apr 17 04:18:34 UTC 2026
 Script    : tools/generate_audit_dome.py
 Keywords  : ['dome', 'domed', 'domes', 'spherical', 'stupa', 'stupas', 'tholos']
 Unambiguous (always included): ['stupa', 'stupas', 'tholos']
@@ -9,7 +9,17 @@ INCLUDED  : 83
 REJECTED  : 7
 FP rate   : 7.8%
 
-A+ among included : 11
+STATISTICS SUMMARY
+────────────────────────────────────────────────────────────────────────────────────────
+  Group                      N   A++    A+     A    C-     C     A+%       p(A+)
+  --------------------------------------------------------------------------
+  All included (raw)        83     2    11    26     1    14   13.3%  4.7338e-04  ***
+  Context-validated         82     2    11    26     1    13   13.4%  4.2590e-04  ***
+  --------------------------------------------------------------------------
+  stupa/stupas              18     0     4     7     0     4   22.2%  4.9896e-03  **
+  tholos                     4     0     0     1     0     0    0.0%  1.0000e+00  ns
+  dome/domed/domes          64     2     8    19     1    11   12.5%  3.9327e-03  **
+  spherical                  1     1     1     1     0     0  100.0%  4.0000e-02  *
 
 INCLUDED SITES:
 ────────────────────────────────────────────────────────────────────────────────────────

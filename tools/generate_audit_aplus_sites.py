@@ -19,7 +19,11 @@ from pathlib import Path
 from datetime import datetime, timezone
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from data.unesco_corpus import load_corpus, cultural_sites_with_coords
+from data.unesco_corpus import (
+    load_corpus,
+    cultural_sites_with_coords_extended,
+    GERIZIM_SYNTHETIC,
+)
 from lib.beru import (
     GERIZIM, BERU, TIER_APP, TIER_APLUS, TIER_A_MAX,
     P_NULL_AP, P_NULL_A,
@@ -70,18 +74,18 @@ def sig(p):
 
 
 def run():
-    corpus    = load_corpus()
-    all_sites = cultural_sites_with_coords(corpus)
-    N_ALL     = len(all_sites)
+    corpus        = load_corpus()
+    all_sites_ext = cultural_sites_with_coords_extended(corpus)  # 1012: inscribed + Gerizim
+    N_EXT         = len(all_sites_ext)   # 1012
+    N_ALL         = N_EXT - 1           # 1011 inscribed only
 
-    # Gerizim is external — no exclusion needed; full corpus N=1011.
-    # Jerusalem is an inscribed member and self-excludes when used as anchor
-    # (matches Sweep B in the main paper, N=1010).
-    jer_corpus = [s for s in all_sites if abs(s.longitude - JERUSALEM) >= 0.001]
-    N_JER      = len(jer_corpus)   # should be N_ALL - 1
+    ger_corpus = [s for s in all_sites_ext if abs(s.longitude - GERIZIM)    >= 0.001]
+    jer_corpus = [s for s in all_sites_ext if abs(s.longitude - JERUSALEM)  >= 0.001]
+    N_GER = len(ger_corpus)   # 1011
+    N_JER = len(jer_corpus)   # 1011
 
-    ger  = classify_sites(all_sites, GERIZIM)
-    jer  = classify_sites(jer_corpus, JERUSALEM)
+    ger = classify_sites(ger_corpus, GERIZIM)
+    jer = classify_sites(jer_corpus, JERUSALEM)
 
     def counts(sites):
         app = sum(1 for s in sites if s["tier"] == "A++")
@@ -92,11 +96,10 @@ def run():
     g_app, g_ap, g_a = counts(ger)
     j_app, j_ap, j_a = counts(jer)
 
-    # Binomial p-values
-    # Gerizim: full corpus N=1011; Jerusalem: self-excluded corpus N=1010
-    p_ger_ap = binomtest(g_ap, N_ALL, P_NULL_AP, alternative="greater").pvalue
+    # Binomial p-values — both anchors use N=1011
+    p_ger_ap = binomtest(g_ap, N_GER, P_NULL_AP, alternative="greater").pvalue
     p_jer_ap = binomtest(j_ap, N_JER, P_NULL_AP, alternative="greater").pvalue
-    p_ger_a  = binomtest(g_a,  N_ALL, P_NULL_A,  alternative="greater").pvalue
+    p_ger_a  = binomtest(g_a,  N_GER, P_NULL_A,  alternative="greater").pvalue
     p_jer_a  = binomtest(j_a,  N_JER, P_NULL_A,  alternative="greater").pvalue
 
     # Overlap: sites in A+ for both anchors
@@ -112,13 +115,17 @@ def run():
         "UNESCO A-TIER SITES: GERIZIM vs JERUSALEM ANCHOR COMPARISON",
         f"Generated : {ts}",
         f"Script    : tools/generate_audit_aplus_sites.py",
-        f"Corpus    : {N_ALL} Cultural/Mixed UNESCO sites with coordinates",
+        f"Corpus    : {N_ALL} inscribed Cultural/Mixed UNESCO sites with coordinates",
+        f"           + 1 synthetic Gerizim entry = {N_EXT} extended corpus",
         f"Beru      : {BERU}°  |  A+ threshold: <= {TIER_APLUS} beru "
         f"({TIER_APLUS*BERU*111:.1f} km)  |  A threshold: <= {TIER_A_MAX} beru "
         f"({TIER_A_MAX*BERU*111:.0f} km)",
-        f"Gerizim   : {GERIZIM}°E  (external; N={N_ALL}, no exclusion)",
-        f"Jerusalem : {JERUSALEM}°E  (self-excluded as anchor; N={N_JER})  "
+        f"Gerizim   : {GERIZIM}°E  (Tentative List, ref. 5706 — not yet inscribed)",
+        f"Jerusalem : {JERUSALEM}°E  (inscribed corpus member)  "
         f"[{abs(GERIZIM - JERUSALEM):.4f}° = {abs(GERIZIM - JERUSALEM)*111:.1f} km separation]",
+        f"Self-exclusion: each anchor removes itself → both test against N={N_GER}.",
+        f"  Gerizim corpus : N={N_GER}  (inscribed 1011, excl. Gerizim; incl. Jerusalem)",
+        f"  Jerusalem corpus: N={N_JER}  (inscribed 1011, excl. Jerusalem; incl. Gerizim)",
         "",
     ]
 
@@ -130,9 +137,9 @@ def run():
         f"  {'Anchor':<14}  {'N corpus':>9}  {'A++':>5}  {'A+':>5}  {'A (all)':>8}  "
         f"{'A+ %':>6}  {'A+ p':>9}  {'':>4}  {'A %':>6}  {'A p':>9}  {'':>4}",
         "  " + "-" * 86,
-        f"  {'Gerizim':<14}  {N_ALL:>9}  {g_app:>5}  {g_ap:>5}  {g_a:>8}  "
-        f"{100*g_ap/N_ALL:>5.1f}%  {p_ger_ap:>9.4f}  {sig(p_ger_ap):>4}  "
-        f"{100*g_a/N_ALL:>5.1f}%  {p_ger_a:>9.4f}  {sig(p_ger_a):>4}",
+        f"  {'Gerizim':<14}  {N_GER:>9}  {g_app:>5}  {g_ap:>5}  {g_a:>8}  "
+        f"{100*g_ap/N_GER:>5.1f}%  {p_ger_ap:>9.4f}  {sig(p_ger_ap):>4}  "
+        f"{100*g_a/N_GER:>5.1f}%  {p_ger_a:>9.4f}  {sig(p_ger_a):>4}",
         f"  {'Jerusalem':<14}  {N_JER:>9}  {j_app:>5}  {j_ap:>5}  {j_a:>8}  "
         f"{100*j_ap/N_JER:>5.1f}%  {p_jer_ap:>9.4f}  {sig(p_jer_ap):>4}  "
         f"{100*j_a/N_JER:>5.1f}%  {p_jer_a:>9.4f}  {sig(p_jer_a):>4}",
@@ -210,8 +217,7 @@ def run():
     for s in ger_only_sorted:
         j_info = jer_by_name.get(s["name"])
         j_tier = j_info["tier"] if j_info else "—"
-        j_km   = j_info["km"]   if j_info else 0.0
-        j_km_s = f"{j_km:>7.1f}" if j_info else f"{'—':>7}"
+        j_km_s = f"{j_info['km']:>7.1f}" if j_info else f"{'—':>7}"
         lines.append(
             f"  {s['name'][:54]:<55}  {s['tier']:>8}  {s['km']:>7.1f}  {j_tier:>8}  {j_km_s}"
         )
@@ -242,8 +248,9 @@ def run():
     OUT.write_text("\n".join(lines), encoding="utf-8")
     print(
         f"Written -> {OUT}\n"
-        f"  Gerizim : A++={g_app}  A+={g_ap}  A={g_a}\n"
-        f"  Jerusalem: A++={j_app}  A+={j_ap}  A={j_a}\n"
+        f"  Extended corpus: N={N_EXT} ({N_ALL} inscribed + 1 synthetic Gerizim)\n"
+        f"  Gerizim  (N={N_GER}): A++={g_app}  A+={g_ap}  A={g_a}\n"
+        f"  Jerusalem (N={N_JER}): A++={j_app}  A+={j_ap}  A={j_a}\n"
         f"  A+ overlap: {len(both_ap)}  |  Gerizim-unique: {len(ger_only_ap)}  "
         f"|  Jerusalem-unique: {len(jer_only_ap)}"
     )

@@ -197,7 +197,7 @@ print("  LATEX MACRO VALUES (copy to tenenbaum_2026_gerizim_beru.tex)")
 print("=" * 100)
 
 print(f"  \\newcommand{{\\JerichoAnchorAp}}{{{count_ap_at_anchor(LANDMARKS['Jericho'])}}}           % A+ count with Jericho as anchor")
-print(f"  \\newcommand{{\\DeadSeaAnchorAp}}{{{count_ap_at_anchor(LANDMARKS['Dead Sea center'])}}}          % A+ count with Dead Sea centre as anchor")
+print(f"  \\newcommand{{\\DeadSeaAnchorAp}}{{{count_ap_at_anchor(LANDMARKS['Dead Sea center'])}}}          % A+ count with Dead Sea center as anchor")
 print(f"  \\newcommand{{\\MtNeboAnchorAp}}{{{count_ap_at_anchor(LANDMARKS['Mount Nebo'])}}}           % A+ count with Mt Nebo as anchor")
 print(f"  \\newcommand{{\\DamascusAnchorAp}}{{{count_ap_at_anchor(LANDMARKS['Damascus'])}}}          % A+ count with Damascus as anchor")
 print(f"  \\newcommand{{\\localBestLon}}{{{local_max_lon:.3f}}}          % longitude of local peak A+ in Levant sweep")

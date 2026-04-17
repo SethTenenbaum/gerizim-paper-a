@@ -92,25 +92,20 @@ FILE INDEX
 6. aplus_sites_audit.txt
    Script  : tools/generate_audit_aplus_sites.py
    Test    : Head-to-head A-tier site comparison: Gerizim vs Jerusalem
-   Method  : Classify every Cultural/Mixed UNESCO site under both anchors.
-             Lists all A++ / A+ / A sites sorted by deviation for each.
+   Method  : Classify every Cultural/Mixed UNESCO site under both anchors using
+             symmetric self-exclusion.  Mount Gerizim is added as a synthetic
+             corpus entry (Tentative List, ref. 5706; not yet inscribed) so that
+             both anchors self-exclude exactly one site, leaving N=1011 each.
+               Gerizim corpus : N=1011 (1011 inscribed, excl. Gerizim; incl. Jerusalem)
+               Jerusalem corpus: N=1011 (1011 inscribed, excl. Jerusalem; incl. Gerizim)
+             Lists all A++ / A+ / A sites sorted by deviation for each anchor.
              Identifies sites unique to each anchor vs sites that are A+ under both.
-   Results : Gerizim A++=7, A+=56, A=228 | Jerusalem A++=8, A+=57, A=218
-             A+ overlap: 39 sites  |  Gerizim-unique: 17  |  Jerusalem-unique: 18
+   Results : Gerizim A++=7, A+=56, A=228 | Jerusalem A++=7, A+=57, A=219
+             A+ overlap: 38 sites  |  Gerizim-unique: 18  |  Jerusalem-unique: 19
+             Gerizim's 56 A+ matches primary Test 1 (N=1011, p=0.0103) exactly.
+             Jerusalem's extra A+ hit is Mount Gerizim itself (4.1 km, Tier A+).
    Output  : Summary comparison table, full A-tier site listings for each
              anchor, overlap section, and unique-to-each-anchor breakdowns.
-
-   NOTE — Jerusalem treatment (two versions):
-   (a) Primary tests (Tests 1–4): Jerusalem is a corpus member (N=1011).
-       It appears as A+ under the Gerizim anchor (4.1 km) and is counted
-       among Gerizim's 56 A+ sites.  This audit reflects that treatment:
-       N=1011 for both columns, no exclusions applied.
-   (b) Anchor-sensitivity sweeps (§Global Anchor Sweep in main paper):
-       Sweep A removes Jerusalem entirely (N=1010, Gerizim → 55 A+);
-       Sweep B retains Jerusalem with self-exclusion (N=1010,
-       Jerusalem → 56 A+, itself not counted).
-       The single-site difference (55 vs. 56 A+ in the sweeps, or
-       56 vs. 57 A+ in this raw audit) is the Old City of Jerusalem.
 
 7. fdr.txt
    Script  : tools/generate_audit_fdr.py
@@ -122,7 +117,47 @@ FILE INDEX
    Note    : LaTeX macros emitted by fdr_multiple_comparisons.py are NOT
              included in this file; they live in manuscript/generated_macros.tex.
 
-7. unesco_site_by_site_audit.txt
+7. fdr.txt
+   Script  : tools/generate_audit_fdr.py
+   Test    : Multiple comparisons: FDR and family-wise corrections
+   Method  : Reads p-values from data/store/results.json (populated by all
+             analysis scripts).  Applies Bonferroni, Holm step-down, and
+             Benjamini-Hochberg FDR across all confirmatory + exploratory tests.
+   Results : Full correction table; counts of tests surviving each threshold.
+   Note    : LaTeX macros emitted by fdr_multiple_comparisons.py are NOT
+             included in this file; they live in manuscript/generated_macros.tex.
+
+8. anchor_sweep_audit.txt
+   Script  : tools/generate_audit_anchor_sweep.py
+   Test    : Global anchor sweep — Gerizim and Jerusalem rankings
+   Method  : 36,000 trial anchors (0–360°E, 0.01° resolution) tested against
+             the extended corpus (N_ext=1012; 1011 inscribed + Gerizim synthetic).
+             Each anchor self-excludes → N=1011 per focal anchor.
+             Ranks all trial anchors by A+ count; highlights Gerizim and Jerusalem.
+             Explains the x.18°E periodic artifact (120 anchors tied at rank 1).
+   Results : Gerizim rank 998/36,000 (97.2th pctile); Jerusalem rank 480/36,000
+             (98.7th pctile); both in global top 2.8%.
+             997 trial anchors score higher than Gerizim; 479 score higher than
+             Jerusalem — nearly all are x.18°E phase-artifact anchors or their
+             immediate neighbors.
+   Output  : Distribution summary, focal anchor table, top-anchor listing,
+             context window ±0.15° around Gerizim, artifact explanation.
+
+9. site_as_anchor_audit.txt
+   Script  : tools/generate_audit_site_as_anchor.py
+   Test    : Site-as-anchor ranking — each of 1012 sites used as its own anchor
+   Method  : For each site in the extended corpus (1011 inscribed + Gerizim),
+             count how many of the remaining 1011 sites fall in the A+ band
+             relative to that site's longitude.  Rank all 1012 sites by A+ count.
+             Directly answers: "How does Gerizim rank compared to every inscribed
+             UNESCO site when each is used as its own beru anchor?"
+   Results : Gerizim ranks 28/1012 (top 2.7%); Jerusalem ranks 12/1012 (top 1.1%).
+             The top sites by A+ are heavily concentrated in the x.18° phase band;
+             Gerizim and Jerusalem are the highest-ranked Levantine sites.
+   Output  : Distribution summary, focal anchor table, full ranked listing of all
+             1012 sites with A++, A+, A counts and longitude.
+
+10. unesco_site_by_site_audit.txt
    Legacy audit output (generated by analysis/unesco/spherical_monument_test.py
    in an earlier version; superseded by dome_keyword_audit.txt above).
    Retained for archival continuity.

@@ -31,7 +31,7 @@ It is recoverable by three independent routes:
   Path 2 — Vedic metrological (¾ British inch tradition):
       The angula is attested at ¾ of a British inch — a correspondence noted
       by colonial-era translators of the Arthaśāstra (Shamasastry 1915) and
-      confirmed by physical artefact measurement (Rao 1993).  The ¾-inch
+      confirmed by physical artifact measurement (Rao 1993).  The ¾-inch
       angula is itself a known independent tradition, not a derived quantity.
       From it the full unit chain follows:
         1 angula = ¾ inch = 19.05 mm
@@ -41,7 +41,7 @@ It is recoverable by three independent routes:
         45.72 × 1.01164 = 46.252 m  ← within rounding of 46.2494 m
       Sources: Arthaśāstra II.20 (Kauṭilya); Shamasastry (1915) trans.;
                Monier-Williams (1899) "hasta"; Rao (1993) "Vedic units of
-               length"; Fussman (1987) on angula artefact variation.
+               length"; Fussman (1987) on angula artifact variation.
 
   Path 3 — Archaeo-astronomical empirical:
       56 × Thom Megalithic Yard

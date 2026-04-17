@@ -48,7 +48,7 @@ CANONICAL = 0.1000
 THRESHOLD = 0.05  # significance threshold for joint significance
 
 # Off-canonical spacings (everything except 0.1000 and 0.1001)
-# 0.1001 is the immediate neighbour that also retains dome significance
+# 0.1001 is the immediate neighbor that also retains dome significance
 # in the observed data; we define "collapse" as: all spacings ≥ 0.0003
 # from canonical are non-significant in at least one population.
 OFF_CANONICAL = [s for s in FINE_SPACINGS if abs(s - CANONICAL) >= 0.0003]

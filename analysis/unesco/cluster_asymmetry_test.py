@@ -22,7 +22,7 @@ longitudes.  There is no reason that sites near a harmonic node should
 cluster more than sites at anti-nodes (both occur at densely settled
 longitudes) — unless the harmonic NODES are *special places where humans
 built many monuments* while the anti-nodes are merely dense because cities
-are planned everywhere near the grid centre.
+are planned everywhere near the grid center.
 
 This script tests:
   H₀: The per-site cluster size is the SAME for A+ and non-A+ sites,
@@ -30,7 +30,7 @@ This script tests:
   H₁: Node-side A+ sites are in denser clusters than:
         (a) node-side non-A+ sites, and
         (b) anti-node-side A+ sites.
-      Anti-node-side A+ sites show NO excess over their non-A+ neighbours.
+      Anti-node-side A+ sites show NO excess over their non-A+ neighbors.
 
 If H₁ holds, the clustering is PHASE-LOCKED: it follows the 0.1-beru
 node/anti-node distinction, not just settlement geography.  This is a
@@ -115,7 +115,7 @@ def load_all_unesco():
 def compute_cluster_sizes(sites, radius_deg=CLUSTER_RADIUS_DEG):
     """
     For each site, count how many OTHER sites have longitude within
-    ±radius_deg.  This is the "cluster size" — how many neighbours
+    ±radius_deg.  This is the "cluster size" — how many neighbors
     share approximately the same longitude corridor.
     """
     lons = np.array([s["lon"] for s in sites])
@@ -123,7 +123,7 @@ def compute_cluster_sizes(sites, radius_deg=CLUSTER_RADIUS_DEG):
     cluster_sizes = np.zeros(n, dtype=int)
 
     for i in range(n):
-        # Count neighbours within ±radius_deg longitude
+        # Count neighbors within ±radius_deg longitude
         dlon = np.abs(lons - lons[i])
         # Handle wrap-around at ±180
         dlon = np.minimum(dlon, 360 - dlon)
@@ -243,7 +243,7 @@ print(f"""
 
 # ── Show the A+ clusters ────────────────────────────────────────────────────
 print("=" * 95)
-print("  TIER-A+ SITES AND THEIR CLUSTER NEIGHBOURHOODS")
+print("  TIER-A+ SITES AND THEIR CLUSTER NEIGHBORHOODS")
 print(f"  (other UNESCO sites within ±{CLUSTER_RADIUS_DEG}° longitude)")
 print("=" * 95)
 print()
@@ -254,15 +254,15 @@ for s in sorted(ap_sites, key=lambda x: -x["cluster_size"]):
           f"dev={s['dev']:.5f} ({s['dev_km']:.1f} km)  "
           f"→ harmonic {s['nearest']:.1f}")
     print(f"    CLUSTER SIZE: {s['cluster_size']} other sites within ±{CLUSTER_RADIUS_DEG}° lon")
-    # Show neighbours
-    neighbours = [x for x in sites if x["name"] != s["name"]
+    # Show neighbors
+    neighbors = [x for x in sites if x["name"] != s["name"]
                   and min(abs(x["lon"] - s["lon"]), 360 - abs(x["lon"] - s["lon"])) <= CLUSTER_RADIUS_DEG]
-    neighbours_sorted = sorted(neighbours, key=lambda x: abs(x["lon"] - s["lon"]))[:8]
-    for nb in neighbours_sorted:
+    neighbors_sorted = sorted(neighbors, key=lambda x: abs(x["lon"] - s["lon"]))[:8]
+    for nb in neighbors_sorted:
         dlon = abs(nb["lon"] - s["lon"])
         print(f"      {nb['name'][:55]:<55s}  Δlon={dlon:.3f}°  tier={nb['tier']}")
-    if len(neighbours) > 8:
-        print(f"      ... and {len(neighbours) - 8} more")
+    if len(neighbors) > 8:
+        print(f"      ... and {len(neighbors) - 8} more")
     print()
 
 

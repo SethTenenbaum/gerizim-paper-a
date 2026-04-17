@@ -59,7 +59,7 @@ plt.rcParams.update({
 OUTDIR = Path(__file__).resolve().parent / "figures"
 OUTDIR.mkdir(exist_ok=True)
 
-# Colour palette — muted, colour-blind friendly
+# Color palette — muted, color-blind friendly
 C_PRIMARY   = "#2c6fbb"  # deep blue
 C_HIGHLIGHT = "#d62728"  # red accent for shaded tier
 C_NULL      = "#888888"  # grey for null baseline

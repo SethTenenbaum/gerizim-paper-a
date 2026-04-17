@@ -8,6 +8,8 @@ from data.scripts.unesco_corpus import *          # noqa: F401,F403
 from data.scripts.unesco_corpus import (          # explicit for IDE support
     load_corpus,
     cultural_sites_with_coords,
+    cultural_sites_with_coords_extended,
+    GERIZIM_SYNTHETIC,
     search_sites,
     strip_html,
     beru_deviation,

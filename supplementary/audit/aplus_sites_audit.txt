@@ -1,10 +1,14 @@
 UNESCO A-TIER SITES: GERIZIM vs JERUSALEM ANCHOR COMPARISON
-Generated : Thu Apr 16 20:34:25 UTC 2026
+Generated : Fri Apr 17 01:53:57 UTC 2026
 Script    : tools/generate_audit_aplus_sites.py
-Corpus    : 1011 Cultural/Mixed UNESCO sites with coordinates
+Corpus    : 1011 inscribed Cultural/Mixed UNESCO sites with coordinates
+           + 1 synthetic Gerizim entry = 1012 extended corpus
 Beru      : 30.0°  |  A+ threshold: <= 0.002 beru (6.7 km)  |  A threshold: <= 0.01 beru (33 km)
-Gerizim   : 35.269°E  (external; N=1011, no exclusion)
-Jerusalem : 35.2317°E  (self-excluded as anchor; N=1010)  [0.0373° = 4.1 km separation]
+Gerizim   : 35.269°E  (Tentative List, ref. 5706 — not yet inscribed)
+Jerusalem : 35.2317°E  (inscribed corpus member)  [0.0373° = 4.1 km separation]
+Self-exclusion: each anchor removes itself → both test against N=1011.
+  Gerizim corpus : N=1011  (inscribed 1011, excl. Gerizim; incl. Jerusalem)
+  Jerusalem corpus: N=1011  (inscribed 1011, excl. Jerusalem; incl. Gerizim)
 
 ────────────────────────────────────────────────────────────────────────────────────────────────
 SUMMARY
@@ -12,12 +16,12 @@ SUMMARY
   Anchor           N corpus    A++     A+   A (all)    A+ %       A+ p           A %        A p      
   --------------------------------------------------------------------------------------
   Gerizim              1011      7     56       228    5.5%     0.0103     *   22.6%     0.0246     *
-  Jerusalem            1010      7     56       217    5.5%     0.0101     *   21.5%     0.1275    ns
+  Jerusalem            1011      7     57       218    5.6%     0.0070    **   21.6%     0.1151    ns
 
   A+ null rate: 4%   A null rate: 20%
   A+ overlap (both anchors): 38 sites
   A+ unique to Gerizim: 18 sites
-  A+ unique to Jerusalem: 18 sites
+  A+ unique to Jerusalem: 19 sites
 
 ────────────────────────────────────────────────────────────────────────────────────────────────
 GERIZIM (35.269°E) — ALL A-TIER SITES  (A++=7, A+=56, A=172, total=228)
@@ -258,7 +262,7 @@ GERIZIM (35.269°E) — ALL A-TIER SITES  (A++=7, A+=56, A=172, total=228)
   A        0.009986    33.3    W       0.9     8.5686  Abbey and Altenmünster of Lorsch
 
 ────────────────────────────────────────────────────────────────────────────────────────────────
-JERUSALEM (35.2317°E) — ALL A-TIER SITES  (A++=7, A+=56, A=161, total=217)
+JERUSALEM (35.2317°E) — ALL A-TIER SITES  (A++=7, A+=57, A=161, total=218)
   Tier   Dev (beru)      km  Dir  Harmonic      Lon°E  Site
   ----------------------------------------------------------------------------------------
   --- A++ ---
@@ -300,6 +304,7 @@ JERUSALEM (35.2317°E) — ALL A-TIER SITES  (A++=7, A+=56, A=161, total=217)
   A+       0.001150     3.8    W       0.4    23.2662  Boyana Church
   A+       0.001166     3.9    E       0.1    38.2667  Site of Palmyra
   A+       0.001196     4.0    W       0.0    35.1958  Tyre
+  A+       0.001243     4.1    E       0.0    35.2690  Mount Gerizim (Tentative List, ref. 5706)
   A+       0.001267     4.2    W       0.9     8.2697  <I>Sacri Monti</I> of Piedmont and Lombardy
   A+       0.001312     4.4    E       1.1    68.2711  Mausoleum of Khoja Ahmed Yasawi
   A+       0.001322     4.4    W       0.7    14.1921  Historic Centre of Naples
@@ -556,7 +561,7 @@ A+ UNIQUE TO GERIZIM  (N=18) — not A+ under Jerusalem
   Classical Weimar                                               A+      6.6         A     10.8
 
 ────────────────────────────────────────────────────────────────────────────────────────────────
-A+ UNIQUE TO JERUSALEM  (N=18) — not A+ under Gerizim
+A+ UNIQUE TO JERUSALEM  (N=19) — not A+ under Gerizim
 
   Site                                                     Jer tier   Jer km  Ger tier   Ger km
   ------------------------------------------------------------------------------------------
@@ -568,6 +573,7 @@ A+ UNIQUE TO JERUSALEM  (N=18) — not A+ under Gerizim
   Chiribiquete National Park – “The Maloca of the Jaguar         A+      3.2         A      7.4
   Group of Monuments at Mahabalipuram                            A+      3.6         A      7.8
   Tyre                                                           A+      4.0         A      8.1
+  Mount Gerizim (Tentative List, ref. 5706)                      A+      4.1         —        —
   Historic Centre of Naples                                      A+      4.4         A      8.5
   Historic Centre of Sheki with the Khan’s Palace                A+      4.9         A      9.0
   Rock Art of Alta                                               A+      5.0         A      9.1

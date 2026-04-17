@@ -112,8 +112,8 @@
   \newcommand{\clusterCondPeakSig}{ns}    % significance label, conditional fraction
 
 % --- analysis/unesco/harmonic_density_attractor_test.py
-  \newcommand{\attractorApMeanN}{6.77}           % mean 0.3° neighbours, A+ sites
-  \newcommand{\attractorNonApMeanN}{5.08}           % mean 0.3° neighbours, non-A+ sites
+  \newcommand{\attractorApMeanN}{6.77}           % mean 0.3° neighbors, A+ sites
+  \newcommand{\attractorNonApMeanN}{5.08}           % mean 0.3° neighbors, non-A+ sites
   \newcommand{\attractorMWp}{0.0182}        % Mann-Whitney p, A+ > non-A+ at 0.3°
   \newcommand{\attractorMWpWide}{0.0595}        % Mann-Whitney p, A+ > non-A+ at 1.0°
   \newcommand{\attractorSpearmanRho}{-0.108}          % Spearman rho, dev vs 0.3° density
@@ -337,21 +337,21 @@
   \newcommand{\anchorSweepNanchors}{36{,}000}          % number of anchor points in sweep
   \newcommand{\anchorSweepApMean}{40.4}           % mean A+ count across all anchors
   \newcommand{\anchorSweepApStd}{6.9}            % std A+ count across all anchors
-  \newcommand{\anchorSweepGlobalMax}{60}           % global max A+/A combined at any anchor
-  \newcommand{\anchorSweepGlobalMaxA}{59}           % global max A at any anchor
-  \newcommand{\optimalPhaseApA}{59}           % max A+ at any x.18°E anchor, Sweep A (alias for anchorSweepGlobalMaxA)
+  \newcommand{\anchorSweepGlobalMax}{60}           % global max A+ at any anchor (symmetric corpus)
+  \newcommand{\anchorSweepGlobalMaxA}{60}           % global max A+ (symmetric corpus, alias)
+  \newcommand{\optimalPhaseApA}{60}           % max A+ at any x.18°E anchor (symmetric corpus)
   \newcommand{\GerizimSweepApp}{7}             % Gerizim A++ in sweep
-  \newcommand{\GerizimSweepAp}{55}              % Gerizim A+ in sweep
-  \newcommand{\GerizimSweepA}{227}             % Gerizim A in sweep
-  \newcommand{\anchorSweepPctile}{98.3}          % Gerizim percentile in A+ anchor sweep
-  \newcommand{\anchorSweepGeApPct}{3.10}          % % of anchors beating Gerizim A+
+  \newcommand{\GerizimSweepAp}{56}              % Gerizim A+ in sweep (N=1011, matches Test 1)
+  \newcommand{\GerizimSweepA}{228}             % Gerizim A in sweep
+  \newcommand{\anchorSweepPctile}{97.2}          % Gerizim percentile in A+ anchor sweep
+  \newcommand{\anchorSweepGeApPct}{3.99}          % % of anchors beating Gerizim A+
   \newcommand{\JerusalemSweepApp}{7}           % Jerusalem A++ in sweep
-  \newcommand{\JerusalemSweepAp}{56}            % Jerusalem A+ in sweep
-  \newcommand{\JerusalemSweepA}{217}           % Jerusalem A in sweep
-  \newcommand{\JerusalemSweepPctile}{98.3}        % Jerusalem percentile in A+ anchor sweep
+  \newcommand{\JerusalemSweepAp}{57}            % Jerusalem A+ in sweep (N=1011, incl. Gerizim)
+  \newcommand{\JerusalemSweepA}{218}           % Jerusalem A in sweep
+  \newcommand{\JerusalemSweepPctile}{98.7}        % Jerusalem percentile in A+ anchor sweep
   \newcommand{\anchorSweepJerApPct}{2.77}          % % of anchors beating Jerusalem A+
-  \newcommand{\anchorSweepTopPct}{1.7}          % top-N% globally (corridor, both anchors)
-  \newcommand{\sweepABDiff}{1}          % A+ count difference between Sweep A and Sweep B
+  \newcommand{\anchorSweepTopPct}{2.8}          % top-N% globally (corridor, both anchors)
+  \newcommand{\sweepABDiff}{1}          % A+ count difference Gerizim vs Jerusalem (Mount Gerizim itself)
 
 % --- analysis/unesco/verify_x18_periodicity.py
   \newcommand{\optimalPhase}{2.18}          % optimal x.18° phase (degrees mod 3)
@@ -370,7 +370,7 @@
 
 % --- analysis/global/landmark_anchor_ranking.py
   \newcommand{\GerizimTempleAp}{56}          % A+ count at Gerizim Temple anchor
-  \newcommand{\GerizimTempleRank}{41}          % rank of Gerizim Temple among all landmarks
+  \newcommand{\GerizimTempleRank}{28}          % rank of Gerizim among all 1012 sites as anchor (extended corpus)
 
 % --- analysis/global/global_corridor_comparison.py
   \newcommand{\corridorJeruN}{5}              % Levantine corridor matches (Jerusalem anchor)
@@ -473,10 +473,10 @@
   \newcommand{\appSiteDevBeruSeven}{0.000180}  % A++ table rank Seven: beru deviation
   \newcommand{\appSiteDevKmSeven}{0.60}  % A++ table rank Seven: km
   \newcommand{\appSiteDevMSeven}{598}  % A++ table rank Seven: m
-  \newcommand{\JerusalemAp}{56}  % Jerusalem A+ count (self-excluded corpus)
-  \newcommand{\NjerSelfExclCorpus}{1010}  % corpus size, Jerusalem self-excluded (Sweep B)
-  \newcommand{\NgerizimSweepCorpus}{1010}  % corpus size, Gerizim sweep (Jerusalem removed, Sweep A)
-  \newcommand{\pJerusalemAp}{0.0101}  % p-value, Jerusalem A+ binomial (self-excluded)
+  \newcommand{\JerusalemAp}{57}  % Jerusalem A+ count (symmetric self-excl, N=1011, incl. Gerizim)
+  \newcommand{\NjerSelfExclCorpus}{1011}  % corpus size, Jerusalem self-excluded (symmetric sweep)
+  \newcommand{\NgerizimSweepCorpus}{1011}  % corpus size, Gerizim self-excluded (symmetric sweep)
+  \newcommand{\pJerusalemAp}{0.0070}  % p-value, Jerusalem A+ binomial (N=1011, symmetric)
   \newcommand{\MeccaAp}{51}  % Mecca A+ count (full corpus)
   \newcommand{\pMeccaAnchor}{0.057}  % p-value, Mecca binomial (A+, one-sided)
   \newcommand{\MeruAp}{44}  % Mt. Meru (Tanzania, 36.750E) A+ count

@@ -16,10 +16,11 @@ import sys
 import json
 from pathlib import Path
 from datetime import datetime, timezone
+from scipy.stats import binomtest
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from data.unesco_corpus import load_corpus
-from lib.beru import GERIZIM, BERU, deviation as beru_dev, tier_label
+from lib.beru import GERIZIM, BERU, P_NULL_AP, deviation as beru_dev, tier_label
 from lib.dome_filter import (
     UNAMBIGUOUS_KEYWORDS as DOME_UNAMB,
     AMBIGUOUS_KEYWORDS   as DOME_AMB,
@@ -127,8 +128,37 @@ def run():
     included.sort(key=lambda r: (tier_order.get(r["tier"], 9), r["dev"]))
     rejected.sort(key=lambda r: r["name"])
 
+    def tier_stats(sites):
+        n   = len(sites)
+        app = sum(1 for r in sites if r["tier"] == "A++")
+        ap  = sum(1 for r in sites if r["tier"] in ("A++", "A+"))
+        a   = sum(1 for r in sites if r["tier"] in ("A++", "A+", "A"))
+        cm  = sum(1 for r in sites if r["tier"] == "C-")
+        c   = sum(1 for r in sites if r["tier"] == "C")
+        p   = binomtest(ap, n, P_NULL_AP, alternative="greater").pvalue if n > 0 else 1.0
+        sig = "***" if p < 0.001 else ("**" if p < 0.01 else ("*" if p < 0.05 else ("~" if p < 0.10 else "ns")))
+        rate = f"{100*ap/n:.1f}%" if n else "n/a"
+        return n, app, ap, a, cm, c, p, sig, rate
+
+    DOME_KEYS  = set(DOME_UNAMB + DOME_AMB)
+    STUPA_KEYS = {"stupa", "stupas"}
+    MOUND_KEYS = set(MOUND_UNAMB + MOUND_AMB)
+
+    def accepted(r, keys):
+        return any(k in keys and r["validated"].get(k) != "REJECTED" for k in r["keys"])
+
+    stages = {
+        "Mound (tumulus/barrow/kofun/mound)": [r for r in included if accepted(r, MOUND_KEYS)],
+        "Stupa (stupa/stupas)":               [r for r in included if accepted(r, STUPA_KEYS)],
+        "Dome (dome/tholos/spherical)":        [r for r in included if accepted(r, DOME_KEYS - STUPA_KEYS)],
+        "Combined (all included)":             included,
+    }
+
     n_ap = sum(1 for r in included if r["tier"] in ("A++", "A+"))
     ts = datetime.now(timezone.utc).strftime("%a %b %d %H:%M:%S UTC %Y")
+    hdr = f"  {'Stage':<38}  {'N':>4}  {'A++':>4}  {'A+':>4}  {'A':>4}  {'C-':>4}  {'C':>4}  {'A+%':>6}  {'p(A+)':>10}"
+    div = "  " + "-" * 88
+
     lines = [
         "UNESCO DOME + HEMISPHERICAL MOUND EVOLUTION KEYWORD AUDIT",
         f"Generated  : {ts}",
@@ -144,8 +174,13 @@ def run():
             if (len(included)+len(rejected)) else "n/a",
         f"A+ included: {n_ap}",
         "",
-        "INCLUDED SITES:", SEP,
+        "STATISTICS SUMMARY", SEP,
+        hdr, div,
     ]
+    for label, grp in stages.items():
+        gn, gapp, gap, ga, gcm, gc, gp, gsig, grate = tier_stats(grp)
+        lines.append(f"  {label:<38}  {gn:>4}  {gapp:>4}  {gap:>4}  {ga:>4}  {gcm:>4}  {gc:>4}  {grate:>6}  {gp:>10.4e}  {gsig}")
+    lines += ["", "INCLUDED SITES:", SEP]
     for r in included:
         flag = " ★" if r["tier"] in ("A++", "A+") else ""
         lines.append(f"  {r['name']}{flag}")

@@ -103,7 +103,7 @@ def percentile_rank(sweep_counts: np.ndarray, value: int) -> float:
     return float(np.mean(sweep_counts <= value)) * 100
 
 
-def summarise_anchor(longitudes: List[float], anchor: float,
+def summarize_anchor(longitudes: List[float], anchor: float,
                      sweep_result: Dict, wrap: bool = False) -> Dict:
     """
     Compute hit counts and percentile ranks for one anchor.

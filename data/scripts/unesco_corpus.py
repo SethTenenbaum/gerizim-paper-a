@@ -237,6 +237,39 @@ def _merge_extended(sites: List[UNESCOSite], cache: Dict[str, dict]) -> None:
         site.criteria_detail      = ext.get("criteria_detail", "")
 
 
+# ── Synthetic Gerizim corpus entry ───────────────────────────────────────────
+# Mount Gerizim (Palestine Tentative List, ref. 5706, nominated 2012) is the
+# primary anchor of this study but is not yet inscribed on the World Heritage
+# List and therefore absent from the standard XML corpus.
+#
+# Adding it as a synthetic UNESCOSite makes self-exclusion symmetric: when
+# Gerizim is used as anchor it removes itself from the working set just as any
+# inscribed site would; when Jerusalem is the anchor it finds Gerizim as an
+# eligible corpus member.  Scripts that need this behaviour call
+# cultural_sites_with_coords_extended() instead of cultural_sites_with_coords().
+#
+# The standard corpus functions (cultural_sites_with_coords, load_corpus) are
+# UNCHANGED — they continue to return the 1011 inscribed sites.
+
+GERIZIM_SYNTHETIC = UNESCOSite(
+    id_number         = "gerizim_synthetic",
+    unique_number     = "gerizim_synthetic",
+    site              = "Mount Gerizim (Tentative List, ref. 5706)",
+    category          = "Cultural",
+    iso_code          = "PS",
+    states            = "Palestine",
+    regions           = "Arab States",
+    date_inscribed    = "",          # not yet inscribed
+    short_description = (
+        "Mount Gerizim, the sacred mountain of the Samaritans, "
+        "on Palestine's UNESCO Tentative List (ref. 5706, 2012). "
+        "Added synthetically for symmetric anchor self-exclusion."
+    ),
+    latitude          = 32.2122,    # summit: 32°12′44″N
+    longitude         = GERIZIM,    # 35.269°E (from config.json)
+)
+
+
 # ── Main entry point ──────────────────────────────────────────────────────────
 _CORPUS_CACHE: Optional[List[UNESCOSite]] = None
 
@@ -318,8 +351,24 @@ def search_sites(
 
 
 def cultural_sites_with_coords(sites: List[UNESCOSite]) -> List[UNESCOSite]:
-    """Return only Cultural/Mixed sites that have geocoordinates."""
+    """Return only Cultural/Mixed sites that have geocoordinates.
+
+    Returns the 1011 inscribed sites (standard corpus).
+    For symmetric anchor comparison use cultural_sites_with_coords_extended().
+    """
     return [s for s in sites if s.is_cultural_or_mixed and s.has_coords]
+
+
+def cultural_sites_with_coords_extended(sites: List[UNESCOSite]) -> List[UNESCOSite]:
+    """Return the 1012-site extended corpus: 1011 inscribed + GERIZIM_SYNTHETIC.
+
+    Use this instead of cultural_sites_with_coords() whenever symmetric
+    self-exclusion is required — i.e. when both Gerizim and Jerusalem are
+    being compared as anchors.  Each anchor removes itself (within 0.001°)
+    and tests against the remaining N = 1011 sites.
+    """
+    inscribed = cultural_sites_with_coords(sites)
+    return inscribed + [GERIZIM_SYNTHETIC]
 
 
 # ── CLI self-test ─────────────────────────────────────────────────────────────

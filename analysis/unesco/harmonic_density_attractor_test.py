@@ -22,15 +22,15 @@ This produces a testable prediction:
 
 This is distinct from the primary enrichment test (Test 2), which
 asks whether A+ sites are over-represented. This test asks whether
-A+ precision *predicts* neighbourhood density — i.e., whether the
+A+ precision *predicts* neighborhood density — i.e., whether the
 harmonic is functioning as a geographic attractor, not just a
 coincidental match.
 
 TESTS
 ─────
-1. Mann-Whitney U: neighbourhood density (0.3° and 1.0° windows)
+1. Mann-Whitney U: neighborhood density (0.3° and 1.0° windows)
    at A+ sites vs non-A+ sites.
-2. Spearman correlation: beru deviation vs. neighbourhood density
+2. Spearman correlation: beru deviation vs. neighborhood density
    (does precision monotonically predict density?).
 3. Harmonic-level test: for each 0.1-beru harmonic, compute mean
    cluster density of all sites at that harmonic. Compare A+ harmonics
@@ -84,7 +84,7 @@ for s in corpus:
         "region":  "Europe" if (-10 < s.longitude < 40 and 35 < s.latitude < 72) else "non-Europe",
     })
 
-# Pre-compute neighbourhood counts for each site
+# Pre-compute neighborhood counts for each site
 lons = np.array([s["lon"] for s in sites])
 for s in sites:
     dlon = np.abs(lons - s["lon"])
@@ -104,7 +104,7 @@ def section(title):
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-section("1. A+ SITES vs NON-A+ SITES: NEIGHBOURHOOD DENSITY")
+section("1. A+ SITES vs NON-A+ SITES: NEIGHBORHOOD DENSITY")
 # ─────────────────────────────────────────────────────────────────────────────
 print()
 for window, key in [("0.3° (Tier-A)", "n03"), ("1.0° (3× Tier-A)", "n10")]:
@@ -112,9 +112,9 @@ for window, key in [("0.3° (Tier-A)", "n03"), ("1.0° (3× Tier-A)", "n10")]:
     nap_vals = [s[key] for s in non_aplus]
     U, p = mannwhitneyu(ap_vals, nap_vals, alternative="greater")
     print(f"  Window {window}:")
-    print(f"    A+  sites (N={len(aplus):>3}): mean neighbours = {np.mean(ap_vals):>5.2f}  "
+    print(f"    A+  sites (N={len(aplus):>3}): mean neighbors = {np.mean(ap_vals):>5.2f}  "
           f"median = {np.median(ap_vals):>4.1f}")
-    print(f"    Non-A+ (N={len(non_aplus):>3}): mean neighbours = {np.mean(nap_vals):>5.2f}  "
+    print(f"    Non-A+ (N={len(non_aplus):>3}): mean neighbors = {np.mean(nap_vals):>5.2f}  "
           f"median = {np.median(nap_vals):>4.1f}")
     print(f"    Mann-Whitney U={U:.0f}  p={p:.4f}  {sig(p)}")
     print()
@@ -126,7 +126,7 @@ print(f"  harmonic-aligned monument attracts subsequent settlement around it.")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-section("2. SPEARMAN CORRELATION: BERU DEVIATION vs NEIGHBOURHOOD DENSITY")
+section("2. SPEARMAN CORRELATION: BERU DEVIATION vs NEIGHBORHOOD DENSITY")
 # ─────────────────────────────────────────────────────────────────────────────
 print()
 devs = np.array([s["dev"] for s in sites])
@@ -138,7 +138,7 @@ print(f"  0.3° window: Spearman rho = {rho03:+.4f}   p = {p03:.6f}  {sig(p03)}"
 print(f"  1.0° window: Spearman rho = {rho10:+.4f}   p = {p10:.6f}  {sig(p10)}")
 print()
 print(f"  Negative rho means: lower beru deviation (higher precision) predicts")
-print(f"  higher neighbourhood density. The relationship is monotonic across")
+print(f"  higher neighborhood density. The relationship is monotonic across")
 print(f"  the full range of deviations, not just at the Tier-A+ threshold.")
 
 
@@ -273,11 +273,11 @@ print(f"""
 
   Key findings:
   ─────────────
-  1. A+ sites have {np.mean([s['n03'] for s in aplus]):.2f} mean neighbours within 0.3° vs
+  1. A+ sites have {np.mean([s['n03'] for s in aplus]):.2f} mean neighbors within 0.3° vs
      {np.mean([s['n03'] for s in non_aplus]):.2f} for non-A+ sites  (MWU p={p03:.4f} at 0.3°).
 
   2. Spearman rho = {rho03:+.4f} (beru deviation vs 0.3° density, p={p03:.6f}).
-     Precision monotonically predicts neighbourhood density.
+     Precision monotonically predicts neighborhood density.
 
   3. A+ harmonics host {ratio:.1f}× as many UNESCO sites per harmonic as
      non-A+ harmonics (MWU p={p3:.4f}).
@@ -317,8 +317,8 @@ else:
     max_dist = 0.0
 
 print("  % LaTeX macros (GROUP 3):")
-print(f"  \\newcommand{{\\attractorApMeanN}}{{{np.mean(ap03):.2f}}}           % mean 0.3° neighbours, A+ sites")
-print(f"  \\newcommand{{\\attractorNonApMeanN}}{{{np.mean(nap03):.2f}}}           % mean 0.3° neighbours, non-A+ sites")
+print(f"  \\newcommand{{\\attractorApMeanN}}{{{np.mean(ap03):.2f}}}           % mean 0.3° neighbors, A+ sites")
+print(f"  \\newcommand{{\\attractorNonApMeanN}}{{{np.mean(nap03):.2f}}}           % mean 0.3° neighbors, non-A+ sites")
 print(f"  \\newcommand{{\\attractorMWp}}{{{p03_mw:.4f}}}        % Mann-Whitney p, A+ > non-A+ at 0.3°")
 print(f"  \\newcommand{{\\attractorMWpWide}}{{{p10_mw:.4f}}}        % Mann-Whitney p, A+ > non-A+ at 1.0°")
 print(f"  \\newcommand{{\\attractorSpearmanRho}}{{{rho03:+.3f}}}          % Spearman rho, dev vs 0.3° density")

@@ -57,8 +57,14 @@ python3 tools/generate_audit_corridor.py
 echo "  [6/7] Gerizim vs Jerusalem A-tier site comparison..."
 python3 tools/generate_audit_aplus_sites.py
 
-echo "  [7/7] FDR / multiple-comparisons audit..."
+echo "  [7/8] FDR / multiple-comparisons audit..."
 python3 tools/generate_audit_fdr.py
+
+echo "  [8/9] Global anchor sweep ranking audit..."
+python3 tools/generate_audit_anchor_sweep.py
+
+echo "  [9/9] Site-as-anchor ranking audit..."
+python3 tools/generate_audit_site_as_anchor.py
 
 echo ""
 echo "  Done.  Files written to supplementary/audit/"

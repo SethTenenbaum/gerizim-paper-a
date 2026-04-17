@@ -225,13 +225,20 @@ Cultural and Mixed); (2)~entries lacking geocoordinates are excluded ($-\NexcNoC
 The result is $N = \NclusterTotal$ sites with valid longitudes.
 
 \subsection{Geodetic Framework}
+\label{sec:geodetic}
 
 The reference anchor is Mount Gerizim at \GerizimLon\textdegree{}E,
 from Palestine's UNESCO tentative list (ref.~5706, 2012; see \S\ref{sec:anchor}).
-Gerizim is not on the inscribed World Heritage List and does not appear
-in the corpus. Jerusalem is an inscribed corpus member, scored as a
-regular site in Tests~1--4 (A+ at 4.1~km under Gerizim), and excluded
-from both anchor-sensitivity sweeps (\S\ref{sec:anchor}).
+Gerizim is not on the inscribed World Heritage List and therefore does not
+appear in the standard corpus.
+Jerusalem is an inscribed corpus member, scored as a regular site in
+Tests~1--4 (A+ at 4.1~km under Gerizim).
+For the anchor-comparison audit and both sensitivity sweeps
+(\S\ref{sec:sensitivity_global}), Gerizim is added as a synthetic corpus
+entry so that each anchor can self-exclude symmetrically: Gerizim removes
+itself and tests against the $N = \NclusterTotal$ inscribed sites (including
+Jerusalem); Jerusalem removes itself and tests against the same $N$ (now
+including Gerizim).
 
 For a site at longitude $\lambda$, the beru-distance is
 $B = |\lambda - \GerizimLon| / 30$ and the beru-deviation from the
@@ -297,8 +304,7 @@ Both populations are reported.
 
 \textbf{Test~1 (full corpus, primary).}
 Full corpus ($N = \NclusterTotal$), no keyword filter; binomial test of
-whether the global A+ rate exceeds the 4\% geometric null, establishing
-the corpus-level backdrop for the primary morphological tests.
+whether the global A+ rate exceeds the 4\% geometric null.
 
 \textbf{Test~2 (dome/spherical, primary).}
 \NcircKeywords{} morphological keywords from four roots
@@ -318,16 +324,19 @@ Extends Test~2 by adding earthen mound-stage keywords
 Not counted separately in the Bonferroni family.
 
 \textbf{Test~3 (cluster asymmetry, primary).}
-Full corpus ($N = \NclusterTotal$), no keyword filter.
+Full corpus ($N = \NclusterTotal$), no keyword filter; tests whether
+A+ harmonics host more total sites than non-A+ harmonics, independent
+of any morphological keyword.
 
 \textbf{Test~4 (temporal gradient, descriptive).}
-Cochran-Armitage trend test on the full corpus, no keyword filter.
+Cochran-Armitage trend test on the full corpus based on year of
+inscription into the UNESCO corpus, no keyword filter.
 
 \textbf{Test~5 (founding classifier, post-hoc).}
 A context-aware keyword classifier
 (\texttt{lib/founding\_filter.py}) refined after initial data inspection
 to reduce false positives in population construction, with residual
-interpretive ambiguity and some false negatives accepted
+interpretive ambiguity and some false positives accepted
 (Appendix~\ref{sec:kwdaudit_founding}).
 It addresses what kinds of sites beyond domed
 monuments tend to fall on harmonic nodes, but carries no weight
@@ -412,8 +421,68 @@ are described with their results in \S\ref{sec:simulation_null}.
 \section{Results}
 \label{sec:results}
 
-Subsections follow in order of evidential weight (Tests~2, 2b, 3, 1).
-Test~5 (founding classifier, post-hoc) is in Appendix~\ref{sec:kwdaudit_founding}.
+Subsections follow test numbering (Tests~1, 2, 2b, 3, 4, 5).
+
+\subsection{Global Enrichment (Test~1, Primary)}
+\label{sec:results_global}
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.9\textwidth]{../figures/fig_devhist}
+\caption{Distribution of beru deviations for the full UNESCO corpus.
+  The excess of sites within the Tier-A+ window ($\delta \leq 0.002$~beru,
+  shaded) above the uniform null (dashed line) establishes the corpus-level
+  signal against which Tests~2 and~3 demonstrate morphological and spatial specificity.}
+\label{fig:devhist}
+\end{figure*}
+
+The full UNESCO Cultural/Mixed corpus ($N = \NclusterTotal$) shows a
+Tier-A+ rate of \clusterApRate\% (Figure~\ref{fig:devhist})
+(\NclusterAp/\NclusterTotal; Clopper-Pearson 95\% CI [4.2\%, 7.1\%]),
+above the \NullRateAp{} null
+(binomial $p = \clusterApBinom$; Bonferroni $p_\mathrm{adj} = \pAdjTestOne$,
+$k = \BonfK$).
+The signal belongs to the $\sim$35\textdegree{}E corridor, not to either
+anchor individually (\S\ref{sec:sensitivity_global}).
+The full-corpus enrichment ratio ($\clusterEnrichAp\times$) is modest compared to
+the dome ($\circEnrichAp\times$) and cluster asymmetry results, consistent with
+only a fraction of sites driving the periodicity.
+
+\textbf{Region-stratified robustness.}
+Mantel-Haenszel analysis by UNESCO region: OR~$= \MHcommonOR$,
+$p = \pCMH$ (trend-level, ns). A region-specific empirical null test
+(Fisher combination of per-region binomials) yields $p = \pRegionEmpAll$
+(ns; pre-2000: $p = \pRegionEmpPreTwoK$, ns): when each region's own
+A+ rate is the null, the stratified signal does not reach significance.
+The pre-2000 cohort remains significant against the geometric null
+($p = \pPreTwoK$~**).
+
+\subsubsection*{World religion sites}
+Religion-keyword sub-populations show consistent enrichment directionality
+(religion-name matching only).
+Sites associated with any world religion ($N = \NreligUnion$): \religUnionApRate\%
+A+ ($\religUnionEnrich\times$, $p = \pReligUnion$, *).
+Christianity ($N = \NchristSites$): \christApRate\% A+, $p = \pChrist$, *.
+Buddhism ($N = \NbudSitesRelig$): \budApRateRelig\% A+ ($p = \pBudRelig$, ns).
+Judaism ($N = \NjudSites$): \judATierCount/\NjudSites{} sites (\judATierRate\%) fall
+within Tier~A ($\leq 33$~km), compared to \judATierOR$\times$ the rate in the
+remainder of the corpus (Fisher exact $p = \pJudATierFisher$, **).
+The A-tier signal in the Judaism sub-corpus is concentrated in the outer
+A-band (7--33~km) and is susceptible to geographic concentration.
+
+\subsubsection*{Buddhist bimodal distribution}
+\label{sec:buddhist_bimodal}
+The following is exploratory (FDR-registered, outside the primary family).
+Among religion sub-populations ($N \geq 10$), Buddhism ($N = \NbudSitesRelig$)
+ranks first in \textit{both} the A$+$ rate (\budApRateRelig\%) and the
+C-band rate (\budAntiNodeRate\%, $\budAntiNodeEnrich\times$ the \corpusAntiNodeRate\% baseline).
+The joint probability of leading both simultaneously is $p = \pBudJoint$
+(exact multivariate hypergeometric; the two bands are mutually exclusive).
+The pattern has a geographic axis: Lumbini, birthplace of the Buddha
+\citep{coningham2013lumbini}, is the tightest Buddhist harmonic hit
+(Tier~A$+$, $\sim$0.8~km from the
+1.6-beru node), while Nara and Hōryū-ji are the only Buddhist C$-$ sites,
+each within $\sim$2--4~km of an inter-harmonic midpoint.
 
 %──────────────────────────────────────────────────────────────────────────────
 \subsection{Domed and Spherical Monuments (Test~2, Primary)}
@@ -470,14 +539,16 @@ $p = \LKOworstTwoP$.
 Leave-3-out (worst case): $p = \LKOworstThreeP$.
 Code: \texttt{dome\_leave\_k\_out.py}.
 
-\textbf{Context-validated robustness check (Test~2x).}
-Applying sentence-level architectural confirmation reduces the population
-to $N = \NcircValidated$ (\NcircContextRejected{} non-architectural false positives
-rejected; full list in Appendix~\ref{sec:kwdaudit_dome}).
-Test~2x yields $p = \pCircApValidated$, $\circEnrichApValidated\times$ enrichment, stronger than the
-raw sweep, consistent with rejected sites diluting the signal.
-Because validation rules were developed after the initial sweep, Test~2x
-is excluded from the primary Bonferroni family.
+\textbf{Context-validated robustness checks (Tests~2x and~2bx).}
+Applying sentence-level architectural confirmation reduces the dome
+population to $N = \NcircValidated$ (\NcircContextRejected{} non-architectural
+false positives rejected; full list in Appendix~\ref{sec:kwdaudit_dome}).
+Test~2x yields $p = \pCircApValidated$, $\circEnrichApValidated\times$ enrichment,
+stronger than the raw sweep, consistent with rejected sites diluting the signal.
+The extended mound-evolution population (Test~2bx, $N = \NevoTotal$ with
+context validation) yields $p = \pEvoApValidated$~***, consistent with Test~2x.
+Because validation rules were developed after the initial sweep, both
+variants are excluded from the primary Bonferroni family.
 
 \textbf{Geographic-concentration null (dedicated simulation).}
 \label{sec:geo_conc_null}
@@ -655,7 +726,7 @@ The full-corpus Rayleigh $R = \fullRayleighR$
 ($Z = \fullRayleighZ$, $p_\mathrm{perm} = \fullRayleighPermP$, ns)
 confirms no spurious global 3\textdegree{} periodicity is present in the
 raw longitude file. The signal is concentrated in A+ sites, not a
-global artefact.
+global artifact.
 
 \textbf{Test~B (A+-only Rayleigh, structural).}
 Among the \Nap{} Tier-A+ sites, $R = \rayleighR$
@@ -673,74 +744,9 @@ Displacing the anchor by a uniform random offset in $[0\textdegree,
 This is the sole positive test that the enrichment depends on the
 specific Gerizim anchor rather than geographic concentration alone.
 
-\subsection{Global Enrichment (Test~1, Primary)}
-\label{sec:results_global}
 
-\begin{figure*}[!t]
-\centering
-\includegraphics[width=0.9\textwidth]{../figures/fig_devhist}
-\caption{Distribution of beru deviations for the full UNESCO corpus.
-  The excess of sites within the Tier-A+ window ($\delta \leq 0.002$~beru,
-  shaded) above the uniform null (dashed line) establishes the corpus-level
-  signal against which Tests~2 and~3 demonstrate morphological and spatial specificity.}
-\label{fig:devhist}
-\end{figure*}
 
-The full UNESCO Cultural/Mixed corpus ($N = \NclusterTotal$) shows a
-Tier-A+ rate of \clusterApRate\% (Figure~\ref{fig:devhist})
-(\NclusterAp/\NclusterTotal; Clopper-Pearson 95\% CI [4.2\%, 7.1\%]),
-above the \NullRateAp{} null
-(binomial $p = \clusterApBinom$; Bonferroni $p_\mathrm{adj} = \pAdjTestOne$,
-$k = \BonfK$).
-Jerusalem (Tier~A$^{++}$; \GerizimJerusalemKm~km from Gerizim; inscribed)
-contributes one of the \NclusterAp{} A+ hits and is not an independent
-data point — Gerizim is external to the corpus and requires no
-self-exclusion, creating a structural asymmetry in Test~1.
-Removing Jerusalem gives $N = \NjerSelfExclCorpus$,
-$A^{+} = \GerizimSweepAp$, $p = \pJerusalemAp$ — unchanged.
-The signal belongs to the $\sim$35\textdegree{}E corridor, not to either
-anchor individually (\S\ref{sec:sensitivity_global}).
-The full-corpus enrichment ratio ($\clusterEnrichAp\times$) is modest compared to
-the dome ($\circEnrichAp\times$) and cluster asymmetry results, consistent with
-only a fraction of sites driving the periodicity.
-
-\textbf{Region-stratified robustness.}
-Mantel-Haenszel analysis by UNESCO region: OR~$= \MHcommonOR$,
-$p = \pCMH$ (trend-level, ns). A region-specific empirical null test
-(Fisher combination of per-region binomials) yields $p = \pRegionEmpAll$
-(ns; pre-2000: $p = \pRegionEmpPreTwoK$, ns): when each region's own
-A+ rate is the null, the stratified signal does not reach significance.
-The pre-2000 cohort remains significant against the geometric null
-($p = \pPreTwoK$~**).
-
-\subsubsection*{World religion sites}
-Religion-keyword sub-populations show consistent enrichment directionality
-(religion-name matching only).
-Sites associated with any world religion ($N = \NreligUnion$): \religUnionApRate\%
-A+ ($\religUnionEnrich\times$, $p = \pReligUnion$, *).
-Christianity ($N = \NchristSites$): \christApRate\% A+, $p = \pChrist$, *.
-Buddhism ($N = \NbudSitesRelig$): \budApRateRelig\% A+ ($p = \pBudRelig$, ns).
-Judaism ($N = \NjudSites$): \judATierCount/\NjudSites{} sites (\judATierRate\%) fall
-within Tier~A ($\leq 33$~km), compared to \judATierOR$\times$ the rate in the
-remainder of the corpus (Fisher exact $p = \pJudATierFisher$, **).
-The A-tier signal in the Judaism sub-corpus is concentrated in the outer
-A-band (7--33~km) and is susceptible to geographic concentration.
-
-\subsubsection*{Buddhist bimodal distribution}
-\label{sec:buddhist_bimodal}
-The following is exploratory (FDR-registered, outside the primary family).
-Among religion sub-populations ($N \geq 10$), Buddhism ($N = \NbudSitesRelig$)
-ranks first in \textit{both} the A$+$ rate (\budApRateRelig\%) and the
-C-band rate (\budAntiNodeRate\%, $\budAntiNodeEnrich\times$ the \corpusAntiNodeRate\% baseline).
-The joint probability of leading both simultaneously is $p = \pBudJoint$
-(exact multivariate hypergeometric; the two bands are mutually exclusive).
-The pattern has a geographic axis: Lumbini, birthplace of the Buddha
-\citep{coningham2013lumbini}, is the tightest Buddhist harmonic hit
-(Tier~A$+$, $\sim$0.8~km from the
-1.6-beru node), while Nara and Hōryū-ji are the only Buddhist C$-$ sites,
-each within $\sim$2--4~km of an inter-harmonic midpoint.
-
-\subsubsection*{Inscription-year stratification and formal trend test}
+\subsection{Temporal Gradient (Test~4, Descriptive)}
 \label{sec:resultstemporal}
 
 \begin{table*}[!t]
@@ -770,12 +776,7 @@ $\canonEnrich\times$, $p = \pCanon$) and dilutes to the null in the modern era
 \begin{figure*}[!t]
 \centering
 \includegraphics[width=0.9\textwidth]{../figures/fig_temporal}
-\caption{Tier-A+ rate declines monotonically with UNESCO inscription year.
-  The earliest cohort (1978--1984) shows $\sim$8\% A+, while the most recent
-  (2010--2025) is indistinguishable from the \NullRateAp{} null.
-  Cochran-Armitage trend test (three-cohort):
-  $Z = \ZcochranThree$, $p = \pCochranThree$, one-sided.
-  Five-cohort result: $Z = \ZcochranFive$, $p = \pCochranFive$.}
+\caption{Tier-A+ rate by UNESCO inscription-year cohort.}
 \label{fig:temporal}
 \end{figure*}
 
@@ -787,11 +788,20 @@ Mantel-Haenszel region-adjusted OR~$= \MHcommonOR$
 ($p = \pCMH$). The temporal gradient is largely
 explained by regional composition and is treated as descriptive only.
 
-\noindent\textit{Founding-site classifier (Test~5, post-hoc;
-Appendix~\ref{sec:kwdaudit_founding}).}
-Fisher OR~$= \foundKwFisherOR$, $p = \pFoundKwFisher$~*.
-Because the classifier was refined after seeing the data, it is
-fully post-hoc. The two primary results (Tests~2 and~3) are unaffected.
+\subsection{Founding-Origin Classifier (Test~5, Post-Hoc)}
+\label{sec:results_founding}
+
+The founding-origin classifier assigns each site to one or more of five
+categories: Founding Capital, Sacred Origin, Founding Monument, Founding
+Axis, and Ancient Continuous Landscape (filter logic in
+Appendix~\ref{sec:kwdaudit_founding}).  Applied to the full corpus
+($N = \NoriginCorpus$), the classifier assigns \NfoundKwAll{} sites
+(\foundKwBaseRate\%) to at least one founding category.  Of the
+\NclusterAp{} A+ sites, \NfoundKwAp{} (\foundKwApRate\%) carry a founding
+keyword, compared to \foundKwBaseRate\% in the full corpus.
+Fisher exact test: OR~$= \foundKwFisherOR$, $p = \pFoundKwFisher$~*.
+Because the classifier was iteratively tuned after data inspection it is
+treated as post-hoc and carries no weight in the primary evidential chain.
 
 \section{Robustness Checks}
 \label{sec:robustness}
@@ -896,41 +906,46 @@ Spacing & Null & Dome hits/$N_D$ & $p$(Dome) && Full hits/$N$ & $p$(Full) \\
 \subsection{Global Anchor Sweep}
 \label{sec:sensitivity_global}
 
-Two parallel sweeps (0--360\textdegree{}E, 0.01\textdegree{} resolution,
-\anchorSweepNanchors{} trial anchors each) assess whether the
+A global sweep (0--360\textdegree{}E, 0.01\textdegree{} resolution,
+\anchorSweepNanchors{} trial anchors) assesses whether the
 $\sim$35\textdegree{}E corridor is unusual globally.
-Sweep~A removes Jerusalem and tests Gerizim as anchor ($N = \NgerizimSweepCorpus$);
-Sweep~B retains Jerusalem with self-exclusion ($N = \NjerSelfExclCorpus$).
+The sweep uses the extended corpus described in \S\ref{sec:geodetic}
+($N_\mathrm{ext} = 1012$): each trial anchor self-excludes any entry
+within $0.001$\textdegree{}, so every focal anchor tests against
+$N = \NgerizimSweepCorpus$.
 
 \begin{table*}[!t]
 \centering\small
-\caption{Global anchor sweep: both Levantine anchors ranked within their
-  own corpus. Each sweep: \anchorSweepNanchors{} trial anchors,
-  0--360\textdegree{}E at 0.01\textdegree{} resolution.
-  Sweep~A: N\,=\,\NgerizimSweepCorpus{} (Jerusalem removed); Sweep~B: N\,=\,\NjerSelfExclCorpus{} (Jerusalem self-excluded).
-  Gerizim is external in both.
+\caption{Global anchor sweep: both Levantine anchors ranked against
+  the same global distribution. \anchorSweepNanchors{} trial anchors,
+  0--360\textdegree{}E at 0.01\textdegree{} resolution; extended corpus
+  $N_\mathrm{ext}=1012$ (1011 inscribed + Gerizim synthetic); each focal
+  anchor self-excludes itself $\Rightarrow N = \NgerizimSweepCorpus$.
   Mean A+ across all anchors: \anchorSweepApMean{}$\pm$\anchorSweepApStd{}.}
 \label{tab:sweep_summary}
 \adjustbox{max width=\textwidth}{%
-\begin{tabular}{llccccc}
+\begin{tabular}{lccccc}
 \toprule
-Sweep & Anchor & A$^{++}$ & A$^{+}$ & A & Percentile & \% anchors $\geq$ \\
+Anchor & A$^{++}$ & A$^{+}$ & A & Percentile & \% anchors $\geq$ \\
 \midrule
-A (Gerizim corpus)   & Gerizim (\GerizimLon\textdegree{}E)  & \GerizimSweepApp  & \GerizimSweepAp  & \GerizimSweepA  & \anchorSweepPctile\textsuperscript{th}  & \anchorSweepGeApPct\% \\
-B (Jerusalem corpus) & Jerusalem (35.2317\textdegree{}E)    & \JerusalemSweepApp & \JerusalemSweepAp & \JerusalemSweepA & \JerusalemSweepPctile\textsuperscript{th} & \anchorSweepJerApPct\% \\
+Gerizim (\GerizimLon\textdegree{}E)  & \GerizimSweepApp  & \GerizimSweepAp  & \GerizimSweepA  & \anchorSweepPctile\textsuperscript{th}  & \anchorSweepGeApPct\% \\
+Jerusalem (35.2317\textdegree{}E)    & \JerusalemSweepApp & \JerusalemSweepAp & \JerusalemSweepA & \JerusalemSweepPctile\textsuperscript{th} & \anchorSweepJerApPct\% \\
 \bottomrule
-\multicolumn{7}{p{0.95\linewidth}}{\footnotesize A$^{++}$$\leq$0.67\,km; A$^{+}$$\leq$6.7\,km; A$\leq$33\,km.
-  Global max \anchorSweepGlobalMax{} A+ in Sweep~B / \anchorSweepGlobalMaxA{} A+ in Sweep~A
+\multicolumn{6}{p{0.95\linewidth}}{\footnotesize A$^{++}$$\leq$0.67\,km; A$^{+}$$\leq$6.7\,km; A$\leq$33\,km.
+  Global max \anchorSweepGlobalMax{} A+
   (all $x.18$\textdegree{}E anchors score identically; \S\ref{sec:x18artifact}).} \\
 \end{tabular}}% end adjustbox
 \end{table*}
 
-Both anchors place the corridor in the global top \anchorSweepTopPct\% 
-(Table~\ref{tab:sweep_summary}), and the result
-is anchor-invariant within the \GerizimJerusalemKm\,km corridor window.
-The single-site difference between sweeps (\GerizimSweepAp{} vs.\ \JerusalemSweepAp{} A+) is precisely
-the Old City of Jerusalem ($\delta = 0.0012$~beru from Gerizim's
-harmonic). No other historical meridian reaches significance except
+Both anchors place the corridor in the global top \anchorSweepTopPct\%
+(Table~\ref{tab:sweep_summary}), and the result is anchor-invariant
+within the \GerizimJerusalemKm\,km corridor window.
+The total counts differ by one (\GerizimSweepAp{} vs.\ \JerusalemSweepAp{});
+the extra Jerusalem hit is Mount Gerizim itself at 4.1~km.
+The A+ compositions diverge more broadly: 18 sites are unique to Gerizim,
+19 are unique to Jerusalem, and 38 are shared
+(supplementary anchor comparison audit).
+No other historical meridian reaches significance except
 Mecca (\MeccaAp{} A+, $p = \pMeccaAnchor$~$^\dagger$).
 
 \subsubsection*{The $x.18$\textdegree{}E periodic structure}
@@ -994,11 +1009,16 @@ The dome enrichment surviving all three simulation nulls remains the primary
 evidence against a purely geographic account.
 
 \textbf{Corridor and landmark ranking.}
-Jerusalem and Gerizim (\GerizimJerusalemKm\,km apart) produce the same
-A+ count and $p = \pJerusalemAp$; the enrichment belongs to the corridor, not to
-either anchor individually. Using each UNESCO site as anchor, Gerizim ranks
-\#\GerizimTempleRank{} (top 4.1\%). The 35\textdegree{}E corridor leads
-globally; no other corridor shares a cross-cultural tradition.
+Gerizim (\GerizimSweepAp{} A+, $p = \clusterApBinom$) and Jerusalem
+(\JerusalemSweepAp{} A+, $p = \pJerusalemAp$) both place the
+$\sim$35\textdegree{}E corridor in the global top \anchorSweepTopPct\%.
+The A+ counts differ by one (Jerusalem finds Gerizim as an extra hit at 4.1~km),
+but the compositions diverge: 18 A+ sites are unique to Gerizim,
+19 are unique to Jerusalem, and 38 are shared.
+The enrichment belongs to the corridor, not to either anchor individually.
+Using each UNESCO site as its own anchor, Gerizim ranks
+\#\GerizimTempleRank{} of 1012 (top 2.8\%). The 35\textdegree{}E corridor
+leads globally; no other corridor shares a cross-cultural tradition.
 
 \subsection{Spatial Autocorrelation}
 \label{sec:autocorrelation}
@@ -1044,7 +1064,7 @@ anchored by \textbf{Borobudur} (c.\ 800~CE, \wikiStupaBorobudurDevKm~km from
 the harmonic, Tier~A) \citep{miksic1990borobudur}, with the site closest to the
 harmonic line reaching Tier~A++ (\wikiStupaNgawenDevM~m).
 The World Peace Pagoda at Lumbini achieves A++ precision
-($\sim$\wikiStupaLumbiniDevM~m) uniquely from Gerizim \citep{coningham2013lumbini}.
+($\sim$\wikiStupaLumbiniDevM~m) uniquely from Gerizim.
 
 Using the identical anchor and null, the corpus yields
 \wikiStupaATierCount/\wikiStupaTotal{} Tier-A sites
@@ -1211,52 +1231,41 @@ units against any externally curated monument corpus; the null model and
 tier boundaries are fixed independently of the data.
 
 \appendix
-\newpage
 
 %──────────────────────────────────────────────────────────────────────────────
 \section{Keyword Audit Summary}
 \label{sec:kwdaudit}
 
-This appendix summarizes the audit trail for the dome/spherical monument
-filter (Test~2) and the founding-origin classifier (Test~5).
-The full site-by-site audit is available in the archived code repository
-(\citealt{tenenbaum2026audit}) and is reproducible by running:\\
-\texttt{python3 analysis/unesco/spherical\_monument\_raw\_sweep.py}\\
-\texttt{python3 analysis/unesco/spherical\_monument\_test.py --audit}
+Full site-by-site audit files are in the archived code repository
+(\citealt{tenenbaum2026audit}).
 
-\subsection{Dome/Spherical Monument Filter (Test~2 and Test~2x)}
+\subsection{Dome/Spherical Monument Filter (Tests~2, 2b, 2x, 2bx)}
 \label{sec:kwdaudit_dome}
 
 \NcircKeywords{} morphological keywords from four roots
 (\textit{stupa/stupas}, \textit{tholos}, \textit{dome/domed/domes},
 \textit{spherical}) are matched as whole words against each site's
-name, XML description, and extended OUV text.
+name, XML description, and extended OUV text.  All \NcircTotal{} matching
+sites are included in Test~2 without context gating; the population is
+fully determined by the keyword list with no post-hoc filtering.
 
-\textbf{Test~2 (primary):} All \NcircTotal{} matching sites are included
-without context gating. This raw positive sweep uses a population fully
-determined by the keyword list, with no post-hoc filtering decisions.
-The sweep is deliberately over-inclusive: it accepts sites where the
-matched keyword refers to geological domes, vernacular housing, or
-natural spherical features. The trade-off favors simplicity and
-reproducibility at the cost of known false negatives in specificity.
+For Test~2x, ambiguous keywords (\textit{dome, domed, domes, spherical})
+are subject to a two-gate context check: Gate~1 (\NdomeGateNeg{} negative
+patterns) rejects non-architectural uses; Gate~2 (\NdomeGatePos{} positive
+patterns) requires architectural confirmation.  Unambiguous keywords
+(\textit{stupa/stupas}, \textit{tholos}) are accepted without validation.
+The full gate lists are in \texttt{lib/dome\_filter.py}.  The seven
+rejected sites are: Hiroshima Peace Memorial, Richtersveld, Gyeongju,
+Vi\~{n}ales Valley, Rock Islands Southern Lagoon, Uluru-Kata Tju\d{t}a,
+and Diqu\'{i}s Stone Spheres.  In every case the exclusion is driven by
+the semantic domain of the keyword match, not by the site's longitude.
 
-\textbf{Test~2x (context-validated robustness check):} Unambiguous keywords
-are accepted without validation. Ambiguous keywords (\textit{dome, domed,
-domes, spherical}) are subject to a two-gate context check: Gate~1
-(\NdomeGateNeg{} negative patterns) rejects non-architectural uses; Gate~2
-(\NdomeGatePos{} positive patterns) requires architectural confirmation. Full gate
-lists: \texttt{lib/dome\_filter.py}. The gates reduce false positives
-but cannot eliminate interpretive ambiguity at the boundary between
-architectural and non-architectural uses.
-
-Of the \NcircTotal{} raw-sweep sites, \NcircContextRejected{} are
-rejected by context validation in Test~2x (Hiroshima Peace Memorial,
-Richtersveld, Gyeongju, Vi\~{n}ales Valley, Rock Islands Southern Lagoon,
-Uluru-Kata Tju\d{t}a, and Diqu\'{i}s Stone Spheres). In every case, the
-exclusion is driven by the semantic domain of the keyword match, not by
-any property of the site's longitude. Test~2x yields $N = \NcircValidated$,
-$p = \pCircApValidated$, $\circEnrichApValidated\times$ enrichment, confirming that the 7 rejected
-sites are inclusions that weakened the signal.
+Test~2b adds earthen mound-stage keywords (\textit{tumulus, tumuli,
+barrow, barrows, kofun} unambiguous; \textit{mound} context-validated)
+to trace the hemispherical tradition from burial mound through stupa to
+architectural dome.  Test~2bx applies the same architectural context gates
+to the extended population.  Statistics for all four variants are reported
+in the main text.
 
 \subsection{Founding-Origin Classifier (Test~5, Post-Hoc)}
 \label{sec:kwdaudit_founding}
@@ -1264,29 +1273,14 @@ sites are inclusions that weakened the signal.
 The founding-origin classifier (\texttt{lib/founding\_filter.py})
 assigns sites to five categories: Founding Capital (F), Sacred Origin
 (S), Founding Monument (M), Founding Axis (X), and Ancient Continuous
-Landscape (L), using unambiguous and context-gated keywords. Full
-keyword lists and gate-logic patterns are in \texttt{keywords.json},
-the single source of truth for all keyword content in this project
-(see also \texttt{lib/beru.py}:\texttt{load\_keywords()}).
-
-This classifier was iteratively tuned after data inspection. The
-objective was to reduce false positives while accepting that keyword-based
-classification cannot fully eliminate interpretive ambiguity at
-the boundary between founding-related and general heritage
-descriptions. It carries no weight in the primary evidential
-chain but addresses a substantive question: what kinds of sites,
-beyond domed and stupa monuments, tend to fall on $x.18$\textdegree{}E
-nodes? The classifier finds enrichment not only in morphologically
-domed structures but in sites associated with the founding of
-civilizational and religious traditions.
-
-\textbf{Keyword enrichment result.}
-Applied to the full corpus ($N = \NoriginCorpus$), the classifier finds
-\NfoundKwAp{} keyword-founding sites among the \NclusterAp{} A+ sites
-(\foundKwApRate\%; $N_{\mathrm{kw}} = \NfoundKwAll$, base rate
-\foundKwBaseRate\%). Fisher exact test: OR~$= \foundKwFisherOR$,
-$p = \pFoundKwFisher$~*. The classifier and keyword lists are available
-in the project repository (see Data and Code Availability).
+Landscape (L).  Each category has its own unambiguous keyword set plus
+context-gated ambiguous terms; positive and negative gate patterns are
+defined per category in \texttt{keywords.json}.  The classifier was
+iteratively tuned after data inspection to reduce false positives;
+residual interpretive ambiguity at the boundary between founding-related
+and general heritage descriptions is accepted.  Statistics are reported
+in the main text; the full site-by-site listing is in
+\texttt{supplementary/audit/founding\_keyword\_audit.txt}.
 
 
 
