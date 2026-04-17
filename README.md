@@ -2,7 +2,7 @@
 
 **Paper A — Primary UNESCO Analysis** · `v1.2.0`
 
-Seth Tenenbaum · Independent Scholar  
+Seth Tenenbaum · Fourth Temple Research  
 ORCID: [0009-0008-5797-2498](https://orcid.org/0009-0008-5797-2498)
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19574076.svg)](https://doi.org/10.5281/zenodo.19574076)
@@ -176,7 +176,6 @@ gerizim-paper-a/
 ├── pytest.ini                # Pytest settings
 ├── requirements.txt          # Python dependencies
 ├── Makefile                  # Reproduce all results with `make all`
-├── _run_x18.py               # Standalone x.18°E periodicity runner
 ├── LICENSE                   # MIT License (code)
 ├── LICENSE_MANUSCRIPT.txt    # CC BY 4.0 (manuscript text and figures)
 ├── LICENSE_DATA.txt          # Data licensing notes (UNESCO, Wikidata)
