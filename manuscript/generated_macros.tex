@@ -1,4 +1,4 @@
-% Generated macros — 2026-04-17T19:22:10Z
+% Generated macros — 2026-04-18T02:49:30Z
 % Source: bash manuscript/reproduce_all_macros.sh
 % IMPORTANT: values are computed fresh each run — do NOT hardcode
 
@@ -137,11 +137,15 @@
   \newcommand{\NcanonAp}{11}              % canon A+ count
   \newcommand{\canonApRate}{8.0}            % canon A+ rate (%)
   \newcommand{\pCanon}{0.0232}         % p-value, canon A+ binomial
+  \newcommand{\pCanonFisher}{0.1281}    % p-value, canon A+ Fisher exact vs rest
+  \newcommand{\orCanonVsRest}{1.59}    % OR, canon A+ Fisher exact vs rest
   \newcommand{\canonEnrich}{1.99}           % enrichment ratio, canon
   \newcommand{\NpreTwoK}{501}            % sites inscribed pre-2000
   \newcommand{\NpreTwoKAp}{33}              % pre-2000 A+ count
   \newcommand{\preTwoKApRate}{6.6}            % pre-2000 A+ rate (%)
   \newcommand{\pPreTwoK}{0.0041}         % p-value, pre-2000 A+ binomial
+  \newcommand{\pPreTwoKFisher}{0.0956}   % p-value, pre-2000 A+ Fisher exact vs rest
+  \newcommand{\orPreTwoKVsRest}{1.49}   % OR, pre-2000 A+ Fisher exact vs rest
   \newcommand{\preTwoKEnrich}{1.65}           % enrichment ratio, pre-2000
   \newcommand{\NmodernSites}{510}            % sites inscribed 2000+
   \newcommand{\NmodernAp}{23}              % modern A+ count
@@ -509,14 +513,14 @@
   \newcommand{\evoApRate}{11.8}           % A+ rate, dome-evolution corpus (%)
   \newcommand{\evoEnrichAp}{2.95}          % enrichment ratio, A+ in dome corpus
   \newcommand{\pEvoAp}{0.0005}          % p-value, A+ binomial (dome corpus)
-  \newcommand{\pEvoApFisher}{0.0049}     % p-value, A+ Fisher exact (dome corpus)
+  \newcommand{\pEvoApFisher}{0.0049}      % p-value, A+ Fisher exact (dome corpus)
   \newcommand{\evoApFisherOR}{2.67}    % OR, A+ Fisher exact (dome corpus)
+  \newcommand{\pEvoAFisher}{0.0113}        % p-value, A Fisher exact (dome corpus)
+  \newcommand{\evoAFisherOR}{1.71}      % OR, A Fisher exact (dome corpus)
   \newcommand{\NevoA}{35}             % Tier-A sites in dome-evolution corpus
   \newcommand{\evoARate}{31.8}           % A rate, dome-evolution corpus (%)
   \newcommand{\evoEnrichA}{1.59}           % enrichment ratio, A in dome corpus
   \newcommand{\pEvoA}{0.0023}          % p-value, A binomial (dome corpus)
-  \newcommand{\pEvoAFisher}{0.0113}      % p-value, A Fisher exact (dome corpus)
-  \newcommand{\evoAFisherOR}{1.71}      % OR, A Fisher exact (dome corpus)
   \newcommand{\evoExpAp}{4.40}          % expected A+ count at 4% null (dome-evolution corpus)
   \newcommand{\evoExpA}{22.00}           % expected A count at 20% null (dome-evolution corpus)
   \newcommand{\NevoMound}{24}           % sites with mound stage
@@ -526,8 +530,10 @@
   \newcommand{\evoMoundARate}{25.0}           % A-tier rate, mound stage (%)
   \newcommand{\evoMoundEnrich}{2.08}          % enrichment ratio, mound stage
   \newcommand{\pEvoMound}{0.2492}          % p-value, A+ binomial in mound stage
-  \newcommand{\pEvoMoundFisher}{0.3880}    % p-value, A+ Fisher exact in mound stage
-  \newcommand{\pEvoMoundAFisher}{0.4653}   % p-value, A Fisher exact in mound stage
+  \newcommand{\pEvoMoundFisher}{0.3880}      % p-value, A+ Fisher exact in mound stage
+  \newcommand{\evoMoundFisherOR}{1.57}    % OR, A+ Fisher exact in mound stage
+  \newcommand{\pEvoMoundAFisher}{0.4653}      % p-value, A Fisher exact in mound stage
+  \newcommand{\evoMoundAFisherOR}{1.15}    % OR, A Fisher exact in mound stage
   \newcommand{\NevoStupa}{18}            % sites with stupa stage
   \newcommand{\NevoStupaAp}{4}             % A+ sites with stupa stage
   \newcommand{\evoStupaApRate}{22.2}            % A+ rate, stupa stage (%)
@@ -535,8 +541,10 @@
   \newcommand{\evoStupaARate}{38.9}            % A-tier rate, stupa stage (%)
   \newcommand{\evoStupaEnrich}{5.56}           % enrichment ratio, stupa stage
   \newcommand{\pEvoStupa}{0.0050}          % p-value, A+ binomial in stupa stage
-  \newcommand{\pEvoStupaFisher}{0.0144}    % p-value, A+ Fisher exact in stupa stage
-  \newcommand{\pEvoStupaAFisher}{0.0874}   % p-value, A Fisher exact in stupa stage
+  \newcommand{\pEvoStupaFisher}{0.0144}      % p-value, A+ Fisher exact in stupa stage
+  \newcommand{\evoStupaFisherOR}{5.17}    % OR, A+ Fisher exact in stupa stage
+  \newcommand{\pEvoStupaAFisher}{0.0874}      % p-value, A Fisher exact in stupa stage
+  \newcommand{\evoStupaAFisherOR}{2.22}    % OR, A Fisher exact in stupa stage
   \newcommand{\NevoDome}{75}            % sites with dome stage
   \newcommand{\NevoDomeAp}{8}             % A+ sites with dome stage
   \newcommand{\evoDomeApRate}{10.7}            % A+ rate, dome stage (%)
@@ -544,8 +552,10 @@
   \newcommand{\evoDomeARate}{30.7}            % A-tier rate, dome stage (%)
   \newcommand{\evoDomeEnrich}{2.67}           % enrichment ratio, dome stage
   \newcommand{\pEvoDome}{0.0102}          % p-value, A+ binomial in dome stage
-  \newcommand{\pEvoDomeFisher}{0.0485}     % p-value, A+ Fisher exact in dome stage
-  \newcommand{\pEvoDomeAFisher}{0.0576}    % p-value, A Fisher exact in dome stage
+  \newcommand{\pEvoDomeFisher}{0.0485}       % p-value, A+ Fisher exact in dome stage
+  \newcommand{\evoDomeFisherOR}{2.21}     % OR, A+ Fisher exact in dome stage
+  \newcommand{\pEvoDomeAFisher}{0.0576}       % p-value, A Fisher exact in dome stage
+  \newcommand{\evoDomeAFisherOR}{1.58}     % OR, A Fisher exact in dome stage
   \newcommand{\NevoMoundOnly}{20}          % mound-only sites (no later dome/stupa)
   \newcommand{\NevoMoundOnlyAp}{2}           % A+ in mound-only sites
   \newcommand{\NevoOverlap}{4}            % sites with both mound and dome/stupa stages
@@ -722,6 +732,30 @@
 \newcommand{\wikiStupaNgawenDevM}{381}
 \newcommand{\wikiStupaLumbiniDevKm}{0.555}
 \newcommand{\wikiStupaLumbiniDevM}{555}
+\newcommand{\wikiJavaNodeN}{83}
+\newcommand{\wikiJavaNodeATierN}{43}
+\newcommand{\wikiJavaNodeATierRate}{51.8}
+\newcommand{\wikiJavaNodeATierOR}{4.74}
+\newcommand{\wikiJavaNodeATierP}{0.000}
+\newcommand{\wikiJavaTightN}{54}
+\newcommand{\wikiJavaTightATierN}{42}
+\newcommand{\wikiJavaTightATierRate}{77.8}
+\newcommand{\wikiJavaTightATierOR}{18.38}
+\newcommand{\wikiJavaTightATierP}{0.000}
+\newcommand{\wikiJavaTightApN}{6}
+\newcommand{\wikiJavaTightApRate}{11.1}
+\newcommand{\wikiJavaTightApOR}{4.25}
+\newcommand{\wikiJavaTightApP}{0.023}
+\newcommand{\wikiMyanmarN}{67}
+\newcommand{\wikiMyanmarCbandN}{24}
+\newcommand{\wikiMyanmarCbandRate}{35.8}
+\newcommand{\wikiMyanmarCbandOR}{4.47}
+\newcommand{\wikiMyanmarCbandP}{0.000}
+\newcommand{\wikiHeartlandN}{120}
+\newcommand{\wikiHeartlandCbandN}{35}
+\newcommand{\wikiHeartlandCbandRate}{29.2}
+\newcommand{\wikiHeartlandCbandOR}{6.00}
+\newcommand{\wikiHeartlandCbandP}{0.000}
 
 % --- analysis/unesco/simulation_null_model.py
   \newcommand{\simNperms}{100{,}000}        % number of permutations in null model
@@ -898,18 +932,18 @@
   \newcommand{\regionCondBNblocks}{61}         % Strategy B blocks
 
 % --- analysis/unesco/fdr_multiple_comparisons.py
-  \newcommand{\NtotalTests}{43}           % total tests in FDR analysis
+  \newcommand{\NtotalTests}{44}           % total tests in FDR analysis
   \newcommand{\NconfTests}{36}           % confirmatory tests
-  \newcommand{\NexplTests}{7}           % exploratory tests
-  \newcommand{\NsurviveFDR}{26}           % tests surviving BH FDR (q<0.05)
+  \newcommand{\NexplTests}{8}           % exploratory tests
+  \newcommand{\NsurviveFDR}{27}           % tests surviving BH FDR (q<0.05)
   \newcommand{\NsurviveBonfAll}{6}           % tests surviving Bonferroni (all tests)
-  \newcommand{\NtotalTestsP}{0.0012}  % Bonferroni threshold = 0.05/43 (used in FDR table header)
-  \newcommand{\FDRqTestOne}{0.0233}  % BH q, Test 1: Global enrichment — full corpus A+ (binomial)
-  \newcommand{\BonfAllTestOne}{0.4429}  % Bonf adj (k=43), Test 1: Global enrichment — full corpus A+ (binomial)
-  \newcommand{\FDRqTestTwo}{0.0068}  % BH q, Test 2: Domed/spherical A+ — RAW sweep (binomial)
-  \newcommand{\BonfAllTestTwo}{0.0407}  % Bonf adj (k=43), Test 2: Domed/spherical A+ — RAW sweep (binomial)
-  \newcommand{\FDRqTestThree}{0.016}  % BH q, Test 3: Cluster asymmetry — permutation p
-  \newcommand{\BonfAllTestThree}{0.1419}  % Bonf adj (k=43), Test 3: Cluster asymmetry — permutation p
+  \newcommand{\NtotalTestsP}{0.0011}  % Bonferroni threshold = 0.05/44 (used in FDR table header)
+  \newcommand{\FDRqTestOne}{0.0227}  % BH q, Test 1: Global enrichment — full corpus A+ (binomial)
+  \newcommand{\BonfAllTestOne}{0.4532}  % Bonf adj (k=44), Test 1: Global enrichment — full corpus A+ (binomial)
+  \newcommand{\FDRqTestTwo}{0.0069}  % BH q, Test 2: Domed/spherical A+ — RAW sweep (binomial)
+  \newcommand{\BonfAllTestTwo}{0.0416}  % Bonf adj (k=44), Test 2: Domed/spherical A+ — RAW sweep (binomial)
+  \newcommand{\FDRqTestThree}{0.0154}  % BH q, Test 3: Cluster asymmetry — permutation p
+  \newcommand{\BonfAllTestThree}{0.1452}  % Bonf adj (k=44), Test 3: Cluster asymmetry — permutation p
 
 % --- analysis/unesco/bonferroni_correction.py
   \newcommand{\BonfK}{3}  % k = confirmatory tests (Tests 1, 2, 3)

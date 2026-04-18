@@ -112,12 +112,16 @@ def run():
     N_EXT         = len(all_sites_ext)   # 1012
     N_ALL         = N_EXT - 1           # 1011 inscribed only
 
-    # Build text lookup for keyword tagging
+    # Build text lookup for keyword tagging, and country/region lookup
     DETAIL_TAGS = _build_detail_tags()
-    text_by_name = {}
+    text_by_name    = {}
+    states_by_name  = {}
+    regions_by_name = {}
     for s in cultural_sites_with_coords(corpus):
         ext  = s.extended_description if s.extended_description else ""
-        text_by_name[s.site] = (s.site + " " + s.short_description + " " + ext).lower()
+        text_by_name[s.site]    = (s.site + " " + s.short_description + " " + ext).lower()
+        states_by_name[s.site]  = s.states  or ""
+        regions_by_name[s.site] = s.regions or ""
 
     def get_tags(name):
         text = text_by_name.get(name, name.lower())
@@ -131,9 +135,11 @@ def run():
     ger = classify_sites(ger_corpus, GERIZIM)
     jer = classify_sites(jer_corpus, JERUSALEM)
 
-    # Attach keyword tags to each record
+    # Attach keyword tags and country/region to each record
     for s in ger + jer:
-        s["tags"] = get_tags(s["name"])
+        s["tags"]    = get_tags(s["name"])
+        s["states"]  = states_by_name.get(s["name"], "")
+        s["regions"] = regions_by_name.get(s["name"], "")
 
     def counts(sites):
         app = sum(1 for s in sites if s["tier"] == "A++")
@@ -198,6 +204,43 @@ def run():
         f"  A+ unique to Jerusalem: {len(jer_only_ap)} sites",
         "",
     ]
+
+    # ── Country / Region breakdown ────────────────────────────────────────────
+    def geo_breakdown(sites, label):
+        """Return lines for country and UNESCO-region breakdown of A+ sites."""
+        ap_sites = [s for s in sites if s["tier"] in ("A++", "A+")]
+        n_ap = len(ap_sites)
+
+        # Count by UNESCO region
+        from collections import Counter
+        region_counts: Counter = Counter()
+        country_counts: Counter = Counter()
+        for s in ap_sites:
+            for reg in (s["regions"] or "Unknown").split(","):
+                region_counts[reg.strip()] += 1
+            for ctry in (s["states"] or "Unknown").split(","):
+                country_counts[ctry.strip()] += 1
+
+        rows = []
+        rows.append(SEP)
+        rows.append(f"COUNTRY / REGION BREAKDOWN — {label.upper()}  (A+ sites, N={n_ap})")
+        rows.append("")
+        rows.append("  UNESCO REGIONS")
+        rows.append(f"  {'Region':<40}  {'Count':>5}  {'Rate':>6}")
+        rows.append("  " + "-" * 56)
+        for reg, cnt in sorted(region_counts.items(), key=lambda x: -x[1]):
+            rows.append(f"  {reg:<40}  {cnt:>5}  {100*cnt/n_ap:>5.1f}%")
+        rows.append("")
+        rows.append("  COUNTRIES  (top 20, alphabetical within count)")
+        rows.append(f"  {'Country':<40}  {'A+ sites':>8}")
+        rows.append("  " + "-" * 52)
+        for ctry, cnt in sorted(country_counts.items(), key=lambda x: (-x[1], x[0]))[:20]:
+            rows.append(f"  {ctry:<40}  {cnt:>8}")
+        rows.append("")
+        return rows
+
+    lines += geo_breakdown(ger, f"Gerizim ({GERIZIM}°E)")
+    lines += geo_breakdown(jer, f"Jerusalem ({JERUSALEM}°E)")
 
     # ── Gerizim site listing ──────────────────────────────────────────────────
     def site_rows(sites, label):

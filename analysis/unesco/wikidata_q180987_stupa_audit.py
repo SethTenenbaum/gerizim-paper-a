@@ -66,7 +66,7 @@ from collections import defaultdict
 from pathlib import Path
 
 import numpy as np
-from scipy.stats import binomtest
+from scipy.stats import binomtest, fisher_exact
 
 np.random.seed(42)
 
@@ -196,6 +196,49 @@ def main() -> None:
     n_java      = len(java_sites)
     n_java_a    = sum(1 for s in java_sites if is_a_tier(s))
     rate_java_a = 100.0 * n_java_a / n_java if n_java > 0 else 0.0
+
+    # ── Geographic breakdown (for paper macros) ──────────────────────────────
+    is_c_band   = lambda s: s["tier"] in ("C", "C-", "C--")
+
+    K_AP = sum(1 for s in sites if is_ap_tier(s))
+    K_A  = sum(1 for s in sites if is_a_tier(s))
+    K_C  = sum(1 for s in sites if is_c_band(s))
+
+    def _fisher(sub, k_sub, K_bg, alternative="greater"):
+        n = len(sub)
+        if n == 0:
+            return float("nan"), float("nan")
+        table = [[k_sub, n - k_sub], [K_bg - k_sub, N - n - (K_bg - k_sub)]]
+        or_, p = fisher_exact(table, alternative=alternative)
+        return round(or_, 2), round(p, 4)
+
+    # Java/Sumatra node 105–115°E
+    java115 = [s for s in sites if 105.0 <= s["lon"] <= 115.0]
+    n_java115    = len(java115)
+    nap_java115  = sum(1 for s in java115 if is_ap_tier(s))
+    na_java115   = sum(1 for s in java115 if is_a_tier(s))
+    or_a_java115,  p_a_java115  = _fisher(java115, na_java115,  K_A)
+    or_ap_java115, p_ap_java115 = _fisher(java115, nap_java115, K_AP)
+
+    # Java tight 107–112°E
+    java112 = [s for s in sites if 107.0 <= s["lon"] <= 112.0]
+    n_java112    = len(java112)
+    nap_java112  = sum(1 for s in java112 if is_ap_tier(s))
+    na_java112   = sum(1 for s in java112 if is_a_tier(s))
+    or_a_java112,  p_a_java112  = _fisher(java112, na_java112,  K_A)
+    or_ap_java112, p_ap_java112 = _fisher(java112, nap_java112, K_AP)
+
+    # Myanmar/Cambodia 90–105°E
+    myanmar = [s for s in sites if 90.0 <= s["lon"] <= 105.0]
+    n_myanmar  = len(myanmar)
+    nc_myanmar = sum(1 for s in myanmar if is_c_band(s))
+    or_c_myanmar, p_c_myanmar = _fisher(myanmar, nc_myanmar, K_C)
+
+    # Heartland 70–105°E combined
+    heartland70 = [s for s in sites if 70.0 <= s["lon"] <= 105.0]
+    n_hl70  = len(heartland70)
+    nc_hl70 = sum(1 for s in heartland70 if is_c_band(s))
+    or_c_hl70, p_c_hl70 = _fisher(heartland70, nc_hl70, K_C)
 
     # ── Cluster asymmetry ────────────────────────────────────────────────────
     # Group sites by nearest harmonic node (0.1-beru step)
@@ -340,6 +383,31 @@ def main() -> None:
         ("wikiStupaNgawenDevM",      f"{named_devs.get('ngawen', 0)*1000:.0f}"),
         ("wikiStupaLumbiniDevKm",    f"{named_devs.get('lumbini', 0):.3f}"),
         ("wikiStupaLumbiniDevM",     f"{named_devs.get('lumbini', 0)*1000:.0f}"),
+        # Geographic breakdown macros
+        ("wikiJavaNodeN",            str(n_java115)),
+        ("wikiJavaNodeATierN",       str(na_java115)),
+        ("wikiJavaNodeATierRate",    f"{100*na_java115/n_java115:.1f}" if n_java115 else "0"),
+        ("wikiJavaNodeATierOR",      f"{or_a_java115:.2f}"),
+        ("wikiJavaNodeATierP",       f"{p_a_java115:.3f}"),
+        ("wikiJavaTightN",           str(n_java112)),
+        ("wikiJavaTightATierN",      str(na_java112)),
+        ("wikiJavaTightATierRate",   f"{100*na_java112/n_java112:.1f}" if n_java112 else "0"),
+        ("wikiJavaTightATierOR",     f"{or_a_java112:.2f}"),
+        ("wikiJavaTightATierP",      f"{p_a_java112:.3f}"),
+        ("wikiJavaTightApN",         str(nap_java112)),
+        ("wikiJavaTightApRate",      f"{100*nap_java112/n_java112:.1f}" if n_java112 else "0"),
+        ("wikiJavaTightApOR",        f"{or_ap_java112:.2f}"),
+        ("wikiJavaTightApP",         f"{p_ap_java112:.3f}"),
+        ("wikiMyanmarN",             str(n_myanmar)),
+        ("wikiMyanmarCbandN",        str(nc_myanmar)),
+        ("wikiMyanmarCbandRate",     f"{100*nc_myanmar/n_myanmar:.1f}" if n_myanmar else "0"),
+        ("wikiMyanmarCbandOR",       f"{or_c_myanmar:.2f}"),
+        ("wikiMyanmarCbandP",        f"{p_c_myanmar:.3f}"),
+        ("wikiHeartlandN",           str(n_hl70)),
+        ("wikiHeartlandCbandN",      str(nc_hl70)),
+        ("wikiHeartlandCbandRate",   f"{100*nc_hl70/n_hl70:.1f}" if n_hl70 else "0"),
+        ("wikiHeartlandCbandOR",     f"{or_c_hl70:.2f}"),
+        ("wikiHeartlandCbandP",      f"{p_c_hl70:.3f}"),
     ]
 
     for name, val in macros:
@@ -368,6 +436,31 @@ def main() -> None:
         ("wikiStupaBorobudurDevKm",  round(named_devs.get("borobudur", 0), 3)),
         ("wikiStupaNgawenDevKm",     round(named_devs.get("ngawen", 0), 4)),
         ("wikiStupaLumbiniDevKm",    round(named_devs.get("lumbini", 0), 4)),
+        # Geographic breakdown
+        ("wikiJavaNodeN",            float(n_java115)),
+        ("wikiJavaNodeATierN",       float(na_java115)),
+        ("wikiJavaNodeATierRate",    round(100*na_java115/n_java115, 1) if n_java115 else 0.0),
+        ("wikiJavaNodeATierOR",      float(or_a_java115)),
+        ("wikiJavaNodeATierP",       float(p_a_java115)),
+        ("wikiJavaTightN",           float(n_java112)),
+        ("wikiJavaTightATierN",      float(na_java112)),
+        ("wikiJavaTightATierRate",   round(100*na_java112/n_java112, 1) if n_java112 else 0.0),
+        ("wikiJavaTightATierOR",     float(or_a_java112)),
+        ("wikiJavaTightATierP",      float(p_a_java112)),
+        ("wikiJavaTightApN",         float(nap_java112)),
+        ("wikiJavaTightApRate",      round(100*nap_java112/n_java112, 1) if n_java112 else 0.0),
+        ("wikiJavaTightApOR",        float(or_ap_java112)),
+        ("wikiJavaTightApP",         float(p_ap_java112)),
+        ("wikiMyanmarN",             float(n_myanmar)),
+        ("wikiMyanmarCbandN",        float(nc_myanmar)),
+        ("wikiMyanmarCbandRate",     round(100*nc_myanmar/n_myanmar, 1) if n_myanmar else 0.0),
+        ("wikiMyanmarCbandOR",       float(or_c_myanmar)),
+        ("wikiMyanmarCbandP",        float(p_c_myanmar)),
+        ("wikiHeartlandN",           float(n_hl70)),
+        ("wikiHeartlandCbandN",      float(nc_hl70)),
+        ("wikiHeartlandCbandRate",   round(100*nc_hl70/n_hl70, 1) if n_hl70 else 0.0),
+        ("wikiHeartlandCbandOR",     float(or_c_hl70)),
+        ("wikiHeartlandCbandP",      float(p_c_hl70)),
     ]}
     ResultsStore().write_many(store_data)
     print()

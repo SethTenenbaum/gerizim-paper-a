@@ -536,31 +536,30 @@ sites matching both keyword sets.
   Null rates: A+ $P_0 = \NullRateAp{}$ (4\%), A $P_0 = \NullRateA{}$ (20\%).
   Fisher exact tests stage vs.\ full corpus background.}
 \label{tab:evostages1b}
-\begin{tabular}{lrrrrrcc}
+\begin{tabular}{lrrrllrl}
 \toprule
-Stage & $N$ & A+ & A+ rate & A & A rate & $p_{\text{A+}}$ (Fisher) & $p_{\text{A}}$ (Fisher) \\
+ & & \multicolumn{3}{c}{Tier A+ ($\leq$6.7\,km)} & \multicolumn{3}{c}{Tier A ($\leq$33\,km)} \\
+\cmidrule(lr){3-5}\cmidrule(lr){6-8}
+Stage & $N$ & A+ & Rate & OR\;($p$, Fisher) & A & Rate & OR\;($p$, Fisher) \\
 \midrule
-Mound (tumulus/barrow/kofun) & \NevoMound & \NevoMoundAp & \evoMoundApRate\% & \NevoMoundA & \evoMoundARate\% & \pEvoMoundFisher~ns  & \pEvoMoundAFisher~ns \\
-Stupa (stupa/stupas)         & \NevoStupa & \NevoStupaAp & \evoStupaApRate\% & \NevoStupaA & \evoStupaARate\% & \pEvoStupaFisher~*   & \pEvoStupaAFisher~$^\dagger$ \\
-Dome (dome/tholos/spherical) & \NevoDome  & \NevoDomeAp  & \evoDomeApRate\%  & \NevoDomeA  & \evoDomeARate\%  & \pEvoDomeFisher~*    & \pEvoDomeAFisher~$^\dagger$ \\
+Mound (tumulus/barrow/kofun) & \NevoMound & \NevoMoundAp & \evoMoundApRate\% & $\evoMoundFisherOR\times$ (\pEvoMoundFisher~ns)            & \NevoMoundA & \evoMoundARate\% & $\evoMoundAFisherOR\times$ (\pEvoMoundAFisher~ns) \\
+Stupa (stupa/stupas)         & \NevoStupa & \NevoStupaAp & \evoStupaApRate\% & $\evoStupaFisherOR\times$ (\pEvoStupaFisher~*)             & \NevoStupaA & \evoStupaARate\% & $\evoStupaAFisherOR\times$ (\pEvoStupaAFisher~$^\dagger$) \\
+Dome (dome/tholos/spherical) & \NevoDome  & \NevoDomeAp  & \evoDomeApRate\%  & $\evoDomeFisherOR\times$ (\pEvoDomeFisher~*)              & \NevoDomeA  & \evoDomeARate\%  & $\evoDomeAFisherOR\times$ (\pEvoDomeAFisher~$^\dagger$) \\
 \midrule
-\textbf{Combined}            & \textbf{\NevoTotal} & \textbf{\NevoAp} & \textbf{\evoApRate\%} & \textbf{\NevoA} & \textbf{\evoARate\%} & \textbf{\pEvoApFisher~**} & \textbf{\pEvoAFisher~*} \\
+\textbf{Combined}            & \textbf{\NevoTotal} & \textbf{\NevoAp} & \textbf{\evoApRate\%} & $\mathbf{\evoApFisherOR\times}$ (\textbf{\pEvoApFisher~**}) & \textbf{\NevoA} & \textbf{\evoARate\%} & $\mathbf{\evoAFisherOR\times}$ (\textbf{\pEvoAFisher~*}) \\
 \bottomrule
 \multicolumn{8}{p{0.98\linewidth}}{\footnotesize
-  Stage $N$ values sum to more than the combined total because \NevoOverlap{} sites match keywords from multiple stages and are counted once in the combined row.
-  A+ and A counts by stage are computed within each stage population independently.
-  Fisher exact: one-sided test (enrichment) vs.\ full UNESCO cultural corpus background.
-  Enrichment ratios: combined A+ = $\evoEnrichAp\times$, A = $\evoEnrichA\times$;
-  stupa A+ = $\evoStupaEnrich\times$, dome A+ = $\evoDomeEnrich\times$.
+  OR = odds ratio; $p$ = one-sided Fisher exact vs.\ full UNESCO cultural corpus ($N = \NclusterTotal$).
+  Stage $N$ values sum to more than the combined total because \NevoOverlap{} sites match multiple stages; combined row counts unique sites.
   *** $p < 0.001$, ** $p < 0.01$, * $p < 0.05$, $^\dagger$ $p < 0.10$, ns = not significant.} \\
 \end{tabular}
 \end{table*}
 
 \noindent The combined population ($N = \NevoTotal$, A+ = \evoApRate\%;
-Tables~\ref{tab:evolution1b}--\ref{tab:evostages1b}) is consistent with Test~2. The mound stage does not reach
-significance (\evoMoundApRate\%, Fisher $p = \pEvoMoundFisher$, ns). The signal is carried
-by the stupa (A+ \evoStupaApRate\%, A \evoStupaARate\%, $\evoStupaEnrich\times$, Fisher $p = \pEvoStupaFisher$~*) and dome
-sub-stages (A+ \evoDomeApRate\%, A \evoDomeARate\%, $\evoDomeEnrich\times$, Fisher $p = \pEvoDomeFisher$~*).
+Table~\ref{tab:evostages1b}) is consistent with Test~2. The mound stage does not reach
+significance (\evoMoundApRate\%, OR $= \evoMoundFisherOR\times$, Fisher $p = \pEvoMoundFisher$, ns). The signal is carried
+by the stupa (A+ \evoStupaApRate\%, OR $= \evoStupaFisherOR\times$, $p = \pEvoStupaFisher$~*) and dome
+sub-stages (A+ \evoDomeApRate\%, OR $= \evoDomeFisherOR\times$, $p = \pEvoDomeFisher$~*).
 Leave-one-out checks confirm stability for all sub-stages.
 The dome-evolution filter (Fisher $p = \pEvoApFisher$~**, binomial $p = \pEvoAp$~***) is the strongest keyword-filtered
 signal in this analysis, exceeding even the raw dome sweep (Fisher $p = \pCircApFisher$, binomial $p = \pCircAp$~***).
@@ -994,6 +993,21 @@ Harmonic nodes with at least one Tier-A site carry $\wikiStupaClusterRatio\times
 more stupa sites on average than empty nodes, mirroring the cluster-asymmetry
 result of Test~3.
 
+\textbf{Geographic tier breakdown and bimodal structure.}
+A sub-regional breakdown reveals a bimodal pattern consistent with the
+Buddhist A/C enrichment in the UNESCO religion audit (\S\ref{sec:resultsrelig}).
+The Java/Sumatra node (105\textdegree--115\textdegree{}E, near the 2.5-beru harmonic at 110.3\textdegree{}E)
+concentrates \wikiJavaNodeATierN{} of \wikiJavaNodeN{} sites at Tier-A (\wikiJavaNodeATierRate\%, OR $= \wikiJavaNodeATierOR\times$, $p < 0.001$),
+rising to \wikiJavaTightATierN/\wikiJavaTightN{} (\wikiJavaTightATierRate\%, OR $= \wikiJavaTightATierOR\times$, $p < 0.001$) in the 107\textdegree--112\textdegree{}E window,
+where A+ is also elevated at \wikiJavaTightApRate\% (OR $= \wikiJavaTightApOR\times$, $p = \wikiJavaTightApP$).
+The physical heartland, India/Nepal (70\textdegree--90\textdegree{}E) and Myanmar/Cambodia
+(90\textdegree--105\textdegree{}E), is A-tier depleted (OR $= 0.15$--$0.68\times$, ns)
+but strongly enriched in the inter-harmonic C-band:
+Myanmar/Cambodia reaches \wikiMyanmarCbandRate\% (OR $= \wikiMyanmarCbandOR\times$, $p < 0.001$) and the
+combined heartland \wikiHeartlandCbandRate\% (OR $= \wikiHeartlandCbandOR\times$, $p < 0.001$).
+The two zones are geographically anti-correlated in the same way as the
+Buddhist bimodal, supporting a grid-level rather than site-selection account.
+
 \subsection{Multiple Comparisons}
 \label{sec:sharpshooter}
 
@@ -1099,18 +1113,15 @@ a novel empirical observation.
 \label{sec:alt_explanations}
 
 \textbf{(1) Independent convergence.}
-Hemispherical structures are a recurring architectural solution, and
-convergent astronomical orientations across unconnected cultures have
-been documented \citep{aveni2001skywatchers,aveni2003archaeoastronomy}. However,
-independent convergence predicts no consistent longitude specificity.
+Hemispherical structures are a recurring architectural solution and convergent
+orientations across cultures are documented \citep{aveni2001skywatchers,aveni2003archaeoastronomy},
+but independent convergence predicts no consistent longitude specificity.
 
 \textbf{(2) Geographic concentration.}
-This is the strongest alternative and cannot be excluded on this corpus
-alone. Permutation tests show geographic concentration can reproduce the
-sensitivity-collapse pattern (\S\ref{sec:sensitivity_slope_perm}).
-However, the restricted geographic draw (Null~C,
-$p = \geoNullDomeRestrictedP$, **) shows that other monuments from the
-same longitude footprint are significantly less enriched than dome sites.
+This is the strongest alternative and cannot be excluded on this corpus alone.
+The restricted geographic draw (Null~C, $p = \geoNullDomeRestrictedP$, **)
+shows that other monuments from the same longitude footprint are significantly
+less enriched than dome sites.
 
 \textbf{(3) Random coincidence.}
 Three simulation approaches fail to reproduce the dome enrichment
@@ -1132,18 +1143,13 @@ asymmetry ($p = \clusterPermP$).
 
 \subsubsection*{Replication and methodological transferability}
 
-This paper is a terminal analysis of the only available globally
-comprehensive, institutionally curated monument corpus. The pipeline is
-transferable to any corpus assembled prior to and without reference to
-this hypothesis, provided it is sufficiently selective. Named heritage
-registers, protected site inventories, and operationally defined named
-lists all qualify. The Wikidata Q180987 stupa result (\S\ref{sec:stupas_q180987})
-illustrates one such application; further applications to independent
-corpora will either accumulate evidence or not.
-
-The pipeline offers a general framework for testing other candidate angular
-units against any externally curated monument corpus; the null model and
-tier boundaries are fixed independently of the data.
+The pipeline is transferable to any corpus assembled without reference to
+this hypothesis. Named heritage registers, protected site inventories, and
+operationally defined lists all qualify; the Wikidata Q180987 result
+(\S\ref{sec:stupas_q180987}) illustrates one such application.
+The null model and tier boundaries are fixed independently of the data,
+so further applications to independent corpora will either accumulate
+evidence or not.
 
 \appendix
 

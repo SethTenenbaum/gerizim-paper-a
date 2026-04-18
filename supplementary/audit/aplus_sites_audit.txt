@@ -1,5 +1,5 @@
 UNESCO A-TIER SITES: GERIZIM vs JERUSALEM ANCHOR COMPARISON
-Generated : Fri Apr 17 20:52:23 UTC 2026
+Generated : Sat Apr 18 03:00:11 UTC 2026
 Script    : tools/generate_audit_aplus_sites.py
 Corpus    : 1011 inscribed Cultural/Mixed UNESCO sites with coordinates
            + 1 synthetic Gerizim entry = 1012 extended corpus
@@ -22,6 +22,79 @@ SUMMARY
   A+ overlap (both anchors): 38 sites
   A+ unique to Gerizim: 18 sites
   A+ unique to Jerusalem: 19 sites
+
+────────────────────────────────────────────────────────────────────────────────────────────────
+COUNTRY / REGION BREAKDOWN — GERIZIM (35.269°E)  (A+ sites, N=56)
+
+  UNESCO REGIONS
+  Region                                    Count    Rate
+  --------------------------------------------------------
+  Europe and North America                     30   53.6%
+  Asia and the Pacific                         14   25.0%
+  Africa                                        5    8.9%
+  Arab States                                   4    7.1%
+  Latin America and the Caribbean               3    5.4%
+
+  COUNTRIES  (top 20, alphabetical within count)
+  Country                                   A+ sites
+  ----------------------------------------------------
+  Italy                                            7
+  Spain                                            4
+  Czechia                                          3
+  France                                           3
+  Bulgaria                                         2
+  China                                            2
+  India                                            2
+  Kazakhstan                                       2
+  Poland                                           2
+  Romania                                          2
+  Türkiye                                          2
+  Angola                                           1
+  Armenia                                          1
+  Australia                                        1
+  Belgium                                          1
+  Côte d'Ivoire                                    1
+  Ethiopia                                         1
+  Germany                                          1
+  Guatemala                                        1
+  Indonesia                                        1
+
+────────────────────────────────────────────────────────────────────────────────────────────────
+COUNTRY / REGION BREAKDOWN — JERUSALEM (35.2317°E)  (A+ sites, N=57)
+
+  UNESCO REGIONS
+  Region                                    Count    Rate
+  --------------------------------------------------------
+  Europe and North America                     23   40.4%
+  Asia and the Pacific                         17   29.8%
+  Africa                                        6   10.5%
+  Latin America and the Caribbean               5    8.8%
+  Arab States                                   5    8.8%
+  Unknown                                       1    1.8%
+
+  COUNTRIES  (top 20, alphabetical within count)
+  Country                                   A+ sites
+  ----------------------------------------------------
+  Italy                                            6
+  India                                            4
+  China                                            3
+  South Africa                                     3
+  Spain                                            3
+  Czechia                                          2
+  Kazakhstan                                       2
+  Poland                                           2
+  Romania                                          2
+  Russian Federation                               2
+  Türkiye                                          2
+  Angola                                           1
+  Australia                                        1
+  Azerbaijan                                       1
+  Bolivia (Plurinational State of)                 1
+  Bulgaria                                         1
+  Chile                                            1
+  Colombia                                         1
+  Côte d'Ivoire                                    1
+  Ethiopia                                         1
 
 ────────────────────────────────────────────────────────────────────────────────────────────────
 GERIZIM (35.269°E) — ALL A-TIER SITES  (A++=7, A+=56, A=172, total=228)
