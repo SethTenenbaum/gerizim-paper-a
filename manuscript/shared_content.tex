@@ -310,18 +310,19 @@ Test~5 (founding)      & \NoriginCorpus  & \pFoundKwFisher$^{a}$ & N/A          
 \end{tabular}}
 \end{table*}
 
-A comprehensive FDR audit (Benjamini-Hochberg, \NtotalTests{} tests,
+A comprehensive FDR audit (\NtotalTests{} tests;
 \citealt{benjamini1995controlling}) retains \NsurviveFDR{} at $q < 0.05$,
-of which \NsurviveBonfAll{} survive Bonferroni at $k = \NtotalTests$.
-All three primary results (Tests~1--3) survive FDR correction; Tests~2
-and~3 additionally survive full-$k$ Bonferroni. Test~1 passes $k = \BonfK$ ($p_\mathrm{adj} = \pAdjTestOne$) but not full-$k$. Test~B is excluded by construction. The \NsurviveBonfAll{} surviving full-$k$ Bonferroni are:
+of which \NsurviveBonfAll{} survive full Bonferroni at $k = \NtotalTests$.
+All three primary results (Tests~1--3) pass FDR correction; Tests~2 and~3
+additionally survive full-$k$ Bonferroni.
+The \NsurviveBonfAll{} full-$k$ survivors are:
 domed/spherical A+ enrichment (Test~2, $p_\mathrm{adj} = \BonfAllTestTwo$);
-harmonic-level Mann--Whitney ($p = \clusterHarmonicMWp$);
+harmonic-level Mann-Whitney ($p\ \clusterHarmonicMWpStr$);
 sequential-peak permutation ($p = \peakSigP$);
-corridor occupancy \corridorPrecHits{}/\corridorPrecN{} and Fisher combined
-($p = \pCorridorBinom$; $p = \pCorridorFisher$);
-and evolution combined A+ (Fisher $p = \pEvoApFisher$, OR~$= \evoApFisherOR$; binomial $p = \pEvoAp$).
-The full audit is in the archived repository (\citealt{tenenbaum2026audit}).
+corridor occupancy \corridorPrecHits{}/\corridorPrecN{} harmonics with
+binomial $p = \pCorridorBinom$ and Fisher $p = \pCorridorFisher$;
+and evolution combined A+ (Fisher $p = \pEvoApFisher$~**, binomial $p = \pEvoAp$~***).
+The full audit is in the archived repository \citep{tenenbaum2026audit}.
 
 \subsection{Null Models}
 \label{sec:methods_simulation}
@@ -377,13 +378,14 @@ The pre-2000 cohort remains significant against the geometric null
 full region-adjusted analysis.
 
 \subsubsection*{World religion sites}
+\label{sec:resultsrelig}
 Religion sub-populations are defined by keyword sets in
 \texttt{keywords.json} (\texttt{religion\_sets}); each set extends beyond
 the bare religion name to include architecturally and historically
 associated terms (e.g.\ \textit{cathedral}, \textit{crusader},
 \textit{byzantine}, \textit{biblical} for Christianity;
 \textit{stupa}, \textit{bodhi}, \textit{ashoka} for Buddhism;
-\textit{synagogue}, \textit{hebrew}, \textit{israelite}, \textit{biblical}.
+\textit{synagogue}, \textit{hebrew}, \textit{israelite}, \textit{biblical}).
 The full per-religion keyword lists and all matched sites are tabulated in
 \texttt{supplementary/audit/religion\_keyword\_audit.txt}.
 Sites associated with any world religion ($N = \NreligUnion$): \religUnionApRate\%
@@ -415,39 +417,24 @@ likely reflecting the modest sample size ($N = \NjudSites$).
 \label{sec:resultscircular}
 
 The keyword filter is described in \S\ref{sec:test_populations} ($N = \NcircTotal$).
-Permutation $Z = \simDomePermZ$,
-$p = \simDomePermP$; bootstrap $p = \simDomeBootP$
-(Table~\ref{tab:circularstats}).
-
-
-\begin{table*}[!t]
-\centering
-\caption{UNESCO domed/spherical monument test ($N = \NcircTotal$, raw keyword sweep).
-  Primary evidence against the chance explanation: simulation permutation
-  $Z = \simDomePermZ$, $p = \simDomePermP$ (\S\ref{sec:simulation_null}).
-  Fisher exact tests compare dome sub-corpus to rest of UNESCO corpus.
-  Exact binomial results are shown as reference baselines.
-  The non-significant $\chi^2$ is discussed in the text.}
-\label{tab:circularstats}
-\adjustbox{max width=\textwidth}{%
-\begin{tabular}{lrrrrrll}
-\toprule
-Metric & Obs & Exp($H_0$) & Rate [95\% CI] & Enrich. & $p$ (Fisher) & OR & \\
-\midrule
-Tier-A+ ($\leq 0.002$ beru) & \NcircTierAp & \circExpAp & \NcircApRate\% [\circApCIlo, \circApCIhi] & $\circEnrichAp\times$ & \pCircApFisher & \circApFisherOR & ** \\
-Tier-A\phantom{+} ($\leq 0.010$ beru)  & \NcircTierA  & \circExpA & \circARate\% [\circACIlo, \circACIhi] & $\circEnrichA\times$ & \pCircAFisher & \circAFisherOR & * \\
-$\chi^2$-uniform (5 bins, df\,=\,4) & --- & --- & ---  & --- & \pCircChi & --- & ns \\
-\midrule
-\multicolumn{8}{l}{Expected under $H_0$: A+ = \NullRateAp{}, A = \NullRateA{}. CIs are Clopper-Pearson exact.} \\
-\multicolumn{8}{l}{Binomial baselines: A+ $p = \pCircAp$~***, A $p = \pCircA$~**.} \\
-\multicolumn{8}{l}{Tier-B (middle zone): \NcircTierB\,/\,\NcircTotal{} sites. Mean $\delta$: \circMeanDev\,beru.} \\
-\multicolumn{8}{l}{\footnotesize *** $p < 0.001$, ** $p < 0.01$, * $p < 0.05$, $^\dagger$ $p < 0.10$ (trend-level), ns = not significant.} \\
-\bottomrule
-\end{tabular}}% end adjustbox
-\end{table*}
+Tier-A+ enrichment: \NcircTierAp/\NcircTotal{} sites
+(\NcircApRate\% [\circApCIlo, \circApCIhi], $\circEnrichAp\times$;
+Fisher OR~$= \circApFisherOR$, $p = \pCircApFisher$~**;
+binomial $p = \pCircAp$~***;
+permutation $Z = \simDomePermZ$, $p = \simDomePermP$;
+bootstrap $p = \simDomeBootP$;
+Bonferroni $p_\mathrm{adj} = \pAdjTestTwo$, $k = \BonfK$).
+Tier-A enrichment: \NcircTierA/\NcircTotal{}
+(\circARate\% [\circACIlo, \circACIhi], $\circEnrichA\times$;
+Fisher OR~$= \circAFisherOR$, $p = \pCircAFisher$~*;
+binomial $p = \pCircA$~**).
+The $\chi^2$-uniform test (5 bins, df~$= 4$) is not significant
+($p = \pCircChi$), consistent with the signal being concentrated at
+harmonic nodes rather than spread uniformly.
+Tier-B (middle zone): \NcircTierB/\NcircTotal{} sites;
+mean $\delta = \circMeanDev$~beru.
 
 \noindent\textbf{Tier-A+ sites} ($N = \NcircTierAp$, \NcircApRate\%, $\circEnrichAp\times$,
-permutation $p = \simDomePermP$,
 Bonferroni $p_\mathrm{adj} = \pAdjTestTwo$, $k = \BonfK$):
 Khoja Ahmed Yasawi (0.2~km),
 Boyana Church (0.3~km),
@@ -522,7 +509,7 @@ The meta-keyword test confirms that only \metaBeatingChiPct\% of
 \subsection{Hemispherical Mound Evolution (Test 2b [Sensitivity Variant])}
 \label{sec:resultsevolution_inline}
 
-Extends Test~2 by adding earthen mound-stage keywords (see \S\ref{sec:test_populations});
+Extending Test~2 with earthen mound-stage keywords (see \S\ref{sec:test_populations});
 the combined population ($N = \NevoTotal$) adds
 \NevoMoundOnly{} mound-stage sites to the core
 domed/spherical population, with \NevoOverlap{}
@@ -654,8 +641,8 @@ independent evidence, as A+ membership is defined by proximity to a
 harmonic (\S\ref{sec:circularity}).
 
 \textbf{Test~C (circular-shift anchor sensitivity).}
-Displacing the anchor by a uniform random offset in $[0\textdegree,
-360\textdegree)$ and recounting A+ sites yields a null mean of
+Displacing the anchor by a uniform random offset in $[0^\circ,
+360^\circ)$ and recounting A+ sites yields a null mean of
 \anchorShiftNullMu{} vs.\ the observed \anchorShiftApCount{}
 ($Z = \anchorShiftZ$, $p_\mathrm{perm} = \anchorShiftPermP$, *).
 This is the sole positive test that the enrichment depends on the
@@ -664,29 +651,12 @@ specific Gerizim anchor rather than geographic concentration alone.
 \subsection{Temporal Gradient (Test~4, Descriptive)}
 \label{sec:resultstemporal}
 
-\begin{table*}[!t]
-\centering
-\caption{Tier-A+ enrichment by UNESCO inscription-year cohort
-  ($N = \NoriginCorpus$ Cultural/Mixed sites).
-  Null rate $P_0 = \NullRateAp{}$.}
-\label{tab:inscriptionyear}
-\begin{tabular}{lrrrrl}
-\toprule
-Cohort & $N$ & A+ & Rate & Enrichment & $p$ (binomial) \\
-\midrule
-1978--1984 (founding canon) & \NcanonSites & \NcanonAp & \canonApRate\% & $\canonEnrich\times$ & \pCanon~* \\
-pre-2000 (1978--1999)       & \NpreTwoK    & \NpreTwoKAp & \preTwoKApRate\% & $\preTwoKEnrich\times$ & \pPreTwoK~** \\
-2000--2025 (modern era)     & \NmodernSites & \NmodernAp & \modernApRate\% & $\modernEnrich\times$ & \pModern~ns \\
-ALL (1978--2025)            & \NoriginCorpus & \NoriginAp & \originApRate\% & $\originEnrichAll\times$ & \pOriginAll~* \\
-\midrule
-\multicolumn{6}{l}{Fisher exact (1978--1984 vs.\ 2000--2025): OR $= \orCanonModern$, $p = \pFisherCanonModern$~($^\dagger$)} \\
-\bottomrule
-\end{tabular}
-\end{table*}
-
-\noindent The A+ rate is highest in the founding canon (1978--1984: \canonApRate\%,
-$\canonEnrich\times$, $p = \pCanon$) and dilutes to the null in the modern era
-(2010--2025: \cohortErate\%, ns).
+The A+ rate is highest in the founding canon (1978--1984: \canonApRate\%,
+$\canonEnrich\times$, $p = \pCanon$~*) and dilutes to the null in the modern
+era (\cohortErate\%, ns). Cochran-Armitage three-cohort:
+$p = \pCochranThree$~(*). The gradient is largely explained by regional
+composition (Mantel-Haenszel OR~$= \MHcommonOR$, $p = \pCMH$) and is
+treated as descriptive only (Figure~\ref{fig:temporal}).
 
 \begin{figure*}[!t]
 \centering
@@ -695,27 +665,16 @@ $\canonEnrich\times$, $p = \pCanon$) and dilutes to the null in the modern era
 \label{fig:temporal}
 \end{figure*}
 
-\noindent Cochran-Armitage three-cohort: $Z = \ZcochranThree$,
-$p = \pCochranThree$~(*); five-cohort: $Z = \ZcochranFive$,
-$p = \pCochranFive$~(*), one-sided.
-The founding canon is concentrated in Europe and the Mediterranean.
-Mantel-Haenszel region-adjusted OR~$= \MHcommonOR$
-($p = \pCMH$). The temporal gradient is largely
-explained by regional composition and is treated as descriptive only.
-
 \subsection{Founding-Origin Classifier (Test~5, Post-Hoc)}
 \label{sec:results_founding}
 
-The founding-origin classifier assigns each site to one or more of five
-categories: Founding Capital, Sacred Origin, Founding Monument, Founding
-Axis, and Ancient Continuous Landscape (\hyperref[sec:kwdaudit_founding]{filter logic in Appendix~\ref*{sec:kwdaudit_founding}}).  Applied to the full corpus
-($N = \NoriginCorpus$), the classifier assigns \NfoundKwAll{} sites
-(\foundKwBaseRate\%) to at least one founding category.  Of the
-\NclusterAp{} A+ sites, \NfoundKwAp{} (\foundKwApRate\%) carry a founding
-keyword, compared to \foundKwBaseRate\% in the full corpus.
-Fisher exact test: OR~$= \foundKwFisherOR$, $p = \pFoundKwFisher$~*.
-Because the classifier was iteratively tuned after data inspection it is
-treated as post-hoc and carries no weight in the primary evidential chain.
+A post-hoc founding-origin classifier
+(\hyperref[sec:kwdaudit_founding]{Appendix~\ref*{sec:kwdaudit_founding}})
+finds \foundKwApRate\% of A+ sites carry a founding keyword versus
+\foundKwBaseRate\% in the full corpus
+(OR~$= \foundKwFisherOR$, $p = \pFoundKwFisher$~*), but carries no
+weight in the primary evidential chain as the classifier was iteratively
+tuned after data inspection.
 
 \section{Robustness Checks}
 \label{sec:robustness}
@@ -726,7 +685,7 @@ treated as post-hoc and carries no weight in the primary evidential chain.
 Varying harmonic spacing from 0.05 to 0.20~beru (physical threshold
 fixed at 6.7~km), the 0.1-beru spacing produces the strongest joint
 significance across both the dome and full-corpus populations
-(Table~\ref{tab:unitsweep}; Figure~\ref{fig:unitsweep}). The 0.05-beru and 0.20-beru spacings also
+(Table~\ref{tab:unitsweep}). The 0.05-beru and 0.20-beru spacings also
 reach significance, as expected structurally: every 0.10-beru harmonic is
 also a 0.05-beru harmonic ($0.10 = 2 \times 0.05$), and 0.20-beru harmonics
 are a strict subset. Adjacent non-harmonic spacings (0.06, 0.07, 0.09, 0.11,
@@ -772,50 +731,12 @@ Spacing & Null & Dome hits/$N_D$ & $p$(Dome) && Full hits/$N$ & $p$(Full) \\
 \subsection{Sensitivity Slope at the Canonical Unit}
 \label{sec:sensitivity_slope_perm}
 
-A fine sweep within $\pm 1\%$ of 0.10~beru (Table~\ref{tab:unitsweep_fine})
+A fine sweep within $\pm 1\%$ of 0.10~beru (Online Supplementary Table~S3)
 shows that a $\pm 0.3\%$ shift collapses joint significance in at least one
-population; only the canonical value and its immediate neighbor (0.1001~beru)
-retain dome significance. Two permutation tests (\permSlopeNperms{} and
-\permSlopeSpecN{} shuffles respectively; code:
-\texttt{sensitivity\_slope\_permutation\_test.py},
-\texttt{sensitivity\_slope\_specificity\_test.py}) find that geographic
-concentration alone is sufficient to reproduce both the sharp-peak pattern
-and the canonical-unit ranking ($p = \permSlopeCanonBestJoint{}$, ns in both
-cases). The sensitivity slope therefore provides no independent evidential
-value beyond Tests~2 and~3.
-
-\begin{table*}[!t]
-\centering
-\caption{Fine-grained sensitivity sweep within $\pm 1\%$ of the 0.10-b\={e}ru
-  canonical spacing, physical window fixed at 6.7~km.
-  Dome column: context-validated population ($N_D = \NcircValidated$).
-  Bold row = canonical attested unit.
-  Code: \texttt{unit\_sweep\_fill.py}.}
-\label{tab:unitsweep_fine}
-\adjustbox{max width=\textwidth}{%
-\begin{tabular}{ccrrcrr}
-\toprule
-Spacing & Null & Dome hits/$N_D$ & $p$(Dome) && Full hits/$N$ & $p$(Full) \\
-\midrule
-0.0990 & \fineNineNineZeroNull & \fineNineNineZeroDomeHits/\NcircValidated & \fineNineNineZeroDomeP~ns && \fineNineNineZeroFullHits/\NclusterTotal & \fineNineNineZeroFullP~ns \\
-0.0993 & \fineNineNineThreeNull & \fineNineNineThreeDomeHits/\NcircValidated & \fineNineNineThreeDomeP~ns && \fineNineNineThreeFullHits/\NclusterTotal & \fineNineNineThreeFullP~ns \\
-0.0995 & \fineNineNineFiveNull & \fineNineNineFiveDomeHits/\NcircValidated & \fineNineNineFiveDomeP~ns && \fineNineNineFiveFullHits/\NclusterTotal & \fineNineNineFiveFullP~ns \\
-\textbf{0.1000} & \textbf{4.00\%} & \textbf{\NcircTierAp/\NcircValidated} & \textbf{0.0005~***} && \textbf{\NclusterAp/\NclusterTotal} & \textbf{\clusterApBinom~*} \\
-0.1001 & \fineOneZeroZeroOneNull & \fineOneZeroZeroOneDomeHits/\NcircValidated & \fineOneZeroZeroOneDomeP~** && \fineOneZeroZeroOneFullHits/\NclusterTotal & \fineOneZeroZeroOneFullP~$^\dagger$ \\
-0.1003 & \fineOneZeroZeroThreeNull & \fineOneZeroZeroThreeDomeHits/\NcircValidated & \fineOneZeroZeroThreeDomeP~ns && \fineOneZeroZeroThreeFullHits/\NclusterTotal & \fineOneZeroZeroThreeFullP~ns \\
-0.1010 & \fineOneZeroOneZeroNull & \fineOneZeroOneZeroDomeHits/\NcircValidated & \fineOneZeroOneZeroDomeP~ns && \fineOneZeroOneZeroFullHits/\NclusterTotal & \fineOneZeroOneZeroFullP~ns \\
-\bottomrule
-\end{tabular}}% end adjustbox
-\end{table*}
-
-\begin{figure*}[!t]
-\centering
-\includegraphics[width=0.9\textwidth]{../figures/fig_unitsweep}
-\caption{Unit sensitivity: signal concentrated at the canonical 0.1-b\={e}ru
-  spacing. Spacings $\geq 0.3\%$ from canonical collapse to non-significance
-  in at least one population.}
-\label{fig:unitsweep}
-\end{figure*}
+population. Two permutation tests find that geographic concentration alone
+suffices to reproduce the sharp-peak pattern and canonical-unit ranking
+($p = \permSlopeCanonBestJoint{}$, ns); the sensitivity slope therefore
+provides no independent evidential value beyond Tests~2 and~3.
 
 \subsection{Global Anchor Sweep}
 \label{sec:sensitivity_global}
@@ -828,31 +749,11 @@ The sweep uses the extended corpus described in \S\ref{sec:geodetic}
 within $0.001$\textdegree{}, so every focal anchor tests against
 $N = \NgerizimSweepCorpus$.
 
-\begin{table*}[!t]
-\centering\small
-\caption{Global anchor sweep: both Levantine anchors ranked against
-  the same global distribution. \anchorSweepNanchors{} trial anchors,
-  0--360\textdegree{}E at 0.01\textdegree{} resolution; extended corpus
-  $N_\mathrm{ext}=1012$ (1011 inscribed + Gerizim synthetic); each focal
-  anchor self-excludes itself $\Rightarrow N = \NgerizimSweepCorpus$.
-  Mean A+ across all anchors: \anchorSweepApMean{}$\pm$\anchorSweepApStd{}.}
-\label{tab:sweep_summary}
-\adjustbox{max width=\textwidth}{%
-\begin{tabular}{lccccc}
-\toprule
-Anchor & A$^{++}$ & A$^{+}$ & A & Percentile & \% anchors $\geq$ \\
-\midrule
-Gerizim (\GerizimLon\textdegree{}E)  & \GerizimSweepApp  & \GerizimSweepAp  & \GerizimSweepA  & \anchorSweepPctile\textsuperscript{th}  & \anchorSweepGeApPct\% \\
-Jerusalem (35.2317\textdegree{}E)    & \JerusalemSweepApp & \JerusalemSweepAp & \JerusalemSweepA & \JerusalemSweepPctile\textsuperscript{th} & \anchorSweepJerApPct\% \\
-\bottomrule
-\multicolumn{6}{p{0.95\linewidth}}{\footnotesize A$^{++}$$\leq$0.67\,km; A$^{+}$$\leq$6.7\,km; A$\leq$33\,km.
-  Global max \anchorSweepGlobalMax{} A+
-  (all $x.18$\textdegree{}E anchors score identically; \S\ref{sec:x18artifact}).} \\
-\end{tabular}}% end adjustbox
-\end{table*}
-
 Both anchors place the corridor in the global top \anchorSweepTopPct\%
-(Table~\ref{tab:sweep_summary}), and the result is anchor-invariant
+(\anchorSweepNanchors{} trial anchors, 0--360\textdegree{}E;
+Gerizim: \GerizimSweepAp{} A+, \anchorSweepPctile\textsuperscript{th} percentile;
+Jerusalem: \JerusalemSweepAp{} A+, \JerusalemSweepPctile\textsuperscript{th} percentile;
+full table in Online Supplementary Table~S4), and the result is anchor-invariant
 within the \GerizimJerusalemKm\,km corridor window.
 The total counts differ by one (\GerizimSweepAp{} vs.\ \JerusalemSweepAp{});
 the extra Jerusalem hit is Mount Gerizim itself at 4.1~km.
@@ -1127,6 +1028,33 @@ less enriched than dome sites.
 Three simulation approaches fail to reproduce the dome enrichment
 (permutation $p = \simDomePermP$; bootstrap $p = \simDomeBootP$).
 
+\subsection{Candidate Transmission Pathways}
+\label{sec:transmission}
+
+The statistical evidence does not identify a mechanism, but the geographic
+structure of the signal points toward the Buddhist tradition as the most
+tractable case. Within the dome-evolution corpus, the stupa sub-stage
+achieves an A+ rate of \evoStupaApRate\% (\NevoStupaAp/\NevoStupa{} sites,
+OR~$= \evoStupaFisherOR\times$, $p = \pEvoStupaFisher$~*), the highest
+of any keyword-defined sub-population in the analysis and more than five
+times the geometric null. The bimodal Buddhist pattern, with A-tier
+concentration in Java/Sumatra and C-band enrichment in the Indian and
+Southeast Asian heartland, is replicated independently in the Wikidata
+stupa corpus (\S\ref{sec:stupas_q180987}), and the densest A-tier node
+is anchored by Borobudur (c.~800~CE) \citep{miksic1990borobudur}. Maritime Silk Road
+routes, active by the fifth century~CE, provide a documented corridor for
+the transmission of architectural canons and measurement systems across
+the Indian Ocean world. Sanskrit \textit{v\={a}stush\={a}stra} treatises
+\citep{shamasastry1915arthashastra} and Therav\={a}da stupa measurement
+manuals attest detailed metrological systems for monument proportioning,
+and the longitudinal alignment identified here may represent the territorial
+complement of these local placement rules, applied outward from the
+documented Levantine anchor. Whether the Babylonian beru was transmitted
+directly via Mesopotamian commercial or scribal networks, re-derived from
+shared astronomical methods that are attested in both traditions
+\citep{neugebauer1975history}, or adopted through an intermediary Indic
+metrological system, is not determinable from the present corpus.
+
 \subsection{Conclusion}
 
 The UNESCO longitude distribution contains a global 3\textdegree{} periodic
@@ -1139,7 +1067,12 @@ $p = \clusterPermP$).
 The two findings most resistant to a purely geographic account are
 morphological specificity (dome enrichment exceeding the restricted
 geographic draw, Null~C, $p = \geoNullDomeRestrictedP$) and cluster
-asymmetry ($p = \clusterPermP$).
+asymmetry ($p = \clusterPermP$). Within the morphological signal, the
+stupa sub-stage stands out: \evoStupaApRate\% A+ (\NevoStupaAp/\NevoStupa{}
+sites, OR~$= \evoStupaFisherOR\times$), the highest rate of any
+keyword-defined sub-population and more than five times the geometric null,
+providing the most direct quantitative link to the Buddhist transmission
+pathway outlined in \S\ref{sec:transmission}.
 
 \subsubsection*{Replication and methodological transferability}
 
