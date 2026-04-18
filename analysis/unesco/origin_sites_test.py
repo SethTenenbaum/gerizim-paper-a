@@ -304,19 +304,49 @@ pre2k = [s for s in sites if s["yr"] < 2000]
 n_pre2k, nap_pre2k, _, p_pre2k, enr_pre2k = stats(pre2k)
 n_modern, nap_modern, _, p_modern, enr_modern = stats(late)
 
+# Corpus-level counts needed for Fisher tests
+na_corpus  = sum(1 for s in sites if is_a_or_better(s["tier"]))
+nap_corpus = sum(1 for s in sites if is_aplus(s["tier"]))
+
+def _fisher_ap_sub(n_sub, nap_sub):
+    """Fisher exact: sub-corpus A+ vs rest (one-sided greater)."""
+    rest_n   = N_ALL - n_sub
+    rest_ap  = nap_corpus - nap_sub
+    tbl = [[nap_sub, n_sub - nap_sub], [rest_ap, rest_n - rest_ap]]
+    or_, p_ = fisher_exact(tbl, alternative="greater")
+    return or_, p_
+
+def _fisher_a_sub(n_sub, na_sub):
+    """Fisher exact: sub-corpus A-tier vs rest (one-sided greater)."""
+    rest_n  = N_ALL - n_sub
+    rest_a  = na_corpus - na_sub
+    tbl = [[na_sub, n_sub - na_sub], [rest_a, rest_n - rest_a]]
+    or_, p_ = fisher_exact(tbl, alternative="greater")
+    return or_, p_
+
+def _fisher_ap_cohort(n_sub, nap_sub, n_comp, nap_comp):
+    """Fisher exact: cohort A+ vs comparison cohort."""
+    tbl = [[nap_sub, n_sub - nap_sub], [nap_comp, n_comp - nap_comp]]
+    or_, p_ = fisher_exact(tbl, alternative="greater")
+    return or_, p_
+
 # religion subsets
 christian_kws = next(kws for name, kws in RELIGION_SETS if name.lower().startswith("christ"))
 christian = [s for s in sites if any(k in s["text"] for k in christian_kws)]
 n_chr, nap_chr, na_chr, p_chr, enr_chr = stats(christian)
 p_chr_a = binomtest(na_chr, n_chr, P_NULL_A, alternative="greater").pvalue
+chr_ap_fisher_or, p_chr_fisher = _fisher_ap_sub(n_chr, nap_chr)
+chr_a_fisher_or,  p_chr_a_fisher = _fisher_a_sub(n_chr, na_chr)
 
 islam_kws = next(kws for name, kws in RELIGION_SETS if name.lower().startswith("islam"))
 islamic = [s for s in sites if any(k in s["text"] for k in islam_kws)]
 n_isl, nap_isl, na_isl, p_isl, enr_isl = stats(islamic)
+isl_ap_fisher_or, p_isl_fisher = _fisher_ap_sub(n_isl, nap_isl)
 
 buddhist_kws = next(kws for name, kws in RELIGION_SETS if name.lower().startswith("buddh"))
 buddhist_relig = [s for s in sites if any(k in s["text"] for k in buddhist_kws)]
 n_bud_r, nap_bud_r, _, p_bud_r, enr_bud_r = stats(buddhist_relig)
+bud_ap_fisher_or, p_bud_fisher = _fisher_ap_sub(n_bud_r, nap_bud_r)
 
 # ── Buddhism bimodal: C-tier enrichment + joint probability ──────────────────
 # C-tier: sites in the symmetric mirror of A-tier, close to the inter-harmonic
@@ -403,13 +433,24 @@ jewish = [s for s in sites if any(k in s["text"] for k in jewish_kws)]
 n_jud = len(jewish)
 na_jud = sum(1 for s in jewish if is_a_or_better(s["tier"]))  # A-tier count
 p_jud_a_binom = binomtest(na_jud, n_jud, P_NULL_A, alternative="greater").pvalue
-na_corpus = sum(1 for s in sites if is_a_or_better(s["tier"]))
 # Fisher's exact: Judaism A-tier vs rest of corpus
 _jud_table = [[na_jud, n_jud - na_jud],
               [na_corpus - na_jud, (N_ALL - n_jud) - (na_corpus - na_jud)]]
 jud_fisher_or, p_jud_fisher = fisher_exact(_jud_table, alternative="greater")
 
 n_rel, nap_rel, _, p_rel, enr_rel = stats(any_relig)
+relig_union_or, p_rel_fisher = _fisher_ap_sub(n_rel, nap_rel)
+
+# ── Fisher for cohort comparisons (canon/pre2k vs rest) ──────────────────────
+# Canon vs rest
+or_canon_vs_rest, p_canon_fisher = _fisher_ap_cohort(n_canon, nap_canon,
+                                                      N_ALL - n_canon, nap_corpus - nap_canon)
+# pre-2000 vs rest
+or_pre2k_vs_rest, p_pre2k_fisher = _fisher_ap_cohort(n_pre2k, nap_pre2k,
+                                                       N_ALL - n_pre2k, nap_corpus - nap_pre2k)
+# modern vs rest
+or_modern_vs_rest, p_modern_fisher = _fisher_ap_cohort(n_modern, nap_modern,
+                                                         N_ALL - n_modern, nap_corpus - nap_modern)
 
 print("  % LaTeX macros (GROUP 5 — origin_sites_test.py):")
 print(f"  \\newcommand{{\\NoriginCorpus}}{{{n_all}}}          % full Cultural/Mixed corpus")
@@ -421,11 +462,15 @@ print(f"  \\newcommand{{\\NcanonSites}}{{{n_canon}}}            % sites inscribe
 print(f"  \\newcommand{{\\NcanonAp}}{{{nap_canon}}}              % canon A+ count")
 print(f"  \\newcommand{{\\canonApRate}}{{{100*nap_canon/n_canon:.1f}}}            % canon A+ rate (%)")
 print(f"  \\newcommand{{\\pCanon}}{{{p_canon:.4f}}}         % p-value, canon A+ binomial")
+print(f"  \\newcommand{{\\pCanonFisher}}{{{p_canon_fisher:.4f}}}    % p-value, canon A+ Fisher exact vs rest")
+print(f"  \\newcommand{{\\orCanonVsRest}}{{{or_canon_vs_rest:.2f}}}    % OR, canon A+ Fisher exact vs rest")
 print(f"  \\newcommand{{\\canonEnrich}}{{{enr_canon:.2f}}}           % enrichment ratio, canon")
 print(f"  \\newcommand{{\\NpreTwoK}}{{{n_pre2k}}}            % sites inscribed pre-2000")
 print(f"  \\newcommand{{\\NpreTwoKAp}}{{{nap_pre2k}}}              % pre-2000 A+ count")
 print(f"  \\newcommand{{\\preTwoKApRate}}{{{100*nap_pre2k/n_pre2k:.1f}}}            % pre-2000 A+ rate (%)")
 print(f"  \\newcommand{{\\pPreTwoK}}{{{p_pre2k:.4f}}}         % p-value, pre-2000 A+ binomial")
+print(f"  \\newcommand{{\\pPreTwoKFisher}}{{{p_pre2k_fisher:.4f}}}   % p-value, pre-2000 A+ Fisher exact vs rest")
+print(f"  \\newcommand{{\\orPreTwoKVsRest}}{{{or_pre2k_vs_rest:.2f}}}   % OR, pre-2000 A+ Fisher exact vs rest")
 print(f"  \\newcommand{{\\preTwoKEnrich}}{{{enr_pre2k:.2f}}}           % enrichment ratio, pre-2000")
 print(f"  \\newcommand{{\\NmodernSites}}{{{n_modern}}}            % sites inscribed 2000+")
 print(f"  \\newcommand{{\\NmodernAp}}{{{nap_modern}}}              % modern A+ count")
@@ -438,24 +483,34 @@ print(f"  \\newcommand{{\\NreligUnion}}{{{n_rel}}}            % any-religion uni
 print(f"  \\newcommand{{\\NreligUnionAp}}{{{nap_rel}}}              % religion-union A+ count")
 print(f"  \\newcommand{{\\religUnionApRate}}{{{100*nap_rel/n_rel:.1f}}}            % religion-union A+ rate (%)")
 print(f"  \\newcommand{{\\pReligUnion}}{{{p_rel:.4f}}}         % p-value, religion-union A+ binomial")
+print(f"  \\newcommand{{\\pReligUnionFisher}}{{{p_rel_fisher:.4f}}}   % p-value, religion-union A+ Fisher exact vs rest")
+print(f"  \\newcommand{{\\religUnionFisherOR}}{{{relig_union_or:.2f}}}   % OR, religion-union A+ Fisher exact")
 print(f"  \\newcommand{{\\religUnionEnrich}}{{{enr_rel:.2f}}}           % enrichment ratio, religion union")
 print(f"  \\newcommand{{\\NchristSites}}{{{n_chr}}}            % Christian sacred sites N")
 print(f"  \\newcommand{{\\NchristAp}}{{{nap_chr}}}              % Christian sites A+ count")
 print(f"  \\newcommand{{\\christApRate}}{{{100*nap_chr/n_chr:.1f}}}            % Christian sites A+ rate (%)")
 print(f"  \\newcommand{{\\pChrist}}{{{p_chr:.4f}}}         % p-value, Christian sites A+ binomial")
+print(f"  \\newcommand{{\\pChristFisher}}{{{p_chr_fisher:.4f}}}      % p-value, Christian A+ Fisher exact vs rest")
+print(f"  \\newcommand{{\\christFisherOR}}{{{chr_ap_fisher_or:.2f}}}      % OR, Christian A+ Fisher exact")
 print(f"  \\newcommand{{\\christEnrich}}{{{enr_chr:.2f}}}           % enrichment ratio, Christian sites")
 print(f"  \\newcommand{{\\NchristA}}{{{na_chr}}}              % Christian sites A-tier count")
 print(f"  \\newcommand{{\\christARate}}{{{100*na_chr/n_chr:.1f}}}            % Christian sites A-tier rate (%)")
 print(f"  \\newcommand{{\\pChristA}}{{{p_chr_a:.4f}}}         % p-value, Christian sites A-tier binomial")
+print(f"  \\newcommand{{\\pChristAFisher}}{{{p_chr_a_fisher:.4f}}}     % p-value, Christian A-tier Fisher exact vs rest")
+print(f"  \\newcommand{{\\christAFisherOR}}{{{chr_a_fisher_or:.2f}}}     % OR, Christian A-tier Fisher exact")
 print(f"  \\newcommand{{\\NIslam}}{{{n_isl}}}            % Islam sacred sites N")
 print(f"  \\newcommand{{\\IslamApCount}}{{{nap_isl}}}              % Islam A+ count")
 print(f"  \\newcommand{{\\IslamApRate}}{{{100*nap_isl/n_isl:.1f}}}            % Islam A+ rate (%)")
 print(f"  \\newcommand{{\\pIslam}}{{{p_isl:.4f}}}         % p-value, Islam A+ binomial")
+print(f"  \\newcommand{{\\pIslamFisher}}{{{p_isl_fisher:.4f}}}        % p-value, Islam A+ Fisher exact vs rest")
+print(f"  \\newcommand{{\\islamFisherOR}}{{{isl_ap_fisher_or:.2f}}}        % OR, Islam A+ Fisher exact")
 print(f"  \\newcommand{{\\NbudSitesRelig}}{{{n_bud_r}}}            % Buddhism religion-tagged sites N")
 print(f"  \\newcommand{{\\NbudATier}}{{{na_bud_r}}}              % Buddhism A-tier count (dev <= 0.010 beru)")
 print(f"  \\newcommand{{\\budATierRate}}{{{100*na_bud_r/n_bud_r:.1f}}}            % Buddhism A-tier rate (%)")
 print(f"  \\newcommand{{\\budApRateRelig}}{{{100*nap_bud_r/n_bud_r:.1f}}}            % Buddhism religion-tagged A+ rate (%)")
 print(f"  \\newcommand{{\\pBudRelig}}{{{p_bud_r:.4f}}}         % p-value, Buddhism religion-tagged A+ binomial")
+print(f"  \\newcommand{{\\pBudFisher}}{{{p_bud_fisher:.4f}}}         % p-value, Buddhism A+ Fisher exact vs rest")
+print(f"  \\newcommand{{\\budFisherOR}}{{{bud_ap_fisher_or:.2f}}}         % OR, Buddhism A+ Fisher exact")
 print(f"  \\newcommand{{\\NbudInterHarmonic}}{{{n_bud_inter}}}             % Buddhist C-tier sites (dist_mid <= 0.010 beru)")
 print(f"  \\newcommand{{\\budInterHarmonicRate}}{{{bud_inter_rate:.1f}}}            % Buddhist C-tier rate (%)")
 print(f"  \\newcommand{{\\budInterHarmonicEnrich}}{{{bud_inter_enr:.2f}}}           % Buddhist C-tier enrichment vs corpus")
@@ -477,7 +532,6 @@ print(f"  \\newcommand{{\\judATierOR}}{{{jud_fisher_or:.2f}}}           % OR, Ju
 nap_jud = sum(1 for s in jewish if is_aplus(s["tier"]))
 p_jud_ap = binomtest(nap_jud, n_jud, P_NULL_AP, alternative="greater").pvalue
 # Fisher's exact: Judaism A+ vs rest of corpus
-nap_corpus = sum(1 for s in sites if is_aplus(s["tier"]))
 _jud_ap_table = [[nap_jud, n_jud - nap_jud],
                  [nap_corpus - nap_jud, (N_ALL - n_jud) - (nap_corpus - nap_jud)]]
 jud_ap_fisher_or, p_jud_ap_fisher = fisher_exact(_jud_ap_table, alternative="greater")
@@ -490,12 +544,22 @@ print(f"  \\newcommand{{\\judApFisherOR}}{{{jud_ap_fisher_or:.2f}}}        % OR,
 # ── Write to results store ────────────────────────────────────────────────────
 ResultsStore().write_many({
     "pCanon":             p_canon,          # binomial p, canon cohort (1978-1984)
+    "pCanonFisher":       p_canon_fisher,   # Fisher p, canon vs rest
+    "orCanonVsRest":      or_canon_vs_rest, # OR, canon vs rest
     "pPreTwoK":           p_pre2k,          # binomial p, pre-2000 cohort
+    "pPreTwoKFisher":     p_pre2k_fisher,   # Fisher p, pre-2000 vs rest
     "pModern":            p_modern,         # binomial p, modern cohort (2000+)
     "pFisherCanonModern": p_fl,             # Fisher p, canon vs modern
     "pReligUnion":        p_rel,            # any-religion A+ binomial p
+    "pReligUnionFisher":  p_rel_fisher,     # any-religion A+ Fisher p
     "pChrist":            p_chr,            # Christian A+ binomial p
+    "pChristFisher":      p_chr_fisher,     # Christian A+ Fisher p
+    "christFisherOR":     chr_ap_fisher_or, # Christian A+ Fisher OR
+    "pChristAFisher":     p_chr_a_fisher,   # Christian A Fisher p
+    "pIslamFisher":       p_isl_fisher,     # Islam A+ Fisher p
+    "islamFisherOR":      isl_ap_fisher_or, # Islam A+ Fisher OR
     "pBudRelig":          p_bud_r,          # Buddhism religion-tagged A+ binomial p
+    "pBudFisher":         p_bud_fisher,     # Buddhism A+ Fisher p
     "pBudJoint":              p_bud_joint,       # joint p: Buddhism A+ and C-tier both enriched
     "pHinJoint":              p_hin_joint,       # joint p: Hinduism A+ and C-tier both enriched
     "NbudInterHarmonic":      n_bud_inter,       # Buddhist inter-harmonic site count

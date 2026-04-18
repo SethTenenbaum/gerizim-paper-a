@@ -43,7 +43,7 @@ import re
 import sys
 import numpy as np
 from pathlib import Path
-from scipy.stats import binomtest, chisquare, binom as binom_dist
+from scipy.stats import binomtest, chisquare, binom as binom_dist, fisher_exact as _fisher_exact
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus
@@ -114,6 +114,18 @@ for s in raw_sites:
 _, chi_p = chisquare(obs_bins, f_exp=[N_raw / 5.0] * 5)
 
 enr_Ap = (nAp / N_raw) / P_NULL_AP if N_raw else 0
+
+# ── Fisher exact: dome corpus vs rest of full Cultural/Mixed corpus ───────────
+from data.unesco_corpus import load_corpus as _load_full
+_full = [s for s in _load_full() if s.category != "Natural" and s.has_coords]
+N_CORPUS = len(_full)
+K_AP_CORPUS = sum(1 for s in _full if is_aplus(tier_label(_beru_dev(s.longitude))))
+K_A_CORPUS  = sum(1 for s in _full if is_a_or_better(tier_label(_beru_dev(s.longitude))))
+
+_tbl_Ap = [[nAp, N_raw - nAp], [K_AP_CORPUS - nAp, N_CORPUS - N_raw - (K_AP_CORPUS - nAp)]]
+_tbl_A  = [[nA,  N_raw - nA],  [K_A_CORPUS  - nA,  N_CORPUS - N_raw - (K_A_CORPUS  - nA)]]
+fisher_or_Ap, fisher_p_Ap = _fisher_exact(_tbl_Ap, alternative="greater")
+fisher_or_A,  fisher_p_A  = _fisher_exact(_tbl_A,  alternative="greater")
 
 # ── Anchor sweep ───────────────────────────────────────────────────────────────
 sweep   = np.arange(34.0, 37.001, 0.001)
@@ -230,6 +242,10 @@ print(f"  \\newcommand{{\\NcircTierB}}{{{nB}}}             % Tier-B hits (raw sw
 print(f"  \\newcommand{{\\NcircTierC}}{{{nC}}}               % Tier-C hits (raw sweep)")
 print(f"  \\newcommand{{\\pCircAp}}{{{bt_Ap.pvalue:.4f}}}          % p-value, A+ binomial (raw sweep)")
 print(f"  \\newcommand{{\\pCircA}}{{{bt_A.pvalue:.4f}}}          % p-value, A  binomial (raw sweep)")
+print(f"  \\newcommand{{\\pCircApFisher}}{{{fisher_p_Ap:.4f}}}      % p-value, A+ Fisher exact vs rest (raw sweep)")
+print(f"  \\newcommand{{\\circApFisherOR}}{{{fisher_or_Ap:.2f}}}      % OR, A+ Fisher exact vs rest (raw sweep)")
+print(f"  \\newcommand{{\\pCircAFisher}}{{{fisher_p_A:.4f}}}       % p-value, A Fisher exact vs rest (raw sweep)")
+print(f"  \\newcommand{{\\circAFisherOR}}{{{fisher_or_A:.2f}}}       % OR, A Fisher exact vs rest (raw sweep)")
 print(f"  \\newcommand{{\\pCircChi}}{{{chi_p:.4f}}}          % chi-sq uniform, 5 bins, df=4 (raw sweep)")
 print(f"  \\newcommand{{\\GerizimPctileAp}}{{{pctile:.0f}}}            % anchor-sweep percentile, A+ (raw sweep)")
 print(f"  \\newcommand{{\\GerizimPctileA}}{{{pctile:.0f}}}            % anchor-sweep percentile, A  (raw sweep)")
@@ -263,13 +279,16 @@ print(f"  \\newcommand{{\\NcircValidatedApRate}}{{{100*nAp/N_validated:.1f}}}  %
 
 # ── Write to results store ────────────────────────────────────────────────────
 ResultsStore().write_many({
-    "pCircAp":   bt_Ap.pvalue,   # binomial p, A+ (raw sweep) — Test 2
-    "pCircA":    bt_A.pvalue,    # binomial p, A  (raw sweep)
-    "pCircChi":  chi_p,          # chi-sq uniform, 5 bins, df=4
-    "NcircTotal": N_raw,         # raw-sweep population size
-    "NcircTierAp": nAp,          # Tier-A+ hits
-    "NcircApRate": round(100 * nAp / N_raw, 1),  # A+ rate (%)
-    "circEnrichAp": enr_Ap,      # enrichment ratio, A+
-    "circEnrichCIlo": _enr_ci_lo,  # Clopper-Pearson 95% CI lower, enrichment ratio
-    "circEnrichCIhi": _enr_ci_hi,  # Clopper-Pearson 95% CI upper, enrichment ratio
+    "pCircAp":      bt_Ap.pvalue,   # binomial p, A+ (raw sweep) — Test 2
+    "pCircA":       bt_A.pvalue,    # binomial p, A  (raw sweep)
+    "pCircApFisher": fisher_p_Ap,   # Fisher p, A+ vs rest (raw sweep)
+    "circApFisherOR": fisher_or_Ap, # Fisher OR, A+ vs rest
+    "pCircAFisher":  fisher_p_A,    # Fisher p, A vs rest (raw sweep)
+    "pCircChi":     chi_p,          # chi-sq uniform, 5 bins, df=4
+    "NcircTotal":   N_raw,          # raw-sweep population size
+    "NcircTierAp":  nAp,            # Tier-A+ hits
+    "NcircApRate":  round(100 * nAp / N_raw, 1),  # A+ rate (%)
+    "circEnrichAp": enr_Ap,         # enrichment ratio, A+
+    "circEnrichCIlo": _enr_ci_lo,   # Clopper-Pearson 95% CI lower, enrichment ratio
+    "circEnrichCIhi": _enr_ci_hi,   # Clopper-Pearson 95% CI upper, enrichment ratio
 })

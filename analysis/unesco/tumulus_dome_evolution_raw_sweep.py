@@ -119,6 +119,12 @@ def extract_earliest_date(text: str):
 # ── Load corpus — raw sweep, no validation ────────────────────────────────────
 corpus = load_corpus()
 
+# ── Full-corpus background counts (for Fisher exact) ─────────────────────────
+_all_cultural = [s for s in corpus if s.category != "Natural" and s.has_coords]
+N_CORPUS     = len(_all_cultural)
+K_AP_CORPUS  = sum(1 for s in _all_cultural if is_aplus(tier_label(_beru_dev(s.longitude))))
+K_A_CORPUS   = sum(1 for s in _all_cultural if is_a_or_better(tier_label(_beru_dev(s.longitude))))
+
 selected   = []   # all raw matches
 dome_only  = []   # dome/stupa stage only (no mound kw)
 mound_only = []   # mound stage only (no dome/stupa kw)
@@ -377,16 +383,50 @@ n_dome_stage     = sum(1 for e in selected if "dome"  in e["stages"])
 n_mound_stage_ap = sum(1 for e in selected if "mound" in e["stages"] and e["ap"])
 n_stupa_stage_ap = sum(1 for e in selected if "stupa" in e["stages"] and e["ap"])
 n_dome_stage_ap  = sum(1 for e in selected if "dome"  in e["stages"] and e["ap"])
+n_mound_stage_a  = sum(1 for e in selected if "mound" in e["stages"] and is_a_or_better(e["tier"]))
+n_stupa_stage_a  = sum(1 for e in selected if "stupa" in e["stages"] and is_a_or_better(e["tier"]))
+n_dome_stage_a   = sum(1 for e in selected if "dome"  in e["stages"] and is_a_or_better(e["tier"]))
 
 p_mound_stage = binomtest(n_mound_stage_ap, n_mound_stage, P_NULL_AP, "greater").pvalue if n_mound_stage else 1.0
 p_stupa_stage = binomtest(n_stupa_stage_ap, n_stupa_stage, P_NULL_AP, "greater").pvalue if n_stupa_stage else 1.0
 p_dome_stage  = binomtest(n_dome_stage_ap,  n_dome_stage,  P_NULL_AP, "greater").pvalue if n_dome_stage  else 1.0
+
+# Fisher exact (one-sided: greater) — stage vs full corpus background
+def _fisher_ap(n_stage, n_stage_ap):
+    table = [[n_stage_ap,            n_stage - n_stage_ap],
+             [K_AP_CORPUS - n_stage_ap, N_CORPUS - n_stage - (K_AP_CORPUS - n_stage_ap)]]
+    _, p = fisher_exact(table, alternative="greater")
+    return p
+
+def _fisher_a(n_stage, n_stage_a):
+    table = [[n_stage_a,            n_stage - n_stage_a],
+             [K_A_CORPUS - n_stage_a, N_CORPUS - n_stage - (K_A_CORPUS - n_stage_a)]]
+    _, p = fisher_exact(table, alternative="greater")
+    return p
+
+fp_mound_ap = _fisher_ap(n_mound_stage, n_mound_stage_ap)
+fp_stupa_ap = _fisher_ap(n_stupa_stage, n_stupa_stage_ap)
+fp_dome_ap  = _fisher_ap(n_dome_stage,  n_dome_stage_ap)
+fp_mound_a  = _fisher_a(n_mound_stage,  n_mound_stage_a)
+fp_stupa_a  = _fisher_a(n_stupa_stage,  n_stupa_stage_a)
+fp_dome_a   = _fisher_a(n_dome_stage,   n_dome_stage_a)
+# Combined
+fp_all_ap   = _fisher_ap(N, n_ap)
+fp_all_a    = _fisher_a(N, n_a)
+# A binomial combined (already computed as bt_a.pvalue)
 
 print(f"  \\newcommand{{\\NevoTotal}}{{{N}}}            % total dome-evolution corpus")
 print(f"  \\newcommand{{\\NevoAp}}{{{n_ap}}}             % A+ sites in dome-evolution corpus")
 print(f"  \\newcommand{{\\evoApRate}}{{{100*n_ap/N:.1f}}}           % A+ rate, dome-evolution corpus (%)")
 print(f"  \\newcommand{{\\evoEnrichAp}}{{{enr_ap:.2f}}}          % enrichment ratio, A+ in dome corpus")
 print(f"  \\newcommand{{\\pEvoAp}}{{{bt_ap.pvalue:.4f}}}          % p-value, A+ binomial (dome corpus)")
+print(f"  \\newcommand{{\\pEvoApFisher}}{{{fp_all_ap:.4f}}}      % p-value, A+ Fisher exact (dome corpus)")
+# Fisher ORs for combined
+_evo_or_ap, _ = fisher_exact([[n_ap, N - n_ap], [K_AP_CORPUS - n_ap, N_CORPUS - N - (K_AP_CORPUS - n_ap)]], alternative="greater")
+_evo_or_a,  _ = fisher_exact([[n_a,  N - n_a],  [K_A_CORPUS  - n_a,  N_CORPUS - N - (K_A_CORPUS  - n_a)]],  alternative="greater")
+print(f"  \\newcommand{{\\evoApFisherOR}}{{{_evo_or_ap:.2f}}}    % OR, A+ Fisher exact (dome corpus)")
+print(f"  \\newcommand{{\\pEvoAFisher}}{{{fp_all_a:.4f}}}        % p-value, A Fisher exact (dome corpus)")
+print(f"  \\newcommand{{\\evoAFisherOR}}{{{_evo_or_a:.2f}}}      % OR, A Fisher exact (dome corpus)")
 print(f"  \\newcommand{{\\NevoA}}{{{n_a}}}             % Tier-A sites in dome-evolution corpus")
 print(f"  \\newcommand{{\\evoARate}}{{{100*n_a/N:.1f}}}           % A rate, dome-evolution corpus (%)")
 print(f"  \\newcommand{{\\evoEnrichA}}{{{enr_a:.2f}}}           % enrichment ratio, A in dome corpus")
@@ -397,18 +437,34 @@ print(f"  \\newcommand{{\\evoExpA}}{{{N*0.20:.2f}}}           % expected A count
 print(f"  \\newcommand{{\\NevoMound}}{{{n_mound_stage}}}           % sites with mound stage")
 print(f"  \\newcommand{{\\NevoMoundAp}}{{{n_mound_stage_ap}}}            % A+ sites with mound stage")
 print(f"  \\newcommand{{\\evoMoundApRate}}{{{100*n_mound_stage_ap/n_mound_stage:.1f}}}           % A+ rate, mound stage (%)")
+print(f"  \\newcommand{{\\NevoMoundA}}{{{n_mound_stage_a}}}            % A-tier sites with mound stage")
+print(f"  \\newcommand{{\\evoMoundARate}}{{{100*n_mound_stage_a/n_mound_stage:.1f}}}           % A-tier rate, mound stage (%)")
 print(f"  \\newcommand{{\\evoMoundEnrich}}{{{(n_mound_stage_ap/n_mound_stage)/_null:.2f}}}          % enrichment ratio, mound stage")
 print(f"  \\newcommand{{\\pEvoMound}}{{{p_mound_stage:.4f}}}          % p-value, A+ binomial in mound stage")
+print(f"  \\newcommand{{\\pEvoMoundFisher}}{{{fp_mound_ap:.4f}}}      % p-value, A+ Fisher exact in mound stage")
+print(f"  \\newcommand{{\\pEvoMoundAFisher}}{{{fp_mound_a:.4f}}}      % p-value, A Fisher exact in mound stage")
 print(f"  \\newcommand{{\\NevoStupa}}{{{n_stupa_stage}}}            % sites with stupa stage")
 print(f"  \\newcommand{{\\NevoStupaAp}}{{{n_stupa_stage_ap}}}             % A+ sites with stupa stage")
 print(f"  \\newcommand{{\\evoStupaApRate}}{{{100*n_stupa_stage_ap/n_stupa_stage:.1f}}}            % A+ rate, stupa stage (%)")
+print(f"  \\newcommand{{\\NevoStupaA}}{{{n_stupa_stage_a}}}             % A-tier sites with stupa stage")
+print(f"  \\newcommand{{\\evoStupaARate}}{{{100*n_stupa_stage_a/n_stupa_stage:.1f}}}            % A-tier rate, stupa stage (%)")
+_stupa_or_ap, _ = fisher_exact([[n_stupa_stage_ap, n_stupa_stage - n_stupa_stage_ap], [K_AP_CORPUS - n_stupa_stage_ap, N_CORPUS - n_stupa_stage - (K_AP_CORPUS - n_stupa_stage_ap)]], alternative="greater")
+_dome_or_ap,  _ = fisher_exact([[n_dome_stage_ap,  n_dome_stage  - n_dome_stage_ap],  [K_AP_CORPUS - n_dome_stage_ap,  N_CORPUS - n_dome_stage  - (K_AP_CORPUS - n_dome_stage_ap)]],  alternative="greater")
 print(f"  \\newcommand{{\\evoStupaEnrich}}{{{(n_stupa_stage_ap/n_stupa_stage)/_null:.2f}}}           % enrichment ratio, stupa stage")
 print(f"  \\newcommand{{\\pEvoStupa}}{{{p_stupa_stage:.4f}}}          % p-value, A+ binomial in stupa stage")
+print(f"  \\newcommand{{\\pEvoStupaFisher}}{{{fp_stupa_ap:.4f}}}      % p-value, A+ Fisher exact in stupa stage")
+print(f"  \\newcommand{{\\evoStupaFisherOR}}{{{_stupa_or_ap:.2f}}}    % OR, A+ Fisher exact in stupa stage")
+print(f"  \\newcommand{{\\pEvoStupaAFisher}}{{{fp_stupa_a:.4f}}}      % p-value, A Fisher exact in stupa stage")
 print(f"  \\newcommand{{\\NevoDome}}{{{n_dome_stage}}}            % sites with dome stage")
 print(f"  \\newcommand{{\\NevoDomeAp}}{{{n_dome_stage_ap}}}             % A+ sites with dome stage")
 print(f"  \\newcommand{{\\evoDomeApRate}}{{{100*n_dome_stage_ap/n_dome_stage:.1f}}}            % A+ rate, dome stage (%)")
+print(f"  \\newcommand{{\\NevoDomeA}}{{{n_dome_stage_a}}}             % A-tier sites with dome stage")
+print(f"  \\newcommand{{\\evoDomeARate}}{{{100*n_dome_stage_a/n_dome_stage:.1f}}}            % A-tier rate, dome stage (%)")
 print(f"  \\newcommand{{\\evoDomeEnrich}}{{{(n_dome_stage_ap/n_dome_stage)/_null:.2f}}}           % enrichment ratio, dome stage")
 print(f"  \\newcommand{{\\pEvoDome}}{{{p_dome_stage:.4f}}}          % p-value, A+ binomial in dome stage")
+print(f"  \\newcommand{{\\pEvoDomeFisher}}{{{fp_dome_ap:.4f}}}       % p-value, A+ Fisher exact in dome stage")
+print(f"  \\newcommand{{\\evoDomeFisherOR}}{{{_dome_or_ap:.2f}}}     % OR, A+ Fisher exact in dome stage")
+print(f"  \\newcommand{{\\pEvoDomeAFisher}}{{{fp_dome_a:.4f}}}       % p-value, A Fisher exact in dome stage")
 print(f"  \\newcommand{{\\NevoMoundOnly}}{{{len(mound_only)}}}          % mound-only sites (no later dome/stupa)")
 print(f"  \\newcommand{{\\NevoMoundOnlyAp}}{{{n_mo_ap}}}           % A+ in mound-only sites")
 print(f"  \\newcommand{{\\NevoOverlap}}{{{len(overlap)}}}            % sites with both mound and dome/stupa stages")

@@ -299,14 +299,14 @@ in Table~\ref{tab:bonferroni_both}.
 Test & $N$ & Raw $p$ & $p_\mathrm{adj}$, $k{=}\BonfK$ & Status \\
 \midrule
 Test~1 (full corpus)   & \NclusterTotal  & \clusterApBinom$^{a}$ & \pAdjTestOne~*     & \textbf{Primary} \\
-Test~2 (dome A+)       & \NcircTotal     & \pCircAp$^{a}$  & \pAdjTestTwo~***   & \textbf{Primary} \\
+Test~2 (dome A+)       & \NcircTotal     & \pCircApFisher$^{a}$ (OR~$= \circApFisherOR$) & \pAdjTestTwo~***   & \textbf{Primary} \\
 Test~3 (cluster asym.) & \NclusterTotal  & \clusterPermP$^{b}$ & \pAdjTestThree~**  & \textbf{Primary} \\
 \midrule
 Test~4 (temporal)      & \NoriginCorpus  & \pCochranThree$^{b}$ & ---                & Descriptive \\
-Test~2b (mound evol.)  & \NevoTotal      & \pEvoAp$^{a}$   & N/A                & Sensitivity \\
+Test~2b (mound evol.)  & \NevoTotal      & \pEvoApFisher$^{a}$ (OR~$= \evoApFisherOR$) & N/A                & Sensitivity \\
 Test~5 (founding)      & \NoriginCorpus  & \pFoundKwFisher$^{a}$ & N/A            & Post-hoc \\
 \bottomrule
-\multicolumn{5}{l}{\footnotesize $^{a}$Exact binomial $p$ (one-tailed vs.\ geometric null); $^{b}$permutation $p$.} \\
+\multicolumn{5}{l}{\footnotesize $^{a}$Fisher exact $p$ vs.\ rest of corpus (one-sided, enrichment); $^{b}$permutation $p$. Binomial baselines: Test~2 $p = \pCircAp$~***, Test~2b $p = \pEvoAp$~***.} \\
 \end{tabular}}
 \end{table*}
 
@@ -320,7 +320,7 @@ harmonic-level Mann--Whitney ($p = \clusterHarmonicMWp$);
 sequential-peak permutation ($p = \peakSigP$);
 corridor occupancy \corridorPrecHits{}/\corridorPrecN{} and Fisher combined
 ($p = \pCorridorBinom$; $p = \pCorridorFisher$);
-and evolution combined A+ ($p = \pEvoAp$).
+and evolution combined A+ (Fisher $p = \pEvoApFisher$, OR~$= \evoApFisherOR$; binomial $p = \pEvoAp$).
 The full audit is in the archived repository (\citealt{tenenbaum2026audit}).
 
 \subsection{Null Models}
@@ -387,19 +387,24 @@ associated terms (e.g.\ \textit{cathedral}, \textit{crusader},
 The full per-religion keyword lists and all matched sites are tabulated in
 \texttt{supplementary/audit/religion\_keyword\_audit.txt}.
 Sites associated with any world religion ($N = \NreligUnion$): \religUnionApRate\%
-A+ ($\religUnionEnrich\times$, $p = \pReligUnion$, *).
-Christianity ($N = \NchristSites$): \christApRate\% A+ ($p = \pChrist$, **),
-with a marginal A-tier signal (\christARate\%, $p = \pChristA$, $\sim$).
-Islam ($N = \NIslam$): \IslamApRate\% A+ ($p = \pIslam$, $\sim$).
-Buddhism ($N = \NbudSitesRelig$): \budApRateRelig\% A+ ($p = \pBudRelig$, ns) taken alone,
+A+ (\religUnionEnrich$\times$; Fisher exact vs.\ rest: OR~$= \religUnionFisherOR$,
+$p = \pReligUnionFisher$, ns; binomial $p = \pReligUnion$, *).
+Christianity ($N = \NchristSites$): \christApRate\% A+
+(OR~$= \christFisherOR$, $p = \pChristFisher$, ns; binomial $p = \pChrist$, **),
+with a marginal A-tier signal (\christARate\%;
+OR~$= \christAFisherOR$, $p = \pChristAFisher$, ns; binomial $p = \pChristA$, $\sim$).
+Islam ($N = \NIslam$): \IslamApRate\% A+
+(OR~$= \islamFisherOR$, $p = \pIslamFisher$, ns; binomial $p = \pIslam$, $\sim$).
+Buddhism ($N = \NbudSitesRelig$): \budApRateRelig\% A+
+(OR~$= \budFisherOR$, $p = \pBudFisher$, ns) taken alone,
 but Buddhist sites show a bimodal distribution across the harmonic spectrum:
 A-tier (\NbudATier/\NbudSitesRelig, \budATierRate\%) and C-band
 (\NbudInterHarmonic/\NbudSitesRelig, \budInterHarmonicRate\%) are both
 elevated simultaneously; the joint probability is $p = \pBudJoint$~**
 (multivariate hypergeometric, equivalent to a three-group Fisher exact).
 Judaism ($N = \NjudSites$): both Tier-A+ (\judApCount/\NjudSites, \judApRate\%,
-$p = \pJudAp$) and Tier-A (\judATierCount/\NjudSites, \judATierRate\%,
-$p = \pJudATierBinom$) reach one-sided binomial significance, but neither
+binomial $p = \pJudAp$) and Tier-A (\judATierCount/\NjudSites, \judATierRate\%,
+binomial $p = \pJudATierBinom$) nominally exceed the geometric baseline, but neither
 survives Fisher exact comparison against the rest-of-corpus rate
 (A+: OR~$= \judApFisherOR$, $p = \pJudApFisher$;
 A: OR~$= \judATierOR$, $p = \pJudATierFisher$),
@@ -420,21 +425,23 @@ $p = \simDomePermP$; bootstrap $p = \simDomeBootP$
 \caption{UNESCO domed/spherical monument test ($N = \NcircTotal$, raw keyword sweep).
   Primary evidence against the chance explanation: simulation permutation
   $Z = \simDomePermZ$, $p = \simDomePermP$ (\S\ref{sec:simulation_null}).
-  Exact binomial results are reference baselines assuming uniform longitude
-  spacing. The non-significant $\chi^2$ is discussed in the text.}
+  Fisher exact tests compare dome sub-corpus to rest of UNESCO corpus.
+  Exact binomial results are shown as reference baselines.
+  The non-significant $\chi^2$ is discussed in the text.}
 \label{tab:circularstats}
 \adjustbox{max width=\textwidth}{%
-\begin{tabular}{lrrrrrl}
+\begin{tabular}{lrrrrrll}
 \toprule
-Metric & Obs & Exp($H_0$) & Rate [95\% CI] & Enrich. & $p$ & \\
+Metric & Obs & Exp($H_0$) & Rate [95\% CI] & Enrich. & $p$ (Fisher) & OR & \\
 \midrule
-Tier-A+ ($\leq 0.002$ beru) & \NcircTierAp & \circExpAp & \NcircApRate\% [\circApCIlo, \circApCIhi] & $\circEnrichAp\times$ & \pCircAp & *** \\
-Tier-A\phantom{+} ($\leq 0.010$ beru)  & \NcircTierA  & \circExpA & \circARate\% [\circACIlo, \circACIhi] & $\circEnrichA\times$ & \pCircA  & ** \\
-$\chi^2$-uniform (5 bins, df\,=\,4) & --- & --- & ---  & --- & \pCircChi & ns \\
+Tier-A+ ($\leq 0.002$ beru) & \NcircTierAp & \circExpAp & \NcircApRate\% [\circApCIlo, \circApCIhi] & $\circEnrichAp\times$ & \pCircApFisher & \circApFisherOR & ** \\
+Tier-A\phantom{+} ($\leq 0.010$ beru)  & \NcircTierA  & \circExpA & \circARate\% [\circACIlo, \circACIhi] & $\circEnrichA\times$ & \pCircAFisher & \circAFisherOR & * \\
+$\chi^2$-uniform (5 bins, df\,=\,4) & --- & --- & ---  & --- & \pCircChi & --- & ns \\
 \midrule
-\multicolumn{7}{l}{Expected under $H_0$: A+ = \NullRateAp{}, A = \NullRateA{}. CIs are Clopper-Pearson exact.} \\
-\multicolumn{7}{l}{Tier-B (middle zone): \NcircTierB\,/\,\NcircTotal{} sites. Mean $\delta$: \circMeanDev\,beru.} \\
-\multicolumn{7}{l}{\footnotesize *** $p < 0.001$, ** $p < 0.01$, * $p < 0.05$, $^\dagger$ $p < 0.10$ (trend-level), ns = not significant.} \\
+\multicolumn{8}{l}{Expected under $H_0$: A+ = \NullRateAp{}, A = \NullRateA{}. CIs are Clopper-Pearson exact.} \\
+\multicolumn{8}{l}{Binomial baselines: A+ $p = \pCircAp$~***, A $p = \pCircA$~**.} \\
+\multicolumn{8}{l}{Tier-B (middle zone): \NcircTierB\,/\,\NcircTotal{} sites. Mean $\delta$: \circMeanDev\,beru.} \\
+\multicolumn{8}{l}{\footnotesize *** $p < 0.001$, ** $p < 0.01$, * $p < 0.05$, $^\dagger$ $p < 0.10$ (trend-level), ns = not significant.} \\
 \bottomrule
 \end{tabular}}% end adjustbox
 \end{table*}
@@ -521,54 +528,42 @@ the combined population ($N = \NevoTotal$) adds
 domed/spherical population, with \NevoOverlap{}
 sites matching both keyword sets.
 
-\begin{table*}[!t]
-\centering
-\caption{Test~2b: hemispherical mound evolution ($N = \NevoTotal$).
-  Combined tumulus $\to$ stupa $\to$ dome population.}
-\label{tab:evolution1b}
-\begin{tabular}{lrrrrl}
-\toprule
-Metric & Obs & Exp($H_0$) & Rate & $p$ & \\
-\midrule
-Tier-A+ ($\leq 0.002$ beru, $\leq 6.7$\,km) & \NevoAp & 4.16 & \evoApRate\% & \pEvoAp & *** \\
-Tier-A\phantom{+} ($\leq 0.010$ beru, $\leq 33$\,km) & \NevoA & 20.80 & \evoARate\% & \pEvoA & ** \\
-\midrule
-\multicolumn{6}{l}{Expected under $H_0$: A+ = \NullRateAp{}, A = \NullRateA{}.
-  Enrichment: A+ = $\evoEnrichAp\times$, A = $\evoEnrichA\times$.} \\
-\multicolumn{6}{l}{\footnotesize *** $p < 0.001$, ** $p < 0.01$, * $p < 0.05$,
-  $^\dagger$ $p < 0.10$, ns = not significant.} \\
-\bottomrule
-\end{tabular}
-\end{table*}
-
 \noindent\textbf{Stage-by-stage breakdown} (Table~\ref{tab:evostages1b}):
 
 \begin{table*}[!t]
 \centering
-\caption{Tier-A+ enrichment by evolutionary stage.
-  Null rate $P_0 = \NullRateAp{}$.}
+\caption{Test~2b enrichment by evolutionary stage ($N = \NevoTotal$).
+  Null rates: A+ $P_0 = \NullRateAp{}$ (4\%), A $P_0 = \NullRateA{}$ (20\%).
+  Fisher exact tests stage vs.\ full corpus background.}
 \label{tab:evostages1b}
-\begin{tabular}{lrrrrl}
+\begin{tabular}{lrrrrrcc}
 \toprule
-Stage & $N$ & A+ & Rate & Enrichment & $p$ (binomial) \\
+Stage & $N$ & A+ & A+ rate & A & A rate & $p_{\text{A+}}$ (Fisher) & $p_{\text{A}}$ (Fisher) \\
 \midrule
-Mound (tumulus/barrow/kofun) & \NevoMound & \NevoMoundAp & \evoMoundApRate\% & $\evoMoundEnrich\times$ & \pEvoMound~ns \\
-Stupa (stupa/stupas)         & \NevoStupa & \NevoStupaAp & \evoStupaApRate\% & $\evoStupaEnrich\times$ & \pEvoStupa~** \\
-Dome (dome/tholos/spherical) & \NevoDome  & \NevoDomeAp  & \evoDomeApRate\%  & $\evoDomeEnrich\times$ & \pEvoDome~* \\
+Mound (tumulus/barrow/kofun) & \NevoMound & \NevoMoundAp & \evoMoundApRate\% & \NevoMoundA & \evoMoundARate\% & \pEvoMoundFisher~ns  & \pEvoMoundAFisher~ns \\
+Stupa (stupa/stupas)         & \NevoStupa & \NevoStupaAp & \evoStupaApRate\% & \NevoStupaA & \evoStupaARate\% & \pEvoStupaFisher~*   & \pEvoStupaAFisher~$^\dagger$ \\
+Dome (dome/tholos/spherical) & \NevoDome  & \NevoDomeAp  & \evoDomeApRate\%  & \NevoDomeA  & \evoDomeARate\%  & \pEvoDomeFisher~*    & \pEvoDomeAFisher~$^\dagger$ \\
 \midrule
-\textbf{Combined}            & \textbf{\NevoTotal} & \textbf{\NevoAp} & \textbf{\evoApRate\%} & $\mathbf{\evoEnrichAp}\times$ & \textbf{\pEvoAp~***} \\
+\textbf{Combined}            & \textbf{\NevoTotal} & \textbf{\NevoAp} & \textbf{\evoApRate\%} & \textbf{\NevoA} & \textbf{\evoARate\%} & \textbf{\pEvoApFisher~**} & \textbf{\pEvoAFisher~*} \\
 \bottomrule
-\multicolumn{6}{p{0.92\linewidth}}{\footnotesize Stage $N$ values sum to more than the combined total because \NevoOverlap{} sites match keywords from multiple stages and are counted once in the combined row. A+ counts by stage are computed within each stage population independently; a site matching two stages contributes its A+ status to each stage separately, so stage A+ values may not sum to the combined A+ count. The combined A+ total is the count of unique A+ sites across the full Test~2b population ($N = \NevoTotal$).} \\
+\multicolumn{8}{p{0.98\linewidth}}{\footnotesize
+  Stage $N$ values sum to more than the combined total because \NevoOverlap{} sites match keywords from multiple stages and are counted once in the combined row.
+  A+ and A counts by stage are computed within each stage population independently.
+  Fisher exact: one-sided test (enrichment) vs.\ full UNESCO cultural corpus background.
+  Enrichment ratios: combined A+ = $\evoEnrichAp\times$, A = $\evoEnrichA\times$;
+  stupa A+ = $\evoStupaEnrich\times$, dome A+ = $\evoDomeEnrich\times$.
+  *** $p < 0.001$, ** $p < 0.01$, * $p < 0.05$, $^\dagger$ $p < 0.10$, ns = not significant.} \\
 \end{tabular}
 \end{table*}
 
-\noindent The combined population ($N = \NevoTotal$, A+ = \evoApRate\%,
-$p = \pEvoAp$ ***; Table~\ref{tab:evolution1b}) is consistent with Test~2. The mound stage does not reach
-significance (\evoMoundApRate\%, $p = \pEvoMound$, ns). The signal is carried
-by the stupa ($\evoStupaEnrich\times$, $p = \pEvoStupa$~**) and dome sub-stages.
+\noindent The combined population ($N = \NevoTotal$, A+ = \evoApRate\%;
+Tables~\ref{tab:evolution1b}--\ref{tab:evostages1b}) is consistent with Test~2. The mound stage does not reach
+significance (\evoMoundApRate\%, Fisher $p = \pEvoMoundFisher$, ns). The signal is carried
+by the stupa (A+ \evoStupaApRate\%, A \evoStupaARate\%, $\evoStupaEnrich\times$, Fisher $p = \pEvoStupaFisher$~*) and dome
+sub-stages (A+ \evoDomeApRate\%, A \evoDomeARate\%, $\evoDomeEnrich\times$, Fisher $p = \pEvoDomeFisher$~*).
 Leave-one-out checks confirm stability for all sub-stages.
-The dome-evolution keyword filter ($p = \pEvoAp$~***) is the strongest
-keyword-filtered signal in this analysis, exceeding even the raw dome sweep ($p = \pCircAp$~***).
+The dome-evolution filter (Fisher $p = \pEvoApFisher$~**, binomial $p = \pEvoAp$~***) is the strongest keyword-filtered
+signal in this analysis, exceeding even the raw dome sweep (Fisher $p = \pCircApFisher$, binomial $p = \pCircAp$~***).
 
 \textbf{Stupa geographic-concentration null.}
 \label{sec:stupa_geo_null}

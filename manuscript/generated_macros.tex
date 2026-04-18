@@ -46,6 +46,10 @@
   \newcommand{\NcircTierC}{15}               % Tier-C hits (raw sweep)
   \newcommand{\pCircAp}{0.0009}          % p-value, A+ binomial (raw sweep)
   \newcommand{\pCircA}{0.0043}          % p-value, A  binomial (raw sweep)
+  \newcommand{\pCircApFisher}{0.0077}      % p-value, A+ Fisher exact vs rest (raw sweep)
+  \newcommand{\circApFisherOR}{2.71}      % OR, A+ Fisher exact vs rest (raw sweep)
+  \newcommand{\pCircAFisher}{0.0175}       % p-value, A Fisher exact vs rest (raw sweep)
+  \newcommand{\circAFisherOR}{1.72}       % OR, A Fisher exact vs rest (raw sweep)
   \newcommand{\pCircChi}{0.0732}          % chi-sq uniform, 5 bins, df=4 (raw sweep)
   \newcommand{\GerizimPctileAp}{100}            % anchor-sweep percentile, A+ (raw sweep)
   \newcommand{\GerizimPctileA}{100}            % anchor-sweep percentile, A  (raw sweep)
@@ -150,24 +154,34 @@
   \newcommand{\NreligUnionAp}{35}              % religion-union A+ count
   \newcommand{\religUnionApRate}{6.1}            % religion-union A+ rate (%)
   \newcommand{\pReligUnion}{0.0108}         % p-value, religion-union A+ binomial
+  \newcommand{\pReligUnionFisher}{0.2414}   % p-value, religion-union A+ Fisher exact vs rest
+  \newcommand{\religUnionFisherOR}{1.27}   % OR, religion-union A+ Fisher exact
   \newcommand{\religUnionEnrich}{1.52}           % enrichment ratio, religion union
   \newcommand{\NchristSites}{397}            % Christian sacred sites N
   \newcommand{\NchristAp}{27}              % Christian sites A+ count
   \newcommand{\christApRate}{6.8}            % Christian sites A+ rate (%)
   \newcommand{\pChrist}{0.0058}         % p-value, Christian sites A+ binomial
+  \newcommand{\pChristFisher}{0.1028}      % p-value, Christian A+ Fisher exact vs rest
+  \newcommand{\christFisherOR}{1.47}      % OR, Christian A+ Fisher exact
   \newcommand{\christEnrich}{1.70}           % enrichment ratio, Christian sites
   \newcommand{\NchristA}{93}              % Christian sites A-tier count
   \newcommand{\christARate}{23.4}            % Christian sites A-tier rate (%)
   \newcommand{\pChristA}{0.0522}         % p-value, Christian sites A-tier binomial
+  \newcommand{\pChristAFisher}{0.3228}     % p-value, Christian A-tier Fisher exact vs rest
+  \newcommand{\christAFisherOR}{1.09}     % OR, Christian A-tier Fisher exact
   \newcommand{\NIslam}{178}            % Islam sacred sites N
   \newcommand{\IslamApCount}{12}              % Islam A+ count
   \newcommand{\IslamApRate}{6.7}            % Islam A+ rate (%)
   \newcommand{\pIslam}{0.0552}         % p-value, Islam A+ binomial
+  \newcommand{\pIslamFisher}{0.2695}        % p-value, Islam A+ Fisher exact vs rest
+  \newcommand{\islamFisherOR}{1.30}        % OR, Islam A+ Fisher exact
   \newcommand{\NbudSitesRelig}{71}            % Buddhism religion-tagged sites N
   \newcommand{\NbudATier}{20}              % Buddhism A-tier count (dev <= 0.010 beru)
   \newcommand{\budATierRate}{28.2}            % Buddhism A-tier rate (%)
   \newcommand{\budApRateRelig}{5.6}            % Buddhism religion-tagged A+ rate (%)
   \newcommand{\pBudRelig}{0.3162}         % p-value, Buddhism religion-tagged A+ binomial
+  \newcommand{\pBudFisher}{0.5651}         % p-value, Buddhism A+ Fisher exact vs rest
+  \newcommand{\budFisherOR}{1.02}         % OR, Buddhism A+ Fisher exact
   \newcommand{\NbudInterHarmonic}{19}             % Buddhist C-tier sites (dist_mid <= 0.010 beru)
   \newcommand{\budInterHarmonicRate}{26.8}            % Buddhist C-tier rate (%)
   \newcommand{\budInterHarmonicEnrich}{1.33}           % Buddhist C-tier enrichment vs corpus
@@ -495,27 +509,43 @@
   \newcommand{\evoApRate}{11.8}           % A+ rate, dome-evolution corpus (%)
   \newcommand{\evoEnrichAp}{2.95}          % enrichment ratio, A+ in dome corpus
   \newcommand{\pEvoAp}{0.0005}          % p-value, A+ binomial (dome corpus)
+  \newcommand{\pEvoApFisher}{0.0049}     % p-value, A+ Fisher exact (dome corpus)
+  \newcommand{\evoApFisherOR}{2.67}    % OR, A+ Fisher exact (dome corpus)
   \newcommand{\NevoA}{35}             % Tier-A sites in dome-evolution corpus
   \newcommand{\evoARate}{31.8}           % A rate, dome-evolution corpus (%)
   \newcommand{\evoEnrichA}{1.59}           % enrichment ratio, A in dome corpus
   \newcommand{\pEvoA}{0.0023}          % p-value, A binomial (dome corpus)
+  \newcommand{\pEvoAFisher}{0.0113}      % p-value, A Fisher exact (dome corpus)
+  \newcommand{\evoAFisherOR}{1.71}      % OR, A Fisher exact (dome corpus)
   \newcommand{\evoExpAp}{4.40}          % expected A+ count at 4% null (dome-evolution corpus)
   \newcommand{\evoExpA}{22.00}           % expected A count at 20% null (dome-evolution corpus)
   \newcommand{\NevoMound}{24}           % sites with mound stage
   \newcommand{\NevoMoundAp}{2}            % A+ sites with mound stage
   \newcommand{\evoMoundApRate}{8.3}           % A+ rate, mound stage (%)
+  \newcommand{\NevoMoundA}{6}            % A-tier sites with mound stage
+  \newcommand{\evoMoundARate}{25.0}           % A-tier rate, mound stage (%)
   \newcommand{\evoMoundEnrich}{2.08}          % enrichment ratio, mound stage
   \newcommand{\pEvoMound}{0.2492}          % p-value, A+ binomial in mound stage
+  \newcommand{\pEvoMoundFisher}{0.3880}    % p-value, A+ Fisher exact in mound stage
+  \newcommand{\pEvoMoundAFisher}{0.4653}   % p-value, A Fisher exact in mound stage
   \newcommand{\NevoStupa}{18}            % sites with stupa stage
   \newcommand{\NevoStupaAp}{4}             % A+ sites with stupa stage
   \newcommand{\evoStupaApRate}{22.2}            % A+ rate, stupa stage (%)
+  \newcommand{\NevoStupaA}{7}             % A-tier sites with stupa stage
+  \newcommand{\evoStupaARate}{38.9}            % A-tier rate, stupa stage (%)
   \newcommand{\evoStupaEnrich}{5.56}           % enrichment ratio, stupa stage
   \newcommand{\pEvoStupa}{0.0050}          % p-value, A+ binomial in stupa stage
+  \newcommand{\pEvoStupaFisher}{0.0144}    % p-value, A+ Fisher exact in stupa stage
+  \newcommand{\pEvoStupaAFisher}{0.0874}   % p-value, A Fisher exact in stupa stage
   \newcommand{\NevoDome}{75}            % sites with dome stage
   \newcommand{\NevoDomeAp}{8}             % A+ sites with dome stage
   \newcommand{\evoDomeApRate}{10.7}            % A+ rate, dome stage (%)
+  \newcommand{\NevoDomeA}{23}             % A-tier sites with dome stage
+  \newcommand{\evoDomeARate}{30.7}            % A-tier rate, dome stage (%)
   \newcommand{\evoDomeEnrich}{2.67}           % enrichment ratio, dome stage
   \newcommand{\pEvoDome}{0.0102}          % p-value, A+ binomial in dome stage
+  \newcommand{\pEvoDomeFisher}{0.0485}     % p-value, A+ Fisher exact in dome stage
+  \newcommand{\pEvoDomeAFisher}{0.0576}    % p-value, A Fisher exact in dome stage
   \newcommand{\NevoMoundOnly}{20}          % mound-only sites (no later dome/stupa)
   \newcommand{\NevoMoundOnlyAp}{2}           % A+ in mound-only sites
   \newcommand{\NevoOverlap}{4}            % sites with both mound and dome/stupa stages

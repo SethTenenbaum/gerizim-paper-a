@@ -52,6 +52,7 @@ def run():
         })
 
     N_ALL    = len(sites)
+    n_ap_all = sum(1 for s in sites if is_aplus(s["tier"]))
     n_a_all  = sum(1 for s in sites if is_a_or_better(s["tier"]))
     n_c_all  = sum(1 for s in sites if is_c_or_better(s["tier"]))
     n_cm_all = sum(1 for s in sites if is_cminus_or_better(s["tier"]))
@@ -66,15 +67,25 @@ def run():
         na   = sum(1 for s in subset if is_a_or_better(s["tier"]))
         nc   = sum(1 for s in subset if is_c_or_better(s["tier"]))
         ncm  = sum(1 for s in subset if is_cminus_or_better(s["tier"]))
-        p_ap  = binomtest(nap, n, P_NULL_AP,     alternative="greater").pvalue if n >= 1 else 1.0
-        p_a   = binomtest(na,  n, P_NULL_A,      alternative="greater").pvalue if n >= 1 else 1.0
-        p_c   = binomtest(nc,  n, P_NULL_C,      alternative="greater").pvalue if n >= 1 else 1.0
-        p_cm  = binomtest(ncm, n, P_NULL_CMINUS, alternative="greater").pvalue if n >= 1 else 1.0
         enr_ap = (nap / n) / P_NULL_AP     if n else 0
         enr_a  = (na  / n) / P_NULL_A      if n else 0
         enr_c  = (nc  / n) / P_NULL_C      if n else 0
         enr_cm = (ncm / n) / P_NULL_CMINUS if n else 0
-        return n, nap, na, nc, ncm, p_ap, p_a, p_c, p_cm, enr_ap, enr_a, enr_c, enr_cm
+        # Fisher exact: sub-corpus vs rest of full corpus (one-sided, greater)
+        nap_rest = n_ap_all - nap;  n_rest = N_ALL - n
+        na_rest  = n_a_all  - na
+        nc_rest  = n_c_all  - nc
+        ncm_rest = n_cm_all - ncm
+        def _f(k, n_sub, k_rest, n_rest_):
+            if n_sub < 1: return 1.0, float('nan')
+            tbl = [[k, n_sub - k], [k_rest, n_rest_ - k_rest]]
+            or_, p_ = fisher_exact(tbl, alternative="greater")
+            return p_, or_
+        p_ap, or_ap = _f(nap, n, nap_rest, n_rest)
+        p_a,  or_a  = _f(na,  n, na_rest,  n_rest)
+        p_c,  or_c  = _f(nc,  n, nc_rest,  n_rest)
+        p_cm, or_cm = _f(ncm, n, ncm_rest, n_rest)
+        return n, nap, na, nc, ncm, p_ap, p_a, p_c, p_cm, enr_ap, enr_a, enr_c, enr_cm, or_ap, or_a, or_c, or_cm
 
     def sig(p):
         if p < 0.001: return "***"
@@ -99,10 +110,10 @@ def run():
     # ── A-side summary table ──────────────────────────────────────────────────
     lines += [
         SEP,
-        "A-SIDE SUMMARY  (harmonic alignment)",
-        f"  {'Religion':<20} {'N':>5}  {'A+':>4} {'A+%':>6} {'A+p':>8} {'':>4}  "
-        f"{'A':>4} {'A%':>6} {'Ap':>8} {'':>4}",
-        "  " + "-" * 82,
+        "A-SIDE SUMMARY  (harmonic alignment)  — Fisher exact: sub-corpus vs rest of full corpus",
+        f"  {'Religion':<20} {'N':>5}  {'A+':>4} {'A+%':>6} {'A+p(F)':>9} {'OR':>6} {'':>4}  "
+        f"{'A':>4} {'A%':>6} {'Ap(F)':>9} {'OR':>6} {'':>4}",
+        "  " + "-" * 96,
     ]
 
     religion_data = {}
@@ -110,55 +121,55 @@ def run():
         matched = [s for s in sites if any(k in s["text"] for k in kws)]
         r = stats(matched)
         religion_data[religion] = (matched, r, kws)
-        n, nap, na, nc, ncm, p_ap, p_a, p_c, p_cm, *_ = r
+        n, nap, na, nc, ncm, p_ap, p_a, p_c, p_cm, enr_ap, enr_a, enr_c, enr_cm, or_ap, or_a, *_ = r
         if n < 5:
             continue
         lines.append(
-            f"  {religion:<20} {n:>5}  {nap:>4} {100*nap/n:>5.1f}% {p_ap:>8.4f} {sig(p_ap):>4}  "
-            f"{na:>4} {100*na/n:>5.1f}% {p_a:>8.4f} {sig(p_a):>4}"
+            f"  {religion:<20} {n:>5}  {nap:>4} {100*nap/n:>5.1f}% {p_ap:>9.4f} {or_ap:>5.2f}x {sig(p_ap):>4}  "
+            f"{na:>4} {100*na/n:>5.1f}% {p_a:>9.4f} {or_a:>5.2f}x {sig(p_a):>4}"
         )
 
     r_u = stats(any_relig)
-    n_u, nap_u, na_u, nc_u, ncm_u, p_ap_u, p_a_u, p_c_u, p_cm_u, enr_ap_u, enr_a_u, enr_c_u, enr_cm_u = r_u
+    n_u, nap_u, na_u, nc_u, ncm_u, p_ap_u, p_a_u, p_c_u, p_cm_u, enr_ap_u, enr_a_u, enr_c_u, enr_cm_u, or_ap_u, or_a_u, or_c_u, or_cm_u = r_u
     lines += [
-        "  " + "-" * 82,
-        f"  {'UNION (any)':<20} {n_u:>5}  {nap_u:>4} {100*nap_u/n_u:>5.1f}% {p_ap_u:>8.4f} "
-        f"{sig(p_ap_u):>4}  {na_u:>4} {100*na_u/n_u:>5.1f}% {p_a_u:>8.4f} {sig(p_a_u):>4}",
+        "  " + "-" * 96,
+        f"  {'UNION (any)':<20} {n_u:>5}  {nap_u:>4} {100*nap_u/n_u:>5.1f}% {p_ap_u:>9.4f} {or_ap_u:>5.2f}x "
+        f"{sig(p_ap_u):>4}  {na_u:>4} {100*na_u/n_u:>5.1f}% {p_a_u:>9.4f} {or_a_u:>5.2f}x {sig(p_a_u):>4}",
         "",
-        f"  Full corpus: N={N_ALL}, A+ null={P_NULL_AP:.0%}, A null={P_NULL_A:.0%}",
+        f"  Full corpus: N={N_ALL}, A+ rate={100*n_ap_all/N_ALL:.1f}% ({n_ap_all}), A rate={100*n_a_all/N_ALL:.1f}% ({n_a_all})",
+        f"  Fisher exact: one-sided (greater), sub-corpus vs rest of full corpus.",
         "",
     ]
 
     # ── C-side summary table ──────────────────────────────────────────────────
     lines += [
         SEP,
-        "C-SIDE SUMMARY  (inter-harmonic midpoint proximity)",
-        f"  H0: religion sub-corpus has same C-tier rate as full corpus ({100*n_c_all/N_ALL:.1f}%)",
-        f"  H0: religion sub-corpus has same C-/C-- rate as full corpus ({100*n_cm_all/N_ALL:.1f}%)",
+        "C-SIDE SUMMARY  (inter-harmonic midpoint proximity)  — Fisher exact vs rest of corpus",
+        f"  Full-corpus C rate: {100*n_c_all/N_ALL:.1f}%  |  C-/C-- rate: {100*n_cm_all/N_ALL:.1f}%",
         "",
-        f"  {'Religion':<20} {'N':>5}  {'C':>4} {'C%':>6} {'Cp':>8} {'':>4}  "
-        f"{'C-':>4} {'C-%':>6} {'C-p':>8} {'':>4}",
-        "  " + "-" * 82,
+        f"  {'Religion':<20} {'N':>5}  {'C':>4} {'C%':>6} {'Cp(F)':>9} {'OR':>6} {'':>4}  "
+        f"{'C-':>4} {'C-%':>6} {'C-p(F)':>9} {'OR':>6} {'':>4}",
+        "  " + "-" * 96,
     ]
 
     for religion, kws in RELIGION_SETS:
         if religion not in religion_data:
             continue
         matched, r, _ = religion_data[religion]
-        n, nap, na, nc, ncm, p_ap, p_a, p_c, p_cm, *_ = r
+        n, nap, na, nc, ncm, p_ap, p_a, p_c, p_cm, enr_ap, enr_a, enr_c, enr_cm, or_ap, or_a, or_c, or_cm = r
         if n < 5:
             continue
         lines.append(
-            f"  {religion:<20} {n:>5}  {nc:>4} {100*nc/n:>5.1f}% {p_c:>8.4f} {sig(p_c):>4}  "
-            f"{ncm:>4} {100*ncm/n:>5.1f}% {p_cm:>8.4f} {sig(p_cm):>4}"
+            f"  {religion:<20} {n:>5}  {nc:>4} {100*nc/n:>5.1f}% {p_c:>9.4f} {or_c:>5.2f}x {sig(p_c):>4}  "
+            f"{ncm:>4} {100*ncm/n:>5.1f}% {p_cm:>9.4f} {or_cm:>5.2f}x {sig(p_cm):>4}"
         )
 
     lines += [
-        "  " + "-" * 82,
-        f"  {'UNION (any)':<20} {n_u:>5}  {nc_u:>4} {100*nc_u/n_u:>5.1f}% {p_c_u:>8.4f} "
-        f"{sig(p_c_u):>4}  {ncm_u:>4} {100*ncm_u/n_u:>5.1f}% {p_cm_u:>8.4f} {sig(p_cm_u):>4}",
+        "  " + "-" * 96,
+        f"  {'UNION (any)':<20} {n_u:>5}  {nc_u:>4} {100*nc_u/n_u:>5.1f}% {p_c_u:>9.4f} {or_c_u:>5.2f}x "
+        f"{sig(p_c_u):>4}  {ncm_u:>4} {100*ncm_u/n_u:>5.1f}% {p_cm_u:>9.4f} {or_cm_u:>5.2f}x {sig(p_cm_u):>4}",
         "",
-        f"  Full corpus: N={N_ALL}, C null={P_NULL_C:.0%}, C- null={P_NULL_CMINUS:.0%}",
+        f"  Full corpus: N={N_ALL}, C-tier count={n_c_all} ({100*n_c_all/N_ALL:.1f}%), C-/C-- count={n_cm_all} ({100*n_cm_all/N_ALL:.1f}%)",
         "",
     ]
 
@@ -207,33 +218,27 @@ def run():
         )
     lines.append("")
 
-    # ── Judaism Fisher exact (A+ and A-tier) ─────────────────────────────────
+    # ── Judaism Fisher exact (A+ and A-tier) — note results from main table ──
     jud_data = religion_data.get("Judaism")
     if jud_data:
         matched_jud, r_jud, _ = jud_data
-        n_jud = r_jud[0]; nap_jud = r_jud[1]; na_jud = r_jud[2]; nc_jud = r_jud[3]
-        nap_corpus = sum(1 for s in sites if is_aplus(s["tier"]))
-        non_jud_ap = nap_corpus - nap_jud
+        n_jud, nap_jud, na_jud, nc_jud, ncm_jud, p_ap_jud, p_a_jud, p_c_jud, p_cm_jud, \
+            enr_ap_jud, enr_a_jud, enr_c_jud, enr_cm_jud, or_ap_jud, or_a_jud, *_ = r_jud
+        non_jud_ap = n_ap_all - nap_jud
         non_jud_a  = n_a_all - na_jud
         non_jud_n  = N_ALL - n_jud
         non_jud_c  = n_c_all - nc_jud
-        table_ap = [[nap_jud, n_jud - nap_jud], [non_jud_ap, non_jud_n - non_jud_ap]]
-        table_a  = [[na_jud,  n_jud - na_jud],  [non_jud_a,  non_jud_n - non_jud_a]]
-        table_c  = [[nc_jud,  n_jud - nc_jud],  [non_jud_c,  non_jud_n - non_jud_c]]
-        fisher_or_ap, fisher_p_ap = fisher_exact(table_ap, alternative="greater")
-        fisher_or_a,  fisher_p_a  = fisher_exact(table_a,  alternative="greater")
-        fisher_or_c,  fisher_p_c  = fisher_exact(table_c,  alternative="greater")
         lines += [
             SEP,
-            "JUDAISM: SMALL-SAMPLE DETAIL (Fisher exact — binomial unreliable at N=50)",
+            "JUDAISM: SMALL-SAMPLE DETAIL  (N=50; all p-values are Fisher exact, same as main table)",
             f"  N = {n_jud}  (full corpus N={N_ALL})",
             f"",
             f"  A+ tier:  {nap_jud}/{n_jud} ({100*nap_jud/n_jud:.1f}%)  vs rest: {non_jud_ap}/{non_jud_n} "
-            f"({100*non_jud_ap/non_jud_n:.1f}%)  Fisher p={fisher_p_ap:.4f} {sig(fisher_p_ap)}  OR={fisher_or_ap:.2f}x",
+            f"({100*non_jud_ap/non_jud_n:.1f}%)  Fisher p={p_ap_jud:.4f} {sig(p_ap_jud)}  OR={or_ap_jud:.2f}x",
             f"  A tier:   {na_jud}/{n_jud} ({100*na_jud/n_jud:.1f}%)  vs rest: {non_jud_a}/{non_jud_n} "
-            f"({100*non_jud_a/non_jud_n:.1f}%)  Fisher p={fisher_p_a:.4f} {sig(fisher_p_a)}  OR={fisher_or_a:.2f}x",
+            f"({100*non_jud_a/non_jud_n:.1f}%)  Fisher p={p_a_jud:.4f} {sig(p_a_jud)}  OR={or_a_jud:.2f}x",
             f"  C tier:   {nc_jud}/{n_jud} ({100*nc_jud/n_jud:.1f}%)  vs rest: {non_jud_c}/{non_jud_n} "
-            f"({100*non_jud_c/non_jud_n:.1f}%)  Fisher p={fisher_p_c:.4f} {sig(fisher_p_c)}  OR={fisher_or_c:.2f}x",
+            f"({100*non_jud_c/non_jud_n:.1f}%)  Fisher p={p_c_jud:.4f} {sig(p_c_jud)}  OR=see main table",
             "",
             f"  NOTE: Judaism A-tier sites are concentrated in the outer A-band (7–33 km).",
             f"  Geographic clustering in the Levant and Central Europe is a strong",
@@ -247,7 +252,7 @@ def run():
         if religion not in religion_data:
             continue
         matched, r, _ = religion_data[religion]
-        n, nap, na, nc, ncm, p_ap, p_a, p_c, p_cm, enr_ap, enr_a, enr_c, enr_cm = r
+        n, nap, na, nc, ncm, p_ap, p_a, p_c, p_cm, enr_ap, enr_a, enr_c, enr_cm, or_ap, or_a, or_c, or_cm = r
         if n < 1:
             continue
 
@@ -277,10 +282,10 @@ def run():
             SEP,
             f"{religion.upper()}  (N={n})",
             f"  Keywords : {', '.join(kws)}",
-            f"  A+  : {nap}/{n} = {100*nap/n:.1f}%  enrich {enr_ap:.2f}x  p={p_ap:.4f} {sig(p_ap)}",
-            f"  A   : {na}/{n} = {100*na/n:.1f}%  enrich {enr_a:.2f}x  p={p_a:.4f} {sig(p_a)}",
-            f"  C   : {nc}/{n} = {100*nc/n:.1f}%  enrich {enr_c:.2f}x  p={p_c:.4f} {sig(p_c)}",
-            f"  C-  : {ncm}/{n} = {100*ncm/n:.1f}%  enrich {enr_cm:.2f}x  p={p_cm:.4f} {sig(p_cm)}",
+            f"  A+  : {nap}/{n} = {100*nap/n:.1f}%  enrich {enr_ap:.2f}x  Fisher p={p_ap:.4f} {sig(p_ap)}  OR={or_ap:.2f}x",
+            f"  A   : {na}/{n} = {100*na/n:.1f}%  enrich {enr_a:.2f}x  Fisher p={p_a:.4f} {sig(p_a)}  OR={or_a:.2f}x",
+            f"  C   : {nc}/{n} = {100*nc/n:.1f}%  enrich {enr_c:.2f}x  Fisher p={p_c:.4f} {sig(p_c)}  OR={or_c:.2f}x",
+            f"  C-  : {ncm}/{n} = {100*ncm/n:.1f}%  enrich {enr_cm:.2f}x  Fisher p={p_cm:.4f} {sig(p_cm)}  OR={or_cm:.2f}x",
             "",
             f"  Keyword tier breakdown (sorted by total hits):",
             f"    {'keyword':<20}  {'total':>7}  {'A+':>4}  {'A':>5}  {'B':>5}  {'C':>5}  {'C-':>4}",

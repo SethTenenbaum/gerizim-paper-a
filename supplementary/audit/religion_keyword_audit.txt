@@ -1,5 +1,5 @@
 UNESCO WORLD RELIGION KEYWORD AUDIT
-Generated : Fri Apr 17 20:57:40 UTC 2026
+Generated : Fri Apr 17 23:49:05 UTC 2026
 Script    : tools/generate_audit_religion.py
 Full corpus (Cultural/Mixed with year): N = 1011
 A-tier null: 20%  |  A+ null: 4%  |  C-tier null: 20%  |  C- null: 4%
@@ -7,37 +7,37 @@ Anchor: Gerizim 35.269°E   |   Beru = 30.0°
 Extended descriptions searched: YES
 
 ────────────────────────────────────────────────────────────────────────────────────────
-A-SIDE SUMMARY  (harmonic alignment)
-  Religion                 N    A+    A+%      A+p          A     A%       Ap     
-  ----------------------------------------------------------------------------------
-  Buddhism                71     4   5.6%   0.3162   ns    20  28.2%   0.0621    ~
-  Christianity           397    27   6.8%   0.0058   **    93  23.4%   0.0522    ~
-  Islam                  178    12   6.7%   0.0552    ~    42  23.6%   0.1352   ns
-  Judaism                 50     5  10.0%   0.0490    *    16  32.0%   0.0308    *
-  Hinduism                39     1   2.6%   0.7965   ns    11  28.2%   0.1406   ns
-  Zoroastrianism          16     2  12.5%   0.1327   ns     2  12.5%   0.8593   ns
-  ----------------------------------------------------------------------------------
-  UNION (any)            577    35   6.1%   0.0108    *   132  22.9%   0.0486    *
+A-SIDE SUMMARY  (harmonic alignment)  — Fisher exact: sub-corpus vs rest of full corpus
+  Religion                 N    A+    A+%    A+p(F)     OR          A     A%     Ap(F)     OR     
+  ------------------------------------------------------------------------------------------------
+  Buddhism                71     4   5.6%    0.5651  1.02x   ns    20  28.2%    0.1522  1.38x   ns
+  Christianity           397    27   6.8%    0.1028  1.47x   ns    93  23.4%    0.3228  1.09x   ns
+  Islam                  178    12   6.7%    0.2695  1.30x   ns    42  23.6%    0.3901  1.07x   ns
+  Judaism                 50     5  10.0%    0.1370  1.98x   ns    16  32.0%    0.0749  1.66x    ~
+  Hinduism                39     1   2.6%    0.8963  0.44x   ns    11  28.2%    0.2469  1.37x   ns
+  Zoroastrianism          16     2  12.5%    0.2207  2.49x   ns     2  12.5%    0.9070  0.49x   ns
+  ------------------------------------------------------------------------------------------------
+  UNION (any)            577    35   6.1%    0.2414  1.27x   ns   132  22.9%    0.4179  1.04x   ns
 
-  Full corpus: N=1011, A+ null=4%, A null=20%
+  Full corpus: N=1011, A+ rate=5.5% (56), A rate=22.6% (228)
+  Fisher exact: one-sided (greater), sub-corpus vs rest of full corpus.
 
 ────────────────────────────────────────────────────────────────────────────────────────
-C-SIDE SUMMARY  (inter-harmonic midpoint proximity)
-  H0: religion sub-corpus has same C-tier rate as full corpus (20.1%)
-  H0: religion sub-corpus has same C-/C-- rate as full corpus (4.5%)
+C-SIDE SUMMARY  (inter-harmonic midpoint proximity)  — Fisher exact vs rest of corpus
+  Full-corpus C rate: 20.1%  |  C-/C-- rate: 4.5%
 
-  Religion                 N     C     C%       Cp         C-    C-%      C-p     
-  ----------------------------------------------------------------------------------
-  Buddhism                71    19  26.8%   0.1036   ns     2   2.8%   0.7818   ns
-  Christianity           397    76  19.1%   0.6843   ns    12   3.0%   0.8720   ns
-  Islam                  178    32  18.0%   0.7765   ns     6   3.4%   0.7197   ns
-  Judaism                 50     7  14.0%   0.8966   ns     1   2.0%   0.8701   ns
-  Hinduism                39    10  25.6%   0.2414   ns     4  10.3%   0.0695    ~
-  Zoroastrianism          16     5  31.2%   0.2018   ns     1   6.2%   0.4796   ns
-  ----------------------------------------------------------------------------------
-  UNION (any)            577   119  20.6%   0.3700   ns    23   4.0%   0.5362   ns
+  Religion                 N     C     C%     Cp(F)     OR         C-    C-%    C-p(F)     OR     
+  ------------------------------------------------------------------------------------------------
+  Buddhism                71    19  26.8%    0.0987  1.50x    ~     2   2.8%    0.8493  0.59x   ns
+  Christianity           397    76  19.1%    0.7503  0.91x   ns    12   3.0%    0.9810  0.53x   ns
+  Islam                  178    32  18.0%    0.8081  0.85x   ns     6   3.4%    0.8495  0.69x   ns
+  Judaism                 50     7  14.0%    0.9047  0.64x   ns     1   2.0%    0.9082  0.42x   ns
+  Hinduism                39    10  25.6%    0.2418  1.39x   ns     4  10.3%    0.0961  2.53x    ~
+  Zoroastrianism          16     5  31.2%    0.2026  1.83x   ns     1   6.2%    0.5280  1.41x   ns
+  ------------------------------------------------------------------------------------------------
+  UNION (any)            577   119  20.6%    0.3382  1.08x   ns    23   4.0%    0.8735  0.74x   ns
 
-  Full corpus: N=1011, C null=20%, C- null=4%
+  Full corpus: N=1011, C-tier count=203 (20.1%), C-/C-- count=46 (4.5%)
 
 ────────────────────────────────────────────────────────────────────────────────────────
 CROSS-RELIGION OVERLAP  (135 sites tagged by 2+ religions)
@@ -190,12 +190,12 @@ CROSS-RELIGION OVERLAP  (135 sites tagged by 2+ religions)
   Sulaiman-Too Sacred Mountain                            C-      165.0  Islam, Hinduism
 
 ────────────────────────────────────────────────────────────────────────────────────────
-JUDAISM: SMALL-SAMPLE DETAIL (Fisher exact — binomial unreliable at N=50)
+JUDAISM: SMALL-SAMPLE DETAIL  (N=50; all p-values are Fisher exact, same as main table)
   N = 50  (full corpus N=1011)
 
   A+ tier:  5/50 (10.0%)  vs rest: 51/961 (5.3%)  Fisher p=0.1370 ns  OR=1.98x
   A tier:   16/50 (32.0%)  vs rest: 212/961 (22.1%)  Fisher p=0.0749 ~  OR=1.66x
-  C tier:   7/50 (14.0%)  vs rest: 196/961 (20.4%)  Fisher p=0.9047 ns  OR=0.64x
+  C tier:   7/50 (14.0%)  vs rest: 196/961 (20.4%)  Fisher p=0.9047 ns  OR=see main table
 
   NOTE: Judaism A-tier sites are concentrated in the outer A-band (7–33 km).
   Geographic clustering in the Levant and Central Europe is a strong
@@ -204,10 +204,10 @@ JUDAISM: SMALL-SAMPLE DETAIL (Fisher exact — binomial unreliable at N=50)
 ────────────────────────────────────────────────────────────────────────────────────────
 BUDDHISM  (N=71)
   Keywords : buddha, buddhist, buddhism, lumbini, ashoka, stupa, bodhi, nirvana
-  A+  : 4/71 = 5.6%  enrich 1.41x  p=0.3162 ns
-  A   : 20/71 = 28.2%  enrich 1.41x  p=0.0621 ~
-  C   : 19/71 = 26.8%  enrich 1.34x  p=0.1036 ns
-  C-  : 2/71 = 2.8%  enrich 0.70x  p=0.7818 ns
+  A+  : 4/71 = 5.6%  enrich 1.41x  Fisher p=0.5651 ns  OR=1.02x
+  A   : 20/71 = 28.2%  enrich 1.41x  Fisher p=0.1522 ns  OR=1.38x
+  C   : 19/71 = 26.8%  enrich 1.34x  Fisher p=0.0987 ~  OR=1.50x
+  C-  : 2/71 = 2.8%  enrich 0.70x  Fisher p=0.8493 ns  OR=0.59x
 
   Keyword tier breakdown (sorted by total hits):
     keyword                 total    A+      A      B      C    C-
@@ -305,10 +305,10 @@ BUDDHISM  (N=71)
 ────────────────────────────────────────────────────────────────────────────────────────
 CHRISTIANITY  (N=397)
   Keywords : christian, cathedral, church, apostle, biblical, byzantine, crusader, orthodox
-  A+  : 27/397 = 6.8%  enrich 1.70x  p=0.0058 **
-  A   : 93/397 = 23.4%  enrich 1.17x  p=0.0522 ~
-  C   : 76/397 = 19.1%  enrich 0.96x  p=0.6843 ns
-  C-  : 12/397 = 3.0%  enrich 0.76x  p=0.8720 ns
+  A+  : 27/397 = 6.8%  enrich 1.70x  Fisher p=0.1028 ns  OR=1.47x
+  A   : 93/397 = 23.4%  enrich 1.17x  Fisher p=0.3228 ns  OR=1.09x
+  C   : 76/397 = 19.1%  enrich 0.96x  Fisher p=0.7503 ns  OR=0.91x
+  C-  : 12/397 = 3.0%  enrich 0.76x  Fisher p=0.9810 ns  OR=0.53x
 
   Keyword tier breakdown (sorted by total hits):
     keyword                 total    A+      A      B      C    C-
@@ -732,10 +732,10 @@ CHRISTIANITY  (N=397)
 ────────────────────────────────────────────────────────────────────────────────────────
 ISLAM  (N=178)
   Keywords : islam, mosque, muslim, sufi, ottoman, caliphate, madrasa, mihrab, quran
-  A+  : 12/178 = 6.7%  enrich 1.69x  p=0.0552 ~
-  A   : 42/178 = 23.6%  enrich 1.18x  p=0.1352 ns
-  C   : 32/178 = 18.0%  enrich 0.90x  p=0.7765 ns
-  C-  : 6/178 = 3.4%  enrich 0.84x  p=0.7197 ns
+  A+  : 12/178 = 6.7%  enrich 1.69x  Fisher p=0.2695 ns  OR=1.30x
+  A   : 42/178 = 23.6%  enrich 1.18x  Fisher p=0.3901 ns  OR=1.07x
+  C   : 32/178 = 18.0%  enrich 0.90x  Fisher p=0.8081 ns  OR=0.85x
+  C-  : 6/178 = 3.4%  enrich 0.84x  Fisher p=0.8495 ns  OR=0.69x
 
   Keyword tier breakdown (sorted by total hits):
     keyword                 total    A+      A      B      C    C-
@@ -941,10 +941,10 @@ ISLAM  (N=178)
 ────────────────────────────────────────────────────────────────────────────────────────
 JUDAISM  (N=50)
   Keywords : jewish, judaism, synagogue, hebrew, israelite, biblical
-  A+  : 5/50 = 10.0%  enrich 2.50x  p=0.0490 *
-  A   : 16/50 = 32.0%  enrich 1.60x  p=0.0308 *
-  C   : 7/50 = 14.0%  enrich 0.70x  p=0.8966 ns
-  C-  : 1/50 = 2.0%  enrich 0.50x  p=0.8701 ns
+  A+  : 5/50 = 10.0%  enrich 2.50x  Fisher p=0.1370 ns  OR=1.98x
+  A   : 16/50 = 32.0%  enrich 1.60x  Fisher p=0.0749 ~  OR=1.66x
+  C   : 7/50 = 14.0%  enrich 0.70x  Fisher p=0.9047 ns  OR=0.64x
+  C-  : 1/50 = 2.0%  enrich 0.50x  Fisher p=0.9082 ns  OR=0.42x
 
   Keyword tier breakdown (sorted by total hits):
     keyword                 total    A+      A      B      C    C-
@@ -1019,10 +1019,10 @@ JUDAISM  (N=50)
 ────────────────────────────────────────────────────────────────────────────────────────
 HINDUISM  (N=39)
   Keywords : hindu, brahman, vedic, shiva, vishnu, ganges
-  A+  : 1/39 = 2.6%  enrich 0.64x  p=0.7965 ns
-  A   : 11/39 = 28.2%  enrich 1.41x  p=0.1406 ns
-  C   : 10/39 = 25.6%  enrich 1.28x  p=0.2414 ns
-  C-  : 4/39 = 10.3%  enrich 2.56x  p=0.0695 ~
+  A+  : 1/39 = 2.6%  enrich 0.64x  Fisher p=0.8963 ns  OR=0.44x
+  A   : 11/39 = 28.2%  enrich 1.41x  Fisher p=0.2469 ns  OR=1.37x
+  C   : 10/39 = 25.6%  enrich 1.28x  Fisher p=0.2418 ns  OR=1.39x
+  C-  : 4/39 = 10.3%  enrich 2.56x  Fisher p=0.0961 ~  OR=2.53x
 
   Keyword tier breakdown (sorted by total hits):
     keyword                 total    A+      A      B      C    C-
@@ -1086,10 +1086,10 @@ HINDUISM  (N=39)
 ────────────────────────────────────────────────────────────────────────────────────────
 ZOROASTRIANISM  (N=16)
   Keywords : zoroastrian, sassanid, sasanian, fire temple
-  A+  : 2/16 = 12.5%  enrich 3.12x  p=0.1327 ns
-  A   : 2/16 = 12.5%  enrich 0.62x  p=0.8593 ns
-  C   : 5/16 = 31.2%  enrich 1.56x  p=0.2018 ns
-  C-  : 1/16 = 6.2%  enrich 1.56x  p=0.4796 ns
+  A+  : 2/16 = 12.5%  enrich 3.12x  Fisher p=0.2207 ns  OR=2.49x
+  A   : 2/16 = 12.5%  enrich 0.62x  Fisher p=0.9070 ns  OR=0.49x
+  C   : 5/16 = 31.2%  enrich 1.56x  Fisher p=0.2026 ns  OR=1.83x
+  C-  : 1/16 = 6.2%  enrich 1.56x  Fisher p=0.5280 ns  OR=1.41x
 
   Keyword tier breakdown (sorted by total hits):
     keyword                 total    A+      A      B      C    C-
@@ -1125,10 +1125,10 @@ ZOROASTRIANISM  (N=16)
 
 ────────────────────────────────────────────────────────────────────────────────────────
 UNION — ALL RELIGION-TAGGED SITES (N=577)
-  A+  : 35/577 = 6.1%  enrich 1.52x  p=0.0108 *
-  A   : 132/577 = 22.9%  enrich 1.14x  p=0.0486 *
-  C   : 119/577 = 20.6%  enrich 1.03x  p=0.3700 ns
-  C-  : 23/577 = 4.0%  enrich 1.00x  p=0.5362 ns
+  A+  : 35/577 = 6.1%  enrich 1.52x  p=0.2414 ns
+  A   : 132/577 = 22.9%  enrich 1.14x  p=0.4179 ns
+  C   : 119/577 = 20.6%  enrich 1.03x  p=0.3382 ns
+  C-  : 23/577 = 4.0%  enrich 1.00x  p=0.8735 ns
 
   Site                                                    Tier       km  Religion (keyword)
   ------------------------------------------------------------------------------------------
