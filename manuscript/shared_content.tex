@@ -299,7 +299,6 @@ Test~3 (cluster asym.) & \NclusterTotal  & \clusterPermP$^{b}$ & \pAdjTestThree~
 \midrule
 Test~4 (temporal)      & \NoriginCorpus  & \pCochranThree$^{b}$ & ---                & Descriptive \\
 Test~2b (mound evol.)  & \NevoTotal      & \pEvoApFisher$^{a}$ (OR~$= \evoApFisherOR$) & N/A                & Sensitivity \\
-Test~5 (founding)      & \NoriginCorpus  & \pFoundKwFisher$^{a}$ (OR~$= \foundKwFisherOR$) & N/A  & Post-hoc \\
 \bottomrule
 \multicolumn{5}{l}{\footnotesize $^{a}$Fisher exact $p$ vs.\ rest of corpus (one-sided, enrichment); $^{b}$permutation $p$. Binomial baselines: Test~2 $p = \pCircAp$~***, Test~2b $p = \pEvoAp$~***.} \\
 \end{tabular}}
@@ -335,8 +334,8 @@ Subsections follow test numbering
 \hyperref[sec:resultscircular]{2},
 \hyperref[sec:resultsevolution_inline]{2b},
 \hyperref[sec:resultscluster]{3},
-\hyperref[sec:resultstemporal]{4},
-\hyperref[sec:results_founding]{5}).
+\hyperref[sec:resultstemporal]{4}).
+Test~5 statistics are in Appendix~\ref{sec:kwdaudit_founding}.
 
 \subsection{Global Enrichment (Test~1, Primary)}
 \label{sec:results_global}
@@ -677,17 +676,6 @@ treated as descriptive only (Figure~\ref{fig:temporal}).
 \caption{Tier-A+ rate by UNESCO inscription-year cohort.}
 \label{fig:temporal}
 \end{figure*}
-
-\subsection{Founding-Origin Classifier (Test~5, Post-Hoc)}
-\label{sec:results_founding}
-
-A post-hoc founding-origin classifier
-(\hyperref[sec:kwdaudit_founding]{Appendix~\ref*{sec:kwdaudit_founding}})
-finds \foundKwApRate\% of A+ sites carry a founding keyword versus
-\foundKwBaseRate\% in the full corpus
-(OR~$= \foundKwFisherOR$, $p = \pFoundKwFisher$~*), but carries no
-weight in the primary evidential chain as the classifier was iteratively
-tuned after data inspection.
 
 \section{Robustness Checks}
 \label{sec:robustness}
@@ -1033,16 +1021,11 @@ elevated: \wikiJavaTightApRate\%
 (OR~$= \wikiJavaTightApOR\times$, $p = \wikiJavaTightApP$~*).
 The C-band signal localises to Myanmar and Cambodia
 (\wikiMyanmarCbandRate\%, OR~$= \wikiMyanmarCbandOR\times$, $p < 0.001$)
-rather than the Indian subcontinent (Figure~\ref{fig:geo_trail}). Maritime Silk Road routes, active by the fifth century~CE, provide a
-documented corridor for the transmission of architectural canons and
-measurement systems across the Indian Ocean world. Sanskrit
-\textit{v\={a}stush\={a}stra} treatises \citep{shamasastry1915arthashastra}
-and Therav\={a}da stupa measurement manuals attest detailed metrological
-systems for monument proportioning. Whether the Babylonian beru reached
-Southeast Asia directly via Mesopotamian commercial or scribal networks,
-re-derived from shared astronomical methods attested in both traditions
-\citep{neugebauer1975history}, or transmitted through an intermediary
-Indic metrological system, is not determinable from the present corpus.
+rather than the Indian subcontinent (Figure~\ref{fig:geo_trail}).
+The anti-correlation between the Indian heartland (C-band enriched, A-depleted)
+and the Southeast Asian transmission zone (A+ enriched, C-absent) is
+consistent with placement according to two nested grids: 0.05-beru in the
+tradition's origin region and 0.10-beru at its transmission nodes.
 
 \begin{figure*}[!t]
   \centering
@@ -1123,6 +1106,12 @@ Statistics for all four variants are reported in
 
 \subsection{Founding-Origin Classifier (Test~5, Post-Hoc)}
 \label{sec:kwdaudit_founding}
+
+\textbf{Results.} The classifier finds \foundKwApRate\% of A+ sites
+carry a founding keyword versus \foundKwBaseRate\% in the full corpus
+(OR~$= \foundKwFisherOR$, $p = \pFoundKwFisher$~*).
+This carries no weight in the primary evidential chain as the classifier
+was iteratively tuned after data inspection.
 
 The founding-origin classifier (\texttt{lib/founding\_filter.py})
 assigns sites to five categories: Founding Capital (F), Sacred Origin
