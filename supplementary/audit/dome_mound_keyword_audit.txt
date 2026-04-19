@@ -1,5 +1,5 @@
 UNESCO DOME + HEMISPHERICAL MOUND EVOLUTION KEYWORD AUDIT
-Generated  : Fri Apr 17 20:37:27 UTC 2026
+Generated  : Sat Apr 18 15:08:37 UTC 2026
 Script     : tools/generate_audit_dome_mound.py
 Dome unamb : ['stupa', 'stupas', 'tholos']
 Dome amb   : ['dome', 'domed', 'domes', 'spherical']  (context-validated)
@@ -22,7 +22,7 @@ STATISTICS SUMMARY
 
 INCLUDED SITES:
 ────────────────────────────────────────────────────────────────────────────────────────
-  Mausoleum of Khoja Ahmed Yasawi ★
+  Mausoleum of Khoja Ahmed Yasawi ★  (Kazakhstan)
     LON  : 68.2711°E  |  dev 0.0001 beru  (0.2 km)  |  Tier A++
     KEYS : ['dome', 'domes', 'spherical']
     VALID: {'dome': 'context-validated', 'domes': 'context-validated', 'spherical': 'context-validated'}
@@ -31,60 +31,60 @@ INCLUDED SITES:
     [domes] "Other notable attributes include fragments of original wall paintings in the mosque, alabaster stalactites (muqarnas) in the intrados of the"
     [spherical] "A conic-spherical dome, the largest in Central Asia, sits above the Main Hall (Kazandyk)."
 
-  Boyana Church ★
+  Boyana Church ★  (Bulgaria)
     LON  : 23.2662°E  |  dev 0.0001 beru  (0.3 km)  |  Tier A++
     KEYS : ['dome']
     VALID: {'dome': 'context-validated'}
     [dome] "Criterion (ii): From an architectural point of view, Boyana Church is a pure example of a church with a Greek cross ground-plan with dome, r"
 
-  Lumbini, the Birthplace of the Lord Buddha ★
+  Lumbini, the Birthplace of the Lord Buddha ★  (Nepal)
     LON  : 83.2761°E  |  dev 0.0002 beru  (0.8 km)  |  Tier A+
     KEYS : ['stupas']
     VALID: {'stupas': 'unambiguous'}
     [stupas] "Additionally there are the excavated remains of Buddhist viharas (monasteries) of the 3rd century BC to the 5th century AD and the remains o"
     [stupas] "Criterion (vi): The archaeological remains of the Buddhist viharas (monasteries) and stupas (memorial shrines) from the 3rd century BC to th"
 
-  Humayun's Tomb, Delhi ★
+  Humayun's Tomb, Delhi ★  (India)
     LON  : 77.2506°E  |  dev 0.0006 beru  (2.0 km)  |  Tier A+
     KEYS : ['dome', 'domes']
     VALID: {'dome': 'context-validated', 'domes': 'context-validated'}
     [dome] "It is surmounted by a 42.5 m high double dome clad with marble flanked by pillared kiosks (chhatris) and the domes of the central chhatris a"
     [domes] "It is surmounted by a 42.5 m high double dome clad with marble flanked by pillared kiosks (chhatris) and the domes of the central chhatris a"
 
-  Pyu Ancient Cities ★
+  Pyu Ancient Cities ★  (Myanmar)
     LON  : 95.2900°E  |  dev 0.0007 beru  (2.3 km)  |  Tier A+
     KEYS : ['stupas']
     VALID: {'stupas': 'unambiguous'}
     [stupas] "Remains include excavated palace citadels, burial grounds and manufacture sites, as well as monumental brick Buddhist stupas, partly standin"
     [stupas] "Marked by imposing memorial stupas and other sophisticated forms of brick ritual structures, the Pyu Ancient Cities provide the earliest evi"
 
-  Silk Roads: the Routes Network of Chang'an-Tianshan Corridor ★
+  Silk Roads: the Routes Network of Chang'an-Tianshan Corridor ★  (China,Kazakhstan,Kyrgyzstan)
     LON  : 107.2911°E  |  dev 0.0007 beru  (2.5 km)  |  Tier A+
     KEYS : ['stupas']
     VALID: {'stupas': 'unambiguous'}
     [stupas] "The series of Buddhist pagodas and large, elaborate cave temples extending from Kucha (now Kuqa County) in the west to Luoyong in the east, "
 
-  Archaeological Site of Troy ★
+  Archaeological Site of Troy ★  (Türkiye)
     LON  : 26.2390°E  |  dev 0.0010 beru  (3.3 km)  |  Tier A+
     KEYS : ['tumuli']
     VALID: {'tumuli': 'unambiguous'}
     [tumuli] "The surrounding landscape contains many important archaeological and historical sites, including prehistoric settlements and cemeteries, Hel"
 
-  The <I>Trulli</I> of Alberobello ★
+  The <I>Trulli</I> of Alberobello ★  (Italy)
     LON  : 17.2369°E  |  dev 0.0011 beru  (3.6 km)  |  Tier A+
     KEYS : ['domed']
     VALID: {'domed': 'context-validated'}
     [domed] "Characteristically, they feature pyramidal, domed or conical roofs built up of corbelled limestone slabs."
     [domed] "These structures, dating from as early as the mid-14th century, characteristically feature pyramidal, domed, or conical roofs built up of co"
 
-  Old City of Jerusalem and its Walls ★
+  Old City of Jerusalem and its Walls ★  (Jerusalem (Site proposed by Jordan))
     LON  : 35.2317°E  |  dev 0.0012 beru  (4.1 km)  |  Tier A+
     KEYS : ['dome']
     VALID: {'dome': 'context-validated'}
     [dome] "Among its 220 historic monuments, the Dome of the Rock stands out: built in the 7th century, it is decorated with beautiful geometric and fl"
     [dome] "Among its 220 historic monuments, the Dome of the Rock stands out: built in the 7th century, it is decorated with beautiful geometric and fl"
 
-  Borobudur Temple Compounds ★
+  Borobudur Temple Compounds ★  (Indonesia)
     LON  : 110.2301°E  |  dev 0.0013 beru  (4.3 km)  |  Tier A+
     KEYS : ['stupa', 'stupas', 'dome']
     VALID: {'stupa': 'unambiguous', 'stupas': 'unambiguous', 'dome': 'context-validated'}
@@ -94,7 +94,7 @@ INCLUDED SITES:
     [stupas] "Around the circular platforms are 72 openwork stupas, each containing a statue of the Buddha."
     [dome] "Criteri on (i): Borobudur Temple Compounds with its stepped, unroofed pyramid consisting of ten superimposing terraces, crowned by a large b"
 
-  Kizhi Pogost ★
+  Kizhi Pogost ★  (Russian Federation)
     LON  : 35.2244°E  |  dev 0.0015 beru  (5.0 km)  |  Tier A+
     KEYS : ['dome', 'domed', 'domes']
     VALID: {'dome': 'context-validated', 'domed': 'context-validated', 'domes': 'context-validated'}
@@ -103,14 +103,14 @@ INCLUDED SITES:
     [domed] "Nowadays it is the only ensemble with two multi-domed wooden churches preserved in Russia."
     [domes] "In the 19th century, the walls of the churches were covered with protective siding boards and painted white and the domes were covered with "
 
-  Gaya Tumuli ★
+  Gaya Tumuli ★  (Republic of Korea)
     LON  : 128.3213°E  |  dev 0.0017 beru  (5.8 km)  |  Tier A+
     KEYS : ['tumuli']
     VALID: {'tumuli': 'unambiguous'}
     [tumuli] "Gaya Tumuli This serial property includes archaeological cemetery sites with burial mounds attributed to the Gaya Confederacy, which develop"
     [tumuli] "The introduction of new forms of tombs and the intensification of the spatial hierarchy in the tumuli sites reflect the structural changes e"
 
-  Cathedral and Churches of Echmiatsin and the Archaeological Site of Zvartnots ★
+  Cathedral and Churches of Echmiatsin and the Archaeological Site of Zvartnots ★  (Armenia)
     LON  : 44.3246°E  |  dev 0.0019 beru  (6.2 km)  |  Tier A+
     KEYS : ['dome', 'domed']
     VALID: {'dome': 'context-validated', 'domed': 'context-validated'}
@@ -119,61 +119,61 @@ INCLUDED SITES:
     [domed] "Cathedral and Churches of Echmiatsin and the Archaeological Site of Zvartnots The cathedral and churches of Echmiatsin and the archaeologica"
     [domed] "They graphically illustrate the evolution and flowering of the Armenian central-domed cross-hall type of church."
 
-  Kunya-Urgench
+  Kunya-Urgench  (Turkmenistan)
     LON  : 59.1417°E  |  dev 0.0042 beru  (14.1 km)  |  Tier A
     KEYS : ['dome', 'domes']
     VALID: {'dome': 'context-validated', 'domes': 'context-validated'}
     [dome] "There are constructions from adobe and burned bricks, plain unicameral dome constructions up-going to ancient chartak and buildings with com"
     [domes] "These monuments also demonstrate the evolution of methods of treatment of inner surface of domes from cellular sails to stalactite those tim"
 
-  Archaeological Ruins at Moenjodaro
+  Archaeological Ruins at Moenjodaro  (Pakistan)
     LON  : 68.1389°E  |  dev 0.0043 beru  (14.4 km)  |  Tier A
     KEYS : ['stupa']
     VALID: {'stupa': 'unambiguous'}
     [stupa] "Moenjodaro comprises two sectors: a citadel area in the west where the Buddhist stupa was constructed with unbaked brick over the ruins of M"
 
-  Mount Kumgang – Diamond Mountain from the Sea
+  Mount Kumgang – Diamond Mountain from the Sea  (Democratic People's Republic of Korea)
     LON  : 128.1375°E  |  dev 0.0044 beru  (14.6 km)  |  Tier A
     KEYS : ['stupas']
     VALID: {'stupas': 'unambiguous'}
     [stupas] "This cultural landscape is home to ancient hermitages, temples, stupas, and stone carvings, many located in the Outer and Inner Kumgang Area"
     [stupas] "Temples, pagodas, steles, stupas, sculptures and stone lanterns attest to the sequence of development of Korean mountain Buddhism."
 
-  Architectural Ensemble of the Trinity Sergius Lavra in Sergiev Posad
+  Architectural Ensemble of the Trinity Sergius Lavra in Sergiev Posad  (Russian Federation)
     LON  : 38.1312°E  |  dev 0.0046 beru  (15.3 km)  |  Tier A
     KEYS : ['dome', 'domes']
     VALID: {'dome': 'context-validated', 'domes': 'context-validated'}
     [dome] "A remarkable feature of this church is a bell tower under its dome without internal interconnection between the belfry and the cathedral its"
     [domes] "The Parish churches situated within the territory of Sergiev Posad, which were originally wooden and later rebuilt in stone, formed a ring o"
 
-  Great Mosque and Hospital of Divriği
+  Great Mosque and Hospital of Divriği  (Türkiye)
     LON  : 38.1218°E  |  dev 0.0049 beru  (16.3 km)  |  Tier A
     KEYS : ['dome']
     VALID: {'dome': 'context-validated'}
     [dome] "Founded by the Mengücekide emir Ahmed Shah following the victory of the Seljuk Turks over the Byzantine army at the battle of Malazgirt in 1"
     [dome] "It is entered via a monumental, elaborately carved stone portal on the west, leading into a double height atrium formed by four massive pier"
 
-  Historic Centre of Zacatecas
+  Historic Centre of Zacatecas  (Mexico)
     LON  : -102.5735°E  |  dev 0.0052 beru  (17.5 km)  |  Tier A
     KEYS : ['dome']
     VALID: {'dome': 'context-validated'}
     [dome] "Its massive dome and towers provide a counterpoint to the nearby cathedral."
 
-  Speyer Cathedral
+  Speyer Cathedral  (Germany)
     LON  : 8.4424°E  |  dev 0.0058 beru  (19.2 km)  |  Tier A
     KEYS : ['domes']
     VALID: {'domes': 'context-validated'}
     [domes] "Speyer Cathedral Speyer Cathedral, a basilica with four towers and two domes, was founded by Conrad II in 1030 and remodelled at the end of "
     [domes] "Brief synthesis Speyer Cathedral in the southwest of Germany, a basilica with four towers and two domes, was founded as a flat-ceiling basil"
 
-  Sanctuary of Asklepios at Epidaurus
+  Sanctuary of Asklepios at Epidaurus  (Greece)
     LON  : 23.0806°E  |  dev 0.0063 beru  (20.9 km)  |  Tier A
     KEYS : ['tholos']
     VALID: {'tholos': 'unambiguous'}
     [tholos] "Its principal monuments, particularly the temple of Asklepios, the Tholos and the Theatre - considered one of the purest masterpieces of Gre"
     [tholos] "The Theatre, together with the Temples of Artemis and Asklepios, the Tholos, the Enkoimeterion and the Propylaia, comprise a coherent assemb"
 
-  Centennial Hall in Wrocław
+  Centennial Hall in Wrocław  (Poland)
     LON  : 17.0770°E  |  dev 0.0064 beru  (21.3 km)  |  Tier A
     KEYS : ['dome', 'domes']
     VALID: {'dome': 'context-validated', 'domes': 'context-validated'}
@@ -181,46 +181,46 @@ INCLUDED SITES:
     [dome] "The hall has a symmetrical quatrefoil ground plan with a huge circular central space covered by a ribbed dome topped with a lantern."
     [domes] "To the north of the square stands the Pavilion of the Historical and Artistic Exhibition, now known as the Four Domes Pavilion, which was bu"
 
-  State Historical and Cultural Park “Ancient Merv”
+  State Historical and Cultural Park “Ancient Merv”  (Turkmenistan)
     LON  : 62.0667°E  |  dev 0.0067 beru  (22.5 km)  |  Tier A
     KEYS : ['stupa']
     VALID: {'stupa': 'unambiguous'}
     [stupa] "In the interior are the remains of a number of important structures: the central Beni Makhan mosque and its cistern; the Buddhist stupa and "
 
-  Stone Circles of Senegambia
+  Stone Circles of Senegambia  (Gambia,Senegal)
     LON  : -15.5167°E  |  dev 0.0071 beru  (23.8 km)  |  Tier A
     KEYS : ['tumuli']
     VALID: {'tumuli': 'unambiguous'}
     [tumuli] "The four groups, Sine Ngayène, Wanar, Wassu and Kerbatch, cover 93 stone circles and numerous tumuli, burial mounds, some of which have been"
     [tumuli] "These sites, Wassu, and Kerbatch in Gambia, and Wanar and Sine Ngayene in Senegal, represent an extraordinary concentration of more than 1,0"
 
-  Royal Court of Tiébélé
+  Royal Court of Tiébélé  (Burkina Faso)
     LON  : -0.9619°E  |  dev 0.0077 beru  (25.6 km)  |  Tier A
     KEYS : ['tumulus']
     VALID: {'tumulus': 'unambiguous'}
     [tumulus] "In addition to the houses, there are symbolic sacred elements: the pourou, the sacred tumulus where the placenta of the new-borns of the roy"
 
-  Dilmun Burial Mounds
+  Dilmun Burial Mounds  (Bahrain)
     LON  : 50.5056°E  |  dev 0.0079 beru  (26.3 km)  |  Tier A
     KEYS : ['tumuli']
     VALID: {'tumuli': 'unambiguous'}
     [tumuli] "Six of these sites are burial mound fields consisting of a few dozen to several thousand tumuli."
     [tumuli] "Six of the selected site components are burial mound fields consisting of some dozen to several thousand tumuli."
 
-  Studenica Monastery
+  Studenica Monastery  (Serbia)
     LON  : 20.5317°E  |  dev 0.0088 beru  (29.2 km)  |  Tier A
     KEYS : ['domed']
     VALID: {'domed': 'context-validated'}
     [domed] "The exterior of the domed single-nave church is reminiscent of Italian Romanesque cathedrals, while interior wall paintings in the naos and "
 
-  Tombs of Buganda Kings at Kasubi
+  Tombs of Buganda Kings at Kasubi  (Uganda)
     LON  : 32.5514°E  |  dev 0.0094 beru  (31.3 km)  |  Tier A
     KEYS : ['dome']
     VALID: {'dome': 'context-validated'}
     [dome] "Four royal tombs now lie within the Muzibu Azaala Mpanga, the main building, which is circular and surmounted by a dome."
     [dome] "The main tomb building, which is circular and surmounted by a dome, is a major example of an architectural achievement that was raised with "
 
-  Gordion
+  Gordion  (Türkiye)
     LON  : 31.9861°E  |  dev 0.0094 beru  (31.4 km)  |  Tier A
     KEYS : ['tumulus', 'tumuli']
     VALID: {'tumulus': 'unambiguous', 'tumuli': 'unambiguous'}
@@ -228,53 +228,53 @@ INCLUDED SITES:
     [tumuli] "The key elements of this archaeological site include the Citadel Mound, the Lower Town, the Outer Town and Fortifications, and several buria"
     [tumuli] "The large concentration of monumental tumuli in the vicinity of Gordion creates an exceptional landscape of power, different from any other "
 
-  Historic Areas of Istanbul
+  Historic Areas of Istanbul  (Türkiye)
     LON  : 28.9833°E  |  dev 0.0095 beru  (31.7 km)  |  Tier A
     KEYS : ['dome']
     VALID: {'dome': 'context-validated'}
     [dome] "The distinctive and characteristic skyline of Istanbul was built up over many centuries and encompasses the  Hagia  Sophia whose vast dome r"
 
-  Selimiye Mosque and its Social Complex
+  Selimiye Mosque and its Social Complex  (Türkiye)
     LON  : 26.5594°E  |  dev 0.0097 beru  (32.2 km)  |  Tier A
     KEYS : ['dome']
     VALID: {'dome': 'context-validated'}
     [dome] "Selimiye Mosque and its Social Complex The square Mosque with its single great dome and four slender minarets, dominates the skyline of the "
     [dome] "The imposing mosque stepping up to its single great dome with four soaring slender minarets, spectacular decorated interior space, manuscrip"
 
-  Paleochristian and Byzantine Monuments of Thessalonika
+  Paleochristian and Byzantine Monuments of Thessalonika  (Greece)
     LON  : 22.9703°E  |  dev 0.0100 beru  (33.2 km)  |  Tier A
     KEYS : ['dome']
     VALID: {'dome': 'context-validated'}
     [dome] "the south dome of the narthex of the Church of Panagia Chalkeon)."
 
-  Monticello and the University of Virginia in Charlottesville
+  Monticello and the University of Virginia in Charlottesville  (United States of America)
     LON  : -78.4310°E  |  dev 0.0100 beru  (33.3 km)  |  Tier B
     KEYS : ['dome']
     VALID: {'dome': 'context-validated'}
     [dome] "His house at Monticello, with its dome, porticos supported by Doric columns, and cornices and friezes derived from classical Roman buildings"
 
-  Bagan
+  Bagan  (Myanmar)
     LON  : 94.9642°E  |  dev 0.0102 beru  (33.8 km)  |  Tier B
     KEYS : ['stupas']
     VALID: {'stupas': 'unambiguous'}
     [stupas] "The seven components of the serial property include numerous temples, stupas, monasteries and places of pilgrimage, as well as archaeologica"
     [stupas] "The serial property of eight components consists of 3,595 recorded monuments – including stupas, temples and other structures for Buddhist s"
 
-  Residence of Bukovinian and Dalmatian Metropolitans
+  Residence of Bukovinian and Dalmatian Metropolitans  (Ukraine)
     LON  : 25.9247°E  |  dev 0.0115 beru  (38.2 km)  |  Tier B
     KEYS : ['domed']
     VALID: {'domed': 'context-validated'}
     [domed] "The property, an outstanding example of 19th-century historicist architecture, also includes a seminary and monastery and is dominated by th"
     [domed] "Criterion (iii) : The Residence bears exceptional testimony to the cultural tradition of the Orthodox Church which is signified by the use o"
 
-  Monasteries of Daphni, Hosios Loukas and Nea Moni of Chios
+  Monasteries of Daphni, Hosios Loukas and Nea Moni of Chios  (Greece)
     LON  : 23.6366°E  |  dev 0.0123 beru  (40.8 km)  |  Tier B
     KEYS : ['dome']
     VALID: {'dome': 'context-validated'}
     [dome] "The churches are built on a cross-in-square plan with a large dome supported by squinches defining an octagonal space."
     [dome] "The churches are built on a cross-in-square plan with a large dome supported by squinches defining an octagonal space."
 
-  Monasteries of Haghpat and Sanahin
+  Monasteries of Haghpat and Sanahin  (Armenia)
     LON  : 44.6664°E  |  dev 0.0132 beru  (44.1 km)  |  Tier B
     KEYS : ['dome', 'domed']
     VALID: {'dome': 'context-validated', 'domed': 'context-validated'}
@@ -283,39 +283,39 @@ INCLUDED SITES:
     [domed] "The church is a rectangular domed construction, slightly elongated from east to west, with an internal cross-shaped plan."
     [domed] "St Astvatsatsin Church (AD 928-944) is a central-domed, cross-shaped example of Armenian medieval classical architecture that reached to its"
 
-  Architectural, Residential and Cultural Complex of the Radziwill Family at Nesvizh
+  Architectural, Residential and Cultural Complex of the Radziwill Family at Nesvizh  (Belarus)
     LON  : 26.6914°E  |  dev 0.0141 beru  (46.9 km)  |  Tier B
     KEYS : ['domed']
     VALID: {'domed': 'context-validated'}
     [domed] "The Radziwill family complex - and in particular the domed basilica Corpus Christi mausoleum-church represents an important stage in the dev"
     [domed] "In particular, this concerns Corpus Christi Church with its domed basilica typology."
 
-  Cordouan Lighthouse
+  Cordouan Lighthouse  (France)
     LON  : -1.1733°E  |  dev 0.0147 beru  (49.1 km)  |  Tier B
     KEYS : ['domes']
     VALID: {'domes': 'context-validated'}
     [domes] "The tower of Louis de Foix clearly reflects the influence of antiquity and Italy, evoking in the open sea the forms of Roman mausoleums, and"
 
-  Medieval Monuments in Kosovo
+  Medieval Monuments in Kosovo  (Serbia)
     LON  : 20.7333°E  |  dev 0.0155 beru  (51.5 km)  |  Tier B
     KEYS : ['domed']
     VALID: {'domed': 'context-validated'}
     [domed] "The Patriarchate of Peć Monastery is a group of four domed churches featuring series of wall paintings."
     [domed] "The Patriarchate of Peć Monastery is a group of four domed churches featuring series of wall paintings."
 
-  Historical Monuments of Mtskheta
+  Historical Monuments of Mtskheta  (Georgia)
     LON  : 44.7338°E  |  dev 0.0155 beru  (51.6 km)  |  Tier B
     KEYS : ['domed']
     VALID: {'domed': 'context-validated'}
     [domed] "The small domed church of the Samtavro Monastery was originally built in the 4th century and has since been subject to various restorations."
 
-  Archaeological Sites of Mycenae and Tiryns
+  Archaeological Sites of Mycenae and Tiryns  (Greece)
     LON  : 22.8000°E  |  dev 0.0156 beru  (52.1 km)  |  Tier B
     KEYS : ['tholos']
     VALID: {'tholos': 'unambiguous'}
     [tholos] "Significant stages in monumental architecture are still visible in the property, such as the massive defensive walls, the corbelled tholos t"
 
-  Buddhist Monuments at Sanchi
+  Buddhist Monuments at Sanchi  (India)
     LON  : 77.7397°E  |  dev 0.0157 beru  (52.2 km)  |  Tier B
     KEYS : ['stupa', 'stupas', 'dome', 'tumuli']
     VALID: {'stupa': 'unambiguous', 'stupas': 'unambiguous', 'dome': 'context-validated', 'tumuli': 'unambiguous'}
@@ -326,45 +326,45 @@ INCLUDED SITES:
     [dome] "The hemispherical, egg-shaped dome (anda), topped with a cubical relic chamber (harmika), is built on a circular terrace (medhi); it has one"
     [tumuli] "Representing a transition from wood structures to stone, the railings (vedika) and the gateways (torana) also bear witness to the continued "
 
-  Nemrut Dağ
+  Nemrut Dağ  (Türkiye)
     LON  : 38.7410°E  |  dev 0.0157 beru  (52.4 km)  |  Tier B
     KEYS : ['tumulus']
     VALID: {'tumulus': 'unambiguous'}
     [tumulus] "Five giant seated limestone statues, identified by their inscriptions as deities, face outwards from the tumulus on the upper level of the e"
     [tumulus] "Criterion (iv): More so than the tombs at Karakus and Eski Kahta, the tumulus at Nemrut Dağ illustrates, through the liberal syncretism of a"
 
-  Millenary Benedictine Abbey of Pannonhalma and its Natural Environment
+  Millenary Benedictine Abbey of Pannonhalma and its Natural Environment  (Hungary)
     LON  : 17.7844°E  |  dev 0.0172 beru  (57.2 km)  |  Tier B
     KEYS : ['dome']
     VALID: {'dome': 'context-validated'}
     [dome] "It was originally surmounted by a dome 26 m high on a high drum, but this had to be removed in 1937-38 because of its severe deterioration."
 
-  Monastery of Geghard and the Upper Azat Valley
+  Monastery of Geghard and the Upper Azat Valley  (Armenia)
     LON  : 44.8185°E  |  dev 0.0183 beru  (61.0 km)  |  Tier B
     KEYS : ['dome']
     VALID: {'dome': 'context-validated'}
     [dome] "The Kathoghikè (main church) is in the classic Armenian form, an equal-armed cross inscribed in a square in plan and covered with a dome on "
 
-  Church of the Ascension, Kolomenskoye
+  Church of the Ascension, Kolomenskoye  (Russian Federation)
     LON  : 37.6739°E  |  dev 0.0198 beru  (66.1 km)  |  Tier B
     KEYS : ['domed']
     VALID: {'domed': 'context-validated'}
     [domed] "Its one-pillar construction differed from the usual five-domed structure on four pillars, making it more like a memorial sculpture with arch"
 
-  Megaliths of Carnac and of the shores of Morbihan
+  Megaliths of Carnac and of the shores of Morbihan  (France)
     LON  : -3.1297°E  |  dev 0.0200 beru  (66.7 km)  |  Tier B
     KEYS : ['tumuli']
     VALID: {'tumuli': 'unambiguous'}
     [tumuli] "A variety of monumental stone structures, such as menhirs, standing stone (or stelae) alignments, stone circles (cromlechs), cairns, and fun"
 
-  Hospicio Cabañas, Guadalajara
+  Hospicio Cabañas, Guadalajara  (Mexico)
     LON  : -103.3378°E  |  dev 0.0202 beru  (67.4 km)  |  Tier B
     KEYS : ['dome']
     VALID: {'dome': 'context-validated'}
     [dome] "The kitchen is topped by a saucer dome and small lantern."
     [dome] "It is the chapel, however, that is the visually dominant feature of the hospice with its imposing dome rising 32.5 metres."
 
-  Kremlin and Red Square, Moscow
+  Kremlin and Red Square, Moscow  (Russian Federation)
     LON  : 37.6204°E  |  dev 0.0216 beru  (72.0 km)  |  Tier B
     KEYS : ['domed', 'domes']
     VALID: {'domed': 'context-validated', 'domes': 'context-validated'}
@@ -372,38 +372,38 @@ INCLUDED SITES:
     [domed] "In the same square another Italian architect, Alevisio Novi, erected the five-domed Church of the Archangel in 1505-1508."
     [domes] "In the 17th century the cathedral gained its up-to-date appearance thanks to the decorative finishing of the domes and painting both inside "
 
-  Cahokia Mounds State Historic Site
+  Cahokia Mounds State Historic Site  (United States of America)
     LON  : -90.0614°E  |  dev 0.0223 beru  (74.3 km)  |  Tier B
     KEYS : ['tumuli']
     VALID: {'tumuli': 'unambiguous'}
     [tumuli] "The mounds served variously as construction foundations for public buildings and as funerary tumuli."
 
-  Episcopal Complex of the Euphrasian Basilica in the Historic Centre of Poreč
+  Episcopal Complex of the Euphrasian Basilica in the Historic Centre of Poreč  (Croatia)
     LON  : 13.5933°E  |  dev 0.0225 beru  (75.0 km)  |  Tier B
     KEYS : ['dome']
     VALID: {'dome': 'context-validated'}
     [dome] "In the main apse there are mosaics around the four windows, in the semi-dome and on the front wall."
 
-  Buddhist Ruins of Takht-i-Bahi and Neighbouring City Remains at Sahr-i-Bahlol
+  Buddhist Ruins of Takht-i-Bahi and Neighbouring City Remains at Sahr-i-Bahlol  (Pakistan)
     LON  : 71.9506°E  |  dev 0.0227 beru  (75.7 km)  |  Tier B
     KEYS : ['stupa', 'stupas']
     VALID: {'stupa': 'unambiguous', 'stupas': 'unambiguous'}
     [stupa] "Today the ruins comprise a main stupa court, votive stupas court, a group of three stupas, the monastic quadrangle with meditation cells, co"
     [stupas] "Today the ruins comprise a main stupa court, votive stupas court, a group of three stupas, the monastic quadrangle with meditation cells, co"
 
-  Painted Churches in the Troodos Region
+  Painted Churches in the Troodos Region  (Cyprus)
     LON  : 32.9663°E  |  dev 0.0232 beru  (77.4 km)  |  Tier B
     KEYS : ['domes']
     VALID: {'domes': 'context-validated'}
     [domes] "The structures display elements that were specific to Cyprus and were determined by its geography, history and climate, including steep-pitc"
 
-  Sassanid Archaeological Landscape of Fars Region
+  Sassanid Archaeological Landscape of Fars Region  (Iran (Islamic Republic of))
     LON  : 52.5325°E  |  dev 0.0245 beru  (81.7 km)  |  Tier B
     KEYS : ['domes']
     VALID: {'domes': 'context-validated'}
     [domes] "The architecture of the Sassanid monuments in the property further illustrates early examples of construction of domes with squinches on squ"
 
-  Saloum Delta
+  Saloum Delta  (Senegal)
     LON  : -16.4986°E  |  dev 0.0256 beru  (85.2 km)  |  Tier B
     KEYS : ['tumulus', 'tumuli']
     VALID: {'tumulus': 'unambiguous', 'tumuli': 'unambiguous'}
@@ -412,7 +412,7 @@ INCLUDED SITES:
     [tumuli] "Burial sites on 28 of the mounds take the form of tumuli where remarkable artefacts have been found."
     [tumuli] "Some mounds include tumuli; they form, with their baobab vegetation and their undulating forms, funerary sites with specific landscape featu"
 
-  Taj Mahal
+  Taj Mahal  (India)
     LON  : 78.0422°E  |  dev 0.0258 beru  (85.8 km)  |  Tier B
     KEYS : ['dome', 'domed', 'domes']
     VALID: {'dome': 'context-validated', 'domed': 'context-validated', 'domes': 'context-validated'}
@@ -420,13 +420,13 @@ INCLUDED SITES:
     [domed] "The large double storied domed chamber, which houses the cenotaphs of Mumtaz Mahal and Shah Jahan, is a perfect octagon in plan."
     [domes] "Its recognised architectonic beauty has a rhythmic combination of solids and voids, concave and convex and light shadow; such as arches and "
 
-  Longmen Grottoes
+  Longmen Grottoes  (China)
     LON  : 112.4667°E  |  dev 0.0267 beru  (89.1 km)  |  Tier B
     KEYS : ['stupas']
     VALID: {'stupas': 'unambiguous'}
     [stupas] "These contain almost 110,000 Buddhist stone statues, more than 60 stupas and 2,800 inscriptions carved on steles."
 
-  Antequera Dolmens Site
+  Antequera Dolmens Site  (Spain)
     LON  : -4.5406°E  |  dev 0.0270 beru  (89.9 km)  |  Tier B
     KEYS : ['tholos', 'tumuli']
     VALID: {'tholos': 'unambiguous', 'tumuli': 'unambiguous'}
@@ -435,14 +435,14 @@ INCLUDED SITES:
     [tumuli] "These three tombs, buried beneath their original earth tumuli, are one of the most remarkable architectural works of European prehistory and"
     [tumuli] "The megalithic structures are presented in the guise of the natural landscape (buried beneath earth tumuli) and their orientation is based o"
 
-  Aachen Cathedral
+  Aachen Cathedral  (Germany)
     LON  : 6.0839°E  |  dev 0.0272 beru  (90.5 km)  |  Tier B
     KEYS : ['dome']
     VALID: {'dome': 'context-validated'}
     [dome] "The Palatine Chapel is based on an octagonal ground plan, which is surrounded by an aisle and by tribunes above, and roofed with a dome."
     [dome] "The high dome gathers light from eight open-arched windows above the drum; it was originally entirely covered with a large mosaic depicting "
 
-  Archaeological Site of Nalanda Mahavihara at Nalanda, Bihar
+  Archaeological Site of Nalanda Mahavihara at Nalanda, Bihar  (India)
     LON  : 85.4439°E  |  dev 0.0275 beru  (91.6 km)  |  Tier B
     KEYS : ['stupa', 'stupas']
     VALID: {'stupa': 'unambiguous', 'stupas': 'unambiguous'}
@@ -451,20 +451,20 @@ INCLUDED SITES:
     [stupas] "It includes  stupas , shrines,  viharas  (residential and educational buildings) and important art works in stucco, stone and metal."
     [stupas] "It includes stupas, chaityas, viharas, shrines, many votive structures and important art works in stucco, stone and metal."
 
-  Etruscan Necropolises of Cerveteri and Tarquinia
+  Etruscan Necropolises of Cerveteri and Tarquinia  (Italy)
     LON  : 12.1019°E  |  dev 0.0278 beru  (92.5 km)  |  Tier B
     KEYS : ['tumuli']
     VALID: {'tumuli': 'unambiguous'}
     [tumuli] "Some of the tombs are monumental, cut in rock and topped by impressive tumuli (burial mounds)."
     [tumuli] "The site contains very different types of tombs: trenches cut in rock; tumuli; and some, also carved in rock, in the shape of huts or houses"
 
-  Historic Centre of Bukhara
+  Historic Centre of Bukhara  (Uzbekistan)
     LON  : 64.4286°E  |  dev 0.0280 beru  (93.3 km)  |  Tier B
     KEYS : ['dome']
     VALID: {'dome': 'context-validated'}
     [dome] "Later buildings from this phase of Bukhara´s history include monumental medressehs at important crossroads: Taki Sarafon (Dome of the Moneyc"
 
-  Kathmandu Valley
+  Kathmandu Valley  (Nepal)
     LON  : 85.4285°E  |  dev 0.0280 beru  (93.3 km)  |  Tier B
     KEYS : ['stupa', 'stupas']
     VALID: {'stupa': 'unambiguous', 'stupas': 'unambiguous'}
@@ -472,13 +472,13 @@ INCLUDED SITES:
     [stupas] "The seven include the Durbar Squares of Hanuman Dhoka (Kathmandu), Patan and Bhaktapur, the Buddhist stupas of Swayambhu and Bauddhanath and"
     [stupas] "The stupas have simple but powerful forms with massive, whitewashed hemispheres supporting gilded cubes with the all-seeing eternal Buddha e"
 
-  Thracian Tomb of Kazanlak
+  Thracian Tomb of Kazanlak  (Bulgaria)
     LON  : 25.3992°E  |  dev 0.0290 beru  (96.6 km)  |  Tier B
     KEYS : ['tholos']
     VALID: {'tholos': 'unambiguous'}
     [tholos] "The tholos has a narrow corridor and a round burial chamber, both decorated with murals representing Thracian burial rituals and culture."
 
-  White Monuments of Vladimir and Suzdal
+  White Monuments of Vladimir and Suzdal  (Russian Federation)
     LON  : 40.3974°E  |  dev 0.0291 beru  (96.8 km)  |  Tier B
     KEYS : ['dome', 'domed']
     VALID: {'dome': 'context-validated', 'domed': 'context-validated'}
@@ -486,52 +486,52 @@ INCLUDED SITES:
     [dome] "It has a single dome at the crossing and reliefs on the upper part of the exterior walls."
     [domed] "Within, dominating the whole town, stands the Cathedral of the Nativity, built in the 13th century and reconstructed in the 16th century, wi"
 
-  The Cultural Landscape of Al-Faw Archaeological Area
+  The Cultural Landscape of Al-Faw Archaeological Area  (Saudi Arabia)
     LON  : 45.1634°E  |  dev 0.0298 beru  (99.3 km)  |  Tier B
     KEYS : ['tumuli']
     VALID: {'tumuli': 'unambiguous'}
     [tumuli] "Archaeological features include the Palaeolithic and Neolithic tools of early people, tapered structures, cairns and circular constructions,"
     [tumuli] "The vast relict cultural landscape encapsulates extremely rich archaeological remains, including the flint tools of the Palaeolithic and Neo"
 
-  Pergamon and its Multi-Layered Cultural Landscape
+  Pergamon and its Multi-Layered Cultural Landscape  (Türkiye)
     LON  : 27.1696°E  |  dev 0.0300 beru  (100.0 km)  |  Tier B
     KEYS : ['tumuli']
     VALID: {'tumuli': 'unambiguous'}
     [tumuli] "The exceptional composition of monuments includes the extremely steep theatre, the lengthy stoa, a three-terraced Gymnasium, the Great Altar"
     [tumuli] "The architectural monuments including the Asclepion, Serapis Temple and Sanctuary, Kybele Sanctuary at Kapıkaya and Tumuli are exceptional t"
 
-  Church and Dominican Convent of Santa Maria delle Grazie with “The Last Supper” by Leonardo da Vinci
+  Church and Dominican Convent of Santa Maria delle Grazie with “The Last Supper” by Leonardo da Vinci  (Italy)
     LON  : 9.1710°E  |  dev 0.0301 beru  (100.1 km)  |  Tier B
     KEYS : ['dome']
     VALID: {'dome': 'context-validated'}
     [dome] "Bramante structurally enlarged the church and added large semi-circular apses, a wonderful drum-shaped dome surrounded by columns, and a spe"
 
-  Archaeological Site of Mystras
+  Archaeological Site of Mystras  (Greece)
     LON  : 22.3667°E  |  dev 0.0301 beru  (100.2 km)  |  Tier B
     KEYS : ['domed']
     VALID: {'domed': 'context-validated'}
     [domed] "Various architectural styles are applied in ecclesiastical architecture, but the so-called “mixed type of Mystras” (in which a three aisled "
 
-  Bam and its Cultural Landscape
+  Bam and its Cultural Landscape  (Iran (Islamic Republic of))
     LON  : 58.3667°E  |  dev 0.0301 beru  (100.2 km)  |  Tier B
     KEYS : ['domed']
     VALID: {'domed': 'context-validated'}
     [domed] "Arg-e Bam is the most representative example of a fortified medieval town built in vernacular technique using mud layers (Chineh), sun-dried"
 
-  Capital Cities and Tombs of the Ancient Koguryo Kingdom
+  Capital Cities and Tombs of the Ancient Koguryo Kingdom  (China)
     LON  : 126.1762°E  |  dev 0.0302 beru  (100.7 km)  |  Tier B
     KEYS : ['tumulus']
     VALID: {'tumulus': 'unambiguous'}
     [tumulus] "Some of the tombs show great ingenuity in their elaborate ceilings, designed to roof wide spaces without columns and carry the heavy load of"
 
-  Churches of the Pskov School of Architecture
+  Churches of the Pskov School of Architecture  (Russian Federation)
     LON  : 28.3341°E  |  dev 0.0312 beru  (103.8 km)  |  Tier B
     KEYS : ['domes']
     VALID: {'domes': 'context-validated'}
     [domes] "Characteristics of these buildings, produced by the Pskov School of Architecture, include cubic volumes, domes, porches and belfries, with t"
     [domes] "The school utilized a limited set of decorative techniques and architectural elements, illustrating a synthesis of vernacular styles brought"
 
-  Archaeological Site of Aigai (modern name Vergina)
+  Archaeological Site of Aigai (modern name Vergina)  (Greece)
     LON  : 22.3183°E  |  dev 0.0317 beru  (105.5 km)  |  Tier B
     KEYS : ['tumulus', 'tumuli']
     VALID: {'tumulus': 'unambiguous', 'tumuli': 'unambiguous'}
@@ -540,7 +540,7 @@ INCLUDED SITES:
     [tumuli] "The most important remains are the monumental palace, lavishly decorated with mosaics and painted stuccoes, and the burial ground with more "
     [tumuli] "The most important, already excavated, archaeological remains of the site are: the monumental palace (ca 340 BC), which was the biggest and "
 
-  Gyeongju Historic Areas
+  Gyeongju Historic Areas  (Republic of Korea)
     LON  : 129.2200°E  |  dev 0.0317 beru  (105.6 km)  |  Tier B
     KEYS : ['domed', 'tumuli']
     VALID: {'domed': 'REJECTED', 'tumuli': 'unambiguous'}
@@ -548,45 +548,45 @@ INCLUDED SITES:
     [tumuli] "The Tumuli Park Belt consists of three groups of Royal Tombs."
     [tumuli] "Protection and management requirements Gyeongju Historic Areas consists of five different sub-areas of Mount Namsan, Wolseong, Tumuli, Hwang"
 
-  Archaeological Site of Philippi
+  Archaeological Site of Philippi  (Greece)
     LON  : 24.2853°E  |  dev 0.0339 beru  (112.8 km)  |  Tier B
     KEYS : ['domed']
     VALID: {'domed': 'context-validated'}
     [domed] "The Octagon Church, the transept Basilica, and the domed Basilica stand out as types of Early Christian architecture."
 
-  Jesuit Missions of La Santísima Trinidad de Paraná and Jesús de Tavarangue
+  Jesuit Missions of La Santísima Trinidad de Paraná and Jesús de Tavarangue  (Paraguay)
     LON  : -55.7530°E  |  dev 0.0341 beru  (113.4 km)  |  Tier B
     KEYS : ['dome']
     VALID: {'dome': 'context-validated'}
     [dome] "The large stone church had a fine dome and impressive decoration."
 
-  Historic Cairo
+  Historic Cairo  (Egypt)
     LON  : 31.2334°E  |  dev 0.0345 beru  (114.9 km)  |  Tier B
     KEYS : ['dome', 'domes']
     VALID: {'dome': 'context-validated', 'domes': 'context-validated'}
     [dome] "As limited space was available, they reconstructed ruined places, renovated multiple buildings that preceded them, and added new landmarks b"
     [domes] "The extraordinary Bahri Mamluk (1250-1382 AD) and Burgi Mamluk (1382-1517 AD) monuments reign triumphant above the skyline of Cairo, the ref"
 
-  Ephesus
+  Ephesus  (Türkiye)
     LON  : 27.3336°E  |  dev 0.0355 beru  (118.2 km)  |  Tier B
     KEYS : ['domed']
     VALID: {'domed': 'context-validated'}
     [domed] "Since the 5 th  century, the House of the Virgin Mary, a domed cruciform chapel seven kilometres from Ephesus, became a major place of Chris"
 
-  Wooden <em>Tserkvas</em> of the Carpathian Region in Poland and Ukraine
+  Wooden <em>Tserkvas</em> of the Carpathian Region in Poland and Ukraine  (Poland,Ukraine)
     LON  : 24.3446°E  |  dev 0.0359 beru  (119.4 km)  |  Tier B
     KEYS : ['domes']
     VALID: {'domes': 'context-validated'}
     [domes] "The&nbsp; tserkvas &nbsp;bear testimony to a distinct building tradition rooted in Orthodox ecclesiastic design interwoven with elements of "
     [domes] "The architectural forms of the tserkvas with tri-partite plans, pyramidal domes, cupolas and bell towers conform to the requirements of East"
 
-  Head-Smashed-In Buffalo Jump
+  Head-Smashed-In Buffalo Jump  (Canada)
     LON  : -113.6521°E  |  dev 0.0360 beru  (119.8 km)  |  Tier B
     KEYS : ['tumulus']
     VALID: {'tumulus': 'unambiguous'}
     [tumulus] "Head-Smashed-In Buffalo Jump In south-west Alberta, the remains of marked trails and an aboriginal camp, and a tumulus where vast quantities"
 
-  Seokguram Grotto and Bulguksa Temple
+  Seokguram Grotto and Bulguksa Temple  (Republic of Korea)
     LON  : 129.3490°E  |  dev 0.0360 beru  (119.9 km)  |  Tier B
     KEYS : ['dome', 'domed']
     VALID: {'dome': 'context-validated', 'domed': 'context-validated'}
@@ -594,7 +594,7 @@ INCLUDED SITES:
     [dome] "A second concrete dome was placed over the existing dome in the 1960s, to create a 1.2 m air space between them, control and adjust airflow,"
     [domed] "The domed ceiling of the rotunda and the entrance corridor employed an innovative construction technique that involved the use of more than "
 
-  Stonehenge, Avebury and Associated Sites
+  Stonehenge, Avebury and Associated Sites  (United Kingdom of Great Britain and Northern Ireland)
     LON  : -1.8254°E  |  dev 0.0365 beru  (121.5 km)  |  Tier B
     KEYS : ['barrow', 'barrows']
     VALID: {'barrow': 'unambiguous', 'barrows': 'unambiguous'}
@@ -602,20 +602,20 @@ INCLUDED SITES:
     [barrow] "A profound insight into the changing mortuary culture of the periods is provided by the use of Stonehenge as a cremation cemetery, by the We"
     [barrows] "At Avebury they include Windmill Hill, the West Kennet Long Barrow, the Sanctuary, Silbury Hill, the West Kennet and Beckhampton Avenues, th"
 
-  Historic City of Yazd
+  Historic City of Yazd  (Iran (Islamic Republic of))
     LON  : 54.3731°E  |  dev 0.0368 beru  (122.6 km)  |  Tier B
     KEYS : ['domes']
     VALID: {'domes': 'context-validated'}
     [domes] "The use of earth in buildings includes walls, and roofs by the construction of vaults and domes."
     [domes] "The skyline of the city punctuated with wind catchers, minarets and domes of the monuments and mosques offer an outstanding panorama visible"
 
-  Historic Ensemble of the Potala Palace, Lhasa
+  Historic Ensemble of the Potala Palace, Lhasa  (China)
     LON  : 91.1338°E  |  dev 0.0378 beru  (126.0 km)  |  Tier B
     KEYS : ['stupas']
     VALID: {'stupas': 'unambiguous'}
     [stupas] "To the west and higher up the mountain the Red Palace contains the gilded burial stupas of past Dalai Lamas."
 
-  Astronomical Observatories of Kazan Federal University
+  Astronomical Observatories of Kazan Federal University  (Russian Federation)
     LON  : 49.1191°E  |  dev 0.0383 beru  (127.6 km)  |  Tier B
     KEYS : ['dome', 'domes']
     VALID: {'dome': 'context-validated', 'domes': 'context-validated'}
@@ -623,13 +623,13 @@ INCLUDED SITES:
     [domes] "The Kazan City Astronomical Observatory, built in 1837, is located on the University campus and the building is characterized by a semi-circ"
     [domes] "It is characterised by a semi-circular façade and three towers with domes built to house astronomical instruments."
 
-  Jelling Mounds, Runic Stones and Church
+  Jelling Mounds, Runic Stones and Church  (Denmark)
     LON  : 9.4200°E  |  dev 0.0384 beru  (127.8 km)  |  Tier B
     KEYS : ['barrow']
     VALID: {'barrow': 'unambiguous'}
     [barrow] "The North mound was constructed over an impressive burial chamber of oak that was cut into an earlier Bronze Age barrow of much smaller dime"
 
-  Sardis and the Lydian Tumuli of Bin Tepe
+  Sardis and the Lydian Tumuli of Bin Tepe  (Türkiye)
     LON  : 28.0453°E  |  dev 0.0408 beru  (135.8 km)  |  Tier C
     KEYS : ['tumulus', 'tumuli']
     VALID: {'tumulus': 'unambiguous', 'tumuli': 'unambiguous'}
@@ -638,20 +638,20 @@ INCLUDED SITES:
     [tumuli] "Sardis and the Lydian Tumuli of Bin Tepe Sardis was the capital of the Lydians, a powerful Iron Age civilization (8th-6th centuries BCE) kno"
     [tumuli] "The necropolis of Bin Tepe is located seven to seventeen kilometres north of the citadel of Sardis, which includes more than 119 tumuli."
 
-  Historic Centre of the City of Salzburg
+  Historic Centre of the City of Salzburg  (Austria)
     LON  : 13.0433°E  |  dev 0.0409 beru  (136.0 km)  |  Tier C
     KEYS : ['domes']
     VALID: {'domes': 'context-validated'}
     [domes] "The Salzburg skyline, against a backdrop of mountains, is characterized by its profusion of spires and domes, dominated by the fortress of H"
 
-  Mozu-Furuichi Kofun Group: Mounded Tombs of Ancient Japan
+  Mozu-Furuichi Kofun Group: Mounded Tombs of Ancient Japan  (Japan)
     LON  : 135.4994°E  |  dev 0.0410 beru  (136.6 km)  |  Tier C
     KEYS : ['kofun']
     VALID: {'kofun': 'unambiguous'}
     [kofun] "Mozu-Furuichi Kofun Group: Mounded Tombs of Ancient Japan Located on a plateau above the Osaka Plain, this property includes 49  kofun  (“ol"
     [kofun] "These  kofun  have been selected from among a total of 160,000 in Japan and form the richest material representation of the Kofun period, fr"
 
-  Ruins of Kilwa Kisiwani and Ruins of Songo Mnara
+  Ruins of Kilwa Kisiwani and Ruins of Songo Mnara  (United Republic of Tanzania)
     LON  : 39.5228°E  |  dev 0.0418 beru  (139.2 km)  |  Tier C
     KEYS : ['dome', 'domed', 'domes']
     VALID: {'dome': 'REJECTED', 'domed': 'context-validated', 'domes': 'context-validated'}
@@ -659,33 +659,33 @@ INCLUDED SITES:
     [domed] "The Great Mosque of Kilwa Kisiwani is the oldest standing mosque on the East African coast and, with its sixteen domed and vaulted bays, has"
     [domes] "The substantial standing ruins, built of coral and lime mortar, include the Great Mosque constructed in the 11th century and considerably en"
 
-  Mahabodhi Temple Complex at Bodh Gaya
+  Mahabodhi Temple Complex at Bodh Gaya  (India)
     LON  : 84.9939°E  |  dev 0.0425 beru  (141.5 km)  |  Tier C
     KEYS : ['stupas']
     VALID: {'stupas': 'unambiguous'}
     [stupas] "The present Mahabodhi Temple Complex at Bodh Gaya comprises the 50 m high grand Temple, the Vajrasana, sacred Bodhi Tree and other six sacre"
     [stupas] "Along this path there are significant places associated with events that immediately followed the Buddha’s Enlightment, together with votive"
 
-  Kyiv: Saint-Sophia Cathedral and Related Monastic Buildings, Kyiv-Pechersk Lavra
+  Kyiv: Saint-Sophia Cathedral and Related Monastic Buildings, Kyiv-Pechersk Lavra  (Ukraine)
     LON  : 30.5584°E  |  dev 0.0430 beru  (143.1 km)  |  Tier C
     KEYS : ['dome']
     VALID: {'dome': 'context-validated'}
     [dome] "The Cathedral’s architecture is distinguished by supplementary naves added to the five-nave core and pyramidal spatial composition of the cr"
 
-  Royal Exhibition Building and Carlton Gardens
+  Royal Exhibition Building and Carlton Gardens  (Australia)
     LON  : 144.9703°E  |  dev 0.0433 beru  (144.2 km)  |  Tier C
     KEYS : ['dome']
     VALID: {'dome': 'context-validated'}
     [dome] "This building is cruciform in plan and incorporates the typical architectural template of earlier exhibition buildings: namely a dome, great"
     [dome] "Conservation work has recently been undertaken on the building’s dome and structure, the external joinery and stonework, and timber floors."
 
-  Convent of Christ in Tomar
+  Convent of Christ in Tomar  (Portugal)
     LON  : -8.4175°E  |  dev 0.0438 beru  (145.8 km)  |  Tier C
     KEYS : ['dome']
     VALID: {'dome': 'context-validated'}
     [dome] "The paintings and frescos depicting mainly 16th century biblical scenes, as well as the gilt statuary under the Byzantine dome were carefull"
 
-  Quseir Amra
+  Quseir Amra  (Jordan)
     LON  : 36.5873°E  |  dev 0.0439 beru  (146.3 km)  |  Tier C
     KEYS : ['dome', 'domed']
     VALID: {'dome': 'context-validated', 'domed': 'context-validated'}
@@ -693,21 +693,21 @@ INCLUDED SITES:
     [dome] "The zodiac dome, human portraits and depictions of animals and birds in the hunting scenes are found only in this early period of Islamic ar"
     [domed] "The representation of the zodiac on the domed ceiling of the caldarium (hot room) is one of the earliest known, surviving portrayals of a ma"
 
-  Elephanta Caves
+  Elephanta Caves  (India)
     LON  : 72.9358°E  |  dev 0.0444 beru  (148.0 km)  |  Tier C
     KEYS : ['stupas']
     VALID: {'stupas': 'unambiguous'}
     [stupas] "There is further scope to reveal archaeological material and enhance information by exposing the buried stupas."
     [stupas] "Besides the caves, Elephanta Island possesses archaeological remains from as early as the 2nd century BC and from the Portuguese period, as "
 
-  The Cathedral of St James in Šibenik
+  The Cathedral of St James in Šibenik  (Croatia)
     LON  : 15.8891°E  |  dev 0.0460 beru  (153.2 km)  |  Tier C
     KEYS : ['dome']
     VALID: {'dome': 'context-validated'}
     [dome] "The three architects who succeeded one another in the construction of the Cathedral - Francesco di Giacomo, Georgius Mathei Dalmaticus and N"
     [dome] "These interchanges created the conditions for unique and outstanding solutions to the technical and structural problems of constructing the "
 
-  Taxila
+  Taxila  (Pakistan)
     LON  : 72.8805°E  |  dev 0.0463 beru  (154.1 km)  |  Tier C
     KEYS : ['stupa', 'stupas', 'domed', 'tumulus']
     VALID: {'stupa': 'unambiguous', 'stupas': 'unambiguous', 'domed': 'context-validated', 'tumulus': 'unambiguous'}
@@ -717,13 +717,13 @@ INCLUDED SITES:
     [domed] "The Giri complex also includes the remains of a three-domed Muslim mosque, ziarat (tomb), and madrassa (school) of the medieval period."
     [tumulus] "Taxila From the ancient Neolithic tumulus of Saraikala to the ramparts of Sirkap (2nd century B.C.) and the city of Sirsukh (1st century A.D"
 
-  Meidan Emam, Esfahan
+  Meidan Emam, Esfahan  (Iran (Islamic Republic of))
     LON  : 51.6778°E  |  dev 0.0470 beru  (156.4 km)  |  Tier C
     KEYS : ['dome']
     VALID: {'dome': 'context-validated'}
     [dome] "Of particular interest is the Royal Mosque, which is connected to the south side of the square by means of an immense, deep entrance portal "
 
-  Masjed-e Jāmé of Isfahan
+  Masjed-e Jāmé of Isfahan  (Iran (Islamic Republic of))
     LON  : 51.6853°E  |  dev 0.0472 beru  (157.2 km)  |  Tier C
     KEYS : ['dome', 'domes']
     VALID: {'dome': 'context-validated', 'domes': 'context-validated'}
@@ -732,20 +732,20 @@ INCLUDED SITES:
     [domes] "Its double-shelled ribbed domes represent an architectural innovation that inspired builders throughout the region."
     [domes] "Following its Seljuq expansion and the characteristic introduction of the four iwans (Chahar Ayvān) around the courtyard as well as two extr"
 
-  Ajanta Caves
+  Ajanta Caves  (India)
     LON  : 75.7002°E  |  dev 0.0477 beru  (158.9 km)  |  Tier C
     KEYS : ['stupa']
     VALID: {'stupa': 'unambiguous'}
     [stupa] "At the centre of the apse stands the object of worship in the form of a chaitya or stupa, also hewn out of the rock."
 
-  Chhatrapati Shivaji Terminus (formerly Victoria Terminus)
+  Chhatrapati Shivaji Terminus (formerly Victoria Terminus)  (India)
     LON  : 72.8362°E  |  dev 0.0478 beru  (159.0 km)  |  Tier C
     KEYS : ['dome']
     VALID: {'dome': 'context-validated'}
     [dome] "Its remarkable stone dome, turrets, pointed arches and eccentric ground plan are close to traditional Indian palace architecture."
     [dome] "Its remarkable stone dome, turrets, pointed arches and eccentric ground plan are close to traditional Indian palace architecture."
 
-  Soltaniyeh
+  Soltaniyeh  (Iran (Islamic Republic of))
     LON  : 48.7947°E  |  dev 0.0491 beru  (163.6 km)  |  Tier C-
     KEYS : ['dome']
     VALID: {'dome': 'context-validated'}

@@ -1,0 +1,26 @@
+[unesco_corpus] Loaded 1248 sites, 1248 with extended descriptions
+Fine unit sweep (±1% of canonical 0.10 beru)
+Dome N = 83, Full N = 1011
+------------------------------------------------------------------------
+ Spacing   Null%   Dome A+      Dome p   Sig   Full A+      Full p   Sig
+------------------------------------------------------------------------
+    0.0970   4.12%   10/83       0.0022    **   36/1011       0.8362    ns
+    0.0980   4.08%    5/83       0.2511    ns   39/1011       0.6626    ns
+    0.0990   4.04%    3/83       0.6567    ns   41/1011       0.5124    ns
+    0.0993   4.03%    5/83       0.2428    ns   47/1011       0.1767    ns
+    0.0995   4.02%    6/83       0.1174    ns   48/1011       0.1370    ns
+>>> 0.1000   4.00%   11/83       0.0005   ***   56/1011       0.0103     *
+    0.1001   4.00%    9/83       0.0059    **   51/1011       0.0563     ~
+    0.1003   3.99%    5/83       0.2366    ns   38/1011       0.6676    ns
+    0.1010   3.96%    5/83       0.2324    ns   47/1011       0.1490    ns
+    0.1020   3.92%    6/83       0.1076    ns   42/1011       0.3734    ns
+    0.1030   3.88%    4/83       0.4036    ns   36/1011       0.7246    ns
+------------------------------------------------------------------------
+>>> = canonical 0.10-beru row
+Joint significance requires both dome and full-corpus p < 0.05.
+A ±0.3% shift from canonical collapses joint significance in at least one population.
+
+────────────────────────────────────────────────────────────────────────────────
+Generated : Sat Apr 18 23:43:15 UTC 2026
+Script    : tools/generate_audit_fine_sweep.py
+Source    : analysis/unesco/fine_sweep_audit.py

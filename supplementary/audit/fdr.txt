@@ -110,6 +110,6 @@
     • Buddhism A/C-band joint (multivariate hyper.)  p = 0.0052  q = 0.0154
 
 ──────────────────────────────────────────────────────────────────────────────────────────────────────────────
-Generated : Fri Apr 17 21:30:39 UTC 2026
+Generated : Sat Apr 18 05:14:31 UTC 2026
 Script    : tools/generate_audit_fdr.py
 LaTeX macros for this analysis are in manuscript/generated_macros.tex

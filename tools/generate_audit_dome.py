@@ -102,6 +102,7 @@ def run():
             validated=validated,
             reject_reasons=reject_reasons,
             sentences={k: form_sentences(full_orig, [k]) for k in all_keys},
+            states=site.states or "",
         )
         if is_rejected:
             rejected.append(record)
@@ -170,7 +171,8 @@ def run():
     lines += ["INCLUDED SITES:", SEP]
     for r in included:
         tier_flag = " ★" if r["tier"] in ("A++", "A+") else ""
-        lines.append(f"  {r['name']}{tier_flag}")
+        country = f"  ({r['states']})" if r.get("states") else ""
+        lines.append(f"  {r['name']}{tier_flag}{country}")
         lines.append(f"    LON  : {r['lon']:.4f}°E  |  dev {r['dev']:.4f} beru"
                      f"  ({r['dev_km']:.1f} km)  |  Tier {r['tier']}")
         lines.append(f"    KEYS : {r['keys']}  →  {r['validated']}")

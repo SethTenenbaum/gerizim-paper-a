@@ -125,6 +125,16 @@ def validate_keyword_match(full_text: str, keyword: str) -> tuple:
         return False, [], "no-sentence-found"
 
 
+def is_dome_site_raw(site_obj) -> bool:
+    """Raw keyword match with no context validation — corresponds to Test 2
+    (the Bonferroni-family primary result, N=90).  Accepts any site where at
+    least one FORM_KEYWORD appears in the full text, regardless of context.
+    Use this when the statistic being compared is the Test 2 raw-sweep result.
+    """
+    full_text = site_obj.full_text
+    return any(rx.search(full_text) for rx in FORM_KEYWORD_RES.values())
+
+
 def is_dome_site(site_obj) -> bool:
     """Determine whether a UNESCO site qualifies as a domed/stupa/tholos
     monument using context-aware keyword matching.

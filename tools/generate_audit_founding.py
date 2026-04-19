@@ -125,6 +125,7 @@ def run():
             tier   = tier,
             cats   = cats,
             primary= primary,
+            states = site.states or "",
         )
 
         if cats:
@@ -206,8 +207,9 @@ def run():
     lines += ["INCLUDED SITES (sorted by tier, then beru deviation):", SEP]
     for r in included:
         flag = " ★" if r["tier"] in ("A++", "A+") else ""
+        country = f"  ({r['states']})" if r.get("states") else ""
         pcat = r["primary"]
-        lines.append(f"  {r['name']}{flag}")
+        lines.append(f"  {r['name']}{flag}{country}")
         lines.append(
             f"    LON     : {r['lon']:.4f}°E  |  dev {r['dev']:.4f} beru"
             f"  ({r['dev_km']:.1f} km)  |  Tier {r['tier']}"

@@ -81,8 +81,9 @@ np.random.seed(42)
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus, cultural_sites_with_coords
 from lib.beru import GERIZIM, BERU, TIER_APLUS, P_NULL_AP
-from lib.beru import deviation as _beru_deviation
+from lib.beru import deviation as _beru_deviation, tier_label
 from lib.results_store import ResultsStore
+from scipy.stats import fisher_exact
 
 N_PERMS = 100_000
 
@@ -131,14 +132,15 @@ def load_all():
     corpus   = load_corpus()
     cultural = cultural_sites_with_coords(corpus)
     all_lons   = np.array([s.longitude for s in cultural])
-    stupa_lons = np.array([s.longitude for s in cultural if is_stupa_site(s)])
-    return all_lons, stupa_lons
+    stupa_sites = [s for s in cultural if is_stupa_site(s)]
+    stupa_lons  = np.array([s.longitude for s in stupa_sites])
+    return all_lons, stupa_lons, stupa_sites, cultural
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def main():
-    all_lons, stupa_lons = load_all()
+    all_lons, stupa_lons, stupa_sites, cultural = load_all()
     N_stupa       = len(stupa_lons)
     obs_stupa_ap  = count_aplus(stupa_lons)
     exp_null      = N_stupa * P_NULL_AP
@@ -291,6 +293,28 @@ def main():
     print(f"\n  Observed: {obs_stupa_ap}/{N_stupa} A+ = {rate_obs:.1f}%  "
           f"(geometric null {100*P_NULL_AP:.0f}%, expected {exp_null:.2f})")
 
+    # ── India/Pakistan C-band Fisher exact (UNESCO corpus) ───────────────────
+    # Tests whether the 4 C-tier stupa sites in India/Pakistan (70°–90°E)
+    # represent significant C-tier enrichment vs the full corpus background.
+    N_corpus   = len(cultural)
+    K_C_corpus = sum(1 for s in cultural
+                     if tier_label(_beru_deviation(s.longitude)) == "C")
+
+    india_pak_stupas = [s for s in stupa_sites if 70.0 <= s.longitude <= 90.0]
+    n_ip   = len(india_pak_stupas)
+    k_ip_c = sum(1 for s in india_pak_stupas
+                 if tier_label(_beru_deviation(s.longitude)) == "C")
+
+    ip_table = [[k_ip_c, n_ip - k_ip_c],
+                [K_C_corpus - k_ip_c, N_corpus - n_ip - (K_C_corpus - k_ip_c)]]
+    ip_or, ip_p = fisher_exact(ip_table, alternative="greater")
+
+    print("\n" + "─" * 80)
+    print("  INDIA/PAKISTAN STUPA C-BAND (70°–90°E)")
+    print(f"  N={n_ip}  C-tier={k_ip_c}  corpus C-tier={K_C_corpus}/{N_corpus}")
+    print(f"  Fisher exact: OR={ip_or:.2f}  p={ip_p:.4f}  {_sig(ip_p)}")
+    print("─" * 80)
+
     # ── LaTeX macros ──────────────────────────────────────────────────────────
     print("\n" + "=" * 80)
     print("  LATEX MACROS (GROUP 29b — stupa geographic-concentration null):")
@@ -309,6 +333,8 @@ def main():
         ("stupaGeoRestrictedN",     str(N_pool_c)),
         ("stupaHeartlandFrac",      f"{heartland_stupa:.0f}"),
         ("fullCorpusHeartlandFrac", f"{heartland_full:.0f}"),
+        ("stupaIndiaPakCOR",        f"{ip_or:.2f}"),
+        ("stupaIndiaPakCP",         f"{ip_p:.4f}"),
     ]
     for name, val in macro_pairs:
         print(f"\\newcommand{{\\{name}}}{{{val}}}")
@@ -328,6 +354,8 @@ def main():
         "stupaGeoRestrictedN":     float(N_pool_c),
         "stupaHeartlandFrac":      heartland_stupa,
         "fullCorpusHeartlandFrac": heartland_full,
+        "stupaIndiaPakCOR":        ip_or,
+        "stupaIndiaPakCP":         ip_p,
     })
     print("\nResults written to data/store/results.json")
     print("=" * 80)

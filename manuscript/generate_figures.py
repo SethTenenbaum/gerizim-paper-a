@@ -39,6 +39,8 @@ from lib.stats import (
 )
 from lib.dome_filter import is_dome_site
 
+_N_PERMS_NULL_C = 100_000
+
 # ── Matplotlib house style ───────────────────────────────────────────────────
 plt.rcParams.update({
     "font.family": "serif",
@@ -394,6 +396,335 @@ def make_unitsweep():
 
 
 # ══════════════════════════════════════════════════════════════════════════════
+#  FIGURE 4: Null C — restricted geographic draw  (fig:null_c)
+# ══════════════════════════════════════════════════════════════════════════════
+def make_null_c():
+    """Bootstrap distributions for Null C at three window widths (±2°, ±5°, ±10°).
+
+    Null C asks: do dome sites outperform OTHER monuments at the same longitudes?
+    For each window W, pool every full-corpus site within ±W° of any dome site,
+    then bootstrap N_dome draws to build the expected A+ distribution.
+    All three windows give p < 0.05, demonstrating the result is window-independent.
+    """
+    from scipy.stats import binomtest as _binomtest
+
+    rng = np.random.default_rng(42)
+
+    dome_sites = [s for s in sites if s["is_dome"]]
+    dome_lons  = np.array([s["lon"] for s in dome_sites])
+    N_dome     = len(dome_lons)
+    obs_ap     = sum(1 for s in dome_sites if s["is_ap"])
+
+    all_lons_arr = np.array([s["lon"] for s in sites])
+
+    windows = [2.0, 5.0, 10.0]
+    labels  = ["±2°", "±5°", "±10°"]
+
+    fig, axes = plt.subplots(1, 3, figsize=(11, 4.2), sharey=False)
+    fig.suptitle(
+        "Null C — restricted geographic draw: dome sites vs. same-longitude corpus",
+        fontsize=11, y=1.01,
+    )
+
+    for ax, W, lbl in zip(axes, windows, labels):
+        # Build pool: corpus sites within ±W° of any dome longitude
+        mask = np.zeros(len(all_lons_arr), dtype=bool)
+        for dlon in dome_lons:
+            mask |= np.abs(all_lons_arr - dlon) <= W
+        pool = all_lons_arr[mask]
+        N_pool = len(pool)
+
+        # Bootstrap: draw N_dome from pool, count A+ each time
+        draws = rng.choice(pool, size=(_N_PERMS_NULL_C, N_dome), replace=True)
+        arc   = np.abs(draws - GERIZIM) / BERU
+        devs  = np.abs(arc - np.round(arc / 0.1) * 0.1)
+        boot_ap = (devs <= TIER_APLUS).sum(axis=1).astype(int)
+
+        p_val  = float(np.mean(boot_ap >= obs_ap))
+        mean_b = float(boot_ap.mean())
+        std_b  = float(boot_ap.std())
+        z_val  = (obs_ap - mean_b) / std_b if std_b > 0 else 0.0
+
+        # Histogram of bootstrap distribution
+        max_ap = max(boot_ap.max(), obs_ap) + 1
+        bins   = np.arange(0, max_ap + 2) - 0.5
+        counts, edges = np.histogram(boot_ap, bins=bins)
+        bar_centers = 0.5 * (edges[:-1] + edges[1:])
+
+        ax.bar(bar_centers, counts / _N_PERMS_NULL_C * 100,
+               width=0.8, color=C_PRIMARY, alpha=0.75,
+               edgecolor="white", linewidth=0.5, zorder=3,
+               label="Bootstrap\ndistribution")
+
+        # Mean line
+        ax.axvline(mean_b, color=C_NULL, linewidth=1.5, linestyle="--",
+                   zorder=4, label=f"Mean = {mean_b:.1f}")
+
+        # Observed line
+        ax.axvline(obs_ap, color=C_HIGHLIGHT, linewidth=2.0, linestyle="-",
+                   zorder=5, label=f"Observed = {obs_ap}")
+
+        # Shade the tail (≥ observed)
+        tail_x = bar_centers[bar_centers >= obs_ap - 0.5]
+        tail_y = counts[bar_centers >= obs_ap - 0.5] / _N_PERMS_NULL_C * 100
+        if len(tail_x):
+            ax.bar(tail_x, tail_y, width=0.8,
+                   color=C_HIGHLIGHT, alpha=0.35,
+                   edgecolor="none", zorder=4)
+
+        # Stats annotation
+        sig_lbl = "***" if p_val < 0.001 else "**" if p_val < 0.01 else "*" if p_val < 0.05 else "ns"
+        ax.text(0.97, 0.97,
+                f"N pool = {N_pool}\nZ = {z_val:.2f}\np = {p_val:.4f}  {sig_lbl}",
+                transform=ax.transAxes,
+                fontsize=8, ha="right", va="top",
+                bbox=dict(boxstyle="round,pad=0.35", facecolor="#f5f5f5",
+                          edgecolor="#cccccc", alpha=0.9))
+
+        ax.set_title(f"Window {lbl}  (pool N = {N_pool})", fontsize=10)
+        ax.set_xlabel("A+ sites in bootstrap draw", fontsize=9)
+        ax.set_ylabel("Frequency (%)" if ax is axes[0] else "", fontsize=9)
+        ax.legend(loc="lower right", fontsize=7.5, framealpha=0.85,
+                  bbox_to_anchor=(1, 0.58), bbox_transform=ax.transAxes)
+        ax.set_xlim(-0.5, max(max_ap, obs_ap + 1) + 0.5)
+
+    fig.tight_layout()
+    outpath = OUTDIR / "fig_null_c.pdf"
+    fig.savefig(outpath)
+    fig.savefig(outpath.with_suffix(".png"))
+    plt.close(fig)
+    print(f"  ✓ {outpath.name} ({outpath.with_suffix('.png').name})")
+    return outpath
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  FIGURE 5: Geographic tier trail — Silk Road / Buddhist transmission
+#                                   (fig:geo_trail)
+# ══════════════════════════════════════════════════════════════════════════════
+def make_geo_trail():
+    """Eurasian map showing tier-coloured UNESCO dome sites and Wikidata stupas.
+
+    Focuses on the Buddhist transmission corridor from the Levant through
+    the Silk Road to Java/SE Asia.  Sites are coloured by harmonic tier;
+    approximate Silk Road overland and maritime routes are drawn as reference.
+
+    Tier colour scheme:
+      A++ / A+  → crimson   (≤6.7 km from harmonic)
+      A         → orange    (≤33 km from harmonic)
+      B         → grey
+      C / C-    → steel-blue (inter-harmonic band)
+
+    Markers:
+      UNESCO dome sites  → circle  (●)
+      Wikidata Q180987   → triangle (▲)
+    """
+    import cartopy.crs as ccrs
+    import cartopy.feature as cfeature
+    import csv
+
+    from lib.dome_filter import is_dome_site_raw as _is_dome_raw
+
+    # ── Tier colour / size lookup ─────────────────────────────────────────────
+    def _tier_style(t):
+        if t in ("A++", "A+"):
+            return "#c0392b", 55, 1.0
+        elif t == "A":
+            return "#e67e22", 28, 0.88
+        elif t == "B":
+            return "#aaaaaa", 10, 0.45
+        else:
+            return "#3498db", 10, 0.45
+
+    # ── Load UNESCO dome sites (raw sweep, N=90) ──────────────────────────────
+    dome_rows = []
+    for s in cultural:
+        if not _is_dome_raw(s):
+            continue
+        lat = getattr(s, "latitude", None)
+        lon = getattr(s, "longitude", None)
+        if lat is None or lon is None:
+            continue
+        d = beru_dev(lon)
+        t = tier(d)
+        clr, sz, alpha = _tier_style(t)
+        dome_rows.append((lon, lat, t, clr, sz, alpha, s.site))
+
+    # ── Load Wikidata Q180987 stupa CSV ───────────────────────────────────────
+    _CSV = PROJECT_ROOT / "data" / "store" / "unesco" / "wikidata_stupas_q180987.csv"
+    wiki_rows = []
+    with open(_CSV, newline="", encoding="utf-8") as fh:
+        reader = csv.DictReader(row for row in fh if not row.startswith("#"))
+        for rec in reader:
+            try:
+                lat = float(rec["lat"])
+                lon = float(rec["lon"])
+                name = rec.get("name", "")
+            except (ValueError, KeyError):
+                continue
+            d = beru_dev(lon)
+            t = tier(d)
+            clr, sz, alpha = _tier_style(t)
+            wiki_rows.append((lon, lat, t, clr, sz, alpha, name))
+
+    # ── Approximate Silk Road routes (historical waypoints) ──────────────────
+    # Overland northern route: Gerizim → Anatolia → Persia → Central Asia → China
+    _silk_north = [
+        (GERIZIM, 32.2),  # Mount Gerizim (anchor)
+        (36.3, 36.2),   # Antioch/Antakya
+        (38.7, 39.9),   # Erzincan
+        (44.5, 40.5),   # Tabriz
+        (51.4, 35.7),   # Tehran
+        (59.0, 37.9),   # Merv
+        (63.6, 40.1),   # Bukhara
+        (69.3, 41.3),   # Samarkand
+        (76.9, 43.2),   # Almaty
+        (80.3, 42.9),   # Xinjiang border
+        (87.6, 43.8),   # Urumqi
+        (98.5, 39.7),   # Dunhuang
+        (107.3, 34.3),  # Chang'an (Xi'an)
+    ]
+    # Maritime route west: Gerizim → Mediterranean → Iberia
+    _silk_med = [
+        (GERIZIM, 32.2),  # Mount Gerizim (anchor)
+        (33.0, 35.1),   # Cyprus
+        (28.2, 36.4),   # Rhodes
+        (23.7, 37.9),   # Athens/Piraeus
+        (14.5, 35.9),   # Sicily
+        (12.5, 41.9),   # Rome/Ostia
+        (10.2, 37.0),   # Carthage/Tunis
+        (5.4,  43.3),   # Marseille
+        (2.2,  41.4),   # Barcelona
+    ]
+    # Maritime route east: Gerizim → Arabian Sea → India → SE Asia → Java
+    _silk_sea = [
+        (GERIZIM, 32.2),  # Mount Gerizim (anchor)
+        (38.0, 21.5),   # Red Sea
+        (44.0, 12.8),   # Aden
+        (55.0, 23.6),   # Oman coast
+        (66.9, 24.9),   # Karachi
+        (72.8, 18.9),   # Mumbai
+        (80.3, 7.9),    # Colombo/Sri Lanka
+        (92.5, 13.1),   # Bay of Bengal
+        (96.1, 16.9),   # Yangon
+        (100.5, 5.4),   # Malacca
+        (107.6, -6.2),  # Jakarta/Java
+        (110.2, -7.6),  # Borobudur area
+    ]
+
+    # ── Build figure ──────────────────────────────────────────────────────────
+    proj = ccrs.Mercator(central_longitude=80.0, min_latitude=-15, max_latitude=65)
+    fig  = plt.figure(figsize=(13, 6.5))
+    ax   = fig.add_axes([0.01, 0.04, 0.98, 0.88], projection=proj)
+
+    # Map extent: Levant to Java, covering full Silk Road corridor
+    ax.set_extent([-5, 145, -12, 58], crs=ccrs.PlateCarree())
+
+    ax.add_feature(cfeature.LAND,  facecolor="#f2ede6", zorder=0)
+    ax.add_feature(cfeature.OCEAN, facecolor="#d6e8f2", zorder=0)
+    ax.add_feature(cfeature.COASTLINE, linewidth=0.4,  edgecolor="#999999", zorder=1)
+    ax.add_feature(cfeature.BORDERS,   linewidth=0.25, edgecolor="#bbbbbb",
+                   linestyle=":", zorder=1)
+
+    # Harmonic grid lines (every 3° from Gerizim, within view)
+    for k in range(-15, 40):
+        hlon = GERIZIM + k * 3.0
+        if -5 <= hlon <= 145:
+            ax.plot([hlon, hlon], [-14, 60], transform=ccrs.PlateCarree(),
+                    color="#dddddd", linewidth=0.5, linestyle="--",
+                    alpha=0.6, zorder=2)
+
+    # Highlighted harmonic lines: Gerizim anchor and Java node
+    java_lon = GERIZIM + 25 * 3.0   # 2.5-beru = harmonic #25
+    for hlon in [GERIZIM, java_lon]:
+        ax.plot([hlon, hlon], [-14, 60], transform=ccrs.PlateCarree(),
+                color="#7f8c8d", linewidth=1.2, linestyle="-",
+                alpha=0.8, zorder=3)
+    # Java node line label is handled via the Borobudur site annotation below
+
+    # Silk Road routes
+    def _plot_route(pts, color, lw, ls, label, zorder=3):
+        lons = [p[0] for p in pts]
+        lats = [p[1] for p in pts]
+        ax.plot(lons, lats, transform=ccrs.PlateCarree(),
+                color=color, linewidth=lw, linestyle=ls,
+                alpha=0.55, zorder=zorder, label=label)
+
+    _plot_route(_silk_north, "#8e44ad", 1.4, "-",  "Overland route (N.)")
+    _plot_route(_silk_med,   "#16a085", 1.4, "--", "Maritime route")
+    _plot_route(_silk_sea,   "#16a085", 1.4, "--", "_nolegend_")
+
+    # ── Plot sites (background tiers first, then A+) ──────────────────────────
+    for priority_tiers in [{"B", "C", "C-", "C--"}, {"A"}, {"A++", "A+"}]:
+        for lon, lat, t, clr, sz, alpha, _ in dome_rows:
+            if t in priority_tiers:
+                ax.scatter(lon, lat, transform=ccrs.PlateCarree(),
+                           s=sz, c=clr, alpha=alpha, marker="o",
+                           edgecolors="white" if sz >= 28 else "none",
+                           linewidths=0.5, zorder=5 if t in ("A++","A+") else 4)
+        for lon, lat, t, clr, sz, alpha, _ in wiki_rows:
+            if t in priority_tiers:
+                ax.scatter(lon, lat, transform=ccrs.PlateCarree(),
+                           s=sz * 0.75, c=clr, alpha=alpha, marker="^",
+                           edgecolors="white" if sz >= 28 else "none",
+                           linewidths=0.5, zorder=5 if t in ("A++","A+") else 4)
+
+    # Annotate key A+ sites
+    _annotations = [
+        (GERIZIM,  32.2,  "Mt. Gerizim\n(anchor)",  "left",   1.5),
+        (44.32,    40.16, "Echmiatsin",              "right",  1.0),
+        (107.3,    34.3,  "Silk Roads\n(Chang'an)",  "left",   1.0),
+        (110.2,    -7.55, "Borobudur\n(Java node, 110.3°E)", "left", 1.0),
+        (80.45,    27.5,  "Lumbini",                 "right",  1.0),
+    ]
+    for lon, lat, label, ha, dy in _annotations:
+        ax.annotate(label,
+                    xy=(lon, lat), xytext=(lon + (2 if ha == "left" else -2), lat + dy),
+                    transform=ccrs.PlateCarree(),
+                    fontsize=7, color="#333333", ha=ha,
+                    arrowprops=dict(arrowstyle="-", color="#888888", lw=0.7),
+                    clip_on=True)
+
+    # ── Legend ────────────────────────────────────────────────────────────────
+    from matplotlib.lines import Line2D
+    tier_handles = [
+        Line2D([0],[0], marker="o", color="w", markerfacecolor="#c0392b",
+               markersize=8, label="Tier A$^{+}$/A$^{++}$  (≤6.7 km)"),
+        Line2D([0],[0], marker="o", color="w", markerfacecolor="#e67e22",
+               markersize=6, label="Tier A  (≤33 km)"),
+        Line2D([0],[0], marker="o", color="w", markerfacecolor="#aaaaaa",
+               markersize=5, label="Tier B"),
+        Line2D([0],[0], marker="o", color="w", markerfacecolor="#3498db",
+               markersize=5, label="C-band (inter-harmonic)"),
+        Line2D([0],[0], marker="o", color="w", markerfacecolor="#555555",
+               markersize=6, label="○ UNESCO dome/stupa"),
+        Line2D([0],[0], marker="^", color="w", markerfacecolor="#555555",
+               markersize=6, label="△ Wikidata Q180987 stupa"),
+        Line2D([0],[0], color="#8e44ad", linewidth=1.4, label="Overland Silk Road"),
+        Line2D([0],[0], color="#16a085", linewidth=1.4, linestyle="--",
+               label="Maritime Silk Road"),
+    ]
+    ax.legend(handles=tier_handles, loc="lower left",
+              fontsize=7.2, framealpha=0.90, ncol=2,
+              title="Tier / corpus / route", title_fontsize=7.5,
+              handletextpad=0.4, borderpad=0.5, columnspacing=0.8)
+
+    ax.set_title(
+        "Buddhist transmission corridor — UNESCO dome/stupa and Wikidata Q180987 stupa tier distribution\n"
+        "Circles = UNESCO ($N=90$); triangles = Wikidata ($N=229$).  "
+        "Dashed grid: 0.1-beru harmonics.  Crimson = A$^{+}$, orange = A-tier.",
+        fontsize=8.5, pad=5,
+    )
+
+    fig.tight_layout(pad=0.3)
+    outpath = OUTDIR / "fig_geo_trail.pdf"
+    fig.savefig(outpath)
+    fig.savefig(outpath.with_suffix(".png"))
+    plt.close(fig)
+    print(f"  ✓ {outpath.name} ({outpath.with_suffix('.png').name})")
+    return outpath
+
+
+# ══════════════════════════════════════════════════════════════════════════════
 #  Main
 # ══════════════════════════════════════════════════════════════════════════════
 if __name__ == "__main__":
@@ -411,6 +742,12 @@ if __name__ == "__main__":
     print("\nFigure 3 — Unit sensitivity sweep (fig:unitsweep)")
     p3 = make_unitsweep()
 
+    print("\nFigure 4 — Null C restricted geographic draw (fig:null_c)")
+    p4 = make_null_c()
+
+    print("\nFigure 5 — Geographic tier trail / Silk Road corridor (fig:geo_trail)")
+    p5 = make_geo_trail()
+
     print()
     print("=" * 70)
     print(f"  All figures saved to: {OUTDIR}/")
@@ -421,3 +758,4 @@ if __name__ == "__main__":
     print(f"  \\includegraphics[width=0.9\\textwidth]{{figures/fig_devhist}}")
     print(f"  \\includegraphics[width=0.9\\textwidth]{{figures/fig_temporal}}")
     print(f"  \\includegraphics[width=0.9\\textwidth]{{figures/fig_unitsweep}}")
+    print(f"  \\includegraphics[width=\\textwidth]{{figures/fig_null_c}}")

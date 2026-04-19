@@ -80,6 +80,8 @@ cultural = cultural_sites_with_coords(corpus)
 N_CORPUS    = len(cultural)
 K_AP_CORPUS = sum(1 for s in cultural if is_aplus(tier_label(beru_dev(s.longitude))))
 K_A_CORPUS  = sum(1 for s in cultural if is_a_or_better(tier_label(beru_dev(s.longitude))))
+K_C_CORPUS  = sum(1 for s in cultural if tier_label(beru_dev(s.longitude)) == "C")
+K_CM_CORPUS = sum(1 for s in cultural if tier_label(beru_dev(s.longitude)) == "C-")
 
 # Stupa population
 stupa_sites = []
@@ -127,6 +129,28 @@ def fisher_a(n_sub, n_a_sub):
     or_, p = fisher_exact(table, alternative="greater")
     return round(or_, 2), p
 
+def fisher_c(n_sub, n_c_sub):
+    """One-sided Fisher exact: enrichment of C-tier in sub-pop vs full corpus."""
+    if n_sub == 0:
+        return float("nan"), float("nan")
+    table = [
+        [n_c_sub,              n_sub - n_c_sub],
+        [K_C_CORPUS - n_c_sub, N_CORPUS - n_sub - (K_C_CORPUS - n_c_sub)],
+    ]
+    or_, p = fisher_exact(table, alternative="greater")
+    return round(or_, 2), p
+
+def fisher_cm(n_sub, n_cm_sub):
+    """One-sided Fisher exact: enrichment of C- tier in sub-pop vs full corpus."""
+    if n_sub == 0:
+        return float("nan"), float("nan")
+    table = [
+        [n_cm_sub,              n_sub - n_cm_sub],
+        [K_CM_CORPUS - n_cm_sub, N_CORPUS - n_sub - (K_CM_CORPUS - n_cm_sub)],
+    ]
+    or_, p = fisher_exact(table, alternative="greater")
+    return round(or_, 2), p
+
 def sig(p):
     if p != p:  # nan
         return "n/a"
@@ -148,8 +172,12 @@ def tier_block(sites, label):
     tc  = tier_counts(sites)
     n_ap = tc["A+"]
     n_a  = tc["A+"] + tc["A"]   # A-or-better
+    n_c  = tc["C"]
+    n_cm = tc["C-"]
     or_ap, p_ap = fisher_ap(n, n_ap)
     or_a,  p_a  = fisher_a(n, n_a)
+    or_c,  p_c  = fisher_c(n, n_c)
+    or_cm, p_cm = fisher_cm(n, n_cm)
     lines = []
     lines.append(f"  {label}  (N = {n})")
     lines.append(f"  {'Tier':<6} {'Count':>5} {'Rate':>7}  {'vs corpus'}")
@@ -161,6 +189,8 @@ def tier_block(sites, label):
     lines.append(f"  {'─'*50}")
     lines.append(f"  A+ Fisher exact: OR = {or_ap}×  p = {p_ap:.4f}  {sig(p_ap)}")
     lines.append(f"  A   Fisher exact: OR = {or_a}×  p = {p_a:.4f}  {sig(p_a)}")
+    lines.append(f"  C   Fisher exact: OR = {or_c}×  p = {p_c:.4f}  {sig(p_c)}")
+    lines.append(f"  C-  Fisher exact: OR = {or_cm}×  p = {p_cm:.4f}  {sig(p_cm)}")
     return lines
 
 def site_listing(sites):
@@ -186,30 +216,48 @@ lines = []
 lines.append(SEP)
 lines.append("  STUPA GEOGRAPHIC TIER AUDIT")
 lines.append(f"  Generated: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}")
-lines.append(f"  Full corpus background: N = {N_CORPUS},  A+ = {K_AP_CORPUS} ({100*K_AP_CORPUS/N_CORPUS:.1f}%),  A = {K_A_CORPUS} ({100*K_A_CORPUS/N_CORPUS:.1f}%)")
+lines.append(f"  Full corpus background: N = {N_CORPUS},  A+ = {K_AP_CORPUS} ({100*K_AP_CORPUS/N_CORPUS:.1f}%),  A = {K_A_CORPUS} ({100*K_A_CORPUS/N_CORPUS:.1f}%),  C = {K_C_CORPUS} ({100*K_C_CORPUS/N_CORPUS:.1f}%),  C- = {K_CM_CORPUS} ({100*K_CM_CORPUS/N_CORPUS:.1f}%)")
 lines.append(f"  Stupa keywords: {', '.join(STUPA_KEYWORDS)}")
 lines.append(SEP)
 
 # Summary table across all regions
 lines.append("")
 lines.append("  SUMMARY TABLE")
-lines.append(f"  {'Region':<40} {'N':>4} {'A+':>4} {'A+%':>6} {'OR_A+':>6} {'p_A+':>8} {'A':>4} {'A%':>6} {'OR_A':>6} {'p_A':>8}")
-lines.append(f"  {'─'*40} {'─'*4} {'─'*4} {'─'*6} {'─'*6} {'─'*8} {'─'*4} {'─'*6} {'─'*6} {'─'*8}")
+hdr = (f"  {'Region':<40} {'N':>4} {'A+':>4} {'A+%':>6} {'OR_A+':>8} {'p_A+':>12}"
+       f"  {'A':>4} {'A%':>6} {'OR_A':>8} {'p_A':>12}"
+       f"  {'C':>4} {'C%':>6} {'OR_C':>8} {'p_C':>12}"
+       f"  {'C-':>4} {'C-%':>6} {'OR_Cm':>8} {'p_Cm':>12}")
+sep_row = (f"  {'─'*40} {'─'*4} {'─'*4} {'─'*6} {'─'*8} {'─'*12}"
+           f"  {'─'*4} {'─'*6} {'─'*8} {'─'*12}"
+           f"  {'─'*4} {'─'*6} {'─'*8} {'─'*12}"
+           f"  {'─'*4} {'─'*6} {'─'*8} {'─'*12}")
+lines.append(hdr)
+lines.append(sep_row)
 
 for label, sites in region_data:
     n    = len(sites)
     tc   = tier_counts(sites)
     n_ap = tc["A+"]
     n_a  = tc["A+"] + tc["A"]
+    n_c  = tc["C"]
+    n_cm = tc["C-"]
     or_ap, p_ap = fisher_ap(n, n_ap)
     or_a,  p_a  = fisher_a(n, n_a)
+    or_c,  p_c  = fisher_c(n, n_c)
+    or_cm, p_cm = fisher_cm(n, n_cm)
     rate_ap = f"{100*n_ap/n:.1f}%" if n else "—"
     rate_a  = f"{100*n_a/n:.1f}%"  if n else "—"
-    p_ap_s  = f"{p_ap:.4f} {sig(p_ap)}" if p_ap == p_ap else "—"
-    p_a_s   = f"{p_a:.4f} {sig(p_a)}"   if p_a  == p_a  else "—"
+    rate_c  = f"{100*n_c/n:.1f}%"  if n else "—"
+    rate_cm = f"{100*n_cm/n:.1f}%" if n else "—"
+    def fmt_p(p, label_):
+        return f"{p:.4f} {sig(p)}" if p == p else "—"
+    def fmt_or(or_):
+        return f"{or_}×" if or_ == or_ else "—"
     lines.append(
-        f"  {label:<40} {n:>4} {n_ap:>4} {rate_ap:>6} {str(or_ap)+'×':>6} {p_ap_s:>12} "
-        f"{n_a:>4} {rate_a:>6} {str(or_a)+'×':>6} {p_a_s:>12}"
+        f"  {label:<40} {n:>4} {n_ap:>4} {rate_ap:>6} {fmt_or(or_ap):>8} {fmt_p(p_ap, 'A+'):>12}"
+        f"  {n_a:>4} {rate_a:>6} {fmt_or(or_a):>8} {fmt_p(p_a, 'A'):>12}"
+        f"  {n_c:>4} {rate_c:>6} {fmt_or(or_c):>8} {fmt_p(p_c, 'C'):>12}"
+        f"  {n_cm:>4} {rate_cm:>6} {fmt_or(or_cm):>8} {fmt_p(p_cm, 'Cm'):>12}"
     )
 
 # Per-region detail

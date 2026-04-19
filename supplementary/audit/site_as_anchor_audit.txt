@@ -1,5 +1,5 @@
 SITE-AS-ANCHOR RANKING AUDIT
-Generated : Fri Apr 17 20:37:51 UTC 2026
+Generated : Sat Apr 18 05:14:33 UTC 2026
 Script    : tools/generate_audit_site_as_anchor.py
 Corpus    : 1012 sites (1011 inscribed Cultural/Mixed + Gerizim synthetic)
            Each site used as anchor; tests against remaining N = 1011 sites

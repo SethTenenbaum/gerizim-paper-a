@@ -42,13 +42,14 @@ def run():
         ext  = s.extended_description if s.extended_description else ""
         text = (s.site + " " + s.short_description + " " + ext).lower()
         sites.append({
-            "name": s.site,
-            "lon":  s.longitude,
-            "yr":   s.year,
-            "dev":  d,
-            "tier": tier_label(d),
-            "km":   d * BERU * 111.0,
-            "text": text,
+            "name":   s.site,
+            "lon":    s.longitude,
+            "yr":     s.year,
+            "dev":    d,
+            "tier":   tier_label(d),
+            "km":     d * BERU * 111.0,
+            "text":   text,
+            "states": s.states or "",
         })
 
     N_ALL    = len(sites)
@@ -213,8 +214,9 @@ def run():
         "  " + "-" * 88,
     ]
     for s, tags in overlap_sites:
+        country = f"  ({s['states']})" if s.get("states") else ""
         lines.append(
-            f"  {s['name'][:54]:<55} {s['tier']:<5} {s['km']:>7.1f}  {', '.join(tags)}"
+            f"  {s['name'][:54]:<55} {s['tier']:<5} {s['km']:>7.1f}  {', '.join(tags)}{country}"
         )
     lines.append("")
 
@@ -297,13 +299,15 @@ def run():
             return ", ".join(k for k in kws if k in s["text"])
 
         def site_line(s):
+            country = f"  ({s['states']})" if s.get("states") else ""
             return (f"    {s['tier']:<4}  {s['km']:>6.1f} km  {s['lon']:>9.4f}°E"
-                    f"  [{kw_hit(s)}]  {s['name']}")
+                    f"  [{kw_hit(s)}]  {s['name']}{country}")
 
         def site_line_c(s):
             dist_mid = (MIDPOINT - s["dev"]) * BERU * 111.0
+            country = f"  ({s['states']})" if s.get("states") else ""
             return (f"    {s['tier']:<4}  {s['km']:>6.1f} km  {s['lon']:>9.4f}°E"
-                    f"  dist_mid={dist_mid:>5.1f} km  [{kw_hit(s)}]  {s['name']}")
+                    f"  dist_mid={dist_mid:>5.1f} km  [{kw_hit(s)}]  {s['name']}{country}")
 
         if aplus_sites:
             lines.append(f"  A+ SITES ({len(aplus_sites)}):")

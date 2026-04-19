@@ -616,6 +616,12 @@
   \newcommand{\LKOnCombosTwo}{55}  % LKO: C(11,2) leave-2-out combinations
   \newcommand{\LKOnCombosThree}{165}  % LKO: C(11,3) leave-3-out combinations
 
+% --- analysis/unesco/evo_leave_k_out.py
+  \newcommand{\EvoLKOworstTwoP}{0.0041}  % evo LKO worst C(13,2)=78
+  \newcommand{\EvoLKOworstThreeP}{0.0108}  % evo LKO worst C(13,3)=286
+  \newcommand{\EvoLKOnCombosTwo}{78}  % evo C(13,2)
+  \newcommand{\EvoLKOnCombosThree}{286}  % evo C(13,3)
+
 % --- analysis/global/dome_periodicity_audit.py
 \newcommand{\domePhaseChiSq}{14.89}     % chi-sq for dome phase uniformity
 \newcommand{\domePhaseChiP}{0.0940}     % p-value, dome phase chi-sq
@@ -870,24 +876,24 @@
   \newcommand{\permSlopeCanonRankSig}{ns}
 
 % --- analysis/unesco/dome_geographic_concentration_test.py
-  \newcommand{\geoNullDomeBootP}{0.5490}   % within-dome bootstrap p
+  \newcommand{\geoNullDomeBootP}{0.5493}   % within-dome bootstrap p
   \newcommand{\geoNullDomeBootZ}{-0.00}    % within-dome bootstrap Z
-  \newcommand{\geoNullDomeBootMean}{11.01}   % within-dome bootstrap mean A+
-  \newcommand{\geoNullDomeRestrictedP}{0.0080}   % restricted-pool p
-  \newcommand{\geoNullDomeRestrictedZ}{2.91}    % restricted-pool Z
-  \newcommand{\geoNullDomeRestrictedMean}{4.80}   % restricted-pool mean A+
-  \newcommand{\geoNullDomeRestrictedN}{881}   % restricted pool size
-  \newcommand{\geoNullDomeRestrictedRate}{5.8}   % A+ base rate in restricted pool (%)
-  \newcommand{\geoNullDomeRestrictedNtwo}{761}   % Null C ±2° pool size
-  \newcommand{\geoNullDomeRestrictedPtwo}{0.0113}   % Null C ±2° p-value
-  \newcommand{\geoNullDomeRestrictedMeantwo}{5.01}   % Null C ±2° mean A+
-  \newcommand{\geoNullDomeRestrictedNfive}{881}   % Null C ±5° pool size
-  \newcommand{\geoNullDomeRestrictedPfive}{0.0083}   % Null C ±5° p-value
-  \newcommand{\geoNullDomeRestrictedMeanfive}{4.81}   % Null C ±5° mean A+
-  \newcommand{\geoNullDomeRestrictedNten}{967}   % Null C ±10° pool size
-  \newcommand{\geoNullDomeRestrictedPten}{0.0077}   % Null C ±10° p-value
-  \newcommand{\geoNullDomeRestrictedMeanten}{4.73}   % Null C ±10° mean A+
-  \newcommand{\domeEurasianFraction}{77}   % % dome sites in 20-120E
+  \newcommand{\geoNullDomeBootMean}{11.00}   % within-dome bootstrap mean A+
+  \newcommand{\geoNullDomeRestrictedP}{0.0133}   % restricted-pool p
+  \newcommand{\geoNullDomeRestrictedZ}{2.68}    % restricted-pool Z
+  \newcommand{\geoNullDomeRestrictedMean}{5.12}   % restricted-pool mean A+
+  \newcommand{\geoNullDomeRestrictedN}{897}   % restricted pool size
+  \newcommand{\geoNullDomeRestrictedRate}{5.7}   % A+ base rate in restricted pool (%)
+  \newcommand{\geoNullDomeRestrictedNtwo}{776}   % Null C ±2° pool size
+  \newcommand{\geoNullDomeRestrictedPtwo}{0.0178}   % Null C ±2° p-value
+  \newcommand{\geoNullDomeRestrictedMeantwo}{5.34}   % Null C ±2° mean A+
+  \newcommand{\geoNullDomeRestrictedNfive}{897}   % Null C ±5° pool size
+  \newcommand{\geoNullDomeRestrictedPfive}{0.0129}   % Null C ±5° p-value
+  \newcommand{\geoNullDomeRestrictedMeanfive}{5.11}   % Null C ±5° mean A+
+  \newcommand{\geoNullDomeRestrictedNten}{980}   % Null C ±10° pool size
+  \newcommand{\geoNullDomeRestrictedPten}{0.0130}   % Null C ±10° p-value
+  \newcommand{\geoNullDomeRestrictedMeanten}{5.14}   % Null C ±10° mean A+
+  \newcommand{\domeEurasianFraction}{71}   % % dome sites in 20-120E
   \newcommand{\fullCorpusEurasianFraction}{41}   % % full corpus in 20-120E
 
 % --- analysis/unesco/stupa_geographic_concentration_test.py
@@ -904,6 +910,8 @@
 \newcommand{\stupaGeoRestrictedN}{168}
 \newcommand{\stupaHeartlandFrac}{72}
 \newcommand{\fullCorpusHeartlandFrac}{10}
+\newcommand{\stupaIndiaPakCOR}{4.44}
+\newcommand{\stupaIndiaPakCP}{0.0374}
 
 % --- analysis/unesco/dome_founding_stratification.py
   \newcommand{\domeStratNfs}{23}                % dome sites that are F/S

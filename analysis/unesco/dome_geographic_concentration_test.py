@@ -72,7 +72,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus, cultural_sites_with_coords
 from lib.beru import GERIZIM, BERU, TIER_APLUS, P_NULL_AP
 from lib.beru import deviation as _beru_deviation
-from lib.dome_filter import is_dome_site
+from lib.dome_filter import is_dome_site_raw
 from lib.results_store import ResultsStore
 
 N_PERMS = 100_000
@@ -99,7 +99,7 @@ def load_all():
     corpus = load_corpus()
     cultural = cultural_sites_with_coords(corpus)
     all_lons = np.array([s.longitude for s in cultural])
-    dome_lons = np.array([s.longitude for s in cultural if is_dome_site(s)])
+    dome_lons = np.array([s.longitude for s in cultural if is_dome_site_raw(s)])
     return all_lons, dome_lons
 
 
@@ -115,7 +115,7 @@ def main():
     print("=" * 80)
     print("  DOME GEOGRAPHIC-CONCENTRATION NULL TEST")
     print(f"  Anchor: {GERIZIM}°E  |  BERU: {BERU}°  |  N_perms: {N_PERMS:,}")
-    print(f"  Corpus: context-validated dome/stupa/tholos sites (is_dome_site)")
+    print(f"  Corpus: raw-sweep dome/stupa/tholos sites (is_dome_site_raw, Test 2 Bonferroni)")
     print(f"  N_dome = {N_dome},  observed A+ = {obs_dome_ap} ({rate_obs:.1f}%)")
     print(f"  Geometric null: {P_NULL_AP:.0%} → expected A+ = {exp_null:.2f}")
     print("=" * 80)
