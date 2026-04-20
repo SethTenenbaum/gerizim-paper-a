@@ -674,7 +674,7 @@ def make_geo_trail():
         (44.32,    40.16, "Echmiatsin",              "right",  1.0),
         (107.3,    34.3,  "Silk Roads\n(Chang'an)",  "left",   1.0),
         (110.2,    -7.55, "Borobudur\n(Java node, 110.3°E)", "left", 1.0),
-        (80.45,    27.5,  "Lumbini",                 "right",  1.0),
+        (83.276,   27.47, "Lumbini",                 "right",  3.5),
     ]
     for lon, lat, label, ha, dy in _annotations:
         ax.annotate(label,

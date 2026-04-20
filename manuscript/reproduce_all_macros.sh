@@ -95,6 +95,7 @@ if [ "${1:-}" != "--full" ]; then
         analysis/unesco/mound_keyword_context_audit.py        # → NmoundRaw/Accepted/Rejected, moundFPRate, moundKwFPRate, pmoundAccAp, moundEnrichAcc
         analysis/unesco/leave_one_out_sensitivity.py         # → LOOdomeN/Ap/Rate/Enrich/P, LOOstupaN/Ap/Rate/P
         analysis/unesco/dome_leave_k_out.py                  # → LKOsiteOne/Two/ThreeName/DevKm, LKOtwo*/three*/worstTwo/ThreeP
+        analysis/unesco/evo_leave_k_out.py                   # → EvoLKOnCombosTwo, EvoLKOnCombosThree
         analysis/global/dome_periodicity_audit.py
         analysis/global/x18_periodicity_formal_test.py       # → rayleighR/Z/PermP, fullRayleighR/Z/PermP, maxApCount/Z/PermP (GROUP 11b)
         analysis/global/x18_max_permutation_test.py          # → anchorMaxPermObsMax/NullMu/NullSD/Z/P/Nperms/BootMu/BootSD/BootZ/BootP (GROUP 11c)
@@ -111,6 +112,7 @@ if [ "${1:-}" != "--full" ]; then
         #  it emits clusterCondN, clusterCondClusterOk, clusterCondPeakFrac, etc.)
 
         analysis/unesco/unit_sweep_fill.py
+        analysis/unesco/unit_sweep_montecarlo.py              # → mcDomeNsigObs, mcDomePObsGe, mcFullNsigObs, mcNperms
         analysis/unesco/sensitivity_slope_permutation_test.py  # → permSlopeNperms, permSlopePcanon, permSlopePsharp
         analysis/unesco/sensitivity_slope_specificity_test.py  # → permSlopeCanonRankObs, permSlopeCanonBestJoint, permSlopeCanonRankP, permSlopeCanonCondFraction
         analysis/unesco/dome_geographic_concentration_test.py  # → geoNullDomeBootP/Z/Mean, geoNullDomeRestrictedP/Z/Mean/N, domeEurasianFraction

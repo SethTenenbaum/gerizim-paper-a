@@ -286,13 +286,12 @@ for reg in regions:
         OR, p_f = fisher_exact([[a, b], [c, d]], alternative="greater")
         print(f"  Fisher (canon vs modern): OR = {OR:.2f}, p = {p_f:.4f}  {sig(p_f)}")
 
-# ── 4. Mantel-Haenszel region-adjusted test ──────────────────────────────────
+# ── 4. Mantel-Haenszel region-adjusted test (binary, kept for reference) ─────
 print(f"\n" + "=" * 100)
-print("  MANTEL-HAENSZEL REGION-ADJUSTED ANALYSIS")
-print("  Tests whether the temporal gradient persists after stratifying by region")
+print("  MANTEL-HAENSZEL REGION-ADJUSTED ANALYSIS (binary early/late — reference only)")
+print("  Note: MH collapses 3 ordinal cohorts to binary; use logistic regression instead.")
 print("=" * 100)
 
-# For each region, compute 2×2 table: early (1978-1999) vs late (2000-2025) × A+ vs not
 mh_tables = []
 for reg in regions:
     rs = [s for s in sites if s["region"] == reg]
@@ -300,7 +299,6 @@ for reg in regions:
     late = [s for s in rs if s["yr"] >= 2000]
     if len(early) < 3 or len(late) < 3:
         continue
-
     a = sum(1 for s in early if s["is_ap"])
     b = len(early) - a
     c = sum(1 for s in late if s["is_ap"])
@@ -308,79 +306,115 @@ for reg in regions:
     n_stratum = a + b + c + d_val
     mh_tables.append((reg, a, b, c, d_val, n_stratum))
 
-# Mantel-Haenszel common odds ratio
 if mh_tables:
-    MH_num = 0
-    MH_den = 0
-    chi_num = 0
-    chi_var = 0
-
+    MH_num = 0; MH_den = 0; chi_num = 0; chi_var = 0
     for reg, a, b, c, d, n in mh_tables:
-        n1 = a + b  # early total
-        n2 = c + d  # late total
-        m1 = a + c  # A+ total
-        m2 = b + d  # non-A+ total
-
+        n1, n2, m1, m2 = a+b, c+d, a+c, b+d
         MH_num += a * d / n
         MH_den += c * b / n
-
-        # CMH test statistic components
         E_a = n1 * m1 / n
         V_a = n1 * n2 * m1 * m2 / (n**2 * (n - 1)) if n > 1 else 0
         chi_num += a - E_a
         chi_var += V_a
 
     MH_OR = MH_num / MH_den if MH_den > 0 else float('inf')
-
-    # CMH chi-squared
-    chi_sq = chi_num**2 / chi_var if chi_var > 0 else 0
     from scipy.stats import chi2
+    chi_sq = chi_num**2 / chi_var if chi_var > 0 else 0
     p_cmh = 1 - chi2.cdf(chi_sq, df=1)
 
-    print(f"\n  Region strata used: {len(mh_tables)}")
-    print(f"  Mantel-Haenszel common OR (early vs late): {MH_OR:.3f}")
-    print(f"  CMH χ² = {chi_sq:.3f}, df = 1, p = {p_cmh:.4f}  {sig(p_cmh)}")
-    if MH_OR > 1:
-        print(f"  → Early-inscribed sites have HIGHER A+ rate than late-inscribed,")
-        print(f"    even after adjusting for regional composition changes.")
-    else:
-        print(f"  → No consistent early > late pattern after regional adjustment.")
-
-    # Per-region concordance counts
     n_concordant = sum(
         1 for reg, a, b, c, d, n in mh_tables
-        if (a + b) > 0 and (c + d) > 0
-        and (a / (a + b)) > (c / (c + d))
+        if (a+b) > 0 and (c+d) > 0 and (a/(a+b)) > (c/(c+d))
     )
     n_regions_tested = len(mh_tables)
-
-    # Per-region individual Fisher tests (one-sided, early > late)
     from scipy.stats import fisher_exact as _fisher
     n_sig_regions = 0
-    print(f"\n  Per-region summary:")
-    print(f"  {'Region':<30}  {'Early A+%':>10}  {'Late A+%':>10}  {'N_early':>8}  {'N_late':>8}  {'Fisher p':>10}  Dir")
-    print(f"  {'─'*95}")
     for reg, a, b, c, d, n in mh_tables:
-        early_pct = 100 * a / (a + b) if (a + b) > 0 else 0
-        late_pct  = 100 * c / (c + d) if (c + d) > 0 else 0
-        or_r, p_r = _fisher([[a, b], [c, d]], alternative="greater")
+        _, p_r = _fisher([[a, b], [c, d]], alternative="greater")
         if p_r < 0.05:
             n_sig_regions += 1
-        direction = "↓" if early_pct > late_pct else "↑" if early_pct < late_pct else "="
-        print(f"  {reg:<30}  {early_pct:>8.1f}%  {late_pct:>8.1f}%  {a+b:>8}  {c+d:>8}  {p_r:>10.4f}  {direction}")
+    verdict = "directionally consistent but underpowered within strata"
 
-    print(f"\n  Concordant regions (early > late): {n_concordant}/{n_regions_tested}")
-    print(f"  Individually significant regions (p<0.05, one-sided): {n_sig_regions}/{n_regions_tested}")
+    print(f"\n  Region strata used: {n_regions_tested}")
+    print(f"  MH common OR (early vs late): {MH_OR:.3f}")
+    print(f"  CMH χ² = {chi_sq:.3f}, df = 1, p = {p_cmh:.4f}  {sig(p_cmh)}")
+    print(f"  Concordant regions (early > late): {n_concordant}/{n_regions_tested}")
 
-    # Decision rule
-    if MH_OR > 1 and p_cmh < 0.05 and n_concordant >= 4:
-        verdict = "attenuated but directionally consistent across regions"
-        status  = "supporting evidence"
-    else:
-        verdict = "largely explained by regional composition after adjustment"
-        status  = "descriptive only"
-    print(f"\n  → Verdict: {verdict}")
-    print(f"  → Test 4 status: {status}")
+# ── 4b. Ordinal logistic regression: cohort + region → A+ ────────────────────
+print(f"\n" + "=" * 100)
+print("  ORDINAL LOGISTIC REGRESSION: cohort (ordinal 1–3) + region → A+")
+print("  Preserves 3-cohort structure; region enters as categorical covariate.")
+print("=" * 100)
+
+try:
+    import numpy as np
+    import statsmodels.api as sm
+
+    # Assign ordinal cohort score
+    def cohort_score(yr):
+        if yr <= 1984: return 1
+        if yr <= 1999: return 2
+        return 3
+
+    y = np.array([int(s["is_ap"]) for s in sites])
+    cohort = np.array([cohort_score(s["yr"]) for s in sites], dtype=float)
+
+    # Region dummies (drop first = Africa as reference)
+    region_list = sorted(set(s["region"] for s in sites))
+    ref_region  = region_list[0]
+    region_dummies = {}
+    for reg in region_list[1:]:
+        region_dummies[reg] = np.array([1.0 if s["region"] == reg else 0.0 for s in sites])
+
+    X = np.column_stack([cohort] + list(region_dummies.values()))
+    X = sm.add_constant(X)
+
+    model  = sm.Logit(y, X)
+    result = model.fit(disp=0)
+
+    # cohort is column index 1
+    coef_cohort = result.params[1]
+    pval_cohort = result.pvalues[1]
+    se_cohort   = result.bse[1]
+    z_cohort    = result.tvalues[1]
+    or_cohort   = float(np.exp(coef_cohort))
+
+    print(f"\n  Reference region: {ref_region}")
+    print(f"  N = {len(y)}  |  A+ = {y.sum()}  |  converged = {result.mle_retvals['converged']}")
+    print(f"\n  Cohort effect (ordinal 1→3, decreasing = negative coef):")
+    print(f"    β = {coef_cohort:.4f}  SE = {se_cohort:.4f}  Z = {z_cohort:.3f}  p = {pval_cohort:.4f}  {sig(pval_cohort)}")
+    print(f"    OR per cohort step = {or_cohort:.3f}")
+    print(f"\n  Full model summary:")
+    col_names = ["const", "cohort"] + list(region_dummies.keys())
+    print(f"  {'Term':<30}  {'β':>8}  {'SE':>8}  {'Z':>8}  {'p':>10}  {'OR':>8}")
+    print(f"  {'─'*80}")
+    for i, name in enumerate(col_names):
+        b = result.params[i]; se = result.bse[i]
+        z = result.tvalues[i]; p = result.pvalues[i]
+        print(f"  {name:<30}  {b:>8.4f}  {se:>8.4f}  {z:>8.3f}  {p:>10.4f}  {np.exp(b):>8.3f}  {sig(p)}")
+
+    # Store for macros
+    p_logreg = pval_cohort
+    or_logreg = or_cohort
+    z_logreg  = z_cohort
+
+    print(f"\n  LATEX MACROS:")
+    print(f"  \\newcommand{{\\pLogRegCohort}}{{{p_logreg:.4f}}}   % logistic regression cohort p")
+    print(f"  \\newcommand{{\\orLogRegCohort}}{{{or_logreg:.3f}}}  % logistic regression cohort OR per step")
+    print(f"  \\newcommand{{\\zLogRegCohort}}{{{z_logreg:.3f}}}   % logistic regression cohort Z")
+
+    ResultsStore().write_many({
+        "pLogRegCohort": p_logreg,
+        "orLogRegCohort": or_logreg,
+        "zLogRegCohort":  z_logreg,
+        "pCMH":           p_cmh,
+        "MH_OR":          MH_OR,
+        "stratNconcordant": n_concordant,
+        "stratNregions":    n_regions_tested,
+    })
+
+except ImportError:
+    print("  statsmodels not available — skipping logistic regression")
 
 # ── 5. Summary ───────────────────────────────────────────────────────────────
 print(f"\n" + "=" * 100)
@@ -463,6 +497,36 @@ if mh_tables:
 
     print(f"  \\newcommand{{\\pRegionEmpAll}}{{{p_reg_emp_all:.4f}}}    % region-specific empirical null, all sites")
     print(f"  \\newcommand{{\\pRegionEmpPreTwoK}}{{{p_reg_emp_pre2k:.4f}}}  % region-specific empirical null, pre-2000")
+
+    # ── Per-region A+ counts and rates ────────────────────────────────────────
+    print()
+    print("  % ── Per-region A+ counts and rates ────────────────────────────────")
+    region_map = {
+        "Europe & North America":    "EuropeNA",
+        "Asia & Pacific":            "AsiaPac",
+        "Africa":                    "Africa",
+        "Arab States":               "ArabStates",
+        "Latin America & Caribbean": "LatAm",
+    }
+    total_ap = sum(1 for s in sites if s["is_ap"])
+    for reg, key in region_map.items():
+        reg_sites = [s for s in sites if s["region"] == reg]
+        reg_n   = len(reg_sites)
+        reg_ap  = sum(1 for s in reg_sites if s["is_ap"])
+        reg_rate = 100.0 * reg_ap / reg_n if reg_n else 0.0
+        reg_share = 100.0 * reg_ap / total_ap if total_ap else 0.0
+        print(f"  \\newcommand{{\\{key}N}}{{{reg_n}}}  % N sites, {reg}")
+        print(f"  \\newcommand{{\\{key}ApCount}}{{{reg_ap}}}  % A+ count, {reg}")
+        print(f"  \\newcommand{{\\{key}ApRate}}{{{reg_rate:.1f}}}  % A+ rate (%), {reg}")
+        print(f"  \\newcommand{{\\{key}ApShare}}{{{reg_share:.1f}}}  % share of total A+, {reg}")
+
+        # Per-region temporal gradient macros (early = pre-2000, late = 2000+)
+        early_r = [s for s in reg_sites if s["yr"] <= 1999]
+        late_r  = [s for s in reg_sites if s["yr"] >= 2000]
+        early_rate = 100.0 * sum(1 for s in early_r if s["is_ap"]) / len(early_r) if early_r else 0.0
+        late_rate  = 100.0 * sum(1 for s in late_r  if s["is_ap"]) / len(late_r)  if late_r  else 0.0
+        print(f"  \\newcommand{{\\{key}EarlyApRate}}{{{early_rate:.1f}}}  % early A+ rate (pre-2000), {reg}")
+        print(f"  \\newcommand{{\\{key}LateApRate}}{{{late_rate:.1f}}}   % late A+ rate (2000+), {reg}")
 
     # ── Write to results store ─────────────────────────────────────────────
     ResultsStore().write_many({

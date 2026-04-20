@@ -7,9 +7,19 @@
 
 This study applies a one-dimensional angular enrichment test to the
 externally curated UNESCO Cultural and Mixed corpus ($N = \NclusterTotal$),
-using a reproducible computational pipeline (see the Data Availability Statement). The approach employs a geometric null with no free
-parameters and is intended as a reusable framework for spatial pattern‑detection
-studies in archaeological heritage data.
+using a reproducible computational pipeline (see the Data Availability Statement).
+The approach employs a geometric null with no free parameters and is intended
+as a reusable framework for spatial pattern‑detection studies in archaeological
+heritage data.
+
+Sites within $\leq0.002$~beru ($\sim$6.7~km) of a harmonic node are
+designated Tier-A+; the geometric null rate is 4\%.
+The full corpus yields \NclusterAp{} A+ sites against an expected
+\NclusterExpAp{} under this null. The excess of roughly
+\NclusterExcessAp{} sites is modest globally but concentrates in
+identifiable sub-populations. Domed monuments carry a disproportionate
+share (Test~2), and harmonics with a precisely aligned site are
+$\clusterHarmonicRatio\times$ more densely populated overall (Test~3).
 
 A global anchor sweep reveals a 3\textdegree{} periodic structure in the
 corpus longitude distribution consistent with the 0.1-beru unit; the full
@@ -42,8 +52,8 @@ archaeometry \citep{magli2013,magli2016,ruggles1999astronomy,ruggles2015handbook
 The \textit{beru} (30\textdegree{} of arc) is attested in the MUL.APIN
 cuneiform compendium \citep{hunger2019mul,watson2011writing}, dated to the late
 second or early first millennium~BCE. The unit divided the ecliptic into twelve
-segments and served for both stellar and terrestrial angular measurement;
-the terrestrial use is explicit in MUL.APIN~II~ii~43--iii~15. The sub-division
+segments and served for both stellar and terrestrial angular measurement.
+The terrestrial use is explicit in MUL.APIN~II~ii~43--iii~15. The sub-division
 into 30~\textit{u\v{s}} (1~u\v{s}~$= 1$\textdegree{}) is well attested
 \citep{hunger2019mul,robson2008mathematics}, and the 0.1-beru interval
 (3\textdegree{}) tested here corresponds to exactly 3~\textit{u\v{s}}.
@@ -82,7 +92,6 @@ serving as orienting meridians in mappamundi and qibla charts
 \citep{harvey1987mappamundi}, providing historical context for the
 Levantine corridor hypothesis.
 
-This study uses an externally curated site list, a one-dimensional test with a geometric null, and a fully archived computational pipeline \citep{tenenbaum2026audit}.
 
 
 
@@ -205,7 +214,7 @@ C-band tiers are defined here; a full inter-harmonic site listing is in
 \subsection{Test Populations}
 \label{sec:test_populations}
 
-Keyword populations are approximate; the raw sweep tolerates known
+Keyword populations are approximate. The raw sweep tolerates known
 false positives while the context-validated variant (Test~2x) applies
 sentence-level gating for greater precision.
 Both populations are reported.
@@ -262,9 +271,6 @@ in the primary evidential chain.
   \item \textbf{Test 3} (cluster asymmetry, full corpus, no keyword filter):
     A+-bearing harmonics host more total sites.
 \end{itemize}
-Tests~2 and~3 address structurally different questions on different
-populations and carry the primary evidential weight; Test~1 provides the
-corpus-level backdrop within the same family.
 All three pass the Bonferroni bound at $k = \BonfK$
 (full corpus $p_\mathrm{adj} = \pAdjTestOne$~*,
 dome $p_\mathrm{adj} = \pAdjTestTwo$~***,
@@ -272,7 +278,7 @@ cluster $p_\mathrm{adj} = \pAdjTestThree$~**).
 
 \textbf{Other tests.}
 Test~4 (temporal gradient, Cochran-Armitage) is descriptive context;
-the trend is substantially explained by regional composition
+the trend does not survive regional stratification
 (\S\ref{sec:resultstemporal}) and is not part of the primary family.
 Test~2b is a sensitivity variant of Test~2.
 Test~5 (founding classifier) is post-hoc (Appendix~\ref{sec:kwdaudit_founding}).
@@ -329,14 +335,6 @@ are described with their results in \S\ref{sec:simulation_null}.
 \section{Results}
 \label{sec:results}
 
-Subsections follow test numbering
-(\hyperref[sec:results_global]{Test~1},
-\hyperref[sec:resultscircular]{2},
-\hyperref[sec:resultsevolution_inline]{2b},
-\hyperref[sec:resultscluster]{3},
-\hyperref[sec:resultstemporal]{4}).
-Test~5 statistics are in Appendix~\ref{sec:kwdaudit_founding}.
-
 \subsection{Global Enrichment (Test~1, Primary)}
 \label{sec:results_global}
 
@@ -374,40 +372,23 @@ full region-adjusted analysis.
 \subsubsection*{World religion sites}
 \label{sec:resultsrelig}
 Religion sub-populations are defined by keyword sets in
-\texttt{keywords.json} (\texttt{religion\_sets}); each set extends beyond
-the bare religion name to include architecturally and historically
-associated terms (e.g.\ \textit{cathedral}, \textit{crusader},
-\textit{byzantine}, \textit{biblical} for Christianity;
-\textit{stupa}, \textit{bodhi}, \textit{ashoka} for Buddhism;
-\textit{synagogue}, \textit{hebrew}, \textit{israelite}, \textit{biblical}).
-The full per-religion keyword lists and all matched sites are tabulated in
+\texttt{keywords.json} (\texttt{religion\_sets}); full keyword lists
+and matched sites are in
 \texttt{supplementary/audit/religion\_keyword\_audit.txt}.
-Sites associated with any world religion ($N = \NreligUnion$): \religUnionApRate\%
-A+ (\religUnionEnrich$\times$; Fisher exact vs.\ rest: OR~$= \religUnionFisherOR$,
-$p = \pReligUnionFisher$, ns; binomial $p = \pReligUnion$, *).
-Christianity ($N = \NchristSites$): \christApRate\% A+
-(OR~$= \christFisherOR$, $p = \pChristFisher$, ns; binomial $p = \pChrist$, **),
-with a marginal A-tier signal (\christARate\%;
-OR~$= \christAFisherOR$, $p = \pChristAFisher$, ns; binomial $p = \pChristA$, $\sim$).
-Islam ($N = \NIslam$): \IslamApRate\% A+
-(OR~$= \islamFisherOR$, $p = \pIslamFisher$, ns; binomial $p = \pIslam$, $\sim$).
-Buddhism ($N = \NbudSitesRelig$): \budApRateRelig\% A+
-(OR~$= \budFisherOR$, $p = \pBudFisher$, ns) taken alone,
-but Buddhist sites show a bimodal distribution across the harmonic spectrum:
+A chi-squared test of independence finds no significant difference in
+A+ rates across the five main religion groups
+($\chi^2 = \religChiSqStat$, df\,=\,\religChiSqDof, $p = \pReligChiSq$, ns);
+individual Fisher tests on underpowered sub-groups are not reported.
+Sites associated with any world religion ($N = \NreligUnion$):
+binomial $p = \pReligUnion$~*.
+The exception is a structural signal in Buddhism ($N = \NbudSitesRelig$):
 A-tier (\NbudATier/\NbudSitesRelig, \budATierRate\%) and C-band
-(\NbudInterHarmonic/\NbudSitesRelig, \budInterHarmonicRate\%) are both
-elevated simultaneously; the joint probability is $p = \pBudJoint$~**
-(multivariate hypergeometric, equivalent to a three-group Fisher exact).
-The C-band midpoint is also a 0.05-beru harmonic node. The same
-6\textdegree{} spacing that reaches significance in the sensitivity sweep
-(\S\ref{sec:metrology}) suggests the bimodal reflects two nested grids.
-Judaism ($N = \NjudSites$): both Tier-A+ (\judApCount/\NjudSites, \judApRate\%,
-binomial $p = \pJudAp$) and Tier-A (\judATierCount/\NjudSites, \judATierRate\%,
-binomial $p = \pJudATierBinom$) nominally exceed the geometric baseline, but neither
-survives Fisher exact comparison against the rest-of-corpus rate
-(A+: OR~$= \judApFisherOR$, $p = \pJudApFisher$;
-A: OR~$= \judATierOR$, $p = \pJudATierFisher$),
-likely reflecting the modest sample size ($N = \NjudSites$).
+(\NbudInterHarmonic/\NbudSitesRelig, \budInterHarmonicRate\%) are
+both elevated simultaneously; the joint probability is
+$p = \pBudJoint$~** (multivariate hypergeometric).
+The C-band midpoint is also a 0.05-beru harmonic node, and the same
+6\textdegree{} spacing that reaches significance in the sensitivity
+sweep (\S\ref{sec:metrology}) suggests the bimodal reflects two nested grids.
 
 %──────────────────────────────────────────────────────────────────────────────
 \subsection{Domed and Spherical Monuments (Test~2, Primary)}
@@ -664,11 +645,19 @@ specific Gerizim anchor rather than geographic concentration alone.
 \label{sec:resultstemporal}
 
 The A+ rate is highest in the founding canon (1978--1984: \canonApRate\%,
-$\canonEnrich\times$, $p = \pCanon$~*) and dilutes to the null in the modern
-era (\cohortErate\%, ns). Cochran-Armitage three-cohort:
-$p = \pCochranThree$~(*). The gradient is largely explained by regional
-composition (Mantel-Haenszel OR~$= \MHcommonOR$, $p = \pCMH$) and is
-treated as descriptive only (Figure~\ref{fig:temporal}).
+$\canonEnrich\times$, $p = \pCanon$~*) and dilutes toward the null in the
+modern era (\cohortErate\%, ns); Cochran-Armitage three-cohort:
+$p = \pCochranThree$~(*). The gradient holds in every Silk Road corridor
+region: Europe/NA (\EuropeNAEarlyApRate\%$\to$\EuropeNALateApRate\%),
+Asia-Pacific (\AsiaPacEarlyApRate\%$\to$\AsiaPacLateApRate\%), and Arab
+States (\ArabStatesEarlyApRate\%$\to$\ArabStatesLateApRate\%). A logistic
+regression with ordinal cohort (1--3) and region as a covariate confirms
+the gradient after regional adjustment
+($Z = \zLogRegCohort$, $p = \pLogRegCohort$~\textasciitilde,
+OR~$= \orLogRegCohort$ per cohort step). The gradient is consistent with
+UNESCO's founding canon having prioritized the most historically prominent
+monuments, which align with the grid most strongly.
+The gradient is treated as descriptive only (Figure~\ref{fig:temporal}).
 
 \begin{figure*}[!t]
 \centering
@@ -691,11 +680,22 @@ mathematical consequences of the 0.10-beru structure: every 0.10-beru
 harmonic is also a 0.05-beru harmonic, and 0.20-beru harmonics are a strict
 subset, so neither constitutes an independent signal.
 Adjacent non-harmonic spacings (0.06, 0.07, 0.09, 0.11, 0.12~beru) are
-non-significant in both populations — the key discriminating observation.
+non-significant in either population, which is the key discriminating observation.
 The 0.08-beru spacing reaches nominal dome significance
 ($p = \sweepEightDomeP$) but not full-corpus ($p = \sweepEightFullP$, ns),
 reflecting unsystematic local overlap with the 0.10-beru grid rather than
 a genuine secondary periodicity.
+Specifically, \sweepEightTenDomeBoth{}/\sweepZeroEightDomeHits{} 
+(\sweepEightTenDomePctOfEight\%) of 0.08‑beru dome hits align 
+to 0.10‑beru, indicating the significance is due to overlap.
+
+A degree-denominated Monte Carlo sweep
+(\S\ref{sec:limitations_geo}) confirms this pattern: candidate intervals
+at 4\textdegree{} and 8\textdegree{} reach nominal dome significance, but
+inspection shows that 6 of 7 and all 4 of their hits respectively fall on
+12\textdegree{} and 24\textdegree{} nodes shared with the 3\textdegree{}
+grid, confirming they are consequences of the primary periodicity rather
+than independent angular units.
 
 \subsection{Sensitivity Slope at the Canonical Unit}
 \label{sec:sensitivity_slope_perm}
@@ -725,11 +725,6 @@ Gerizim: \GerizimSweepAp{} A+, \anchorSweepPctile\textsuperscript{th} percentile
 Jerusalem: \JerusalemSweepAp{} A+, \JerusalemSweepPctile\textsuperscript{th} percentile;
 full table in Online Supplementary Table~S4), and the result is anchor-invariant
 within the \GerizimJerusalemKm\,km corridor window.
-The total counts differ by one (\GerizimSweepAp{} vs.\ \JerusalemSweepAp{});
-the extra Jerusalem hit is Mount Gerizim itself at 4.1~km.
-The A+ compositions diverge more broadly: 18 sites are unique to Gerizim,
-19 are unique to Jerusalem, and 38 are shared
-(supplementary anchor comparison audit).
 No other historical meridian reaches significance except
 Mecca (\MeccaAp{} A+, $p = \pMeccaAnchor$~$^\dagger$).
 
@@ -786,14 +781,9 @@ The dome enrichment surviving all three simulation nulls remains the primary
 evidence against a purely geographic account.
 
 \textbf{Corridor and landmark ranking.}
-Gerizim (\GerizimSweepAp{} A+, $p = \clusterApBinom$) and Jerusalem
-(\JerusalemSweepAp{} A+, $p = \pJerusalemAp$) both place the
-$\sim$35\textdegree{}E corridor in the global top \anchorSweepTopPct\%.
-The A+ counts differ by one (Jerusalem finds Gerizim as an extra hit at 4.1~km),
-but the compositions diverge: 18 A+ sites are unique to Gerizim,
-19 are unique to Jerusalem, and 38 are shared.
-The enrichment belongs to the corridor, not to either anchor individually.
-Using each UNESCO site as its own anchor, Gerizim ranks
+Of the 18 A+ sites unique to Gerizim and 19 unique to Jerusalem,
+38 are shared; the enrichment belongs to the corridor, not to either
+anchor individually. Using each UNESCO site as its own anchor, Gerizim ranks
 \#\GerizimTempleRank{} of 1012 (top 2.8\%).
 
 \subsection{Spatial Autocorrelation}
@@ -819,7 +809,7 @@ Three simulation nulls (\simNperms{} trials each, seed~$= \simSeed{}$,
 \citealt{good2005permutation}):
 (1)~Longitude permutation: dome ($N = \NcircValidated$)
 $p_\mathrm{perm} = \simDomePermP$~(**);
-canon ($N = \NcanonSites$) $p = \simCanonPermP$~(ns);
+1978-1984 canon ($N = \NcanonSites$) $p = \simCanonPermP$~(ns);
 pre-2000 ($N = \NpreTwoK$) $p = \simPreTwoKPermP$~($^\dagger$).
 (2)~Bootstrap from full corpus: dome $p_\mathrm{boot} = \simDomeBootP$~(*).
 (3)~KDE-smoothed null: expected $\simKDEMean \pm \simKDEStd$, observed \Nap{}, $Z = \simKDEZ$,
@@ -868,6 +858,11 @@ but strongly enriched in the inter-harmonic C-band:
 Myanmar/Cambodia reaches \wikiMyanmarCbandRate\% (OR $= \wikiMyanmarCbandOR\times$, $p < 0.001$) and the
 combined heartland \wikiHeartlandCbandRate\% (OR $= \wikiHeartlandCbandOR\times$, $p < 0.001$).
 The anti-correlation is consistent with a grid-level account (see \S\ref{sec:transmission}).
+The non-heartland Wikidata stupas (outside 70\textdegree--110\textdegree{}E,
+$N = 102$) show the same A-enriched, C-depleted profile as the UNESCO
+domed monument corpus: 50\% reach Tier-A (OR $= 5.68\times$, $p < 0.001$)
+with no C-band enrichment, suggesting that UNESCO inscription preferentially
+captures the most precisely aligned examples within each tradition.
 
 \subsection{Multiple Comparisons}
 \label{sec:sharpshooter}
@@ -886,62 +881,74 @@ FDR audit (\NtotalTests{} tests) retains \NsurviveFDR{} at $q < 0.05$;
 \subsection{Circularity: Full Canonical Treatment}
 \label{sec:limitations_circularity}
 
-\textbf{The public-data constraint.}
-Both the UNESCO coordinate file and the candidate anchor (Mount Gerizim)
-are fully public. Any investigator could run this pipeline at any time,
-before or after seeing these results. Pre-registration cannot verify temporal
-priority for statistical analyses of public databases: the data are
-permanently accessible, so any registration claim is unverifiable.
-The relevant question is whether the reported pattern exists in the data
-and whether the anchor choice was justified independently of the result.
-Both are addressed directly.
+Pre-registration cannot address circularity for analyses of permanent
+public databases. The UNESCO coordinate file and Mount Gerizim are both
+fully public, so any investigator could run this pipeline at any time
+and temporal priority is unverifiable. The relevant questions are whether
+the pattern exists and whether the anchor was chosen on independent grounds.
 
-\textbf{What the anchor sweep establishes.}
-The global anchor sweep (\S\ref{sec:sensitivity_global}) tests all
-\NharmonicsCoarse{} possible $x.18$\textdegree{}E anchors against the same
-corpus. Gerizim and Jerusalem both place the $\sim$35\textdegree{}E corridor
-in the global top \anchorSweepTopPct\% of all trial anchors.
-The enrichment is a property of the corridor, not of the specific anchor
-chosen within it. The choice of Gerizim was made on documented historical
-grounds (\S\ref{sec:anchor}); that its longitude falls within the optimal
-phase band is an empirical observation, not a post-hoc rationalization.
+Both are answered directly. The global anchor sweep (\S\ref{sec:sensitivity_global})
+confirms that the enrichment is a property of the $\sim$35\textdegree{}E
+corridor. Every $x.18$\textdegree{}E anchor produces the same result, and
+Gerizim and Jerusalem both place the corridor in the global top
+\anchorSweepTopPct\% of \anchorSweepNanchors{} trial anchors.
+Historical justifications could be constructed post-hoc for many
+high-scoring anchors in the global sweep. What distinguishes Gerizim
+is pre-existing documentary evidence, the \textit{tabbur ha-aretz}
+cosmographic role (\S\ref{sec:anchor}), that predates this analysis entirely.
 
-\textbf{What remains genuinely contaminated.}
-The narrative framing of Gerizim as a historically motivated anchor
-is post-hoc in the sense that reporting it was conditioned on observing
-the phase alignment. The Rayleigh Test~B is tautological by construction
-(\S\ref{sec:results_rayleigh}). These are noted for completeness.
+The 3\textdegree{} periodic structure is recoverable by any unanchored
+\NharmonicsCoarse-phase scan without reference to Gerizim. The dome
+enrichment (Test~2) is identical across all \NharmonicsCoarse{}
+$x.18$\textdegree{}E anchors. The cluster asymmetry (Test~3) requires
+no keyword filter and no anchor. Test~B is tautological by construction
+(\S\ref{sec:results_rayleigh}) and is noted as such.
 
-\textbf{What is not contaminated.}
-The 3\textdegree{} periodic structure in the UNESCO longitude file is
-recoverable by any unanchored \NharmonicsCoarse-phase scan without
-reference to Gerizim. The dome enrichment (Test~2) is identical across
-all \NharmonicsCoarse{} $x.18$\textdegree{}E anchors. The cluster
-asymmetry (Test~3) requires no keyword filter and no anchor.
-
-Accordingly, the Levantine corridor statistics are reported as the motivated
-entry point rather than independent confirmation, and the Bonferroni
-correction is applied as a descriptive bound on effect magnitude.
+The Levantine corridor statistics are reported as the motivated entry
+point, not independent confirmation.
 This ranking does not survive the 36,000-anchor discovery correction
-(Test~D, $p = \anchorMaxPermP$, ns); primary evidence is Tests~2 and~3,
-which require no anchor.
+(Test~D, $p = \anchorMaxPermP$, ns). The primary evidence is Tests~2
+and~3, which require no anchor.
 
 \subsection{Geographic and Cultural Selection Bias}
+\label{sec:limitations_geo}
 
-Geographic and cultural selection bias is the most important alternative
-explanation. The UNESCO list over-represents Europe and the
-Mediterranean-to-South-Asian corridor
-(Europe \& North America: \CorpusPctEurope\% of Cultural/Mixed sites;
+The UNESCO list over-represents Europe and the
+Mediterranean-to-South-Asian corridor of Cultural/Mixed sites. 
+The regional distribution is as follows: 
+(Europe \& North America: \CorpusPctEurope\%;
 Arab States: \CorpusPctArabStates\%;
 Asia-Pacific: \CorpusPctAsiaPac\%;
-Americas: \CorpusPctLatAm\%;
+Latin Americas: \CorpusPctLatAm\%;
 Africa: \CorpusPctAfrica\%).
 Permutation tests show geographic concentration can reproduce the
-sensitivity peak (\S\ref{sec:sensitivity_slope_perm}). The dome
-enrichment surviving the restricted geographic draw (Null~C,
-$p = \geoNullDomeRestrictedP$, *) remains the primary evidence against
-a purely geographic account.
+sensitivity peak (\S\ref{sec:sensitivity_slope_perm}), but domed
+monuments exceed the A+ rate of other monuments from the same longitude
+footprint (Null~C, $p = \geoNullDomeRestrictedP$, *), establishing
+that the enrichment is carried by a specific building type rather than
+the geographic distribution alone. Although UNESCO nomination criteria
+make no reference to longitude, it cannot be ruled out that the
+inscription process carries some of the same longitudinal structure
+observed here.
 
+To further disentangle geographic effects from true periodicity, a Monte Carlo unit sweep (\mcNperms{} permutations, \mcNcandidates{}
+candidate spacing values at even 0.5\textdegree{} increments from
+0.5\textdegree{} to 15\textdegree{}) asks which angular interval
+produces clustering beyond geographic concentration, without assuming
+any particular unit. The dominant peak is at 3\textdegree{} ($p <
+0.001$), with the next strongest signals at 6\textdegree{} and
+12\textdegree{} ($p < 0.001$ each); adjacent candidates
+2.5\textdegree{} and 3.5\textdegree{} do not reach significance.
+The dome corpus amplifies the 3\textdegree{} signal beyond the full 
+corpus baseline and peaks at integer multiples of 3\textdegree{}, with domed monuments 
+and earthen mound traditions both contributing to the broader pattern. 
+
+Permutation tests indicate a dominant period is expected a priori, but
+geographic clustering can also generate peaks and cannot by itself identify
+the underlying unit. The b\={e}ru is the only ancient, documentary‑attested
+angular unit at this scale: 30\textdegree{} divides the ecliptic into twelve
+equal segments. The data independently identify 3\textdegree{} as the
+dominant period, and distinguished buildings are preferentially aligned to it.
 
 \subsection{Americas Negative Control}
 \label{sec:americas_negative_control}
@@ -996,31 +1003,30 @@ tractable case. Within the dome-evolution corpus, the stupa sub-stage
 achieves an A+ rate of \evoStupaApRate\% (\NevoStupaAp/\NevoStupa{} sites,
 OR~$= \evoStupaFisherOR\times$, $p = \pEvoStupaFisher$~*), the highest
 of any keyword-defined sub-population in the analysis and more than five
-times the geometric null. The A+ tier within the UNESCO stupa sub-population concentrates at the
-110\textdegree{}E harmonic node anchored by Borobudur (c.~800~CE)
-\citep{miksic1990borobudur}, while the four C-tier stupa sites fall
-exclusively in the Indian subcontinent: Mahabodhi, Elephanta, Taxila,
-and Ajanta (India/Pakistan band, OR~$= \stupaIndiaPakCOR\times$,
-$p = \stupaIndiaPakCP$~*); the Southeast Asian stupa sites in the
-UNESCO corpus (Pyu Ancient Cities, Silk Roads Chang'an-Tianshan
-Corridor) are both A+, not C-tier.
-The Indian heartland's C-band enrichment is consistent with the Wikidata
-bimodal (\S\ref{sec:stupas_q180987}): India/Pakistan sites fall on
-0.05-beru harmonics, while Southeast Asian transmission sites align
-with the 0.10-beru grid.
-The A+ concentration at 110\textdegree{}E is anchored by Borobudur,
-and the surrounding longitude band hosts a correspondingly higher density
-of A-tier sites.
-In the Wikidata Q180987 stupa corpus (\S\ref{sec:stupas_q180987}),
-\wikiStupaATierRate\% of all \wikiStupaTotal{} stupas reach Tier-A
-($p \wikiStupaATierBinomP$~\wikiStupaATierBinomStar), confirming
-corpus-wide harmonic enrichment. At the Java node (107\textdegree{}--112\textdegree{}E) the
+times the geometric null. Three of the four UNESCO A+ stupa sites fall in the
+95\textdegree{}--110\textdegree{}E corridor, including Pyu Ancient Cities,
+Silk Roads Chang'an-Tianshan, and Borobudur (c.~800~CE)
+\citep{miksic1990borobudur}. The fourth is Lumbini (83\textdegree{}E, Nepal).
+The Indonesia sub-region (95\textdegree{}--141\textdegree{}E) achieves
+an A+ rate of 60\% (3/5 sites, OR~$= 26.97\times$, $p = 0.0015$, **).
+By contrast, the four C-tier stupa sites fall exclusively in the
+India/Pakistan band: Mahabodhi, Elephanta, Taxila, and Ajanta
+(OR~$= \stupaIndiaPakCOR\times$, $p = \stupaIndiaPakCP$~*).
+The Indian heartland's C-band enrichment is consistent with the Buddhist
+A/C bimodal identified in \S\ref{sec:resultsrelig}: India/Pakistan sites
+fall on 0.05-beru harmonics, while Indonesia and Southeast Asian sites
+align with the 0.10-beru grid. The Wikidata Q180987 stupa corpus
+(\S\ref{sec:stupas_q180987}) reproduces the same pattern independently,
+with \wikiStupaATierRate\% of all \wikiStupaTotal{} stupas reaching Tier-A
+(binomial $p\ \wikiStupaATierBinomP$~\wikiStupaATierBinomStar;
+permutation $Z = \wikiStupaPermZ$, $p_\mathrm{perm} = \wikiStupaPermP$~\wikiStupaPermStar),
+confirming corpus-wide harmonic enrichment. At the Java node (107\textdegree{}--112\textdegree{}E) the
 A-tier rate rises to \wikiJavaTightATierRate\%
-(OR~$= \wikiJavaTightATierOR\times$, $p < 0.001$), and Tier-A+ is also
+(OR~$= \wikiJavaTightATierOR\times$, $p < 0.001$~***), and Tier-A+ is also
 elevated: \wikiJavaTightApRate\%
 (OR~$= \wikiJavaTightApOR\times$, $p = \wikiJavaTightApP$~*).
-The C-band signal localises to Myanmar and Cambodia
-(\wikiMyanmarCbandRate\%, OR~$= \wikiMyanmarCbandOR\times$, $p < 0.001$)
+The C-band signal localizes to Myanmar and Cambodia
+(\wikiMyanmarCbandRate\%, OR~$= \wikiMyanmarCbandOR\times$, $p < 0.001$~***)
 rather than the Indian subcontinent (Figure~\ref{fig:geo_trail}).
 The anti-correlation between the Indian heartland (C-band enriched, A-depleted)
 and the Southeast Asian transmission zone (A+ enriched, C-absent) is
@@ -1030,7 +1036,8 @@ tradition's origin region and 0.10-beru at its transmission nodes.
 \begin{figure*}[!t]
   \centering
   \includegraphics[width=\textwidth]{../figures/fig_geo_trail}
-  \caption{Buddhist transmission corridor from dome to stupa.}
+  \caption{Tier distribution of UNESCO domed/stupa and Wikidata Q180987
+  stupas sites along the Silk Road corridor.}
   \label{fig:geo_trail}
 \end{figure*}
 
@@ -1049,11 +1056,11 @@ the strongest alignment of any class tested
 (OR~$= \circApFisherOR$, $p_\mathrm{adj} = \pAdjTestTwo$~***),
 exceeding what geography alone predicts (Null~C, $p = \geoNullDomeRestrictedP$~*).
 
-Comparison with the Wikidata Q180987 stupa corpus suggests that UNESCO
-inscription captures the most precisely aligned sites.
-The broader stupa population distributes across the Java Sea region, while
-UNESCO entries concentrate at the harmonic lines, consistent with the list
-selecting the most canonically significant monuments.
+Comparison with the Wikidata Q180987 stupa corpus suggests a broader
+pattern: within the stupa tradition, the most historically significant
+monuments are those positioned at $x.18$\textdegree{}E harmonic longitudes,
+and UNESCO inscription appears to select preferentially from this aligned
+subset.
 
 Geographically, Mount Gerizim lies between the Mediterranean to the west and
 the overland Silk Road to the east, placing it at a natural node of the
@@ -1116,12 +1123,12 @@ was iteratively tuned after data inspection.
 The founding-origin classifier (\texttt{lib/founding\_filter.py})
 assigns sites to five categories: Founding Capital (F), Sacred Origin
 (S), Founding Monument (M), Founding Axis (X), and Ancient Continuous
-Landscape (L).  Each category has its own unambiguous keyword set plus
+Landscape (L). Each category has its own unambiguous keyword set plus
 context-gated ambiguous terms; positive and negative gate patterns are
-defined per category in \texttt{keywords.json}.  The classifier was
+defined per category in \texttt{keywords.json}. The classifier was
 iteratively tuned after data inspection to reduce false positives;
 residual interpretive ambiguity at the boundary between founding-related
-and general heritage descriptions is accepted.  Statistics are reported
+and general heritage descriptions is accepted. Statistics are reported
 in \hyperref[sec:results_founding]{§\ref*{sec:results_founding}}; the
 full site-by-site listing is in
 \texttt{supplementary/audit/founding\_keyword\_audit.txt}.

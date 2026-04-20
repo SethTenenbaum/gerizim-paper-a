@@ -1,5 +1,5 @@
 GERIZIM CORRIDOR PRECISION AUDIT
-Generated : Sat Apr 18 05:14:31 UTC 2026
+Generated : Mon Apr 20 01:50:32 UTC 2026
 Script    : tools/generate_audit_corridor.py
 Anchor    : Gerizim 35.269°E   |   Beru = 30.0°
 Corridor  : 35.269°E (0.0 beru) to Lumbini 83.2761°E (1.6002 beru ≈ 1.6 harmonic)

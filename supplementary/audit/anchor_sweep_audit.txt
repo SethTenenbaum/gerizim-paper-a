@@ -1,5 +1,5 @@
 GLOBAL ANCHOR SWEEP AUDIT — GERIZIM AND JERUSALEM RANKINGS
-Generated : Sat Apr 18 05:14:32 UTC 2026
+Generated : Mon Apr 20 01:50:35 UTC 2026
 Script    : tools/generate_audit_anchor_sweep.py
 Corpus    : 1012 sites (1011 inscribed Cultural/Mixed + Gerizim synthetic)
            Each trial anchor self-excludes itself → N = 1011 per anchor

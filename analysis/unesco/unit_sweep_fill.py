@@ -1,4 +1,3 @@
-
 import re
 import sys
 from pathlib import Path
@@ -115,6 +114,31 @@ def main():
 
         fine_rows.append((sp, nr, d_hits, d_p, f_hits, f_p))
 
+    # ── Overlap between 0.08 and 0.10 spacings ──────────────────────────────
+    def hit_mask(lons, spacing):
+        return np.array([deviation_at_spacing(lon, spacing) <= TIER_APLUS for lon in lons], dtype=bool)
+
+    dome_08_mask = hit_mask(dome_lons, 0.08)
+    dome_10_mask = hit_mask(dome_lons, 0.10)
+    full_08_mask = hit_mask(all_lons, 0.08)
+    full_10_mask = hit_mask(all_lons, 0.10)
+
+    dome_08 = int(np.count_nonzero(dome_08_mask))
+    dome_10 = int(np.count_nonzero(dome_10_mask))
+    dome_both = int(np.count_nonzero(dome_08_mask & dome_10_mask))
+    full_08 = int(np.count_nonzero(full_08_mask))
+    full_10 = int(np.count_nonzero(full_10_mask))
+    full_both = int(np.count_nonzero(full_08_mask & full_10_mask))
+
+    print()
+    print("=" * 100)
+    print("  OVERLAP BETWEEN 0.08 AND 0.10 SPACINGS")
+    print("=" * 100)
+    print(f"{'Set':>8} {'Hits@0.08':>10} {'Hits@0.10':>10} {'Hits@Both':>10} {'%Both of 0.08':>14} {'%Both of 0.10':>14}")
+    print("-" * 100)
+    print(f"  {'DOME':>6} {dome_08:>10} {dome_10:>10} {dome_both:>10} {100*dome_both/dome_08 if dome_08 else 0:14.1f}% {100*dome_both/dome_10 if dome_10 else 0:14.1f}%")
+    print(f"  {'FULL':>6} {full_08:>10} {full_10:>10} {full_both:>10} {100*full_both/full_08 if full_08 else 0:14.1f}% {100*full_both/full_10 if full_10 else 0:14.1f}%")
+
     # ── LaTeX output ─────────────────────────────────────────────────────────
     print()
     print("=" * 100)
@@ -185,16 +209,27 @@ def main():
 
     print(f"  \\newcommand{{\\sweepEightDomeP}}{{{_fmt(next(d_p for sp,nr,d_hits,d_p,f_hits,f_p in coarse_rows if abs(sp-0.08)<1e-9))}}}   % p(Dome), 0.08-beru")
     print(f"  \\newcommand{{\\sweepEightFullP}}{{{_fmt(next(f_p for sp,nr,d_hits,d_p,f_hits,f_p in coarse_rows if abs(sp-0.08)<1e-9))}}}   % p(Full), 0.08-beru")
+    # Overlap macros: 0.08 vs 0.10 spacings
+    dome_08_pct_of_ten = round(100 * dome_both / dome_10, 1) if dome_10 else 0.0
+    dome_08_pct_of_eight = round(100 * dome_both / dome_08, 1) if dome_08 else 0.0
+    full_08_pct_of_ten = round(100 * full_both / full_10, 1) if full_10 else 0.0
+    full_08_pct_of_eight = round(100 * full_both / full_08, 1) if full_08 else 0.0
+    print(f"  \\newcommand{{\\sweepEightTenDomeBoth}}{{{dome_both}}}   % DOME hits shared by 0.08- and 0.10-beru")
+    print(f"  \\newcommand{{\\sweepEightTenDomePctOfTen}}{{{dome_08_pct_of_ten}}}   % pct of 0.10-beru dome hits also in 0.08-beru")
+    print(f"  \\newcommand{{\\sweepEightTenDomePctOfEight}}{{{dome_08_pct_of_eight}}}   % pct of 0.08-beru dome hits also in 0.10-beru")
+    print(f"  \\newcommand{{\\sweepEightTenFullBoth}}{{{full_both}}}   % full-corpus hits shared by 0.08- and 0.10-beru")
+    print(f"  \\newcommand{{\\sweepEightTenFullPctOfTen}}{{{full_08_pct_of_ten}}}   % pct of 0.10-beru full hits also in 0.08-beru")
+    print(f"  \\newcommand{{\\sweepEightTenFullPctOfEight}}{{{full_08_pct_of_eight}}}   % pct of 0.08-beru full hits also in 0.10-beru")
 
     for sp, nr, d_hits, d_p, f_hits, f_p in fine_rows:
         tag = FINE_TAG.get(round(sp, 4), "")
         if not tag:
             continue
-        print(f"  \\newcommand{{\\fine{tag}Null}}{{{nr*100:.2f}\\%}}   % null rate, {sp:.4f}-beru")
-        print(f"  \\newcommand{{\\fine{tag}DomeHits}}{{{d_hits}}}   % dome hits, {sp:.4f}-beru")
-        print(f"  \\newcommand{{\\fine{tag}DomeP}}{{{_fmt(d_p)}}}   % p(Dome), {sp:.4f}-beru")
-        print(f"  \\newcommand{{\\fine{tag}FullHits}}{{{f_hits}}}   % full hits, {sp:.4f}-beru")
-        print(f"  \\newcommand{{\\fine{tag}FullP}}{{{_fmt(f_p)}}}   % p(Full), {sp:.4f}-beru")
+        print(f"  \\newcommand{{\fine{tag}Null}}{{{nr*100:.2f}\%}}   % null rate, {sp:.4f}-beru")
+        print(f"  \\newcommand{{\fine{tag}DomeHits}}{{{d_hits}}}   % dome hits, {sp:.4f}-beru")
+        print(f"  \\newcommand{{\fine{tag}DomeP}}{{{_fmt(d_p)}}}   % p(Dome), {sp:.4f}-beru")
+        print(f"  \\newcommand{{\fine{tag}FullHits}}{{{f_hits}}}   % full hits, {sp:.4f}-beru")
+        print(f"  \\newcommand{{\fine{tag}FullP}}{{{_fmt(f_p)}}}   % p(Full), {sp:.4f}-beru")
 
 if __name__ == "__main__":
     main()

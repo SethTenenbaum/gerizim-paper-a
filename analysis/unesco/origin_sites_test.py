@@ -441,6 +441,30 @@ jud_fisher_or, p_jud_fisher = fisher_exact(_jud_table, alternative="greater")
 n_rel, nap_rel, _, p_rel, enr_rel = stats(any_relig)
 relig_union_or, p_rel_fisher = _fisher_ap_sub(n_rel, nap_rel)
 
+# ── Chi-squared test of independence across religion sub-populations ──────────
+# Tests whether A+ enrichment differs across groups (Christianity, Islam,
+# Buddhism, Judaism, Hinduism) — appropriate when per-group Fisher tests
+# are underpowered; a single omnibus test avoids inflating per-group α.
+from scipy.stats import chi2_contingency
+
+_relig_groups = [
+    ("Christianity", christian),
+    ("Islam",        islamic),
+    ("Buddhism",     buddhist_relig),
+    ("Judaism",      jewish),
+    ("Hinduism",     hindu),
+]
+_chi_obs = [[sum(1 for s in grp if is_aplus(s["tier"])),
+             sum(1 for s in grp if not is_aplus(s["tier"]))]
+            for _, grp in _relig_groups]
+_chi_obs_arr = [row for row in _chi_obs if row[0] + row[1] >= 5]
+if len(_chi_obs_arr) >= 2:
+    import numpy as _np
+    _chi_stat, _p_relig_chi2, _dof, _ = chi2_contingency(_np.array(_chi_obs_arr))
+else:
+    _chi_stat, _p_relig_chi2, _dof = 0.0, 1.0, 0
+print(f"  Chi-squared (A+ across 5 religion groups): χ²={_chi_stat:.3f}, df={_dof}, p={_p_relig_chi2:.4f}  {sig(_p_relig_chi2)}")
+
 # ── Fisher for cohort comparisons (canon/pre2k vs rest) ──────────────────────
 # Canon vs rest
 or_canon_vs_rest, p_canon_fisher = _fisher_ap_cohort(n_canon, nap_canon,
@@ -484,6 +508,9 @@ print(f"  \\newcommand{{\\NreligUnionAp}}{{{nap_rel}}}              % religion-u
 print(f"  \\newcommand{{\\religUnionApRate}}{{{100*nap_rel/n_rel:.1f}}}            % religion-union A+ rate (%)")
 print(f"  \\newcommand{{\\pReligUnion}}{{{p_rel:.4f}}}         % p-value, religion-union A+ binomial")
 print(f"  \\newcommand{{\\pReligUnionFisher}}{{{p_rel_fisher:.4f}}}   % p-value, religion-union A+ Fisher exact vs rest")
+print(f"  \\newcommand{{\\pReligChiSq}}{{{_p_relig_chi2:.4f}}}      % p-value, chi-sq A+ across 5 religion groups")
+print(f"  \\newcommand{{\\religChiSqStat}}{{{_chi_stat:.3f}}}       % chi-sq statistic, religion groups")
+print(f"  \\newcommand{{\\religChiSqDof}}{{{_dof}}}                 % df, chi-sq religion groups")
 print(f"  \\newcommand{{\\religUnionFisherOR}}{{{relig_union_or:.2f}}}   % OR, religion-union A+ Fisher exact")
 print(f"  \\newcommand{{\\religUnionEnrich}}{{{enr_rel:.2f}}}           % enrichment ratio, religion union")
 print(f"  \\newcommand{{\\NchristSites}}{{{n_chr}}}            % Christian sacred sites N")

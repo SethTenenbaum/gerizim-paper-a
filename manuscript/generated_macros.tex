@@ -1,4 +1,4 @@
-% Generated macros — 2026-04-18T02:49:30Z
+% Generated macros — 2026-04-19T18:52:52Z
 % Source: bash manuscript/reproduce_all_macros.sh
 % IMPORTANT: values are computed fresh each run — do NOT hardcode
 
@@ -159,6 +159,9 @@
   \newcommand{\religUnionApRate}{6.1}            % religion-union A+ rate (%)
   \newcommand{\pReligUnion}{0.0108}         % p-value, religion-union A+ binomial
   \newcommand{\pReligUnionFisher}{0.2414}   % p-value, religion-union A+ Fisher exact vs rest
+  \newcommand{\pReligChiSq}{0.7206}      % p-value, chi-sq A+ across 5 religion groups
+  \newcommand{\religChiSqStat}{2.083}       % chi-sq statistic, religion groups
+  \newcommand{\religChiSqDof}{4}                 % df, chi-sq religion groups
   \newcommand{\religUnionFisherOR}{1.27}   % OR, religion-union A+ Fisher exact
   \newcommand{\religUnionEnrich}{1.52}           % enrichment ratio, religion union
   \newcommand{\NchristSites}{397}            % Christian sacred sites N
@@ -497,15 +500,48 @@
   \newcommand{\blockBootZ}{2.14}           % block-bootstrap Z-score, A+
 
 % --- analysis/unesco/regional_temporal_gradient.py
+  \newcommand{\pLogRegCohort}{0.0784}   % logistic regression cohort p
+  \newcommand{\orLogRegCohort}{0.722}  % logistic regression cohort OR per step
+  \newcommand{\zLogRegCohort}{-1.760}   % logistic regression cohort Z
   \newcommand{\MHcommonOR}{1.582}             % MH common OR (early vs late)
   \newcommand{\CMHchisq}{2.553}              % CMH chi-squared
   \newcommand{\pCMH}{0.1101}                  % CMH p-value
   \newcommand{\stratNconcordant}{4}    % regions with early > late
   \newcommand{\stratNregions}{5}   % total regions tested
   \newcommand{\stratNsig}{0}          % regions sig at p<0.05
-  \newcommand{\stratVerdict}{largely explained by regional composition after adjustment}
+  \newcommand{\stratVerdict}{directionally consistent but underpowered within strata}
   \newcommand{\pRegionEmpAll}{0.8230}    % region-specific empirical null, all sites
   \newcommand{\pRegionEmpPreTwoK}{0.4205}  % region-specific empirical null, pre-2000
+  \newcommand{\EuropeNAN}{487}  % N sites, Europe & North America
+  \newcommand{\EuropeNAApCount}{28}  % A+ count, Europe & North America
+  \newcommand{\EuropeNAApRate}{5.7}  % A+ rate (%), Europe & North America
+  \newcommand{\EuropeNAApShare}{50.0}  % share of total A+, Europe & North America
+  \newcommand{\EuropeNAEarlyApRate}{6.6}  % early A+ rate (pre-2000), Europe & North America
+  \newcommand{\EuropeNALateApRate}{4.6}   % late A+ rate (2000+), Europe & North America
+  \newcommand{\AsiaPacN}{232}  % N sites, Asia & Pacific
+  \newcommand{\AsiaPacApCount}{14}  % A+ count, Asia & Pacific
+  \newcommand{\AsiaPacApRate}{6.0}  % A+ rate (%), Asia & Pacific
+  \newcommand{\AsiaPacApShare}{25.0}  % share of total A+, Asia & Pacific
+  \newcommand{\AsiaPacEarlyApRate}{7.7}  % early A+ rate (pre-2000), Asia & Pacific
+  \newcommand{\AsiaPacLateApRate}{5.0}   % late A+ rate (2000+), Asia & Pacific
+  \newcommand{\AfricaN}{68}  % N sites, Africa
+  \newcommand{\AfricaApCount}{5}  % A+ count, Africa
+  \newcommand{\AfricaApRate}{7.4}  % A+ rate (%), Africa
+  \newcommand{\AfricaApShare}{8.9}  % share of total A+, Africa
+  \newcommand{\AfricaEarlyApRate}{4.8}  % early A+ rate (pre-2000), Africa
+  \newcommand{\AfricaLateApRate}{8.5}   % late A+ rate (2000+), Africa
+  \newcommand{\ArabStatesN}{110}  % N sites, Arab States
+  \newcommand{\ArabStatesApCount}{6}  % A+ count, Arab States
+  \newcommand{\ArabStatesApRate}{5.5}  % A+ rate (%), Arab States
+  \newcommand{\ArabStatesApShare}{10.7}  % share of total A+, Arab States
+  \newcommand{\ArabStatesEarlyApRate}{7.3}  % early A+ rate (pre-2000), Arab States
+  \newcommand{\ArabStatesLateApRate}{3.6}   % late A+ rate (2000+), Arab States
+  \newcommand{\LatAmN}{114}  % N sites, Latin America & Caribbean
+  \newcommand{\LatAmApCount}{3}  % A+ count, Latin America & Caribbean
+  \newcommand{\LatAmApRate}{2.6}  % A+ rate (%), Latin America & Caribbean
+  \newcommand{\LatAmApShare}{5.4}  % share of total A+, Latin America & Caribbean
+  \newcommand{\LatAmEarlyApRate}{4.8}  % early A+ rate (pre-2000), Latin America & Caribbean
+  \newcommand{\LatAmLateApRate}{0.0}   % late A+ rate (2000+), Latin America & Caribbean
 
 % --- analysis/unesco/tumulus_dome_evolution_raw_sweep.py
   \newcommand{\NevoTotal}{110}            % total dome-evolution corpus
@@ -826,6 +862,12 @@
   \newcommand{\sweepZeroTwentyFullP}{0.0564}   % p(Full), 0.20-beru
   \newcommand{\sweepEightDomeP}{0.0229}   % p(Dome), 0.08-beru
   \newcommand{\sweepEightFullP}{0.4371}   % p(Full), 0.08-beru
+  \newcommand{\sweepEightTenDomeBoth}{6}   % DOME hits shared by 0.08- and 0.10-beru
+  \newcommand{\sweepEightTenDomePctOfTen}{54.5}   % pct of 0.10-beru dome hits also in 0.08-beru
+  \newcommand{\sweepEightTenDomePctOfEight}{66.7}   % pct of 0.08-beru dome hits also in 0.10-beru
+  \newcommand{\sweepEightTenFullBoth}{17}   % full-corpus hits shared by 0.08- and 0.10-beru
+  \newcommand{\sweepEightTenFullPctOfTen}{30.4}   % pct of 0.10-beru full hits also in 0.08-beru
+  \newcommand{\sweepEightTenFullPctOfEight}{32.7}   % pct of 0.08-beru full hits also in 0.10-beru
   \newcommand{\fineNineNineZeroNull}{4.04\%}   % null rate, 0.0990-beru
   \newcommand{\fineNineNineZeroDomeHits}{3}   % dome hits, 0.0990-beru
   \newcommand{\fineNineNineZeroDomeP}{0.6567}   % p(Dome), 0.0990-beru
@@ -856,6 +898,17 @@
   \newcommand{\fineOneZeroOneZeroDomeP}{0.2324}   % p(Dome), 0.1010-beru
   \newcommand{\fineOneZeroOneZeroFullHits}{47}   % full hits, 0.1010-beru
   \newcommand{\fineOneZeroOneZeroFullP}{0.1490}   % p(Full), 0.1010-beru
+
+% --- analysis/unesco/unit_sweep_montecarlo.py
+  \newcommand{\mcDomeNsigObs}{9}          % dome: observed significant spacings
+  \newcommand{\mcDomeNsigMean}{1.02}      % dome: E[N_sig] under null
+  \newcommand{\mcDomePZero}{0.5941}       % dome: P(N_sig=0) under null
+  \newcommand{\mcDomePObsGe}{0.0059}      % dome: P(N_sig>=obs) under null
+  \newcommand{\mcNcandidates}{18}         % number of candidate spacing values tested
+  \newcommand{\mcFullNsigObs}{3}          % full corpus: observed significant spacings
+  \newcommand{\mcFourDegDomeP}{0.0125}    % dome p-value at 4 deg
+  \newcommand{\mcEightDegDomeP}{0.0366}   % dome p-value at 8 deg
+  \newcommand{\mcNperms}{10{,}000}        % number of permutations
 
 % --- analysis/unesco/sensitivity_slope_permutation_test.py
   \newcommand{\permSlopeNperms}{10{,}000}

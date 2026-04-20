@@ -1,5 +1,5 @@
 UNESCO HARMONIC INTER-HARMONIC ZONE AUDIT
-Generated  : Fri Apr 17 20:52:18 UTC 2026
+Generated  : Mon Apr 20 01:50:39 UTC 2026
 Script     : tools/generate_audit_interharmonic.py
 Corpus     : 1011 Cultural/Mixed UNESCO sites with year
 Anchor     : Gerizim 35.269°E   |   Beru = 30.0°
@@ -24,11 +24,11 @@ TIER DISTRIBUTION (all sites)
   Tier        N       %  Description
   ----------------------------------------------------------------------
   A++         7    0.7%  dev <= 0.0002 beru  (~0.67 km from harmonic)
-  A+         49    4.8%  dev <= 0.002  beru  (~6.7 km from harmonic)
-  A         172   17.0%  dev <= 0.010  beru  (~33 km from harmonic)
+  A+         56    5.5%  dev <= 0.002  beru  (~6.7 km from harmonic)
+  A         228   22.6%  dev <= 0.010  beru  (~33 km from harmonic)
   B         580   57.4%  middle zone
-  C         157   15.5%  dist_mid <= 0.010 beru  (~33 km from midpoint)
-  C-         41    4.1%  dist_mid <= 0.002 beru  (~6.7 km from midpoint)
+  C         203   20.1%  dist_mid <= 0.010 beru  (~33 km from midpoint)
+  C-         46    4.5%  dist_mid <= 0.002 beru  (~6.7 km from midpoint)
   C--         5    0.5%  dist_mid <= 0.0002 beru (~0.67 km from midpoint)
 
   C-tier total (C + C- + C--):    203   20.1%  (null rate = 20%)

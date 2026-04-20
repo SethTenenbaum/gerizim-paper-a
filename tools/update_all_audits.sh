@@ -39,32 +39,44 @@ if [[ $FULL -eq 1 ]]; then
 fi
 
 echo ""
-echo "  [1/6] Dome keyword audit..."
+echo "  [1/13] Dome keyword audit..."
 python3 tools/generate_audit_dome.py
 
-echo "  [2/6] Dome + mound evolution audit..."
+echo "  [2/13] Dome + mound evolution audit..."
 python3 tools/generate_audit_dome_mound.py
 
-echo "  [3/6] Founding / sacred-origin audit..."
+echo "  [3/13] Founding / sacred-origin audit..."
 python3 tools/generate_audit_founding.py
 
-echo "  [4/6] World religion keyword audit..."
+echo "  [4/13] World religion keyword audit..."
 python3 tools/generate_audit_religion.py
 
-echo "  [5/6] Corridor precision audit..."
+echo "  [5/13] Corridor precision audit..."
 python3 tools/generate_audit_corridor.py
 
-echo "  [6/7] Gerizim vs Jerusalem A-tier site comparison..."
+echo "  [6/13] Gerizim vs Jerusalem A-tier site comparison..."
 python3 tools/generate_audit_aplus_sites.py
 
-echo "  [7/8] FDR / multiple-comparisons audit..."
+echo "  [7/13] FDR / multiple-comparisons audit..."
 python3 tools/generate_audit_fdr.py
 
-echo "  [8/9] Global anchor sweep ranking audit..."
+echo "  [8/13] Global anchor sweep ranking audit..."
 python3 tools/generate_audit_anchor_sweep.py
 
-echo "  [9/9] Site-as-anchor ranking audit..."
+echo "  [9/13] Site-as-anchor ranking audit..."
 python3 tools/generate_audit_site_as_anchor.py
+
+echo "  [10/13] Interharmonic audit..."
+python3 tools/generate_audit_interharmonic.py
+
+echo "  [11/13] Fine sweep audit..."
+python3 tools/generate_audit_fine_sweep.py
+
+echo "  [12/13] Stupa geo audit..."
+python3 tools/generate_audit_stupa_geo.py
+
+echo "  [13/13] Stupa q180987 audit..."
+python3 tools/generate_audit_stupa_q180987_geo.py
 
 echo ""
 echo "  Done.  Files written to supplementary/audit/"
