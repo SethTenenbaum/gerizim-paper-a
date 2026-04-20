@@ -217,6 +217,76 @@ def summarise(label, obs_nsig, perm_nsig):
 
 dome_mean, dome_sd, dome_pzero, dome_pge = summarise("DOME", obs_dome_nsig, perm_dome_nsig)
 
+# ── Collapsed (independent) significant-spacings count ─────────────────────
+# Collapse harmonics: count the 3° spacing at most once, and count any
+# non-3° spacing only if it remains significant after removing hits that
+# fall on canonical 3° (0.1-beru) nodes (i.e. off_hits with off_p < ALPHA).
+def collapsed_independent_count(pvals, nonthree_results):
+    cnt = 0
+    # include 3° if significant
+    for sp_deg, p, _ in pvals:
+        if abs(sp_deg - 3.0) < 1e-9 and p < ALPHA:
+            cnt += 1
+            break
+    # include non-3° spacings that are significant on their off-node hits
+    for res in nonthree_results:
+        if res.get("off_p", 1.0) < ALPHA:
+            cnt += 1
+    return cnt
+
+obs_dome_collapsed = collapsed_independent_count(obs_dome_pvals, nonthree_overlap_results)
+obs_full_collapsed = collapsed_independent_count(obs_full_pvals, nonthree_overlap_results_full)
+
+print(f"\n  COLLAPSED (INDEPENDENT) SIGNIFICANT SPACINGS:")
+print(f"  DOME: {obs_dome_collapsed}   |   FULL: {obs_full_collapsed}")
+
+# ── Permutation null for collapsed (independent) count
+# Re-sample to build null distribution for the collapsed (harmonic-collapsed)
+# independent-signals count. This answers: how likely is the collapsed
+# observed count under geographic-null label-shuffling?
+perm_dome_collapsed = np.zeros(N_PERM, dtype=int)
+for i in range(N_PERM):
+    perm_dome = all_lons[RNG.choice(N_all, size=N_dome, replace=False)]
+    pvals = spacing_pvals(perm_dome)
+    nonthree = significant_nonthree_overlap(perm_dome, pvals)
+    perm_dome_collapsed[i] = collapsed_independent_count(pvals, nonthree)
+
+p_ge_collapsed = (perm_dome_collapsed >= obs_dome_collapsed).mean()
+p_eq1_collapsed = (perm_dome_collapsed == 1).mean()
+print(f"\n  NULL DISTRIBUTION (collapsed, DOME, N_perm={N_PERM}):")
+print(f"  E[collapsed] = {perm_dome_collapsed.mean():.2f}  SD = {perm_dome_collapsed.std():.2f}")
+print(f"  P(collapsed>={obs_dome_collapsed}) = {p_ge_collapsed:.4f}  {sig(p_ge_collapsed)}")
+print(f"  P(collapsed=1) = {p_eq1_collapsed:.4f}")
+print(f"  Observed collapsed = {obs_dome_collapsed}")
+
+# ── Permutation null for collapsed (independent) count — FULL CORPUS ──────
+# Use bootstrap sampling of the full corpus (sample with replacement) to build
+# a null distribution for the collapsed (harmonic-collapsed) independent-
+# signals count for the full corpus. This complements the dome label-shuffle
+# null above so we can report how surprising the full-corpus collapsed count
+# is under a geographic-concentration null that re-samples the observed
+# longitude distribution.
+print(f"\n  Running {N_PERM} bootstrap permutations (full-corpus re-sample with replacement)...")
+
+perm_full_collapsed = np.zeros(N_PERM, dtype=int)
+for i in range(N_PERM):
+    perm_full = all_lons[RNG.choice(N_all, size=N_all, replace=True)]
+    pvals = spacing_pvals(perm_full)
+    nonthree = significant_nonthree_overlap(perm_full, pvals)
+    perm_full_collapsed[i] = collapsed_independent_count(pvals, nonthree)
+
+p_ge_full = (perm_full_collapsed >= obs_full_collapsed).mean()
+p_eq1_full = (perm_full_collapsed == 1).mean()
+print(f"\n  NULL DISTRIBUTION (collapsed, FULL, N_perm={N_PERM}):")
+print(f"  E[collapsed] = {perm_full_collapsed.mean():.2f}  SD = {perm_full_collapsed.std():.2f}")
+print(f"  P(collapsed>={obs_full_collapsed}) = {p_ge_full:.4f}  {sig(p_ge_full)}")
+print(f"  P(collapsed=1) = {p_eq1_full:.4f}")
+print(f"  Observed collapsed = {obs_full_collapsed}")
+for k in range(max(perm_full_collapsed) + 2):
+    frac = (perm_full_collapsed == k).mean()
+    if frac > 0.001:
+        print(f"    N_sig={k}: {100*frac:5.1f}%  {'█'*int(frac*40)}")
+
 # ── LaTeX macros ──────────────────────────────────────────────────────────────
 n_candidates = len(CANDIDATE_DEG)
 
@@ -241,6 +311,13 @@ print(f"  \\newcommand{{\\mcFullNsigObs}}{{{obs_full_nsig}}}        % full corpu
 print(f"  \\newcommand{{\\mcFourDegDomeP}}{{{p_four_dome:.4f}}}    % dome p-value at 4 deg")
 print(f"  \\newcommand{{\\mcEightDegDomeP}}{{{p_eight_dome:.4f}}}  % dome p-value at 8 deg")
 print(f"  \\newcommand{{\\mcNonThreeOverlapCount}}{{{len(nonthree_overlap_results)}}}  % non-3° spacings overlapping a 3° multiple")
+print(f"  \\newcommand{{\\mcDomeNsigCollapsed}}{{{obs_dome_collapsed}}}  % dome: collapsed independent sig spacings")
+print(f"  \\newcommand{{\\mcFullNsigCollapsed}}{{{obs_full_collapsed}}}  % full: collapsed independent sig spacings")
+print(f"  \\newcommand{{\\mcDomeCollapsedPEqOne}}{{{p_eq1_collapsed:.4f}}}  % dome: P(collapsed=1)")
+print(f"  \\newcommand{{\\mcFullCollapsedPEqOne}}{{{p_eq1_full:.4f}}}  % full: P(collapsed=1)")
+print(f"  \\newcommand{{\\mcFullCollapsedPObsGe}}{{{p_ge_full:.4f}}}  % full: P(collapsed>=obs)")
+print(f"  \\newcommand{{\\mcFullCollapsedMean}}{{{perm_full_collapsed.mean():.2f}}}  % full: E[collapsed] under null")
+print(f"  \\newcommand{{\\mcFullCollapsedSD}}{{{perm_full_collapsed.std():.2f}}}  % full: SD collapsed under null")
 
 ResultsStore().write_many({
     "mcDomeNsigObs":   obs_dome_nsig,
@@ -252,4 +329,11 @@ ResultsStore().write_many({
     "mcFourDegDomeP":  round(p_four_dome, 4),
     "mcEightDegDomeP": round(p_eight_dome, 4),
     "mcNonThreeOverlapCount": len(nonthree_overlap_results),
+    "mcDomeNsigCollapsed": obs_dome_collapsed,
+    "mcFullNsigCollapsed": obs_full_collapsed,
+    "mcDomeCollapsedPEqOne": round(p_eq1_collapsed, 4),
+    "mcFullCollapsedPEqOne": round(p_eq1_full, 4),
+    "mcFullCollapsedPObsGe": round(p_ge_full, 4),
+    "mcFullCollapsedMean": round(perm_full_collapsed.mean(), 2),
+    "mcFullCollapsedSD": round(perm_full_collapsed.std(), 2),
 })

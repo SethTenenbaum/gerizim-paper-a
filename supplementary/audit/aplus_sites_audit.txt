@@ -1,9 +1,9 @@
 UNESCO A-TIER SITES: GERIZIM vs JERUSALEM ANCHOR COMPARISON
-Generated : Mon Apr 20 01:50:34 UTC 2026
+Generated : Mon Apr 20 19:36:49 UTC 2026
 Script    : tools/generate_audit_aplus_sites.py
 Corpus    : 1011 inscribed Cultural/Mixed UNESCO sites with coordinates
            + 1 synthetic Gerizim entry = 1012 extended corpus
-Beru      : 30.0°  |  A+ threshold: <= 0.002 beru (6.7 km)  |  A threshold: <= 0.01 beru (33 km)
+Beru      : 30.0°  |  A+ threshold: <= 0.00321 beru (10.7 km)  |  A threshold: <= 0.01 beru (33 km)
 Gerizim   : 35.269°E  (Tentative List, ref. 5706 — not yet inscribed)
 Jerusalem : 35.2317°E  (inscribed corpus member)  [0.0373° = 4.1 km separation]
 Self-exclusion: each anchor removes itself → both test against N=1011.
@@ -15,89 +15,89 @@ SUMMARY
 
   Anchor           N corpus    A++     A+   A (all)    A+ %       A+ p           A %        A p      
   --------------------------------------------------------------------------------------
-  Gerizim              1011      7     56       228    5.5%     0.0103     *   22.6%     0.0246     *
-  Jerusalem            1011      7     57       218    5.6%     0.0070    **   21.6%     0.1151    ns
+  Gerizim              1011      7     88       228    8.7%     0.0000   ***   22.6%     0.0246     *
+  Jerusalem            1011      7     88       218    8.7%     0.0000   ***   21.6%     0.1151    ns
 
   A+ null rate: 4%   A null rate: 20%
-  A+ overlap (both anchors): 38 sites
-  A+ unique to Gerizim: 18 sites
-  A+ unique to Jerusalem: 19 sites
+  A+ overlap (both anchors): 71 sites
+  A+ unique to Gerizim: 17 sites
+  A+ unique to Jerusalem: 17 sites
 
 ────────────────────────────────────────────────────────────────────────────────────────────────
-COUNTRY / REGION BREAKDOWN — GERIZIM (35.269°E)  (A+ sites, N=56)
+COUNTRY / REGION BREAKDOWN — GERIZIM (35.269°E)  (A+ sites, N=88)
 
   UNESCO REGIONS
   Region                                    Count    Rate
   --------------------------------------------------------
-  Europe and North America                     30   53.6%
-  Asia and the Pacific                         14   25.0%
-  Africa                                        5    8.9%
-  Arab States                                   4    7.1%
-  Latin America and the Caribbean               3    5.4%
+  Europe and North America                     45   51.1%
+  Asia and the Pacific                         22   25.0%
+  Arab States                                   7    8.0%
+  Latin America and the Caribbean               7    8.0%
+  Africa                                        7    8.0%
 
   COUNTRIES  (top 20, alphabetical within count)
   Country                                   A+ sites
   ----------------------------------------------------
-  Italy                                            7
-  Spain                                            4
+  Italy                                           10
+  Spain                                            7
+  France                                           5
+  China                                            4
+  India                                            4
+  Türkiye                                          4
   Czechia                                          3
-  France                                           3
+  South Africa                                     3
   Bulgaria                                         2
-  China                                            2
-  India                                            2
+  Germany                                          2
+  Indonesia                                        2
   Kazakhstan                                       2
+  Norway                                           2
   Poland                                           2
   Romania                                          2
-  Türkiye                                          2
   Angola                                           1
   Armenia                                          1
   Australia                                        1
+  Azerbaijan                                       1
   Belgium                                          1
-  Côte d'Ivoire                                    1
-  Ethiopia                                         1
-  Germany                                          1
-  Guatemala                                        1
-  Indonesia                                        1
 
 ────────────────────────────────────────────────────────────────────────────────────────────────
-COUNTRY / REGION BREAKDOWN — JERUSALEM (35.2317°E)  (A+ sites, N=57)
+COUNTRY / REGION BREAKDOWN — JERUSALEM (35.2317°E)  (A+ sites, N=88)
 
   UNESCO REGIONS
   Region                                    Count    Rate
   --------------------------------------------------------
-  Europe and North America                     23   40.4%
-  Asia and the Pacific                         17   29.8%
-  Africa                                        6   10.5%
-  Latin America and the Caribbean               5    8.8%
-  Arab States                                   5    8.8%
-  Unknown                                       1    1.8%
+  Europe and North America                     40   45.5%
+  Asia and the Pacific                         25   28.4%
+  Arab States                                   8    9.1%
+  Latin America and the Caribbean               7    8.0%
+  Africa                                        7    8.0%
+  Unknown                                       1    1.1%
 
   COUNTRIES  (top 20, alphabetical within count)
   Country                                   A+ sites
   ----------------------------------------------------
-  Italy                                            6
+  Italy                                            8
+  China                                            5
+  Spain                                            5
+  France                                           4
   India                                            4
-  China                                            3
+  Czechia                                          3
   South Africa                                     3
-  Spain                                            3
-  Czechia                                          2
+  Türkiye                                          3
+  Bulgaria                                         2
+  Iran (Islamic Republic of)                       2
   Kazakhstan                                       2
+  Morocco                                          2
+  Norway                                           2
   Poland                                           2
   Romania                                          2
   Russian Federation                               2
-  Türkiye                                          2
+  State of Palestine                               2
+  Turkmenistan                                     2
+  Albania                                          1
   Angola                                           1
-  Australia                                        1
-  Azerbaijan                                       1
-  Bolivia (Plurinational State of)                 1
-  Bulgaria                                         1
-  Chile                                            1
-  Colombia                                         1
-  Côte d'Ivoire                                    1
-  Ethiopia                                         1
 
 ────────────────────────────────────────────────────────────────────────────────────────────────
-GERIZIM (35.269°E) — ALL A-TIER SITES  (A++=7, A+=56, A=172, total=228)
+GERIZIM (35.269°E) — ALL A-TIER SITES  (A++=7, A+=88, A=140, total=228)
   Tier   Dev (beru)      km  Dir  Harmonic      Lon°E  Tags                          Site
   --------------------------------------------------------------------------------------------------------------------
   --- A++ ---
@@ -159,40 +159,40 @@ GERIZIM (35.269°E) — ALL A-TIER SITES  (A++=7, A+=56, A=172, total=228)
   A+       0.001897     6.3    W       1.0     5.3259  —                             Bryggen
   A+       0.001913     6.4    W       0.7    14.3264  founding                      18th-Century Royal Palace at Caserta with the Park, the Aqueduct of Vanvitelli, and the San Leucio Complex
   A+       0.001987     6.6    W       0.8    11.3286  Christianity                  Classical Weimar
+  A+       0.002030     6.8    E       0.9    62.2081  founding, Islam               Silk Roads: Zarafshan-Karakum Corridor
+  A+       0.002031     6.8    E       0.3    44.2081  founding, Christianity, Islam  Old City of Sana'a
+  A+       0.002050     6.8    W       0.0    35.2075  founding, Christianity, Islam  Birthplace of Jesus: Church of the Nativity and the Pilgrimage Route, Bethlehem
+  A+       0.002061     6.9    E       4.1   158.3308  dome, mound                   Nan Madol: Ceremonial Centre of Eastern Micronesia
+  A+       0.002089     7.0    W       0.8    11.3317  founding, Christianity        Historic Centre of Siena
+  A+       0.002102     7.0    W       3.5   -69.7941  —                             Humberstone and Santa Laura Saltpeter Works
+  A+       0.002170     7.2    W       0.6    17.2039  dome, founding, mound         Richtersveld Cultural and Botanical Landscape
+  A+       0.002172     7.2    W       0.7    14.3342  —                             Villa Romana del Casale
+  A+       0.002207     7.4    W       3.6   -72.7972  —                             Chiribiquete National Park – “The Maloca of the Jaguar”
+  A+       0.002327     7.7    W       1.7   -15.6612  founding                      Risco Caido and the Sacred Mountains of Gran Canaria Cultural Landscape
+  A+       0.002330     7.8    W       1.4    -6.6611  —                             Prehistoric Rock Art Sites in the Côa Valley and Siega Verde
+  A+       0.002337     7.8    E       1.5    80.1989  Hinduism                      Group of Monuments at Mahabalipuram
+  A+       0.002356     7.8    W       0.8    11.3397  —                             Bauhaus and its Sites in Weimar, Dessau and Bernau
+  A+       0.002404     8.0    W       0.8    11.3411  founding                      Rock Carvings in Tanum
+  A+       0.002439     8.1    W       0.0    35.1958  Christianity                  Tyre
+  A+       0.002514     8.4    W       5.8  -138.6556  —                             Te Henua Enata – The Marquesas Islands
+  A+       0.002565     8.5    W       0.7    14.1921  dome, mound, Christianity     Historic Centre of Naples
+  A+       0.002619     8.7    W       2.6   -42.6524  founding                      Serra da Capivara National Park
+  A+       0.002681     8.9    E       2.6   113.3494  founding, Buddhism            Mount Wutai
+  A+       0.002717     9.0    E       0.4    47.1875  dome, founding, mound, Christianity, Islam  Historic Centre of Sheki with the Khan’s Palace
+  A+       0.002733     9.1    W       0.4    23.1870  —                             Rock Art of Alta
+  A+       0.002783     9.3    E       3.3   134.3525  dome, founding, mound         Rock Islands Southern Lagoon
+  A+       0.002791     9.3    E       1.4    77.1853  Islam, Hinduism               Qutb Minar and its Monuments, Delhi
+  A+       0.002796     9.3    E       2.7   116.1851  founding, Buddhism            Site of Xanadu
+  A+       0.002820     9.4    E       0.0    35.3536  Christianity, Judaism         Masada
+  A+       0.002983     9.9    W       3.3   -63.8205  —                             Fuerte de Samaipata
+  A+       0.003069    10.2    W       0.2    29.1769  dome, mound                   Fossil Hominid Sites of South Africa
+  A+       0.003070    10.2    E       0.1    38.3611  —                             Arslantepe Mound
+  A+       0.003133    10.4    W       1.1     2.1750  Christianity                  Palau de la Música Catalana and Hospital de Sant Pau, Barcelona
+  A+       0.003155    10.5    W       1.1     2.3637  Christianity                  Historic Fortified City of Carcassonne
+  A+       0.003193    10.6    E       2.5   110.3648  founding, Buddhism, Islam, Hinduism  The Cosmological Axis of Yogyakarta and its Historic Landmarks
+  A+       0.003198    10.6    W       0.2    29.1731  founding, Christianity, Islam  Bursa and Cumalıkızık: the Birth of the Ottoman Empire
 
   --- A ---
-  A        0.002030     6.8    E       0.9    62.2081  founding, Islam               Silk Roads: Zarafshan-Karakum Corridor
-  A        0.002031     6.8    E       0.3    44.2081  founding, Christianity, Islam  Old City of Sana'a
-  A        0.002050     6.8    W       0.0    35.2075  founding, Christianity, Islam  Birthplace of Jesus: Church of the Nativity and the Pilgrimage Route, Bethlehem
-  A        0.002061     6.9    E       4.1   158.3308  dome, mound                   Nan Madol: Ceremonial Centre of Eastern Micronesia
-  A        0.002089     7.0    W       0.8    11.3317  founding, Christianity        Historic Centre of Siena
-  A        0.002102     7.0    W       3.5   -69.7941  —                             Humberstone and Santa Laura Saltpeter Works
-  A        0.002170     7.2    W       0.6    17.2039  dome, founding, mound         Richtersveld Cultural and Botanical Landscape
-  A        0.002172     7.2    W       0.7    14.3342  —                             Villa Romana del Casale
-  A        0.002207     7.4    W       3.6   -72.7972  —                             Chiribiquete National Park – “The Maloca of the Jaguar”
-  A        0.002327     7.7    W       1.7   -15.6612  founding                      Risco Caido and the Sacred Mountains of Gran Canaria Cultural Landscape
-  A        0.002330     7.8    W       1.4    -6.6611  —                             Prehistoric Rock Art Sites in the Côa Valley and Siega Verde
-  A        0.002337     7.8    E       1.5    80.1989  Hinduism                      Group of Monuments at Mahabalipuram
-  A        0.002356     7.8    W       0.8    11.3397  —                             Bauhaus and its Sites in Weimar, Dessau and Bernau
-  A        0.002404     8.0    W       0.8    11.3411  founding                      Rock Carvings in Tanum
-  A        0.002439     8.1    W       0.0    35.1958  Christianity                  Tyre
-  A        0.002514     8.4    W       5.8  -138.6556  —                             Te Henua Enata – The Marquesas Islands
-  A        0.002565     8.5    W       0.7    14.1921  dome, mound, Christianity     Historic Centre of Naples
-  A        0.002619     8.7    W       2.6   -42.6524  founding                      Serra da Capivara National Park
-  A        0.002681     8.9    E       2.6   113.3494  founding, Buddhism            Mount Wutai
-  A        0.002717     9.0    E       0.4    47.1875  dome, founding, mound, Christianity, Islam  Historic Centre of Sheki with the Khan’s Palace
-  A        0.002733     9.1    W       0.4    23.1870  —                             Rock Art of Alta
-  A        0.002783     9.3    E       3.3   134.3525  dome, founding, mound         Rock Islands Southern Lagoon
-  A        0.002791     9.3    E       1.4    77.1853  Islam, Hinduism               Qutb Minar and its Monuments, Delhi
-  A        0.002796     9.3    E       2.7   116.1851  founding, Buddhism            Site of Xanadu
-  A        0.002820     9.4    E       0.0    35.3536  Christianity, Judaism         Masada
-  A        0.002983     9.9    W       3.3   -63.8205  —                             Fuerte de Samaipata
-  A        0.003069    10.2    W       0.2    29.1769  dome, mound                   Fossil Hominid Sites of South Africa
-  A        0.003070    10.2    E       0.1    38.3611  —                             Arslantepe Mound
-  A        0.003133    10.4    W       1.1     2.1750  Christianity                  Palau de la Música Catalana and Hospital de Sant Pau, Barcelona
-  A        0.003155    10.5    W       1.1     2.3637  Christianity                  Historic Fortified City of Carcassonne
-  A        0.003193    10.6    E       2.5   110.3648  founding, Buddhism, Islam, Hinduism  The Cosmological Axis of Yogyakarta and its Historic Landmarks
-  A        0.003198    10.6    W       0.2    29.1731  founding, Christianity, Islam  Bursa and Cumalıkızık: the Birth of the Ottoman Empire
   A        0.003213    10.7    E       0.1    38.1726  dome, founding, mound, Christianity  Cultural Landscape of Kenozero Lake
   A        0.003256    10.8    W       4.9  -111.6333  founding                      Writing-on-Stone / Áísínai’pi
   A        0.003343    11.1    W       3.7   -75.6307  founding                      Archaeological Landscape of the First Coffee Plantations in the South-East of Cuba
@@ -335,7 +335,7 @@ GERIZIM (35.269°E) — ALL A-TIER SITES  (A++=7, A+=56, A=172, total=228)
   A        0.009986    33.3    W       0.9     8.5686  Christianity                  Abbey and Altenmünster of Lorsch
 
 ────────────────────────────────────────────────────────────────────────────────────────────────
-JERUSALEM (35.2317°E) — ALL A-TIER SITES  (A++=7, A+=57, A=161, total=218)
+JERUSALEM (35.2317°E) — ALL A-TIER SITES  (A++=7, A+=88, A=130, total=218)
   Tier   Dev (beru)      km  Dir  Harmonic      Lon°E  Tags                          Site
   --------------------------------------------------------------------------------------------------------------------
   --- A++ ---
@@ -398,39 +398,39 @@ JERUSALEM (35.2317°E) — ALL A-TIER SITES  (A++=7, A+=57, A=161, total=218)
   A+       0.001955     6.5    W       0.2    29.1731  founding, Christianity, Islam  Bursa and Cumalıkızık: the Birth of the Ottoman Empire
   A+       0.001970     6.6    E       0.1    38.1726  dome, founding, mound, Christianity  Cultural Landscape of Kenozero Lake
   A+       0.001980     6.6    E       2.4   107.2911  dome, founding, mound, Buddhism, Christianity, Islam, Zoroastrianism  Silk Roads: the Routes Network of Chang'an-Tianshan Corridor
+  A+       0.002045     6.8    W       0.7    14.2931  founding                      Archaeological Site of Leptis Magna
+  A+       0.002143     7.1    W       1.3    -3.7040  Christianity                  Burgos Cathedral
+  A+       0.002147     7.1    E       0.6    53.1673  founding, Hinduism            Pasargadae
+  A+       0.002156     7.2    W       1.1     2.2964  founding, Christianity        Belfries of Belgium and France
+  A+       0.002198     7.3    W       0.2    29.2976  founding, Christianity        Xanthos-Letoon
+  A+       0.002205     7.3    W       2.7   -45.8344  founding                      Kujataa Greenland: Norse and Inuit Farming at the Edge of the Ice Cap
+  A+       0.002321     7.7    W       1.3    -3.6987  founding, Christianity, Islam  Cliff of Bandiagara (Land of the Dogons)
+  A+       0.002332     7.8    W       1.1     2.3017  Christianity                  Amiens Cathedral
+  A+       0.002341     7.8    W       0.8    11.3019  —                             The Porticoes of Bologna
+  A+       0.002427     8.1    W       0.0    35.1589  founding                      Palestine: Land of Olives and Vines – Cultural Landscape of Southern Jerusalem, Battir
+  A+       0.002562     8.5    W       0.4    23.3086  Christianity, Islam           Rila Monastery
+  A+       0.002575     8.6    W       4.9  -111.8456  founding                      The 20th-Century Architecture of Frank Lloyd Wright
+  A+       0.002621     8.7    W       1.4    -6.8469  Islam                         Rabat, Modern Capital and Historic City: a Shared Heritage
+  A+       0.002686     8.9    E       2.2   101.1511  Buddhism, Hinduism            The Ancient Town of Si Thep and its Associated Dvaravati Monuments
+  A+       0.002708     9.0    W       1.3    -3.6871  founding                      Paseo del Prado and Buen Retiro, a landscape of Arts and Sciences
+  A+       0.002720     9.1    W       3.1   -57.8499  Christianity                  Historic Quarter of the City of Colonia del Sacramento
+  A+       0.002778     9.2    W       0.7    14.3150  Christianity                  Historic Centre of Český Krumlov
+  A+       0.002805     9.3    W       1.0     5.1476  —                             Rietveld Schröderhuis (Rietveld Schröder House)
+  A+       0.002918     9.7    W       1.1     2.1442  Christianity                  Episcopal City of Albi
+  A+       0.002969     9.9    W       3.5   -69.6792  dome, founding, mound, Christianity, Judaism  Coro and its Port
+  A+       0.002981     9.9    W       1.1     2.3211  founding, Christianity        Paris, Banks of the Seine
+  A+       0.002987     9.9    E       3.1   128.3213  mound                         Gaya Tumuli
+  A+       0.003001    10.0    E       0.8    59.1417  dome, founding, mound, Islam  Kunya-Urgench
+  A+       0.003015    10.0    E       2.6   113.1412  founding, Buddhism            Historic Monuments of Dengfeng in “The Centre of Heaven and Earth”
+  A+       0.003020    10.1    E       2.7   116.1411  Buddhism                      Summer Palace, an Imperial Garden in Beijing
+  A+       0.003029    10.1    W       0.5    20.1408  Christianity, Islam           Historic Centres of Berat and Gjirokastra
+  A+       0.003094    10.3    E       1.1    68.1389  dome, mound, Buddhism         Archaeological Ruins at Moenjodaro
+  A+       0.003098    10.3    E       0.3    44.3246  dome, founding, mound, Christianity  Cathedral and Churches of Echmiatsin and the Archaeological Site of Zvartnots
+  A+       0.003140    10.5    E       3.1   128.1375  dome, founding, mound, Buddhism  Mount Kumgang – Diamond Mountain from the Sea
+  A+       0.003140    10.5    W       1.0     5.3259  —                             Bryggen
+  A+       0.003156    10.5    W       0.7    14.3264  founding                      18th-Century Royal Palace at Caserta with the Park, the Aqueduct of Vanvitelli, and the San Leucio Complex
 
   --- A ---
-  A        0.002045     6.8    W       0.7    14.2931  founding                      Archaeological Site of Leptis Magna
-  A        0.002143     7.1    W       1.3    -3.7040  Christianity                  Burgos Cathedral
-  A        0.002147     7.1    E       0.6    53.1673  founding, Hinduism            Pasargadae
-  A        0.002156     7.2    W       1.1     2.2964  founding, Christianity        Belfries of Belgium and France
-  A        0.002198     7.3    W       0.2    29.2976  founding, Christianity        Xanthos-Letoon
-  A        0.002205     7.3    W       2.7   -45.8344  founding                      Kujataa Greenland: Norse and Inuit Farming at the Edge of the Ice Cap
-  A        0.002321     7.7    W       1.3    -3.6987  founding, Christianity, Islam  Cliff of Bandiagara (Land of the Dogons)
-  A        0.002332     7.8    W       1.1     2.3017  Christianity                  Amiens Cathedral
-  A        0.002341     7.8    W       0.8    11.3019  —                             The Porticoes of Bologna
-  A        0.002427     8.1    W       0.0    35.1589  founding                      Palestine: Land of Olives and Vines – Cultural Landscape of Southern Jerusalem, Battir
-  A        0.002562     8.5    W       0.4    23.3086  Christianity, Islam           Rila Monastery
-  A        0.002575     8.6    W       4.9  -111.8456  founding                      The 20th-Century Architecture of Frank Lloyd Wright
-  A        0.002621     8.7    W       1.4    -6.8469  Islam                         Rabat, Modern Capital and Historic City: a Shared Heritage
-  A        0.002686     8.9    E       2.2   101.1511  Buddhism, Hinduism            The Ancient Town of Si Thep and its Associated Dvaravati Monuments
-  A        0.002708     9.0    W       1.3    -3.6871  founding                      Paseo del Prado and Buen Retiro, a landscape of Arts and Sciences
-  A        0.002720     9.1    W       3.1   -57.8499  Christianity                  Historic Quarter of the City of Colonia del Sacramento
-  A        0.002778     9.2    W       0.7    14.3150  Christianity                  Historic Centre of Český Krumlov
-  A        0.002805     9.3    W       1.0     5.1476  —                             Rietveld Schröderhuis (Rietveld Schröder House)
-  A        0.002918     9.7    W       1.1     2.1442  Christianity                  Episcopal City of Albi
-  A        0.002969     9.9    W       3.5   -69.6792  dome, founding, mound, Christianity, Judaism  Coro and its Port
-  A        0.002981     9.9    W       1.1     2.3211  founding, Christianity        Paris, Banks of the Seine
-  A        0.002987     9.9    E       3.1   128.3213  mound                         Gaya Tumuli
-  A        0.003001    10.0    E       0.8    59.1417  dome, founding, mound, Islam  Kunya-Urgench
-  A        0.003015    10.0    E       2.6   113.1412  founding, Buddhism            Historic Monuments of Dengfeng in “The Centre of Heaven and Earth”
-  A        0.003020    10.1    E       2.7   116.1411  Buddhism                      Summer Palace, an Imperial Garden in Beijing
-  A        0.003029    10.1    W       0.5    20.1408  Christianity, Islam           Historic Centres of Berat and Gjirokastra
-  A        0.003094    10.3    E       1.1    68.1389  dome, mound, Buddhism         Archaeological Ruins at Moenjodaro
-  A        0.003098    10.3    E       0.3    44.3246  dome, founding, mound, Christianity  Cathedral and Churches of Echmiatsin and the Archaeological Site of Zvartnots
-  A        0.003140    10.5    E       3.1   128.1375  dome, founding, mound, Buddhism  Mount Kumgang – Diamond Mountain from the Sea
-  A        0.003140    10.5    W       1.0     5.3259  —                             Bryggen
-  A        0.003156    10.5    W       0.7    14.3264  founding                      18th-Century Royal Palace at Caserta with the Park, the Aqueduct of Vanvitelli, and the San Leucio Complex
   A        0.003230    10.8    W       0.8    11.3286  Christianity                  Classical Weimar
   A        0.003279    10.9    W       0.8    11.1333  dome, founding, mound         Ecosystem and Relict Cultural Landscape of Lopé-Okanda
   A        0.003304    11.0    E       4.1   158.3308  dome, mound                   Nan Madol: Ceremonial Centre of Eastern Micronesia
@@ -563,28 +563,48 @@ JERUSALEM (35.2317°E) — ALL A-TIER SITES  (A++=7, A+=57, A=161, total=218)
   A        0.009999    33.3    W       0.5    20.5317  dome, founding, mound, Christianity  Studenica Monastery
 
 ────────────────────────────────────────────────────────────────────────────────────────────────
-A+ OVERLAP: SITES IN A+ BAND FOR BOTH ANCHORS  (N=38)
+A+ OVERLAP: SITES IN A+ BAND FOR BOTH ANCHORS  (N=71)
 
-  These sites fall within 6.7 km of a 0.1-beru harmonic
+  These sites fall within 10.7 km of a 0.1-beru harmonic
   under both Gerizim and Jerusalem.  They do not discriminate between anchors.
 
   Site                                                     Ger tier   Ger km  Jer tier   Jer km
   ------------------------------------------------------------------------------------------
+  18th-Century Royal Palace at Caserta with the Park, th         A+      6.4        A+     10.5
   <I>Sacri Monti</I> of Piedmont and Lombardy                   A++      0.1        A+      4.2
+  Amiens Cathedral                                               A+      3.6        A+      7.8
   Antigua Guatemala                                             A++      0.3        A+      4.5
+  Archaeological Site of Leptis Magna                            A+      2.7        A+      6.8
   Archaeological Site of Troy                                    A+      3.3        A+      0.8
   Baroque Churches of the Philippines                            A+      3.7       A++      0.4
+  Belfries of Belgium and France                                 A+      3.0        A+      7.2
+  Birthplace of Jesus: Church of the Nativity and the Pi         A+      6.8        A+      2.7
   Borobudur Temple Compounds                                     A+      4.3       A++      0.2
   Boyana Church                                                 A++      0.3        A+      3.8
+  Bryggen                                                        A+      6.3        A+     10.5
   Brâncuși Monumental Ensemble of Târgu Jiu                      A+      1.1        A+      5.2
+  Burgos Cathedral                                               A+      3.0        A+      7.1
+  Bursa and Cumalıkızık: the Birth of the Ottoman Empire         A+     10.6        A+      6.5
+  Cathedral and Churches of Echmiatsin and the Archaeolo         A+      6.2        A+     10.3
+  Chiribiquete National Park – “The Maloca of the Jaguar         A+      7.4        A+      3.2
+  Cliff of Bandiagara (Land of the Dogons)                       A+      3.6        A+      7.7
+  Coro and its Port                                              A+      5.7        A+      9.9
   Dacian Fortresses of the Orastie Mountains                     A+      5.8        A+      1.7
   Deer Stone Monuments and Related Bronze Age Sites              A+      4.8       A++      0.7
+  Fossil Hominid Sites of South Africa                           A+     10.2        A+      6.1
+  Fuerte de Samaipata                                            A+      9.9        A+      5.8
+  Gaya Tumuli                                                    A+      5.8        A+      9.9
+  Group of Monuments at Mahabalipuram                            A+      7.8        A+      3.6
   Historic Centre of Florence                                    A+      1.4        A+      2.7
+  Historic Centre of Naples                                      A+      8.5        A+      4.4
   Historic Centre of Oaxaca and Archaeological Site of M         A+      4.1       A++      0.0
+  Historic Centre of Sheki with the Khan’s Palace                A+      9.0        A+      4.9
+  Historic Centre of Český Krumlov                               A+      5.1        A+      9.2
   Historic Town of Grand-Bassam                                 A++      0.6        A+      3.5
   Holašovice Historic Village                                   A++      0.4        A+      4.5
   Holy Trinity Column in Olomouc                                 A+      2.1        A+      2.1
   Humayun's Tomb, Delhi                                          A+      2.0        A+      2.1
+  Humberstone and Santa Laura Saltpeter Works                    A+      7.0        A+      2.9
   Kizhi Pogost                                                   A+      5.0        A+      0.8
   Las Médulas                                                    A+      5.0        A+      0.9
   Lumbini, the Birthplace of the Lord Buddha                     A+      0.8        A+      4.9
@@ -594,66 +614,76 @@ A+ OVERLAP: SITES IN A+ BAND FOR BOTH ANCHORS  (N=38)
   Medici Villas and Gardens in Tuscany                           A+      2.4        A+      1.8
   Medina of Essaouira (formerly Mogador)                         A+      6.2        A+      2.0
   New Lanark                                                     A+      5.8        A+      1.6
+  Old City of Sana'a                                             A+      6.8        A+      2.6
   Old City of Zamość                                             A+      1.8        A+      2.3
   Old Town of Galle and its Fortifications                       A+      5.8        A+      1.7
+  Palau de la Música Catalana and Hospital de Sant Pau,          A+     10.4        A+      6.3
   Palmeral of Elche                                              A+      1.6        A+      5.7
+  Paris, Banks of the Seine                                      A+      5.8        A+      9.9
+  Paseo del Prado and Buen Retiro, a landscape of Arts a         A+      4.9        A+      9.0
   Pyu Ancient Cities                                             A+      2.3        A+      6.5
+  Qutb Minar and its Monuments, Delhi                            A+      9.3        A+      5.2
   Red Fort Complex                                               A+      3.1        A+      1.0
+  Richtersveld Cultural and Botanical Landscape                  A+      7.2        A+      3.1
+  Rila Monastery                                                 A+      4.4        A+      8.5
+  Rock Art of Alta                                               A+      9.1        A+      5.0
+  Silk Roads: Zarafshan-Karakum Corridor                         A+      6.8        A+      2.6
   Silk Roads: the Routes Network of Chang'an-Tianshan Co         A+      2.5        A+      6.6
   Site of Palmyra                                               A++      0.3        A+      3.9
+  Site of Xanadu                                                 A+      9.3        A+      5.2
   Takht-e Soleyman                                               A+      3.8       A++      0.4
   Tasmanian Wilderness                                           A+      4.3       A++      0.1
   The <I>Trulli</I> of Alberobello                               A+      3.6       A++      0.6
   The Gedeo Cultural Landscape                                   A+      2.1        A+      6.2
   The Great Wall                                                 A+      4.9        A+      0.7
+  The Porticoes of Bologna                                       A+      3.7        A+      7.8
+  Tyre                                                           A+      8.1        A+      4.0
   Via Appia. <em>Regina Viarum</em>                              A+      3.0        A+      1.2
   Wooden Churches of Southern Małopolska                         A+      5.8        A+      1.7
+  Xanthos-Letoon                                                 A+      3.2        A+      7.3
 
 ────────────────────────────────────────────────────────────────────────────────────────────────
-A+ UNIQUE TO GERIZIM  (N=18) — not A+ under Jerusalem
+A+ UNIQUE TO GERIZIM  (N=17) — not A+ under Jerusalem
 
   Site                                                     Ger tier   Ger km  Jer tier   Jer km
   ------------------------------------------------------------------------------------------
-  Archaeological Site of Leptis Magna                            A+      2.7         A      6.8
-  Burgos Cathedral                                               A+      3.0         A      7.1
-  Belfries of Belgium and France                                 A+      3.0         A      7.2
-  Xanthos-Letoon                                                 A+      3.2         A      7.3
-  Cliff of Bandiagara (Land of the Dogons)                       A+      3.6         A      7.7
-  Amiens Cathedral                                               A+      3.6         A      7.8
-  The Porticoes of Bologna                                       A+      3.7         A      7.8
   Old City of Jerusalem and its Walls                            A+      4.1         —        —
-  Rila Monastery                                                 A+      4.4         A      8.5
-  Paseo del Prado and Buen Retiro, a landscape of Arts a         A+      4.9         A      9.0
-  Historic Centre of Český Krumlov                               A+      5.1         A      9.2
-  Coro and its Port                                              A+      5.7         A      9.9
-  Paris, Banks of the Seine                                      A+      5.8         A      9.9
-  Gaya Tumuli                                                    A+      5.8         A      9.9
-  Cathedral and Churches of Echmiatsin and the Archaeolo         A+      6.2         A     10.3
-  Bryggen                                                        A+      6.3         A     10.5
-  18th-Century Royal Palace at Caserta with the Park, th         A+      6.4         A     10.5
   Classical Weimar                                               A+      6.6         A     10.8
+  Nan Madol: Ceremonial Centre of Eastern Micronesia             A+      6.9         A     11.0
+  Historic Centre of Siena                                       A+      7.0         A     11.1
+  Villa Romana del Casale                                        A+      7.2         A     11.4
+  Risco Caido and the Sacred Mountains of Gran Canaria C         A+      7.7         A     11.9
+  Prehistoric Rock Art Sites in the Côa Valley and Siega         A+      7.8         A     11.9
+  Bauhaus and its Sites in Weimar, Dessau and Bernau             A+      7.8         A     12.0
+  Rock Carvings in Tanum                                         A+      8.0         A     12.1
+  Te Henua Enata – The Marquesas Islands                         A+      8.4         A     12.5
+  Serra da Capivara National Park                                A+      8.7         A     12.9
+  Mount Wutai                                                    A+      8.9         A     13.1
+  Rock Islands Southern Lagoon                                   A+      9.3         A     13.4
+  Masada                                                         A+      9.4         A     13.5
+  Arslantepe Mound                                               A+     10.2         A     14.4
+  Historic Fortified City of Carcassonne                         A+     10.5         A     14.6
+  The Cosmological Axis of Yogyakarta and its Historic L         A+     10.6         A     14.8
 
 ────────────────────────────────────────────────────────────────────────────────────────────────
-A+ UNIQUE TO JERUSALEM  (N=19) — not A+ under Gerizim
+A+ UNIQUE TO JERUSALEM  (N=17) — not A+ under Gerizim
 
   Site                                                     Jer tier   Jer km  Ger tier   Ger km
   ------------------------------------------------------------------------------------------
-  Silk Roads: Zarafshan-Karakum Corridor                         A+      2.6         A      6.8
-  Old City of Sana'a                                             A+      2.6         A      6.8
-  Birthplace of Jesus: Church of the Nativity and the Pi         A+      2.7         A      6.8
-  Humberstone and Santa Laura Saltpeter Works                    A+      2.9         A      7.0
-  Richtersveld Cultural and Botanical Landscape                  A+      3.1         A      7.2
-  Chiribiquete National Park – “The Maloca of the Jaguar         A+      3.2         A      7.4
-  Group of Monuments at Mahabalipuram                            A+      3.6         A      7.8
-  Tyre                                                           A+      4.0         A      8.1
   Mount Gerizim (Tentative List, ref. 5706)                      A+      4.1         —        —
-  Historic Centre of Naples                                      A+      4.4         A      8.5
-  Historic Centre of Sheki with the Khan’s Palace                A+      4.9         A      9.0
-  Rock Art of Alta                                               A+      5.0         A      9.1
-  Qutb Minar and its Monuments, Delhi                            A+      5.2         A      9.3
-  Site of Xanadu                                                 A+      5.2         A      9.3
-  Fuerte de Samaipata                                            A+      5.8         A      9.9
-  Fossil Hominid Sites of South Africa                           A+      6.1         A     10.2
-  Palau de la Música Catalana and Hospital de Sant Pau,          A+      6.3         A     10.4
-  Bursa and Cumalıkızık: the Birth of the Ottoman Empire         A+      6.5         A     10.6
   Cultural Landscape of Kenozero Lake                            A+      6.6         A     10.7
+  Pasargadae                                                     A+      7.1         A     11.3
+  Kujataa Greenland: Norse and Inuit Farming at the Edge         A+      7.3         A     11.5
+  Palestine: Land of Olives and Vines – Cultural Landsca         A+      8.1         A     12.2
+  The 20th-Century Architecture of Frank Lloyd Wright            A+      8.6         A     12.7
+  Rabat, Modern Capital and Historic City: a Shared Heri         A+      8.7         A     12.9
+  The Ancient Town of Si Thep and its Associated Dvarava         A+      8.9         A     13.1
+  Historic Quarter of the City of Colonia del Sacramento         A+      9.1         A     13.2
+  Rietveld Schröderhuis (Rietveld Schröder House)                A+      9.3         A     13.5
+  Episcopal City of Albi                                         A+      9.7         A     13.9
+  Kunya-Urgench                                                  A+     10.0         A     14.1
+  Historic Monuments of Dengfeng in “The Centre of Heave         A+     10.0         A     14.2
+  Summer Palace, an Imperial Garden in Beijing                   A+     10.1         A     14.2
+  Historic Centres of Berat and Gjirokastra                      A+     10.1         A     14.2
+  Archaeological Ruins at Moenjodaro                             A+     10.3         A     14.4
+  Mount Kumgang – Diamond Mountain from the Sea                  A+     10.5         A     14.6

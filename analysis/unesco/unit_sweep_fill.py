@@ -225,11 +225,11 @@ def main():
         tag = FINE_TAG.get(round(sp, 4), "")
         if not tag:
             continue
-        print(f"  \\newcommand{{\fine{tag}Null}}{{{nr*100:.2f}\%}}   % null rate, {sp:.4f}-beru")
-        print(f"  \\newcommand{{\fine{tag}DomeHits}}{{{d_hits}}}   % dome hits, {sp:.4f}-beru")
-        print(f"  \\newcommand{{\fine{tag}DomeP}}{{{_fmt(d_p)}}}   % p(Dome), {sp:.4f}-beru")
-        print(f"  \\newcommand{{\fine{tag}FullHits}}{{{f_hits}}}   % full hits, {sp:.4f}-beru")
-        print(f"  \\newcommand{{\fine{tag}FullP}}{{{_fmt(f_p)}}}   % p(Full), {sp:.4f}-beru")
+        print(f"  \\newcommand{{\\fine{tag}Null}}{{{nr*100:.2f}\%}}   % null rate, {sp:.4f}-beru")
+        print(f"  \\newcommand{{\\fine{tag}DomeHits}}{{{d_hits}}}   % dome hits, {sp:.4f}-beru")
+        print(f"  \\newcommand{{\\fine{tag}DomeP}}{{{_fmt(d_p)}}}   % p(Dome), {sp:.4f}-beru")
+        print(f"  \\newcommand{{\\fine{tag}FullHits}}{{{f_hits}}}   % full hits, {sp:.4f}-beru")
+        print(f"  \\newcommand{{\\fine{tag}FullP}}{{{_fmt(f_p)}}}   % p(Full), {sp:.4f}-beru")
 
 if __name__ == "__main__":
     main()

@@ -1,4 +1,4 @@
-% Generated macros — 2026-04-19T18:52:52Z
+% Generated macros — 2026-04-20T17:03:16Z
 % Source: bash manuscript/reproduce_all_macros.sh
 % IMPORTANT: values are computed fresh each run — do NOT hardcode
 
@@ -701,6 +701,19 @@
 \newcommand{\NpermRayleigh}{10,000}
 \newcommand{\Nap}{56}  % Tier-A+ count (alias for NclusterAp)
 \newcommand{\rayleighRPctPhrasing}{essentially all}  % prose for R=0.9972: 'essentially all / nearly all / most'
+\newcommand{\targetedDfull}{8.6103}
+\newcommand{\targetedPfull}{0.0199}
+\newcommand{\targetedWfull}{0.0312}
+\newcommand{\targetedWfullPct}{3.1}
+\newcommand{\targetedBgPct}{97}
+\newcommand{\targetedKfull}{36.70}
+\newcommand{\targetedSdFullDeg}{0.0788}
+\newcommand{\targetedDAp}{337.6889}
+\newcommand{\targetedPAp}{0.0010}
+\newcommand{\targetedWAp}{1.0000}
+\newcommand{\targetedKAp}{180.87}
+\newcommand{\targetedSdApDeg}{0.0355}
+\newcommand{\targetedB}{200}
 
 % --- analysis/global/x18_max_permutation_test.py
 \newcommand{\anchorMaxPermObsMax}{60}
@@ -900,15 +913,23 @@
   \newcommand{\fineOneZeroOneZeroFullP}{0.1490}   % p(Full), 0.1010-beru
 
 % --- analysis/unesco/unit_sweep_montecarlo.py
-  \newcommand{\mcDomeNsigObs}{9}          % dome: observed significant spacings
+  \newcommand{\mcDomeNsigObs}{9}        % dome: observed sig spacings
   \newcommand{\mcDomeNsigMean}{1.02}      % dome: E[N_sig] under null
-  \newcommand{\mcDomePZero}{0.5941}       % dome: P(N_sig=0) under null
-  \newcommand{\mcDomePObsGe}{0.0059}      % dome: P(N_sig>=obs) under null
-  \newcommand{\mcNcandidates}{18}         % number of candidate spacing values tested
-  \newcommand{\mcFullNsigObs}{3}          % full corpus: observed significant spacings
+  \newcommand{\mcDomePZero}{0.5941}        % dome: P(N_sig=0)
+  \newcommand{\mcDomePObsGe}{0.0059}         % dome: P(N_sig>=obs)
+  \newcommand{\mcNcandidates}{18}         % number of candidate spacings
+  \newcommand{\mcNperms}{10000}               % number of permutations
+  \newcommand{\mcFullNsigObs}{3}        % full corpus: observed sig spacings
   \newcommand{\mcFourDegDomeP}{0.0125}    % dome p-value at 4 deg
-  \newcommand{\mcEightDegDomeP}{0.0366}   % dome p-value at 8 deg
-  \newcommand{\mcNperms}{10{,}000}        % number of permutations
+  \newcommand{\mcEightDegDomeP}{0.0366}  % dome p-value at 8 deg
+  \newcommand{\mcNonThreeOverlapCount}{8}  % non-3° spacings overlapping a 3° multiple
+  \newcommand{\mcDomeNsigCollapsed}{1}  % dome: collapsed independent sig spacings
+  \newcommand{\mcFullNsigCollapsed}{2}  % full: collapsed independent sig spacings
+  \newcommand{\mcDomeCollapsedPEqOne}{0.1849}  % dome: P(collapsed=1)
+  \newcommand{\mcFullCollapsedPEqOne}{0.1003}  % full: P(collapsed=1)
+  \newcommand{\mcFullCollapsedPObsGe}{0.8281}  % full: P(collapsed>=obs)
+  \newcommand{\mcFullCollapsedMean}{3.74}  % full: E[collapsed] under null
+  \newcommand{\mcFullCollapsedSD}{2.34}  % full: SD collapsed under null
 
 % --- analysis/unesco/sensitivity_slope_permutation_test.py
   \newcommand{\permSlopeNperms}{10{,}000}
