@@ -26,19 +26,24 @@ import collections
 from data.unesco_corpus import load_corpus
 from lib.beru import (
     BERU as BERU_DEG, HARMONIC_STEP,
-    TIER_APP, TIER_APLUS, TIER_A_MAX,
-    TIER_APP_KM, TIER_APLUS_KM, TIER_A_KM,
-    P_NULL_APP, P_NULL_AP, P_NULL_A,
-    TIER_CMINUS, TIER_CMINUS2,
+    TIER_APP, TIER_APLUS, TIER_A_MAX, TIER_B_MAX,
+    TIER_APP_KM, TIER_APLUS_KM, TIER_A_KM, TIER_B_KM,
+    TIER_C_MAX, TIER_CMINUS, TIER_CMINUS2,
+    P_NULL_APP, P_NULL_AP, P_NULL_A, P_NULL_B,
+    P_NULL_C, P_NULL_CMINUS, P_NULL_CMINUS2,
 )
 
 _cfg = json.loads((ROOT / "config.json").read_text())
 
 # ── Metrological constants from config ────────────────────────────────────────
 N_HARMONICS      = int(round(360.0 / (BERU_DEG * HARMONIC_STEP)))   # 120
-NULL_RATE_APP    = P_NULL_APP    # = 2 * TIER_APP   / HARMONIC_STEP
-NULL_RATE_AP     = P_NULL_AP     # = 2 * TIER_APLUS / HARMONIC_STEP
-NULL_RATE_A      = P_NULL_A      # = 2 * TIER_A_MAX / HARMONIC_STEP
+NULL_RATE_APP    = P_NULL_APP
+NULL_RATE_AP     = P_NULL_AP
+NULL_RATE_A      = P_NULL_A
+NULL_RATE_B      = P_NULL_B
+NULL_RATE_C      = P_NULL_C
+NULL_RATE_CMINUS = P_NULL_CMINUS
+NULL_RATE_CMINUS2= P_NULL_CMINUS2
 SIM_SEED         = _cfg["simulation"]["random_seed"]         # 42
 
 GER_LON     = _cfg["anchors"]["gerizim"]["longitude"]
@@ -90,9 +95,13 @@ print(f"  \\newcommand{{\\NexcNoCoord}}{{{n_cult_mixed - n_cult_mixed_coords}}} 
 print(f"  \\newcommand{{\\NfineSweepSpacings}}{{7}}  % number of spacings in the fine unit sweep (Table tab:unitsweep_fine)")
 print(f"  \\newcommand{{\\NharmonicsCoarse}}{{{N_HARMONICS}}}  % number of 0.1-beru harmonics in 360 degrees")
 print(f"  \\newcommand{{\\simSeed}}{{{SIM_SEED}}}  % random seed used in all permutation/simulation tests")
-print(f"  \\newcommand{{\\NullRateApp}}{{{NULL_RATE_APP*100:.1f}\\%}}  % geometric null rate for Tier-A++")
-print(f"  \\newcommand{{\\NullRateAp}}{{{NULL_RATE_AP*100:.0f}\\%}}  % geometric null rate for Tier-A+")
-print(f"  \\newcommand{{\\NullRateA}}{{{NULL_RATE_A*100:.0f}\\%}}  % geometric null rate for Tier-A")
+print(f"  \\newcommand{{\\NullRateApp}}{{{NULL_RATE_APP*100:.4g}\\%}}  % geometric null rate for Tier-A++")
+print(f"  \\newcommand{{\\NullRateAp}}{{{NULL_RATE_AP*100:.4g}\\%}}  % geometric null rate for Tier-A+")
+print(f"  \\newcommand{{\\NullRateA}}{{{NULL_RATE_A*100:.4g}\\%}}  % geometric null rate for Tier-A")
+print(f"  \\newcommand{{\\NullRateB}}{{{NULL_RATE_B*100:.4g}\\%}}  % geometric null rate for Tier-B")
+print(f"  \\newcommand{{\\NullRateC}}{{{NULL_RATE_C*100:.4g}\\%}}  % geometric null rate for Tier-C (= A, symmetric)")
+print(f"  \\newcommand{{\\NullRateCMinus}}{{{NULL_RATE_CMINUS*100:.4g}\\%}}  % geometric null rate for Tier-C− (= A+, symmetric)")
+print(f"  \\newcommand{{\\NullRateCMinusTwo}}{{{NULL_RATE_CMINUS2*100:.4g}\\%}}  % geometric null rate for Tier-C−− (= A++, symmetric)")
 # ── Tier threshold macros ────────────────────────────────────────────────────
 print(f"  \\newcommand{{\\ApThreshBeru}}{{{TIER_APLUS}}}  % A+ threshold (beru)")
 print(f"  \\newcommand{{\\ApThreshKm}}{{{TIER_APLUS_KM:.1f}}}  % A+ threshold (km, equatorial)")
@@ -100,8 +109,12 @@ print(f"  \\newcommand{{\\AppThreshBeru}}{{{TIER_APP}}}  % A++ threshold (beru)"
 print(f"  \\newcommand{{\\AppThreshKm}}{{{TIER_APP_KM:.2f}}}  % A++ threshold (km, equatorial)")
 print(f"  \\newcommand{{\\ATierThreshBeru}}{{{TIER_A_MAX}}}  % A-tier threshold (beru)")
 print(f"  \\newcommand{{\\ATierThreshKm}}{{{TIER_A_KM:.0f}}}  % A-tier threshold (km, equatorial)")
+print(f"  \\newcommand{{\\BTierThreshBeru}}{{{TIER_B_MAX}}}  % B-tier threshold (beru)")
+print(f"  \\newcommand{{\\BTierThreshKm}}{{{TIER_B_KM:.0f}}}  % B-tier threshold (km, equatorial)")
 print(f"  \\newcommand{{\\CMinusThreshBeru}}{{{TIER_CMINUS}}}  % C− threshold (beru, = A+ mirror)")
 print(f"  \\newcommand{{\\CMinusThreshKm}}{{{TIER_CMINUS * BERU_DEG * 111.0:.1f}}}  % C− threshold (km)")
+print(f"  \\newcommand{{\\CTierThreshBeru}}{{{TIER_C_MAX}}}  % C-tier threshold (beru, = A mirror)")
+print(f"  \\newcommand{{\\CMinusTwoThreshBeru}}{{{TIER_CMINUS2}}}  % C−− threshold (beru, = A++ mirror)")
 print(f"  \\newcommand{{\\NullRateApPct}}{{{NULL_RATE_AP*100:.4g}}}  % A+ null rate as plain number (no %)")
 print(f"  \\newcommand{{\\NullRateApFormula}}{{$2 \\times \\ApThreshBeru{{}} / 0.1$}}  % null rate formula")
 # ── Static convenience macros ─────────────────────────────────────────────────
@@ -129,6 +142,17 @@ ResultsStore().write_many({
     "AppThreshKm":     round(TIER_APP_KM, 2),
     "ATierThreshBeru": TIER_A_MAX,
     "ATierThreshKm":   round(TIER_A_KM, 0),
-    "CMinusThreshBeru": TIER_CMINUS,
+    "BTierThreshBeru": TIER_B_MAX,
+    "BTierThreshKm":   round(TIER_B_KM, 0),
+    "CMinusThreshBeru":   TIER_CMINUS,
+    "CTierThreshBeru":    TIER_C_MAX,
+    "CMinusTwoThreshBeru": TIER_CMINUS2,
+    "NullRateApp":     round(NULL_RATE_APP * 100, 4),
+    "NullRateAp":      round(NULL_RATE_AP  * 100, 4),
+    "NullRateA":       round(NULL_RATE_A   * 100, 4),
+    "NullRateB":       round(NULL_RATE_B   * 100, 4),
+    "NullRateC":       round(NULL_RATE_C   * 100, 4),
+    "NullRateCMinus":  round(NULL_RATE_CMINUS  * 100, 4),
+    "NullRateCMinusTwo": round(NULL_RATE_CMINUS2 * 100, 4),
     "NullRateApPct":   round(NULL_RATE_AP * 100, 4),
 })

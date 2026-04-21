@@ -1,4 +1,4 @@
-% Generated macros — 2026-04-21T02:45:14Z
+% Generated macros — 2026-04-21T03:26:09Z
 % Source: bash manuscript/reproduce_all_macros.sh
 % IMPORTANT: values are computed fresh each run — do NOT hardcode
 
@@ -17,16 +17,24 @@
   \newcommand{\NharmonicsCoarse}{120}  % number of 0.1-beru harmonics in 360 degrees
   \newcommand{\simSeed}{42}  % random seed used in all permutation/simulation tests
   \newcommand{\NullRateApp}{0.4\%}  % geometric null rate for Tier-A++
-  \newcommand{\NullRateAp}{6\%}  % geometric null rate for Tier-A+
+  \newcommand{\NullRateAp}{6.42\%}  % geometric null rate for Tier-A+
   \newcommand{\NullRateA}{20\%}  % geometric null rate for Tier-A
+  \newcommand{\NullRateB}{100\%}  % geometric null rate for Tier-B
+  \newcommand{\NullRateC}{20\%}  % geometric null rate for Tier-C (= A, symmetric)
+  \newcommand{\NullRateCMinus}{6.42\%}  % geometric null rate for Tier-C− (= A+, symmetric)
+  \newcommand{\NullRateCMinusTwo}{0.4\%}  % geometric null rate for Tier-C−− (= A++, symmetric)
   \newcommand{\ApThreshBeru}{0.00321}  % A+ threshold (beru)
   \newcommand{\ApThreshKm}{10.7}  % A+ threshold (km, equatorial)
   \newcommand{\AppThreshBeru}{0.0002}  % A++ threshold (beru)
   \newcommand{\AppThreshKm}{0.67}  % A++ threshold (km, equatorial)
   \newcommand{\ATierThreshBeru}{0.01}  % A-tier threshold (beru)
   \newcommand{\ATierThreshKm}{33}  % A-tier threshold (km, equatorial)
+  \newcommand{\BTierThreshBeru}{0.05}  % B-tier threshold (beru)
+  \newcommand{\BTierThreshKm}{166}  % B-tier threshold (km, equatorial)
   \newcommand{\CMinusThreshBeru}{0.00321}  % C− threshold (beru, = A+ mirror)
   \newcommand{\CMinusThreshKm}{10.7}  % C− threshold (km)
+  \newcommand{\CTierThreshBeru}{0.01}  % C-tier threshold (beru, = A mirror)
+  \newcommand{\CMinusTwoThreshBeru}{0.0002}  % C−− threshold (beru, = A++ mirror)
   \newcommand{\NullRateApPct}{6.42}  % A+ null rate as plain number (no %)
   \newcommand{\NullRateApFormula}{$2 \times \ApThreshBeru{} / 0.1$}  % null rate formula
   \newcommand{\threeStar}{***}  % *** significance shorthand for p<0.001 literal comparisons

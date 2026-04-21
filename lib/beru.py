@@ -56,6 +56,7 @@ TIER_CMINUS2  = CONFIG["tiers"]["C--"]["max_dist_from_midpoint_beru"]  # from co
 P_NULL_APP    = 2 * TIER_APP   / HARMONIC_STEP  # = 2 × TIER_APP / 0.1
 P_NULL_AP     = 2 * TIER_APLUS / HARMONIC_STEP  # = 2 × TIER_APLUS / 0.1
 P_NULL_A      = 2 * TIER_A_MAX / HARMONIC_STEP  # = 2 × TIER_A_MAX / 0.1
+P_NULL_B      = 2 * TIER_B_MAX / HARMONIC_STEP  # = 2 × TIER_B_MAX / 0.1  (= 1.0; full half-step)
 P_NULL_C      = P_NULL_A                          # symmetric with A
 P_NULL_CMINUS = P_NULL_AP                         # symmetric with A+
 P_NULL_CMINUS2= P_NULL_APP                        # symmetric with A++
