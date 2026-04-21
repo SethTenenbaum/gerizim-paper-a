@@ -57,6 +57,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus
 from lib.beru import (
     GERIZIM, BERU, HARMONIC_STEP, TIER_APLUS, TIER_A_MAX, TIER_B_MAX,
+    TIER_APLUS_LABEL,
     P_NULL_AP, P_NULL_A,
     deviation as beru_dev, tier_label, is_aplus,
 )
@@ -269,7 +270,7 @@ section("SUMMARY")
 # ─────────────────────────────────────────────────────────────────────────────
 print(f"""
   N = {len(sites)} UNESCO Cultural/Mixed sites with coordinates.
-  A+ sites (≤ 0.002 beru, ≤ 6.7 km): {len(aplus)}
+  A+ sites ({TIER_APLUS_LABEL}): {len(aplus)}
 
   Key findings:
   ─────────────

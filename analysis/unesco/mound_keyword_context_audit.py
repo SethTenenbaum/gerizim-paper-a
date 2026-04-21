@@ -419,7 +419,7 @@ print(f"  {'N (population)':<50}  {N_raw:>12}  {N_accepted:>12}")
 print(f"  {'n Tier-A+ hits':<50}  {n_ap_raw:>12}  {n_ap_accepted:>12}")
 print(f"  {'Tier-A+ rate':<50}  {100*n_ap_raw/N_raw:>11.1f}%  "
       f"{100*n_ap_accepted/N_accepted:>11.1f}%")
-print(f"  {'Enrichment vs 4% null (A+)':<50}  {enr_ap_raw:>11.2f}×  {enr_ap_val:>11.2f}×")
+print(f"  {'Enrichment vs geometric null (A+)':<50}  {enr_ap_raw:>11.2f}×  {enr_ap_val:>11.2f}×")
 print(f"  {'Binomial p (A+)':<50}  {bt_ap_raw.pvalue:>12.4f}  {bt_ap_val.pvalue:>12.4f}")
 print(f"  {'Significance (A+)':<50}  {sig(bt_ap_raw.pvalue):>12}  {sig(bt_ap_val.pvalue):>12}")
 print(f"  {'n Tier-A hits':<50}  {n_a_raw:>12}  {n_a_accepted:>12}")

@@ -66,6 +66,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus, cultural_sites_with_coords
 from lib.beru import (
     GERIZIM, BERU, TIER_APLUS, TIER_A_MAX, TIER_B_MAX, P_NULL_AP,
+    TIER_APLUS_KM, TIER_A_KM, TIER_B_KM,
     deviation as beru_deviation, tier_label, is_aplus, is_a_or_better,
 )
 from lib.stats import significance_label as sig
@@ -166,10 +167,10 @@ print(f"""
   POPULATION
   ──────────────────────────────────────────────────────────────────────
   Total Cultural/Mixed with coords:  N = {N}
-  Tier-A+ (≤6.7 km from harmonic):  {n_Ap}  ({100*n_Ap/N:.1f}%)  [null: 4%]
-  Tier-A  (≤33 km):                  {n_A}  ({100*n_A/N:.1f}%)
-  Tier-B  (≤166.5 km):              {n_B}  ({100*n_B/N:.1f}%)
-  Tier-C  (>166.5 km):              {n_C}  ({100*n_C/N:.1f}%)
+  Tier-A+ (≤{TIER_APLUS_KM:.1f} km from harmonic):  {n_Ap}  ({100*n_Ap/N:.1f}%)  [null: {P_NULL_AP:.1%}]
+  Tier-A  (≤{TIER_A_KM:.0f} km):                  {n_A}  ({100*n_A/N:.1f}%)
+  Tier-B  (≤{TIER_B_KM:.0f} km):              {n_B}  ({100*n_B/N:.1f}%)
+  Tier-C  (>{TIER_B_KM:.0f} km):              {n_C}  ({100*n_C/N:.1f}%)
 """)
 
 # ── Tier-A+ enrichment (full UNESCO, no keyword filter) ────────────────────
@@ -535,9 +536,9 @@ print("  % LaTeX macros (GROUP 2):")
 print(f"  \\newcommand{{\\NclusterTotal}}{{{N}}}          % full Cultural/Mixed corpus")
 print(f"  \\newcommand{{\\NclusterAp}}{{{n_Ap}}}              % Tier-A+ sites")
 print(f"  \\newcommand{{\\clusterApRate}}{{{100*n_Ap/N:.1f}}}           % A+ rate (%)")
-print(f"  \\newcommand{{\\clusterEnrichAp}}{{{(n_Ap/N)/0.04:.2f}}}          % enrichment ratio, A+ vs 4% null")
-print(f"  \\newcommand{{\\NclusterExpAp}}{{{N*0.04:.1f}}}           % expected A+ count under 4% null")
-print(f"  \\newcommand{{\\NclusterExcessAp}}{{{round(n_Ap - N*0.04)}}}          % excess A+ above chance (observed - expected)")
+print(f"  \\newcommand{{\\clusterEnrichAp}}{{{(n_Ap/N)/P_NULL_AP:.2f}}}          % enrichment ratio, A+ vs geometric null")
+print(f"  \\newcommand{{\\NclusterExpAp}}{{{N*P_NULL_AP:.1f}}}           % expected A+ count under geometric null")
+print(f"  \\newcommand{{\\NclusterExcessAp}}{{{round(n_Ap - N*P_NULL_AP)}}}          % excess A+ above chance (observed - expected)")
 print(f"  \\newcommand{{\\clusterApBinom}}{{{bt_Ap.pvalue:.4f}}}        % binomial p, A+")
 print(f"  \\newcommand{{\\clusterApMean}}{{{mean_ap:.2f}}}          % mean cluster size, A+ sites")
 print(f"  \\newcommand{{\\clusterNonApMean}}{{{mean_nonap:.2f}}}          % mean cluster size, non-A+ sites")

@@ -53,7 +53,7 @@ def binomial_enrichment(k: int, n: int, null_rate: float) -> BinomialResult:
     n : int
         Total trials (e.g. total sites in population).
     null_rate : float
-        Expected probability under H0 (e.g. 0.04 for A+).
+        Expected probability under H0 (e.g. P_NULL_AP from lib.beru for A+ tier).
 
     Returns
     -------
@@ -91,7 +91,7 @@ def binomial_depletion(k: int, n: int, null_rate: float) -> BinomialResult:
     n : int
         Total trials (e.g. total sites in the corpus).
     null_rate : float
-        Expected probability under H0 (e.g. 0.04 for A+).
+        Expected probability under H0 (e.g. P_NULL_AP from lib.beru for A+ tier).
 
     Returns
     -------

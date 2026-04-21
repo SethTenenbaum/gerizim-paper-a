@@ -1,8 +1,8 @@
 UNESCO WORLD RELIGION KEYWORD AUDIT
-Generated : Mon Apr 20 01:50:23 UTC 2026
+Generated : Mon Apr 20 20:13:13 UTC 2026
 Script    : tools/generate_audit_religion.py
 Full corpus (Cultural/Mixed with year): N = 1011
-A-tier null: 20%  |  A+ null: 4%  |  C-tier null: 20%  |  C- null: 4%
+A-tier null: 20%  |  A+ null: 6%  |  C-tier null: 20%  |  C- null: 6%
 Anchor: Gerizim 35.269°E   |   Beru = 30.0°
 Extended descriptions searched: YES
 
@@ -10,34 +10,34 @@ Extended descriptions searched: YES
 A-SIDE SUMMARY  (harmonic alignment)  — Fisher exact: sub-corpus vs rest of full corpus
   Religion                 N    A+    A+%    A+p(F)     OR          A     A%     Ap(F)     OR     
   ------------------------------------------------------------------------------------------------
-  Buddhism                71     4   5.6%    0.5651  1.02x   ns    20  28.2%    0.1522  1.38x   ns
-  Christianity           397    27   6.8%    0.1028  1.47x   ns    93  23.4%    0.3228  1.09x   ns
-  Islam                  178    12   6.7%    0.2695  1.30x   ns    42  23.6%    0.3901  1.07x   ns
-  Judaism                 50     5  10.0%    0.1370  1.98x   ns    16  32.0%    0.0749  1.66x    ~
-  Hinduism                39     1   2.6%    0.8963  0.44x   ns    11  28.2%    0.2469  1.37x   ns
-  Zoroastrianism          16     2  12.5%    0.2207  2.49x   ns     2  12.5%    0.9070  0.49x   ns
+  Buddhism                71     7   9.9%    0.4243  1.16x   ns    20  28.2%    0.1522  1.38x   ns
+  Christianity           397    37   9.3%    0.3266  1.13x   ns    93  23.4%    0.3228  1.09x   ns
+  Islam                  178    19  10.7%    0.1875  1.32x   ns    42  23.6%    0.3901  1.07x   ns
+  Judaism                 50     6  12.0%    0.2636  1.46x   ns    16  32.0%    0.0749  1.66x    ~
+  Hinduism                39     4  10.3%    0.4457  1.21x   ns    11  28.2%    0.2469  1.37x   ns
+  Zoroastrianism          16     2  12.5%    0.4127  1.51x   ns     2  12.5%    0.9070  0.49x   ns
   ------------------------------------------------------------------------------------------------
-  UNION (any)            577    35   6.1%    0.2414  1.27x   ns   132  22.9%    0.4179  1.04x   ns
+  UNION (any)            577    51   8.8%    0.4769  1.04x   ns   132  22.9%    0.4179  1.04x   ns
 
-  Full corpus: N=1011, A+ rate=5.5% (56), A rate=22.6% (228)
+  Full corpus: N=1011, A+ rate=8.7% (88), A rate=22.6% (228)
   Fisher exact: one-sided (greater), sub-corpus vs rest of full corpus.
 
 ────────────────────────────────────────────────────────────────────────────────────────
 C-SIDE SUMMARY  (inter-harmonic midpoint proximity)  — Fisher exact vs rest of corpus
-  Full-corpus C rate: 20.1%  |  C-/C-- rate: 4.5%
+  Full-corpus C rate: 20.1%  |  C-/C-- rate: 7.2%
 
   Religion                 N     C     C%     Cp(F)     OR         C-    C-%    C-p(F)     OR     
   ------------------------------------------------------------------------------------------------
-  Buddhism                71    19  26.8%    0.0987  1.50x    ~     2   2.8%    0.8493  0.59x   ns
-  Christianity           397    76  19.1%    0.7503  0.91x   ns    12   3.0%    0.9810  0.53x   ns
-  Islam                  178    32  18.0%    0.8081  0.85x   ns     6   3.4%    0.8495  0.69x   ns
-  Judaism                 50     7  14.0%    0.9047  0.64x   ns     1   2.0%    0.9082  0.42x   ns
-  Hinduism                39    10  25.6%    0.2418  1.39x   ns     4  10.3%    0.0961  2.53x    ~
-  Zoroastrianism          16     5  31.2%    0.2026  1.83x   ns     1   6.2%    0.5280  1.41x   ns
+  Buddhism                71    19  26.8%    0.0987  1.50x    ~     5   7.0%    0.5955  0.97x   ns
+  Christianity           397    76  19.1%    0.7503  0.91x   ns    19   4.8%    0.9952  0.52x   ns
+  Islam                  178    32  18.0%    0.8081  0.85x   ns    11   6.2%    0.7695  0.82x   ns
+  Judaism                 50     7  14.0%    0.9047  0.64x   ns     1   2.0%    0.9786  0.25x   ns
+  Hinduism                39    10  25.6%    0.2418  1.39x   ns     7  17.9%    0.0181  3.00x    *
+  Zoroastrianism          16     5  31.2%    0.2026  1.83x   ns     3  18.8%    0.1025  3.05x   ns
   ------------------------------------------------------------------------------------------------
-  UNION (any)            577   119  20.6%    0.3382  1.08x   ns    23   4.0%    0.8735  0.74x   ns
+  UNION (any)            577   119  20.6%    0.3382  1.08x   ns    39   6.8%    0.7817  0.85x   ns
 
-  Full corpus: N=1011, C-tier count=203 (20.1%), C-/C-- count=46 (4.5%)
+  Full corpus: N=1011, C-tier count=203 (20.1%), C-/C-- count=73 (7.2%)
 
 ────────────────────────────────────────────────────────────────────────────────────────
 CROSS-RELIGION OVERLAP  (135 sites tagged by 2+ religions)
@@ -62,13 +62,13 @@ CROSS-RELIGION OVERLAP  (135 sites tagged by 2+ religions)
   Rila Monastery                                          A+        4.4  Christianity, Islam  (Bulgaria)
   Coro and its Port                                       A+        5.7  Christianity, Judaism  (Venezuela (Bolivarian Republic of))
   Medina of Essaouira (formerly Mogador)                  A+        6.2  Christianity, Islam, Judaism  (Morocco)
-  Old City of Sana'a                                      A         6.8  Christianity, Islam  (Yemen)
-  Birthplace of Jesus: Church of the Nativity and the Pi  A         6.8  Christianity, Islam  (State of Palestine)
-  Historic Centre of Sheki with the Khan’s Palace         A         9.0  Christianity, Islam  (Azerbaijan)
-  Qutb Minar and its Monuments, Delhi                     A         9.3  Islam, Hinduism  (India)
-  Masada                                                  A         9.4  Christianity, Judaism  (Israel)
-  The Cosmological Axis of Yogyakarta and its Historic L  A        10.6  Buddhism, Islam, Hinduism  (Indonesia)
-  Bursa and Cumalıkızık: the Birth of the Ottoman Empire  A        10.6  Christianity, Islam  (Türkiye)
+  Old City of Sana'a                                      A+        6.8  Christianity, Islam  (Yemen)
+  Birthplace of Jesus: Church of the Nativity and the Pi  A+        6.8  Christianity, Islam  (State of Palestine)
+  Historic Centre of Sheki with the Khan’s Palace         A+        9.0  Christianity, Islam  (Azerbaijan)
+  Qutb Minar and its Monuments, Delhi                     A+        9.3  Islam, Hinduism  (India)
+  Masada                                                  A+        9.4  Christianity, Judaism  (Israel)
+  The Cosmological Axis of Yogyakarta and its Historic L  A+       10.6  Buddhism, Islam, Hinduism  (Indonesia)
+  Bursa and Cumalıkızık: the Birth of the Ottoman Empire  A+       10.6  Christianity, Islam  (Türkiye)
   Fort and Shalamar Gardens in Lahore                     A        12.6  Islam, Hinduism  (Pakistan)
   The Ancient Town of Si Thep and its Associated Dvarava  A        13.1  Buddhism, Hinduism  (Thailand)
   Historic Centres of Berat and Gjirokastra               A        14.2  Christianity, Islam  (Albania)
@@ -183,8 +183,8 @@ CROSS-RELIGION OVERLAP  (135 sites tagged by 2+ religions)
   Historic Walled Town of Cuenca                          C       155.4  Christianity, Islam  (Spain)
   Abbey Church of Saint-Savin sur Gartempe                C       155.7  Christianity, Judaism  (France)
   Royal Monastery of Santa María de Guadalupe             C       155.8  Christianity, Islam  (Spain)
-  Masjed-e Jāmé of Isfahan                                C       157.2  Islam, Zoroastrianism  (Iran (Islamic Republic of))
-  Cultural Landscape and Archaeological Remains of the B  C       158.2  Buddhism, Islam, Hinduism, Zoroastrianism  (Afghanistan)
+  Masjed-e Jāmé of Isfahan                                C-      157.2  Islam, Zoroastrianism  (Iran (Islamic Republic of))
+  Cultural Landscape and Archaeological Remains of the B  C-      158.2  Buddhism, Islam, Hinduism, Zoroastrianism  (Afghanistan)
   Hatra                                                   C-      160.9  Islam, Zoroastrianism  (Iraq)
   Vézelay, Church and Hill                                C-      162.8  Christianity, Judaism  (France)
   Sulaiman-Too Sacred Mountain                            C-      165.0  Islam, Hinduism  (Kyrgyzstan)
@@ -193,7 +193,7 @@ CROSS-RELIGION OVERLAP  (135 sites tagged by 2+ religions)
 JUDAISM: SMALL-SAMPLE DETAIL  (N=50; all p-values are Fisher exact, same as main table)
   N = 50  (full corpus N=1011)
 
-  A+ tier:  5/50 (10.0%)  vs rest: 51/961 (5.3%)  Fisher p=0.1370 ns  OR=1.98x
+  A+ tier:  6/50 (12.0%)  vs rest: 82/961 (8.5%)  Fisher p=0.2636 ns  OR=1.46x
   A tier:   16/50 (32.0%)  vs rest: 212/961 (22.1%)  Fisher p=0.0749 ~  OR=1.66x
   C tier:   7/50 (14.0%)  vs rest: 196/961 (20.4%)  Fisher p=0.9047 ns  OR=see main table
 
@@ -204,33 +204,33 @@ JUDAISM: SMALL-SAMPLE DETAIL  (N=50; all p-values are Fisher exact, same as main
 ────────────────────────────────────────────────────────────────────────────────────────
 BUDDHISM  (N=71)
   Keywords : buddha, buddhist, buddhism, lumbini, ashoka, stupa, bodhi, nirvana
-  A+  : 4/71 = 5.6%  enrich 1.41x  Fisher p=0.5651 ns  OR=1.02x
+  A+  : 7/71 = 9.9%  enrich 1.54x  Fisher p=0.4243 ns  OR=1.16x
   A   : 20/71 = 28.2%  enrich 1.41x  Fisher p=0.1522 ns  OR=1.38x
   C   : 19/71 = 26.8%  enrich 1.34x  Fisher p=0.0987 ~  OR=1.50x
-  C-  : 2/71 = 2.8%  enrich 0.70x  Fisher p=0.8493 ns  OR=0.59x
+  C-  : 5/71 = 7.0%  enrich 1.10x  Fisher p=0.5955 ns  OR=0.97x
 
   Keyword tier breakdown (sorted by total hits):
     keyword                 total    A+      A      B      C    C-
     ------------------------------------------------------------
-    buddhist              total= 62  A+= 4  A= 13  B= 29  C= 14  C-= 2
-    buddhism              total= 43  A+= 2  A=  7  B= 19  C= 14  C-= 1
-    buddha                total= 22  A+= 2  A=  3  B= 11  C=  6  C-= 0
-    stupa                 total= 18  A+= 4  A=  3  B=  7  C=  4  C-= 0
-    bodhi                 total=  4  A+= 1  A=  1  B=  1  C=  1  C-= 0
+    buddhist              total= 62  A+= 6  A= 11  B= 29  C= 11  C-= 5
+    buddhism              total= 43  A+= 4  A=  5  B= 19  C= 11  C-= 4
+    buddha                total= 22  A+= 2  A=  3  B= 11  C=  4  C-= 2
+    stupa                 total= 18  A+= 4  A=  3  B=  7  C=  3  C-= 1
+    bodhi                 total=  4  A+= 2  A=  0  B=  1  C=  1  C-= 0
     lumbini               total=  1  A+= 1  A=  0  B=  0  C=  0  C-= 0
     ashoka                total=  1  A+= 1  A=  0  B=  0  C=  0  C-= 0
     nirvana               total=  1  A+= 1  A=  0  B=  0  C=  0  C-= 0
 
-  A+ SITES (4):
+  A+ SITES (7):
     A+       0.8 km    83.2761°E  [buddha, buddhist, lumbini, ashoka, stupa]  Lumbini, the Birthplace of the Lord Buddha  (Nepal)
     A+       2.3 km    95.2900°E  [buddhist, buddhism, stupa]  Pyu Ancient Cities  (Myanmar)
     A+       2.5 km   107.2911°E  [buddhist, buddhism, stupa]  Silk Roads: the Routes Network of Chang'an-Tianshan Corridor  (China,Kazakhstan,Kyrgyzstan)
     A+       4.3 km   110.2301°E  [buddha, buddhist, stupa, bodhi, nirvana]  Borobudur Temple Compounds  (Indonesia)
+    A+       8.9 km   113.3494°E  [buddhist, bodhi]  Mount Wutai  (China)
+    A+       9.3 km   116.1851°E  [buddhism]  Site of Xanadu  (China)
+    A+      10.6 km   110.3648°E  [buddhist, buddhism]  The Cosmological Axis of Yogyakarta and its Historic Landmarks  (Indonesia)
 
-  A-TIER SITES (16):
-    A        8.9 km   113.3494°E  [buddhist, bodhi]  Mount Wutai  (China)
-    A        9.3 km   116.1851°E  [buddhism]  Site of Xanadu  (China)
-    A       10.6 km   110.3648°E  [buddhist, buddhism]  The Cosmological Axis of Yogyakarta and its Historic Landmarks  (Indonesia)
+  A-TIER SITES (13):
     A       12.7 km    80.3833°E  [buddha, buddhist]  Sacred City of Anuradhapura  (Sri Lanka)
     A       13.1 km   101.1511°E  [buddhist, buddhism]  The Ancient Town of Si Thep and its Associated Dvaravati Monuments  (Thailand)
     A       14.2 km   113.1412°E  [buddhist]  Historic Monuments of Dengfeng in “The Centre of Heaven and Earth”  (China)
@@ -279,7 +279,7 @@ BUDDHISM  (N=71)
     B      126.0 km    91.1338°E  [buddha, buddhist, buddhism, stupa]  Historic Ensemble of the Potala Palace, Lhasa  (China)
     B      126.3 km   135.4072°E  [buddhist, buddhism]  Sacred Sites and Pilgrimage Routes in the Kii Mountain Range  (Japan)
 
-  C SITES (17) — near inter-harmonic midpoint:
+  C SITES (14) — near inter-harmonic midpoint:
     C      134.7 km   127.0556°E  dist_mid= 31.8 km  [buddhist, buddhism]  Baekje Historic Areas  (Republic of Korea)
     C      137.8 km    99.5107°E  dist_mid= 28.7 km  [buddha, buddhist, buddhism]  Historic Town of Sukhothai and Associated Historic Towns  (Thailand)
     C      139.2 km   138.5228°E  dist_mid= 27.3 km  [buddha, buddhist, buddhism]  Fujisan, sacred place and source of artistic inspiration  (Japan)
@@ -294,35 +294,35 @@ BUDDHISM  (N=71)
     C      149.6 km   126.6169°E  dist_mid= 16.9 km  [buddha, buddhist, buddhism]  Sansa, Buddhist Mountain Monasteries in Korea  (Republic of Korea)
     C      150.1 km   105.6211°E  dist_mid= 16.4 km  [buddhist]  Citadel of the Ho Dynasty  (Viet Nam)
     C      154.1 km    72.8805°E  dist_mid= 12.4 km  [buddhist, stupa]  Taxila  (Pakistan)
-    C      156.5 km   102.6785°E  dist_mid= 10.0 km  [buddhist, buddhism]  Orkhon Valley Cultural Landscape  (Mongolia)
-    C      158.2 km    66.8435°E  dist_mid=  8.3 km  [buddha, buddhist, buddhism]  Cultural Landscape and Archaeological Remains of the Bamiyan Valley  (Afghanistan)
-    C      158.9 km    75.7002°E  dist_mid=  7.6 km  [buddha, buddhist, buddhism, stupa]  Ajanta Caves  (India)
 
-  C-/C-- SITES (2) — very close to midpoint:
+  C-/C-- SITES (5) — very close to midpoint:
+    C-     156.5 km   102.6785°E  dist_mid= 10.0 km  [buddhist, buddhism]  Orkhon Valley Cultural Landscape  (Mongolia)
+    C-     158.2 km    66.8435°E  dist_mid=  8.3 km  [buddha, buddhist, buddhism]  Cultural Landscape and Archaeological Remains of the Bamiyan Valley  (Afghanistan)
+    C-     158.9 km    75.7002°E  dist_mid=  7.6 km  [buddha, buddhist, buddhism, stupa]  Ajanta Caves  (India)
     C-     162.6 km   135.7342°E  dist_mid=  3.9 km  [buddhist, buddhism]  Buddhist Monuments in the Horyu-ji Area  (Japan)
     C-     164.8 km   135.7842°E  dist_mid=  1.7 km  [buddhist]  Historic Monuments of Ancient Nara  (Japan)
 
 ────────────────────────────────────────────────────────────────────────────────────────
 CHRISTIANITY  (N=397)
   Keywords : christian, cathedral, church, apostle, biblical, byzantine, crusader, orthodox
-  A+  : 27/397 = 6.8%  enrich 1.70x  Fisher p=0.1028 ns  OR=1.47x
+  A+  : 37/397 = 9.3%  enrich 1.45x  Fisher p=0.3266 ns  OR=1.13x
   A   : 93/397 = 23.4%  enrich 1.17x  Fisher p=0.3228 ns  OR=1.09x
   C   : 76/397 = 19.1%  enrich 0.96x  Fisher p=0.7503 ns  OR=0.91x
-  C-  : 12/397 = 3.0%  enrich 0.76x  Fisher p=0.9810 ns  OR=0.53x
+  C-  : 19/397 = 4.8%  enrich 0.75x  Fisher p=0.9952 ns  OR=0.52x
 
   Keyword tier breakdown (sorted by total hits):
     keyword                 total    A+      A      B      C    C-
     ------------------------------------------------------------
-    church                total=306  A+=21  A= 47  B=179  C= 48  C-=11
-    christian             total=160  A+=13  A= 25  B= 91  C= 28  C-= 3
-    cathedral             total=132  A+= 9  A= 25  B= 75  C= 19  C-= 4
-    byzantine             total= 78  A+= 2  A= 19  B= 40  C= 14  C-= 3
-    orthodox              total= 41  A+= 2  A=  7  B= 24  C=  6  C-= 2
+    church                total=306  A+=25  A= 43  B=179  C= 43  C-=16
+    christian             total=160  A+=16  A= 22  B= 91  C= 27  C-= 4
+    cathedral             total=132  A+=14  A= 20  B= 75  C= 17  C-= 6
+    byzantine             total= 78  A+= 5  A= 16  B= 40  C= 14  C-= 3
+    orthodox              total= 41  A+= 3  A=  6  B= 24  C=  6  C-= 2
     apostle               total= 20  A+= 2  A=  3  B= 11  C=  3  C-= 1
     biblical              total= 10  A+= 2  A=  1  B=  3  C=  3  C-= 1
-    crusader              total= 10  A+= 1  A=  5  B=  4  C=  0  C-= 0
+    crusader              total= 10  A+= 2  A=  4  B=  4  C=  0  C-= 0
 
-  A+ SITES (27):
+  A+ SITES (37):
     A++      0.1 km     8.2697°E  [christian, church, biblical]  <I>Sacri Monti</I> of Piedmont and Lombardy  (Italy)
     A++      0.3 km    23.2662°E  [church, byzantine]  Boyana Church  (Bulgaria)
     A++      0.3 km   -90.7282°E  [christian, cathedral, church]  Antigua Guatemala  (Guatemala)
@@ -350,18 +350,18 @@ CHRISTIANITY  (N=397)
     A+       6.2 km    44.3246°E  [christian, cathedral, church, apostle]  Cathedral and Churches of Echmiatsin and the Archaeological Site of Zvartnots  (Armenia)
     A+       6.2 km    -9.7867°E  [christian]  Medina of Essaouira (formerly Mogador)  (Morocco)
     A+       6.6 km    11.3286°E  [church]  Classical Weimar  (Germany)
+    A+       6.8 km    44.2081°E  [christian, cathedral]  Old City of Sana'a  (Yemen)
+    A+       6.8 km    35.2075°E  [christian, church, orthodox]  Birthplace of Jesus: Church of the Nativity and the Pilgrimage Route, Bethlehem  (State of Palestine)
+    A+       7.0 km    11.3317°E  [church]  Historic Centre of Siena  (Italy)
+    A+       8.1 km    35.1958°E  [cathedral, crusader]  Tyre  (Lebanon)
+    A+       8.5 km    14.1921°E  [cathedral, church, byzantine]  Historic Centre of Naples  (Italy)
+    A+       9.0 km    47.1875°E  [christian]  Historic Centre of Sheki with the Khan’s Palace  (Azerbaijan)
+    A+       9.4 km    35.3536°E  [byzantine]  Masada  (Israel)
+    A+      10.4 km     2.1750°E  [cathedral]  Palau de la Música Catalana and Hospital de Sant Pau, Barcelona  (Spain)
+    A+      10.5 km     2.3637°E  [cathedral, church]  Historic Fortified City of Carcassonne  (France)
+    A+      10.6 km    29.1731°E  [byzantine]  Bursa and Cumalıkızık: the Birth of the Ottoman Empire  (Türkiye)
 
-  A-TIER SITES (66):
-    A        6.8 km    44.2081°E  [christian, cathedral]  Old City of Sana'a  (Yemen)
-    A        6.8 km    35.2075°E  [christian, church, orthodox]  Birthplace of Jesus: Church of the Nativity and the Pilgrimage Route, Bethlehem  (State of Palestine)
-    A        7.0 km    11.3317°E  [church]  Historic Centre of Siena  (Italy)
-    A        8.1 km    35.1958°E  [cathedral, crusader]  Tyre  (Lebanon)
-    A        8.5 km    14.1921°E  [cathedral, church, byzantine]  Historic Centre of Naples  (Italy)
-    A        9.0 km    47.1875°E  [christian]  Historic Centre of Sheki with the Khan’s Palace  (Azerbaijan)
-    A        9.4 km    35.3536°E  [byzantine]  Masada  (Israel)
-    A       10.4 km     2.1750°E  [cathedral]  Palau de la Música Catalana and Hospital de Sant Pau, Barcelona  (Spain)
-    A       10.5 km     2.3637°E  [cathedral, church]  Historic Fortified City of Carcassonne  (France)
-    A       10.6 km    29.1731°E  [byzantine]  Bursa and Cumalıkızık: the Birth of the Ottoman Empire  (Türkiye)
+  A-TIER SITES (56):
     A       10.7 km    38.1726°E  [church]  Cultural Landscape of Kenozero Lake  (Russian Federation)
     A       12.5 km    17.3819°E  [church]  Gardens and Castle at Kroměříž  (Czechia)
     A       13.2 km   -57.8499°E  [church]  Historic Quarter of the City of Colonia del Sacramento  (Uruguay)
@@ -649,7 +649,7 @@ CHRISTIANITY  (N=397)
     B      133.1 km    36.4681°E  [christian, cathedral, church, byzantine]  Ancient City of Bosra  (Syrian Arab Republic)
     B      133.2 km     6.4689°E  [christian, byzantine]  Timgad  (Algeria)
 
-  C SITES (64) — near inter-harmonic midpoint:
+  C SITES (57) — near inter-harmonic midpoint:
     C      134.0 km    12.4761°E  dist_mid= 32.5 km  [christian, church, apostle]  Historic Centre of Rome, the Properties of the Holy See in that City Enjoying Extraterritorial Rights and San Paolo Fuori le Mura  (Holy See,Italy)
     C      134.1 km   121.0606°E  dist_mid= 32.4 km  [christian]  Rice Terraces of the Philippine Cordilleras  (Philippines)
     C      134.3 km    49.0589°E  dist_mid= 32.2 km  [cathedral, church]  Bolgar Historical and Archaeological Complex  (Russian Federation)
@@ -707,15 +707,15 @@ CHRISTIANITY  (N=397)
     C      155.4 km    -2.1310°E  dist_mid= 11.1 km  [cathedral]  Historic Walled Town of Cuenca  (Spain)
     C      155.7 km     0.8661°E  dist_mid= 10.8 km  [christian, church, biblical]  Abbey Church of Saint-Savin sur Gartempe  (France)
     C      155.8 km    -5.3275°E  dist_mid= 10.7 km  [christian, church]  Royal Monastery of Santa María de Guadalupe  (Spain)
-    C      156.4 km   -50.1402°E  dist_mid= 10.1 km  [cathedral, church]  Historic Centre of the Town of Goiás  (Brazil)
-    C      157.2 km    24.8530°E  dist_mid=  9.3 km  [christian]  Kernavė Archaeological Site (Cultural Reserve of Kernavė)  (Lithuania)
-    C      157.4 km     9.8510°E  dist_mid=  9.1 km  [church]  Portovenere, Cinque Terre, and the Islands (Palmaria, Tino and Tinetto)  (Italy)
-    C      158.2 km     6.8442°E  dist_mid=  8.3 km  [cathedral]  Völklingen Ironworks  (Germany)
-    C      158.8 km    18.7000°E  dist_mid=  7.7 km  [church]  Natural and Culturo-Historical Region of Kotor  (Montenegro)
-    C      159.1 km     0.7028°E  dist_mid=  7.4 km  [church]  The Loire Valley between Sully-sur-Loire and Chalonnes  (France)
-    C      159.4 km   -98.1667°E  dist_mid=  7.1 km  [church]  San Antonio Missions  (United States of America)
 
-  C-/C-- SITES (12) — very close to midpoint:
+  C-/C-- SITES (19) — very close to midpoint:
+    C-     156.4 km   -50.1402°E  dist_mid= 10.1 km  [cathedral, church]  Historic Centre of the Town of Goiás  (Brazil)
+    C-     157.2 km    24.8530°E  dist_mid=  9.3 km  [christian]  Kernavė Archaeological Site (Cultural Reserve of Kernavė)  (Lithuania)
+    C-     157.4 km     9.8510°E  dist_mid=  9.1 km  [church]  Portovenere, Cinque Terre, and the Islands (Palmaria, Tino and Tinetto)  (Italy)
+    C-     158.2 km     6.8442°E  dist_mid=  8.3 km  [cathedral]  Völklingen Ironworks  (Germany)
+    C-     158.8 km    18.7000°E  dist_mid=  7.7 km  [church]  Natural and Culturo-Historical Region of Kotor  (Montenegro)
+    C-     159.1 km     0.7028°E  dist_mid=  7.4 km  [church]  The Loire Valley between Sully-sur-Loire and Chalonnes  (France)
+    C-     159.4 km   -98.1667°E  dist_mid=  7.1 km  [church]  San Antonio Missions  (United States of America)
     C-     162.0 km  -101.1904°E  dist_mid=  4.5 km  [cathedral, church]  Historic Centre of Morelia  (Mexico)
     C-     162.8 km   -98.1978°E  dist_mid=  3.7 km  [cathedral, church]  Historic Centre of Puebla  (Mexico)
     C-     162.8 km     3.7360°E  dist_mid=  3.7 km  [christian, church, apostle, biblical]  Vézelay, Church and Hill  (France)
@@ -732,25 +732,25 @@ CHRISTIANITY  (N=397)
 ────────────────────────────────────────────────────────────────────────────────────────
 ISLAM  (N=178)
   Keywords : islam, mosque, muslim, sufi, ottoman, caliphate, madrasa, mihrab, quran
-  A+  : 12/178 = 6.7%  enrich 1.69x  Fisher p=0.2695 ns  OR=1.30x
+  A+  : 19/178 = 10.7%  enrich 1.66x  Fisher p=0.1875 ns  OR=1.32x
   A   : 42/178 = 23.6%  enrich 1.18x  Fisher p=0.3901 ns  OR=1.07x
   C   : 32/178 = 18.0%  enrich 0.90x  Fisher p=0.8081 ns  OR=0.85x
-  C-  : 6/178 = 3.4%  enrich 0.84x  Fisher p=0.8495 ns  OR=0.69x
+  C-  : 11/178 = 6.2%  enrich 0.96x  Fisher p=0.7695 ns  OR=0.82x
 
   Keyword tier breakdown (sorted by total hits):
     keyword                 total    A+      A      B      C    C-
     ------------------------------------------------------------
-    islam                 total=126  A+= 8  A= 21  B= 73  C= 20  C-= 4
-    mosque                total= 93  A+= 1  A= 19  B= 53  C= 17  C-= 3
-    muslim                total= 67  A+= 3  A=  9  B= 41  C= 13  C-= 1
-    ottoman               total= 41  A+= 2  A= 12  B= 24  C=  2  C-= 1
-    madrasa               total= 16  A+= 0  A=  3  B= 10  C=  3  C-= 0
+    islam                 total=126  A+=14  A= 15  B= 73  C= 15  C-= 9
+    mosque                total= 93  A+= 6  A= 14  B= 53  C= 14  C-= 6
+    muslim                total= 67  A+= 7  A=  5  B= 41  C= 12  C-= 2
+    ottoman               total= 41  A+= 5  A=  9  B= 24  C=  2  C-= 1
+    madrasa               total= 16  A+= 1  A=  2  B= 10  C=  3  C-= 0
     caliphate             total= 11  A+= 0  A=  2  B=  7  C=  2  C-= 0
-    sufi                  total=  7  A+= 2  A=  3  B=  2  C=  0  C-= 0
+    sufi                  total=  7  A+= 4  A=  1  B=  2  C=  0  C-= 0
     mihrab                total=  2  A+= 0  A=  1  B=  1  C=  0  C-= 0
     quran                 total=  2  A+= 1  A=  0  B=  0  C=  0  C-= 1
 
-  A+ SITES (12):
+  A+ SITES (19):
     A++      0.1 km     8.2697°E  [muslim]  <I>Sacri Monti</I> of Piedmont and Lombardy  (Italy)
     A++      0.2 km    68.2711°E  [islam, mosque, sufi]  Mausoleum of Khoja Ahmed Yasawi  (Kazakhstan)
     A+       1.6 km    -0.7167°E  [islam, muslim]  Palmeral of Elche  (Spain)
@@ -763,15 +763,15 @@ ISLAM  (N=178)
     A+       4.1 km    35.2317°E  [islam]  Old City of Jerusalem and its Walls  (Jerusalem (Site proposed by Jordan))
     A+       4.4 km    23.3086°E  [ottoman]  Rila Monastery  (Bulgaria)
     A+       6.2 km    -9.7867°E  [muslim]  Medina of Essaouira (formerly Mogador)  (Morocco)
+    A+       6.8 km    62.2081°E  [islam, mosque, muslim, sufi]  Silk Roads: Zarafshan-Karakum Corridor  (Tajikistan,Turkmenistan,Uzbekistan)
+    A+       6.8 km    44.2081°E  [islam, mosque, ottoman]  Old City of Sana'a  (Yemen)
+    A+       6.8 km    35.2075°E  [muslim]  Birthplace of Jesus: Church of the Nativity and the Pilgrimage Route, Bethlehem  (State of Palestine)
+    A+       9.0 km    47.1875°E  [islam, mosque, ottoman]  Historic Centre of Sheki with the Khan’s Palace  (Azerbaijan)
+    A+       9.3 km    77.1853°E  [islam, mosque, muslim]  Qutb Minar and its Monuments, Delhi  (India)
+    A+      10.6 km   110.3648°E  [islam, sufi]  The Cosmological Axis of Yogyakarta and its Historic Landmarks  (Indonesia)
+    A+      10.6 km    29.1731°E  [islam, mosque, muslim, ottoman, madrasa]  Bursa and Cumalıkızık: the Birth of the Ottoman Empire  (Türkiye)
 
-  A-TIER SITES (30):
-    A        6.8 km    62.2081°E  [islam, mosque, muslim, sufi]  Silk Roads: Zarafshan-Karakum Corridor  (Tajikistan,Turkmenistan,Uzbekistan)
-    A        6.8 km    44.2081°E  [islam, mosque, ottoman]  Old City of Sana'a  (Yemen)
-    A        6.8 km    35.2075°E  [muslim]  Birthplace of Jesus: Church of the Nativity and the Pilgrimage Route, Bethlehem  (State of Palestine)
-    A        9.0 km    47.1875°E  [islam, mosque, ottoman]  Historic Centre of Sheki with the Khan’s Palace  (Azerbaijan)
-    A        9.3 km    77.1853°E  [islam, mosque, muslim]  Qutb Minar and its Monuments, Delhi  (India)
-    A       10.6 km   110.3648°E  [islam, sufi]  The Cosmological Axis of Yogyakarta and its Historic Landmarks  (Indonesia)
-    A       10.6 km    29.1731°E  [islam, mosque, muslim, ottoman, madrasa]  Bursa and Cumalıkızık: the Birth of the Ottoman Empire  (Türkiye)
+  A-TIER SITES (23):
     A       12.1 km    59.3781°E  [islam]  Ancient City of Qalhat  (Oman)
     A       12.6 km    74.3821°E  [islam, mosque]  Fort and Shalamar Gardens in Lahore  (Pakistan)
     A       12.9 km    -6.8469°E  [islam, mosque, muslim, caliphate]  Rabat, Modern Capital and Historic City: a Shared Heritage  (Morocco)
@@ -902,7 +902,7 @@ ISLAM  (N=178)
     B      130.5 km    -8.5554°E  [islam, muslim]  Santiago de Compostela (Old Town)  (Spain)
     B      133.1 km    36.4681°E  [islam, mosque, muslim, madrasa]  Ancient City of Bosra  (Syrian Arab Republic)
 
-  C SITES (26) — near inter-harmonic midpoint:
+  C SITES (21) — near inter-harmonic midpoint:
     C      134.3 km    49.0589°E  dist_mid= 32.2 km  [islam, mosque, muslim]  Bolgar Historical and Archaeological Complex  (Russian Federation)
     C      136.4 km    -8.5019°E  dist_mid= 30.1 km  [muslim]  Portuguese City of Mazagan (El Jadida)  (Morocco)
     C      136.6 km     9.5000°E  dist_mid= 29.9 km  [islam, mosque, ottoman]  Old Town of Ghadamès  (Libya)
@@ -924,13 +924,13 @@ ISLAM  (N=178)
     C      154.1 km    72.8805°E  dist_mid= 12.4 km  [islam, mosque, muslim]  Taxila  (Pakistan)
     C      155.4 km    -2.1310°E  dist_mid= 11.1 km  [islam, mosque, caliphate]  Historic Walled Town of Cuenca  (Spain)
     C      155.8 km    -5.3275°E  dist_mid= 10.7 km  [muslim]  Royal Monastery of Santa María de Guadalupe  (Spain)
-    C      156.4 km    51.6778°E  dist_mid= 10.1 km  [islam, mosque]  Meidan Emam, Esfahan  (Iran (Islamic Republic of))
-    C      157.2 km    51.6853°E  dist_mid=  9.3 km  [islam, mosque]  Masjed-e Jāmé of Isfahan  (Iran (Islamic Republic of))
-    C      158.2 km    66.8435°E  dist_mid=  8.3 km  [islam]  Cultural Landscape and Archaeological Remains of the Bamiyan Valley  (Afghanistan)
-    C      159.1 km    48.8358°E  dist_mid=  7.4 km  [islam, muslim]  Shushtar Historical Hydraulic System  (Iran (Islamic Republic of))
-    C      159.4 km    66.8333°E  dist_mid=  7.1 km  [islam, mosque]  Historic Centre of Shakhrisyabz  (Uzbekistan)
 
-  C-/C-- SITES (6) — very close to midpoint:
+  C-/C-- SITES (11) — very close to midpoint:
+    C-     156.4 km    51.6778°E  dist_mid= 10.1 km  [islam, mosque]  Meidan Emam, Esfahan  (Iran (Islamic Republic of))
+    C-     157.2 km    51.6853°E  dist_mid=  9.3 km  [islam, mosque]  Masjed-e Jāmé of Isfahan  (Iran (Islamic Republic of))
+    C-     158.2 km    66.8435°E  dist_mid=  8.3 km  [islam]  Cultural Landscape and Archaeological Remains of the Bamiyan Valley  (Afghanistan)
+    C-     159.1 km    48.8358°E  dist_mid=  7.4 km  [islam, muslim]  Shushtar Historical Hydraulic System  (Iran (Islamic Republic of))
+    C-     159.4 km    66.8333°E  dist_mid=  7.1 km  [islam, mosque]  Historic Centre of Shakhrisyabz  (Uzbekistan)
     C-     160.9 km    42.7183°E  dist_mid=  5.6 km  [islam]  Hatra  (Iraq)
     C-     162.5 km    -5.1949°E  dist_mid=  4.0 km  [islam, mosque, muslim, quran]  Sudanese style mosques in northern Côte d’Ivoire  (Côte d'Ivoire)
     C-     163.6 km    48.7947°E  dist_mid=  2.9 km  [islam]  Soltaniyeh  (Iran (Islamic Republic of))
@@ -941,30 +941,30 @@ ISLAM  (N=178)
 ────────────────────────────────────────────────────────────────────────────────────────
 JUDAISM  (N=50)
   Keywords : jewish, judaism, synagogue, hebrew, israelite, biblical
-  A+  : 5/50 = 10.0%  enrich 2.50x  Fisher p=0.1370 ns  OR=1.98x
+  A+  : 6/50 = 12.0%  enrich 1.87x  Fisher p=0.2636 ns  OR=1.46x
   A   : 16/50 = 32.0%  enrich 1.60x  Fisher p=0.0749 ~  OR=1.66x
   C   : 7/50 = 14.0%  enrich 0.70x  Fisher p=0.9047 ns  OR=0.64x
-  C-  : 1/50 = 2.0%  enrich 0.50x  Fisher p=0.9082 ns  OR=0.42x
+  C-  : 1/50 = 2.0%  enrich 0.31x  Fisher p=0.9786 ns  OR=0.25x
 
   Keyword tier breakdown (sorted by total hits):
     keyword                 total    A+      A      B      C    C-
     ------------------------------------------------------------
-    jewish                total= 27  A+= 2  A=  9  B= 15  C=  1  C-= 0
+    jewish                total= 27  A+= 3  A=  8  B= 15  C=  1  C-= 0
     synagogue             total= 16  A+= 0  A=  5  B= 10  C=  1  C-= 0
     judaism               total= 11  A+= 1  A=  4  B=  4  C=  2  C-= 0
     biblical              total= 10  A+= 2  A=  1  B=  3  C=  3  C-= 1
     hebrew                total=  5  A+= 0  A=  3  B=  2  C=  0  C-= 0
     israelite             total=  1  A+= 1  A=  0  B=  0  C=  0  C-= 0
 
-  A+ SITES (5):
+  A+ SITES (6):
     A++      0.1 km     8.2697°E  [biblical]  <I>Sacri Monti</I> of Piedmont and Lombardy  (Italy)
     A+       3.8 km    47.2350°E  [biblical]  Takht-e Soleyman  (Iran (Islamic Republic of))
     A+       4.1 km    35.2317°E  [judaism]  Old City of Jerusalem and its Walls  (Jerusalem (Site proposed by Jordan))
     A+       5.7 km   -69.6792°E  [jewish]  Coro and its Port  (Venezuela (Bolivarian Republic of))
     A+       6.2 km    -9.7867°E  [jewish, israelite]  Medina of Essaouira (formerly Mogador)  (Morocco)
+    A+       9.4 km    35.3536°E  [jewish]  Masada  (Israel)
 
-  A-TIER SITES (11):
-    A        9.4 km    35.3536°E  [jewish]  Masada  (Israel)
+  A-TIER SITES (10):
     A       15.8 km    35.1269°E  [jewish, judaism, hebrew]  Necropolis of Bet She’arim: A Landmark of Jewish Renewal  (Israel)
     A       17.8 km    35.1083°E  [judaism]  Hebron/Al-Khalil Old Town  (State of Palestine)
     A       18.9 km     8.4395°E  [jewish, judaism, synagogue, hebrew]  ShUM Sites of Speyer, Worms and Mainz  (Germany)
@@ -1019,28 +1019,28 @@ JUDAISM  (N=50)
 ────────────────────────────────────────────────────────────────────────────────────────
 HINDUISM  (N=39)
   Keywords : hindu, brahman, vedic, shiva, vishnu, ganges
-  A+  : 1/39 = 2.6%  enrich 0.64x  Fisher p=0.8963 ns  OR=0.44x
+  A+  : 4/39 = 10.3%  enrich 1.60x  Fisher p=0.4457 ns  OR=1.21x
   A   : 11/39 = 28.2%  enrich 1.41x  Fisher p=0.2469 ns  OR=1.37x
   C   : 10/39 = 25.6%  enrich 1.28x  Fisher p=0.2418 ns  OR=1.39x
-  C-  : 4/39 = 10.3%  enrich 2.56x  Fisher p=0.0961 ~  OR=2.53x
+  C-  : 7/39 = 17.9%  enrich 2.80x  Fisher p=0.0181 *  OR=3.00x
 
   Keyword tier breakdown (sorted by total hits):
     keyword                 total    A+      A      B      C    C-
     ------------------------------------------------------------
-    hindu                 total= 30  A+= 1  A=  9  B= 13  C=  4  C-= 3
-    brahman               total=  9  A+= 0  A=  2  B=  6  C=  1  C-= 0
-    shiva                 total=  9  A+= 0  A=  3  B=  4  C=  2  C-= 0
-    vedic                 total=  4  A+= 0  A=  0  B=  1  C=  1  C-= 2
-    vishnu                total=  3  A+= 0  A=  2  B=  1  C=  0  C-= 0
-    ganges                total=  2  A+= 0  A=  1  B=  1  C=  0  C-= 0
+    hindu                 total= 30  A+= 4  A=  6  B= 13  C=  3  C-= 4
+    brahman               total=  9  A+= 1  A=  1  B=  6  C=  1  C-= 0
+    shiva                 total=  9  A+= 1  A=  2  B=  4  C=  1  C-= 1
+    vedic                 total=  4  A+= 0  A=  0  B=  1  C=  0  C-= 3
+    vishnu                total=  3  A+= 1  A=  1  B=  1  C=  0  C-= 0
+    ganges                total=  2  A+= 1  A=  0  B=  1  C=  0  C-= 0
 
-  A+ SITES (1):
+  A+ SITES (4):
     A+       3.1 km    77.2408°E  [hindu]  Red Fort Complex  (India)
+    A+       7.8 km    80.1989°E  [hindu, shiva, vishnu, ganges]  Group of Monuments at Mahabalipuram  (India)
+    A+       9.3 km    77.1853°E  [hindu, brahman]  Qutb Minar and its Monuments, Delhi  (India)
+    A+      10.6 km   110.3648°E  [hindu]  The Cosmological Axis of Yogyakarta and its Historic Landmarks  (Indonesia)
 
-  A-TIER SITES (10):
-    A        7.8 km    80.1989°E  [hindu, shiva, vishnu, ganges]  Group of Monuments at Mahabalipuram  (India)
-    A        9.3 km    77.1853°E  [hindu, brahman]  Qutb Minar and its Monuments, Delhi  (India)
-    A       10.6 km   110.3648°E  [hindu]  The Cosmological Axis of Yogyakarta and its Historic Landmarks  (Indonesia)
+  A-TIER SITES (7):
     A       11.3 km    53.1673°E  [hindu]  Pasargadae  (Iran (Islamic Republic of))
     A       12.6 km    74.3821°E  [hindu]  Fort and Shalamar Gardens in Lahore  (Pakistan)
     A       13.1 km   101.1511°E  [hindu]  The Ancient Town of Si Thep and its Associated Dvaravati Monuments  (Thailand)
@@ -1069,15 +1069,15 @@ HINDUISM  (N=39)
     B      103.6 km   115.3361°E  [hindu]  Cultural Landscape of Bali Province: the <em>Subak</em> System as a Manifestation of the <em>Tri Hita Karana</em> Philosophy  (Indonesia)
     B      126.3 km    79.1316°E  [hindu, brahman, vedic, shiva]  Great Living Chola Temples  (India)
 
-  C SITES (6) — near inter-harmonic midpoint:
+  C SITES (3) — near inter-harmonic midpoint:
     C      141.5 km    84.9939°E  dist_mid= 25.0 km  [hindu, brahman]  Mahabodhi Temple Complex at Bodh Gaya  (India)
     C      146.4 km    72.5881°E  dist_mid= 20.1 km  [hindu]  Historic City of Ahmadabad  (India)
     C      148.0 km    72.9358°E  dist_mid= 18.5 km  [hindu, shiva]  Elephanta Caves  (India)
-    C      157.2 km    87.6850°E  dist_mid=  9.3 km  [vedic]  Santiniketan  (India)
-    C      158.2 km    66.8435°E  dist_mid=  8.3 km  [hindu]  Cultural Landscape and Archaeological Remains of the Bamiyan Valley  (Afghanistan)
-    C      159.0 km    72.8362°E  dist_mid=  7.5 km  [shiva]  Chhatrapati Shivaji Terminus (formerly Victoria Terminus)  (India)
 
-  C-/C-- SITES (4) — very close to midpoint:
+  C-/C-- SITES (7) — very close to midpoint:
+    C-     157.2 km    87.6850°E  dist_mid=  9.3 km  [vedic]  Santiniketan  (India)
+    C-     158.2 km    66.8435°E  dist_mid=  8.3 km  [hindu]  Cultural Landscape and Archaeological Remains of the Bamiyan Valley  (Afghanistan)
+    C-     159.0 km    72.8362°E  dist_mid=  7.5 km  [shiva]  Chhatrapati Shivaji Terminus (formerly Victoria Terminus)  (India)
     C-     160.6 km   105.8222°E  dist_mid=  5.9 km  [hindu]  Vat Phou and Associated Ancient Settlements within the Champasak Cultural Landscape  (Lao People's Democratic Republic)
     C-     160.6 km    75.8219°E  dist_mid=  5.9 km  [hindu, vedic]  Jaipur City, Rajasthan  (India)
     C-     161.2 km    75.8172°E  dist_mid=  5.3 km  [hindu]  Group of Monuments at Pattadakal  (India)
@@ -1086,17 +1086,17 @@ HINDUISM  (N=39)
 ────────────────────────────────────────────────────────────────────────────────────────
 ZOROASTRIANISM  (N=16)
   Keywords : zoroastrian, sassanid, sasanian, fire temple
-  A+  : 2/16 = 12.5%  enrich 3.12x  Fisher p=0.2207 ns  OR=2.49x
+  A+  : 2/16 = 12.5%  enrich 1.95x  Fisher p=0.4127 ns  OR=1.51x
   A   : 2/16 = 12.5%  enrich 0.62x  Fisher p=0.9070 ns  OR=0.49x
   C   : 5/16 = 31.2%  enrich 1.56x  Fisher p=0.2026 ns  OR=1.83x
-  C-  : 1/16 = 6.2%  enrich 1.56x  Fisher p=0.5280 ns  OR=1.41x
+  C-  : 3/16 = 18.8%  enrich 2.92x  Fisher p=0.1025 ns  OR=3.05x
 
   Keyword tier breakdown (sorted by total hits):
     keyword                 total    A+      A      B      C    C-
     ------------------------------------------------------------
     zoroastrian           total=  8  A+= 2  A=  0  B=  5  C=  1  C-= 0
-    sassanid              total=  7  A+= 0  A=  0  B=  4  C=  2  C-= 1
-    sasanian              total=  5  A+= 1  A=  0  B=  2  C=  2  C-= 0
+    sassanid              total=  7  A+= 0  A=  0  B=  4  C=  1  C-= 2
+    sasanian              total=  5  A+= 1  A=  0  B=  2  C=  1  C-= 1
     fire temple           total=  4  A+= 1  A=  0  B=  3  C=  0  C-= 0
 
   A+ SITES (2):
@@ -1114,21 +1114,21 @@ ZOROASTRIANISM  (N=16)
     B      114.3 km    40.2393°E  [sassanid]  Diyarbakır Fortress and Hevsel Gardens Cultural Landscape  (Türkiye)
     B      122.6 km    54.3731°E  [zoroastrian, fire temple]  Historic City of Yazd  (Iran (Islamic Republic of))
 
-  C SITES (4) — near inter-harmonic midpoint:
+  C SITES (2) — near inter-harmonic midpoint:
     C      138.7 km    48.5183°E  dist_mid= 27.8 km  [sassanid, sasanian]  Hegmataneh  (Iran (Islamic Republic of))
     C      146.4 km    72.5881°E  dist_mid= 20.1 km  [zoroastrian]  Historic City of Ahmadabad  (India)
-    C      157.2 km    51.6853°E  dist_mid=  9.3 km  [sassanid]  Masjed-e Jāmé of Isfahan  (Iran (Islamic Republic of))
-    C      158.2 km    66.8435°E  dist_mid=  8.3 km  [sasanian]  Cultural Landscape and Archaeological Remains of the Bamiyan Valley  (Afghanistan)
 
-  C-/C-- SITES (1) — very close to midpoint:
+  C-/C-- SITES (3) — very close to midpoint:
+    C-     157.2 km    51.6853°E  dist_mid=  9.3 km  [sassanid]  Masjed-e Jāmé of Isfahan  (Iran (Islamic Republic of))
+    C-     158.2 km    66.8435°E  dist_mid=  8.3 km  [sasanian]  Cultural Landscape and Archaeological Remains of the Bamiyan Valley  (Afghanistan)
     C-     160.9 km    42.7183°E  dist_mid=  5.6 km  [sassanid]  Hatra  (Iraq)
 
 ────────────────────────────────────────────────────────────────────────────────────────
 UNION — ALL RELIGION-TAGGED SITES (N=577)
-  A+  : 35/577 = 6.1%  enrich 1.52x  p=0.2414 ns
+  A+  : 51/577 = 8.8%  enrich 1.38x  p=0.4769 ns
   A   : 132/577 = 22.9%  enrich 1.14x  p=0.4179 ns
   C   : 119/577 = 20.6%  enrich 1.03x  p=0.3382 ns
-  C-  : 23/577 = 4.0%  enrich 1.00x  p=0.8735 ns
+  C-  : 39/577 = 6.8%  enrich 1.05x  p=0.7817 ns
 
   Site                                                    Tier       km  Religion (keyword)
   ------------------------------------------------------------------------------------------
@@ -1167,22 +1167,22 @@ UNION — ALL RELIGION-TAGGED SITES (N=577)
   Cathedral and Churches of Echmiatsin and the Archaeolo  A+        6.2  Christianity(christian, cathedral, church, apostle)
   Medina of Essaouira (formerly Mogador)                  A+        6.2  Christianity(christian); Islam(muslim); Judaism(jewish, israelite)
   Classical Weimar                                        A+        6.6  Christianity(church)
-  Silk Roads: Zarafshan-Karakum Corridor                  A         6.8  Islam(islam, mosque, muslim, sufi)
-  Old City of Sana'a                                      A         6.8  Christianity(christian, cathedral); Islam(islam, mosque, ottoman)
-  Birthplace of Jesus: Church of the Nativity and the Pi  A         6.8  Christianity(christian, church, orthodox); Islam(muslim)
-  Historic Centre of Siena                                A         7.0  Christianity(church)
-  Group of Monuments at Mahabalipuram                     A         7.8  Hinduism(hindu, shiva, vishnu, ganges)
-  Tyre                                                    A         8.1  Christianity(cathedral, crusader)
-  Historic Centre of Naples                               A         8.5  Christianity(cathedral, church, byzantine)
-  Mount Wutai                                             A         8.9  Buddhism(buddhist, bodhi)
-  Historic Centre of Sheki with the Khan’s Palace         A         9.0  Christianity(christian); Islam(islam, mosque, ottoman)
-  Qutb Minar and its Monuments, Delhi                     A         9.3  Islam(islam, mosque, muslim); Hinduism(hindu, brahman)
-  Site of Xanadu                                          A         9.3  Buddhism(buddhism)
-  Masada                                                  A         9.4  Christianity(byzantine); Judaism(jewish)
-  Palau de la Música Catalana and Hospital de Sant Pau,   A        10.4  Christianity(cathedral)
-  Historic Fortified City of Carcassonne                  A        10.5  Christianity(cathedral, church)
-  The Cosmological Axis of Yogyakarta and its Historic L  A        10.6  Buddhism(buddhist, buddhism); Islam(islam, sufi); Hinduism(hindu)
-  Bursa and Cumalıkızık: the Birth of the Ottoman Empire  A        10.6  Christianity(byzantine); Islam(islam, mosque, muslim, ottoman, madrasa)
+  Silk Roads: Zarafshan-Karakum Corridor                  A+        6.8  Islam(islam, mosque, muslim, sufi)
+  Old City of Sana'a                                      A+        6.8  Christianity(christian, cathedral); Islam(islam, mosque, ottoman)
+  Birthplace of Jesus: Church of the Nativity and the Pi  A+        6.8  Christianity(christian, church, orthodox); Islam(muslim)
+  Historic Centre of Siena                                A+        7.0  Christianity(church)
+  Group of Monuments at Mahabalipuram                     A+        7.8  Hinduism(hindu, shiva, vishnu, ganges)
+  Tyre                                                    A+        8.1  Christianity(cathedral, crusader)
+  Historic Centre of Naples                               A+        8.5  Christianity(cathedral, church, byzantine)
+  Mount Wutai                                             A+        8.9  Buddhism(buddhist, bodhi)
+  Historic Centre of Sheki with the Khan’s Palace         A+        9.0  Christianity(christian); Islam(islam, mosque, ottoman)
+  Qutb Minar and its Monuments, Delhi                     A+        9.3  Islam(islam, mosque, muslim); Hinduism(hindu, brahman)
+  Site of Xanadu                                          A+        9.3  Buddhism(buddhism)
+  Masada                                                  A+        9.4  Christianity(byzantine); Judaism(jewish)
+  Palau de la Música Catalana and Hospital de Sant Pau,   A+       10.4  Christianity(cathedral)
+  Historic Fortified City of Carcassonne                  A+       10.5  Christianity(cathedral, church)
+  The Cosmological Axis of Yogyakarta and its Historic L  A+       10.6  Buddhism(buddhist, buddhism); Islam(islam, sufi); Hinduism(hindu)
+  Bursa and Cumalıkızık: the Birth of the Ottoman Empire  A+       10.6  Christianity(byzantine); Islam(islam, mosque, muslim, ottoman, madrasa)
   Cultural Landscape of Kenozero Lake                     A        10.7  Christianity(church)
   Pasargadae                                              A        11.3  Hinduism(hindu)
   Ancient City of Qalhat                                  A        12.1  Islam(islam)
@@ -1670,22 +1670,22 @@ UNION — ALL RELIGION-TAGGED SITES (N=577)
   Historic Walled Town of Cuenca                          C       155.4  Christianity(cathedral); Islam(islam, mosque, caliphate)
   Abbey Church of Saint-Savin sur Gartempe                C       155.7  Christianity(christian, church, biblical); Judaism(biblical)
   Royal Monastery of Santa María de Guadalupe             C       155.8  Christianity(christian, church); Islam(muslim)
-  Meidan Emam, Esfahan                                    C       156.4  Islam(islam, mosque)
-  Historic Centre of the Town of Goiás                    C       156.4  Christianity(cathedral, church)
-  Orkhon Valley Cultural Landscape                        C       156.5  Buddhism(buddhist, buddhism)
-  Santiniketan                                            C       157.2  Hinduism(vedic)
-  Kernavė Archaeological Site (Cultural Reserve of Kerna  C       157.2  Christianity(christian)
-  Masjed-e Jāmé of Isfahan                                C       157.2  Islam(islam, mosque); Zoroastrianism(sassanid)
-  Portovenere, Cinque Terre, and the Islands (Palmaria,   C       157.4  Christianity(church)
-  Völklingen Ironworks                                    C       158.2  Christianity(cathedral)
-  Cultural Landscape and Archaeological Remains of the B  C       158.2  Buddhism(buddha, buddhist, buddhism); Islam(islam); Hinduism(hindu); Zoroastrianism(sasanian)
-  Natural and Culturo-Historical Region of Kotor          C       158.8  Christianity(church)
-  Ajanta Caves                                            C       158.9  Buddhism(buddha, buddhist, buddhism, stupa)
-  Chhatrapati Shivaji Terminus (formerly Victoria Termin  C       159.0  Hinduism(shiva)
-  Shushtar Historical Hydraulic System                    C       159.1  Islam(islam, muslim)
-  The Loire Valley between Sully-sur-Loire and Chalonnes  C       159.1  Christianity(church)
-  San Antonio Missions                                    C       159.4  Christianity(church)
-  Historic Centre of Shakhrisyabz                         C       159.4  Islam(islam, mosque)
+  Meidan Emam, Esfahan                                    C-      156.4  Islam(islam, mosque)
+  Historic Centre of the Town of Goiás                    C-      156.4  Christianity(cathedral, church)
+  Orkhon Valley Cultural Landscape                        C-      156.5  Buddhism(buddhist, buddhism)
+  Santiniketan                                            C-      157.2  Hinduism(vedic)
+  Kernavė Archaeological Site (Cultural Reserve of Kerna  C-      157.2  Christianity(christian)
+  Masjed-e Jāmé of Isfahan                                C-      157.2  Islam(islam, mosque); Zoroastrianism(sassanid)
+  Portovenere, Cinque Terre, and the Islands (Palmaria,   C-      157.4  Christianity(church)
+  Völklingen Ironworks                                    C-      158.2  Christianity(cathedral)
+  Cultural Landscape and Archaeological Remains of the B  C-      158.2  Buddhism(buddha, buddhist, buddhism); Islam(islam); Hinduism(hindu); Zoroastrianism(sasanian)
+  Natural and Culturo-Historical Region of Kotor          C-      158.8  Christianity(church)
+  Ajanta Caves                                            C-      158.9  Buddhism(buddha, buddhist, buddhism, stupa)
+  Chhatrapati Shivaji Terminus (formerly Victoria Termin  C-      159.0  Hinduism(shiva)
+  Shushtar Historical Hydraulic System                    C-      159.1  Islam(islam, muslim)
+  The Loire Valley between Sully-sur-Loire and Chalonnes  C-      159.1  Christianity(church)
+  San Antonio Missions                                    C-      159.4  Christianity(church)
+  Historic Centre of Shakhrisyabz                         C-      159.4  Islam(islam, mosque)
   Vat Phou and Associated Ancient Settlements within the  C-      160.6  Hinduism(hindu)
   Jaipur City, Rajasthan                                  C-      160.6  Hinduism(hindu, vedic)
   Hatra                                                   C-      160.9  Islam(islam); Zoroastrianism(sassanid)

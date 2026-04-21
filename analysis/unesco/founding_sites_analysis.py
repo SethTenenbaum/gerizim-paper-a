@@ -3,13 +3,13 @@ founding_sites_analysis.py
 ==========================
 Thematic breakdown of the Tier-A+ sites detected in the corpus.
 
-The 57 sites within ±6.7 km of a beru harmonic are classified by
+The 57 sites within ±TIER_APLUS_KM of a beru harmonic are classified by
 UNESCO's own inscription language into five categories.
 
 IMPORTANT — NO HAND-PICKING
 ─────────────────────────────
 Every site in this analysis is included because it passes the same
-mechanical beru-deviation threshold (≤ 0.002 beru) applied uniformly
+mechanical beru-deviation threshold (≤ TIER_APLUS beru) applied uniformly
 to all 1011 cultural/mixed UNESCO sites. No site is added or removed
 by hand. The old APLUS_CATALOGUE list (which assigned categories by
 hand to pre-selected sites) has been removed entirely.
@@ -49,7 +49,7 @@ from scipy.stats import binomtest, fisher_exact
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus, cultural_sites_with_coords
 from lib.beru import (
-    GERIZIM, BERU, TIER_APLUS, TIER_A_MAX, TIER_B_MAX, P_NULL_AP,
+    GERIZIM, BERU, TIER_APLUS, TIER_APLUS_KM, TIER_A_MAX, TIER_B_MAX, P_NULL_AP,
     deviation as beru_dev, tier_label as tier, is_aplus, is_a_or_better,
 )
 from lib.founding_filter import (
@@ -113,7 +113,7 @@ aplus_sites = sorted(
 # ── 1. Thematic breakdown table ───────────────────────────────────────────────
 print_header(
     f"BERU-GRID A+ SITES: THEMATIC ANALYSIS\n"
-    f"  Tier-A+ = within ±6.7 km of a beru harmonic  "
+    f"  Tier-A+ = within ±{TIER_APLUS_KM:.1f} km of a beru harmonic  "
     f"(1/80 of Earth's circumference)\n"
     f"  Total A+ sites detected from corpus: {len(aplus_sites)}\n"
     f"  Classification: keyword-driven from config.json, applied uniformly",

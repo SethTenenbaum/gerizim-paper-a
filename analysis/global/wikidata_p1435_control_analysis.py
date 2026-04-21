@@ -10,7 +10,7 @@ for beru-harmonic enrichment.
 
 TESTS PERFORMED
 ---------------
-  (a) Binomial test: P1435 control vs 4% geometric null
+  (a) Binomial test: P1435 control vs geometric null (P_NULL_AP from config)
   (b) 2-proportion z-test: UNESCO > P1435 control
   (c) Odds ratio with 95% CI (Woolf log-odds SE)
   (d) Permutation test (50,000 draws, seed=42)
@@ -77,7 +77,7 @@ _CFG           = _json.loads((ROOT / "config.json").read_text())
 BERU_DEG       = BERU                          # 30.0° — from lib.beru
 HARMONIC_STEP  = BERU * 0.1                   # 0.1 beru = 3.0°
 HALF_STEP      = HARMONIC_STEP / 2
-P_NULL         = P_NULL_AP                    # 0.04 — geometric null for Tier-A+
+P_NULL         = P_NULL_AP                    # geometric null for Tier-A+ (from config)
 CTRL_CSV       = ROOT / "data" / "store" / "wikidata" / "p1435_global_control.csv"
 N_PERM         = _CFG["simulation"]["n_permutations_wikidata"]  # 50,000
 SEED           = _CFG["simulation"]["random_seed"]              # 42
@@ -191,7 +191,7 @@ def main():
     print(f"\n  UNESCO:  N = {n_u:,}, A+ = {k_u}, rate = {r_u*100:.2f}%")
     print(f"  Control: N = {n_c:,}, A+ = {k_c}, rate = {r_c*100:.2f}%")
 
-    # (a) Binomial: control vs 4% null
+    # (a) Binomial: control vs geometric null (P_NULL_AP)
     p_binom_c = binomtest(k_c, n_c, P_NULL, alternative="two-sided").pvalue
 
     # (b) 2-proportion z-test
@@ -255,18 +255,18 @@ def main():
     nc_arab  = sum(1 for r in ctrl if r["region"] == "Arab States")
     kc_arab  = sum(1 for r in ctrl if r["region"] == "Arab States" and r["aplus"])
     rc_arab  = kc_arab / nc_arab if nc_arab > 0 else 0.0
-    # Binomial test: Arab States A+ rate vs 4% geometric null
+    # Binomial test: Arab States A+ rate vs geometric null (P_NULL_AP)
     p_arab_binom = binomtest(kc_arab, nc_arab, P_NULL, alternative="greater").pvalue \
                    if nc_arab > 0 else 1.0
 
     # ── Print results ─────────────────────────────────────────────────────
-    print(f"\n  (a) Binomial (control vs 4% null):  p = {p_binom_c:.4g}")
+    print(f"\n  (a) Binomial (control vs {P_NULL:.1%} null):  p = {p_binom_c:.4g}")
     print(f"  (b) 2-prop z-test (UNESCO > ctrl):  z = {z:.3f}, p = {p_z:.4f}")
     print(f"  (c) OR = {or_global:.2f}  (95% CI {or_lo:.2f}--{or_hi:.2f})")
     print(f"  (d) Permutation p ({N_PERM:,} draws):  p = {p_perm:.3f}")
     print(f"  (e) Mantel-Haenszel: OR = {mh_or:.3f}, χ² = {mh_chi2:.3f}, p = {mh_p:.4f}")
     print(f"  (f) Drop-Europe OR = {or_noeu:.2f}")
-    print(f"  (g) Arab States (P1435 ctrl): N = {nc_arab:,}, A+ = {kc_arab}, rate = {rc_arab*100:.2f}%, binom p (vs 4% null) = {p_arab_binom:.2e}")
+    print(f"  (g) Arab States (P1435 ctrl): N = {nc_arab:,}, A+ = {kc_arab}, rate = {rc_arab*100:.2f}%, binom p (vs {P_NULL:.1%} null) = {p_arab_binom:.2e}")
 
     # ── LaTeX macros ──────────────────────────────────────────────────────
     def fmt_p(p: float, decimals: int = 3) -> str:
@@ -298,7 +298,7 @@ def main():
     print(f"  \\newcommand{{\\WDctrlArabN}}{{{nc_arab_fmt}}}           % P1435 control: Arab States site count")
     print(f"  \\newcommand{{\\WDctrlArabAp}}{{{kc_arab}}}            % P1435 control: Arab States A+ count")
     print(f"  \\newcommand{{\\WDctrlArabRate}}{{{rc_arab*100:.2f}}}          % P1435 control: Arab States A+ rate (%)")
-    print(f"  \\newcommand{{\\WDctrlArabBinomP}}{{{fmt_p(p_arab_binom)}}}  % P1435 Arab States binom p vs 4% null")
+    print(f"  \\newcommand{{\\WDctrlArabBinomP}}{{{fmt_p(p_arab_binom)}}}  % P1435 Arab States binom p vs geometric null")
 
     print(f"\n" + "=" * 72)
     print(f"  DONE — all GROUP 23 macros printed above.")

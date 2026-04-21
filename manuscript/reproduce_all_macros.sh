@@ -123,6 +123,8 @@ if [ "${1:-}" != "--full" ]; then
         # ── Summary scripts (read from store) ─────────────────────────────
         analysis/unesco/fdr_multiple_comparisons.py          # reads all keys from config+store
         analysis/unesco/bonferroni_correction.py             # reads confirmatory keys from store
+        # ── Sig-label companions (MUST be last — reads all p-values from store) ─
+        analysis/global/emit_sig_macros.py                   # → \macroNameSig auto-generated from store
     )
 
     for s in "${SCRIPTS[@]}"; do

@@ -1,5 +1,5 @@
 UNESCO FOUNDING / SACRED-ORIGIN SITE KEYWORD AUDIT
-Generated  : Mon Apr 20 01:50:23 UTC 2026
+Generated  : Mon Apr 20 20:13:12 UTC 2026
 Script     : tools/generate_audit_founding.py
 Keywords   : loaded from keywords.json via lib/founding_filter.py
 
@@ -20,16 +20,16 @@ SUMMARY
 ────────────────────────────────────────────────────────────────────────────────────────
   Cultural/Mixed sites in corpus : 1013
   Classified (≥1 category)       : 355
-  A+ among classified            : 28
+  A+ among classified            : 35
 
   Category breakdown (sites may appear in multiple categories):
   Cat     N   A++    A+     A    C-     C     A+%       p(A+)
   ------------------------------------------------------------
-  F    192     3    11    38     9    32    5.7%  1.4933e-01  ns  (FOUNDING CAPITAL / SEAT OF POWER)
-  S     56     0     4    14     2     8    7.1%  1.8541e-01  ns  (SACRED ORIGIN / BIRTH OF A TRADITION)
-  M     70     2     8    21     2     9   11.4%  6.7982e-03  **  (FOUNDING MONUMENT / PROTOTYPE)
-  L     82     0     4    20     5    14    4.9%  4.1649e-01  ns  (ANCIENT CONTINUOUS LANDSCAPE)
-  X     26     1     5    10     1     3   19.2%  3.3300e-03  **  (FOUNDING AXIS / IMPERIAL INFRASTRUCTURE)
+  F    192     3    15    38    13    28    7.8%  2.5289e-01  ns  (FOUNDING CAPITAL / SEAT OF POWER)
+  S     56     0     5    14     2     8    8.9%  2.8996e-01  ns  (SACRED ORIGIN / BIRTH OF A TRADITION)
+  M     70     2     8    21     6     5   11.4%  7.9250e-02  ~  (FOUNDING MONUMENT / PROTOTYPE)
+  L     82     0     6    20     9    10    7.3%  4.3182e-01  ns  (ANCIENT CONTINUOUS LANDSCAPE)
+  X     26     1     7    10     2     2   26.9%  9.9586e-04  ***  (FOUNDING AXIS / IMPERIAL INFRASTRUCTURE)
 
 INCLUDED SITES (sorted by tier, then beru deviation):
 ────────────────────────────────────────────────────────────────────────────────────────
@@ -264,15 +264,15 @@ in c."
     [F] reasons : ['context-validated:capital of']
       ↳ [context-validated:capital of] "the aqueduct carolino, with its imposing viaduct “ponti della valle” is a stunning work of engineering and provides an extraordinary infrastructure not only ser"
 
-  Birthplace of Jesus: Church of the Nativity and the Pilgrimage Route, Bethlehem  (State of Palestine)
-    LON     : 35.2075°E  |  dev 0.0020 beru  (6.8 km)  |  Tier A
+  Birthplace of Jesus: Church of the Nativity and the Pilgrimage Route, Bethlehem ★  (State of Palestine)
+    LON     : 35.2075°E  |  dev 0.0020 beru  (6.8 km)  |  Tier A+
     PRIMARY : S — SACRED ORIGIN / BIRTH OF A TRADITION
     ALL CATS: ['S']
     [S] reasons : ['unambiguous:holy city']
       ↳ [unambiguous:holy city] "each of the three adjacent convents is maintained under its own arrangement: the armenian convent is controlled by the armenian patriarchate in the holy city of"
 
-  Richtersveld Cultural and Botanical Landscape  (South Africa)
-    LON     : 17.2039°E  |  dev 0.0022 beru  (7.2 km)  |  Tier A
+  Richtersveld Cultural and Botanical Landscape ★  (South Africa)
+    LON     : 17.2039°E  |  dev 0.0022 beru  (7.2 km)  |  Tier A+
     PRIMARY : L — ANCIENT CONTINUOUS LANDSCAPE
     ALL CATS: ['L']
     [L] reasons : ['context-validated:cultural landscape']
@@ -280,15 +280,15 @@ in c."
 the 160,000 ha richtersveld cultural and botanical landscape of dramatic mountainous desert in north-western south"
       ↳ [context-validated:cultural landscape] "criterion (v): the richtersveld is one of the few areas in southern africa where transhumance pastoralism is still practised; as a cultural landscape it reflect"
 
-  Rock Carvings in Tanum  (Sweden)
-    LON     : 11.3411°E  |  dev 0.0024 beru  (8.0 km)  |  Tier A
+  Rock Carvings in Tanum ★  (Sweden)
+    LON     : 11.3411°E  |  dev 0.0024 beru  (8.0 km)  |  Tier A+
     PRIMARY : L — ANCIENT CONTINUOUS LANDSCAPE
     ALL CATS: ['L']
     [L] reasons : ['context-validated:cultural landscape']
       ↳ [context-validated:cultural landscape] "a cultural landscape with a continuity in settlement and consistency in land use that spans more than eight millennia, the area is rendered outstanding by its a"
 
-  Historic Centre of Sheki with the Khan’s Palace  (Azerbaijan)
-    LON     : 47.1875°E  |  dev 0.0027 beru  (9.0 km)  |  Tier A
+  Historic Centre of Sheki with the Khan’s Palace ★  (Azerbaijan)
+    LON     : 47.1875°E  |  dev 0.0027 beru  (9.0 km)  |  Tier A+
     PRIMARY : F — FOUNDING CAPITAL / SEAT OF POWER
     ALL CATS: ['F', 'X']
     [F] reasons : ['context-validated:capital of']
@@ -296,8 +296,8 @@ the 160,000 ha richtersveld cultural and botanical landscape of dramatic mountai
     [X] reasons : ['unambiguous:silk road']
       ↳ [unambiguous:silk road] "as a trading centre, in contact with asia and europe, and also as a part of silk road route, the principal economy of sheki, from the ancient times, has been ba"
 
-  Site of Xanadu  (China)
-    LON     : 116.1851°E  |  dev 0.0028 beru  (9.3 km)  |  Tier A
+  Site of Xanadu ★  (China)
+    LON     : 116.1851°E  |  dev 0.0028 beru  (9.3 km)  |  Tier A+
     PRIMARY : F — FOUNDING CAPITAL / SEAT OF POWER
     ALL CATS: ['F', 'X']
     [F] reasons : ['unambiguous:first capital']
@@ -306,15 +306,15 @@ the 160,000 ha richtersveld cultural and botanical landscape of dramatic mountai
       ↳ [unambiguous:great wall] "site of xanadu
 north of the great wall, the site of xanadu encompasses the remains of kublai khan&rsquo;s legendary capital city, designed by the mongol ruler&r"
 
-  The Cosmological Axis of Yogyakarta and its Historic Landmarks  (Indonesia)
-    LON     : 110.3648°E  |  dev 0.0032 beru  (10.6 km)  |  Tier A
+  The Cosmological Axis of Yogyakarta and its Historic Landmarks ★  (Indonesia)
+    LON     : 110.3648°E  |  dev 0.0032 beru  (10.6 km)  |  Tier A+
     PRIMARY : F — FOUNDING CAPITAL / SEAT OF POWER
     ALL CATS: ['F']
     [F] reasons : ['context-validated:capital of']
       ↳ [context-validated:capital of] "the location of the kraton and the city were chosen by the sultan mangkubumi in 1755 to conform to javanese cosmological beliefs, where the capital of the kingd"
 
-  Bursa and Cumalıkızık: the Birth of the Ottoman Empire  (Türkiye)
-    LON     : 29.1731°E  |  dev 0.0032 beru  (10.6 km)  |  Tier A
+  Bursa and Cumalıkızık: the Birth of the Ottoman Empire ★  (Türkiye)
+    LON     : 29.1731°E  |  dev 0.0032 beru  (10.6 km)  |  Tier A+
     PRIMARY : F — FOUNDING CAPITAL / SEAT OF POWER
     ALL CATS: ['F']
     [F] reasons : ['unambiguous:first capital']
@@ -2717,7 +2717,7 @@ the budj bim cultural landscape, located in the traditional country of the gundi
       ↳ [context-validated:capital of] "until the 13th century, it had belonged to the territory of rostov principality and in 1218 it became the capital of yaroslavl principality."
 
   Orkhon Valley Cultural Landscape  (Mongolia)
-    LON     : 102.6785°E  |  dev 0.0470 beru  (156.5 km)  |  Tier C
+    LON     : 102.6785°E  |  dev 0.0470 beru  (156.5 km)  |  Tier C-
     PRIMARY : F — FOUNDING CAPITAL / SEAT OF POWER
     ALL CATS: ['F', 'L', 'M']
     [F] reasons : ['unambiguous:imperial capital']
@@ -2731,7 +2731,7 @@ the 121,967-ha orkhon valley cultural landscape encompasses an extensive area of
       ↳ [unambiguous:earliest surviving] "specifically, the inscribed property provides evidence of the 6th-7th century turkish memorial sites, the 8th-9th century uighur capita of khar balgas, the 13th"
 
   Masjed-e Jāmé of Isfahan  (Iran (Islamic Republic of))
-    LON     : 51.6853°E  |  dev 0.0472 beru  (157.2 km)  |  Tier C
+    LON     : 51.6853°E  |  dev 0.0472 beru  (157.2 km)  |  Tier C-
     PRIMARY : M — FOUNDING MONUMENT / PROTOTYPE
     ALL CATS: ['M']
     [M] reasons : ['context-validated:prototype']
@@ -2739,7 +2739,7 @@ the 121,967-ha orkhon valley cultural landscape encompasses an extensive area of
       ↳ [context-validated:prototype] "following its seljuq expansion and the characteristic introduction of the four iwans (chahar ayvān) around the courtyard as well as two extraordinary domes, the"
 
   Portovenere, Cinque Terre, and the Islands (Palmaria, Tino and Tinetto)  (Italy)
-    LON     : 9.8510°E  |  dev 0.0473 beru  (157.4 km)  |  Tier C
+    LON     : 9.8510°E  |  dev 0.0473 beru  (157.4 km)  |  Tier C-
     PRIMARY : M — FOUNDING MONUMENT / PROTOTYPE
     ALL CATS: ['L', 'M']
     [L] reasons : ['context-validated:cultural landscape']
@@ -2750,14 +2750,14 @@ the ligurian coast between cinque terre and portovenere is a cultural landscape 
       ↳ [context-validated:culminating in] "it is compact in form, the houses aligned along the coastline culminating in the doria castle, which dominates the settlement and is a historical palimpsest, wi"
 
   Völklingen Ironworks  (Germany)
-    LON     : 6.8442°E  |  dev 0.0475 beru  (158.2 km)  |  Tier C
+    LON     : 6.8442°E  |  dev 0.0475 beru  (158.2 km)  |  Tier C-
     PRIMARY : M — FOUNDING MONUMENT / PROTOTYPE
     ALL CATS: ['M']
     [M] reasons : ['unambiguous:first of its kind']
       ↳ [unambiguous:first of its kind] "technological milestones such as the dry gas purification plant, which was the first of its kind on such a large scale, the suspended conveyor system (the large"
 
   Cultural Landscape and Archaeological Remains of the Bamiyan Valley  (Afghanistan)
-    LON     : 66.8435°E  |  dev 0.0475 beru  (158.2 km)  |  Tier C
+    LON     : 66.8435°E  |  dev 0.0475 beru  (158.2 km)  |  Tier C-
     PRIMARY : X — FOUNDING AXIS / IMPERIAL INFRASTRUCTURE
     ALL CATS: ['L', 'X']
     [L] reasons : ['context-validated:cultural landscape']
@@ -2769,7 +2769,7 @@ the cultural landscape and archaeological remains of the bamiyan valley represen
       ↳ [unambiguous:silk road] "criterion (ii): the artistic and architectural remains of bamiyan valley, an important buddhist centre on the silk road, are an exceptional testimony to the int"
 
   Historic Centre of São Luís  (Brazil)
-    LON     : -44.3034°E  |  dev 0.0476 beru  (158.5 km)  |  Tier C
+    LON     : -44.3034°E  |  dev 0.0476 beru  (158.5 km)  |  Tier C-
     PRIMARY : F — FOUNDING CAPITAL / SEAT OF POWER
     ALL CATS: ['F']
     [F] reasons : ['context-validated:capital of']
@@ -2777,7 +2777,7 @@ the cultural landscape and archaeological remains of the bamiyan valley represen
       ↳ [context-validated:capital of] "authenticity the overlay of the various periods in the evolution of the historic center of são luís, from inception of the original site in the 16th century, re"
 
   Central Sector of the Imperial Citadel of Thang Long - Hanoi  (Viet Nam)
-    LON     : 105.8386°E  |  dev 0.0477 beru  (158.8 km)  |  Tier C
+    LON     : 105.8386°E  |  dev 0.0477 beru  (158.8 km)  |  Tier C-
     PRIMARY : F — FOUNDING CAPITAL / SEAT OF POWER
     ALL CATS: ['F']
     [F] reasons : ['unambiguous:seat of power']
@@ -2785,7 +2785,7 @@ the cultural landscape and archaeological remains of the bamiyan valley represen
       ↳ [unambiguous:seat of power] "it was a continuous seat of power from the 7th century through to the present day."
 
   The Loire Valley between Sully-sur-Loire and Chalonnes  (France)
-    LON     : 0.7028°E  |  dev 0.0478 beru  (159.1 km)  |  Tier C
+    LON     : 0.7028°E  |  dev 0.0478 beru  (159.1 km)  |  Tier C-
     PRIMARY : L — ANCIENT CONTINUOUS LANDSCAPE
     ALL CATS: ['L']
     [L] reasons : ['context-validated:cultural landscape']
@@ -2794,7 +2794,7 @@ the loire valley is an outstanding cultural landscape of great beauty, containin
       ↳ [context-validated:cultural landscape] "criterion (ii):  the loire valley is an outstanding cultural landscape along a major river which bears witness to an interchange of human values and to a harmon"
 
   Historic Centre of Guimarães and Couros Zone  (Portugal)
-    LON     : -8.2928°E  |  dev 0.0479 beru  (159.6 km)  |  Tier C
+    LON     : -8.2928°E  |  dev 0.0479 beru  (159.6 km)  |  Tier C-
     PRIMARY : F — FOUNDING CAPITAL / SEAT OF POWER
     ALL CATS: ['F']
     [F] reasons : ['unambiguous:first capital']
@@ -2953,4 +2953,4 @@ nara was the capital of japan from 710 to 784."
 
 Total included: 355
 Generated by  : tools/generate_audit_founding.py
-Timestamp     : Mon Apr 20 01:50:23 UTC 2026
+Timestamp     : Mon Apr 20 20:13:12 UTC 2026

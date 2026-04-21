@@ -99,7 +99,7 @@ N_corpus = len(lons)   # derive from data; do not assert against stale store val
 # which already span the full phase space at the resolution that matters.
 
 HARMONIC_STEP = 3.0                          # degrees
-thresh_deg    = TIER_APLUS * BERU            # 0.002 * 30 = 0.06 degrees
+thresh_deg    = TIER_APLUS * BERU            # TIER_APLUS * BERU (from config)
 
 # Reduce longitudes to residues on [0, HARMONIC_STEP)
 phases_obs = lons % HARMONIC_STEP            # shape (N,)

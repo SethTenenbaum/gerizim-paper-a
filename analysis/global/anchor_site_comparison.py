@@ -33,7 +33,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
 from data.unesco_corpus import load_corpus, cultural_sites_with_coords
-from lib.beru import GERIZIM, BERU, TIER_APP, TIER_APLUS
+from lib.beru import GERIZIM, BERU, TIER_APP, TIER_APLUS, TIER_A_MAX, P_NULL_AP
 
 # ── Constants from config.json ────────────────────────────────────────────────
 _CFG      = _json.loads((ROOT / "config.json").read_text())
@@ -61,7 +61,7 @@ def beru_dev(lon: float, anchor: float) -> tuple[float, float, str]:
     elif dev <= TIER_APLUS:
         tier = "A+"
     else:
-        tier = "A" if dev <= 0.010 else "B"
+        tier = "A" if dev <= TIER_A_MAX else "B"
     return dev, km, tier
 
 
@@ -166,7 +166,7 @@ def main():
     mecca_devs = np.abs(mecca_bvs - mecca_near)
     mecca_ap   = int(np.sum(mecca_devs <= TIER_APLUS))
     from scipy.stats import binomtest as _binom
-    mecca_p = _binom(mecca_ap, len(sites), 0.04, alternative="greater").pvalue
+    mecca_p = _binom(mecca_ap, len(sites), P_NULL_AP, alternative="greater").pvalue
 
     # ── Mt. Meru A+ count (Tanzania; 36.750°E) ────────────────────────────
     # Physical Mt. Meru, Tanzania. The cosmological/Hindu "Mt. Meru" has no
@@ -181,7 +181,7 @@ def main():
         near = np.round(bvs * 10) / 10
         devs = np.abs(bvs - near)
         ap   = int(np.sum(devs <= TIER_APLUS))
-        p    = _binom(ap, len(sites), 0.04, alternative="greater").pvalue
+        p    = _binom(ap, len(sites), P_NULL_AP, alternative="greater").pvalue
         return ap, p
     meru_ap,    meru_p    = _anchor_ap(MERU_LON)
     kailash_ap, kailash_p = _anchor_ap(KAILASH_LON)
@@ -326,17 +326,26 @@ def main():
     print("=" * 72)
     # Jerusalem A+ p-value (self-excluded corpus, N = full corpus - 1)
     from scipy.stats import binomtest as _binom2
-    jer_p = _binom2(jer_ap_count, len(sites) - 1, 0.04, alternative="greater").pvalue
+    jer_p = _binom2(jer_ap_count, len(sites) - 1, P_NULL_AP, alternative="greater").pvalue
     print(f"  \\newcommand{{\\JerusalemAp}}{{{jer_ap_count}}}  % Jerusalem A+ count (self-excluded corpus)")
     print(f"  \\newcommand{{\\NjerSelfExclCorpus}}{{{len(sites) - 1}}}  % corpus size, Jerusalem self-excluded (Sweep B)")
     print(f"  \\newcommand{{\\NgerizimSweepCorpus}}{{{len(sites) - 1}}}  % corpus size, Gerizim sweep (Jerusalem removed, Sweep A)")
-    print(f"  \\newcommand{{\\pJerusalemAp}}{{{jer_p:.4f}}}  % p-value, Jerusalem A+ binomial (self-excluded)")
+    def _pfmt(p):
+        """Format p-value for LaTeX: scientific notation if it would round to zero."""
+        if p < 0.0001:
+            from decimal import Decimal
+            exp = int(f"{p:.2e}".split("e")[1])
+            mantissa = p / (10 ** exp)
+            return f"{mantissa:.2f} \\times 10^{{{exp}}}"
+        return f"{p:.4f}"
+
+    print(f"  \\newcommand{{\\pJerusalemAp}}{{{_pfmt(jer_p)}}}  % p-value, Jerusalem A+ binomial (self-excluded)")
     print(f"  \\newcommand{{\\MeccaAp}}{{{mecca_ap}}}  % Mecca A+ count (full corpus)")
-    print(f"  \\newcommand{{\\pMeccaAnchor}}{{{mecca_p:.3f}}}  % p-value, Mecca binomial (A+, one-sided)")
+    print(f"  \\newcommand{{\\pMeccaAnchor}}{{{_pfmt(mecca_p)}}}  % p-value, Mecca binomial (A+, one-sided)")
     print(f"  \\newcommand{{\\MeruAp}}{{{meru_ap}}}  % Mt. Meru (Tanzania, 36.750E) A+ count")
-    print(f"  \\newcommand{{\\pMeruAnchor}}{{{meru_p:.3f}}}  % p-value, Mt. Meru binomial (A+, one-sided)")
+    print(f"  \\newcommand{{\\pMeruAnchor}}{{{_pfmt(meru_p)}}}  % p-value, Mt. Meru binomial (A+, one-sided)")
     print(f"  \\newcommand{{\\KailashAp}}{{{kailash_ap}}}  % Mt. Kailash (81.312E) A+ count")
-    print(f"  \\newcommand{{\\pKailashAnchor}}{{{kailash_p:.3f}}}  % p-value, Kailash binomial (A+, one-sided)")
+    print(f"  \\newcommand{{\\pKailashAnchor}}{{{_pfmt(kailash_p)}}}  % p-value, Kailash binomial (A+, one-sided)")
 
     ResultsStore = __import__("lib.results_store", fromlist=["ResultsStore"]).ResultsStore
     ResultsStore().write_many({

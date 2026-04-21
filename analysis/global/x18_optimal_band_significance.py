@@ -8,7 +8,7 @@ The global anchor sweep (anchor_uniqueness_audit.py, GROUP 11) already
 identifies the optimal x.18°E phase as producing the maximum observed A+
 count across all 36,000 trial anchors.  This script reads those already-
 computed values from the results store and runs one-sided binomial tests
-against the 4% geometric null to report the significance of the optimal band.
+against the geometric null (P_NULL_AP from config) to report the significance of the optimal band.
 
 No re-scanning is performed.  All inputs come from the results store.
 
@@ -59,7 +59,7 @@ def _sig(p):
 
 print("=" * 70)
 print("  x.18° OPTIMAL BAND — BINOMIAL SIGNIFICANCE TEST")
-print(f"  Null rate P0 = {P_NULL_AP:.0%}  (geometric 4% null)")
+print(f"  Null rate P0 = {P_NULL_AP:.0%}  (geometric null, P_NULL_AP from config)")
 print("=" * 70)
 print(f"  Sweep A (Jerusalem removed, N={N_A})")
 print(f"    Observed A+ at optimum : {obs_A}")

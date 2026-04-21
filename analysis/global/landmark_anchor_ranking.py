@@ -7,7 +7,7 @@ from scipy.stats import binomtest
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus, cultural_sites_with_coords
 from lib.beru import (
-    GERIZIM, BERU, TIER_APLUS, TIER_B_MAX, P_NULL_AP,
+    GERIZIM, BERU, TIER_APLUS, TIER_B_MAX, P_NULL_AP, TIER_APLUS_KM,
     CONFIG, load_notable_anchors,
 )
 
@@ -35,7 +35,7 @@ def count_ap_at_anchor(anchor):
 print("=" * 110)
 print("  LANDMARK-AS-ANCHOR RANKING")
 print(f"  Use each of {N} UNESCO Cultural/Mixed sites as anchor, count A+ sites")
-print(f"  Tier-A+ threshold: ≤ {TIER_APLUS} beru (≤ 6.7 km)")
+print(f"  Tier-A+ threshold: ≤ {TIER_APLUS} beru (≤ {TIER_APLUS_KM:.1f} km)")
 print("=" * 110)
 
 results = []
@@ -76,7 +76,7 @@ print(f"""
   Mean A+ count:    {mean_ap:.1f} ± {std_ap:.1f}
   Max A+ count:     {max_ap}
   Min A+ count:     {min_ap}
-  Expected (4%):    {0.04 * N:.1f}
+  Expected ({P_NULL_AP:.0%}):    {P_NULL_AP * N:.1f}
   Gerizim temple ({GERIZIM_TEMPLE}°E):
     A+ count:   {gerizim_temple_ap}
     Rank:       #{gerizim_rank} of {N} (top {100*gerizim_rank/N:.1f}%)

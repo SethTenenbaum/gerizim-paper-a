@@ -34,13 +34,13 @@ sys.path.insert(0, str(ROOT))
 
 from data.unesco_corpus import load_corpus, cultural_sites_with_coords
 from lib.beru import (
-    GERIZIM, BERU, HARMONIC_STEP,
+    GERIZIM, BERU, HARMONIC_STEP, TIER_APLUS_KM,
     deviation, tier_label,
 )
 
 # ── Constants ─────────────────────────────────────────────────────────────────
 KM_PER_DEG_EQUATORIAL = 111.32          # km per degree of longitude at equator
-PHYS_THRESHOLD_KM     = 6.7            # geodesic A+ threshold to compare against
+PHYS_THRESHOLD_KM     = TIER_APLUS_KM   # geodesic A+ threshold (from config via lib.beru)
 REF_LAT_FOR_DISPLAY   = 60.0           # latitude used in the manuscript example
 
 

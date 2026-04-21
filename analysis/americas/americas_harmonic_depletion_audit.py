@@ -8,9 +8,9 @@ DEPLETION of sites near beru harmonic longitudes relative to the geometric
 null rate — i.e. is the Americas *anti-harmonic*?
 
 The geometric null is derived from the beru grid geometry alone:
-  P(Tier-A+) = 0.002 / 0.05 = 4.0%
-If site longitudes were uniformly distributed within a harmonic cell, 4%
-of sites would be Tier-A+.  A rate significantly BELOW 4% is the signature
+  P(Tier-A+) = 2 × TIER_APLUS / HARMONIC_STEP  (= P_NULL_AP, from config)
+If site longitudes were uniformly distributed within a harmonic cell, P_NULL_AP
+of sites would be Tier-A+.  A rate significantly BELOW P_NULL_AP is the signature
 of a population that is structurally distanced from beru harmonics.
 
 The Americas P1435 corpus (all Wikidata heritage buildings with region
@@ -29,11 +29,11 @@ merely uncorrelated (null) with it.
 
 TESTS PERFORMED
 ---------------
-  1. Binomial test (depletion): Americas A+ count vs 4% geometric null.
-     H₀: P(A+) = 4%.  H₁: P(A+) < 4% (one-sided, depletion).
+  1. Binomial test (depletion): Americas A+ count vs geometric null (P_NULL_AP).
+     H₀: P(A+) = P_NULL_AP.  H₁: P(A+) < P_NULL_AP (one-sided, depletion).
 
   2. Clopper–Pearson 95% CI on the Americas A+ rate.
-     Verdict: does the CI upper bound fall entirely below the 4% null?
+     Verdict: does the CI upper bound fall entirely below the P_NULL_AP null?
 
   3. KS test vs Uniform[0, 0.05]:
      H₀: Americas beru deviations are uniformly distributed.
@@ -61,7 +61,7 @@ OUTPUT
   Primary verdict (depletion test) is in section 1.
 
 ANCHOR: Mount Gerizim {GERIZIM}°E  |  BERU = 30.0°  |  HARMONIC STEP = 3.0°
-NULL:   P(Tier-A+) = 4.0%  [geometric: 0.002 beru / 0.05 beru half-cell]
+NULL:   P(Tier-A+) = P_NULL_AP  [geometric: 2 × TIER_APLUS / HARMONIC_STEP, from config]
 
 DATA
 ----
@@ -95,7 +95,10 @@ from statsmodels.stats.multitest import multipletests
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
-from lib.beru import GERIZIM, TIER_APLUS, P_NULL_AP
+from lib.beru import (
+    GERIZIM, TIER_APP, TIER_APLUS, TIER_A_MAX, P_NULL_AP, P_NULL_APP,
+    TIER_APLUS_LABEL, TIER_APP_LABEL, HARMONIC_STEP,
+)
 from lib.stats import significance_label as SIG
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -103,11 +106,8 @@ from lib.stats import significance_label as SIG
 # ─────────────────────────────────────────────────────────────────────────────
 
 CTRL_CSV     = ROOT / "data" / "store" / "wikidata" / "p1435_global_control.csv"
-TIER_APP     = 0.001
-TIER_AP      = TIER_APLUS       # 0.002 beru  (≤ 6.7 km)
-HALF_STEP    = 0.05
-P_NULL_AP    = TIER_AP / HALF_STEP    # 0.04
-P_NULL_APP   = TIER_APP / HALF_STEP   # 0.02
+TIER_AP      = TIER_APLUS   # alias used throughout this file
+HALF_STEP    = HARMONIC_STEP / 2   # max possible beru deviation (= MIDPOINT)
 N_BOOTSTRAP  = 100_000
 RNG_SEED     = 42
 N_PHASE_BINS = 10
@@ -174,7 +174,7 @@ def print_binomial_primary(df: pd.DataFrame):
   Grid:       0.1-beru harmonic spacing (3°)
 """)
 
-    print(f"  ── Tier-A+  (|δ| ≤ 0.002 beru, ≤ 6.7 km) ──")
+    print(f"  ── Tier-A+  (|δ| {TIER_APLUS_LABEL}) ──")
     print(f"     Null rate:              {P_NULL_AP:.0%}  ({P_NULL_AP*n:.1f} expected sites)")
     print(f"     Observed:               {k}/{n} = {k/n*100:.3f}%")
     print(f"     Enrichment factor:      {k/n/P_NULL_AP:.3f}×  (< 1 = depletion)")
@@ -182,7 +182,7 @@ def print_binomial_primary(df: pd.DataFrame):
     print(f"     CI upper bound {ci[1]*100:.3f}% {'BELOW' if ci[1] < P_NULL_AP else 'above'} {P_NULL_AP:.0%} null?  {'YES ✓' if ci[1] < P_NULL_AP else 'no'}")
     print(f"     p (one-sided depletion): {res.pvalue:.4e}  {SIG(res.pvalue)}")
 
-    print(f"\n  ── Tier-A++ (|δ| ≤ 0.001 beru, ≤ 0.67 km) ──")
+    print(f"\n  ── Tier-A++ (|δ| {TIER_APP_LABEL}) ──")
     print(f"     Null rate:              {P_NULL_APP:.0%}  ({P_NULL_APP*n:.1f} expected sites)")
     print(f"     Observed:               {k_app}/{n} = {k_app/n*100:.3f}%")
     print(f"     Enrichment factor:      {k_app/n/P_NULL_APP:.3f}×")
@@ -254,7 +254,7 @@ def print_phase_histogram(df: pd.DataFrame):
         note = ""
         if hi <= TIER_AP:
             note = "  ◄ Tier-A+ zone"
-        elif hi <= 0.010:
+        elif hi <= TIER_A_MAX:
             note = "  ◄ Tier-A zone"
         am_dir   = "▼" if z_am   < -2 else ("▲" if z_am   > 2 else " ")
         arab_dir = "▲" if z_arab >  2 else ("▼" if z_arab < -2 else " ")
@@ -532,7 +532,7 @@ def main():
     print(f"  \\newcommand{{\\MexicoCtrlAp}}{{{k_mex}}}           % P1435 Mexico A+ hits")
     print(f"  \\newcommand{{\\MexicoCtrlRate}}{{{rate_mex:.2f}}}         % P1435 Mexico A+ rate (%)")
     print(f"  \\newcommand{{\\MexicoCtrlDeplFactor}}{{{depl_mex:.3f}}}      % P1435 Mexico depletion factor (obs/exp)")
-    print(f"  \\newcommand{{\\pMexicoDepl}}{{{p_mex_str}}}   % p-value, Mexico depletion vs 4% null")
+    print(f"  \\newcommand{{\\pMexicoDepl}}{{{p_mex_str}}}   % p-value, Mexico depletion vs geometric null (P_NULL_AP)")
     print(f"  \\newcommand{{\\MexicoCtrlSig}}{{{mex_sig}}}         % significance label, Mexico depletion")
     # Americas ex-Mexico
     print(f"  \\newcommand{{\\AmericasNoMexN}}{{{n_nomex}}}          % Americas P1435 excluding Mexico")

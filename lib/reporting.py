@@ -5,7 +5,7 @@ All print/display logic lives here so that analysis scripts
 contain only data processing and statistical calculations.
 """
 
-from typing import List, Dict, Any, Optional, Tuple
+from typing import List, Dict, Any, Optional, Tuple, Union
 
 from lib.beru import is_aplus, is_a_or_better, CONFIG
 from lib.stats import (
@@ -136,9 +136,13 @@ def print_enrichment_header(label_width: int = 30, extra_header: str = ""):
 
 
 def print_enrichment_row(label: str, n: int, n_aplus: int, p: float,
-                         null_rate: float = 0.04, label_width: int = 30,
+                         null_rate: Optional[float] = None, label_width: int = 30,
                          extra: str = ""):
-    """Print one enrichment row (N, A+, rate, enrichment, p, sig)."""
+    """Print one enrichment row (N, A+, rate, enrichment, p, sig).
+    null_rate defaults to P_NULL_AP from lib.beru if not provided."""
+    if null_rate is None:
+        from lib.beru import P_NULL_AP
+        null_rate = P_NULL_AP
     rate = n_aplus / n if n else 0.0
     enr  = rate / null_rate if null_rate else 0.0
     sig  = significance_label(p)
@@ -149,14 +153,18 @@ def print_enrichment_row(label: str, n: int, n_aplus: int, p: float,
     ))
 
 
-def print_enrichment_table(rows: List[Dict], null_rate: float = 0.04,
+def print_enrichment_table(rows: List[Dict], null_rate: Optional[float] = None,
                            label_width: int = 30, extra_header: str = ""):
     """
     Print a full enrichment table from a list of row dicts.
 
     Each dict must have: label, n, n_aplus, p.
     Optional keys: extra (str appended to the row).
+    null_rate defaults to P_NULL_AP from lib.beru if not provided.
     """
+    if null_rate is None:
+        from lib.beru import P_NULL_AP
+        null_rate = P_NULL_AP
     print_enrichment_header(label_width, extra_header)
     for r in rows:
         print_enrichment_row(
@@ -170,11 +178,12 @@ def print_enrichment_table(rows: List[Dict], null_rate: float = 0.04,
 # Cohort table
 # ---------------------------------------------------------------------------
 
-def print_cohort_table(rows: List[Dict], null_rate: float = 0.04):
+def print_cohort_table(rows: List[Dict], null_rate: Optional[float] = None):
     """
     Print a cohort-level enrichment table.
 
     Each dict must have: label, n, n_aplus, p.
+    null_rate defaults to P_NULL_AP from lib.beru if not provided.
     """
     print_enrichment_table(rows, null_rate=null_rate, label_width=32)
 
@@ -186,12 +195,16 @@ def print_cohort_table(rows: List[Dict], null_rate: float = 0.04):
 # ---------------------------------------------------------------------------
 
 def print_category_table(rows: List[Dict], n_corpus: int, n_aplus: int,
-                         null_rate: float = 0.04, label_width: int = 25):
+                         null_rate: Optional[float] = None, label_width: int = 25):
     """
     Print per-category enrichment (corpus rate, A+ rate, enrichment, Fisher p).
 
     Each dict must have: label, n_corpus, n_aplus_cat, n_nap_cat, p_fisher.
+    null_rate defaults to P_NULL_AP from lib.beru if not provided.
     """
+    if null_rate is None:
+        from lib.beru import P_NULL_AP
+        null_rate = P_NULL_AP
     print(
         f"  {'Category':<{label_width}}  {'Corpus':>8}  {'Corpus%':>8}"
         f"  {'A+':>5}  {'A+%':>7}  {'Enrich':>7}  {'p(Fisher)':>10}  Sig"

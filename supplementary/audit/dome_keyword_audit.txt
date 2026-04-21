@@ -1,5 +1,5 @@
 UNESCO DOME / SPHERICAL MONUMENT KEYWORD AUDIT
-Generated : Mon Apr 20 01:50:14 UTC 2026
+Generated : Mon Apr 20 20:13:05 UTC 2026
 Script    : tools/generate_audit_dome.py
 Keywords  : ['dome', 'domed', 'domes', 'spherical', 'stupa', 'stupas', 'tholos']
 Unambiguous (always included): ['stupa', 'stupas', 'tholos']
@@ -13,13 +13,13 @@ STATISTICS SUMMARY
 ────────────────────────────────────────────────────────────────────────────────────────
   Group                      N   A++    A+     A    C-     C     A+%       p(A+)
   --------------------------------------------------------------------------
-  All included (raw)        83     2    11    26     1    14   13.3%  4.7338e-04  ***
-  Context-validated         82     2    11    26     1    13   13.4%  4.2590e-04  ***
+  All included (raw)        83     2    11    26     5    10   13.3%  1.7038e-02  *
+  Context-validated         82     2    11    26     5     9   13.4%  1.5663e-02  *
   --------------------------------------------------------------------------
-  stupa/stupas              18     0     4     7     0     4   22.2%  4.9896e-03  **
+  stupa/stupas              18     0     4     7     1     3   22.2%  2.5138e-02  *
   tholos                     4     0     0     1     0     0    0.0%  1.0000e+00  ns
-  dome/domed/domes          64     2     8    19     1    11   12.5%  3.9327e-03  **
-  spherical                  1     1     1     1     0     0  100.0%  4.0000e-02  *
+  dome/domed/domes          64     2     8    19     4     8   12.5%  5.1745e-02  ~
+  spherical                  1     1     1     1     0     0  100.0%  6.4200e-02  ~
 
 INCLUDED SITES:
 ────────────────────────────────────────────────────────────────────────────────────────
@@ -488,12 +488,12 @@ INCLUDED SITES:
     [domed] "The Giri complex also includes the remains of a three-domed Muslim mosque, ziarat (tomb), and madrassa (school) of the medieval period."
 
   Meidan Emam, Esfahan  (Iran (Islamic Republic of))
-    LON  : 51.6778°E  |  dev 0.0470 beru  (156.4 km)  |  Tier C
+    LON  : 51.6778°E  |  dev 0.0470 beru  (156.4 km)  |  Tier C-
     KEYS : ['dome']  →  {'dome': 'context-validated'}
     [dome] "Of particular interest is the Royal Mosque, which is connected to the south side of the square by means of an immense, deep entrance portal "
 
   Masjed-e Jāmé of Isfahan  (Iran (Islamic Republic of))
-    LON  : 51.6853°E  |  dev 0.0472 beru  (157.2 km)  |  Tier C
+    LON  : 51.6853°E  |  dev 0.0472 beru  (157.2 km)  |  Tier C-
     KEYS : ['dome', 'domes']  →  {'dome': 'context-validated', 'domes': 'context-validated'}
     [dome] "The prototype character is well illustrated in the earliest double-shell ribbed Nezam al-Molk dome, the first use of the four iwan (Chahar A"
     [dome] "The Nezam al-Molk Dome is the first double-shell ribbed dome structure in the Islamic empire, which introduced new engineering skills, allow"
@@ -501,12 +501,12 @@ INCLUDED SITES:
     [domes] "Following its Seljuq expansion and the characteristic introduction of the four iwans (Chahar Ayvān) around the courtyard as well as two extr"
 
   Ajanta Caves  (India)
-    LON  : 75.7002°E  |  dev 0.0477 beru  (158.9 km)  |  Tier C
+    LON  : 75.7002°E  |  dev 0.0477 beru  (158.9 km)  |  Tier C-
     KEYS : ['stupa']  →  {'stupa': 'unambiguous'}
     [stupa] "At the centre of the apse stands the object of worship in the form of a chaitya or stupa, also hewn out of the rock."
 
   Chhatrapati Shivaji Terminus (formerly Victoria Terminus)  (India)
-    LON  : 72.8362°E  |  dev 0.0478 beru  (159.0 km)  |  Tier C
+    LON  : 72.8362°E  |  dev 0.0478 beru  (159.0 km)  |  Tier C-
     KEYS : ['dome']  →  {'dome': 'context-validated'}
     [dome] "Its remarkable stone dome, turrets, pointed arches and eccentric ground plan are close to traditional Indian palace architecture."
     [dome] "Its remarkable stone dome, turrets, pointed arches and eccentric ground plan are close to traditional Indian palace architecture."

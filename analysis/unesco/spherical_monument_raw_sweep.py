@@ -51,6 +51,7 @@ from lib.results_store import ResultsStore
 from lib.beru import (
     GERIZIM, BERU, TIER_APLUS, TIER_A_MAX,
     P_NULL_AP, P_NULL_A,
+    TIER_APLUS_LABEL, TIER_A_LABEL, TIER_B_LABEL, TIER_C_LABEL,
     deviation as _beru_dev, tier_label, is_aplus, is_a_or_better,
 )
 from lib.dome_filter import FORM_KEYWORDS, FORM_KEYWORD_RES, AMBIGUOUS_KEYWORDS
@@ -110,7 +111,7 @@ bt_A   = binomtest(nA,  N_raw, P_NULL_A,  alternative="greater")
 
 obs_bins = [0] * 5
 for s in raw_sites:
-    obs_bins[min(int(s["dev"] / 0.010), 4)] += 1
+    obs_bins[min(int(s["dev"] / TIER_A_MAX), 4)] += 1
 _, chi_p = chisquare(obs_bins, f_exp=[N_raw / 5.0] * 5)
 
 enr_Ap = (nAp / N_raw) / P_NULL_AP if N_raw else 0
@@ -173,12 +174,12 @@ print(SEP)
 print()
 print(f"  {'Metric':<45}  {'Obs':>5}  {'Exp(H₀)':>9}  {'Enrich':>7}  {'p':>8}  Sig")
 print(f"  {'-'*85}")
-print(f"  {'Tier-A+  (≤0.002 beru, ≤6.7 km)':<45}  {nAp:>5}  "
+print(f"  {f'Tier-A+  ({TIER_APLUS_LABEL})':<45}  {nAp:>5}  "
       f"{N_raw*P_NULL_AP:>9.2f}  {enr_Ap:>6.2f}×  {bt_Ap.pvalue:>8.4f}  {sig(bt_Ap.pvalue)}")
-print(f"  {'Tier-A   (≤0.010 beru, ≤33 km)':<45}  {nA:>5}  "
+print(f"  {f'Tier-A   ({TIER_A_LABEL})':<45}  {nA:>5}  "
       f"{N_raw*P_NULL_A:>9.2f}  {(nA/N_raw)/P_NULL_A:>6.2f}×  {bt_A.pvalue:>8.4f}  {sig(bt_A.pvalue)}")
-print(f"  {'Tier-B   (≤0.050 beru)':<45}  {nB:>5}")
-print(f"  {'Tier-C   (>0.050 beru)':<45}  {nC:>5}")
+print(f"  {f'Tier-B   ({TIER_B_LABEL})':<45}  {nB:>5}")
+print(f"  {f'Tier-C   ({TIER_C_LABEL})':<45}  {nC:>5}")
 print(f"  {'χ²-uniform (5 bins, df=4)':<45}  {'':>5}  {'':>9}  {'':>7}  {chi_p:>8.4f}  {sig(chi_p)}")
 print(f"  {'Anchor sweep percentile (34–37°E)':<45}  {g_Ap:>5}  {'':>9}  {'':>7}  "
       f"{'':>8}  {pctile:.0f}th pctile")
@@ -195,7 +196,7 @@ print(f"  {'N (population)':<30}  {N_raw:>14}  {'83':>20}")
 print(f"  {'n A+ hits':<30}  {nAp:>14}  {'11':>20}")
 print(f"  {'A+ rate':<30}  {100*nAp/N_raw:>13.1f}%  {'13.3%':>20}")
 print(f"  {'Binomial p (A+)':<30}  {bt_Ap.pvalue:>14.4f}  {'0.0005':>20}")
-print(f"  {'Enrichment vs 4% null':<30}  {enr_Ap:>13.2f}×  {'3.31×':>20}")
+print(f"  {'Enrichment vs geometric null':<30}  {enr_Ap:>13.2f}×  {11/83/P_NULL_AP:>19.2f}×")
 print(f"  {'Anchor pctile (A+)':<30}  {pctile:>13.0f}th  ")
 print()
 

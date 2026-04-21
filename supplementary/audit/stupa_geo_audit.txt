@@ -1,20 +1,20 @@
 ====================================================================================================
   STUPA GEOGRAPHIC TIER AUDIT
-  Generated: 2026-04-18 14:57 UTC
-  Full corpus background: N = 1011,  A+ = 56 (5.5%),  A = 228 (22.6%),  C = 157 (15.5%),  C- = 41 (4.1%)
+  Generated: 2026-04-20 20:13 UTC
+  Full corpus background: N = 1011,  A+ = 88 (8.7%),  A = 228 (22.6%),  C = 130 (12.9%),  C- = 68 (6.7%)
   Stupa keywords: stupa, stupas, dagoba, chorten
 ====================================================================================================
 
   SUMMARY TABLE
   Region                                      N   A+    A+%    OR_A+         p_A+     A     A%     OR_A          p_A     C     C%     OR_C          p_C    C-    C-%    OR_Cm         p_Cm
   ──────────────────────────────────────── ──── ──── ────── ──────── ────────────  ──── ────── ──────── ────────────  ──── ────── ──────── ────────────  ──── ────── ──────── ────────────
-  All stupas                                 18    4  22.2%    5.17×     0.0144 *     7  38.9%    2.22×     0.0874 †     4  22.2%    1.57×    0.3016 ns     0   0.0%     0.0×    1.0000 ns
-  Heartland (70°–110°E)                      13    3  23.1%    5.35×     0.0310 *     3  23.1%    1.03×    0.5900 ns     4  30.8%    2.45×    0.1288 ns     0   0.0%     0.0×    1.0000 ns
-  Non-heartland                               5    1  20.0%    4.32×    0.2484 ns     4  80.0%   13.96×     0.0104 *     0   0.0%     0.0×    1.0000 ns     0   0.0%     0.0×    1.0000 ns
-  Indonesia (95°–141°E)                       5    3  60.0%   26.97×    0.0015 **     4  80.0%   13.96×     0.0104 *     0   0.0%     0.0×    1.0000 ns     0   0.0%     0.0×    1.0000 ns
-  Java (105°–112°E)                           2    2 100.0%     inf×    0.0030 **     2 100.0%     inf×     0.0507 †     0   0.0%     0.0×    1.0000 ns     0   0.0%     0.0×    1.0000 ns
-  India/Nepal (70°–90°E)                      9    1  11.1%    2.15×    0.4025 ns     1  11.1%    0.43×    0.9008 ns     4  44.4%    4.44×     0.0374 *     0   0.0%     0.0×    1.0000 ns
-  SE Asia ex-Indonesia (95°–110°E)            2    2 100.0%     inf×    0.0030 **     2 100.0%     inf×     0.0507 †     0   0.0%     0.0×    1.0000 ns     0   0.0%     0.0×    1.0000 ns
+  All stupas                                 18    4  22.2%    3.09×     0.0637 †     7  38.9%    2.22×     0.0874 †     3  16.7%    1.36×    0.4138 ns     1   5.6%    0.81×    0.7176 ns
+  Heartland (70°–110°E)                      13    3  23.1%    3.22×     0.0962 †     3  23.1%    1.03×    0.5900 ns     3  23.1%    2.06×    0.2278 ns     1   7.7%    1.16×    0.5978 ns
+  Non-heartland                               5    1  20.0%    2.64×    0.3664 ns     4  80.0%   13.96×     0.0104 *     0   0.0%     0.0×    1.0000 ns     0   0.0%     0.0×    1.0000 ns
+  Indonesia (95°–141°E)                       5    3  60.0%   16.25×    0.0056 **     4  80.0%   13.96×     0.0104 *     0   0.0%     0.0×    1.0000 ns     0   0.0%     0.0×    1.0000 ns
+  Java (105°–112°E)                           2    2 100.0%     inf×    0.0075 **     2 100.0%     inf×     0.0507 †     0   0.0%     0.0×    1.0000 ns     0   0.0%     0.0×    1.0000 ns
+  India/Nepal (70°–90°E)                      9    1  11.1%    1.31×    0.5609 ns     1  11.1%    0.43×    0.9008 ns     3  33.3%    3.44×     0.0974 †     1  11.1%    1.74×    0.4670 ns
+  SE Asia ex-Indonesia (95°–110°E)            2    2 100.0%     inf×    0.0075 **     2 100.0%     inf×     0.0507 †     0   0.0%     0.0×    1.0000 ns     0   0.0%     0.0×    1.0000 ns
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────
   All stupas  (N = 18)
@@ -23,13 +23,13 @@
   A+         4   22.2%
   A          3   16.7%
   B          7   38.9%
-  C          4   22.2%
-  C-         0    0.0%
+  C          3   16.7%
+  C-         1    5.6%
   ──────────────────────────────────────────────────
-  A+ Fisher exact: OR = 5.17×  p = 0.0144  *
+  A+ Fisher exact: OR = 3.09×  p = 0.0637  †
   A   Fisher exact: OR = 2.22×  p = 0.0874  †
-  C   Fisher exact: OR = 1.57×  p = 0.3016  ns
-  C-  Fisher exact: OR = 0.0×  p = 1.0000  ns
+  C   Fisher exact: OR = 1.36×  p = 0.4138  ns
+  C-  Fisher exact: OR = 0.81×  p = 0.7176  ns
 
   Tier  Dev(km)       Lon  Keywords / Name
   ──── ────────  ────────  ────────────────────────────────────────────────────────────
@@ -50,7 +50,7 @@
   [C  ]   141.5km    84.994°E  (stupas)  Mahabodhi Temple Complex at Bodh Gaya
   [C  ]   148.0km    72.936°E  (stupas)  Elephanta Caves
   [C  ]   154.1km    72.881°E  (stupa, stupas)  Taxila
-  [C  ]   158.9km    75.700°E  (stupa)  Ajanta Caves
+  [C- ]   158.9km    75.700°E  (stupa)  Ajanta Caves
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────
   Heartland (70°–110°E)  (N = 13)
@@ -59,13 +59,13 @@
   A+         3   23.1%
   A          0    0.0%
   B          6   46.2%
-  C          4   30.8%
-  C-         0    0.0%
+  C          3   23.1%
+  C-         1    7.7%
   ──────────────────────────────────────────────────
-  A+ Fisher exact: OR = 5.35×  p = 0.0310  *
+  A+ Fisher exact: OR = 3.22×  p = 0.0962  †
   A   Fisher exact: OR = 1.03×  p = 0.5900  ns
-  C   Fisher exact: OR = 2.45×  p = 0.1288  ns
-  C-  Fisher exact: OR = 0.0×  p = 1.0000  ns
+  C   Fisher exact: OR = 2.06×  p = 0.2278  ns
+  C-  Fisher exact: OR = 1.16×  p = 0.5978  ns
 
   Tier  Dev(km)       Lon  Keywords / Name
   ──── ────────  ────────  ────────────────────────────────────────────────────────────
@@ -81,7 +81,7 @@
   [C  ]   141.5km    84.994°E  (stupas)  Mahabodhi Temple Complex at Bodh Gaya
   [C  ]   148.0km    72.936°E  (stupas)  Elephanta Caves
   [C  ]   154.1km    72.881°E  (stupa, stupas)  Taxila
-  [C  ]   158.9km    75.700°E  (stupa)  Ajanta Caves
+  [C- ]   158.9km    75.700°E  (stupa)  Ajanta Caves
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────
   Non-heartland  (N = 5)
@@ -93,7 +93,7 @@
   C          0    0.0%
   C-         0    0.0%
   ──────────────────────────────────────────────────
-  A+ Fisher exact: OR = 4.32×  p = 0.2484  ns
+  A+ Fisher exact: OR = 2.64×  p = 0.3664  ns
   A   Fisher exact: OR = 13.96×  p = 0.0104  *
   C   Fisher exact: OR = 0.0×  p = 1.0000  ns
   C-  Fisher exact: OR = 0.0×  p = 1.0000  ns
@@ -116,7 +116,7 @@
   C          0    0.0%
   C-         0    0.0%
   ──────────────────────────────────────────────────
-  A+ Fisher exact: OR = 26.97×  p = 0.0015  **
+  A+ Fisher exact: OR = 16.25×  p = 0.0056  **
   A   Fisher exact: OR = 13.96×  p = 0.0104  *
   C   Fisher exact: OR = 0.0×  p = 1.0000  ns
   C-  Fisher exact: OR = 0.0×  p = 1.0000  ns
@@ -139,7 +139,7 @@
   C          0    0.0%
   C-         0    0.0%
   ──────────────────────────────────────────────────
-  A+ Fisher exact: OR = inf×  p = 0.0030  **
+  A+ Fisher exact: OR = inf×  p = 0.0075  **
   A   Fisher exact: OR = inf×  p = 0.0507  †
   C   Fisher exact: OR = 0.0×  p = 1.0000  ns
   C-  Fisher exact: OR = 0.0×  p = 1.0000  ns
@@ -156,13 +156,13 @@
   A+         1   11.1%
   A          0    0.0%
   B          4   44.4%
-  C          4   44.4%
-  C-         0    0.0%
+  C          3   33.3%
+  C-         1   11.1%
   ──────────────────────────────────────────────────
-  A+ Fisher exact: OR = 2.15×  p = 0.4025  ns
+  A+ Fisher exact: OR = 1.31×  p = 0.5609  ns
   A   Fisher exact: OR = 0.43×  p = 0.9008  ns
-  C   Fisher exact: OR = 4.44×  p = 0.0374  *
-  C-  Fisher exact: OR = 0.0×  p = 1.0000  ns
+  C   Fisher exact: OR = 3.44×  p = 0.0974  †
+  C-  Fisher exact: OR = 1.74×  p = 0.4670  ns
 
   Tier  Dev(km)       Lon  Keywords / Name
   ──── ────────  ────────  ────────────────────────────────────────────────────────────
@@ -174,7 +174,7 @@
   [C  ]   141.5km    84.994°E  (stupas)  Mahabodhi Temple Complex at Bodh Gaya
   [C  ]   148.0km    72.936°E  (stupas)  Elephanta Caves
   [C  ]   154.1km    72.881°E  (stupa, stupas)  Taxila
-  [C  ]   158.9km    75.700°E  (stupa)  Ajanta Caves
+  [C- ]   158.9km    75.700°E  (stupa)  Ajanta Caves
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────
   SE Asia ex-Indonesia (95°–110°E)  (N = 2)
@@ -186,7 +186,7 @@
   C          0    0.0%
   C-         0    0.0%
   ──────────────────────────────────────────────────
-  A+ Fisher exact: OR = inf×  p = 0.0030  **
+  A+ Fisher exact: OR = inf×  p = 0.0075  **
   A   Fisher exact: OR = inf×  p = 0.0507  †
   C   Fisher exact: OR = 0.0×  p = 1.0000  ns
   C-  Fisher exact: OR = 0.0×  p = 1.0000  ns
@@ -204,17 +204,17 @@
   or is it spread across the full heartland?
 
   Java (105°–112°E)
-    N=2  A+=2 (100.0%)  OR_A+=inf× p=0.0030 **
+    N=2  A+=2 (100.0%)  OR_A+=inf× p=0.0075 **
           A=2  (100.0%)       OR_A=inf×  p=0.0507  †
     Tier breakdown: A+=2  A=0  B=0  C=0  C-=0
 
   Heartland ex-Java (70°–110°E, excl. 105°–112°E)
-    N=12  A+=2 (16.7%)  OR_A+=3.5× p=0.1394 ns
+    N=12  A+=2 (16.7%)  OR_A+=2.12× p=0.2810 ns
           A=2  (16.7%)       OR_A=0.68×  p=0.7924  ns
-    Tier breakdown: A+=2  A=0  B=6  C=4  C-=0
+    Tier breakdown: A+=2  A=0  B=6  C=3  C-=1
 
   Outside heartland
-    N=5  A+=1 (20.0%)  OR_A+=4.32× p=0.2484 ns
+    N=5  A+=1 (20.0%)  OR_A+=2.64× p=0.3664 ns
           A=4  (80.0%)       OR_A=13.96×  p=0.0104  *
     Tier breakdown: A+=1  A=3  B=1  C=0  C-=0
 

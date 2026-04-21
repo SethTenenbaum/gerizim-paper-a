@@ -9,6 +9,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus, cultural_sites_with_coords
 from lib.beru import GERIZIM, BERU, TIER_APLUS, deviation_at_spacing
 from lib.stats import significance_label as _sig_label
+from lib.results_store import ResultsStore
 
 # shared with spherical_monument_test.py)
 from lib.dome_filter import is_dome_site
@@ -209,6 +210,10 @@ def main():
 
     print(f"  \\newcommand{{\\sweepEightDomeP}}{{{_fmt(next(d_p for sp,nr,d_hits,d_p,f_hits,f_p in coarse_rows if abs(sp-0.08)<1e-9))}}}   % p(Dome), 0.08-beru")
     print(f"  \\newcommand{{\\sweepEightFullP}}{{{_fmt(next(f_p for sp,nr,d_hits,d_p,f_hits,f_p in coarse_rows if abs(sp-0.08)<1e-9))}}}   % p(Full), 0.08-beru")
+    # Persist sweepEight p-values so emit_sig_macros.py can emit their Sig companions
+    _eight_d_p = next(d_p for sp,nr,d_hits,d_p,f_hits,f_p in coarse_rows if abs(sp-0.08)<1e-9)
+    _eight_f_p = next(f_p for sp,nr,d_hits,d_p,f_hits,f_p in coarse_rows if abs(sp-0.08)<1e-9)
+    ResultsStore().write_many({"sweepEightDomeP": _eight_d_p, "sweepEightFullP": _eight_f_p})
     # Overlap macros: 0.08 vs 0.10 spacings
     dome_08_pct_of_ten = round(100 * dome_both / dome_10, 1) if dome_10 else 0.0
     dome_08_pct_of_eight = round(100 * dome_both / dome_08, 1) if dome_08 else 0.0

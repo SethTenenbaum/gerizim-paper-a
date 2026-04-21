@@ -54,8 +54,8 @@ MEGIDDO   = CONFIG["anchors"]["megiddo"]["longitude"]
 
 TIER_AP = TIER_APLUS
 
-P0_APP = P_NULL_APP   # 0.004 — from lib.beru
-P0_AP  = P_NULL_AP    # 0.04  — from lib.beru
+P0_APP = P_NULL_APP   # geometric null for A++ — from lib.beru (config-driven)
+P0_AP  = P_NULL_AP    # geometric null for A+  — from lib.beru (config-driven)
 
 N_PERM = CONFIG["simulation"]["n_permutations"]   # 100,000 from config
 

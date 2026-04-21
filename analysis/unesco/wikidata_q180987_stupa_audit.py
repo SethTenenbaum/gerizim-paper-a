@@ -13,7 +13,7 @@ Fetch   : data/scripts/fetch_wikidata_q180987.py
 TESTS
 -----
 1. A-tier enrichment : one-sided exact binomial (H1: rate > 20% null)
-2. A+ enrichment     : one-sided exact binomial (H1: rate > 4% null)
+2. A+ enrichment     : one-sided exact binomial (H1: rate > geometric null, P_NULL_AP from config)
 3. Circular-shift permutation (100,000 trials, seed 42):
    shift all site longitudes by the same uniform-random offset in
    [0, 3°) — one full harmonic period — and count A-tier hits.
@@ -42,7 +42,7 @@ MANUSCRIPT MACROS PRODUCED
     \\wikiStupaPermStar       — significance label for permutation test
     \\wikiStupaApCount        — combined A+/A++ count
     \\wikiStupaApRate         — combined A+/A++ rate (%)
-    \\wikiStupaApEnrich       — A+ enrichment vs 4% null
+    \\wikiStupaApEnrich       — A+ enrichment vs geometric null (P_NULL_AP from config)
     \\wikiStupaApBinomP       — binomial p-value for A+ enrichment
     \\wikiStupaApBinomStar    — significance label for A+ test
     \\wikiStupaJavaTotal      — sites in Java-region window (107–115°E)
@@ -173,7 +173,7 @@ def main() -> None:
     rate_a    = 100.0 * n_a_tier  / N
     rate_ap   = 100.0 * n_ap_tier / N
     enrich_a  = (n_a_tier  / N) / P_NULL_A   # vs 20% null
-    enrich_ap = (n_ap_tier / N) / P_NULL_AP  # vs 4% null
+    enrich_ap = (n_ap_tier / N) / P_NULL_AP  # vs geometric null (P_NULL_AP)
 
     binom_a  = binomtest(n_a_tier,  N, P_NULL_A,  alternative="greater")
     binom_ap = binomtest(n_ap_tier, N, P_NULL_AP, alternative="greater")
@@ -239,6 +239,18 @@ def main() -> None:
     n_hl70  = len(heartland70)
     nc_hl70 = sum(1 for s in heartland70 if is_c_band(s))
     or_c_hl70, p_c_hl70 = _fisher(heartland70, nc_hl70, K_C)
+
+    # Non-heartland: outside 70–110°E
+    non_heartland = [s for s in sites if not (70.0 <= s["lon"] <= 110.0)]
+    n_nonhl       = len(non_heartland)
+    na_nonhl      = sum(1 for s in non_heartland if is_a_tier(s))
+    nap_nonhl     = sum(1 for s in non_heartland if is_ap_tier(s))
+    nc_nonhl      = sum(1 for s in non_heartland if is_c_band(s))
+    or_a_nonhl,   p_a_nonhl   = _fisher(non_heartland, na_nonhl,  K_A)
+    or_ap_nonhl,  p_ap_nonhl  = _fisher(non_heartland, nap_nonhl, K_AP)
+    or_c_nonhl,   p_c_nonhl   = _fisher(non_heartland, nc_nonhl,  K_C)
+    rate_a_nonhl  = round(100 * na_nonhl  / n_nonhl, 1) if n_nonhl else 0.0
+    rate_ap_nonhl = round(100 * nap_nonhl / n_nonhl, 1) if n_nonhl else 0.0
 
     # ── Cluster asymmetry ────────────────────────────────────────────────────
     # Group sites by nearest harmonic node (0.1-beru step)
@@ -315,7 +327,7 @@ def main() -> None:
     print()
 
     print(dash)
-    print("  A+ ENRICHMENT  (A++ + A+  vs 4% geometric null)")
+    print("  A+ ENRICHMENT  (A++ + A+  vs geometric null, P_NULL_AP from config)")
     print(dash)
     print(f"  Observed  : {n_ap_tier}/{N}  = {rate_ap:.1f}%")
     print(f"  Null      : {100*P_NULL_AP:.0f}%")
@@ -408,6 +420,17 @@ def main() -> None:
         ("wikiHeartlandCbandRate",   f"{100*nc_hl70/n_hl70:.1f}" if n_hl70 else "0"),
         ("wikiHeartlandCbandOR",     f"{or_c_hl70:.2f}"),
         ("wikiHeartlandCbandP",      f"{p_c_hl70:.3f}"),
+        # Non-heartland (outside 70–110°E)
+        ("wikiNonHeartlandN",        str(n_nonhl)),
+        ("wikiNonHeartlandATierN",   str(na_nonhl)),
+        ("wikiNonHeartlandATierRate",f"{rate_a_nonhl:.1f}"),
+        ("wikiNonHeartlandATierOR",  f"{or_a_nonhl:.2f}"),
+        ("wikiNonHeartlandATierP",   f"{p_a_nonhl:.3f}"),
+        ("wikiNonHeartlandApRate",   f"{rate_ap_nonhl:.1f}"),
+        ("wikiNonHeartlandApOR",     f"{or_ap_nonhl:.2f}"),
+        ("wikiNonHeartlandApP",      f"{p_ap_nonhl:.3f}"),
+        ("wikiNonHeartlandCbandOR",  f"{or_c_nonhl:.2f}"),
+        ("wikiNonHeartlandCbandP",   f"{p_c_nonhl:.3f}"),
     ]
 
     for name, val in macros:
@@ -461,6 +484,17 @@ def main() -> None:
         ("wikiHeartlandCbandRate",   round(100*nc_hl70/n_hl70, 1) if n_hl70 else 0.0),
         ("wikiHeartlandCbandOR",     float(or_c_hl70)),
         ("wikiHeartlandCbandP",      float(p_c_hl70)),
+        # Non-heartland (outside 70–110°E)
+        ("wikiNonHeartlandN",        float(n_nonhl)),
+        ("wikiNonHeartlandATierN",   float(na_nonhl)),
+        ("wikiNonHeartlandATierRate",rate_a_nonhl),
+        ("wikiNonHeartlandATierOR",  float(or_a_nonhl)),
+        ("wikiNonHeartlandATierP",   float(p_a_nonhl)),
+        ("wikiNonHeartlandApRate",   rate_ap_nonhl),
+        ("wikiNonHeartlandApOR",     float(or_ap_nonhl)),
+        ("wikiNonHeartlandApP",      float(p_ap_nonhl)),
+        ("wikiNonHeartlandCbandOR",  float(or_c_nonhl)),
+        ("wikiNonHeartlandCbandP",   float(p_c_nonhl)),
     ]}
     ResultsStore().write_many(store_data)
     print()

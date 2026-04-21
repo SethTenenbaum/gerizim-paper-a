@@ -36,27 +36,46 @@ HARMONIC_STEP = CONFIG["units"]["harmonic_step"]      # 0.1
 KM_PER_DEGREE = CONFIG["units"]["km_per_degree"]      # 111.0
 
 # Tier thresholds (beru deviation from harmonic)
-TIER_APP   = CONFIG["tiers"]["A++"]["max_deviation_beru"]   # 0.0002
-TIER_APLUS = CONFIG["tiers"]["A+"]["max_deviation_beru"]    # 0.002
-TIER_A_MAX = CONFIG["tiers"]["A"]["max_deviation_beru"]     # 0.010
-TIER_B_MAX = CONFIG["tiers"]["B"]["max_deviation_beru"]     # 0.050
+TIER_APP   = CONFIG["tiers"]["A++"]["max_deviation_beru"]   # from config (e.g. 0.0002)
+TIER_APLUS = CONFIG["tiers"]["A+"]["max_deviation_beru"]    # from config (e.g. 0.00321)
+TIER_A_MAX = CONFIG["tiers"]["A"]["max_deviation_beru"]     # from config (e.g. 0.010)
+TIER_B_MAX = CONFIG["tiers"]["B"]["max_deviation_beru"]     # from config (e.g. 0.050)
 
 # Midpoint = 0.5 × harmonic spacing (0.1 beru); maximum possible deviation
 MIDPOINT   = 0.05   # beru — perfect inter-harmonic midpoint
 
 # C-tier thresholds (distance from the inter-harmonic midpoint)
 # Mirrors: TIER_C_MAX mirrors TIER_A_MAX, TIER_CMINUS mirrors TIER_APLUS, etc.
-TIER_C_MAX    = CONFIG["tiers"]["C"]["max_dist_from_midpoint_beru"]    # 0.010
-TIER_CMINUS   = CONFIG["tiers"]["C-"]["max_dist_from_midpoint_beru"]   # 0.002
-TIER_CMINUS2  = CONFIG["tiers"]["C--"]["max_dist_from_midpoint_beru"]  # 0.0002
+TIER_C_MAX    = CONFIG["tiers"]["C"]["max_dist_from_midpoint_beru"]    # from config (e.g. 0.010)
+TIER_CMINUS   = CONFIG["tiers"]["C-"]["max_dist_from_midpoint_beru"]   # from config (e.g. 0.00321)
+TIER_CMINUS2  = CONFIG["tiers"]["C--"]["max_dist_from_midpoint_beru"]  # from config (e.g. 0.0002)
 
-# Geometric null rates
-P_NULL_APP    = CONFIG["null_rates"]["tier_app"]      # 0.004
-P_NULL_AP     = CONFIG["null_rates"]["tier_aplus"]    # 0.04
-P_NULL_A      = CONFIG["null_rates"]["tier_a"]        # 0.20
-P_NULL_C      = CONFIG["null_rates"]["tier_c"]        # 0.20  (symmetric with A)
-P_NULL_CMINUS = CONFIG["null_rates"]["tier_cminus"]   # 0.04  (symmetric with A+)
-P_NULL_CMINUS2= CONFIG["null_rates"]["tier_cminus2"]  # 0.004 (symmetric with A++)
+# Geometric null rates — derived from tier thresholds and harmonic step.
+# Formula: 2 × max_deviation / harmonic_step  (window spans ±threshold on
+# each side of the harmonic line, over a half-cell of HARMONIC_STEP/2).
+P_NULL_APP    = 2 * TIER_APP   / HARMONIC_STEP  # = 2 × TIER_APP / 0.1
+P_NULL_AP     = 2 * TIER_APLUS / HARMONIC_STEP  # = 2 × TIER_APLUS / 0.1
+P_NULL_A      = 2 * TIER_A_MAX / HARMONIC_STEP  # = 2 × TIER_A_MAX / 0.1
+P_NULL_C      = P_NULL_A                          # symmetric with A
+P_NULL_CMINUS = P_NULL_AP                         # symmetric with A+
+P_NULL_CMINUS2= P_NULL_APP                        # symmetric with A++
+
+# Pre-formatted tier label strings for print/audit output.
+# Import these instead of hardcoding "≤0.002 beru, ≤6.7 km" in scripts.
+_KM_PER_BERU   = BERU * KM_PER_DEGREE
+TIER_APP_KM    = TIER_APP   * _KM_PER_BERU   # km (from config)
+TIER_APLUS_KM  = TIER_APLUS * _KM_PER_BERU   # km (from config)
+TIER_A_KM      = TIER_A_MAX * _KM_PER_BERU   # km (from config)
+TIER_B_KM      = TIER_B_MAX * _KM_PER_BERU   # km (from config)
+TIER_APP_LABEL   = f"≤{TIER_APP} beru, ≤{TIER_APP_KM:.2f} km"
+TIER_APLUS_LABEL = f"≤{TIER_APLUS} beru, ≤{TIER_APLUS_KM:.1f} km"
+TIER_A_LABEL     = f"≤{TIER_A_MAX} beru, ≤{TIER_A_KM:.0f} km"
+TIER_B_LABEL     = f"≤{TIER_B_MAX} beru, ≤{TIER_B_KM:.0f} km"
+TIER_C_LABEL     = f">{TIER_B_MAX} beru, >{TIER_B_KM:.0f} km"
+
+# Inverse of harmonic step — used in rounding to nearest harmonic line.
+# Prefer  round(beru_val / HARMONIC_STEP) * HARMONIC_STEP  over * 10 / 10.
+HARMONIC_STEP_INV = round(1.0 / HARMONIC_STEP)  # = 10
 
 
 # ---------------------------------------------------------------------------

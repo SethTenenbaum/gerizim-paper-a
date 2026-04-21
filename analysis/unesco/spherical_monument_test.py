@@ -10,6 +10,7 @@ from lib.results_store import ResultsStore
 from lib.beru import (
     GERIZIM, BERU, TIER_APLUS, TIER_A_MAX, TIER_B_MAX,
     P_NULL_AP, P_NULL_A,
+    TIER_APLUS_LABEL, TIER_A_LABEL, TIER_B_LABEL, TIER_C_LABEL,
     deviation as _beru_dev, tier_label, is_aplus, is_a_or_better,
 )
 from lib.stats import significance_label as sig
@@ -261,7 +262,7 @@ bt_A  = binomtest(n_A,  N, P_NULL_A,  alternative="greater")
 
 obs = [0] * 5
 for s in sites:
-    obs[min(int(s["dev"] / 0.010), 4)] += 1
+    obs[min(int(s["dev"] / TIER_A_MAX), 4)] += 1
 chi_stat, chi_p = chisquare(obs, f_exp=[N / 5.0] * 5)
 
 print()
@@ -274,14 +275,14 @@ print("=" * 100)
 print()
 print(f"  {'Metric':<45s}  {'Obs':>5}  {'Exp(H₀)':>9}  {'Ratio':>7}  {'p':>8}  Sig")
 print(f"  {'-'*90}")
-print(f"  {'Tier-A+ (≤0.002 beru, ≤6.7 km)':<45s}  {n_Ap:>5d}  "
+print(f"  {f'Tier-A+ ({TIER_APLUS_LABEL})':<45s}  {n_Ap:>5d}  "
       f"{N*P_NULL_AP:>9.2f}  {n_Ap/max(N*P_NULL_AP,0.001):>6.2f}×  "
       f"{bt_Ap.pvalue:>8.4f}  {sig(bt_Ap.pvalue)}")
-print(f"  {'Tier-A  (≤0.010 beru, ≤33 km)  ◀ PRIMARY':<45s}  {n_A:>5d}  "
+print(f"  {f'Tier-A  ({TIER_A_LABEL})  ◀ PRIMARY':<45s}  {n_A:>5d}  "
       f"{N*P_NULL_A:>9.2f}  {n_A/max(N*P_NULL_A,0.001):>6.2f}×  "
       f"{bt_A.pvalue:>8.4f}  {sig(bt_A.pvalue)}")
-print(f"  {'Tier-B  (≤0.050 beru)':<45s}  {n_B:>5d}")
-print(f"  {'Tier-C  (>0.050 beru)':<45s}  {n_C:>5d}")
+print(f"  {f'Tier-B  ({TIER_B_LABEL})':<45s}  {n_B:>5d}")
+print(f"  {f'Tier-C  ({TIER_C_LABEL})':<45s}  {n_C:>5d}")
 print(f"  {'Mean deviation':<45s}  {mean_dev:>5.4f} beru  ({mean_dev*BERU*111:.1f} km)")
 print(f"  {'χ²-uniform (5 bins, 0–0.05 beru, df=4)':<45s}  "
       f"{'':>5}  {'':>9}  {'':>7}  {chi_p:>8.4f}  {sig(chi_p)}")
@@ -291,7 +292,7 @@ print()
 bins = ["0–0.01", "0.01–0.02", "0.02–0.03", "0.03–0.04", "0.04–0.05"]
 for lbl, o in zip(bins, obs):
     bar  = "█" * int(round(o * 40 / max(obs + [1])))
-    note = "  ← Tier-A  (A+ = leftmost 20% of this bin)" if lbl == "0–0.01" else ""
+    note = f"  ← Tier-A  (A+ = leftmost {P_NULL_AP/P_NULL_A:.0%} of this bin)" if lbl == "0–0.01" else ""
     print(f"    {lbl}:  {o:3d}  ({100*o/N if N else 0:>4.0f}%)  {bar}{note}")
 
 print(f"\n  Tier-A+ hits ({n_Ap}) — form sentence from UNESCO description:")
@@ -396,12 +397,12 @@ print(f"""
 
   PRIMARY RESULT — Tier-A+ binomial (H₁: rate > {P_NULL_AP:.0%})
   ──────────────────────────────────────────────────────────────────────────────
-  N = {N}  |  Tier-A+: {n_Ap}/{N} = {100*n_Ap/N:.1f}%  |  {enr_Ap:.2f}× vs null 4%
+  N = {N}  |  Tier-A+: {n_Ap}/{N} = {100*n_Ap/N:.1f}%  |  {enr_Ap:.2f}× vs null {P_NULL_AP:.0%}
   p = {bt_Ap.pvalue:.4f}  {sig(bt_Ap.pvalue)}
 
   SECONDARY — Tier-A (H₁: rate > {P_NULL_A:.0%})
   ──────────────────────────────────────────────────────────────────────────────
-  N = {N}  |  Tier-A: {n_A}/{N} = {100*n_A/N:.1f}%  |  {enr_A:.2f}× vs null 20%
+  N = {N}  |  Tier-A: {n_A}/{N} = {100*n_A/N:.1f}%  |  {enr_A:.2f}× vs null {P_NULL_A:.0%}
   p = {bt_A.pvalue:.4f}  {sig(bt_A.pvalue)}
 
   χ²-UNIFORM — (5 bins, df=4)

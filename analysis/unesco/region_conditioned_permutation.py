@@ -27,7 +27,7 @@ from lib.results_store import ResultsStore
 
 N_PERMS      = 100_000
 HARMONIC_DEG = 3.0
-APLUS_DEG    = TIER_APLUS * 30.0   # 0.002 * 30 = 0.06 deg
+APLUS_DEG    = TIER_APLUS * 30.0   # TIER_APLUS * 30 (from config)
 
 
 def count_aplus_vec(lons):

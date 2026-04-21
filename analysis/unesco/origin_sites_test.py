@@ -596,4 +596,5 @@ ResultsStore().write_many({
     "judATierOR":         jud_fisher_or,    # Judaism A-tier odds ratio
     "pJudApFisher":       p_jud_ap_fisher,  # Judaism A+ Fisher exact p
     "judApFisherOR":      jud_ap_fisher_or, # Judaism A+ Fisher exact OR
+    "pReligChiSq":        _p_relig_chi2,    # chi-sq p, A+ across 5 religion groups
 })

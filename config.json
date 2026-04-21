@@ -99,8 +99,8 @@
       "note": "Extremely close to a harmonic"
     },
     "A+": {
-      "max_deviation_beru": 0.002,
-      "approx_km": 6.7,
+      "max_deviation_beru": 0.00321,
+      "approx_km": 10.692,
       "note": "Primary threshold for significance testing"
     },
     "A": {
@@ -119,8 +119,8 @@
       "note": "Mirror of A: within 33 km of inter-harmonic midpoint (dev >= 0.040)"
     },
     "C-": {
-      "max_dist_from_midpoint_beru": 0.002,
-      "approx_km": 6.7,
+      "max_dist_from_midpoint_beru": 0.00321,
+      "approx_km": 10.692,
       "note": "Mirror of A+: within 6.7 km of inter-harmonic midpoint (dev >= 0.048)"
     },
     "C--": {
@@ -128,15 +128,6 @@
       "approx_km": 0.67,
       "note": "Mirror of A++: within 0.67 km of inter-harmonic midpoint (dev >= 0.0498)"
     }
-  },
-  "null_rates": {
-    "note": "Geometric null rates: tier width / baseline window width. C-tiers mirror A-tiers by symmetry.",
-    "tier_app": 0.004,
-    "tier_aplus": 0.04,
-    "tier_a": 0.2,
-    "tier_c": 0.2,
-    "tier_cminus": 0.04,
-    "tier_cminus2": 0.004
   },
   "arc_test": {
     "note": "Parameters for Framework 2 / 4 / 5 great-circle arc tests (PART XX).",

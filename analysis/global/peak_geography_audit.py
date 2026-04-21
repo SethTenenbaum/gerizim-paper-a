@@ -27,7 +27,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus, cultural_sites_with_coords
 from lib.beru import (
     GERIZIM, BERU, TIER_APLUS, TIER_B_MAX, P_NULL_AP,
-    CONFIG, load_levant_landmarks,
+    HARMONIC_STEP, CONFIG, load_levant_landmarks,
 )
 
 
@@ -45,7 +45,7 @@ def count_ap_at_anchor(anchor):
     arcs = np.abs(lons - anchor)
     arcs = np.minimum(arcs, 360 - arcs)
     bvs = arcs / BERU
-    nearests = np.round(bvs * 10) / 10
+    nearests = np.round(bvs / HARMONIC_STEP) * HARMONIC_STEP
     devs = np.abs(bvs - nearests)
     return int(np.sum(devs <= TIER_APLUS))
 

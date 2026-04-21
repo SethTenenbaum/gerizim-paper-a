@@ -24,16 +24,21 @@ sys.path.insert(0, str(ROOT))
 import json
 import collections
 from data.unesco_corpus import load_corpus
+from lib.beru import (
+    BERU as BERU_DEG, HARMONIC_STEP,
+    TIER_APP, TIER_APLUS, TIER_A_MAX,
+    TIER_APP_KM, TIER_APLUS_KM, TIER_A_KM,
+    P_NULL_APP, P_NULL_AP, P_NULL_A,
+    TIER_CMINUS, TIER_CMINUS2,
+)
 
 _cfg = json.loads((ROOT / "config.json").read_text())
 
 # ── Metrological constants from config ────────────────────────────────────────
-BERU_DEG         = _cfg["units"]["beru"]["degrees"]          # 30.0
-HARMONIC_STEP    = _cfg["units"]["harmonic_step"]            # 0.1
 N_HARMONICS      = int(round(360.0 / (BERU_DEG * HARMONIC_STEP)))   # 120
-NULL_RATE_APP    = _cfg["null_rates"]["tier_app"]            # 0.004
-NULL_RATE_AP     = _cfg["null_rates"]["tier_aplus"]          # 0.04
-NULL_RATE_A      = _cfg["null_rates"]["tier_a"]              # 0.2
+NULL_RATE_APP    = P_NULL_APP    # = 2 * TIER_APP   / HARMONIC_STEP
+NULL_RATE_AP     = P_NULL_AP     # = 2 * TIER_APLUS / HARMONIC_STEP
+NULL_RATE_A      = P_NULL_A      # = 2 * TIER_A_MAX / HARMONIC_STEP
 SIM_SEED         = _cfg["simulation"]["random_seed"]         # 42
 
 GER_LON     = _cfg["anchors"]["gerizim"]["longitude"]
@@ -88,6 +93,22 @@ print(f"  \\newcommand{{\\simSeed}}{{{SIM_SEED}}}  % random seed used in all per
 print(f"  \\newcommand{{\\NullRateApp}}{{{NULL_RATE_APP*100:.1f}\\%}}  % geometric null rate for Tier-A++")
 print(f"  \\newcommand{{\\NullRateAp}}{{{NULL_RATE_AP*100:.0f}\\%}}  % geometric null rate for Tier-A+")
 print(f"  \\newcommand{{\\NullRateA}}{{{NULL_RATE_A*100:.0f}\\%}}  % geometric null rate for Tier-A")
+# ── Tier threshold macros ────────────────────────────────────────────────────
+print(f"  \\newcommand{{\\ApThreshBeru}}{{{TIER_APLUS}}}  % A+ threshold (beru)")
+print(f"  \\newcommand{{\\ApThreshKm}}{{{TIER_APLUS_KM:.1f}}}  % A+ threshold (km, equatorial)")
+print(f"  \\newcommand{{\\AppThreshBeru}}{{{TIER_APP}}}  % A++ threshold (beru)")
+print(f"  \\newcommand{{\\AppThreshKm}}{{{TIER_APP_KM:.2f}}}  % A++ threshold (km, equatorial)")
+print(f"  \\newcommand{{\\ATierThreshBeru}}{{{TIER_A_MAX}}}  % A-tier threshold (beru)")
+print(f"  \\newcommand{{\\ATierThreshKm}}{{{TIER_A_KM:.0f}}}  % A-tier threshold (km, equatorial)")
+print(f"  \\newcommand{{\\CMinusThreshBeru}}{{{TIER_CMINUS}}}  % C− threshold (beru, = A+ mirror)")
+print(f"  \\newcommand{{\\CMinusThreshKm}}{{{TIER_CMINUS * BERU_DEG * 111.0:.1f}}}  % C− threshold (km)")
+print(f"  \\newcommand{{\\NullRateApPct}}{{{NULL_RATE_AP*100:.4g}}}  % A+ null rate as plain number (no %)")
+print(f"  \\newcommand{{\\NullRateApFormula}}{{$2 \\times \\ApThreshBeru{{}} / 0.1$}}  % null rate formula")
+# ── Static convenience macros ─────────────────────────────────────────────────
+print(f"  \\newcommand{{\\threeStar}}{{***}}  % *** significance shorthand for p<0.001 literal comparisons")
+print(f"  \\newcommand{{\\twoStar}}{{**}}    % ** significance shorthand")
+print(f"  \\newcommand{{\\oneStar}}{{*}}     % * significance shorthand")
+print(f"  \\newcommand{{\\nsLabel}}{{ns}}    % ns label — use for editorial ns where no single p-value macro exists")
 
 # ── Regional fractions (Cultural/Mixed analysis corpus) ───────────────────────
 print(f"  \\newcommand{{\\CorpusPctEurope}}{{{round(100*_n_europe/_n_corpus)}}}  % pct Europe & North America in analysis corpus")
@@ -98,3 +119,16 @@ print(f"  \\newcommand{{\\CorpusPctAfrica}}{{{round(100*_n_africa/_n_corpus)}}} 
 
 print()
 print("  ✓ All GROUP 0 constants emitted.")
+
+# ── ResultsStore ─────────────────────────────────────────────────────────────
+from lib.results_store import ResultsStore
+ResultsStore().write_many({
+    "ApThreshBeru":    TIER_APLUS,
+    "ApThreshKm":      round(TIER_APLUS_KM, 1),
+    "AppThreshBeru":   TIER_APP,
+    "AppThreshKm":     round(TIER_APP_KM, 2),
+    "ATierThreshBeru": TIER_A_MAX,
+    "ATierThreshKm":   round(TIER_A_KM, 0),
+    "CMinusThreshBeru": TIER_CMINUS,
+    "NullRateApPct":   round(NULL_RATE_AP * 100, 4),
+})

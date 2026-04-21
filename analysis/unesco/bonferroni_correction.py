@@ -235,3 +235,10 @@ if _mw_raw is not None:
     print(f"  % Cluster asymmetry Mann-Whitney (Bonferroni-adj, k={K})")
     print(f"  \\newcommand{{\\pAdjClusterMW}}{{{_adj_mw:.3f}}}  % Bonf-adj p, cluster MW (= {_mw_raw:.4f} × {K})")
     print()
+
+# ── Write Bonferroni-adjusted p-values to store (for emit_sig_macros.py) ─────
+_store_writes = {"BonfK": K}
+for tid, lbl, raw_p, p_bonf, p_holm, survives, macro, _ in results:
+    if macro:
+        _store_writes[f"pAdjTest{macro}"] = round(p_bonf, 4)
+store.write_many(_store_writes)

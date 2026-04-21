@@ -51,6 +51,7 @@ from lib.beru import (
     load_keywords,
 )
 
+
 # ── Config ────────────────────────────────────────────────────────────────────
 
 # Our observed values from spherical_monument_test.py (N=17)
@@ -77,7 +78,7 @@ def compute_stats(lons):
     # Chi-square uniform (5 bins)
     obs_bins = [0] * 5
     for d in devs:
-        obs_bins[min(int(d / 0.010), 4)] += 1
+        obs_bins[min(int(d / TIER_A_MAX), 4)] += 1
     try:
         chi_stat, chi_p = chisquare(obs_bins, f_exp=[n / 5.0] * 5)
     except Exception:

@@ -1,5 +1,5 @@
 UNESCO A-TIER SITES: GERIZIM vs JERUSALEM ANCHOR COMPARISON
-Generated : Mon Apr 20 19:36:49 UTC 2026
+Generated : Mon Apr 20 20:13:16 UTC 2026
 Script    : tools/generate_audit_aplus_sites.py
 Corpus    : 1011 inscribed Cultural/Mixed UNESCO sites with coordinates
            + 1 synthetic Gerizim entry = 1012 extended corpus
@@ -15,10 +15,10 @@ SUMMARY
 
   Anchor           N corpus    A++     A+   A (all)    A+ %       A+ p           A %        A p      
   --------------------------------------------------------------------------------------
-  Gerizim              1011      7     88       228    8.7%     0.0000   ***   22.6%     0.0246     *
-  Jerusalem            1011      7     88       218    8.7%     0.0000   ***   21.6%     0.1151    ns
+  Gerizim              1011      7     88       228    8.7%     0.0027    **   22.6%     0.0246     *
+  Jerusalem            1011      7     88       218    8.7%     0.0027    **   21.6%     0.1151    ns
 
-  A+ null rate: 4%   A null rate: 20%
+  A+ null rate: 6%   A null rate: 20%
   A+ overlap (both anchors): 71 sites
   A+ unique to Gerizim: 17 sites
   A+ unique to Jerusalem: 17 sites

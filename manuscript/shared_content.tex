@@ -12,7 +12,7 @@ The approach employs a geometric null with no free parameters and is intended
 as a reusable framework for spatial pattern‑detection studies in archaeological
 heritage data.
 
-Sites within $\leq0.002$~beru ($\sim$6.7~km) of a harmonic node are
+Sites within $\leq\ApThreshBeru{}$~beru ($\sim\ApThreshKm{}$~km) of a harmonic node are
 designated Tier-A+; the geometric null rate is 4\%.
 The full corpus yields \NclusterAp{} A+ sites against an expected
 \NclusterExpAp{} under this null. The excess of roughly
@@ -118,8 +118,8 @@ anchor and produces a similar A+ count (\S\ref{sec:sensitivity_global}).
 Both lie within the \textit{Levantine corridor} ($\sim$35\textdegree{}E,
 Jordan Valley to Levant), and the enrichment belongs to this corridor,
 not to the specific anchor within it.
-Mecca ($p \approx \pMeccaAnchor$, ns), Mt.\ Meru ($p \approx \pMeruAnchor$, ns),
-and Mt.\ Kailash ($p \approx \pKailashAnchor$, ns) do not approach significance.
+Mecca ($p \approx \pMeccaAnchor$, \pMeccaAnchorSig{}), Mt.\ Meru ($p \approx \pMeruAnchor$, \pMeruAnchorSig{}),
+and Mt.\ Kailash ($p \approx \pKailashAnchor$, \pKailashAnchorSig{}) do not approach significance.
 
 
 %──────────────────────────────────────────────────────────────────────────────
@@ -158,7 +158,7 @@ $B = |\lambda - \GerizimLon| / 30$ and the beru-deviation from the
 nearest 0.1-beru harmonic is
 $\delta = |B - \operatorname{round}(B, 0.1)|$.
 The tier classification is a fixed angular criterion.
-Kilometer labels (e.g.\ $\lesssim 6.7$~km for Tier-A+) are equatorial
+Kilometer labels (e.g.\ $\lesssim\ApThreshKm{}$~km for Tier-A+) are equatorial
 approximations computed as $\delta \times 30 \times 111$~km/\textdegree{},
 becoming smaller at higher latitudes. This makes the angular criterion
 \emph{conservative} at high latitudes. A geodesic sensitivity check confirms
@@ -166,7 +166,7 @@ that applying a strict physical threshold would increase the A+ count to
 \GeodesicApPhysical{}, strengthening all primary results. No latitude
 correction is applied.
 
-The geometric null for Tier-A+ is $2 \times 0.002 / 0.1 = 4\%$,
+The geometric null for Tier-A+ is $2 \times \ApThreshBeru{} / 0.1 = \NullRateApPct{}\%$,
 assuming uniform longitudes. This serves as a convenient reference, but
 the primary tests are simulation-based null models (\S\ref{sec:simulation_null})
 that preserve the empirical longitude distribution. A Gaussian KDE produces
@@ -197,14 +197,14 @@ Sites are classified by $\delta$, the angular deviation from the
 nearest 0.1-beru harmonic. All tier boundaries were fixed on metrological
 grounds, not tuned to the data.
 \textbf{Tier~A++}: $\delta \leq 0.0002$~beru ($\lesssim 0.67$~km), $P_0 = \NullRateApp{}$, descriptive only.
-\textbf{Tier~A+}: $\delta \leq 0.002$~beru ($\lesssim 6.7$~km), $P_0 = \NullRateAp{}$ (i.e.\ $2 \times 0.002/0.1$), primary threshold.
-\textbf{Tier~A}: $\delta \leq 0.010$~beru ($\lesssim 33$~km), $P_0 = \NullRateA{}$.
+\textbf{Tier~A+}: $\delta \leq \ApThreshBeru{}$~beru ($\lesssim\ApThreshKm{}$~km), $P_0 = \NullRateAp{}$ (i.e.\ $2 \times \ApThreshBeru{}/0.1$), primary threshold.
+\textbf{Tier~A}: $\delta \leq \ATierThreshBeru{}$~beru ($\lesssim\ATierThreshKm{}$~km), $P_0 = \NullRateA{}$.
 \textbf{Tier~B}: the middle zone is neither near a harmonic nor near a midpoint.
 The C-band is the symmetric mirror of the A-band, measured as
 $\delta_\mathrm{mid} = 0.050 - \delta$ (distance from the nearest
 inter-harmonic midpoint rather than from the nearest harmonic):
-\textbf{Tier~C}: $\delta_\mathrm{mid} \leq 0.010$~beru ($\lesssim 33$~km), $P_0 = \NullRateA{}$.
-\textbf{Tier~C$-$}: $\delta_\mathrm{mid} \leq 0.002$~beru ($\lesssim 6.7$~km), $P_0 = \NullRateAp{}$.
+\textbf{Tier~C}: $\delta_\mathrm{mid} \leq \ATierThreshBeru{}$~beru ($\lesssim\ATierThreshKm{}$~km), $P_0 = \NullRateA{}$.
+\textbf{Tier~C$-$}: $\delta_\mathrm{mid} \leq \CMinusThreshBeru{}$~beru ($\lesssim\ApThreshKm{}$~km), $P_0 = \NullRateAp{}$.
 \textbf{Tier~C$--$}: $\delta_\mathrm{mid} \leq 0.0002$~beru ($\lesssim 0.67$~km), $P_0 = \NullRateApp{}$, descriptive only.
 C-band tiers are defined here; a full inter-harmonic site listing is in
 \texttt{supplementary/audit/interharmonic\_audit.txt}.
@@ -263,9 +263,9 @@ A context-aware keyword classifier (\texttt{lib/founding\_filter.py}), refined a
     A+-bearing harmonics host more total sites.
 \end{itemize}
 All three pass the Bonferroni bound at $k = \BonfK$
-(full corpus $p_\mathrm{adj} = \pAdjTestOne$~*,
-dome $p_\mathrm{adj} = \pAdjTestTwo$~***,
-cluster $p_\mathrm{adj} = \pAdjTestThree$~**).
+(full corpus $p_\mathrm{adj} = \pAdjTestOne$~\pAdjTestOneSig{},
+dome $p_\mathrm{adj} = \pAdjTestTwo$~\pAdjTestTwoSig{},
+cluster $p_\mathrm{adj} = \pAdjTestThree$~\pAdjTestThreeSig{}).
 
 \textbf{Other tests.}
 Test~4 (temporal gradient, Cochran-Armitage) is descriptive context;
@@ -276,7 +276,7 @@ and it is not part of the primary family.
 Test~2b is a sensitivity variant of Test~2.
 Test~5 (founding classifier) is post-hoc (Appendix~\ref{sec:kwdaudit_founding}).
 World religion sub-group analyses (\S\ref{sec:resultsrelig}) are exploratory:
-chi-squared across five groups ($p = \pReligChiSq$, ns);
+chi-squared across five groups ($p = \pReligChiSq$, \pReligChiSqSig{});
 Buddhist bimodal ($p = \pBudJoint$, **).
 Tests~A--D (\S\ref{sec:results_rayleigh}) assess the 3\textdegree{} periodicity
 structure: Test~A (full-corpus Rayleigh) is a negative control structurally
@@ -296,14 +296,14 @@ in Table~\ref{tab:bonferroni_both}.
 \toprule
 Test & $N$ & Raw $p$ & $p_\mathrm{adj}$, $k{=}\BonfK$ & Status \\
 \midrule
-Test~1 (full corpus)   & \NclusterTotal  & \clusterApBinom$^{a}$ & \pAdjTestOne~*     & \textbf{Primary} \\
-Test~2 (dome A+)       & \NcircTotal     & \pCircApFisher$^{a}$ (OR~$= \circApFisherOR$) & \pAdjTestTwo~***   & \textbf{Primary} \\
-Test~3 (cluster asym.) & \NclusterTotal  & \clusterPermP$^{b}$ & \pAdjTestThree~**  & \textbf{Primary} \\
+Test~1 (full corpus)   & \NclusterTotal  & \clusterApBinom$^{a}$ & \pAdjTestOne~\pAdjTestOneSig{}     & \textbf{Primary} \\
+Test~2 (dome A+)       & \NcircTotal     & \pCircApFisher$^{a}$ (OR~$= \circApFisherOR$) & \pAdjTestTwo~\pAdjTestTwoSig{}   & \textbf{Primary} \\
+Test~3 (cluster asym.) & \NclusterTotal  & \clusterPermP$^{b}$ & \pAdjTestThree~\pAdjTestThreeSig{}  & \textbf{Primary} \\
 \midrule
 Test~4 (temporal)      & \NoriginCorpus  & \pCochranThree$^{b}$ & ---                & Descriptive \\
 Test~2b (mound evol.)  & \NevoTotal      & \pEvoApFisher$^{a}$ (OR~$= \evoApFisherOR$) & N/A                & Sensitivity \\
 \bottomrule
-\multicolumn{5}{l}{\footnotesize $^{a}$Fisher exact $p$ vs.\ rest of corpus (one-sided, enrichment); $^{b}$permutation $p$. Binomial baselines: Test~2 $p = \pCircAp$~***, Test~2b $p = \pEvoAp$~***.} \\
+\multicolumn{5}{l}{\footnotesize $^{a}$Fisher exact $p$ vs.\ rest of corpus (one-sided, enrichment); $^{b}$permutation $p$. Binomial baselines: Test~2 $p = \pCircAp$~\pCircApSig{}, Test~2b $p = \pEvoAp$~\pEvoApSig{}.} \\
 \end{tabular}}
 \end{table*}
 
@@ -316,7 +316,7 @@ harmonic Mann-Whitney ($p\ \clusterHarmonicMWpStr$);
 sequential-peak permutation ($p = \peakSigP$);
 corridor occupancy \corridorPrecHits{}/\corridorPrecN{} harmonics
 ($p = \pCorridorFisher$);
-and evolution combined A+ (Fisher $p = \pEvoApFisher$~**, binomial $p = \pEvoAp$~***).
+and evolution combined A+ (Fisher $p = \pEvoApFisher$~\pEvoApFisherSig{}, binomial $p = \pEvoAp$~\pEvoApSig{}).
 The full audit is in the archived repository \citep{tenenbaum2026audit}.
 
 \subsection{Null Models}
@@ -337,7 +337,7 @@ are described with their results in \S\ref{sec:simulation_null}.
 \centering
 \includegraphics[width=0.9\textwidth]{../figures/fig_devhist}
 \caption{Distribution of beru deviations for the full UNESCO corpus.
-  The excess of sites within the Tier-A+ window ($\delta \leq 0.002$~beru,
+  The excess of sites within the Tier-A+ window ($\delta \leq \ApThreshBeru{}$~beru,
   shaded) above the uniform null (dashed line) establishes the corpus-level
   signal against which Tests~2 and~3 demonstrate morphological and spatial specificity.}
 \label{fig:devhist}
@@ -357,8 +357,8 @@ only a fraction of sites driving the periodicity.
 
 \textbf{Region-stratified robustness.}
 A region-specific empirical null (Fisher combination of per-region binomials)
-yields $p = \pRegionEmpAll$ (ns); the pre-2000 cohort remains significant
-against the geometric null ($p = \pPreTwoK$~**; \S\ref{sec:resultstemporal}).
+yields $p = \pRegionEmpAll$ (\pRegionEmpAllSig{}); the pre-2000 cohort remains significant
+against the geometric null ($p = \pPreTwoK$~\pPreTwoKSig{}; \S\ref{sec:resultstemporal}).
 
 \subsubsection*{World religion sites}
 \label{sec:resultsrelig}
@@ -366,15 +366,15 @@ Religion sub-populations are defined by keyword sets in \texttt{keywords.json};
 matched sites are in the supplementary audit files.
 A chi-squared test of independence finds no significant difference in
 A+ rates across the five main religion groups
-($\chi^2 = \religChiSqStat$, df\,=\,\religChiSqDof, $p = \pReligChiSq$, ns);
+($\chi^2 = \religChiSqStat$, df\,=\,\religChiSqDof, $p = \pReligChiSq$, \pReligChiSqSig{});
 individual Fisher tests on underpowered sub-groups are not reported.
 Sites associated with any world religion ($N = \NreligUnion$):
-binomial $p = \pReligUnion$~*.
+binomial $p = \pReligUnion$~\pReligUnionSig{}.
 The exception is a structural signal in Buddhism ($N = \NbudSitesRelig$):
 A-tier (\NbudATier/\NbudSitesRelig, \budATierRate\%) and C-band
 (\NbudInterHarmonic/\NbudSitesRelig, \budInterHarmonicRate\%) are
 both elevated simultaneously; the joint probability is
-$p = \pBudJoint$~** (multivariate hypergeometric).
+$p = \pBudJoint$~\pBudJointSig{} (multivariate hypergeometric).
 The C-band midpoint is also a 0.05-beru harmonic node, and the same
 6\textdegree{} spacing that reaches significance in the sensitivity
 sweep (\S\ref{sec:metrology}) suggests the bimodal reflects two nested grids.
@@ -386,16 +386,16 @@ sweep (\S\ref{sec:metrology}) suggests the bimodal reflects two nested grids.
 The keyword filter is described in \S\ref{sec:test_populations} ($N = \NcircTotal$).
 Tier-A+ enrichment: \NcircTierAp/\NcircTotal{} sites
 (\NcircApRate\% [\circApCIlo, \circApCIhi], $\circEnrichAp\times$;
-Fisher OR~$= \circApFisherOR$, $p = \pCircApFisher$~**;
-binomial $p = \pCircAp$~***;
+Fisher OR~$= \circApFisherOR$, $p = \pCircApFisher$~\pCircApFisherSig{};
+binomial $p = \pCircAp$~\pCircApSig{};
 permutation $Z = \simDomePermZ$, $p = \simDomePermP$;
 bootstrap $p = \simDomeBootP$;
 Bonferroni $p_\mathrm{adj} = \pAdjTestTwo$, $k = \BonfK$).
 Tier-A enrichment: \NcircTierA/\NcircTotal{}
 (\circARate\% [\circACIlo, \circACIhi], $\circEnrichA\times$;
-Fisher OR~$= \circAFisherOR$, $p = \pCircAFisher$~*;
-binomial $p = \pCircA$~**).
-The $\chi^2$-uniform test ($p = \pCircChi$, ns) is consistent with
+Fisher OR~$= \circAFisherOR$, $p = \pCircAFisher$~\pCircAFisherSig{};
+binomial $p = \pCircA$~\pCircASig{}).
+The $\chi^2$-uniform test ($p = \pCircChi$, \pCircChiSig{}) is consistent with
 concentration at harmonic nodes rather than uniform spread.
 Tier-B (middle zone): \NcircTierB/\NcircTotal{} sites;
 mean $\delta = \circMeanDev$~beru.
@@ -426,7 +426,7 @@ Sentence-level architectural confirmation reduces the dome population to
 $N = \NcircValidated$ (\NcircContextRejected{} false positives rejected;
 Appendix~\ref{sec:kwdaudit_dome}).
 Test~2x: $p = \pCircApValidated$, $\circEnrichApValidated\times$ enrichment.
-Test~2bx ($N = \NevoTotal$): $p = \pEvoApValidated$~***.
+Test~2bx ($N = \NevoTotal$): $p = \pEvoApValidated$~\pEvoApValidatedSig{}.
 Both are excluded from the primary Bonferroni family as rules were developed
 after the initial sweep.
 
@@ -440,7 +440,7 @@ Two targeted null models test whether this explains the dome enrichment
 
 \textbf{Null~A (within-dome bootstrap):} Draw $N = \NcircTotal$ longitudes
 from the dome sites' own list. Mean $= \geoNullDomeBootMean$ A+,
-$p = \geoNullDomeBootP$ (ns). The dome sites' positions are concentrated
+$p = \geoNullDomeBootP$ (\geoNullDomeBootPSig{}). The dome sites' positions are concentrated
 near harmonic longitudes.
 
 \textbf{Null~C (restricted geographic draw):} Pool all full-corpus sites
@@ -501,15 +501,15 @@ sites matching both keyword sets.
 \label{tab:evostages1b}
 \begin{tabular}{lrrrllrl}
 \toprule
- & & \multicolumn{3}{c}{Tier A+ ($\leq$6.7\,km)} & \multicolumn{3}{c}{Tier A ($\leq$33\,km)} \\
+ & & \multicolumn{3}{c}{Tier A+ ($\leq\ApThreshKm{}$\,km)} & \multicolumn{3}{c}{Tier A ($\leq\ATierThreshKm{}$\,km)} \\
 \cmidrule(lr){3-5}\cmidrule(lr){6-8}
 Stage & $N$ & A+ & Rate & OR\;($p$, Fisher) & A & Rate & OR\;($p$, Fisher) \\
 \midrule
-Mound (tumulus/barrow/kofun) & \NevoMound & \NevoMoundAp & \evoMoundApRate\% & $\evoMoundFisherOR\times$ (\pEvoMoundFisher~ns)            & \NevoMoundA & \evoMoundARate\% & $\evoMoundAFisherOR\times$ (\pEvoMoundAFisher~ns) \\
-Stupa (stupa/stupas)         & \NevoStupa & \NevoStupaAp & \evoStupaApRate\% & $\evoStupaFisherOR\times$ (\pEvoStupaFisher~*)             & \NevoStupaA & \evoStupaARate\% & $\evoStupaAFisherOR\times$ (\pEvoStupaAFisher~$^\dagger$) \\
-Dome (dome/tholos/spherical) & \NevoDome  & \NevoDomeAp  & \evoDomeApRate\%  & $\evoDomeFisherOR\times$ (\pEvoDomeFisher~*)              & \NevoDomeA  & \evoDomeARate\%  & $\evoDomeAFisherOR\times$ (\pEvoDomeAFisher~$^\dagger$) \\
+Mound (tumulus/barrow/kofun) & \NevoMound & \NevoMoundAp & \evoMoundApRate\% & $\evoMoundFisherOR\times$ (\pEvoMoundFisher~\pEvoMoundFisherSig{})            & \NevoMoundA & \evoMoundARate\% & $\evoMoundAFisherOR\times$ (\pEvoMoundAFisher~\pEvoMoundAFisherSig{}) \\
+Stupa (stupa/stupas)         & \NevoStupa & \NevoStupaAp & \evoStupaApRate\% & $\evoStupaFisherOR\times$ (\pEvoStupaFisher~\pEvoStupaFisherSig{})             & \NevoStupaA & \evoStupaARate\% & $\evoStupaAFisherOR\times$ (\pEvoStupaAFisher~$^\dagger$) \\
+Dome (dome/tholos/spherical) & \NevoDome  & \NevoDomeAp  & \evoDomeApRate\%  & $\evoDomeFisherOR\times$ (\pEvoDomeFisher~\pEvoDomeFisherSig{})              & \NevoDomeA  & \evoDomeARate\%  & $\evoDomeAFisherOR\times$ (\pEvoDomeAFisher~$^\dagger$) \\
 \midrule
-\textbf{Combined}            & \textbf{\NevoTotal} & \textbf{\NevoAp} & \textbf{\evoApRate\%} & $\mathbf{\evoApFisherOR\times}$ (\textbf{\pEvoApFisher~**}) & \textbf{\NevoA} & \textbf{\evoARate\%} & $\mathbf{\evoAFisherOR\times}$ (\textbf{\pEvoAFisher~*}) \\
+\textbf{Combined}            & \textbf{\NevoTotal} & \textbf{\NevoAp} & \textbf{\evoApRate\%} & $\mathbf{\evoApFisherOR\times}$ (\textbf{\pEvoApFisher~\pEvoApFisherSig{}}) & \textbf{\NevoA} & \textbf{\evoARate\%} & $\mathbf{\evoAFisherOR\times}$ (\textbf{\pEvoAFisher~\pEvoAFisherSig{}}) \\
 \bottomrule
 \multicolumn{8}{p{0.98\linewidth}}{\footnotesize
   OR = odds ratio; $p$ = one-sided Fisher exact vs.\ full UNESCO cultural corpus ($N = \NclusterTotal$).
@@ -520,20 +520,20 @@ Dome (dome/tholos/spherical) & \NevoDome  & \NevoDomeAp  & \evoDomeApRate\%  & $
 
 \noindent The combined population ($N = \NevoTotal$, A+ = \evoApRate\%;
 Table~\ref{tab:evostages1b}) is consistent with Test~2. The mound stage does not reach
-significance (\evoMoundApRate\%, OR $= \evoMoundFisherOR\times$, Fisher $p = \pEvoMoundFisher$, ns). The signal is carried
-by the stupa (A+ \evoStupaApRate\%, OR $= \evoStupaFisherOR\times$, $p = \pEvoStupaFisher$~*) and dome
-sub-stages (A+ \evoDomeApRate\%, OR $= \evoDomeFisherOR\times$, $p = \pEvoDomeFisher$~*).
+significance (\evoMoundApRate\%, OR $= \evoMoundFisherOR\times$, Fisher $p = \pEvoMoundFisher$, \pEvoMoundFisherSig{}). The signal is carried
+by the stupa (A+ \evoStupaApRate\%, OR $= \evoStupaFisherOR\times$, $p = \pEvoStupaFisher$~\pEvoStupaFisherSig{}) and dome
+sub-stages (A+ \evoDomeApRate\%, OR $= \evoDomeFisherOR\times$, $p = \pEvoDomeFisher$~\pEvoDomeFisherSig{}).
 Leave-one-out checks confirm stability for all sub-stages.
 Leave-3-out (worst case, $\EvoLKOnCombosThree{}$ triples):
 $p = \EvoLKOworstThreeP$, within the Bonferroni bound.
-The dome-evolution filter (Fisher $p = \pEvoApFisher$~**, binomial $p = \pEvoAp$~***) is the strongest keyword-filtered
-signal in this analysis, exceeding even the raw dome sweep (Fisher $p = \pCircApFisher$, binomial $p = \pCircAp$~***).
+The dome-evolution filter (Fisher $p = \pEvoApFisher$~\pEvoApFisherSig{}, binomial $p = \pEvoAp$~\pEvoApSig{}) is the strongest keyword-filtered
+signal in this analysis, exceeding even the raw dome sweep (Fisher $p = \pCircApFisher$, binomial $p = \pCircAp$~\pCircApSig{}).
 
 \textbf{Stupa geographic-concentration null.}
 \label{sec:stupa_geo_null}
 Stupa sites are concentrated in South/Southeast Asia
 (\stupaHeartlandFrac\% in 70\textdegree--110\textdegree{}E).
-Null~A (within-stupa bootstrap): $p = \stupaGeoBootP$ (ns).
+Null~A (within-stupa bootstrap): $p = \stupaGeoBootP$ (\stupaGeoBootPSig{}).
 Null~C (restricted $\pm 5$\textdegree{} draw): $p = \stupaGeoRestrictedP$ (*).
 
 \subsection{Cluster Asymmetry (Test~3, Primary)}
@@ -559,9 +559,9 @@ Metric & A+ sites & Non-A+ sites & Ratio / $Z$ & $p$ \\
 Mean cluster size (sites within $\pm 0.3$\textdegree{} lon)
   & \clusterApMean & \clusterNonApMean & \clusterRatio$\times$ & \\
 Mann-Whitney $U$ (one-tailed)
-  & & & & \clusterMWp~* \\
+  & & & & \clusterMWp~\clusterMWpSig{} \\
 Permutation (\NpermCluster{} shuffles)
-  & & & $Z = \clusterPermZ$ & \clusterPermP~** \\
+  & & & $Z = \clusterPermZ$ & \clusterPermP~\clusterPermPSig{} \\
 \midrule
 \multicolumn{5}{l}{\textit{Harmonic-level density (all Tier $\leq$ B sites per 0.1-beru harmonic):}} \\
 Harmonics with $\geq 1$ A+ site (\NclusterApHarmonics{})
@@ -569,7 +569,7 @@ Harmonics with $\geq 1$ A+ site (\NclusterApHarmonics{})
   & & \\
 Harmonics with 0 A+ sites (\NclusterNonApHarmonics{})
   & \multicolumn{2}{c}{mean $= \clusterHarmonicNonApMean$ sites}
-  & \clusterHarmonicRatio$\times$ & $\clusterHarmonicMWpStr$~*** \\
+  & \clusterHarmonicRatio$\times$ & $\clusterHarmonicMWpStr$~\clusterHarmonicMWpSig{} \\
 \midrule
 \bottomrule
 \end{tabular}}% end adjustbox
@@ -601,7 +601,7 @@ periodicity:
 
 \textbf{Test~A (full-corpus Rayleigh, negative control).}
 The full-corpus Rayleigh $R = \fullRayleighR$
-($Z = \fullRayleighZ$, $p_\mathrm{perm} = \fullRayleighPermP$, ns)
+($Z = \fullRayleighZ$, $p_\mathrm{perm} = \fullRayleighPermP$, \fullRayleighPermPSig{})
 confirms no spurious global 3\textdegree{} periodicity is present in the
 raw longitude file. The signal is concentrated in A+ sites, not a
 global artifact.
@@ -651,8 +651,8 @@ artifact.
 \label{sec:resultstemporal}
 
 The A+ rate is highest in the founding canon (1978--1984: \canonApRate\%,
-$\canonEnrich\times$, $p = \pCanon$~*) and dilutes toward the null in the
-modern era (\cohortErate\%, ns); Cochran-Armitage three-cohort:
+$\canonEnrich\times$, $p = \pCanon$~\pCanonSig{}) and dilutes toward the null in the
+modern era (\cohortErate\%, \pModernSig{}); Cochran-Armitage three-cohort:
 $p = \pCochranThree$~(*). The gradient holds across all three UNESCO region groups.
 Logistic regression (ordinal cohort + region covariate) confirms the gradient
 ($Z = \zLogRegCohort$, $p = \pLogRegCohort$~\textasciitilde,
@@ -674,7 +674,7 @@ The gradient is treated as descriptive only (Figure~\ref{fig:temporal}).
 \label{sec:metrology}
 
 Varying harmonic spacing from 0.05 to 0.20~beru (physical threshold
-fixed at 6.7~km), the 0.1-beru spacing produces the strongest joint
+fixed at \ApThreshKm{}~km), the 0.1-beru spacing produces the strongest joint
 significance across both the dome and full-corpus populations.
 The 0.05-beru and 0.20-beru spacings also reach significance, but both are
 mathematical consequences of the 0.10-beru structure: every 0.10-beru
@@ -683,7 +683,7 @@ subset, so neither constitutes an independent signal.
 Adjacent non-harmonic spacings (0.06, 0.07, 0.09, 0.11, 0.12~beru) are
 non-significant in either population, which is the key discriminating observation.
 The 0.08-beru spacing reaches nominal dome significance
-($p = \sweepEightDomeP$) but not full-corpus ($p = \sweepEightFullP$, ns),
+($p = \sweepEightDomeP$) but not full-corpus ($p = \sweepEightFullP$, \sweepEightFullPSig{}),
 reflecting unsystematic local overlap with the 0.10-beru grid rather than
 a genuine secondary periodicity.
 Specifically, \sweepEightTenDomeBoth{}/\sweepZeroEightDomeHits{} 
@@ -704,7 +704,7 @@ than independent angular units.
 A fine sweep within $\pm 1\%$ of 0.10~beru (\texttt{fine\_sweep\_audit.py})
 shows a $\pm 0.3\%$ shift collapses joint significance in at least one
 population. Geographic concentration alone reproduces the sharp-peak and
-canonical-unit ranking ($p = \permSlopeCanonBestJoint{}$, ns); the sensitivity
+canonical-unit ranking ($p = \permSlopeCanonBestJoint{}$, \permSlopeCanonBestJointSig{}); the sensitivity
 slope provides no independent evidential value beyond the primary tests.
 The 3\textdegree{} periodicity is independently confirmed by Tests~C and~D
 (\S\ref{sec:results_rayleigh}).
@@ -762,10 +762,10 @@ Code: \texttt{peak\_geography\_audit.py}, \texttt{verify\_x18\_periodicity.py}.
 \subsubsection*{Formal statistical tests for the $x.18$\textdegree{} periodicity}
 \label{sec:x18_formal}
 
-The full-corpus Rayleigh ($p_\mathrm{perm} = \fullRayleighPermP$, ns) confirms no
+The full-corpus Rayleigh ($p_\mathrm{perm} = \fullRayleighPermP$, \fullRayleighPermPSig{}) confirms no
 spurious global periodicity; Test~B is tautological.
 Tests~C ($p_\mathrm{perm} = \anchorShiftPermP$, *) and~D ($p_\mathrm{boot} = \targetedPfull$, *)
-are positive anchor-specific tests; discovery correction (Test~E, $p = \anchorMaxPermP$, ns)
+are positive anchor-specific tests; discovery correction (Test~E, $p = \anchorMaxPermP$, \anchorMaxPermPSig{})
 places the optimum within the expected range over \anchorSweepNanchors{} anchors.
 The unit sensitivity sweep (\S\ref{sec:metrology}) and Monte Carlo unit sweep
 (\S\ref{sec:limitations_geo}) independently confirm 3\textdegree{} as the dominant
@@ -810,7 +810,7 @@ Three simulation nulls (\simNperms{} trials each, seed~$= \simSeed{}$,
 \citealt{good2005permutation}):
 (1)~Longitude permutation: dome ($N = \NcircValidated$)
 $p_\mathrm{perm} = \simDomePermP$~(**);
-1978-1984 canon ($N = \NcanonSites$) $p = \simCanonPermP$~(ns);
+1978-1984 canon ($N = \NcanonSites$) $p = \simCanonPermP$~\simCanonPermPSig{};
 pre-2000 ($N = \NpreTwoK$) $p = \simPreTwoKPermP$~($^\dagger$).
 (2)~Bootstrap from full corpus: dome $p_\mathrm{boot} = \simDomeBootP$~(*).
 (3)~KDE-smoothed null: expected $\simKDEMean \pm \simKDEStd$, observed \Nap{}, $Z = \simKDEZ$,
@@ -847,19 +847,19 @@ result of Test~3.
 A sub-regional breakdown reveals a bimodal pattern consistent with the
 Buddhist A/C enrichment in the UNESCO religion audit (\S\ref{sec:resultsrelig}).
 The Java/Sumatra node (105\textdegree--115\textdegree{}E, near the 2.5-beru harmonic at 110.3\textdegree{}E)
-concentrates \wikiJavaNodeATierN{} of \wikiJavaNodeN{} sites at Tier-A (\wikiJavaNodeATierRate\%, OR $= \wikiJavaNodeATierOR\times$, $p < 0.001$),
-rising to \wikiJavaTightATierN/\wikiJavaTightN{} (\wikiJavaTightATierRate\%, OR $= \wikiJavaTightATierOR\times$, $p < 0.001$) in the 107\textdegree--112\textdegree{}E window,
-where A+ is also elevated at \wikiJavaTightApRate\% (OR $= \wikiJavaTightApOR\times$, $p = \wikiJavaTightApP$).
+concentrates \wikiJavaNodeATierN{} of \wikiJavaNodeN{} sites at Tier-A (\wikiJavaNodeATierRate\%, OR $= \wikiJavaNodeATierOR\times$, $p = \wikiJavaNodeATierP$~\wikiJavaNodeATierPSig{}),
+rising to \wikiJavaTightATierN/\wikiJavaTightN{} (\wikiJavaTightATierRate\%, OR $= \wikiJavaTightATierOR\times$, $p = \wikiJavaTightATierP$~\wikiJavaTightATierPSig{}) in the 107\textdegree--112\textdegree{}E window,
+where A+ is also elevated at \wikiJavaTightApRate\% (OR $= \wikiJavaTightApOR\times$, $p = \wikiJavaTightApP$~\wikiJavaTightApPSig{}).
 The physical heartland, India/Nepal (70\textdegree--90\textdegree{}E) and Myanmar/Cambodia
-(90\textdegree--105\textdegree{}E), is A-tier depleted (OR $= 0.15$--$0.68\times$, ns)
+(90\textdegree--105\textdegree{}E), is A-tier depleted (OR $= 0.15$--$0.68\times$, \nsLabel{})
 but strongly enriched in the inter-harmonic C-band:
-Myanmar/Cambodia reaches \wikiMyanmarCbandRate\% (OR $= \wikiMyanmarCbandOR\times$, $p < 0.001$) and the
-combined heartland \wikiHeartlandCbandRate\% (OR $= \wikiHeartlandCbandOR\times$, $p < 0.001$).
+Myanmar/Cambodia reaches \wikiMyanmarCbandRate\% (OR $= \wikiMyanmarCbandOR\times$, $p = \wikiMyanmarCbandP$~\wikiMyanmarCbandPSig{}) and the
+combined heartland \wikiHeartlandCbandRate\% (OR $= \wikiHeartlandCbandOR\times$, $p = \wikiHeartlandCbandP$~\wikiHeartlandCbandPSig{}).
 The anti-correlation is consistent with a grid-level account (see \S\ref{sec:transmission}).
 The non-heartland Wikidata stupas (outside 70\textdegree--110\textdegree{}E,
-$N = 102$) show the same A-enriched, C-depleted profile as the UNESCO
-domed monument corpus: 50\% reach Tier-A (OR $= 5.68\times$, $p < 0.001$)
-with no C-band enrichment, suggesting that UNESCO inscription preferentially
+$N = \wikiNonHeartlandN{}$) show the same A-enriched, C-depleted profile as the UNESCO
+domed monument corpus: \wikiNonHeartlandATierRate\% reach Tier-A (OR $= \wikiNonHeartlandATierOR\times$, $p = \wikiNonHeartlandATierP$~\wikiNonHeartlandATierPSig{})
+with no C-band enrichment (\wikiNonHeartlandCbandOR$\times$, $p = \wikiNonHeartlandCbandP$~\wikiNonHeartlandCbandPSig{}), suggesting that UNESCO inscription preferentially
 captures the most precisely aligned examples within each tradition.
 
 \subsection{Multiple Comparisons}
@@ -905,7 +905,7 @@ no keyword filter and no anchor. Test~B is tautological by construction
 The Levantine corridor statistics are reported as the motivated entry
 point, not independent confirmation.
 This ranking does not survive the 36,000-anchor discovery correction
-(Test~E, $p = \anchorMaxPermP$, ns). The primary evidence is Tests~2
+(Test~E, $p = \anchorMaxPermP$, \anchorMaxPermPSig{}). The primary evidence is Tests~2
 and~3, which require no anchor.
 
 \subsection{Geographic and Cultural Selection Bias}
@@ -942,7 +942,7 @@ supporting 3\textdegree{} as the period to which domed monuments are preferentia
 \subsection{Americas Negative Control}
 \label{sec:americas_negative_control}
 The UNESCO Americas sub-corpus ($N = 145$) shows directional
-depletion (A+ = 2.1\%, $p = 0.164$, ns) relative to the
+depletion (A+ = 2.1\%, $p = \AmericasOneSidedP$, \AmericasOneSidedStar{}) relative to the
 \NullRateAp{} null; the result is directional but uninformative
 at this sample size.
 
@@ -993,7 +993,7 @@ The statistical evidence does not identify a mechanism, but the geographic
 structure of the signal points toward the Buddhist tradition as the most
 tractable case. Within the dome-evolution corpus, the stupa sub-stage
 achieves an A+ rate of \evoStupaApRate\% (\NevoStupaAp/\NevoStupa{} sites,
-OR~$= \evoStupaFisherOR\times$, $p = \pEvoStupaFisher$~*), the highest
+OR~$= \evoStupaFisherOR\times$, $p = \pEvoStupaFisher$~\pEvoStupaFisherSig{}), the highest
 of any keyword-defined sub-population in the analysis and more than five
 times the geometric null. Three of the four UNESCO A+ stupa sites fall in the
 95\textdegree{}--110\textdegree{}E corridor, including Pyu Ancient Cities,
@@ -1003,7 +1003,7 @@ The Indonesia sub-region (95\textdegree{}--141\textdegree{}E) achieves
 an A+ rate of 60\% (3/5 sites, OR~$= 26.97\times$, $p = 0.0015$, **).
 By contrast, the four C-tier stupa sites fall exclusively in the
 India/Pakistan band: Mahabodhi, Elephanta, Taxila, and Ajanta
-(OR~$= \stupaIndiaPakCOR\times$, $p = \stupaIndiaPakCP$~*).
+(OR~$= \stupaIndiaPakCOR\times$, $p = \stupaIndiaPakCP$~\stupaIndiaPakCPSig{}).
 The Indian heartland's C-band enrichment is consistent with the Buddhist
 A/C bimodal identified in \S\ref{sec:resultsrelig}: India/Pakistan sites
 fall on 0.05-beru harmonics, while Indonesia and Southeast Asian sites
@@ -1014,11 +1014,11 @@ with \wikiStupaATierRate\% of all \wikiStupaTotal{} stupas reaching Tier-A
 permutation $Z = \wikiStupaPermZ$, $p_\mathrm{perm} = \wikiStupaPermP$~\wikiStupaPermStar),
 confirming corpus-wide harmonic enrichment. At the Java node (107\textdegree{}--112\textdegree{}E) the
 A-tier rate rises to \wikiJavaTightATierRate\%
-(OR~$= \wikiJavaTightATierOR\times$, $p < 0.001$~***), and Tier-A+ is also
+(OR~$= \wikiJavaTightATierOR\times$, $p < 0.001$~\threeStar{}), and Tier-A+ is also
 elevated: \wikiJavaTightApRate\%
-(OR~$= \wikiJavaTightApOR\times$, $p = \wikiJavaTightApP$~*).
+(OR~$= \wikiJavaTightApOR\times$, $p = \wikiJavaTightApP$~\wikiJavaTightApPSig{}).
 The C-band signal localizes to Myanmar and Cambodia
-(\wikiMyanmarCbandRate\%, OR~$= \wikiMyanmarCbandOR\times$, $p < 0.001$~***)
+(\wikiMyanmarCbandRate\%, OR~$= \wikiMyanmarCbandOR\times$, $p < 0.001$~\threeStar{})
 rather than the Indian subcontinent (Figure~\ref{fig:geo_trail}).
 The anti-correlation between the Indian heartland (C-band enriched, A-depleted)
 and the Southeast Asian transmission zone (A+ enriched, C-absent) is
@@ -1040,13 +1040,13 @@ The UNESCO Cultural and Mixed corpus is quantized to the 0.1-beru
 enrichment surviving Bonferroni correction at $k = \BonfK$.
 Longitude bands that contain a precisely aligned monument are
 $\clusterHarmonicRatio\times$ more densely populated with other heritage
-sites than bands without one (Test~3, $p = \clusterPermP$~**), suggesting
+sites than bands without one (Test~3, $p = \clusterPermP$~\clusterPermPSig{}), suggesting
 that the most important sites and the broader heritage record share the
 same longitudinal structure.
 Among architectural sub-populations, spherically shaped monuments show
 the strongest alignment of any class tested
-(OR~$= \circApFisherOR$, $p_\mathrm{adj} = \pAdjTestTwo$~***),
-exceeding what geography alone predicts (Null~C, $p = \geoNullDomeRestrictedP$~*).
+(OR~$= \circApFisherOR$, $p_\mathrm{adj} = \pAdjTestTwo$~\pAdjTestTwoSig{}),
+exceeding what geography alone predicts (Null~C, $p = \geoNullDomeRestrictedP$~\geoNullDomeRestrictedPSig{}).
 
 Comparison with the Wikidata Q180987 stupa corpus suggests a broader
 pattern: within the stupa tradition, the most historically significant
@@ -1108,7 +1108,7 @@ Statistics for all four variants are reported in
 
 \textbf{Results.} The classifier finds \foundKwApRate\% of A+ sites
 carry a founding keyword versus \foundKwBaseRate\% in the full corpus
-(OR~$= \foundKwFisherOR$, $p = \pFoundKwFisher$~*).
+(OR~$= \foundKwFisherOR$, $p = \pFoundKwFisher$~\pFoundKwFisherSig{}).
 This carries no weight in the primary evidential chain as the classifier
 was iteratively tuned after data inspection.
 
@@ -1319,4 +1319,3 @@ Claude (Anthropic) assisted with manuscript drafting and prose editing.
 GitHub Copilot (Microsoft) assisted with code autocompletion.
 All scientific conclusions, hypothesis design, keyword-list decisions,
 and analytical choices are solely the author's.
-

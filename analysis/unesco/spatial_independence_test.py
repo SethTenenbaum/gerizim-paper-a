@@ -250,9 +250,9 @@ def main():
         print(f"    Observed rate = {b['obs_rate']*100:.2f}%")
         print(f"    Bootstrap mean rate = {b['boot_mean']*100:.2f}% ± {b['boot_std']*100:.2f}%")
         print(f"    95% CI = [{b['ci_lo']*100:.2f}%, {b['ci_hi']*100:.2f}%]")
-        print(f"    4% null excluded from CI: {'YES' if b['null_excluded'] else 'NO'}")
-        print(f"    Z (observed rate vs 4% null, SE from bootstrap) = {z:.2f}")
-        print(f"    p (Z-test vs 4% null) = {p_null_z:.6f}"
+        print(f"    {P_NULL_AP:.1%} null excluded from CI: {'YES' if b['null_excluded'] else 'NO'}")
+        print(f"    Z (observed rate vs {P_NULL_AP:.1%} null, SE from bootstrap) = {z:.2f}")
+        print(f"    p (Z-test vs {P_NULL_AP:.1%} null) = {p_null_z:.6f}"
               f"  {'*' if p_null_z < 0.05 else 'ns'}")
         sig = "YES ★" if b['null_excluded'] else "NO"
         print(f"    → Spatial-dependence-adjusted significance: {sig}")
@@ -273,13 +273,13 @@ def main():
   3. Spatial block bootstrap: resample longitude blocks with
      replacement, preserving within-block dependence. The 95% CI
      on the A+ rate accounts for spatial autocorrelation; if the
-     lower bound exceeds 4%, the enrichment is confirmed even
+     lower bound exceeds the geometric null (P_NULL_AP), the enrichment is confirmed even
      under dependence.
 
   If the independence assumption were driving the result, we would
   expect the A+ rate to be consistent across space. The methods
   above test and account for spatial structure. If the 95% CI
-  excludes the 4% null from the CI, the independence assumption is not driving
+  excludes the geometric null (P_NULL_AP) from the CI, the independence assumption is not driving
   the result.
 """)
 

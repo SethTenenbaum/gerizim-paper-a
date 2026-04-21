@@ -6,7 +6,7 @@ monument corpus (Test 2, raw keyword sweep, N=90, A+=11).
 
 Targets the three closest-to-harmonic (lowest beru-deviation) A+ sites
 in the dome corpus.  Removes them in combinations of 2 and 3, re-runs
-the one-sided binomial test against the 4% geometric null, and reports
+the one-sided binomial test against the geometric null (P_NULL_AP from config), and reports
 the worst-case (highest) p-value across all combinations.
 
 MACROS EMITTED (GROUP LOO2)
