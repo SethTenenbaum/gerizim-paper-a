@@ -136,7 +136,7 @@ def run():
 
     lines = []
     ts = datetime.now(timezone.utc).strftime("%a %b %d %H:%M:%S UTC %Y")
-    hdr = f"  {'Group':<22}  {'N':>4}  {'A++':>4}  {'A+':>4}  {'A':>4}  {'C-':>4}  {'C':>4}  {'A+%':>6}  {'p(A+)':>10}"
+    hdr = f"  {'Group':<22}  {'N':>4}  {'A++':>4}  {'A+':>4}  {'A':>4}  {'C':>4}  {'C-':>4}  {'A+%':>6}  {'p(A+)':>10}"
     div = "  " + "-" * 74
 
     lines += [
@@ -156,16 +156,16 @@ def run():
         hdr, div,
     ]
     n, app, ap, a, cm, c, p, sig, rate = tier_stats(included)
-    lines.append(f"  {'All included (raw)':<22}  {n:>4}  {app:>4}  {ap:>4}  {a:>4}  {cm:>4}  {c:>4}  {rate:>6}  {p:>10.4e}  {sig}")
+    lines.append(f"  {'All included (raw)':<22}  {n:>4}  {app:>4}  {ap:>4}  {a:>4}  {c:>4}  {cm:>4}  {rate:>6}  {p:>10.4e}  {sig}")
 
     n_v = [r for r in included if all(v != "REJECTED" for v in r["validated"].values())]
     nv, app2, ap2, a2, cm2, c2, p2, sig2, rate2 = tier_stats(n_v)
-    lines.append(f"  {'Context-validated':<22}  {nv:>4}  {app2:>4}  {ap2:>4}  {a2:>4}  {cm2:>4}  {c2:>4}  {rate2:>6}  {p2:>10.4e}  {sig2}")
+    lines.append(f"  {'Context-validated':<22}  {nv:>4}  {app2:>4}  {ap2:>4}  {a2:>4}  {c2:>4}  {cm2:>4}  {rate2:>6}  {p2:>10.4e}  {sig2}")
     lines.append(div)
 
     for label, grp in groups.items():
         gn, gapp, gap, ga, gcm, gc, gp, gsig, grate = tier_stats(grp)
-        lines.append(f"  {label:<22}  {gn:>4}  {gapp:>4}  {gap:>4}  {ga:>4}  {gcm:>4}  {gc:>4}  {grate:>6}  {gp:>10.4e}  {gsig}")
+        lines.append(f"  {label:<22}  {gn:>4}  {gapp:>4}  {gap:>4}  {ga:>4}  {gc:>4}  {gcm:>4}  {grate:>6}  {gp:>10.4e}  {gsig}")
     lines.append("")
 
     lines += ["INCLUDED SITES:", SEP]

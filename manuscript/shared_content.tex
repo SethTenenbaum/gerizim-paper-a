@@ -12,7 +12,8 @@ The approach employs a geometric null with no free parameters and is intended
 as a reusable framework for spatial pattern‑detection studies in archaeological
 heritage data.
 
-Sites within $\leq\ApThreshBeru{}$~beru ($\sim\ApThreshKm{}$~km) of a harmonic node are
+Sites within $\leq\ApThreshBeru{}$~beru ($\sim\ApThreshKm{}$~km, see 
+\S\ref{sec:tier_classification}) of a harmonic node are
 designated Tier-A+; the geometric null rate is \NullRateAp{}.
 The full corpus yields \NclusterAp{} A+ sites against an expected
 \NclusterExpAp{} under this null. The excess of roughly
@@ -58,7 +59,7 @@ into 30~\textit{u\v{s}} (1~u\v{s}~$= 1$\textdegree{}) is well attested
 \citep{hunger2019mul,robson2008mathematics}, and the 0.1-beru interval
 (3\textdegree{}) tested here corresponds to exactly 3~\textit{u\v{s}}.
 
-The beru also functioned as a unit of territorial description: royal
+The beru also functioned as a unit of linear territorial description: royal
 inscriptions record inter-regional distances in beru, \textit{kudurru}
 (boundary stones) recording territorial extents were deposited in temples
 as legally authoritative records \citep{robson2008mathematics,powell1987metrological},
@@ -192,20 +193,33 @@ the same periodicity, not an independent signal.
 
 
 \subsection{Tier Classification}
+\label{sec:tier_classification}
 
-Sites are classified by $\delta$, the angular deviation from the
-nearest 0.1-beru harmonic. All tier boundaries were fixed on metrological
-grounds, not tuned to the data.
-\textbf{Tier~A++}: $\delta \leq 0.0002$~beru ($\lesssim 0.67$~km), $P_0 = \NullRateApp{}$, descriptive only.
-\textbf{Tier~A+}: $\delta \leq \ApThreshBeru{}$~beru ($\lesssim\ApThreshKm{}$~km), $P_0 = \NullRateAp{}$ (i.e.\ $2 \times \ApThreshBeru{}/0.1$), primary threshold.
-\textbf{Tier~A}: $\delta \leq \ATierThreshBeru{}$~beru ($\lesssim\ATierThreshKm{}$~km), $P_0 = \NullRateA{}$.
+\textbf{Metrological basis for the Tier boundaries.}
+Thureau-Dangin~\cite[p.~133]{thureau1921} derives the linear
+distance-\textit{beru} (French ``la lieue'') from 180
+\textit{aslu} (French ``la corde'') of 59.4\,m each, giving
+$180 \times 59.4 = 10{,}692$\,m.
+At 111\,km/°, 10,692\,m equals 0.00321\, angular-beru.
+One-half a distance-beru is one parasang (\citealt[p.~467]{powell1987metrological}),
+and one barid is four parasangs (\citealt[vol.~2, p.~63, n.~2]{burton1893pilgrimage}).
+
+The same longitude offset corresponds to a smaller ground distance at
+higher latitudes. The km values are only approximate, while the
+beru criterion is the primary, latitude-independent measure.
+No cuneiform text explicitly prescribes these exact tolerances, but they
+are grounded in Thureau-Dangin’s metrological values.
+
+\textbf{Tier~A++}: One equatorial parasang, $\delta \leq \AppThreshBeru{}$~beru ($\lesssim\AppThreshKm{}$~km), $P_0 = \NullRateApp{}$.
+\textbf{Tier~A+}: One equatorial Akkadian beru, $\delta \leq \ApThreshBeru{}$~beru ($\lesssim\ApThreshKm{}$~km), $P_0 = \NullRateAp{}$ (i.e.\ $2 \times \ApThreshBeru{}/0.1$), primary threshold.
+\textbf{Tier~A}: One equatorial barid, $\delta \leq \ATierThreshBeru{}$~beru ($\lesssim\ATierThreshKm{}$~km), $P_0 = \NullRateA{}$.
 \textbf{Tier~B}: the middle zone is neither near a harmonic nor near a midpoint.
 The C-band is the symmetric mirror of the A-band, measured as
 $\delta_\mathrm{mid} = 0.050 - \delta$ (distance from the nearest
 inter-harmonic midpoint rather than from the nearest harmonic):
 \textbf{Tier~C}: $\delta_\mathrm{mid} \leq \ATierThreshBeru{}$~beru ($\lesssim\ATierThreshKm{}$~km), $P_0 = \NullRateA{}$.
 \textbf{Tier~C$-$}: $\delta_\mathrm{mid} \leq \CMinusThreshBeru{}$~beru ($\lesssim\ApThreshKm{}$~km), $P_0 = \NullRateAp{}$.
-\textbf{Tier~C$--$}: $\delta_\mathrm{mid} \leq 0.0002$~beru ($\lesssim 0.67$~km), $P_0 = \NullRateApp{}$, descriptive only.
+\textbf{Tier~C$--$}: $\delta_\mathrm{mid} \leq \CMinusTwoThreshBeru{}$~beru ($\lesssim\AppThreshKm{}$~km), $P_0 = \NullRateApp{}$, descriptive only.
 C-band tiers are defined here; a full inter-harmonic site listing is in
 \texttt{supplementary/audit/interharmonic\_audit.txt}.
 
@@ -286,40 +300,22 @@ Test~B is tautological by construction and excluded from both tables.
 Results of all primary and secondary tests are consolidated
 in Table~\ref{tab:bonferroni_both}.
 
-\begin{table*}[tp]
-\centering\small
-\caption{Multiple-comparisons summary.
-  Primary test family: Tests~1--3 ($k = \BonfK$, $\alpha = 0.05/\BonfK$).}
-\label{tab:bonferroni_both}
-\adjustbox{max width=\textwidth}{%
-\begin{tabular}{lcrll}
-\toprule
-Test & $N$ & Raw $p$ & $p_\mathrm{adj}$, $k{=}\BonfK$ & Status \\
-\midrule
-Test~1 (full corpus)   & \NclusterTotal  & \clusterApBinom$^{a}$ & \pAdjTestOne~\pAdjTestOneSig{}     & \textbf{Primary} \\
-Test~2 (dome A+)       & \NcircTotal     & \pCircApFisher$^{a}$ (OR~$= \circApFisherOR$) & \pAdjTestTwo~\pAdjTestTwoSig{}   & \textbf{Primary} \\
-Test~3 (cluster asym.) & \NclusterTotal  & \clusterPermP$^{b}$ & \pAdjTestThree~\pAdjTestThreeSig{}  & \textbf{Primary} \\
-\midrule
-Test~4 (temporal)      & \NoriginCorpus  & \pCochranThree$^{b}$ & ---                & Descriptive \\
-Test~2b (mound evol.)  & \NevoTotal      & \pEvoApFisher$^{a}$ (OR~$= \evoApFisherOR$) & N/A                & Sensitivity \\
-\bottomrule
-\multicolumn{5}{l}{\footnotesize $^{a}$Fisher exact $p$ vs.\ rest of corpus (one-sided, enrichment); $^{b}$permutation $p$. Binomial baselines: Test~2 $p = \pCircAp$~\pCircApSig{}, Test~2b $p = \pEvoAp$~\pEvoApSig{}.} \\
-\end{tabular}}
-\end{table*}
 
 A comprehensive FDR audit (\NtotalTests{} tests;
 \citealt{benjamini1995controlling}) retains \NsurviveFDR{} at $q < 0.05$,
 of which \NsurviveBonfAll{} survive full Bonferroni at $k = \NtotalTests$.
 The \NsurviveBonfAll{} full-$k$ survivors are:
-domed A+ (Test~2, $p_\mathrm{adj} = \BonfAllTestTwo$);
-harmonic Mann-Whitney ($p\ \clusterHarmonicMWpStr$);
-sequential-peak permutation ($p = \peakSigP$);
+dome/spherical A++ (Test~1, binomial $p = \BonfAllSurvivepCircApp$);
+cluster permutation (Test~2, $p_\mathrm{adj} = \BonfAllSurviveclusterPermP$);
+harmonic Mann-Whitney ($p_\mathrm{adj} = \BonfAllSurviveclusterHarmonicMWp$);
+sequential-peak permutation ($p_\mathrm{adj} = \BonfAllSurvivepeakSigP$);
 corridor occupancy \corridorPrecHits{}/\corridorPrecN{} harmonics
-($p = \pCorridorFisher$);
-and evolution combined A+ (Fisher $p = \pEvoApFisher$~\pEvoApFisherSig{}, binomial $p = \pEvoAp$~\pEvoApSig{}).
-The full audit is in the archived repository \citep{tenenbaum2026audit}.
-
-\subsection{Null Models}
+($p_\mathrm{adj} = \BonfAllSurvivepCorridorBinom$);
+corridor Fisher combined ($p_\mathrm{adj} = \BonfAllSurvivepCorridorFisher$);
+corridor A++ enrichment ($p_\mathrm{adj} = \BonfAllSurvivepCorridorAppFisher$);
+corridor precision Mann-Whitney ($p_\mathrm{adj} = \BonfAllSurvivepCorridorMW$);
+evolution combined A++ (binomial $p = \BonfAllSurvivepEvoApp$);
+and Hinduism A+/C- joint (multivariate hyper.\ $p_\mathrm{adj} = \BonfAllSurvivepHinApCminus$).
 \label{sec:methods_simulation}
 
 Three simulation approaches (code: \texttt{simulation\_null\_model.py},
@@ -328,6 +324,9 @@ are described with their results in \S\ref{sec:simulation_null}.
 
 %──────────────────────────────────────────────────────────────────────────────
 \section{Results}
+
+
+
 \label{sec:results}
 
 \subsection{Global Enrichment (Test~1, Primary)}
@@ -409,7 +408,7 @@ Humayun's Tomb (2.0~km),
 Pyu Ancient Cities (2.3~km),
 Silk Roads: Chang'an-Tianshan (2.5~km), Trulli of Alberobello (3.6~km),
 Old City of Jerusalem (4.1~km),
-Borobudur (4.3~km; \citealt{miksic1990borobudur}),
+Borobudur (4.3~km;),
 Kizhi Pogost (5.0~km), Echmiatsin/Zvartnots (6.2~km).
 
 A leave-one-out check confirms no single site drives the result:
@@ -667,6 +666,26 @@ The gradient is treated as descriptive only (Figure~\ref{fig:temporal}).
 \label{fig:temporal}
 \end{figure*}
 
+\begin{table*}[tp]
+\centering\small
+\caption{Multiple-comparisons summary.
+  Primary test family: Tests~1--3 ($k = \BonfK$, $\alpha = 0.05/\BonfK$).}
+\label{tab:bonferroni_both}
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{lcrll}
+\toprule
+Test & $N$ & Raw $p$ & $p_\mathrm{adj}$, $k{=}\BonfK$ & Status \\
+\midrule
+Test~1 (full corpus)   & \NclusterTotal  & \clusterApBinom$^{a}$ & \pAdjTestOne~\pAdjTestOneSig{}     & \textbf{Primary} \\
+Test~2 (dome A+)       & \NcircTotal     & \pCircApFisher$^{a}$ (OR~$= \circApFisherOR$) & \pAdjTestTwo~\pAdjTestTwoSig{}   & \textbf{Primary} \\
+Test~3 (cluster asym.) & \NclusterTotal  & \clusterPermP$^{b}$ & \pAdjTestThree~\pAdjTestThreeSig{}  & \textbf{Primary} \\
+\midrule
+Test~4 (temporal)      & \NoriginCorpus  & \pCochranThree$^{b}$ & ---                & Descriptive \\
+Test~2b (mound evol.)  & \NevoTotal      & \pEvoApFisher$^{a}$ (OR~$= \evoApFisherOR$) & N/A                & Sensitivity \\
+\bottomrule
+\multicolumn{5}{l}{\footnotesize $^{a}$Fisher exact $p$ vs.\ rest of corpus (one-sided, enrichment); $^{b}$permutation $p$. Binomial baselines: Test~2 $p = \pCircAp$~\pCircApSig{}, Test~2b $p = \pEvoAp$~\pEvoApSig{}.} \\
+\end{tabular}}
+\end{table*}
 \section{Robustness Checks}
 \label{sec:robustness}
 
@@ -936,7 +955,7 @@ assuming any particular unit. The dominant peak is at 3\textdegree{} ($p < 0.001
 with harmonics at 6\textdegree{} and 12\textdegree{} also significant; adjacent
 candidates 2.5\textdegree{} and 3.5\textdegree{} do not reach significance.
 Collapsing harmonics, the dome subset yields \mcDomeNsigCollapsed{} independent
-dominant spacing ($P = \mcDomeCollapsedPEqOne{}$ under the geographic null),
+dominant spacings ($P = \mcDomeCollapsedPEqOne{}$ under the geographic null),
 supporting 3\textdegree{} as the period to which domed monuments are preferentially aligned.
 
 \subsection{Americas Negative Control}
@@ -1063,8 +1082,6 @@ corridors through which architectural canons circulated in antiquity
 
 The pipeline is transferable to any externally curated corpus; the Wikidata
 Q180987 result (\S\ref{sec:stupas_q180987}) illustrates one such application.
-Tier boundaries and the null model are fixed independently of the data,
-so further applications will either accumulate evidence or not.
 
 \appendix
 
@@ -1181,6 +1198,12 @@ Cartography in Prehistoric, Ancient, and Medieval Europe
 and the Mediterranean} (pp.~283--370).
 University of Chicago Press.
 
+\bibitem[Burton(1893)]{burton1893pilgrimage}
+Burton, R.~F. (1893).
+\textit{Personal Narrative of a Pilgrimage to Al-Madinah \& Meccah},
+vol.~2 (Memorial Edition), p.~63, n.~2.
+Tylston and Edwards.
+
 \bibitem[Hunger \& Steele(2019)]{hunger2019mul}
 Hunger, H. \& Steele, J. (2019).
 \textit{The Babylonian Astronomical Compendium MUL.APIN}.
@@ -1190,6 +1213,11 @@ Routledge.
 Shamasastry, R. (1915).
 \textit{Kautilya's Artha\'{s}\={a}stra}.
 Mysore Government Press.
+
+\bibitem[Thureau-Dangin(1921)]{thureau1921}
+Thureau-Dangin, F. (1921).
+\textit{Numération et métrologie sumériennes}.
+Revue d'Assyriologie et d'archéologie orientale, 18, 123--142.
 
 \bibitem[Kendall(1974)]{kendall1974}
 Kendall, D.~G. (1974).

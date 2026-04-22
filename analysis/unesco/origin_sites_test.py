@@ -44,7 +44,7 @@ from data.unesco_corpus import load_corpus, cultural_sites_with_coords
 from lib.beru import (
     GERIZIM, BERU, TIER_APLUS, TIER_A_MAX, TIER_B_MAX, P_NULL_AP, P_NULL_A,
     deviation as beru_deviation, tier_label, is_aplus, is_a_or_better,
-    is_c_or_better, P_NULL_C,
+    is_c_or_better, is_cminus_or_better, P_NULL_C, P_NULL_CMINUS,
     load_religion_sets,
 )
 from lib.stats import significance_label as sig
@@ -356,6 +356,8 @@ bud_ap_fisher_or, p_bud_fisher = _fisher_ap_sub(n_bud_r, nap_bud_r)
 from math import lgamma, log, exp
 
 N_inter_corpus = sum(1 for s in sites if is_c_or_better(s["tier"]))
+N_cminus_corpus = sum(1 for s in sites if is_cminus_or_better(s["tier"]))
+
 bud_inter      = [s for s in buddhist_relig if is_c_or_better(s["tier"])]
 n_bud_inter    = len(bud_inter)
 bud_inter_rate = 100 * n_bud_inter / n_bud_r
@@ -416,7 +418,7 @@ hin_inter_enr  = (n_hin_inter / n_hin_r) / (N_inter_corpus / N_ALL)
 # Exact joint P(A>=obs AND C>=obs) — A-tier paired with C-tier
 _log_denom_h = _lc(N_ALL, n_hin_r)
 _log_joint_h = float('-inf')
-for _x1 in range(na_hin_r, min(K_a_g, n_hin_r) + 1):
+for _x1 in range(nap_hin_r, min(K_a_g, n_hin_r) + 1):
     for _x2 in range(n_hin_inter, min(K_inter_g, n_hin_r - _x1) + 1):
         _x3 = n_hin_r - _x1 - _x2
         if _x3 < 0 or _x3 > K_rest_g:
@@ -428,6 +430,26 @@ for _x1 in range(na_hin_r, min(K_a_g, n_hin_r) + 1):
             _log_joint_h = _log_joint_h + log(1 + exp(_lp - _log_joint_h))
 p_hin_joint = exp(_log_joint_h)
 
+hin_cminus = [s for s in hindu if is_cminus_or_better(s["tier"])]
+n_hin_cminus = len(hin_cminus)
+hin_cminus_rate = 100 * n_hin_cminus / n_hin_r
+hin_cminus_enr = (n_hin_cminus / n_hin_r) / (N_cminus_corpus / N_ALL)
+p_hin_cminus = binomtest(n_hin_cminus, n_hin_r, P_NULL_CMINUS, alternative="greater").pvalue if n_hin_r else 1.0
+
+_log_denom_h_cminus = _lc(N_ALL, n_hin_r)
+_log_joint_h_cminus = float('-inf')
+for _x1 in range(nap_hin_r, min(K_a_g, n_hin_r) + 1):
+    for _x2 in range(n_hin_cminus, min(N_cminus_corpus, n_hin_r - _x1) + 1):
+        _x3 = n_hin_r - _x1 - _x2
+        if _x3 < 0 or _x3 > K_rest_g:
+            continue
+        _lp = _lc(K_a_g, _x1) + _lc(N_cminus_corpus, _x2) + _lc(K_rest_g, _x3) - _log_denom_h_cminus
+        if _lp > _log_joint_h_cminus:
+            _log_joint_h_cminus = _lp + log(1 + exp(_log_joint_h_cminus - _lp)) if _log_joint_h_cminus > float('-inf') else _lp
+        elif _lp > _log_joint_h_cminus - 50:
+            _log_joint_h_cminus = _log_joint_h_cminus + log(1 + exp(_lp - _log_joint_h_cminus))
+p_hin_ap_cminus = exp(_log_joint_h_cminus)
+
 jewish_kws = next(kws for name, kws in RELIGION_SETS if name.lower().startswith("jud"))
 jewish = [s for s in sites if any(k in s["text"] for k in jewish_kws)]
 n_jud = len(jewish)
@@ -437,6 +459,13 @@ p_jud_a_binom = binomtest(na_jud, n_jud, P_NULL_A, alternative="greater").pvalue
 _jud_table = [[na_jud, n_jud - na_jud],
               [na_corpus - na_jud, (N_ALL - n_jud) - (na_corpus - na_jud)]]
 jud_fisher_or, p_jud_fisher = fisher_exact(_jud_table, alternative="greater")
+
+nap_jud = sum(1 for s in jewish if is_aplus(s["tier"]))
+p_jud_ap = binomtest(nap_jud, n_jud, P_NULL_AP, alternative="greater").pvalue
+# Fisher's exact: Judaism A+ vs rest of corpus
+_jud_ap_table = [[nap_jud, n_jud - nap_jud],
+                 [nap_corpus - nap_jud, (N_ALL - n_jud) - (nap_corpus - nap_jud)]]
+jud_ap_fisher_or, p_jud_ap_fisher = fisher_exact(_jud_ap_table, alternative="greater")
 
 n_rel, nap_rel, _, p_rel, enr_rel = stats(any_relig)
 relig_union_or, p_rel_fisher = _fisher_ap_sub(n_rel, nap_rel)
@@ -519,7 +548,6 @@ print(f"  \\newcommand{{\\christApRate}}{{{100*nap_chr/n_chr:.1f}}}            %
 print(f"  \\newcommand{{\\pChrist}}{{{p_chr:.4f}}}         % p-value, Christian sites A+ binomial")
 print(f"  \\newcommand{{\\pChristFisher}}{{{p_chr_fisher:.4f}}}      % p-value, Christian A+ Fisher exact vs rest")
 print(f"  \\newcommand{{\\christFisherOR}}{{{chr_ap_fisher_or:.2f}}}      % OR, Christian A+ Fisher exact")
-print(f"  \\newcommand{{\\christEnrich}}{{{enr_chr:.2f}}}           % enrichment ratio, Christian sites")
 print(f"  \\newcommand{{\\NchristA}}{{{na_chr}}}              % Christian sites A-tier count")
 print(f"  \\newcommand{{\\christARate}}{{{100*na_chr/n_chr:.1f}}}            % Christian sites A-tier rate (%)")
 print(f"  \\newcommand{{\\pChristA}}{{{p_chr_a:.4f}}}         % p-value, Christian sites A-tier binomial")
@@ -550,23 +578,11 @@ print(f"  \\newcommand{{\\hinApRate}}{{{100*nap_hin_r/n_hin_r:.1f}}}            
 print(f"  \\newcommand{{\\NhinInterHarmonic}}{{{n_hin_inter}}}             % Hinduism C-tier sites")
 print(f"  \\newcommand{{\\hinInterHarmonicRate}}{{{hin_inter_rate:.1f}}}            % Hinduism C-tier rate (%)")
 print(f"  \\newcommand{{\\pHinJoint}}{{{p_hin_joint:.4f}}}         % joint p: Hinduism A >= {na_hin_r} AND C-tier >= {n_hin_inter} (multivariate hypergeometric)")
-print(f"  \\newcommand{{\\NjudSites}}{{{n_jud}}}            % Judaism-tagged sites N")
-print(f"  \\newcommand{{\\judATierCount}}{{{na_jud}}}              % Judaism A-tier count")
-print(f"  \\newcommand{{\\judATierRate}}{{{100*na_jud/n_jud:.1f}}}            % Judaism A-tier rate (%)")
-print(f"  \\newcommand{{\\pJudATierBinom}}{{{p_jud_a_binom:.4f}}}         % p-value, Judaism A-tier binomial")
-print(f"  \\newcommand{{\\pJudATierFisher}}{{{p_jud_fisher:.4f}}}         % p-value, Judaism A-tier Fisher exact vs rest")
-print(f"  \\newcommand{{\\judATierOR}}{{{jud_fisher_or:.2f}}}           % OR, Judaism A-tier Fisher exact")
-nap_jud = sum(1 for s in jewish if is_aplus(s["tier"]))
-p_jud_ap = binomtest(nap_jud, n_jud, P_NULL_AP, alternative="greater").pvalue
-# Fisher's exact: Judaism A+ vs rest of corpus
-_jud_ap_table = [[nap_jud, n_jud - nap_jud],
-                 [nap_corpus - nap_jud, (N_ALL - n_jud) - (nap_corpus - nap_jud)]]
-jud_ap_fisher_or, p_jud_ap_fisher = fisher_exact(_jud_ap_table, alternative="greater")
-print(f"  \\newcommand{{\\judApCount}}{{{nap_jud}}}               % Judaism A+ count")
-print(f"  \\newcommand{{\\judApRate}}{{{100*nap_jud/n_jud:.1f}}}            % Judaism A+ rate (%)")
-print(f"  \\newcommand{{\\pJudAp}}{{{p_jud_ap:.4f}}}         % p-value, Judaism A+ binomial")
-print(f"  \\newcommand{{\\pJudApFisher}}{{{p_jud_ap_fisher:.4f}}}      % p-value, Judaism A+ Fisher exact vs rest")
-print(f"  \\newcommand{{\\judApFisherOR}}{{{jud_ap_fisher_or:.2f}}}        % OR, Judaism A+ Fisher exact vs rest")
+print(f"  \\newcommand{{\\NhinCminus}}{{{n_hin_cminus}}}            % Hinduism C- tier sites")
+print(f"  \\newcommand{{\\hinCminusRate}}{{{hin_cminus_rate:.1f}}}            % Hinduism C- tier rate (%)")
+print(f"  \\newcommand{{\\hinCminusEnrich}}{{{hin_cminus_enr:.2f}}}           % Hinduism C- tier enrichment vs corpus")
+print(f"  \\newcommand{{\\pHinCminus}}{{{p_hin_cminus:.4f}}}         % p-value, Hinduism C- tier binomial")
+print(f"  \\newcommand{{\\pHinApCminus}}{{{p_hin_ap_cminus:.4f}}}         % joint p: Hinduism A+ >= {nap_hin_r} AND C- >= {n_hin_cminus} (multivariate hypergeometric)")
 
 # ── Write to results store ────────────────────────────────────────────────────
 ResultsStore().write_many({
@@ -587,14 +603,14 @@ ResultsStore().write_many({
     "islamFisherOR":      isl_ap_fisher_or, # Islam A+ Fisher OR
     "pBudRelig":          p_bud_r,          # Buddhism religion-tagged A+ binomial p
     "pBudFisher":         p_bud_fisher,     # Buddhism A+ Fisher p
-    "pBudJoint":              p_bud_joint,       # joint p: Buddhism A+ and C-tier both enriched
-    "pHinJoint":              p_hin_joint,       # joint p: Hinduism A+ and C-tier both enriched
-    "NbudInterHarmonic":      n_bud_inter,       # Buddhist inter-harmonic site count
-    "budInterHarmonicRate":   bud_inter_rate,    # Buddhist inter-harmonic rate (%)
-    "budInterHarmonicEnrich": bud_inter_enr,     # Buddhist inter-harmonic enrichment ratio
+    "pBudJoint":          p_bud_joint,      # joint p: Buddhism A+ and C-tier both enriched
+    "pHinJoint":          p_hin_joint,      # joint p: Hinduism A+ and C-tier both enriched
+    "pHinCminus":         p_hin_cminus,     # Hinduism C- binomial p
+    "pHinApCminus":       p_hin_ap_cminus,  # Hinduism A+ and C- joint p
     "pJudATierFisher":    p_jud_fisher,     # Judaism A-tier Fisher exact p
     "judATierOR":         jud_fisher_or,    # Judaism A-tier odds ratio
+    "pJudAp":            p_jud_ap,        # Judaism A+ binomial p
     "pJudApFisher":       p_jud_ap_fisher,  # Judaism A+ Fisher exact p
-    "judApFisherOR":      jud_ap_fisher_or, # Judaism A+ Fisher exact OR
-    "pReligChiSq":        _p_relig_chi2,    # chi-sq p, A+ across 5 religion groups
+    "pReligChiSq":        _p_relig_chi2,    # p-value, chi-sq A+ across 5 religion groups
+    "pJudApFisherSig":    p_jud_ap_fisher,  # Judaism A+ Fisher exact p
 })

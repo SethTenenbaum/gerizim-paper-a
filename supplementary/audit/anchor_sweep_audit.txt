@@ -1,5 +1,5 @@
 GLOBAL ANCHOR SWEEP AUDIT — GERIZIM AND JERUSALEM RANKINGS
-Generated : Mon Apr 20 20:13:26 UTC 2026
+Generated : Wed Apr 22 18:09:48 UTC 2026
 Script    : tools/generate_audit_anchor_sweep.py
 Corpus    : 1012 sites (1011 inscribed Cultural/Mixed + Gerizim synthetic)
            Each trial anchor self-excludes itself → N = 1011 per anchor
@@ -20,8 +20,8 @@ FOCAL ANCHOR RESULTS
 
   Anchor                            Lon°E    A++     A+      A    Rank   Pctile     % ≥     p-value  sig
   -----------------------------------------------------------------------------------------------
-  Gerizim (Tentative List)         35.269      7     88    228     721    98.0th   2.99%  2.7224e-03  **
-  Jerusalem (inscribed)           35.2317      7     88    218     721    98.0th   2.99%  2.7224e-03  **
+  Gerizim (Tentative List)         35.269     44     88    214     721    98.0th   2.99%  2.7224e-03  **
+  Jerusalem (inscribed)           35.2317     48     88    210     721    98.0th   2.99%  2.7224e-03  **
 
   Gerizim : 720 anchors score higher, 356 score equally → rank 721 / 36,000
   Jerusalem: 720 anchors score higher, 356 score equally → rank 721 / 36,000

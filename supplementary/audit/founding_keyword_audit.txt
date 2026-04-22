@@ -1,5 +1,5 @@
 UNESCO FOUNDING / SACRED-ORIGIN SITE KEYWORD AUDIT
-Generated  : Mon Apr 20 20:13:12 UTC 2026
+Generated  : Wed Apr 22 18:09:42 UTC 2026
 Script     : tools/generate_audit_founding.py
 Keywords   : loaded from keywords.json via lib/founding_filter.py
 
@@ -25,11 +25,11 @@ SUMMARY
   Category breakdown (sites may appear in multiple categories):
   Cat     N   A++    A+     A    C-     C     A+%       p(A+)
   ------------------------------------------------------------
-  F    192     3    15    38    13    28    7.8%  2.5289e-01  ns  (FOUNDING CAPITAL / SEAT OF POWER)
-  S     56     0     5    14     2     8    8.9%  2.8996e-01  ns  (SACRED ORIGIN / BIRTH OF A TRADITION)
-  M     70     2     8    21     6     5   11.4%  7.9250e-02  ~  (FOUNDING MONUMENT / PROTOTYPE)
-  L     82     0     6    20     9    10    7.3%  4.3182e-01  ns  (ANCIENT CONTINUOUS LANDSCAPE)
-  X     26     1     7    10     2     2   26.9%  9.9586e-04  ***  (FOUNDING AXIS / IMPERIAL INFRASTRUCTURE)
+  F    192     9    15    34     7    26    7.8%  2.5289e-01  ns  (FOUNDING CAPITAL / SEAT OF POWER)
+  S     56     4     5    13     1     6    8.9%  2.8996e-01  ns  (SACRED ORIGIN / BIRTH OF A TRADITION)
+  M     70     7     8    20     4     5   11.4%  7.9250e-02  ~  (FOUNDING MONUMENT / PROTOTYPE)
+  L     82     4     6    18     5     8    7.3%  4.3182e-01  ns  (ANCIENT CONTINUOUS LANDSCAPE)
+  X     26     5     7    10     1     2   26.9%  9.9586e-04  ***  (FOUNDING AXIS / IMPERIAL INFRASTRUCTURE)
 
 INCLUDED SITES (sorted by tier, then beru deviation):
 ────────────────────────────────────────────────────────────────────────────────────────
@@ -75,7 +75,7 @@ antigua, the capital of the captaincy-general of guatemala, was founded in the e
 the first capital of côte d’ivoire, the historic town of grand-bassam, is an example of a late 19 th - and early 20 th -century co"
 
   Lumbini, the Birthplace of the Lord Buddha ★  (Nepal)
-    LON     : 83.2761°E  |  dev 0.0002 beru  (0.8 km)  |  Tier A+
+    LON     : 83.2761°E  |  dev 0.0002 beru  (0.8 km)  |  Tier A++
     PRIMARY : S — SACRED ORIGIN / BIRTH OF A TRADITION
     ALL CATS: ['S']
     [S] reasons : ['unambiguous:holiest']
@@ -83,14 +83,14 @@ the first capital of côte d’ivoire, the historic town of grand-bassam, is an 
       ↳ [unambiguous:holiest] "lumbini is one of the holiest places of one of the world's great religions, and its remains contain important evidence about the nature of buddhist pilgrimage c"
 
   Historic Centre of Florence ★  (Italy)
-    LON     : 11.2561°E  |  dev 0.0004 beru  (1.4 km)  |  Tier A+
+    LON     : 11.2561°E  |  dev 0.0004 beru  (1.4 km)  |  Tier A++
     PRIMARY : F — FOUNDING CAPITAL / SEAT OF POWER
     ALL CATS: ['F']
     [F] reasons : ['context-validated:capital of']
       ↳ [context-validated:capital of] "these values are still appreciable within the historic centre, notwithstanding the 19th-century transformations undertaken during the period in which florence s"
 
   Old City of Zamość ★  (Poland)
-    LON     : 23.2528°E  |  dev 0.0005 beru  (1.8 km)  |  Tier A+
+    LON     : 23.2528°E  |  dev 0.0005 beru  (1.8 km)  |  Tier A++
     PRIMARY : X — FOUNDING AXIS / IMPERIAL INFRASTRUCTURE
     ALL CATS: ['X']
     [X] reasons : ['context-validated:trade route']
@@ -99,7 +99,7 @@ zamosc was founded in the 16th century by the chancellor jan zamoysky on the tra
       ↳ [context-validated:trade route] "located on the trade route linking western and northern europe with the black sea, zamość was conceived as a trade-based economic centre."
 
   Humayun's Tomb, Delhi ★  (India)
-    LON     : 77.2506°E  |  dev 0.0006 beru  (2.0 km)  |  Tier A+
+    LON     : 77.2506°E  |  dev 0.0006 beru  (2.0 km)  |  Tier A++
     PRIMARY : M — FOUNDING MONUMENT / PROTOTYPE
     ALL CATS: ['M']
     [M] reasons : ['context-validated:culminating in']
@@ -107,7 +107,7 @@ zamosc was founded in the 16th century by the chancellor jan zamoysky on the tra
       ↳ [context-validated:culminating in] "the monumental scale achieved here was to become the characteristic of mughal imperial projects, culminating in the construction of the taj mahal."
 
   The Gedeo Cultural Landscape ★  (Ethiopia)
-    LON     : 38.2878°E  |  dev 0.0006 beru  (2.1 km)  |  Tier A+
+    LON     : 38.2878°E  |  dev 0.0006 beru  (2.1 km)  |  Tier A++
     PRIMARY : L — ANCIENT CONTINUOUS LANDSCAPE
     ALL CATS: ['L']
     [L] reasons : ['context-validated:cultural landscape']
@@ -116,7 +116,7 @@ the property lies along the eastern edge of the main ethiopian rift, on the stee
       ↳ [context-validated:cultural landscape] "brief synthesis the gedeo cultural landscape spread along the eastern escarpment of the ethiopian highlands, is an exceptional testimony to a long-standing and "
 
   Mbanza Kongo, Vestiges of the Capital of the former Kingdom of Kongo ★  (Angola)
-    LON     : 14.2497°E  |  dev 0.0006 beru  (2.1 km)  |  Tier A+
+    LON     : 14.2497°E  |  dev 0.0006 beru  (2.1 km)  |  Tier A++
     PRIMARY : F — FOUNDING CAPITAL / SEAT OF POWER
     ALL CATS: ['F']
     [F] reasons : ['context-validated:capital of']
@@ -125,20 +125,20 @@ the town of mbanza kongo, located on a plateau at an altitude of 570 m, was the 
       ↳ [context-validated:capital of] "brief synthesis the town of mbanza kongo was the political and spiritual capital of the kingdom of kongo, one of the largest constituted states of southern afri"
 
   Pyu Ancient Cities ★  (Myanmar)
-    LON     : 95.2900°E  |  dev 0.0007 beru  (2.3 km)  |  Tier A+
+    LON     : 95.2900°E  |  dev 0.0007 beru  (2.3 km)  |  Tier A++
     PRIMARY : M — FOUNDING MONUMENT / PROTOTYPE
     ALL CATS: ['M']
     [M] reasons : ['context-validated:prototype']
 
   Medici Villas and Gardens in Tuscany ★  (Italy)
-    LON     : 11.2478°E  |  dev 0.0007 beru  (2.4 km)  |  Tier A+
+    LON     : 11.2478°E  |  dev 0.0007 beru  (2.4 km)  |  Tier A++
     PRIMARY : M — FOUNDING MONUMENT / PROTOTYPE
     ALL CATS: ['M']
     [M] reasons : ['unambiguous:first example']
       ↳ [unambiguous:first example] "the medici villas form the first example of the connection between architecture, gardens, and the environment and became an enduring reference for princely resi"
 
   Silk Roads: the Routes Network of Chang'an-Tianshan Corridor ★  (China,Kazakhstan,Kyrgyzstan)
-    LON     : 107.2911°E  |  dev 0.0007 beru  (2.5 km)  |  Tier A+
+    LON     : 107.2911°E  |  dev 0.0007 beru  (2.5 km)  |  Tier A++
     PRIMARY : F — FOUNDING CAPITAL / SEAT OF POWER
     ALL CATS: ['F', 'X']
     [F] reasons : ['context-validated:capital of']
@@ -150,21 +150,21 @@ this property is a 5,000 km section of the extensive silk roads network, stretc
       ↳ [unambiguous:great wall] "thirty-three sites along the corridor include capital cities palace complexes of various empires and khan kingdoms, trading settlements, buddhist cave temples, "
 
   Archaeological Site of Leptis Magna ★  (Libya)
-    LON     : 14.2931°E  |  dev 0.0008 beru  (2.7 km)  |  Tier A+
+    LON     : 14.2931°E  |  dev 0.0008 beru  (2.7 km)  |  Tier A++
     PRIMARY : F — FOUNDING CAPITAL / SEAT OF POWER
     ALL CATS: ['F']
     [F] reasons : ['unambiguous:imperial capital']
       ↳ [unambiguous:imperial capital] "the urban fabric of the city represents a synthesis of progressive developments and enlargements which came to a height in the severan period, incorporating maj"
 
   Via Appia. <em>Regina Viarum</em> ★  (Italy)
-    LON     : 17.2421°E  |  dev 0.0009 beru  (3.0 km)  |  Tier A+
+    LON     : 17.2421°E  |  dev 0.0009 beru  (3.0 km)  |  Tier A++
     PRIMARY : X — FOUNDING AXIS / IMPERIAL INFRASTRUCTURE
     ALL CATS: ['X']
     [X] reasons : ['regex-unambiguous:\\boldest.{0,20}road']
       ↳ [regex-unambiguous:\boldest.{0,20}road] "regina viarum is the oldest roman road whose route is beyond doubt and among the first created."
 
   Red Fort Complex ★  (India)
-    LON     : 77.2408°E  |  dev 0.0009 beru  (3.1 km)  |  Tier A+
+    LON     : 77.2408°E  |  dev 0.0009 beru  (3.1 km)  |  Tier A++
     PRIMARY : F — FOUNDING CAPITAL / SEAT OF POWER
     ALL CATS: ['F', 'M']
     [F] reasons : ['context-validated:capital of']
@@ -173,7 +173,7 @@ the red fort complex was built as the palace fort of shahjahanabad – the new c
     [M] reasons : ['context-validated:prototype']
 
   Xanthos-Letoon ★  (Türkiye)
-    LON     : 29.2976°E  |  dev 0.0010 beru  (3.2 km)  |  Tier A+
+    LON     : 29.2976°E  |  dev 0.0010 beru  (3.2 km)  |  Tier A++
     PRIMARY : F — FOUNDING CAPITAL / SEAT OF POWER
     ALL CATS: ['F']
     [F] reasons : ['context-validated:capital of']
@@ -182,7 +182,7 @@ this site, which was the capital of lycia, illustrates the blending of lycian tr
       ↳ [context-validated:capital of] "xanthos, which was the capital of ancient lycia, illustrates the blending of lycian traditions with the hellenic influence, especially in its funerary art."
 
   Mapungubwe Cultural Landscape ★  (South Africa)
-    LON     : 29.2389°E  |  dev 0.0010 beru  (3.3 km)  |  Tier A+
+    LON     : 29.2389°E  |  dev 0.0010 beru  (3.3 km)  |  Tier A++
     PRIMARY : L — ANCIENT CONTINUOUS LANDSCAPE
     ALL CATS: ['L']
     [L] reasons : ['context-validated:cultural landscape']
@@ -191,14 +191,14 @@ mapungubwe is set hard against the northern border of south africa, joining zimb
       ↳ [context-validated:cultural landscape] "criterion (ii):  the mapungubwe cultural landscape contains evidence for an important interchange of human values that led to far-reaching cultural and social c"
 
   Historic Centre of Oaxaca and Archaeological Site of Monte Albán ★  (Mexico)
-    LON     : -96.7681°E  |  dev 0.0012 beru  (4.1 km)  |  Tier A+
+    LON     : -96.7681°E  |  dev 0.0012 beru  (4.1 km)  |  Tier A++
     PRIMARY : S — SACRED ORIGIN / BIRTH OF A TRADITION
     ALL CATS: ['S']
     [S] reasons : ['unambiguous:sacred city']
       ↳ [unambiguous:sacred city] "the final phases of monte albán iv and v were marked by the transformation of the sacred city into a fortified town."
 
   Old City of Jerusalem and its Walls ★  (Jerusalem (Site proposed by Jordan))
-    LON     : 35.2317°E  |  dev 0.0012 beru  (4.1 km)  |  Tier A+
+    LON     : 35.2317°E  |  dev 0.0012 beru  (4.1 km)  |  Tier A++
     PRIMARY : S — SACRED ORIGIN / BIRTH OF A TRADITION
     ALL CATS: ['S']
     [S] reasons : ['unambiguous:holy city']
@@ -207,14 +207,14 @@ as a holy city for judaism, christianity and islam, jerusalem has always been of
       ↳ [unambiguous:holy city] "as a holy city for judaism, christianity and islam, jerusalem has always been of great symbolic importance."
 
   Borobudur Temple Compounds ★  (Indonesia)
-    LON     : 110.2301°E  |  dev 0.0013 beru  (4.3 km)  |  Tier A+
+    LON     : 110.2301°E  |  dev 0.0013 beru  (4.3 km)  |  Tier A++
     PRIMARY : S — SACRED ORIGIN / BIRTH OF A TRADITION
     ALL CATS: ['S']
     [S] reasons : ['context-validated:pilgrimage site']
       ↳ [context-validated:pilgrimage site] "nowadays the property could be used as a buddhist pilgrimage site."
 
   Paseo del Prado and Buen Retiro, a landscape of Arts and Sciences ★  (Spain)
-    LON     : -3.6871°E  |  dev 0.0015 beru  (4.9 km)  |  Tier A+
+    LON     : -3.6871°E  |  dev 0.0015 beru  (4.9 km)  |  Tier A++
     PRIMARY : M — FOUNDING MONUMENT / PROTOTYPE
     ALL CATS: ['L', 'M']
     [L] reasons : ['context-validated:cultural landscape']
@@ -227,7 +227,7 @@ located at the urban heart of madrid, this cultural landscape evolved since the 
       ↳ [context-validated:prototype] "it includes the paseo del prado as the prototype of a hispanic alameda (tree-lined avenue) from the 16th century and modified in the 18th century, a designed pu"
 
   The Great Wall ★  (China)
-    LON     : 98.2250°E  |  dev 0.0015 beru  (4.9 km)  |  Tier A+
+    LON     : 98.2250°E  |  dev 0.0015 beru  (4.9 km)  |  Tier A++
     PRIMARY : X — FOUNDING AXIS / IMPERIAL INFRASTRUCTURE
     ALL CATS: ['X']
     [X] reasons : ['unambiguous:great wall']
@@ -236,7 +236,7 @@ in c."
       ↳ [unambiguous:great wall] "construction continued up to the ming dynasty (1368–1644), when the great wall became the world's largest military structure."
 
   Las Médulas ★  (Spain)
-    LON     : -6.7761°E  |  dev 0.0015 beru  (5.0 km)  |  Tier A+
+    LON     : -6.7761°E  |  dev 0.0015 beru  (5.0 km)  |  Tier A++
     PRIMARY : L — ANCIENT CONTINUOUS LANDSCAPE
     ALL CATS: ['L']
     [L] reasons : ['unambiguous:ancient landscape']
@@ -670,7 +670,7 @@ qal’at al-bahrain is a typical tell – an artificial mound created by many su
       ↳ [context-validated:culminating in] "its spatial organization, starting from the border of the site marked with the traditional bark cloth trees, leading through the gatehouse, the main courtyard, "
 
   Gordion  (Türkiye)
-    LON     : 31.9861°E  |  dev 0.0094 beru  (31.4 km)  |  Tier A
+    LON     : 31.9861°E  |  dev 0.0094 beru  (31.4 km)  |  Tier B
     PRIMARY : F — FOUNDING CAPITAL / SEAT OF POWER
     ALL CATS: ['F']
     [F] reasons : ['unambiguous:ancient capital']
@@ -678,14 +678,14 @@ qal’at al-bahrain is a typical tell – an artificial mound created by many su
 located in an open rural landscape, the archaeological site of gordion is a multi-layered ancient settlement, encompassing the remains of the ancient ca"
 
   Baptism Site “Bethany Beyond the Jordan” (Al-Maghtas)  (Jordan)
-    LON     : 35.5528°E  |  dev 0.0095 beru  (31.5 km)  |  Tier A
+    LON     : 35.5528°E  |  dev 0.0095 beru  (31.5 km)  |  Tier B
     PRIMARY : S — SACRED ORIGIN / BIRTH OF A TRADITION
     ALL CATS: ['S']
     [S] reasons : ['context-validated:place of pilgrimage']
       ↳ [context-validated:place of pilgrimage] "the site is a christian place of pilgrimage."
 
   Historic Areas of Istanbul  (Türkiye)
-    LON     : 28.9833°E  |  dev 0.0095 beru  (31.7 km)  |  Tier A
+    LON     : 28.9833°E  |  dev 0.0095 beru  (31.7 km)  |  Tier B
     PRIMARY : F — FOUNDING CAPITAL / SEAT OF POWER
     ALL CATS: ['F', 'M']
     [F] reasons : ['context-validated:capital of']
@@ -695,7 +695,7 @@ located in an open rural landscape, the archaeological site of gordion is a mult
       ↳ [context-validated:model for] "thus, the 6,650 meter terrestrial wall of theodosius ii with its second line of defence, created in 447, was one of the leading references for military architec"
 
   Historic City of Toledo  (Spain)
-    LON     : -4.0244°E  |  dev 0.0098 beru  (32.6 km)  |  Tier A
+    LON     : -4.0244°E  |  dev 0.0098 beru  (32.6 km)  |  Tier B
     PRIMARY : F — FOUNDING CAPITAL / SEAT OF POWER
     ALL CATS: ['F']
     [F] reasons : ['context-validated:capital of']
@@ -704,21 +704,21 @@ successively a roman municipium, the capital of the visigothic kingdom, a fortre
       ↳ [context-validated:capital of] "successively, a roman municipium , the capital of the visigothic kingdom, a fortress of the umayyad realms of córdoba, an outpost of the christian kingdoms agai"
 
   Royal Hill of Ambohimanga  (Madagascar)
-    LON     : 47.5628°E  |  dev 0.0098 beru  (32.6 km)  |  Tier A
+    LON     : 47.5628°E  |  dev 0.0098 beru  (32.6 km)  |  Tier B
     PRIMARY : L — ANCIENT CONTINUOUS LANDSCAPE
     ALL CATS: ['L']
     [L] reasons : ['context-validated:cultural landscape']
       ↳ [context-validated:cultural landscape] "the royal hill of ambohimanga constitutes an eminent example of an architectural ensemble (the rova) and the associative cultural landscape (wood, sacred founta"
 
   Angkor  (Cambodia)
-    LON     : 103.9740°E  |  dev 0.0098 beru  (32.7 km)  |  Tier A
+    LON     : 103.9740°E  |  dev 0.0098 beru  (32.7 km)  |  Tier B
     PRIMARY : F — FOUNDING CAPITAL / SEAT OF POWER
     ALL CATS: ['F']
     [F] reasons : ['context-validated:seat of the']
       ↳ [context-validated:seat of the] "the site integrity however, is put under dual pressures: endogenous: exerted by more than 100,000 inhabitants distributed over 112 historic settlements scattere"
 
   Aasivissuit – Nipisat. Inuit Hunting Ground between Ice and Sea  (Denmark)
-    LON     : -51.4332°E  |  dev 0.0099 beru  (33.1 km)  |  Tier A
+    LON     : -51.4332°E  |  dev 0.0099 beru  (33.1 km)  |  Tier B
     PRIMARY : L — ANCIENT CONTINUOUS LANDSCAPE
     ALL CATS: ['L']
     [L] reasons : ['context-validated:cultural landscape']
@@ -2339,7 +2339,7 @@ bosra, once the capital of the roman province of arabia, was an important stopov
       ↳ [context-validated:oldest surviving] "al-omari mosque is one of the oldest surviving mosques in islamic history, and the madrasah mabrak al-naqua is one of the oldest and most celebrated of islam."
 
   The Causses and the Cévennes, Mediterranean agro-pastoral Cultural Landscape  (France)
-    LON     : 3.4731°E  |  dev 0.0401 beru  (133.7 km)  |  Tier C
+    LON     : 3.4731°E  |  dev 0.0401 beru  (133.7 km)  |  Tier B
     PRIMARY : L — ANCIENT CONTINUOUS LANDSCAPE
     ALL CATS: ['L']
     [L] reasons : ['context-validated:cultural landscape']
@@ -2348,7 +2348,7 @@ this 302,319 ha property, in the southern part of central france, is a mountain 
       ↳ [context-validated:cultural landscape] "integrity the wholeness or intactness of the cultural landscape is related to the survival of the forces that shaped the landscape as well as to the symptoms th"
 
   Historic Centre of Rome, the Properties of the Holy See in that City Enjoying Extraterritorial Rights and San Paolo Fuori le Mura  (Holy See,Italy)
-    LON     : 12.4761°E  |  dev 0.0402 beru  (134.0 km)  |  Tier C
+    LON     : 12.4761°E  |  dev 0.0402 beru  (134.0 km)  |  Tier B
     PRIMARY : F — FOUNDING CAPITAL / SEAT OF POWER
     ALL CATS: ['F']
     [F] reasons : ['context-validated:capital of']
@@ -2357,7 +2357,7 @@ founded, according to legend, "
       ↳ [context-validated:capital of] "founded on the banks of the tiber river in 753 b.c., according to legend, by romulus and remus, rome was first the centre of the roman republic, then of the rom"
 
   Rice Terraces of the Philippine Cordilleras  (Philippines)
-    LON     : 121.0606°E  |  dev 0.0403 beru  (134.1 km)  |  Tier C
+    LON     : 121.0606°E  |  dev 0.0403 beru  (134.1 km)  |  Tier B
     PRIMARY : L — ANCIENT CONTINUOUS LANDSCAPE
     ALL CATS: ['L']
     [L] reasons : ['context-validated:cultural landscape']
@@ -2365,7 +2365,7 @@ founded, according to legend, "
       ↳ [context-validated:cultural landscape] "indeed, it is a living cultural landscape of unparalleled beauty."
 
   Sacred City of Caral-Supe  (Peru)
-    LON     : -77.5214°E  |  dev 0.0403 beru  (134.3 km)  |  Tier C
+    LON     : -77.5214°E  |  dev 0.0403 beru  (134.3 km)  |  Tier B
     PRIMARY : S — SACRED ORIGIN / BIRTH OF A TRADITION
     ALL CATS: ['S']
     [S] reasons : ['unambiguous:sacred city']
@@ -2374,7 +2374,7 @@ the 5000-year-old 626-hectare archaeological site of the sacred city of caral-su
       ↳ [unambiguous:sacred city] "brief synthesis the sacred city of caral-supe reflects the rise of civilisation in the americas."
 
   Bolgar Historical and Archaeological Complex  (Russian Federation)
-    LON     : 49.0589°E  |  dev 0.0403 beru  (134.3 km)  |  Tier C
+    LON     : 49.0589°E  |  dev 0.0403 beru  (134.3 km)  |  Tier B
     PRIMARY : F — FOUNDING CAPITAL / SEAT OF POWER
     ALL CATS: ['F', 'S']
     [F] reasons : ['unambiguous:first capital']
@@ -2839,7 +2839,7 @@ a large fortified city under the influence of the parthian empire and capital of
       ↳ [context-validated:capital of] "brief synthesis the classical gardens of suzhou, jiangsu province, china date back to the 6th century bce when the city was founded as the capital of the wu kin"
 
   Historic Monuments of Ancient Kyoto (Kyoto, Uji and Otsu Cities)  (Japan)
-    LON     : 135.8077°E  |  dev 0.0487 beru  (162.2 km)  |  Tier C-
+    LON     : 135.8077°E  |  dev 0.0487 beru  (162.2 km)  |  Tier C--
     PRIMARY : F — FOUNDING CAPITAL / SEAT OF POWER
     ALL CATS: ['F']
     [F] reasons : ['unambiguous:imperial capital']
@@ -2847,14 +2847,14 @@ a large fortified city under the influence of the parthian empire and capital of
       ↳ [unambiguous:imperial capital] "794 on the model of the ancient chinese capital, kyoto has acted as the cultural centre while serving as the imperial capital until the middle of the 19th centu"
 
   Tsodilo  (Botswana)
-    LON     : 21.7333°E  |  dev 0.0488 beru  (162.5 km)  |  Tier C-
+    LON     : 21.7333°E  |  dev 0.0488 beru  (162.5 km)  |  Tier C--
     PRIMARY : L — ANCIENT CONTINUOUS LANDSCAPE
     ALL CATS: ['L']
     [L] reasons : ['context-validated:cultural landscape']
       ↳ [context-validated:cultural landscape] "its water holes and hills are revered as a sacred cultural landscape, by the hambukushu and san communities."
 
   Buddhist Monuments in the Horyu-ji Area  (Japan)
-    LON     : 135.7342°E  |  dev 0.0488 beru  (162.6 km)  |  Tier C-
+    LON     : 135.7342°E  |  dev 0.0488 beru  (162.6 km)  |  Tier C--
     PRIMARY : L — ANCIENT CONTINUOUS LANDSCAPE
     ALL CATS: ['L']
     [L] reasons : ['context-validated:oldest surviving']
@@ -2862,14 +2862,14 @@ a large fortified city under the influence of the parthian empire and capital of
       ↳ [context-validated:oldest surviving] "eleven structures on the temple sites date from the late-7th or 8th century making them some of the oldest surviving wooden buildings in the world."
 
   Historic Centre of Puebla  (Mexico)
-    LON     : -98.1978°E  |  dev 0.0489 beru  (162.8 km)  |  Tier C-
+    LON     : -98.1978°E  |  dev 0.0489 beru  (162.8 km)  |  Tier C--
     PRIMARY : X — FOUNDING AXIS / IMPERIAL INFRASTRUCTURE
     ALL CATS: ['X']
     [X] reasons : ['context-validated:trade route']
       ↳ [context-validated:trade route] "it commands a strategic location on the commercial and cultural trade route betweeen the port of veracruz and mexico city, approximately 100 kilometres to the w"
 
   Vézelay, Church and Hill  (France)
-    LON     : 3.7360°E  |  dev 0.0489 beru  (162.8 km)  |  Tier C-
+    LON     : 3.7360°E  |  dev 0.0489 beru  (162.8 km)  |  Tier C--
     PRIMARY : S — SACRED ORIGIN / BIRTH OF A TRADITION
     ALL CATS: ['S']
     [S] reasons : ['context-validated:place of pilgrimage']
@@ -2878,7 +2878,7 @@ shortly after its foundation in the 9th century, the benedictine abbey of vézel
       ↳ [context-validated:place of pilgrimage] "it became a place of pilgrimage, all the more popular because it was located on one of the roads leading to santiago de compostela."
 
   Historic Centre (Old Town) of Tallinn  (Estonia)
-    LON     : 24.7400°E  |  dev 0.0490 beru  (163.3 km)  |  Tier C-
+    LON     : 24.7400°E  |  dev 0.0490 beru  (163.3 km)  |  Tier C--
     PRIMARY : F — FOUNDING CAPITAL / SEAT OF POWER
     ALL CATS: ['F']
     [F] reasons : ['context-validated:administrative centre']
@@ -2886,7 +2886,7 @@ shortly after its foundation in the 9th century, the benedictine abbey of vézel
       ↳ [context-validated:administrative centre] "in addition to architectural continuity, old town has retained its traditional use as a living city, hosting domestic, commercial and religious functions, and r"
 
   Historic City of Sucre  (Bolivia (Plurinational State of))
-    LON     : -65.2596°E  |  dev 0.0490 beru  (163.3 km)  |  Tier C-
+    LON     : -65.2596°E  |  dev 0.0490 beru  (163.3 km)  |  Tier C--
     PRIMARY : F — FOUNDING CAPITAL / SEAT OF POWER
     ALL CATS: ['F']
     [F] reasons : ['unambiguous:first capital']
@@ -2895,7 +2895,7 @@ sucre, the first capital of bolivia, was founded by the spanish in the first hal
       ↳ [unambiguous:first capital] "the city was renamed in honour of the deceased leader of the fight for independence, antonio jose de sucre in 1839, when it was declared the first capital of bo"
 
   Villa d'Este, Tivoli  (Italy)
-    LON     : 12.7963°E  |  dev 0.0491 beru  (163.5 km)  |  Tier C-
+    LON     : 12.7963°E  |  dev 0.0491 beru  (163.5 km)  |  Tier C--
     PRIMARY : M — FOUNDING MONUMENT / PROTOTYPE
     ALL CATS: ['M']
     [M] reasons : ['context-validated:model for']
@@ -2903,7 +2903,7 @@ sucre, the first capital of bolivia, was founded by the spanish in the first hal
       ↳ [context-validated:model for] "the villa d’este, one of the first giardini delle meraviglie , served as a model for and had a decisive influence on the development of gardens in europe."
 
   Soltaniyeh  (Iran (Islamic Republic of))
-    LON     : 48.7947°E  |  dev 0.0491 beru  (163.6 km)  |  Tier C-
+    LON     : 48.7947°E  |  dev 0.0491 beru  (163.6 km)  |  Tier C--
     PRIMARY : F — FOUNDING CAPITAL / SEAT OF POWER
     ALL CATS: ['F']
     [F] reasons : ['unambiguous:ancient capital']
@@ -2911,14 +2911,14 @@ sucre, the first capital of bolivia, was founded by the spanish in the first hal
       ↳ [unambiguous:ancient capital] "as the ancient capital of the ilkhanid dynasty, soltaniyeh represents an exceptional testimony to the history of the 13th and 14th centuries in iran."
 
   Lavaux, Vineyard Terraces  (Switzerland)
-    LON     : 6.7461°E  |  dev 0.0492 beru  (164.0 km)  |  Tier C-
+    LON     : 6.7461°E  |  dev 0.0492 beru  (164.0 km)  |  Tier C--
     PRIMARY : L — ANCIENT CONTINUOUS LANDSCAPE
     ALL CATS: ['L']
     [L] reasons : ['context-validated:cultural landscape']
       ↳ [context-validated:cultural landscape] "the lavaux vineyard landscape is a thriving cultural landscape that demonstrates in a highly visible way its evolution and development over almost a millennia, "
 
   Historic District of Old Québec  (Canada)
-    LON     : -71.2106°E  |  dev 0.0493 beru  (164.2 km)  |  Tier C-
+    LON     : -71.2106°E  |  dev 0.0493 beru  (164.2 km)  |  Tier C--
     PRIMARY : F — FOUNDING CAPITAL / SEAT OF POWER
     ALL CATS: ['F']
     [F] reasons : ['context-validated:capital of']
@@ -2926,14 +2926,14 @@ sucre, the first capital of bolivia, was founded by the spanish in the first hal
       ↳ [context-validated:capital of] "criterion (vi) : québec, the former capital of new france, illustrates one of the major stages in the european settlement of the colonization of the americas by"
 
   M'Zab Valley  (Algeria)
-    LON     : 3.7517°E  |  dev 0.0494 beru  (164.6 km)  |  Tier C-
+    LON     : 3.7517°E  |  dev 0.0494 beru  (164.6 km)  |  Tier C--
     PRIMARY : M — FOUNDING MONUMENT / PROTOTYPE
     ALL CATS: ['M']
     [M] reasons : ['context-validated:model for']
       ↳ [context-validated:model for] "criterion (ii): the anthropic ensembles of the m'zab valley bear witness, by their exceedingly original architecture dating from the beginning of the 11th centu"
 
   Historic Monuments of Ancient Nara  (Japan)
-    LON     : 135.7842°E  |  dev 0.0495 beru  (164.8 km)  |  Tier C-
+    LON     : 135.7842°E  |  dev 0.0495 beru  (164.8 km)  |  Tier C--
     PRIMARY : F — FOUNDING CAPITAL / SEAT OF POWER
     ALL CATS: ['F', 'L']
     [F] reasons : ['context-validated:capital of']
@@ -2953,4 +2953,4 @@ nara was the capital of japan from 710 to 784."
 
 Total included: 355
 Generated by  : tools/generate_audit_founding.py
-Timestamp     : Mon Apr 20 20:13:12 UTC 2026
+Timestamp     : Wed Apr 22 18:09:42 UTC 2026

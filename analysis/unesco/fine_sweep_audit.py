@@ -20,7 +20,7 @@ from scipy.stats import binomtest
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus, cultural_sites_with_coords
-from lib.beru import TIER_APLUS, deviation_at_spacing
+from lib.beru import TIER_APLUS, TIER_APP, deviation_at_spacing
 from lib.dome_filter import is_dome_site
 from lib.stats import significance_label as _sig_label, null_rate_at_spacing
 
@@ -36,8 +36,8 @@ def sig(p):
     return "~" if label == "~" else label
 
 
-def count_hits(lons, spacing):
-    return sum(1 for lon in lons if deviation_at_spacing(lon, spacing) <= TIER_APLUS)
+def count_hits(lons, spacing, threshold):
+    return sum(1 for lon in lons if deviation_at_spacing(lon, spacing) <= threshold)
 
 
 def main():
@@ -62,10 +62,10 @@ def main():
     for sp in FINE_SPACINGS:
         nr = null_rate_at_spacing(TIER_APLUS, sp)
 
-        d_hits = count_hits(dome_lons, sp)
+        d_hits = count_hits(dome_lons, sp, TIER_APLUS)
         d_p = binomtest(d_hits, N_dome, nr, alternative="greater").pvalue
 
-        f_hits = count_hits(all_lons, sp)
+        f_hits = count_hits(all_lons, sp, TIER_APLUS)
         f_p = binomtest(f_hits, N_all, nr, alternative="greater").pvalue
 
         marker = ">>>" if abs(sp - 0.100) < 1e-6 else "   "
@@ -77,6 +77,26 @@ def main():
         )
 
     print(sep)
+    print("Dome A++ sensitivity sweep")
+    header_app = f"{'Spacing':>8}  {'Null%':>6}  {'Dome A++':>9}  {'Dome p':>10}  {'Sig':>4}  {'Full A++':>9}  {'Full p':>10}  {'Sig':>4}"
+    sep_app = "-" * len(header_app)
+    print(header_app)
+    print(sep_app)
+    for sp in FINE_SPACINGS:
+        nr_app = null_rate_at_spacing(TIER_APP, sp)
+        d_hits_app = count_hits(dome_lons, sp, TIER_APP)
+        d_p_app = binomtest(d_hits_app, N_dome, nr_app, alternative="greater").pvalue
+        f_hits_app = count_hits(all_lons, sp, TIER_APP)
+        f_p_app = binomtest(f_hits_app, N_all, nr_app, alternative="greater").pvalue
+        marker = ">>>" if abs(sp - 0.100) < 1e-6 else "   "
+        d_p_app_str = f"{d_p_app:.4f}" if d_p_app >= 0.0001 else f"{d_p_app:.2e}"
+        f_p_app_str = f"{f_p_app:.4f}" if f_p_app >= 0.0001 else f"{f_p_app:.2e}"
+        print(
+            f"{marker} {sp:.4f}  {nr_app*100:5.2f}%  {d_hits_app:>3}/{N_dome}   {d_p_app_str:>10}  {sig(d_p_app):>4}  "
+            f"{f_hits_app:>3}/{N_all}   {f_p_app_str:>10}  {sig(f_p_app):>4}"
+        )
+
+    print(sep_app)
     print(">>> = canonical 0.10-beru row")
     print("Joint significance requires both dome and full-corpus p < 0.05.")
     print("A ±0.3% shift from canonical collapses joint significance in at least one population.")

@@ -1,5 +1,5 @@
 UNESCO DOME / SPHERICAL MONUMENT KEYWORD AUDIT
-Generated : Mon Apr 20 20:13:05 UTC 2026
+Generated : Wed Apr 22 18:09:28 UTC 2026
 Script    : tools/generate_audit_dome.py
 Keywords  : ['dome', 'domed', 'domes', 'spherical', 'stupa', 'stupas', 'tholos']
 Unambiguous (always included): ['stupa', 'stupas', 'tholos']
@@ -11,14 +11,14 @@ FP rate   : 7.8%
 
 STATISTICS SUMMARY
 ────────────────────────────────────────────────────────────────────────────────────────
-  Group                      N   A++    A+     A    C-     C     A+%       p(A+)
+  Group                      N   A++    A+     A     C    C-     A+%       p(A+)
   --------------------------------------------------------------------------
-  All included (raw)        83     2    11    26     5    10   13.3%  1.7038e-02  *
-  Context-validated         82     2    11    26     5     9   13.4%  1.5663e-02  *
+  All included (raw)        83    10    11    23    10     4   13.3%  1.7038e-02  *
+  Context-validated         82    10    11    23     9     4   13.4%  1.5663e-02  *
   --------------------------------------------------------------------------
-  stupa/stupas              18     0     4     7     1     3   22.2%  2.5138e-02  *
+  stupa/stupas              18     4     4     7     3     1   22.2%  2.5138e-02  *
   tholos                     4     0     0     1     0     0    0.0%  1.0000e+00  ns
-  dome/domed/domes          64     2     8    19     4     8   12.5%  5.1745e-02  ~
+  dome/domed/domes          64     7     8    16     8     3   12.5%  5.1745e-02  ~
   spherical                  1     1     1     1     0     0  100.0%  6.4200e-02  ~
 
 INCLUDED SITES:
@@ -37,42 +37,42 @@ INCLUDED SITES:
     [dome] "Criterion (ii): From an architectural point of view, Boyana Church is a pure example of a church with a Greek cross ground-plan with dome, r"
 
   Lumbini, the Birthplace of the Lord Buddha ★  (Nepal)
-    LON  : 83.2761°E  |  dev 0.0002 beru  (0.8 km)  |  Tier A+
+    LON  : 83.2761°E  |  dev 0.0002 beru  (0.8 km)  |  Tier A++
     KEYS : ['stupas']  →  {'stupas': 'unambiguous'}
     [stupas] "Additionally there are the excavated remains of Buddhist viharas (monasteries) of the 3rd century BC to the 5th century AD and the remains o"
     [stupas] "Criterion (vi): The archaeological remains of the Buddhist viharas (monasteries) and stupas (memorial shrines) from the 3rd century BC to th"
 
   Humayun's Tomb, Delhi ★  (India)
-    LON  : 77.2506°E  |  dev 0.0006 beru  (2.0 km)  |  Tier A+
+    LON  : 77.2506°E  |  dev 0.0006 beru  (2.0 km)  |  Tier A++
     KEYS : ['dome', 'domes']  →  {'dome': 'context-validated', 'domes': 'context-validated'}
     [dome] "It is surmounted by a 42.5 m high double dome clad with marble flanked by pillared kiosks (chhatris) and the domes of the central chhatris a"
     [domes] "It is surmounted by a 42.5 m high double dome clad with marble flanked by pillared kiosks (chhatris) and the domes of the central chhatris a"
 
   Pyu Ancient Cities ★  (Myanmar)
-    LON  : 95.2900°E  |  dev 0.0007 beru  (2.3 km)  |  Tier A+
+    LON  : 95.2900°E  |  dev 0.0007 beru  (2.3 km)  |  Tier A++
     KEYS : ['stupas']  →  {'stupas': 'unambiguous'}
     [stupas] "Remains include excavated palace citadels, burial grounds and manufacture sites, as well as monumental brick Buddhist stupas, partly standin"
     [stupas] "Marked by imposing memorial stupas and other sophisticated forms of brick ritual structures, the Pyu Ancient Cities provide the earliest evi"
 
   Silk Roads: the Routes Network of Chang'an-Tianshan Corridor ★  (China,Kazakhstan,Kyrgyzstan)
-    LON  : 107.2911°E  |  dev 0.0007 beru  (2.5 km)  |  Tier A+
+    LON  : 107.2911°E  |  dev 0.0007 beru  (2.5 km)  |  Tier A++
     KEYS : ['stupas']  →  {'stupas': 'unambiguous'}
     [stupas] "The series of Buddhist pagodas and large, elaborate cave temples extending from Kucha (now Kuqa County) in the west to Luoyong in the east, "
 
   The <I>Trulli</I> of Alberobello ★  (Italy)
-    LON  : 17.2369°E  |  dev 0.0011 beru  (3.6 km)  |  Tier A+
+    LON  : 17.2369°E  |  dev 0.0011 beru  (3.6 km)  |  Tier A++
     KEYS : ['domed']  →  {'domed': 'context-validated'}
     [domed] "Characteristically, they feature pyramidal, domed or conical roofs built up of corbelled limestone slabs."
     [domed] "These structures, dating from as early as the mid-14th century, characteristically feature pyramidal, domed, or conical roofs built up of co"
 
   Old City of Jerusalem and its Walls ★  (Jerusalem (Site proposed by Jordan))
-    LON  : 35.2317°E  |  dev 0.0012 beru  (4.1 km)  |  Tier A+
+    LON  : 35.2317°E  |  dev 0.0012 beru  (4.1 km)  |  Tier A++
     KEYS : ['dome']  →  {'dome': 'context-validated'}
     [dome] "Among its 220 historic monuments, the Dome of the Rock stands out: built in the 7th century, it is decorated with beautiful geometric and fl"
     [dome] "Among its 220 historic monuments, the Dome of the Rock stands out: built in the 7th century, it is decorated with beautiful geometric and fl"
 
   Borobudur Temple Compounds ★  (Indonesia)
-    LON  : 110.2301°E  |  dev 0.0013 beru  (4.3 km)  |  Tier A+
+    LON  : 110.2301°E  |  dev 0.0013 beru  (4.3 km)  |  Tier A++
     KEYS : ['stupa', 'stupas', 'dome']  →  {'stupa': 'unambiguous', 'stupas': 'unambiguous', 'dome': 'context-validated'}
     [stupa] "It was built in three tiers: a pyramidal base with five concentric square terraces, the trunk of a cone with three circular platforms and, a"
     [stupa] "The main temple is a stupa built in three tiers around a hill which was a natural centre: a pyramidal base with five concentric square terra"
@@ -81,7 +81,7 @@ INCLUDED SITES:
     [dome] "Criteri on (i): Borobudur Temple Compounds with its stepped, unroofed pyramid consisting of ten superimposing terraces, crowned by a large b"
 
   Kizhi Pogost ★  (Russian Federation)
-    LON  : 35.2244°E  |  dev 0.0015 beru  (5.0 km)  |  Tier A+
+    LON  : 35.2244°E  |  dev 0.0015 beru  (5.0 km)  |  Tier A++
     KEYS : ['dome', 'domed', 'domes']  →  {'dome': 'context-validated', 'domed': 'context-validated', 'domes': 'context-validated'}
     [dome] "The eight cupolas encircle the 27m high central onion dome, and which covers the central parallelepiped space, gives it a more static appear"
     [dome] "It has nine posts supporting the tent roof with an onion dome covered with shingles."
@@ -166,18 +166,18 @@ INCLUDED SITES:
     [dome] "The main tomb building, which is circular and surmounted by a dome, is a major example of an architectural achievement that was raised with "
 
   Historic Areas of Istanbul  (Türkiye)
-    LON  : 28.9833°E  |  dev 0.0095 beru  (31.7 km)  |  Tier A
+    LON  : 28.9833°E  |  dev 0.0095 beru  (31.7 km)  |  Tier B
     KEYS : ['dome']  →  {'dome': 'context-validated'}
     [dome] "The distinctive and characteristic skyline of Istanbul was built up over many centuries and encompasses the  Hagia  Sophia whose vast dome r"
 
   Selimiye Mosque and its Social Complex  (Türkiye)
-    LON  : 26.5594°E  |  dev 0.0097 beru  (32.2 km)  |  Tier A
+    LON  : 26.5594°E  |  dev 0.0097 beru  (32.2 km)  |  Tier B
     KEYS : ['dome']  →  {'dome': 'context-validated'}
     [dome] "Selimiye Mosque and its Social Complex The square Mosque with its single great dome and four slender minarets, dominates the skyline of the "
     [dome] "The imposing mosque stepping up to its single great dome with four soaring slender minarets, spectacular decorated interior space, manuscrip"
 
   Paleochristian and Byzantine Monuments of Thessalonika  (Greece)
-    LON  : 22.9703°E  |  dev 0.0100 beru  (33.2 km)  |  Tier A
+    LON  : 22.9703°E  |  dev 0.0100 beru  (33.2 km)  |  Tier B
     KEYS : ['dome']  →  {'dome': 'context-validated'}
     [dome] "the south dome of the narthex of the Church of Panagia Chalkeon)."
 
@@ -512,7 +512,7 @@ INCLUDED SITES:
     [dome] "Its remarkable stone dome, turrets, pointed arches and eccentric ground plan are close to traditional Indian palace architecture."
 
   Soltaniyeh  (Iran (Islamic Republic of))
-    LON  : 48.7947°E  |  dev 0.0491 beru  (163.6 km)  |  Tier C-
+    LON  : 48.7947°E  |  dev 0.0491 beru  (163.6 km)  |  Tier C--
     KEYS : ['dome']  →  {'dome': 'context-validated'}
     [dome] "The octagonal building is crowned with a 50 m tall dome covered in turquoise-blue faience and surrounded by eight slender minarets."
     [dome] "It is the earliest existing example of the double-shelled dome in Iran."

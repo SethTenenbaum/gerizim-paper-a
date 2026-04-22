@@ -49,10 +49,10 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus
 from lib.results_store import ResultsStore
 from lib.beru import (
-    GERIZIM, BERU, TIER_APLUS, TIER_A_MAX,
-    P_NULL_AP, P_NULL_A,
+    GERIZIM, BERU, TIER_APP, TIER_APLUS, TIER_A_MAX,
+    P_NULL_APP, P_NULL_AP, P_NULL_A,
     TIER_APLUS_LABEL, TIER_A_LABEL, TIER_B_LABEL, TIER_C_LABEL,
-    deviation as _beru_dev, tier_label, is_aplus, is_a_or_better,
+    deviation as _beru_dev, tier_label, is_aplusplus, is_aplus, is_a_or_better,
 )
 from lib.dome_filter import FORM_KEYWORDS, FORM_KEYWORD_RES, AMBIGUOUS_KEYWORDS
 from lib.stats import significance_label as sig
@@ -101,11 +101,13 @@ for site_obj in corpus:
 
 # ── Stats ──────────────────────────────────────────────────────────────────────
 N_raw  = len(raw_sites)
+nApp   = sum(1 for s in raw_sites if is_aplusplus(s["tier"]))
 nAp    = sum(1 for s in raw_sites if is_aplus(s["tier"]))
 nA     = sum(1 for s in raw_sites if is_a_or_better(s["tier"]))
 nB     = sum(1 for s in raw_sites if s["tier"] == "B")
 nC     = sum(1 for s in raw_sites if s["tier"] == "C")
 
+bt_App = binomtest(nApp, N_raw, P_NULL_APP, alternative="greater")
 bt_Ap  = binomtest(nAp, N_raw, P_NULL_AP, alternative="greater")
 bt_A   = binomtest(nA,  N_raw, P_NULL_A,  alternative="greater")
 
@@ -114,6 +116,7 @@ for s in raw_sites:
     obs_bins[min(int(s["dev"] / TIER_A_MAX), 4)] += 1
 _, chi_p = chisquare(obs_bins, f_exp=[N_raw / 5.0] * 5)
 
+enr_App = (nApp / N_raw) / P_NULL_APP if N_raw else 0
 enr_Ap = (nAp / N_raw) / P_NULL_AP if N_raw else 0
 
 # ── Fisher exact: dome corpus vs rest of full Cultural/Mixed corpus ───────────
@@ -121,10 +124,13 @@ from data.unesco_corpus import load_corpus as _load_full
 _full = [s for s in _load_full() if s.category != "Natural" and s.has_coords]
 N_CORPUS = len(_full)
 K_AP_CORPUS = sum(1 for s in _full if is_aplus(tier_label(_beru_dev(s.longitude))))
+K_APP_CORPUS= sum(1 for s in _full if is_aplusplus(tier_label(_beru_dev(s.longitude))))
 K_A_CORPUS  = sum(1 for s in _full if is_a_or_better(tier_label(_beru_dev(s.longitude))))
 
+_tbl_App= [[nApp, N_raw - nApp], [K_APP_CORPUS - nApp, N_CORPUS - N_raw - (K_APP_CORPUS - nApp)]]
 _tbl_Ap = [[nAp, N_raw - nAp], [K_AP_CORPUS - nAp, N_CORPUS - N_raw - (K_AP_CORPUS - nAp)]]
 _tbl_A  = [[nA,  N_raw - nA],  [K_A_CORPUS  - nA,  N_CORPUS - N_raw - (K_A_CORPUS  - nA)]]
+fisher_or_App, fisher_p_App = _fisher_exact(_tbl_App, alternative="greater")
 fisher_or_Ap, fisher_p_Ap = _fisher_exact(_tbl_Ap, alternative="greater")
 fisher_or_A,  fisher_p_A  = _fisher_exact(_tbl_A,  alternative="greater")
 
@@ -236,11 +242,13 @@ print(f"  \\newcommand{{\\NcircValidated}}{{{N_validated}}}             % contex
 print(f"  \\newcommand{{\\NcircKeywords}}{{{len(FORM_KEYWORDS)}}}               % number of dome-form keywords")
 print(f"  \\newcommand{{\\NcircExcluded}}{{{0}}}               % excluded (natural/no-coord)")
 print(f"  \\newcommand{{\\NcircContextRejected}}{{{N_context_rejected}}}               % added by raw sweep vs validated")
+print(f"  \\newcommand{{\\NcircTierApp}}{{{nApp}}}           % Tier-A++ hits (raw sweep)")
 print(f"  \\newcommand{{\\NcircTierAp}}{{{nAp}}}             % Tier-A+ hits (raw sweep)")
 print(f"  \\newcommand{{\\NcircApRate}}{{{100*nAp/N_raw:.1f}}}     % A+ rate (%) = {nAp}/{N_raw}, rounded to 1 d.p.")
 print(f"  \\newcommand{{\\NcircTierA}}{{{nA}}}             % Tier-A hits (raw sweep)")
 print(f"  \\newcommand{{\\NcircTierB}}{{{nB}}}             % Tier-B hits (raw sweep)")
 print(f"  \\newcommand{{\\NcircTierC}}{{{nC}}}               % Tier-C hits (raw sweep)")
+print(f"  \\newcommand{{\\pCircApp}}{{{bt_App.pvalue:.4f}}}         % p-value, A++ binomial (raw sweep)")
 print(f"  \\newcommand{{\\pCircAp}}{{{bt_Ap.pvalue:.4f}}}          % p-value, A+ binomial (raw sweep)")
 print(f"  \\newcommand{{\\pCircA}}{{{bt_A.pvalue:.4f}}}          % p-value, A  binomial (raw sweep)")
 print(f"  \\newcommand{{\\pCircApFisher}}{{{fisher_p_Ap:.4f}}}      % p-value, A+ Fisher exact vs rest (raw sweep)")
@@ -280,6 +288,7 @@ print(f"  \\newcommand{{\\NcircValidatedApRate}}{{{100*nAp/N_validated:.1f}}}  %
 
 # ── Write to results store ────────────────────────────────────────────────────
 ResultsStore().write_many({
+    "pCircApp":     bt_App.pvalue,  # binomial p, A++ (raw sweep)
     "pCircAp":      bt_Ap.pvalue,   # binomial p, A+ (raw sweep) — Test 2
     "pCircA":       bt_A.pvalue,    # binomial p, A  (raw sweep)
     "pCircApFisher": fisher_p_Ap,   # Fisher p, A+ vs rest (raw sweep)

@@ -219,6 +219,11 @@ def tier_label(dev: float) -> str:
     return "B"
 
 
+def is_aplusplus(tier: str) -> bool:
+    """Is the site in the A++ tier (strictly)?"""
+    return tier == "A++"
+
+
 def is_aplus(tier: str) -> bool:
     """Is the site in the A+ or A++ tier?"""
     return tier in ("A++", "A+")

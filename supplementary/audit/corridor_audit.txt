@@ -1,5 +1,5 @@
 GERIZIM CORRIDOR PRECISION AUDIT
-Generated : Mon Apr 20 20:13:15 UTC 2026
+Generated : Wed Apr 22 18:09:46 UTC 2026
 Script    : tools/generate_audit_corridor.py
 Anchor    : Gerizim 35.269°E   |   Beru = 30.0°
 Corridor  : 35.269°E (0.0 beru) to Lumbini 83.2761°E (1.6002 beru ≈ 1.6 harmonic)
@@ -11,59 +11,59 @@ Corpus    : 1011 UNESCO Cultural/Mixed sites with coordinates
 PER-HARMONIC SITE TABLE
    Harm  Harmonic°E  Dir  Best A+ site                                               Dev     km  Tier
   ------------------------------------------------------------------------------------------
-    0.0      35.269    W  Old City of Jerusalem and its Walls                   0.001244    4.1  A+ A+
+    0.0      35.269    W  Old City of Jerusalem and its Walls                   0.001244    4.1  A++ A++
     0.1      38.269    E  Site of Palmyra                                       0.000078    0.3  A++ A++
-    0.2      41.269    W  Xanthos-Letoon                                        0.000955    3.2  A+ A+
-    0.3      44.269    W  Archaeological Site of Troy                           0.001000    3.3  A+ A+
+    0.2      41.269    W  Xanthos-Letoon                                        0.000955    3.2  A++ A++
+    0.3      44.269    W  Archaeological Site of Troy                           0.001000    3.3  A++ A++
     0.4      47.269    W  Boyana Church                                         0.000094    0.3  A++ A++
     0.5      50.269    W  Wooden Churches of Southern Małopolska                0.001744    5.8  A+ A+
-    0.6      53.269    W  Holy Trinity Column in Olomouc                        0.000618    2.1  A+ A+
+    0.6      53.269    W  Holy Trinity Column in Olomouc                        0.000618    2.1  A++ A++
     0.7      56.269    W  Holašovice Historic Village                           0.000120    0.4  A++ A++
-    0.8      59.269    W  Historic Centre of Florence                           0.000430    1.4  A+ A+
+    0.8      59.269    W  Historic Centre of Florence                           0.000430    1.4  A++ A++
     0.9      62.269    W  <I>Sacri Monti</I> of Piedmont and Lombardy           0.000024    0.1  A++ A++
     1.0      65.269    W  Bryggen                                               0.001897    6.3  A+ A+
     1.1      68.269    E  Mausoleum of Khoja Ahmed Yasawi                       0.000069    0.2  A++ A++
-    1.2      71.269    W  Palmeral of Elche                                     0.000478    1.6  A+ A+
+    1.2      71.269    W  Palmeral of Elche                                     0.000478    1.6  A++ A++
     1.3      74.269    W  Historic Town of Grand-Bassam                         0.000180    0.6  A++ A++
-    1.4      77.269    E  Humayun's Tomb, Delhi                                 0.000615    2.0  A+ A+
+    1.4      77.269    E  Humayun's Tomb, Delhi                                 0.000615    2.0  A++ A++
     1.5      80.269    E  Old Town of Galle and its Fortifications              0.001755    5.8  A+ A+
-    1.6      83.269    E  Lumbini, the Birthplace of the Lord Buddha            0.000237    0.8  A+ A+
+    1.6      83.269    E  Lumbini, the Birthplace of the Lord Buddha            0.000237    0.8  A++ A++
 
   Corridor occupancy: 17/17 harmonics have >= 1 A+ site
-  A++: 6   A+: 11   Misses: 0
+  A++: 14   A+: 3   Misses: 0
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────
 FULL A+ SITE CATALOGUE PER CORRIDOR HARMONIC
 
   0.0 beru  (E: 35.269°E  |  W: 35.269°E)
-      W  Old City of Jerusalem and its Walls                      lon=  35.2317  dev=0.001244    4.1 km [A+]
-      W  Kizhi Pogost                                             lon=  35.2244  dev=0.001488    5.0 km [A+]
+      W  Old City of Jerusalem and its Walls                      lon=  35.2317  dev=0.001244    4.1 km [A++]
+      W  Kizhi Pogost                                             lon=  35.2244  dev=0.001488    5.0 km [A++]
       W  Birthplace of Jesus: Church of the Nativity and the Pilgrimage Route, Bethlehem  lon=  35.2075  dev=0.002050    6.8 km [A+]
       W  Tyre                                                     lon=  35.1958  dev=0.002439    8.1 km [A+]
       E  Masada                                                   lon=  35.3536  dev=0.002820    9.4 km [A+]
 
   0.1 beru  (E: 38.269°E  |  W: 32.269°E)
       E  Site of Palmyra                                          lon=  38.2667  dev=0.000078    0.3 km [A++]
-      E  The Gedeo Cultural Landscape                             lon=  38.2878  dev=0.000626    2.1 km [A+]
+      E  The Gedeo Cultural Landscape                             lon=  38.2878  dev=0.000626    2.1 km [A++]
       E  Arslantepe Mound                                         lon=  38.3611  dev=0.003070   10.2 km [A+]
 
   0.2 beru  (E: 41.269°E  |  W: 29.269°E)
-      W  Xanthos-Letoon                                           lon=  29.2976  dev=0.000955    3.2 km [A+]
-      W  Mapungubwe Cultural Landscape                            lon=  29.2389  dev=0.001004    3.3 km [A+]
+      W  Xanthos-Letoon                                           lon=  29.2976  dev=0.000955    3.2 km [A++]
+      W  Mapungubwe Cultural Landscape                            lon=  29.2389  dev=0.001004    3.3 km [A++]
       W  Fossil Hominid Sites of South Africa                     lon=  29.1769  dev=0.003069   10.2 km [A+]
       W  Bursa and Cumalıkızık: the Birth of the Ottoman Empire   lon=  29.1731  dev=0.003198   10.6 km [A+]
 
   0.3 beru  (E: 44.269°E  |  W: 26.269°E)
-      W  Archaeological Site of Troy                              lon=  26.2390  dev=0.001000    3.3 km [A+]
+      W  Archaeological Site of Troy                              lon=  26.2390  dev=0.001000    3.3 km [A++]
       E  Cathedral and Churches of Echmiatsin and the Archaeological Site of Zvartnots  lon=  44.3246  dev=0.001855    6.2 km [A+]
       E  Old City of Sana'a                                       lon=  44.2081  dev=0.002031    6.8 km [A+]
 
   0.4 beru  (E: 47.269°E  |  W: 23.269°E)
       W  Boyana Church                                            lon=  23.2662  dev=0.000094    0.3 km [A++]
-      W  Brâncuși Monumental Ensemble of Târgu Jiu                lon=  23.2788  dev=0.000326    1.1 km [A+]
-      W  Old City of Zamość                                       lon=  23.2528  dev=0.000541    1.8 km [A+]
-      E  Takht-e Soleyman                                         lon=  47.2350  dev=0.001133    3.8 km [A+]
-      W  Rila Monastery                                           lon=  23.3086  dev=0.001318    4.4 km [A+]
+      W  Brâncuși Monumental Ensemble of Târgu Jiu                lon=  23.2788  dev=0.000326    1.1 km [A++]
+      W  Old City of Zamość                                       lon=  23.2528  dev=0.000541    1.8 km [A++]
+      E  Takht-e Soleyman                                         lon=  47.2350  dev=0.001133    3.8 km [A++]
+      W  Rila Monastery                                           lon=  23.3086  dev=0.001318    4.4 km [A++]
       W  Dacian Fortresses of the Orastie Mountains               lon=  23.2167  dev=0.001744    5.8 km [A+]
       E  Historic Centre of Sheki with the Khan’s Palace          lon=  47.1875  dev=0.002717    9.0 km [A+]
       W  Rock Art of Alta                                         lon=  23.1870  dev=0.002733    9.1 km [A+]
@@ -72,24 +72,24 @@ FULL A+ SITE CATALOGUE PER CORRIDOR HARMONIC
       W  Wooden Churches of Southern Małopolska                   lon=  20.2167  dev=0.001744    5.8 km [A+]
 
   0.6 beru  (E: 53.269°E  |  W: 17.269°E)
-      W  Holy Trinity Column in Olomouc                           lon=  17.2505  dev=0.000618    2.1 km [A+]
-      W  Via Appia. <em>Regina Viarum</em>                        lon=  17.2421  dev=0.000896    3.0 km [A+]
-      W  The <I>Trulli</I> of Alberobello                         lon=  17.2369  dev=0.001069    3.6 km [A+]
+      W  Holy Trinity Column in Olomouc                           lon=  17.2505  dev=0.000618    2.1 km [A++]
+      W  Via Appia. <em>Regina Viarum</em>                        lon=  17.2421  dev=0.000896    3.0 km [A++]
+      W  The <I>Trulli</I> of Alberobello                         lon=  17.2369  dev=0.001069    3.6 km [A++]
       W  Richtersveld Cultural and Botanical Landscape            lon=  17.2039  dev=0.002170    7.2 km [A+]
 
   0.7 beru  (E: 56.269°E  |  W: 14.269°E)
       W  Holašovice Historic Village                              lon=  14.2726  dev=0.000120    0.4 km [A++]
-      W  Mbanza Kongo, Vestiges of the Capital of the former Kingdom of Kongo  lon=  14.2497  dev=0.000643    2.1 km [A+]
-      W  Archaeological Site of Leptis Magna                      lon=  14.2931  dev=0.000802    2.7 km [A+]
-      W  Historic Centre of Český Krumlov                         lon=  14.3150  dev=0.001534    5.1 km [A+]
+      W  Mbanza Kongo, Vestiges of the Capital of the former Kingdom of Kongo  lon=  14.2497  dev=0.000643    2.1 km [A++]
+      W  Archaeological Site of Leptis Magna                      lon=  14.2931  dev=0.000802    2.7 km [A++]
+      W  Historic Centre of Český Krumlov                         lon=  14.3150  dev=0.001534    5.1 km [A++]
       W  18th-Century Royal Palace at Caserta with the Park, the Aqueduct of Vanvitelli, and the San Leucio Complex  lon=  14.3264  dev=0.001913    6.4 km [A+]
       W  Villa Romana del Casale                                  lon=  14.3342  dev=0.002172    7.2 km [A+]
       W  Historic Centre of Naples                                lon=  14.1921  dev=0.002565    8.5 km [A+]
 
   0.8 beru  (E: 59.269°E  |  W: 11.269°E)
-      W  Historic Centre of Florence                              lon=  11.2561  dev=0.000430    1.4 km [A+]
-      W  Medici Villas and Gardens in Tuscany                     lon=  11.2478  dev=0.000707    2.4 km [A+]
-      W  The Porticoes of Bologna                                 lon=  11.3019  dev=0.001097    3.7 km [A+]
+      W  Historic Centre of Florence                              lon=  11.2561  dev=0.000430    1.4 km [A++]
+      W  Medici Villas and Gardens in Tuscany                     lon=  11.2478  dev=0.000707    2.4 km [A++]
+      W  The Porticoes of Bologna                                 lon=  11.3019  dev=0.001097    3.7 km [A++]
       W  Classical Weimar                                         lon=  11.3286  dev=0.001987    6.6 km [A+]
       W  Historic Centre of Siena                                 lon=  11.3317  dev=0.002089    7.0 km [A+]
       W  Bauhaus and its Sites in Weimar, Dessau and Bernau       lon=  11.3397  dev=0.002356    7.8 km [A+]
@@ -104,26 +104,26 @@ FULL A+ SITE CATALOGUE PER CORRIDOR HARMONIC
 
   1.1 beru  (E: 68.269°E  |  W: 2.269°E)
       E  Mausoleum of Khoja Ahmed Yasawi                          lon=  68.2711  dev=0.000069    0.2 km [A++]
-      W  Belfries of Belgium and France                           lon=   2.2964  dev=0.000913    3.0 km [A+]
-      W  Amiens Cathedral                                         lon=   2.3017  dev=0.001089    3.6 km [A+]
+      W  Belfries of Belgium and France                           lon=   2.2964  dev=0.000913    3.0 km [A++]
+      W  Amiens Cathedral                                         lon=   2.3017  dev=0.001089    3.6 km [A++]
       W  Paris, Banks of the Seine                                lon=   2.3211  dev=0.001738    5.8 km [A+]
       W  Palau de la Música Catalana and Hospital de Sant Pau, Barcelona  lon=   2.1750  dev=0.003133   10.4 km [A+]
       W  Historic Fortified City of Carcassonne                   lon=   2.3637  dev=0.003155   10.5 km [A+]
 
   1.2 beru  (E: 71.269°E  |  W: -0.731°E)
-      W  Palmeral of Elche                                        lon=  -0.7167  dev=0.000478    1.6 km [A+]
+      W  Palmeral of Elche                                        lon=  -0.7167  dev=0.000478    1.6 km [A++]
 
   1.3 beru  (E: 74.269°E  |  W: -3.731°E)
       W  Historic Town of Grand-Bassam                            lon=  -3.7364  dev=0.000180    0.6 km [A++]
-      W  Burgos Cathedral                                         lon=  -3.7040  dev=0.000900    3.0 km [A+]
-      W  Cliff of Bandiagara (Land of the Dogons)                 lon=  -3.6987  dev=0.001078    3.6 km [A+]
-      W  Paseo del Prado and Buen Retiro, a landscape of Arts and Sciences  lon=  -3.6871  dev=0.001465    4.9 km [A+]
+      W  Burgos Cathedral                                         lon=  -3.7040  dev=0.000900    3.0 km [A++]
+      W  Cliff of Bandiagara (Land of the Dogons)                 lon=  -3.6987  dev=0.001078    3.6 km [A++]
+      W  Paseo del Prado and Buen Retiro, a landscape of Arts and Sciences  lon=  -3.6871  dev=0.001465    4.9 km [A++]
       W  New Lanark                                               lon=  -3.7831  dev=0.001735    5.8 km [A+]
 
   1.4 beru  (E: 77.269°E  |  W: -6.731°E)
-      E  Humayun's Tomb, Delhi                                    lon=  77.2506  dev=0.000615    2.0 km [A+]
-      E  Red Fort Complex                                         lon=  77.2408  dev=0.000939    3.1 km [A+]
-      W  Las Médulas                                              lon=  -6.7761  dev=0.001505    5.0 km [A+]
+      E  Humayun's Tomb, Delhi                                    lon=  77.2506  dev=0.000615    2.0 km [A++]
+      E  Red Fort Complex                                         lon=  77.2408  dev=0.000939    3.1 km [A++]
+      W  Las Médulas                                              lon=  -6.7761  dev=0.001505    5.0 km [A++]
       W  Prehistoric Rock Art Sites in the Côa Valley and Siega Verde  lon=  -6.6611  dev=0.002330    7.8 km [A+]
       E  Qutb Minar and its Monuments, Delhi                      lon=  77.1853  dev=0.002791    9.3 km [A+]
 
@@ -133,7 +133,7 @@ FULL A+ SITE CATALOGUE PER CORRIDOR HARMONIC
       E  Group of Monuments at Mahabalipuram                      lon=  80.1989  dev=0.002337    7.8 km [A+]
 
   1.6 beru  (E: 83.269°E  |  W: -12.731°E)
-      E  Lumbini, the Birthplace of the Lord Buddha               lon=  83.2761  dev=0.000237    0.8 km [A+]
+      E  Lumbini, the Birthplace of the Lord Buddha               lon=  83.2761  dev=0.000237    0.8 km [A++]
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────
 STATISTICAL TESTS
@@ -149,9 +149,9 @@ STATISTICAL TESTS
     Fisher combined p: 1.49e-19  ***
 
   TEST 3: A++ enrichment in corridor vs non-corridor
-    Corridor    (17 harmonics): 6 A++ sites
-    Non-corridor (39 harmonics): 1 A++ sites
-    Fisher exact (one-tailed): OR = 20.73,  p = 0.0022  **
+    Corridor    (17 harmonics): 14 A++ sites
+    Non-corridor (39 harmonics): 9 A++ sites
+    Fisher exact (one-tailed): OR = 15.56,  p = 0.0000  ***
 
   TEST 4: Corridor precision vs global A+ mean deviation
     Corridor A+ mean dev: 0.000679 beru  (2.26 km)
@@ -163,32 +163,32 @@ STATISTICAL TESTS
 ANCHOR COMPARISON: CORRIDOR OCCUPANCY (17 harmonics)
   Anchor                     Lon°E   Hits/17    A++   Occupancy%  Bar (17 cells)
   -------------------------------------------------------------------------------------
-  Gerizim                  35.2690      17/17      6         100%  [#################]  (proposed anchor)
-  Jerusalem                35.2317      17/17      3         100%  [#################]  (35.232°E)
-  Megiddo                  35.1840      16/17      2          94%  [################.]  (35.183°E, Tel Megiddo)
-  Bethel                   35.2250      17/17      2         100%  [#################]  (35.225°E)
+  Gerizim                  35.2690      17/17     14         100%  [#################]  (proposed anchor)
+  Jerusalem                35.2317      17/17     15         100%  [#################]  (35.232°E)
+  Megiddo                  35.1840      16/17     15          94%  [################.]  (35.183°E, Tel Megiddo)
+  Bethel                   35.2250      17/17     14         100%  [#################]  (35.225°E)
 
   Extended notable-anchor comparison (Gerizim vs 17-harmonic corridor):
   Anchor                             Lon°E   Hits/17    A++
   ------------------------------------------------------------
-  Lumbini (83.2761°E)              83.2761      15/17      2
-  Bethel (35.225°E)                35.2250      17/17      2
-  Gerizim (35.269°E)               35.2690      17/17      6
-  Jerusalem (35.2317°E)            35.2317      17/17      3
-  Mecca (39.826°E)                 39.8260      15/17      3
-  Giza (31.134°E)                  31.1340      16/17      5
-  Babylon (44.421°E)               44.4210      15/17      4
-  Persepolis (52.890°E)            52.8900      16/17      4
-  Greenwich (0.000°E)               0.0000      11/17      3
-  Ujjain (75.784°E)                75.7840      10/17      2
-  Baghdad (44.366°E)               44.3660      15/17      2
-  Damascus (36.335°E)              36.3350      12/17      4
-  Rome (12.453°E)                  12.4530      14/17      2
-  Athens (23.726°E)                23.7260      13/17      3
-  Alexandria (29.918°E)            29.9180      11/17      4
-  Angkor Wat (103.867°E)          103.8670      10/17      1
-  Beijing (116.397°E)             116.3970       7/17      1
-  Varanasi (82.997°E)              82.9970      11/17      1
+  Lumbini (83.2761°E)              83.2761      15/17     10
+  Bethel (35.225°E)                35.2250      17/17     14
+  Gerizim (35.269°E)               35.2690      17/17     14
+  Jerusalem (35.2317°E)            35.2317      17/17     15
+  Mecca (39.826°E)                 39.8260      15/17     12
+  Giza (31.134°E)                  31.1340      16/17     12
+  Babylon (44.421°E)               44.4210      15/17     13
+  Persepolis (52.890°E)            52.8900      16/17     12
+  Greenwich (0.000°E)               0.0000      11/17      8
+  Ujjain (75.784°E)                75.7840      10/17      9
+  Baghdad (44.366°E)               44.3660      15/17     12
+  Damascus (36.335°E)              36.3350      12/17     11
+  Rome (12.453°E)                  12.4530      14/17      9
+  Athens (23.726°E)                23.7260      13/17     10
+  Alexandria (29.918°E)            29.9180      11/17     10
+  Angkor Wat (103.867°E)          103.8670      10/17      6
+  Beijing (116.397°E)             116.3970       7/17      6
+  Varanasi (82.997°E)              82.9970      11/17      8
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────
 SUMMARY
@@ -198,5 +198,5 @@ SUMMARY
 
   Binomial p = 5.35e-21  ***
   Fisher combined p = 1.49e-19  ***
-  A++ enrichment vs non-corridor: OR = 20.73, p = 0.0022  **
+  A++ enrichment vs non-corridor: OR = 15.56, p = 0.0000  ***
   Corridor A+ sites are 2.35x more precise than the global A+ mean.

@@ -33,7 +33,8 @@ from scipy.stats import fisher_exact, binomtest
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from lib.beru import (
-    GERIZIM, BERU, TIER_APLUS,
+    GERIZIM, BERU, TIER_APLUS, TIER_A_MAX,
+    TIER_APLUS_LABEL, TIER_A_LABEL,
     P_NULL_AP, P_NULL_A,
     deviation as beru_dev,
     tier_label, is_aplus, is_a_or_better,
@@ -106,6 +107,8 @@ def fisher_ap(sub):
     k  = n_aplus(sub)
     if n == 0:
         return float("nan"), float("nan")
+    if n == N_CORPUS:
+        return 1.0, 1.0
     table = [[k, n - k],
              [K_AP_CORPUS - k, N_CORPUS - n - (K_AP_CORPUS - k)]]
     or_, p = fisher_exact(table, alternative="greater")
@@ -116,6 +119,8 @@ def fisher_a(sub):
     k  = n_atier(sub)
     if n == 0:
         return float("nan"), float("nan")
+    if n == N_CORPUS:
+        return 1.0, 1.0
     table = [[k, n - k],
              [K_A_CORPUS - k, N_CORPUS - n - (K_A_CORPUS - k)]]
     or_, p = fisher_exact(table, alternative="greater")
@@ -127,6 +132,8 @@ def fisher_c(sub):
     k = n_ctier(sub)
     if n == 0:
         return float("nan"), float("nan")
+    if n == N_CORPUS:
+        return 1.0, 1.0
     table = [[k, n - k],
              [K_C_CORPUS - k, N_CORPUS - n - (K_C_CORPUS - k)]]
     or_, p = fisher_exact(table, alternative="greater")
@@ -174,9 +181,14 @@ def summary_row(label, sub):
     nap = n_aplus(sub)
     na  = n_atier(sub)
     nc  = n_ctier(sub)
-    or_ap, p_ap = fisher_ap(sub)
-    or_a,  p_a  = fisher_a(sub)
-    or_c,  p_c  = fisher_c(sub)
+    if n == N_CORPUS:
+        or_ap, p_ap = 1.0, binom_ap(sub)
+        or_a,  p_a  = 1.0, binom_a(sub)
+        or_c,  p_c  = 1.0, 1.0
+    else:
+        or_ap, p_ap = fisher_ap(sub)
+        or_a,  p_a  = fisher_a(sub)
+        or_c,  p_c  = fisher_c(sub)
     rate_ap = f"{100*nap/n:.1f}%" if n else "—"
     rate_a  = f"{100*na/n:.1f}%"  if n else "—"
     rate_c  = f"{100*nc/n:.1f}%"  if n else "—"
@@ -237,7 +249,9 @@ hdr = (f"  {'Region':<42} {'N':>4} {'A+':>4} {'A+%':>6}  "
        f"{'OR_A':>7} {'p_A':>7} {'sig':<4}  "
        f"{'C':>4} {'C%':>6}  "
        f"{'OR_C':>7} {'p_C':>7} {'sig':<4}")
-lines += ["  SUMMARY TABLE  (A+ = ≤6.7km, A = ≤33km, C = inter-harmonic C/C-/C--)", hdr,
+lines += ["  SUMMARY TABLE  (A+ = " + TIER_APLUS_LABEL + ", A = " + TIER_A_LABEL + ", C = inter-harmonic C/C-/C--)",
+          "  Note: The All stupas row reports binomial tests vs geometric null; subregions use Fisher exact vs the full corpus.",
+          hdr,
           "  " + "─"*len(hdr.rstrip())]
 for label, sub in region_data:
     lines.append(summary_row(label, sub))

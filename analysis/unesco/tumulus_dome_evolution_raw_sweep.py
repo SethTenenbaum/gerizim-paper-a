@@ -39,10 +39,10 @@ from scipy.stats import binomtest, fisher_exact, chisquare
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus
 from lib.beru import (
-    GERIZIM, BERU, TIER_APLUS, TIER_A_MAX, HARMONIC_STEP,
-    P_NULL_AP, P_NULL_A,
+    GERIZIM, BERU, TIER_APP, TIER_APLUS, TIER_A_MAX, HARMONIC_STEP,
+    P_NULL_APP, P_NULL_AP, P_NULL_A,
     TIER_APLUS_LABEL, TIER_A_LABEL, TIER_B_LABEL, TIER_C_LABEL,
-    deviation as _beru_dev, tier_label, is_aplus, is_a_or_better,
+    deviation as _beru_dev, tier_label, is_aplusplus, is_aplus, is_a_or_better,
 )
 from lib.stats import significance_label as sig
 from lib.results_store import ResultsStore
@@ -123,6 +123,7 @@ corpus = load_corpus()
 # ── Full-corpus background counts (for Fisher exact) ─────────────────────────
 _all_cultural = [s for s in corpus if s.category != "Natural" and s.has_coords]
 N_CORPUS     = len(_all_cultural)
+K_APP_CORPUS = sum(1 for s in _all_cultural if is_aplusplus(tier_label(_beru_dev(s.longitude))))
 K_AP_CORPUS  = sum(1 for s in _all_cultural if is_aplus(tier_label(_beru_dev(s.longitude))))
 K_A_CORPUS   = sum(1 for s in _all_cultural if is_a_or_better(tier_label(_beru_dev(s.longitude))))
 
@@ -175,15 +176,18 @@ for site_obj in corpus:
         dome_only.append(entry)
 
 # ── Stats ─────────────────────────────────────────────────────────────────────
-N    = len(selected)
-n_ap = sum(1 for e in selected if e["ap"])
-n_a  = sum(1 for e in selected if is_a_or_better(e["tier"]))
-n_b  = sum(1 for e in selected if e["tier"] == "B")
-n_c  = sum(1 for e in selected if e["tier"] == "C")
+N     = len(selected)
+n_app = sum(1 for e in selected if is_aplusplus(e["tier"]))
+n_ap  = sum(1 for e in selected if e["ap"])
+n_a   = sum(1 for e in selected if is_a_or_better(e["tier"]))
+n_b   = sum(1 for e in selected if e["tier"] == "B")
+n_c   = sum(1 for e in selected if e["tier"] == "C")
 
+bt_app = binomtest(n_app, N, P_NULL_APP, alternative="greater")
 bt_ap = binomtest(n_ap, N, P_NULL_AP, alternative="greater")
 bt_a  = binomtest(n_a,  N, P_NULL_A,  alternative="greater")
 
+enr_app = (n_app / N) / P_NULL_APP if N else 0
 enr_ap = (n_ap / N) / P_NULL_AP if N else 0
 enr_a  = (n_a  / N) / P_NULL_A  if N else 0
 
@@ -417,6 +421,10 @@ fp_all_a    = _fisher_a(N, n_a)
 # A binomial combined (already computed as bt_a.pvalue)
 
 print(f"  \\newcommand{{\\NevoTotal}}{{{N}}}            % total dome-evolution corpus")
+print(f"  \\newcommand{{\\NevoApp}}{{{n_app}}}            % A++ sites in dome-evolution corpus")
+print(f"  \\newcommand{{\\evoAppRate}}{{{100*n_app/N:.1f}}}          % A++ rate, dome-evolution corpus (%)")
+print(f"  \\newcommand{{\\evoEnrichApp}}{{{enr_app:.2f}}}         % enrichment ratio, A++ in dome corpus")
+print(f"  \\newcommand{{\\pEvoApp}}{{{bt_app.pvalue:.4f}}}         % p-value, A++ binomial (dome corpus)")
 print(f"  \\newcommand{{\\NevoAp}}{{{n_ap}}}             % A+ sites in dome-evolution corpus")
 print(f"  \\newcommand{{\\evoApRate}}{{{100*n_ap/N:.1f}}}           % A+ rate, dome-evolution corpus (%)")
 print(f"  \\newcommand{{\\evoEnrichAp}}{{{enr_ap:.2f}}}          % enrichment ratio, A+ in dome corpus")
@@ -479,6 +487,7 @@ print(f"  \\newcommand{{\\NevoOverlap}}{{{len(overlap)}}}            % sites wit
 
 # ── Write to results store ────────────────────────────────────────────────────
 ResultsStore().write_many({
+    "pEvoApp":          bt_app.pvalue,   # binomial p, A++ (dome-evolution corpus)
     "pEvoAp":           bt_ap.pvalue,    # binomial p, A+ (dome-evolution corpus) — Test 2b
     "pEvoA":            bt_a.pvalue,     # binomial p, A
     "pEvoApFisher":     fp_all_ap,       # Fisher p, A+ vs full corpus

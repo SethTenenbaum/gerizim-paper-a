@@ -98,6 +98,8 @@ EXPLICIT_P_KEYS = {
     "wikiNonHeartlandATierP", "wikiNonHeartlandApP", "wikiNonHeartlandCbandP",
     # Americas
     "AmericasOneSidedP",
+    # FDR q-values for the BH test family
+    "FDRqTestOne", "FDRqTestTwo", "FDRqTestThree",
     # Unit sweep / slope tests
     "sweepEightDomeP", "sweepEightFullP",
     "permSlopeCanonBestJoint", "permSlopeCanonRank",

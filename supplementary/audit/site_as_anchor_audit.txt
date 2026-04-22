@@ -1,5 +1,5 @@
 SITE-AS-ANCHOR RANKING AUDIT
-Generated : Mon Apr 20 20:13:27 UTC 2026
+Generated : Wed Apr 22 18:09:49 UTC 2026
 Script    : tools/generate_audit_site_as_anchor.py
 Corpus    : 1012 sites (1011 inscribed Cultural/Mixed + Gerizim synthetic)
            Each site used as anchor; tests against remaining N = 1011 sites
@@ -20,1066 +20,1066 @@ FOCAL ANCHOR RESULTS
 
   Site                                             Lon°E   A++    A+      A   Rank   % above     p-value  sig
   ----------------------------------------------------------------------------------------------------
-  Mount Gerizim (Tentative List)                  35.269     7    88    228     18      1.7%  2.7224e-03  **
-  Old City of Jerusalem                          35.2317     7    88    217     18      1.7%  2.7224e-03  **
+  Mount Gerizim (Tentative List)                  35.269    44    88    214     18      1.7%  2.7224e-03  **
+  Old City of Jerusalem                          35.2317    48    88    210     18      1.7%  2.7224e-03  **
 
 ──────────────────────────────────────────────────────────────────────────────────────────────────────────────
 FULL RANKING  (all 1012 sites, sorted by A+ count)
 
    Rank   A++    A+      A      Lon°E  Site
   ---------------------------------------------------------------------------------------------------------
-      1     6    92    218   -72.7972  Chiribiquete National Park – “The Maloca of the Jaguar”
-      1     6    92    218    17.2039  Richtersveld Cultural and Botanical Landscape
-      1     6    92    223    35.2075  Birthplace of Jesus: Church of the Nativity and the Pilgrimage Ro
-      1     6    92    223    44.2081  Old City of Sana'a
-      1     6    92    223    62.2081  Silk Roads: Zarafshan-Karakum Corridor
-      1     5    92    220   -69.7941  Humberstone and Santa Laura Saltpeter Works
+      1    45    92    213   -69.7941  Humberstone and Santa Laura Saltpeter Works
+      1    44    92    212   -72.7972  Chiribiquete National Park – “The Maloca of the Jaguar”
+      1    44    92    213    17.2039  Richtersveld Cultural and Botanical Landscape
+      1    44    92    212    35.2075  Birthplace of Jesus: Church of the Nativity and the Pilgrimage Ro
+      1    44    92    211    44.2081  Old City of Sana'a
+      1    44    92    211    62.2081  Silk Roads: Zarafshan-Karakum Corridor
 
-      7     7    91    221    -9.7867  Medina of Essaouira (formerly Mogador)
+      7    45    91    209    -9.7867  Medina of Essaouira (formerly Mogador)
 
-      8     6    90    220   101.2258  Deer Stone Monuments and Related Bronze Age Sites
-      8     4    90    222    -3.7831  New Lanark
-      8     4    90    222    20.2167  Wooden Churches of Southern Małopolska
-      8     4    90    222    23.2167  Dacian Fortresses of the Orastie Mountains
+      8    47    90    210   101.2258  Deer Stone Monuments and Related Bronze Age Sites
+      8    44    90    207    -3.7831  New Lanark
+      8    44    90    207    20.2167  Wooden Churches of Southern Małopolska
+      8    44    90    207    23.2167  Dacian Fortresses of the Orastie Mountains
 
-     12     9    89    218    47.2350  Takht-e Soleyman
-     12     9    89    218   122.2354  Baroque Churches of the Philippines
-     12     8    89    219    17.2369  The <I>Trulli</I> of Alberobello
-     12     5    89    222    98.2250  The Great Wall
-     12     4    89    222    80.2163  Old Town of Galle and its Fortifications
-     12     3    89    223    80.1989  Group of Monuments at Mahabalipuram
+     12    47    89    211    98.2250  The Great Wall
+     12    46    89    211    47.2350  Takht-e Soleyman
+     12    46    89    211   122.2354  Baroque Churches of the Philippines
+     12    45    89    212    17.2369  The <I>Trulli</I> of Alberobello
+     12    44    89    207    80.2163  Old Town of Galle and its Fortifications
+     12    43    89    210    80.1989  Group of Monuments at Mahabalipuram
 
-     18     8    88    218   110.2301  Borobudur Temple Compounds
-     18     7    88    217    35.2317  Old City of Jerusalem and its Walls  ◄ JERUSALEM
-     18     7    88    228    35.2690  Mount Gerizim (Tentative List, ref. 5706)  ◄ GERIZIM (synthetic)
-     18     7    88    228    68.2711  Mausoleum of Khoja Ahmed Yasawi
-     18     7    88    218   146.2306  Tasmanian Wilderness
-     18     6    88    218   -96.7681  Historic Centre of Oaxaca and Archaeological Site of Monte Albán
-     18     4    88    226    38.2878  The Gedeo Cultural Landscape
-     18     4    88    227    47.1875  Historic Centre of Sheki with the Khan’s Palace
-     18     3    88    224    14.1921  Historic Centre of Naples
-     18     2    88    223    35.1958  Tyre
+     18    48    88    212   -96.7681  Historic Centre of Oaxaca and Archaeological Site of Monte Albán
+     18    48    88    210    35.2317  Old City of Jerusalem and its Walls  ◄ JERUSALEM
+     18    47    88    210   110.2301  Borobudur Temple Compounds
+     18    47    88    210   146.2306  Tasmanian Wilderness
+     18    45    88    212    47.1875  Historic Centre of Sheki with the Khan’s Palace
+     18    44    88    213    14.1921  Historic Centre of Naples
+     18    44    88    211    35.1958  Tyre
+     18    44    88    214    35.2690  Mount Gerizim (Tentative List, ref. 5706)  ◄ GERIZIM (synthetic)
+     18    44    88    214    68.2711  Mausoleum of Khoja Ahmed Yasawi
+     18    41    88    214    38.2878  The Gedeo Cultural Landscape
 
-     28     8    87    222    -3.7040  Burgos Cathedral
-     28     7    87    228   -90.7282  Antigua Guatemala
-     28     7    87    222     2.2964  Belfries of Belgium and France
-     28     7    87    226    38.2667  Site of Palmyra
-     28     6    87    229     8.2697  <I>Sacri Monti</I> of Piedmont and Lombardy
-     28     6    87    227    14.2726  Holašovice Historic Village
-     28     6    87    227    23.2662  Boyana Church
-     28     6    87    222    29.2976  Xanthos-Letoon
-     28     5    87    225   107.2911  Silk Roads: the Routes Network of Chang'an-Tianshan Corridor
-     28     4    87    227    23.1870  Rock Art of Alta
-     28     4    87    222    35.2244  Kizhi Pogost
-     28     4    87    226    77.1853  Qutb Minar and its Monuments, Delhi
-     28     4    87    225    95.2900  Pyu Ancient Cities
-     28     4    87    226   116.1851  Site of Xanadu
-     28     3    87    222    -6.7761  Las Médulas
-     28     2    87    227    23.2788  Brâncuși Monumental Ensemble of Târgu Jiu
+     28    47    87    209    -6.7761  Las Médulas
+     28    47    87    210    35.2244  Kizhi Pogost
+     28    45    87    211    77.1853  Qutb Minar and its Monuments, Delhi
+     28    45    87    211   116.1851  Site of Xanadu
+     28    44    87    214   -90.7282  Antigua Guatemala
+     28    44    87    214     8.2697  <I>Sacri Monti</I> of Piedmont and Lombardy
+     28    44    87    212    23.1870  Rock Art of Alta
+     28    44    87    210    23.2788  Brâncuși Monumental Ensemble of Târgu Jiu
+     28    43    87    210    23.2662  Boyana Church
+     28    43    87    215    29.2976  Xanthos-Letoon
+     28    43    87    210    38.2667  Site of Palmyra
+     28    42    87    214    -3.7040  Burgos Cathedral
+     28    42    87    215     2.2964  Belfries of Belgium and France
+     28    42    87    214    14.2726  Holašovice Historic Village
+     28    41    87    215   107.2911  Silk Roads: the Routes Network of Chang'an-Tianshan Corridor
+     28    40    87    214    95.2900  Pyu Ancient Cities
 
-     44     6    86    223    14.2931  Archaeological Site of Leptis Magna
-     44     6    86    219    26.2390  Archaeological Site of Troy
-     44     6    86    219    29.2389  Mapungubwe Cultural Landscape
-     44     5    86    222    -3.6987  Cliff of Bandiagara (Land of the Dogons)
-     44     5    86    222     2.3017  Amiens Cathedral
-     44     5    86    222    11.2478  Medici Villas and Gardens in Tuscany
-     44     5    86    222    11.3019  The Porticoes of Bologna
-     44     5    86    226    17.2505  Holy Trinity Column in Olomouc
-     44     5    86    226    23.2528  Old City of Zamość
-     44     5    86    226    77.2506  Humayun's Tomb, Delhi
-     44     4    86    222    14.2497  Mbanza Kongo, Vestiges of the Capital of the former Kingdom of Ko
-     44     4    86    226    83.2761  Lumbini, the Birthplace of the Lord Buddha
-     44     3    86    228    -3.7364  Historic Town of Grand-Bassam
-     44     3    86    227    11.2561  Historic Centre of Florence
-     44     2    86    229    -0.7167  Palmeral of Elche
+     44    49    86    211    14.2497  Mbanza Kongo, Vestiges of the Capital of the former Kingdom of Ko
+     44    49    86    211    17.2505  Holy Trinity Column in Olomouc
+     44    49    86    211    77.2506  Humayun's Tomb, Delhi
+     44    47    86    210    23.2528  Old City of Zamość
+     44    46    86    212    -3.7364  Historic Town of Grand-Bassam
+     44    46    86    210    11.2478  Medici Villas and Gardens in Tuscany
+     44    46    86    210    11.2561  Historic Centre of Florence
+     44    45    86    211    26.2390  Archaeological Site of Troy
+     44    45    86    211    29.2389  Mapungubwe Cultural Landscape
+     44    43    86    210    -0.7167  Palmeral of Elche
+     44    43    86    211    83.2761  Lumbini, the Birthplace of the Lord Buddha
+     44    42    86    213    14.2931  Archaeological Site of Leptis Magna
+     44    41    86    217     2.3017  Amiens Cathedral
+     44    41    86    217    11.3019  The Porticoes of Bologna
+     44    40    86    217    -3.6987  Cliff of Bandiagara (Land of the Dogons)
 
-     59     6    85    221    77.2408  Red Fort Complex
-     59     5    85    221    17.2421  Via Appia. <em>Regina Viarum</em>
-     59     4    85    226   -63.8205  Fuerte de Samaipata
-     59     4    85    226    29.1769  Fossil Hominid Sites of South Africa
+     59    46    85    212    17.2421  Via Appia. <em>Regina Viarum</em>
+     59    45    85    211    77.2408  Red Fort Complex
+     59    44    85    212    29.1769  Fossil Hominid Sites of South Africa
+     59    42    85    211   -63.8205  Fuerte de Samaipata
 
-     63     4    84    227     2.1750  Palau de la Música Catalana and Hospital de Sant Pau, Barcelona
+     63    42    84    212     2.1750  Palau de la Música Catalana and Hospital de Sant Pau, Barcelona
 
-     64     4    83    227    29.1731  Bursa and Cumalıkızık: the Birth of the Ottoman Empire
-     64     1    83    224    23.3086  Rila Monastery
+     64    43    83    214    29.1731  Bursa and Cumalıkızık: the Birth of the Ottoman Empire
+     64    42    83    214    23.3086  Rila Monastery
 
-     66     4    82    226    38.1726  Cultural Landscape of Kenozero Lake
-     66     2    82    224    -3.6871  Paseo del Prado and Buen Retiro, a landscape of Arts and Sciences
+     66    43    82    215    38.1726  Cultural Landscape of Kenozero Lake
+     66    41    82    213    -3.6871  Paseo del Prado and Buen Retiro, a landscape of Arts and Sciences
 
-     68     8    80    225     5.3259  Bryggen
-     68     8    80    225    14.3264  18th-Century Royal Palace at Caserta with the Park, the Aqueduct 
-     68     6    80    225    44.3246  Cathedral and Churches of Echmiatsin and the Archaeological Site 
-     68     4    80    225  -111.8456  The 20th-Century Architecture of Frank Lloyd Wright
-     68     2    80    225    14.3150  Historic Centre of Český Krumlov
-     68     2    80    225    35.1589  Palestine: Land of Olives and Vines – Cultural Landscape of South
+     68    42    80    212  -111.8456  The 20th-Century Architecture of Frank Lloyd Wright
+     68    42    80    214    35.1589  Palestine: Land of Olives and Vines – Cultural Landscape of South
+     68    40    80    213    14.3150  Historic Centre of Český Krumlov
+     68    38    80    212     5.3259  Bryggen
+     68    38    80    212    14.3264  18th-Century Royal Palace at Caserta with the Park, the Aqueduct 
+     68    38    80    212    44.3246  Cathedral and Churches of Echmiatsin and the Archaeological Site 
 
-     74    10    79    205    37.4000  Konso Cultural Landscape
-     74     9    79    204    79.4014  Maratha Military Landscapes of India
-     74     8    79    205   -43.5977  Historic Centre of the Town of Diamantina
-     74     6    79    227   -69.6792  Coro and its Port
-     74     5    79    226     2.3211  Paris, Banks of the Seine
-     74     5    79    225   128.3213  Gaya Tumuli
-     74     3    79    227    53.1673  Pasargadae
-     74     1    79    225   -45.8344  Kujataa Greenland: Norse and Inuit Farming at the Edge of the Ice
+     74    44    79    216   -45.8344  Kujataa Greenland: Norse and Inuit Farming at the Edge of the Ice
+     74    44    79    215    53.1673  Pasargadae
+     74    43    79    198   -43.5977  Historic Centre of the Town of Diamantina
+     74    42    79    198    37.4000  Konso Cultural Landscape
+     74    41    79    199    79.4014  Maratha Military Landscapes of India
+     74    39    79    213   128.3213  Gaya Tumuli
+     74    38    79    213   -69.6792  Coro and its Port
+     74    38    79    213     2.3211  Paris, Banks of the Seine
 
-     82     5    78    224    11.3317  Historic Centre of Siena
-     82     5    78    225   158.3308  Nan Madol: Ceremonial Centre of Eastern Micronesia
+     82    40    78    215   158.3308  Nan Madol: Ceremonial Centre of Eastern Micronesia
+     82    39    78    215    11.3317  Historic Centre of Siena
 
-     84    11    77    205    13.3986  Museumsinsel (Museum Island), Berlin
-     84    11    77    205    58.3986  The Persian Qanat
-     84    10    77    205    25.3992  Thracian Tomb of Kazanlak
-     84     6    77    225    11.3286  Classical Weimar
-     84     5    77    224    -6.8469  Rabat, Modern Capital and Historic City: a Shared Heritage
-     84     3    77    206    -1.5883  Studley Royal Park including the Ruins of Fountains Abbey
-     84     3    77    206     1.4164  Canal du Midi
+     84    45    77    202    -1.5883  Studley Royal Park including the Ruins of Fountains Abbey
+     84    42    77    211    -6.8469  Rabat, Modern Capital and Historic City: a Shared Heritage
+     84    42    77    197     1.4164  Canal du Midi
+     84    41    77    198    25.3992  Thracian Tomb of Kazanlak
+     84    40    77    198    13.3986  Museumsinsel (Museum Island), Berlin
+     84    40    77    198    58.3986  The Persian Qanat
+     84    39    77    213    11.3286  Classical Weimar
 
-     91    11    76    205     4.3978  Plantin-Moretus House-Workshops-Museum Complex
-     91    11    76    205    10.3964  Piazza del Duomo, Pisa
-     91    10    76    205    49.3962  Gobustan Rock Art Cultural Landscape
-     91     6    76    226  -138.6556  Te Henua Enata – The Marquesas Islands
-     91     6    76    224    14.3342  Villa Romana del Casale
-     91     5    76    224   -57.8499  Historic Quarter of the City of Colonia del Sacramento
-     91     5    76    225     5.1476  Rietveld Schröderhuis (Rietveld Schröder House)
-     91     4    76    224   101.1511  The Ancient Town of Si Thep and its Associated Dvaravati Monument
-     91     4    76    228   113.3494  Mount Wutai
-     91     3    76    228    38.3611  Arslantepe Mound
-     91     2    76    205     4.4161  Stoclet House
-     91     2    76    205     4.4161  Decorated Cave of Pont d’Arc, known as Grotte Chauvet-Pont d’Arc,
-     91     2    76    198    16.4833  Agricultural Landscape of Southern Öland
+     91    42    76    211   101.1511  The Ancient Town of Si Thep and its Associated Dvaravati Monument
+     91    41    76    211   -57.8499  Historic Quarter of the City of Colonia del Sacramento
+     91    41    76    197     4.4161  Stoclet House
+     91    41    76    197     4.4161  Decorated Cave of Pont d’Arc, known as Grotte Chauvet-Pont d’Arc,
+     91    41    76    215    14.3342  Villa Romana del Casale
+     91    40    76    198     4.3978  Plantin-Moretus House-Workshops-Museum Complex
+     91    40    76    212     5.1476  Rietveld Schröderhuis (Rietveld Schröder House)
+     91    39    76    198    10.3964  Piazza del Duomo, Pisa
+     91    39    76    198    49.3962  Gobustan Rock Art Cultural Landscape
+     91    38    76    217  -138.6556  Te Henua Enata – The Marquesas Islands
+     91    37    76    219   113.3494  Mount Wutai
+     91    35    76    188    16.4833  Agricultural Landscape of Southern Öland
+     91    35    76    222    38.3611  Arslantepe Mound
 
-    104    11    75    205    40.3974  White Monuments of Vladimir and Suzdal
-    104    10    75    205   100.3951  Ombilin Coal Mining Heritage of Sawahlunto
-    104     8    75    194     9.3778  Abbey of St Gall
-    104     7    75    203     1.4452  Ibiza, Biodiversity and Culture
-    104     7    75    203   118.4442  Quanzhou: Emporium of the World in Song-Yuan China
-    104     6    75    203    -7.5531  Roman Walls of Lugo
-    104     6    75    203    10.4476  Benedictine Convent of St John at Müstair
-    104     6    75    203    85.4439  Archaeological Site of Nalanda Mahavihara at Nalanda, Bihar
-    104     5    75    199   -10.5386  Sceilg Mhichíl
-    104     5    75    189     9.4200  Jelling Mounds, Runic Stones and Church
-    104     5    75    190    51.4205  Golestan Palace
-    104     5    75    193    54.3731  Historic City of Yazd
-    104     4    75    202     4.4408  Major Mining Sites of Wallonia
-    104     4    75    227    11.3411  Rock Carvings in Tanum
-    104     4    75    190   132.4169  Iwami Ginzan Silver Mine and its Cultural Landscape
-    104     3    75    198   -71.2106  Historic District of Old Québec
-    104     3    75    227   -42.6524  Serra da Capivara National Park
-    104     3    75    200    12.7963  Villa d'Este, Tivoli
-    104     3    75    203    16.4392  Historical Complex of Split with the Palace of Diocletian
-    104     3    75    199    24.7922  Historic Centre of Sighişoara
-    104     3    75    194    24.8142  Minoan Palatial Centres
-    104     3    75    196    76.4717  Group of Monuments at Hampi
-    104     3    75    228   134.3525  Rock Islands Southern Lagoon
-    104     2    75    228    35.3536  Masada
+    104    44    75    188    54.3731  Historic City of Yazd
+    104    43    75    193     4.4408  Major Mining Sites of Wallonia
+    104    43    75    189     9.3778  Abbey of St Gall
+    104    43    75    194    85.4439  Archaeological Site of Nalanda Mahavihara at Nalanda, Bihar
+    104    43    75    194   118.4442  Quanzhou: Emporium of the World in Song-Yuan China
+    104    42    75    193    16.4392  Historical Complex of Split with the Palace of Diocletian
+    104    41    75    194     1.4452  Ibiza, Biodiversity and Culture
+    104    41    75    185    24.8142  Minoan Palatial Centres
+    104    40    75    190   -71.2106  Historic District of Old Québec
+    104    40    75    190    24.7922  Historic Centre of Sighişoara
+    104    40    75    198    40.3974  White Monuments of Vladimir and Suzdal
+    104    39    75    193    -7.5531  Roman Walls of Lugo
+    104    39    75    193    10.4476  Benedictine Convent of St John at Müstair
+    104    39    75    188    12.7963  Villa d'Este, Tivoli
+    104    38    75    192   -10.5386  Sceilg Mhichíl
+    104    38    75    217    11.3411  Rock Carvings in Tanum
+    104    38    75    187    76.4717  Group of Monuments at Hampi
+    104    37    75    219   -42.6524  Serra da Capivara National Park
+    104    37    75    197   100.3951  Ombilin Coal Mining Heritage of Sawahlunto
+    104    36    75    218    35.3536  Masada
+    104    36    75    180   132.4169  Iwami Ginzan Silver Mine and its Cultural Landscape
+    104    36    75    218   134.3525  Rock Islands Southern Lagoon
+    104    34    75    181     9.4200  Jelling Mounds, Runic Stones and Church
+    104    34    75    181    51.4205  Golestan Palace
 
-    128     9    74    194   -89.6167  Tikal National Park
-    128     9    74    194   -86.6163  Ruins of León Viejo
-    128     9    74    194    -8.6167  Historic Centre of Oporto, Luiz I Bridge and Monastery of Serra d
-    128     9    74    195     3.3893  Notre-Dame Cathedral in Tournai
-    128     9    74    205    10.3930  Prehistoric Pile Dwellings around the Alps
-    128     9    74    194    12.3833  Grimeton Radio Station, Varberg
-    128     8    74    195   -59.6139  Historic Bridgetown and its Garrison
-    128     8    74    195   120.3875  Historic City of Vigan
-    128     8    74    194   132.3839  Kakadu National Park
-    128     8    74    195   165.3806  Bikini Atoll Nuclear Test Site
-    128     7    74    225     2.1442  Episcopal City of Albi
-    128     6    74    199   -83.2198  Hopewell Ceremonial Earthworks
-    128     6    74    193   -71.6280  Historic Quarter of the Seaport City of Valparaíso
-    128     6    74    203   -55.5500  L’Anse aux Meadows National Historic Site
-    128     6    74    193    54.3760  The Persian Caravanserai
-    128     6    74    199   102.7800  Cultural Landscape of Honghe Hani Rice Terraces
-    128     5    74    189   -89.5787  Pre-Hispanic Town of Uxmal
-    128     5    74    203     7.4503  Old City of Berne
-    128     5    74    193    36.3700  Umm Al-Jimāl
-    128     5    74    235    59.3781  Ancient City of Qalhat
-    128     5    74    193    69.3702  Cultural Heritage Sites of Ancient Khuttal
-    128     5    74    195   129.3490  Seokguram Grotto and Bulguksa Temple
-    128     4    74    233  -111.6333  Writing-on-Stone / Áísínai’pi
-    128     4    74    196  -101.1904  Historic Centre of Morelia
-    128     4    74    196     1.4872  Chartres Cathedral
-    128     4    74    229     2.3637  Historic Fortified City of Carcassonne
-    128     4    74    194     9.8122  Fagus Factory in Alfeld
-    128     4    74    202    12.7720  Villa Adriana (Tivoli)
-    128     4    74    202    18.7719  Venetian Works of Defence between the 16th and 17th Centuries: <e
-    128     4    74    194    21.3500  Tokaj Wine Region Historic Cultural Landscape
-    128     4    74    230   110.3648  The Cosmological Axis of Yogyakarta and its Historic Landmarks
-    128     4    74    197   130.4861  Sacred Island of Okinoshima and Associated Sites in the Munakata 
-    128     4    74    196   135.8077  Historic Monuments of Ancient Kyoto (Kyoto, Uji and Otsu Cities)
-    128     3    74    196   -98.1978  Historic Centre of Puebla
-    128     3    74    195    -5.1949  Sudanese style mosques in northern Côte d’Ivoire
-    128     3    74    208    -1.5761  Durham Castle and Cathedral
-    128     3    74    235    20.3746  ǂKhomani Cultural Landscape
-    128     3    74    200    48.7947  Soltaniyeh
-    128     1    74    195     3.3572  Nord-Pas de Calais Mining Basin
-    128     1    74    191     9.4102  Carolingian Westwork and Civitas Corvey
-    128     1    74    196    60.3603  Itchan Kala
-    128     1    74    193   135.4072  Sacred Sites and Pilgrimage Routes in the Kii Mountain Range
+    128    44    74    188   -71.6280  Historic Quarter of the Seaport City of Valparaíso
+    128    44    74    195    -1.5761  Durham Castle and Cathedral
+    128    44    74    189    54.3760  The Persian Caravanserai
+    128    43    74    187    36.3700  Umm Al-Jimāl
+    128    43    74    188    69.3702  Cultural Heritage Sites of Ancient Khuttal
+    128    43    74    184   129.3490  Seokguram Grotto and Bulguksa Temple
+    128    42    74    196   -83.2198  Hopewell Ceremonial Earthworks
+    128    42    74    213     2.1442  Episcopal City of Albi
+    128    42    74    188     3.3572  Nord-Pas de Calais Mining Basin
+    128    42    74    185     9.8122  Fagus Factory in Alfeld
+    128    42    74    184    21.3500  Tokaj Wine Region Historic Cultural Landscape
+    128    42    74    189    60.3603  Itchan Kala
+    128    42    74    196   102.7800  Cultural Landscape of Honghe Hani Rice Terraces
+    128    41    74    188   165.3806  Bikini Atoll Nuclear Test Site
+    128    40    74    186  -101.1904  Historic Centre of Morelia
+    128    40    74    185   135.8077  Historic Monuments of Ancient Kyoto (Kyoto, Uji and Otsu Cities)
+    128    39    74    184   -89.6167  Tikal National Park
+    128    39    74    184   -86.6163  Ruins of León Viejo
+    128    39    74    182   -59.6139  Historic Bridgetown and its Garrison
+    128    39    74    184    -8.6167  Historic Centre of Oporto, Luiz I Bridge and Monastery of Serra d
+    128    39    74    187    -5.1949  Sudanese style mosques in northern Côte d’Ivoire
+    128    39    74    184    12.3833  Grimeton Radio Station, Varberg
+    128    39    74    184   132.3839  Kakadu National Park
+    128    38    74    192   -55.5500  L’Anse aux Meadows National Historic Site
+    128    38    74    192     7.4503  Old City of Berne
+    128    38    74    192    12.7720  Villa Adriana (Tivoli)
+    128    38    74    192    18.7719  Venetian Works of Defence between the 16th and 17th Centuries: <e
+    128    38    74    182   120.3875  Historic City of Vigan
+    128    37    74    188     1.4872  Chartres Cathedral
+    128    37    74    182     3.3893  Notre-Dame Cathedral in Tournai
+    128    37    74    196    10.3930  Prehistoric Pile Dwellings around the Alps
+    128    37    74    188    48.7947  Soltaniyeh
+    128    37    74    188   130.4861  Sacred Island of Okinoshima and Associated Sites in the Munakata 
+    128    36    74    188   -98.1978  Historic Centre of Puebla
+    128    36    74    180     9.4102  Carolingian Westwork and Civitas Corvey
+    128    36    74    180   135.4072  Sacred Sites and Pilgrimage Routes in the Kii Mountain Range
+    128    35    74    223  -111.6333  Writing-on-Stone / Áísínai’pi
+    128    35    74    222     2.3637  Historic Fortified City of Carcassonne
+    128    35    74    222   110.3648  The Cosmological Axis of Yogyakarta and its Historic Landmarks
+    128    34    74    181   -89.5787  Pre-Hispanic Town of Uxmal
+    128    33    74    223    20.3746  ǂKhomani Cultural Landscape
+    128    33    74    223    59.3781  Ancient City of Qalhat
 
-    170     7    73    195    10.4903  Mantua and Sabbioneta
-    170     7    73    200    21.7775  Bronze Age Burial Site of Sammallahdenmäki
-    170     6    73    199  -131.2203  S<U>G</U>ang Gwaay
-    170     6    73    198   -79.5347  The Colonial Transisthmian Route of Panamá
-    170     6    73    196     9.3468  Archaeological Border complex of Hedeby and the Danevirke
-    170     6    73    200     9.7786  Frontiers of the Roman Empire
-    170     5    73    196  -113.6521  Head-Smashed-In Buffalo Jump
-    170     5    73    208   -76.5711  Blue and John Crow Mountains
-    170     5    73    223   -15.6612  Risco Caido and the Sacred Mountains of Gran Canaria Cultural Lan
-    170     5    73    223    -6.6611  Prehistoric Rock Art Sites in the Côa Valley and Siega Verde
-    170     5    73    224    11.3397  Bauhaus and its Sites in Weimar, Dessau and Bernau
-    170     5    73    189    15.8280  Semmering Railway
-    170     5    73    188    18.4224  Stećci Medieval Tombstone Graveyards
-    170     5    73    208    64.4286  Historic Centre of Bukhara
-    170     5    73    194    75.8172  Group of Monuments at Pattadakal
-    170     5    73    190    75.8250  The Jantar Mantar, Jaipur
-    170     5    73    208    85.4285  Kathmandu Valley
-    170     5    73    192   105.8222  Vat Phou and Associated Ancient Settlements within the Champasak 
-    170     4    73    193   -77.1785  Chavin (Archaeological Site)
-    170     4    73    197   -55.5314  Jesuit Missions of the Guaranis: San Ignacio Mini, Santa Ana, Nue
-    170     4    73    198    -4.5406  Antequera Dolmens Site
-    170     4    73    198    -4.5404  Old Towns of Djenné
-    170     4    73    202    -1.6258  Asante Traditional Buildings
-    170     4    73    196    37.4697  Fasil Ghebbi, Gondar Region
-    170     4    73    203    42.7683  Gelati Monastery
-    170     4    73    202    55.3756  Cultural Landscape of Maymand
-    170     4    73    204    57.7667  <i>Aflaj</i> Irrigation Systems of Oman
-    170     4    73    199    67.4587  Proto-urban Site of Sarazm
-    170     4    73    193    75.8219  Jaipur City, Rajasthan
-    170     3    73    204    10.3892  Viking-Age Ring Fortresses
-    170     3    73    235    14.3751  Twyfelfontein or /Ui-//aes
-    170     3    73    237    17.3819  Gardens and Castle at Kroměříž
-    170     3    73    193    18.3667  Robben Island
-    170     3    73    203    28.3767  Khami Ruins National Monument
-    170     3    73    237    74.3821  Fort and Shalamar Gardens in Lahore
-    170     3    73    237    80.3833  Sacred City of Anuradhapura
-    170     3    73    203    88.3772  Khangchendzonga National Park
-    170     2    73    204     4.3891  Cistercian Abbey of Fontenay
+    170    44    73    182     9.3468  Archaeological Border complex of Hedeby and the Danevirke
+    170    43    73    182  -113.6521  Head-Smashed-In Buffalo Jump
+    170    42    73    197   -76.5711  Blue and John Crow Mountains
+    170    42    73    186    18.3667  Robben Island
+    170    42    73    197    64.4286  Historic Centre of Bukhara
+    170    42    73    197    85.4285  Kathmandu Valley
+    170    41    73    196  -131.2203  S<U>G</U>ang Gwaay
+    170    41    73    184   -77.1785  Chavin (Archaeological Site)
+    170    41    73    195     9.7786  Frontiers of the Roman Empire
+    170    41    73    194    21.7775  Bronze Age Burial Site of Sammallahdenmäki
+    170    41    73    184    75.8219  Jaipur City, Rajasthan
+    170    41    73    185    75.8250  The Jantar Mantar, Jaipur
+    170    41    73    184   105.8222  Vat Phou and Associated Ancient Settlements within the Champasak 
+    170    40    73    217   -15.6612  Risco Caido and the Sacred Mountains of Gran Canaria Cultural Lan
+    170    40    73    217    -6.6611  Prehistoric Rock Art Sites in the Côa Valley and Siega Verde
+    170    40    73    185    75.8172  Group of Monuments at Pattadakal
+    170    39    73    218    11.3397  Bauhaus and its Sites in Weimar, Dessau and Bernau
+    170    39    73    185    15.8280  Semmering Railway
+    170    39    73    192    67.4587  Proto-urban Site of Sarazm
+    170    38    73    190   -55.5314  Jesuit Missions of the Guaranis: San Ignacio Mini, Santa Ana, Nue
+    170    38    73    191    -4.5406  Antequera Dolmens Site
+    170    38    73    191    -4.5404  Old Towns of Djenné
+    170    38    73    188    37.4697  Fasil Ghebbi, Gondar Region
+    170    38    73    193    42.7683  Gelati Monastery
+    170    38    73    195    57.7667  <i>Aflaj</i> Irrigation Systems of Oman
+    170    37    73    191   -79.5347  The Colonial Transisthmian Route of Panamá
+    170    37    73    186    10.4903  Mantua and Sabbioneta
+    170    36    73    197    -1.6258  Asante Traditional Buildings
+    170    35    73    195     4.3891  Cistercian Abbey of Fontenay
+    170    35    73    195    10.3892  Viking-Age Ring Fortresses
+    170    35    73    195    28.3767  Khami Ruins National Monument
+    170    35    73    196    55.3756  Cultural Landscape of Maymand
+    170    35    73    195    88.3772  Khangchendzonga National Park
+    170    34    73    223    14.3751  Twyfelfontein or /Ui-//aes
+    170    34    73    181    18.4224  Stećci Medieval Tombstone Graveyards
+    170    33    73    223    17.3819  Gardens and Castle at Kroměříž
+    170    33    73    223    74.3821  Fort and Shalamar Gardens in Lahore
+    170    32    73    223    80.3833  Sacred City of Anuradhapura
 
-    208     9    72    196    24.3446  Wooden <em>Tserkvas</em> of the Carpathian Region in Poland and U
-    208     8    72    196    33.3439  Choirokoitia
-    208     7    72    195    16.4918  Churches of Peace in Jawor and Świdnica
-    208     7    72    223    59.1417  Kunya-Urgench
-    208     6    72    223    20.1408  Historic Centres of Berat and Gjirokastra
-    208     6    72    200    72.7828  Sulaiman-Too Sacred Mountain
-    208     6    72    223   113.1412  Historic Monuments of Dengfeng in “The Centre of Heaven and Earth
-    208     6    72    223   116.1411  Summer Palace, an Imperial Garden in Beijing
-    208     6    72    200   135.7842  Historic Monuments of Ancient Nara
-    208     5    72    202   -43.5462  Sítio Roberto Burle Marx
-    208     5    72    188    72.8301  Victorian Gothic and Art Deco Ensembles of Mumbai
-    208     5    72    198   112.4667  Longmen Grottoes
-    208     4    72    208   -88.5687  Pre-Hispanic City of Chichen-Itza
-    208     4    72    188    -8.5767  St Kilda
-    208     4    72    195     9.3931  Bergpark Wilhelmshöhe
-    208     4    72    200    22.3667  Archaeological Site of Mystras
-    208     4    72    200    34.3664  Saint Hilarion Monastery/ Tell Umm Amer
-    208     4    72    204    38.5991  Melka Kunture and Balchit: Archaeological and Palaeontological Si
-    208     4    72    200    58.3667  Bam and its Cultural Landscape
-    208     3    72    195   -23.6052  Cidade Velha, Historic Centre of Ribeira Grande
-    208     2    72    204     9.7656  Caves and Ice Age Art in the Swabian Jura
-    208     2    72    237   116.3914  Beijing Central Axis: A Building Ensemble Exhibiting the Ideal Or
-    208     1    72    237    -3.6093  Aranjuez Cultural Landscape
-    208     1    72    201     4.3557  Major Town Houses of the Architect Victor Horta (Brussels)
-    208     1    72    201     4.3562  The Maison Carrée of Nîmes
-    208     1    72    203    10.3070  Wartburg Castle
-    208     1    72    187    15.4333  Cilento and Vallo di Diano National Park with the Archeological S
+    208    42    72    197   -88.5687  Pre-Hispanic City of Chichen-Itza
+    208    42    72    212    20.1408  Historic Centres of Berat and Gjirokastra
+    208    42    72    182    24.3446  Wooden <em>Tserkvas</em> of the Carpathian Region in Poland and U
+    208    42    72    181    33.3439  Choirokoitia
+    208    42    72    212    59.1417  Kunya-Urgench
+    208    42    72    212   113.1412  Historic Monuments of Dengfeng in “The Centre of Heaven and Earth
+    208    42    72    212   116.1411  Summer Palace, an Imperial Garden in Beijing
+    208    41    72    192    72.7828  Sulaiman-Too Sacred Mountain
+    208    39    72    192   -43.5462  Sítio Roberto Burle Marx
+    208    39    72    190     4.3557  Major Town Houses of the Architect Victor Horta (Brussels)
+    208    39    72    194     4.3562  The Maison Carrée of Nîmes
+    208    38    72    195     9.7656  Caves and Ice Age Art in the Swabian Jura
+    208    38    72    185    72.8301  Victorian Gothic and Art Deco Ensembles of Mumbai
+    208    38    72    191   135.7842  Historic Monuments of Ancient Nara
+    208    37    72    188    16.4918  Churches of Peace in Jawor and Świdnica
+    208    37    72    190   112.4667  Longmen Grottoes
+    208    36    72    180   -23.6052  Cidade Velha, Historic Centre of Ribeira Grande
+    208    36    72    195    22.3667  Archaeological Site of Mystras
+    208    36    72    195    34.3664  Saint Hilarion Monastery/ Tell Umm Amer
+    208    36    72    195    58.3667  Bam and its Cultural Landscape
+    208    35    72    180     9.3931  Bergpark Wilhelmshöhe
+    208    34    72    181    -8.5767  St Kilda
+    208    33    72    195    38.5991  Melka Kunture and Balchit: Archaeological and Palaeontological Si
+    208    32    72    228    -3.6093  Aranjuez Cultural Landscape
+    208    32    72    227   116.3914  Beijing Central Axis: A Building Ensemble Exhibiting the Ideal Or
+    208    29    72    187    10.3070  Wartburg Castle
+    208    28    72    179    15.4333  Cilento and Vallo di Diano National Park with the Archeological S
 
-    235     8    71    197    12.3389  Venice and its Lagoon
-    235     8    71    193    57.3283  Le Morne Cultural Landscape
-    235     7    71    198   -95.6587  Historic Monuments Zone of Tlacotalpan
-    235     7    71    197    48.3393  Prehistoric Sites of the Khorramabad Valley
-    235     6    71    197    -5.6603  Old City of Salamanca
-    235     6    71    201    16.3699  Historic Centre of Vienna
-    235     5    71    234   -75.6307  Archaeological Landscape of the First Coffee Plantations in the S
-    235     5    71    191    10.9001  Pilgrimage Church of Wies
-    235     5    71    191    34.9000  Caves of Maresha and Bet-Guvrin in the Judean Lowlands as a Micro
-    235     5    71    191    67.9000  Historical Monuments at Makli, Thatta
-    235     4    71    201   -58.4653  ESMA Museum and Site of Memory – Former Clandestine Centre of Det
-    235     4    71    206     4.4325  Van Nellefabriek
-    235     4    71    191    10.9020  Water Management System of Augsburg
-    235     4    71    200    13.3675  Archaeological Area and the Patriarchal Basilica of Aquileia
-    235     4    71    191   136.9019  Historic Villages of Shirakawa-go and Gokayama
-    235     3    71    201     4.5353  Pont du Gard (Roman Aqueduct)
-    235     3    71    203    50.6133  Pearling, Testimony of an Island Economy
-    235     2    71    202    -3.3889  The Forth Bridge
-    235     2    71    202     4.3524  La Grand-Place, Brussels
-    235     2    71    203    38.6121  Tiya
-    235     2    71    239   116.3972  Imperial Palaces of the Ming and Qing Dynasties in Beijing and Sh
-    235     1    71    191   -44.6854  Paraty and Ilha Grande – Culture and Biodiversity
-    235     1    71    187    15.4342  Wachau Cultural Landscape
-    235     0    71    198   126.9172  Gochang, Hwasun and Ganghwa Dolmen Sites
+    235    45    71    183    12.3389  Venice and its Lagoon
+    235    45    71    183    48.3393  Prehistoric Sites of the Khorramabad Valley
+    235    44    71    184   -95.6587  Historic Monuments Zone of Tlacotalpan
+    235    44    71    183    -5.6603  Old City of Salamanca
+    235    42    71    196     4.4325  Van Nellefabriek
+    235    40    71    183    57.3283  Le Morne Cultural Landscape
+    235    39    71    190     4.3524  La Grand-Place, Brussels
+    235    39    71    196    16.3699  Historic Centre of Vienna
+    235    38    71    184   -44.6854  Paraty and Ilha Grande – Culture and Biodiversity
+    235    36    71    197    13.3675  Archaeological Area and the Patriarchal Basilica of Aquileia
+    235    35    71    228   116.3972  Imperial Palaces of the Ming and Qing Dynasties in Beijing and Sh
+    235    34    71    223   -75.6307  Archaeological Landscape of the First Coffee Plantations in the S
+    235    32    71    177    10.9001  Pilgrimage Church of Wies
+    235    32    71    177    34.9000  Caves of Maresha and Bet-Guvrin in the Judean Lowlands as a Micro
+    235    32    71    177    67.9000  Historical Monuments at Makli, Thatta
+    235    31    71    190   -58.4653  ESMA Museum and Site of Memory – Former Clandestine Centre of Det
+    235    31    71    177    10.9020  Water Management System of Augsburg
+    235    31    71    177   136.9019  Historic Villages of Shirakawa-go and Gokayama
+    235    30    71    192    -3.3889  The Forth Bridge
+    235    30    71    190     4.5353  Pont du Gard (Roman Aqueduct)
+    235    30    71    191    38.6121  Tiya
+    235    30    71    191    50.6133  Pearling, Testimony of an Island Economy
+    235    27    71    179    15.4342  Wachau Cultural Landscape
+    235    24    71    180   126.9172  Gochang, Hwasun and Ganghwa Dolmen Sites
 
-    259     8    70    197   -98.6626  Aqueduct of Padre Tembleque Hydraulic System
-    259     7    70    223    68.1389  Archaeological Ruins at Moenjodaro
-    259     6    70    193   -68.6733  Tiwanaku: Spiritual and Political Centre of the Tiwanaku Culture
-    259     6    70    202    61.3278  Shahr-i Sokhta
-    259     6    70    222   128.1375  Mount Kumgang – Diamond Mountain from the Sea
-    259     5    70    195    -1.5061  Mont-Saint-Michel and its Bay
-    259     5    70    202     7.3227  Urnes Stave Church
-    259     5    70    202    10.3236  Archaeological Site of Carthage
-    259     4    70    208   -96.4211  Prehistoric Caves of Yagul and Mitla in the Central Valley of Oax
-    259     4    70    199     3.2989  Provins, Town of Medieval Fairs
-    259     4    70    195     9.9389  Würzburg Residence with the Court Gardens and Residence Square
-    259     4    70    209    11.5785  Margravial Opera House Bayreuth
-    259     4    70    197    35.6456  Byblos
-    259     4    70    202    52.5325  Sassanid Archaeological Landscape of Fars Region
-    259     4    70    203    73.5333  Champaner-Pavagadh Archaeological Park
-    259     4    70    194   117.9383  Mountain Resort and its Outlying Temples, Chengde
-    259     3    70    204   -75.3808  Moravian Church Settlements
-    259     3    70    210    -9.4167  Cultural Landscape of Sintra
-    259     3    70    238    -3.5833  Ruins of Loropéni
-    259     3    70    196     9.9472  St Mary's Cathedral and St Michael's Church at Hildesheim
-    259     3    70    210    17.5833  Laponian Area
-    259     3    70    200   101.6273  Forest Research Institute Malaysia Forest Park Selangor
-    259     2    70    199    -1.4881  Derwent Valley Mills
-    259     2    70    204    11.6198  Ferrara, City of the Renaissance, and its Po Delta
-    259     2    70    203    14.6028  Costiera Amalfitana
-    259     2    70    194    36.3097  Ancient City of Damascus
-    259     2    70    196    51.3983  Trans-Iranian Railway
-    259     2    70    207   107.5957  Complex of Hué Monuments
-    259     2    70    196   141.3058  Jomon Prehistoric Sites in Northern Japan
+    259    44    70    181   -98.6626  Aqueduct of Padre Tembleque Hydraulic System
+    259    40    70    183   -68.6733  Tiwanaku: Spiritual and Political Centre of the Tiwanaku Culture
+    259    40    70    211    68.1389  Archaeological Ruins at Moenjodaro
+    259    40    70    210   128.1375  Mount Kumgang – Diamond Mountain from the Sea
+    259    39    70    185    36.3097  Ancient City of Damascus
+    259    38    70    185   141.3058  Jomon Prehistoric Sites in Northern Japan
+    259    36    70    197   -96.4211  Prehistoric Caves of Yagul and Mitla in the Central Valley of Oax
+    259    36    70    195    -9.4167  Cultural Landscape of Sintra
+    259    36    70    183     3.2989  Provins, Town of Medieval Fairs
+    259    36    70    198    11.5785  Margravial Opera House Bayreuth
+    259    36    70    195    17.5833  Laponian Area
+    259    36    70    195   107.5957  Complex of Hué Monuments
+    259    34    70    189    -1.5061  Mont-Saint-Michel and its Bay
+    259    34    70    186    35.6456  Byblos
+    259    34    70    183    51.3983  Trans-Iranian Railway
+    259    33    70    190    11.6198  Ferrara, City of the Renaissance, and its Po Delta
+    259    32    70    189   -75.3808  Moravian Church Settlements
+    259    32    70    222    -3.5833  Ruins of Loropéni
+    259    32    70    188    52.5325  Sassanid Archaeological Landscape of Fars Region
+    259    32    70    188    73.5333  Champaner-Pavagadh Archaeological Park
+    259    32    70    185   101.6273  Forest Research Institute Malaysia Forest Park Selangor
+    259    31    70    197    14.6028  Costiera Amalfitana
+    259    30    70    185     9.9472  St Mary's Cathedral and St Michael's Church at Hildesheim
+    259    28    70    185    -1.4881  Derwent Valley Mills
+    259    28    70    185     9.9389  Würzburg Residence with the Court Gardens and Residence Square
+    259    28    70    186    61.3278  Shahr-i Sokhta
+    259    28    70    185   117.9383  Mountain Resort and its Outlying Temples, Chengde
+    259    27    70    186     7.3227  Urnes Stave Church
+    259    27    70    187    10.3236  Archaeological Site of Carthage
 
-    288     7    69    196    27.3336  Ephesus
-    288     6    69    195   -43.5056  Historic Town of Ouro Preto
-    288     6    69    193   102.3319  Phu Phrabat, a testimony to the Sīma stone tradition of the Dvara
-    288     6    69    196   108.3333  Hoi An Ancient Town
-    288     6    69    193   144.3317  Kuk Early Agricultural Site
-    288     5    69    222   -75.8704  San Pedro de la Roca Castle, Santiago de Cuba
-    288     5    69    193    -4.1090  Castles and Town Walls of King Edward in Gwynedd
-    288     5    69    193    -1.1080  Mudejar Architecture of Aragon
-    288     5    69    222    11.1303  Collegiate Church, Castle and Old Town of Quedlinburg
-    288     5    69    200    15.2931  Syracuse and the Rocky Necropolis of Pantalica
-    288     5    69    201    23.6366  Monasteries of Daphni, Hosios Loukas and Nea Moni of Chios
-    288     5    69    201    36.2944  Crac des Chevaliers and Qal’at Salah El-Din
-    288     5    69    237    44.4208  Babylon
-    288     5    69    193    52.8903  Persepolis
-    288     4    69    197   -92.0500  Pre-Hispanic City and National Park of Palenque
-    288     4    69    200   -70.6667  Cueva de las Manos, Río Pinturas
-    288     4    69    201   -64.6732  Historic Town of St George and Related Fortifications, Bermuda
-    288     4    69    197     3.9500  Champagne Hillsides, Houses and Cellars
-    288     4    69    200    10.3333  Rock-Art Sites of Tadrart Acacus
-    288     4    69    239    11.4189  Schwerin Residence Ensemble
-    288     4    69    209    32.5733  Paphos
-    288     4    69    202    34.3261  Thimlich Ohinga Archaeological Site
-    288     4    69    199    37.5551  Ensemble of the Novodevichy Convent
-    288     4    69    192   114.3252  Yin Xu
-    288     4    69    226   125.5075  Complex of Koguryo Tombs
-    288     4    69    192   138.3253  Sado Island Gold Mines
-    288     3    69    200    -3.3681  University and Historic Precinct of Alcalá de Henares
-    288     3    69    201    -0.3784  La Lonja de la Seda de Valencia
-    288     3    69    195    57.3011  Bahla Fort
-    288     2    69    201    -6.3700  Old Town of Cáceres
-    288     2    69    207     8.5936  Rjukan-Notodden Industrial Heritage Site
-    288     2    69    192    18.9000  Historic Town of Banská Štiavnica and the Technical Monuments in 
-    288     2    69    196    23.7262  Acropolis, Athens
-    288     2    69    202    52.5253  The Persian Garden
-    288     2    69    203    77.6033  Rock Shelters of Bhimbetka
-    288     2    69    202   112.5257  Kaiping Diaolou and Villages
-    288     1    69    202   -76.4903  Rideau Canal
-    288     1    69    228    26.4727  Mir Castle Complex
-    288     1    69    199    64.5159  Minaret and Archaeological Remains of Jam
+    288    40    69    184   114.3252  Yin Xu
+    288    40    69    184   138.3253  Sado Island Gold Mines
+    288    39    69    181    27.3336  Ephesus
+    288    39    69    182   102.3319  Phu Phrabat, a testimony to the Sīma stone tradition of the Dvara
+    288    39    69    181   108.3333  Hoi An Ancient Town
+    288    39    69    182   144.3317  Kuk Early Agricultural Site
+    288    38    69    184    57.3011  Bahla Fort
+    288    37    69    209   -75.8704  San Pedro de la Roca Castle, Santiago de Cuba
+    288    37    69    209    11.1303  Collegiate Church, Castle and Old Town of Quedlinburg
+    288    36    69    195     8.5936  Rjukan-Notodden Industrial Heritage Site
+    288    35    69    200    32.5733  Paphos
+    288    35    69    210   125.5075  Complex of Koguryo Tombs
+    288    34    69    187   -43.5056  Historic Town of Ouro Preto
+    288    34    69    224    11.4189  Schwerin Residence Ensemble
+    288    34    69    185    23.6366  Monasteries of Daphni, Hosios Loukas and Nea Moni of Chios
+    288    34    69    185    36.2944  Crac des Chevaliers and Qal’at Salah El-Din
+    288    34    69    223    44.4208  Babylon
+    288    33    69    187    -6.3700  Old Town of Cáceres
+    288    33    69    178    -4.1090  Castles and Town Walls of King Edward in Gwynedd
+    288    33    69    186    -3.3681  University and Historic Precinct of Alcalá de Henares
+    288    33    69    178    -1.1080  Mudejar Architecture of Aragon
+    288    33    69    188    -0.3784  La Lonja de la Seda de Valencia
+    288    33    69    184    15.2931  Syracuse and the Rocky Necropolis of Pantalica
+    288    33    69    178    52.8903  Persepolis
+    288    32    69    215    26.4727  Mir Castle Complex
+    288    31    69    187    52.5253  The Persian Garden
+    288    31    69    197    77.6033  Rock Shelters of Bhimbetka
+    288    31    69    187   112.5257  Kaiping Diaolou and Villages
+    288    30    69    185   -92.0500  Pre-Hispanic City and National Park of Palenque
+    288    30    69    185   -70.6667  Cueva de las Manos, Río Pinturas
+    288    30    69    185     3.9500  Champagne Hillsides, Houses and Cellars
+    288    30    69    185    10.3333  Rock-Art Sites of Tadrart Acacus
+    288    29    69    188    64.5159  Minaret and Archaeological Remains of Jam
+    288    28    69    186   -76.4903  Rideau Canal
+    288    28    69    181    23.7262  Acropolis, Athens
+    288    28    69    186    37.5551  Ensemble of the Novodevichy Convent
+    288    27    69    185   -64.6732  Historic Town of St George and Related Fortifications, Bermuda
+    288    27    69    185    34.3261  Thimlich Ohinga Archaeological Site
+    288    25    69    185    18.9000  Historic Town of Banská Štiavnica and the Technical Monuments in 
 
-    327     6    68    191   -98.1667  San Antonio Missions
-    327     6    68    194     4.8878  Seventeenth-Century Canal Ring Area of Amsterdam inside the Singe
-    327     6    68    191     7.8950  Residences of the Royal House of Savoy
-    327     6    68    200    18.2958  Hanseatic Town of Visby
-    327     6    68    191    66.8333  Historic Centre of Shakhrisyabz
-    327     5    68    194    10.8889  Town of Bamberg
-    327     5    68    199    11.6407  City of Vicenza and the Palladian Villas of the Veneto
-    327     5    68    202    19.5292  Old Village of Hollókő and its Surroundings
-    327     5    68    222    23.1306  Roșia Montană Mining Landscape
-    327     5    68    199    26.6408  Verla Groundwood and Board Mill
-    327     5    68    222    29.1233  Hierapolis-Pamukkale
-    327     5    68    221    38.1218  Great Mosque and Hospital of Divriği
-    327     5    68    222    38.1312  Architectural Ensemble of the Trinity Sergius Lavra in Sergiev Po
-    327     5    68    196    44.7338  Historical Monuments of Mtskheta
-    327     5    68    192    48.8358  Shushtar Historical Hydraulic System
-    327     5    68    221   113.1222  Yungang Grottoes
-    327     4    68    226   -78.5121  City of Quito
-    327     4    68    200    -4.6885  Old Town of Ávila with its Extra-Muros Churches
-    327     4    68    196    12.9534  Erzgebirge/Krušnohoří Mining Region
-    327     4    68    228    14.4861  Archaeological Areas of Pompei, Herculaneum and Torre Annunziata
-    327     4    68    226    14.5058  The works of Jože Plečnik in Ljubljana – Human Centred Urban Desi
-    327     4    68    225    14.5069  Ħal Saflieni Hypogeum
-    327     4    68    194    14.7294  Muskauer Park / Park Mużakowski
-    327     4    68    190    15.4386  City of Graz – Historic Centre and Schloss Eggenberg
-    327     4    68    238    20.4175  Wieliczka and Bochnia Royal Salt Mines
-    327     4    68    196    20.7333  Medieval Monuments in Kosovo
-    327     4    68    196    21.8628  Ennedi Massif: Natural and Cultural Landscape
-    327     4    68    198    28.3341  Churches of the Pskov School of Architecture
-    327     4    68    200    32.6390  Ancient Thebes with its Necropolis
-    327     4    68    194    35.7283  As-Salt - The Place of Tolerance and Urban Hospitality
-    327     4    68    200    43.3155  Historic Town of Zabid
-    327     4    68    201    48.2914  Sheikh Safi al-din Khānegāh and Shrine Ensemble in Ardabil
-    327     4    68    226    50.5056  Dilmun Burial Mounds
-    327     4    68    192    72.8362  Chhatrapati Shivaji Terminus (formerly Victoria Terminus)
-    327     4    68    199   121.5572  The Grand Canal
-    327     4    68    201   129.2914  Historic Villages of Korea: Hahoe and Yangdong
-    327     4    68    192   132.3246  Itsukushima Shinto Shrine
-    327     3    68    196   -50.1402  Historic Centre of the Town of Goiás
-    327     3    68    228   -15.5167  Stone Circles of Senegambia
-    327     3    68    192    -5.5569  Archaeological Site of Volubilis
-    327     3    68    230    -3.5153  Archaeological Site of Atapuerca
-    327     3    68    195    15.9421  Pilgrimage Church of St John of Nepomuk at Zelená Hora
-    327     3    68    222    20.5317  Studenica Monastery
-    327     3    68    193    21.8969  Temple of Apollo Epicurius at Bassae
-    327     3    68    194    39.8917  Rock Art in the Hail Region of Saudi Arabia
-    327     3    68    195    48.8854  Cultural Landscape of Khinalig People and “Köç Yolu” Transhumance
-    327     3    68    193    72.9358  Elephanta Caves
-    327     3    68    193   105.8964  Trang An Landscape Complex
-    327     3    68    195   141.8853  Budj Bim Cultural Landscape
-    327     2    68    223    -3.4690  Renaissance Monumental Ensembles of Úbeda and Baeza
-    327     2    68    199     4.5522  Osun-Osogbo Sacred Grove
-    327     2    68    204    10.3400  Mines of Rammelsberg, Historic Town of Goslar and Upper Harz Wate
-    327     2    68    195    15.8735  Jewish Quarter and St Procopius' Basilica in Třebíč
-    327     2    68    195    39.8761  Historical Centre of the City of Yaroslavl
-    327     2    68    224    50.5183  Qal’at al-Bahrain – Ancient Harbour and Capital of Dilmun
-    327     2    68    226   110.4917  Prambanan Temple Compounds
-    327     1    68    240    -3.5899  Alhambra, Generalife and Albayzín, Granada
-    327     1    68    240     2.3983  Bourges Cathedral
+    327    39    68    185   132.3246  Itsukushima Shinto Shrine
+    327    37    68    183   -98.1667  San Antonio Missions
+    327    37    68    205    -3.4690  Renaissance Monumental Ensembles of Úbeda and Baeza
+    327    37    68    209    23.1306  Roșia Montană Mining Landscape
+    327    37    68    209    38.1312  Architectural Ensemble of the Trinity Sergius Lavra in Sergiev Po
+    327    37    68    183    48.8358  Shushtar Historical Hydraulic System
+    327    37    68    183    66.8333  Historic Centre of Shakhrisyabz
+    327    37    68    183    72.8362  Chhatrapati Shivaji Terminus (formerly Victoria Terminus)
+    327    36    68    183   -50.1402  Historic Centre of the Town of Goiás
+    327    36    68    205    20.5317  Studenica Monastery
+    327    35    68    212    14.5058  The works of Jože Plečnik in Ljubljana – Human Centred Urban Desi
+    327    35    68    211    14.5069  Ħal Saflieni Hypogeum
+    327    35    68    183    21.8628  Ennedi Massif: Natural and Cultural Landscape
+    327    35    68    210    29.1233  Hierapolis-Pamukkale
+    327    35    68    210    38.1218  Great Mosque and Hospital of Divriği
+    327    35    68    212    50.5056  Dilmun Burial Mounds
+    327    35    68    210   113.1222  Yungang Grottoes
+    327    34    68    229     2.3983  Bourges Cathedral
+    327    34    68    179     4.8878  Seventeenth-Century Canal Ring Area of Amsterdam inside the Singe
+    327    34    68    186    11.6407  City of Vicenza and the Palladian Villas of the Veneto
+    327    34    68    183    18.2958  Hanseatic Town of Visby
+    327    34    68    186    26.6408  Verla Groundwood and Board Mill
+    327    34    68    185    32.6390  Ancient Thebes with its Necropolis
+    327    33    68    225    -3.5899  Alhambra, Generalife and Albayzín, Granada
+    327    33    68    177    10.8889  Town of Bamberg
+    327    32    68    178     7.8950  Residences of the Royal House of Savoy
+    327    32    68    188    19.5292  Old Village of Hollókő and its Surroundings
+    327    32    68    183    48.2914  Sheikh Safi al-din Khānegāh and Shrine Ensemble in Ardabil
+    327    32    68    183   129.2914  Historic Villages of Korea: Hahoe and Yangdong
+    327    31    68    214   -15.5167  Stone Circles of Senegambia
+    327    31    68    215    -3.5153  Archaeological Site of Atapuerca
+    327    31    68    189    12.9534  Erzgebirge/Krušnohoří Mining Region
+    327    31    68    182    15.8735  Jewish Quarter and St Procopius' Basilica in Třebíč
+    327    31    68    224    20.4175  Wieliczka and Bochnia Royal Salt Mines
+    327    31    68    206    50.5183  Qal’at al-Bahrain – Ancient Harbour and Capital of Dilmun
+    327    30    68    215    14.4861  Archaeological Areas of Pompei, Herculaneum and Torre Annunziata
+    327    30    68    186    28.3341  Churches of the Pskov School of Architecture
+    327    30    68    183    39.8761  Historical Centre of the City of Yaroslavl
+    327    29    68    189    10.3400  Mines of Rammelsberg, Historic Town of Goslar and Upper Harz Wate
+    327    29    68    184    15.9421  Pilgrimage Church of St John of Nepomuk at Zelená Hora
+    327    29    68    184    72.9358  Elephanta Caves
+    327    28    68    214   -78.5121  City of Quito
+    327    28    68    187    -4.6885  Old Town of Ávila with its Extra-Muros Churches
+    327    28    68    188     4.5522  Osun-Osogbo Sacred Grove
+    327    28    68    182    15.4386  City of Graz – Historic Centre and Schloss Eggenberg
+    327    28    68    182    44.7338  Historical Monuments of Mtskheta
+    327    28    68    211   110.4917  Prambanan Temple Compounds
+    327    28    68    186   121.5572  The Grand Canal
+    327    27    68    180    -5.5569  Archaeological Site of Volubilis
+    327    27    68    182    20.7333  Medieval Monuments in Kosovo
+    327    27    68    184    39.8917  Rock Art in the Hail Region of Saudi Arabia
+    327    26    68    185    21.8969  Temple of Apollo Epicurius at Bassae
+    327    26    68    179    35.7283  As-Salt - The Place of Tolerance and Urban Hospitality
+    327    26    68    184    48.8854  Cultural Landscape of Khinalig People and “Köç Yolu” Transhumance
+    327    26    68    185   105.8964  Trang An Landscape Complex
+    327    26    68    184   141.8853  Budj Bim Cultural Landscape
+    327    25    68    179    14.7294  Muskauer Park / Park Mużakowski
+    327    25    68    187    43.3155  Historic Town of Zabid
 
-    385     6    67    214     2.5532  Tipasa
-    385     6    67    221    11.1333  Ecosystem and Relict Cultural Landscape of Lopé-Okanda
-    385     6    67    216    14.5500  Historic Centre of Prague
-    385     6    67    216    26.5500  The Historic Centre (Chorá) with the Monastery of Saint-John the 
-    385     5    67    228   -75.5333  Port, Fortresses and Group of Monuments, Cartagena
-    385     5    67    197   -74.0447  Statue of Liberty
-    385     5    67    228   -72.5334  Historic Sanctuary of Machu Picchu
-    385     5    67    228    11.4667  Historic Centres of Stralsund and Wismar
-    385     5    67    235    20.4228  Stari Ras and Sopoćani
-    385     5    67    200    22.3183  Archaeological Site of Aigai (modern name Vergina)
-    385     5    67    199    80.6403  Sacred City of Kandy
-    385     4    67    198  -139.4399  Tr’ondëk-Klondike
-    385     4    67    227   -90.5372  Historic Fortified Town of Campeche
-    385     4    67    225    -0.4936  Forts and Castles, Volta, Greater Accra, Central and Western Regi
-    385     4    67    205     3.7517  M'Zab Valley
-    385     4    67    228     5.4691  Flemish Béguinages
-    385     4    67    200    16.3133  Palace and Gardens of Schönbrunn
-    385     4    67    200    16.3144  Litomyšl Castle
-    385     4    67    197    21.8583  Archaeological Site of Cyrene
-    385     4    67    198    28.5000  Matobo Hills
-    385     4    67    227    44.4629  Ḥimā Cultural Area
-    385     4    67    198   100.5606  Historic City of Ayutthaya
-    385     4    67    199   115.3361  Cultural Landscape of Bali Province: the <em>Subak</em> System as
-    385     4    67    205   126.7517  Seowon, Korean Neo-Confucian Academies
-    385     3    67    196   -89.1333  Maya Site of Copan
-    385     3    67    198   -16.4986  Saloum Delta
-    385     3    67    192    -5.5583  Historic City of Meknes
-    385     3    67    198     0.8661  Abbey Church of Saint-Savin sur Gartempe
-    385     3    67    194    15.8891  The Cathedral of St James in Šibenik
-    385     3    67    194    30.9333  Great Zimbabwe National Monument
-    385     3    67    190    76.8818  Sacred Ensembles of the Hoysalas
-    385     2    67    225  -108.4856  Mesa Verde National Park
-    385     2    67    225    14.5144  City of Valletta
-    385     1    67    243     5.4073  Dutch Water Defence Lines
-    385     0    67    226    -6.4755  Brú na Bóinne - Archaeological Ensemble of the Bend of the Boyne
-    385     0    67    194     6.9098  Castles of Augustusburg and Falkenlust at Brühl
+    385    38    67    208    11.1333  Ecosystem and Relict Cultural Landscape of Lopé-Okanda
+    385    37    67    205     2.5532  Tipasa
+    385    36    67    205    14.5500  Historic Centre of Prague
+    385    36    67    184    21.8583  Archaeological Site of Cyrene
+    385    36    67    205    26.5500  The Historic Centre (Chorá) with the Monastery of Saint-John the 
+    385    35    67    212    -0.4936  Forts and Castles, Volta, Greater Accra, Central and Western Regi
+    385    34    67    206  -108.4856  Mesa Verde National Park
+    385    34    67    217   -90.5372  Historic Fortified Town of Campeche
+    385    34    67    181   -89.1333  Maya Site of Copan
+    385    34    67    217   -75.5333  Port, Fortresses and Group of Monuments, Cartagena
+    385    34    67    217   -72.5334  Historic Sanctuary of Machu Picchu
+    385    34    67    203    -6.4755  Brú na Bóinne - Archaeological Ensemble of the Bend of the Boyne
+    385    34    67    181     0.8661  Abbey Church of Saint-Savin sur Gartempe
+    385    34    67    193     3.7517  M'Zab Valley
+    385    34    67    224     5.4073  Dutch Water Defence Lines
+    385    34    67    217    11.4667  Historic Centres of Stralsund and Wismar
+    385    34    67    206    14.5144  City of Valletta
+    385    34    67    223    20.4228  Stari Ras and Sopoćani
+    385    34    67    217    44.4629  Ḥimā Cultural Area
+    385    34    67    186    80.6403  Sacred City of Kandy
+    385    34    67    193   126.7517  Seowon, Korean Neo-Confucian Academies
+    385    33    67    177    76.8818  Sacred Ensembles of the Hoysalas
+    385    32    67    217     5.4691  Flemish Béguinages
+    385    31    67    189   -74.0447  Statue of Liberty
+    385    30    67    186   -16.4986  Saloum Delta
+    385    30    67    185    28.5000  Matobo Hills
+    385    30    67    186    30.9333  Great Zimbabwe National Monument
+    385    29    67    187  -139.4399  Tr’ondëk-Klondike
+    385    29    67    187   100.5606  Historic City of Ayutthaya
+    385    29    67    187   115.3361  Cultural Landscape of Bali Province: the <em>Subak</em> System as
+    385    28    67    179    -5.5583  Historic City of Meknes
+    385    28    67    187    16.3133  Palace and Gardens of Schönbrunn
+    385    27    67    186    16.3144  Litomyšl Castle
+    385    26    67    186     6.9098  Castles of Augustusburg and Falkenlust at Brühl
+    385    26    67    184    15.8891  The Cathedral of St James in Šibenik
+    385    25    67    185    22.3183  Archaeological Site of Aigai (modern name Vergina)
 
-    421     8    66    205     6.7461  Lavaux, Vineyard Terraces
-    421     7    66    204  -101.2556  Historic Town of Guanajuato and Adjacent Mines
-    421     7    66    197   -16.5044  Island of Saint-Louis
-    421     7    66    204     0.7455  Catalan Romanesque Churches of the Vall de Boí
-    421     7    66    197    22.4962  Archaeological Site of Delphi
-    421     7    66    221    35.1269  Necropolis of Bet She’arim: A Landmark of Jewish Renewal
-    421     6    66    205   -77.2500  Río Abiseo National Park
-    421     6    66    205     6.7496  La Chaux-de-Fonds / Le Locle, Watchmaking Town Planning
-    421     6    66    214    32.5514  Tombs of Buganda Kings at Kasubi
-    421     6    66    214    35.5528  Baptism Site “Bethany Beyond the Jordan” (Al-Maghtas)
-    421     6    66    193   105.8386  Central Sector of the Imperial Citadel of Thang Long - Hanoi
-    421     5    66    194  -170.1458  Papahānaumokuākea
-    421     5    66    201   -77.0326  Historic Centre of Lima
-    421     5    66    220   -69.8858  Colonial City of Santo Domingo
-    421     5    66    215    11.5500  Val d'Orcia
-    421     5    66    200    24.9667  Frontiers of the Roman Empire – Dacia
-    421     5    66    220   104.5372  Koh Ker: Archaeological Site of Ancient Lingapura or Chok Gargyar
-    421     5    66    221   113.5364  Historic Centre of Macao
-    421     4    66    195     5.7367  Djémila
-    421     4    66    221    11.1128  The Palaces of King Ludwig II of Bavaria: Neuschwanstein, Linderh
-    421     4    66    213    47.5628  Royal Hill of Ambohimanga
-    421     4    66    192    77.7397  Buddhist Monuments at Sanchi
-    421     3    66    235  -102.5735  Historic Centre of Zacatecas
-    421     3    66    196   -89.0403  Archaeological Park and Ruins of Quirigua
-    421     3    66    190    -4.1167  Old Town of Segovia and its Aqueduct
-    421     3    66    196    -2.1310  Historic Walled Town of Cuenca
-    421     3    66    194     6.8442  Völklingen Ironworks
-    421     3    66    197     6.9572  Cologne Cathedral
-    421     3    66    189     7.8692  Ivrea, industrial city of the 20th century
-    421     3    66    207    28.2278  Medieval City of Rhodes
-    421     3    66    192    38.7410  Nemrut Dağ
-    421     3    66    194    66.8435  Cultural Landscape and Archaeological Remains of the Bamiyan Vall
-    421     3    66    194    72.8805  Taxila
-    421     2    66    193    -8.5554  Santiago de Compostela (Old Town)
-    421     2    66    190    94.8764  Moidams – the Mound-Burial System of the Ahom Dynasty
-    421     1    66    228  -105.5460  Taos Pueblo
-    421     0    66    222   -57.9418  The Architectural Work of Le Corbusier, an Outstanding Contributi
-    421     0    66    191    -6.2436  Archaeological Ensemble of Mérida
-    421     0    66    201    46.3008  Tabriz Historic Bazaar Complex
+    421    38    66    184  -170.1458  Papahānaumokuākea
+    421    38    66    182     6.8442  Völklingen Ironworks
+    421    38    66    184   105.8386  Central Sector of the Imperial Citadel of Thang Long - Hanoi
+    421    37    66    207    32.5514  Tombs of Buganda Kings at Kasubi
+    421    37    66    205    35.5528  Baptism Site “Bethany Beyond the Jordan” (Al-Maghtas)
+    421    37    66    182    66.8435  Cultural Landscape and Archaeological Remains of the Bamiyan Vall
+    421    36    66    191  -101.2556  Historic Town of Guanajuato and Adjacent Mines
+    421    36    66    209    35.1269  Necropolis of Bet She’arim: A Landmark of Jewish Renewal
+    421    35    66    193   -77.2500  Río Abiseo National Park
+    421    35    66    190   -77.0326  Historic Centre of Lima
+    421    35    66    211   -69.8858  Colonial City of Santo Domingo
+    421    35    66    191     0.7455  Catalan Romanesque Churches of the Vall de Boí
+    421    35    66    191     6.7461  Lavaux, Vineyard Terraces
+    421    35    66    193     6.7496  La Chaux-de-Fonds / Le Locle, Watchmaking Town Planning
+    421    35    66    211    11.1128  The Palaces of King Ludwig II of Bavaria: Neuschwanstein, Linderh
+    421    35    66    204    11.5500  Val d'Orcia
+    421    35    66    190    24.9667  Frontiers of the Roman Empire – Dacia
+    421    35    66    198    28.2278  Medieval City of Rhodes
+    421    35    66    207   104.5372  Koh Ker: Archaeological Site of Ancient Lingapura or Chok Gargyar
+    421    35    66    206   113.5364  Historic Centre of Macao
+    421    34    66    182    -2.1310  Historic Walled Town of Cuenca
+    421    33    66    221  -102.5735  Historic Centre of Zacatecas
+    421    33    66    187   -16.5044  Island of Saint-Louis
+    421    33    66    178    -4.1167  Old Town of Segovia and its Aqueduct
+    421    32    66    186    22.4962  Archaeological Site of Delphi
+    421    32    66    201    47.5628  Royal Hill of Ambohimanga
+    421    31    66    218  -105.5460  Taos Pueblo
+    421    31    66    191   -89.0403  Archaeological Park and Ruins of Quirigua
+    421    31    66    180     5.7367  Djémila
+    421    31    66    191     6.9572  Cologne Cathedral
+    421    31    66    180     7.8692  Ivrea, industrial city of the 20th century
+    421    30    66    182    77.7397  Buddhist Monuments at Sanchi
+    421    30    66    179    94.8764  Moidams – the Mound-Burial System of the Ahom Dynasty
+    421    29    66    183    38.7410  Nemrut Dağ
+    421    29    66    187    46.3008  Tabriz Historic Bazaar Complex
+    421    29    66    183    72.8805  Taxila
+    421    27    66    180    -8.5554  Santiago de Compostela (Old Town)
+    421    27    66    179    -6.2436  Archaeological Ensemble of Mérida
+    421    17    66    211   -57.9418  The Architectural Work of Le Corbusier, an Outstanding Contributi
 
-    460     8    65    203   -65.2596  Historic City of Sucre
-    460     8    65    203    24.7400  Historic Centre (Old Town) of Tallinn
-    460     8    65    203    30.7416  The Historic Centre of Odesa
-    460     7    65    195   -12.3386  Bassari Country: Bassari, Fula and Bedik Cultural Landscapes
-    460     7    65    195    19.9275  Old Town of Corfu
-    460     7    65    194    28.9279  Struve Geodetic Arc
-    460     6    65    203    21.9715  Old town of Kuldīga
-    460     6    65    203   105.9711  Xixia Imperial Tombs
-    460     5    65    197   -28.4367  Landscape of the Pico Island Vineyard Culture
-    460     5    65    215    11.5503  Luther Memorials in Eisleben and Wittenberg
-    460     5    65    202   144.9703  Royal Exhibition Building and Carlton Gardens
-    460     4    65    195    -0.2940  Royal Botanic Gardens, Kew
-    460     4    65    194     9.8464  Rhaetian Railway in the Albula / Bernina Landscapes
-    460     4    65    195    14.7057  Late Baroque Towns of the Val di Noto (South-Eastern Sicily)
-    460     4    65    190    56.7450  Archaeological Sites of Bat, Al-Khutm and Al-Ayn
-    460     3    65    194   -71.5368  Historical Centre of the City of Arequipa
-    460     3    65    189    -7.1289  Ksar of Ait-Ben-Haddou
-    460     3    65    206     1.2478  Archaeological Ensemble of Tarraco
-    460     3    65    198    12.4519  San Marino Historic Centre and Mount Titano
-    460     3    65    198    15.4540  Historic Centre of Telč
-    460     3    65    199    66.9639  Samarkand – Crossroad of Cultures
-    460     3    65    198   132.4536  Hiroshima Peace Memorial (Genbaku Dome)
-    460     2    65    207   -55.7530  Jesuit Missions of La Santísima Trinidad de Paraná and Jesús de T
-    460     2    65    234    -0.5722  Bordeaux, Port of the Moon
-    460     2    65    192     4.9111  Droogmakerij de Beemster (Beemster Polder)
-    460     2    65    191    10.8618  Djerba: Testimony to a settlement pattern in an island territory
-    460     2    65    191    11.7500  Vegaøyan – The Vega Archipelago
-    460     2    65    190    26.6914  Architectural, Residential and Cultural Complex of the Radziwill 
-    460     2    65    195    35.6581  Mount Mulanje Cultural Landscape
-    460     2    65    192    73.9117  Churches and Convents of Goa
-    460     2    65    192    80.7500  Ancient City of Sigiriya
-    460     1    65    213    26.5594  Selimiye Mosque and its Social Complex
-    460     1    65    195    40.5794  Lower Valley of the Awash
-    460     1    65    198    79.9432  Kakatiya Rudreshwara (Ramappa) Temple, Telangana
-    460     1    65    196    80.6492  Rangiri Dambulla Cave Temple
+    460    38    65    186    35.6581  Mount Mulanje Cultural Landscape
+    460    37    65    182     9.8464  Rhaetian Railway in the Albula / Bernina Landscapes
+    460    37    65    190    21.9715  Old town of Kuldīga
+    460    37    65    190   105.9711  Xixia Imperial Tombs
+    460    37    65    189   144.9703  Royal Exhibition Building and Carlton Gardens
+    460    36    65    189    30.7416  The Historic Centre of Odesa
+    460    36    65    188    66.9639  Samarkand – Crossroad of Cultures
+    460    35    65    189   -65.2596  Historic City of Sucre
+    460    35    65    185   -12.3386  Bassari Country: Bassari, Fula and Bedik Cultural Landscapes
+    460    35    65    204    11.5503  Luther Memorials in Eisleben and Wittenberg
+    460    35    65    189    24.7400  Historic Centre (Old Town) of Tallinn
+    460    35    65    178    28.9279  Struve Geodetic Arc
+    460    34    65    179    -0.2940  Royal Botanic Gardens, Kew
+    460    34    65    179    14.7057  Late Baroque Towns of the Val di Noto (South-Eastern Sicily)
+    460    34    65    178    19.9275  Old Town of Corfu
+    460    34    65    201    26.5594  Selimiye Mosque and its Social Complex
+    460    34    65    187    80.6492  Rangiri Dambulla Cave Temple
+    460    33    65    220    -0.5722  Bordeaux, Port of the Moon
+    460    33    65    188    40.5794  Lower Valley of the Awash
+    460    32    65    195   -55.7530  Jesuit Missions of La Santísima Trinidad de Paraná and Jesús de T
+    460    32    65    195     1.2478  Archaeological Ensemble of Tarraco
+    460    32    65    177     4.9111  Droogmakerij de Beemster (Beemster Polder)
+    460    32    65    177    73.9117  Churches and Convents of Goa
+    460    32    65    182    79.9432  Kakatiya Rudreshwara (Ramappa) Temple, Telangana
+    460    31    65    181   -71.5368  Historical Centre of the City of Arequipa
+    460    31    65    187   -28.4367  Landscape of the Pico Island Vineyard Culture
+    460    31    65    181    -7.1289  Ksar of Ait-Ben-Haddou
+    460    31    65    178    10.8618  Djerba: Testimony to a settlement pattern in an island territory
+    460    31    65    181    15.4540  Historic Centre of Telč
+    460    31    65    184    26.6914  Architectural, Residential and Cultural Complex of the Radziwill 
+    460    31    65    181   132.4536  Hiroshima Peace Memorial (Genbaku Dome)
+    460    29    65    183    56.7450  Archaeological Sites of Bat, Al-Khutm and Al-Ayn
+    460    28    65    180    12.4519  San Marino Historic Centre and Mount Titano
+    460    27    65    180    11.7500  Vegaøyan – The Vega Archipelago
+    460    27    65    180    80.7500  Ancient City of Sigiriya
 
-    495     7    64    195    10.9257  Cathedral, Torre Civica and Piazza Grande, Modena
-    495     6    64    195   -79.0747  Chan Chan Archaeological Zone
-    495     6    64    204   -62.0234  Jesuit Missions of the Chiquitos
-    495     6    64    209   -61.7617  Antigua Naval Dockyard and Related Archaeological Sites
-    495     6    64    204    33.9754  Saint Catherine Area
-    495     6    64    208    40.2393  Diyarbakır Fortress and Hevsel Gardens Cultural Landscape
-    495     5    64    191     2.6947  Cultural Landscape of the Serra de Tramuntana
-    495     5    64    191     2.6981  Palace and Park of Fontainebleau
-    495     5    64    211     8.5686  Abbey and Altenmünster of Lorsch
-    495     5    64    197    13.5667  Berlin Modernism Housing Estates
-    495     5    64    218    29.5406  Maloti-Drakensberg Park
-    495     5    64    218    35.5408  Ngorongoro Conservation Area
-    495     5    64    197    43.5667  Archaeological Site of Ani
-    495     5    64    196    46.5725  At-Turaif District in ad-Dir'iyah
-    495     5    64    197   130.5667  Sites of Japan’s Meiji Industrial Revolution: Iron and Steel, Shi
-    495     4    64    210   -78.4310  Monticello and the University of Virginia in Charlottesville
-    495     4    64    219     2.1194  Palace and Park of Versailles
-    495     4    64    193     9.8510  Portovenere, Cinque Terre, and the Islands (Palmaria, Tino and Ti
-    495     4    64    197    12.4574  Vatican City
-    495     4    64    202    13.0433  Historic Centre of the City of Salzburg
-    495     4    64    193    18.8512  Tarnowskie Góry Lead-Silver-Zinc Mine and its Underground Water M
-    495     4    64    193    24.8530  Kernavė Archaeological Site (Cultural Reserve of Kernavė)
-    495     4    64    233    35.4339  Wadi Rum Protected Area
-    495     4    64    188   115.8667  Lushan National Park
-    495     4    64    229   116.4447  Temple of Heaven: an Imperial Sacrificial Altar in Beijing
-    495     4    64    202   118.0431  Mount Wuyi
-    495     3    64    194   -77.5214  Sacred City of Caral-Supe
-    495     3    64    190     4.8644  The Climats, terroirs of Burgundy
-    495     3    64    216     5.5438  Eisinga Planetarium in Franeker
-    495     3    64    190    32.6926  City of Safranbolu
-    495     3    64    196    49.5769  Al-Ahsa Oasis, an Evolving Cultural Landscape
-    495     2    64    191   -55.1500  Historic Inner City of Paramaribo
-    495     2    64    189    -4.1580  Monastery and Site of the Escurial, Madrid
-    495     2    64    190     6.0839  Aachen Cathedral
-    495     2    64    199    19.9372  Historic Centre of Kraków
-    495     2    64    193    43.9156  Samarra Archaeological City
-    495     1    64    199   -76.0490  National Archeological Park of Tierradentro
-    495     1    64    199    37.9550  Hegra Archaeological Site (al-Hijr / Madā ͐ in Ṣāliḥ)
-    495     1    64    192    40.8525  Lamu Old Town
-    495     1    64    203    42.7183  Hatra
-    495     0    64    196    38.7186  Aksum
-    495     0    64    193    48.2564  Susa
+    495    39    64    184    24.8530  Kernavė Archaeological Site (Cultural Reserve of Kernavė)
+    495    38    64    190   -62.0234  Jesuit Missions of the Chiquitos
+    495    38    64    184     9.8510  Portovenere, Cinque Terre, and the Islands (Palmaria, Tino and Ti
+    495    38    64    184    18.8512  Tarnowskie Góry Lead-Silver-Zinc Mine and its Underground Water M
+    495    38    64    190    33.9754  Saint Catherine Area
+    495    36    64    174    40.8525  Lamu Old Town
+    495    34    64    202   -78.4310  Monticello and the University of Virginia in Charlottesville
+    495    34    64    173   -55.1500  Historic Inner City of Paramaribo
+    495    34    64    174    -4.1580  Monastery and Site of the Escurial, Madrid
+    495    34    64    209     2.1194  Palace and Park of Versailles
+    495    34    64    207     5.5438  Eisinga Planetarium in Franeker
+    495    34    64    201     8.5686  Abbey and Altenmünster of Lorsch
+    495    34    64    206    29.5406  Maloti-Drakensberg Park
+    495    34    64    206    35.5408  Ngorongoro Conservation Area
+    495    34    64    188    46.5725  At-Turaif District in ad-Dir'iyah
+    495    33    64    176   -79.0747  Chan Chan Archaeological Zone
+    495    33    64    178    10.9257  Cathedral, Torre Civica and Piazza Grande, Modena
+    495    33    64    179    19.9372  Historic Centre of Kraków
+    495    33    64    188    37.9550  Hegra Archaeological Site (al-Hijr / Madā ͐ in Ṣāliḥ)
+    495    33    64    187    49.5769  Al-Ahsa Oasis, an Evolving Cultural Landscape
+    495    33    64    216   116.4447  Temple of Heaven: an Imperial Sacrificial Altar in Beijing
+    495    32    64    185   -76.0490  National Archeological Park of Tierradentro
+    495    32    64    183     2.6947  Cultural Landscape of the Serra de Tramuntana
+    495    32    64    183     2.6981  Palace and Park of Fontainebleau
+    495    32    64    177     4.8644  The Climats, terroirs of Burgundy
+    495    32    64    184    32.6926  City of Safranbolu
+    495    31    64    182   -77.5214  Sacred City of Caral-Supe
+    495    31    64    179    12.4574  Vatican City
+    495    30    64    195   -61.7617  Antigua Naval Dockyard and Related Archaeological Sites
+    495    30    64    187    13.5667  Berlin Modernism Housing Estates
+    495    30    64    217    35.4339  Wadi Rum Protected Area
+    495    30    64    195    40.2393  Diyarbakır Fortress and Hevsel Gardens Cultural Landscape
+    495    30    64    188    42.7183  Hatra
+    495    30    64    187    43.5667  Archaeological Site of Ani
+    495    30    64    177    43.9156  Samarra Archaeological City
+    495    30    64    178   115.8667  Lushan National Park
+    495    30    64    187   130.5667  Sites of Japan’s Meiji Industrial Revolution: Iron and Steel, Shi
+    495    28    64    187    13.0433  Historic Centre of the City of Salzburg
+    495    28    64    185    38.7186  Aksum
+    495    28    64    187   118.0431  Mount Wuyi
+    495    26    64    171     6.0839  Aachen Cathedral
+    495    26    64    186    48.2564  Susa
 
-    537     8    63    196     8.6639  Mathildenhöhe Darmstadt
-    537     7    63    230     8.4424  Speyer Cathedral
-    537     7    63    209    31.2334  Historic Cairo
-    537     7    63    208   100.2333  Old Town of Lijiang
-    537     6    63    210   103.2376  Ban Chiang Archaeological Site
-    537     5    63    195   -99.2964  Archaeological Monuments Zone of Xochicalco
-    537     5    63    195    -9.3255  Royal Building of <i>Mafra</i> – Palace, Basilica, Convent, <i>Ce
-    537     5    63    197    13.5719  Sukur Cultural Landscape
-    537     5    63    234    14.4368  Megalithic Temples of Malta
-    537     5    63    194    25.9247  Residence of Bukovinian and Dalmatian Metropolitans
-    537     5    63    233    47.4367  Bisotun
-    537     5    63    195    76.9317  Mountain Railways of India
-    537     5    63    192   115.9227  Peking Man Site at Zhoukoudian
-    537     4    63    202  -113.0204  Rock Paintings of the Sierra de San Francisco
-    537     4    63    210   -51.4332  Aasivissuit – Nipisat. Inuit Hunting Ground between Ice and Sea
-    537     4    63    203    -8.0222  Medina of Marrakesh
-    537     4    63    219     2.1197  Fortifications of Vauban
-    537     4    63    196     3.4731  The Causses and the Cévennes, Mediterranean agro-pastoral Cultura
-    537     4    63    200     7.0461  Zollverein Coal Mine Industrial Complex in Essen
-    537     4    63    216    17.5426  Birka and Hovgården
-    537     4    63    202    19.0429  Budapest, including the Banks of the Danube, the Buda Castle Quar
-    537     4    63    201    28.0453  Sardis and the Lydian Tumuli of Bin Tepe
-    537     4    63    210    38.5667  Ensemble of the Ferapontov Monastery
-    537     3    63    190    -7.1547  Garrison Border Town of Elvas and its Fortifications
-    537     3    63    205    31.2746  Historic Monuments of Novgorod and Surroundings
-    537     3    63    195    36.4681  Ancient City of Bosra
-    537     3    63    198    73.5889  Rohtas Fort
-    537     2    63    193   -89.7373  Ancient Maya City and Protected Tropical Forests of Calakmul, Cam
-    537     2    63    194    12.4761  Historic Centre of Rome, the Properties of the Holy See in that C
-    537     2    63    185    34.8408  Biblical Tels - Megiddo, Hazor, Beer Sheba
-    537     2    63    193   102.2625  Melaka and George Town, Historic Cities of the Straits of Malacca
-    537     2    63    202   120.7204  Classical Gardens of Suzhou
-    537     1    63    205    -4.7797  Historic Centre of Cordoba
-    537     1    63    199    -2.2754  Cave of Altamira and Paleolithic Cave Art of Northern Spain
-    537     1    63    224    17.0770  Centennial Hall in Wrocław
-    537     1    63    203    19.2783  Vlkolínec
-    537     1    63    200    25.2931  Vilnius Historic Centre
-    537     1    63    229   128.4529  Royal Tombs of the Joseon Dynasty
-    537     0    63    195   -65.7498  City of Potosí
+    537    40    63    191  -113.0204  Rock Paintings of the Sierra de San Francisco
+    537    38    63    191    -8.0222  Medina of Marrakesh
+    537    35    63    173    -7.1547  Garrison Border Town of Elvas and its Fortifications
+    537    35    63    185     8.6639  Mathildenhöhe Darmstadt
+    537    34    63    180   -99.2964  Archaeological Monuments Zone of Xochicalco
+    537    34    63    200   -51.4332  Aasivissuit – Nipisat. Inuit Hunting Ground between Ice and Sea
+    537    34    63    209     2.1197  Fortifications of Vauban
+    537    34    63    207    17.5426  Birka and Hovgården
+    537    34    63    200    38.5667  Ensemble of the Ferapontov Monastery
+    537    33    63    182    -9.3255  Royal Building of <i>Mafra</i> – Palace, Basilica, Convent, <i>Ce
+    537    33    63    200    -4.7797  Historic Centre of Cordoba
+    537    33    63    186    -2.2754  Cave of Altamira and Paleolithic Cave Art of Northern Spain
+    537    33    63    175    25.9247  Residence of Bukovinian and Dalmatian Metropolitans
+    537    33    63    197    31.2334  Historic Cairo
+    537    33    63    174    34.8408  Biblical Tels - Megiddo, Hazor, Beer Sheba
+    537    33    63    178    76.9317  Mountain Railways of India
+    537    33    63    197   100.2333  Old Town of Lijiang
+    537    33    63    174   115.9227  Peking Man Site at Zhoukoudian
+    537    32    63    215     8.4424  Speyer Cathedral
+    537    32    63    188    13.5719  Sukur Cultural Landscape
+    537    32    63    217    14.4368  Megalithic Temples of Malta
+    537    32    63    189    19.2783  Vlkolínec
+    537    32    63    187    25.2931  Vilnius Historic Centre
+    537    32    63    191    73.5889  Rohtas Fort
+    537    32    63    188   120.7204  Classical Gardens of Suzhou
+    537    31    63    182    12.4761  Historic Centre of Rome, the Properties of the Holy See in that C
+    537    31    63    217    47.4367  Bisotun
+    537    31    63    218   128.4529  Royal Tombs of the Joseon Dynasty
+    537    30    63    189    31.2746  Historic Monuments of Novgorod and Surroundings
+    537    30    63    183    36.4681  Ancient City of Bosra
+    537    30    63    196   103.2376  Ban Chiang Archaeological Site
+    537    29    63    190     7.0461  Zollverein Coal Mine Industrial Complex in Essen
+    537    28    63    186   -89.7373  Ancient Maya City and Protected Tropical Forests of Calakmul, Cam
+    537    28    63    187    19.0429  Budapest, including the Banks of the Danube, the Buda Castle Quar
+    537    28    63    190    28.0453  Sardis and the Lydian Tumuli of Bin Tepe
+    537    28    63    186   102.2625  Melaka and George Town, Historic Cities of the Straits of Malacca
+    537    27    63    182     3.4731  The Causses and the Cévennes, Mediterranean agro-pastoral Cultura
+    537    25    63    184   -65.7498  City of Potosí
+    537    23    63    215    17.0770  Centennial Hall in Wrocław
 
-    576     8    62    232     8.4395  ShUM Sites of Speyer, Worms and Mainz
-    576     7    62    209   -55.7664  The work of engineer Eladio Dieste: Church of Atlántida
-    576     7    62    204     3.7360  Vézelay, Church and Hill
-    576     7    62    204    27.7360  Ancient City of Nessebar
-    576     7    62    204    39.7361  Sacred Mijikenda Kaya Forests
-    576     7    62    233    47.4386  The Ahwar of Southern Iraq: Refuge of Biodiversity and the Relict
-    576     6    62    193  -105.3000  Wixárika Route through Sacred Sites to Wirikuta (Tatehuarí Huajuy
-    576     6    62    209     7.2340  Frontiers of the Roman Empire – The Lower German Limes
-    576     6    62    191   134.7000  Himeji-jo
-    576     5    62    198    57.5032  Aapravasi Ghat
-    576     5    62    195    79.9311  Khajuraho Group of Monuments
-    576     5    62    204   135.7342  Buddhist Monuments in the Horyu-ji Area
-    576     4    62    221   -66.8907  Ciudad Universitaria de Caracas
-    576     4    62    192     5.6789  Ir.D.F. Woudagemaal (D.F. Wouda Steam Pumping Station)
-    576     4    62    204     7.2723  Nice, Winter Resort Town of the Riviera
-    576     4    62    192    11.6786  Historic Centre of the City of Pienza
-    576     4    62    198    18.7000  Natural and Culturo-Historical Region of Kotor
-    576     4    62    193    20.6761  Natural and Cultural Heritage of the Ohrid region
-    576     4    62    205    31.2611  Memphis and its Necropolis – the Pyramid Fields from Giza to Dahs
-    576     4    62    222    35.1083  Hebron/Al-Khalil Old Town
-    576     4    62    229    35.4433  Petra
-    576     4    62    205    43.2611  Ashur (Qal'at Sherqat)
-    576     4    62    198    75.7002  Ajanta Caves
-    576     3    62    198   -83.7167  Viñales Valley
-    576     3    62    222    -3.8919  Ancient Ferrous Metallurgy Sites of Burkina Faso
-    576     3    62    196     6.4689  Timgad
-    576     3    62    199     7.9636  Vineyard Landscape of Piedmont: Langhe-Roero and Monferrato
-    576     3    62    192    15.2674  Kutná Hora: Historical Town Centre with the Church of St Barbara 
-    576     3    62    204    16.2514  Historic City of Trogir
-    576     3    62    197    33.2792  Archaeological Sites of the Island of Meroe
-    576     3    62    199    48.2828  Citadel, Ancient City and Fortress Buildings of Derbent
-    576     3    62    198    49.0589  Bolgar Historical and Archaeological Complex
-    576     3    62    200    94.9642  Bagan
-    576     3    62    198   121.0606  Rice Terraces of the Philippine Cordilleras
-    576     2    62    187   -77.9186  Historic Centre of Camagüey
-    576     2    62    185     4.8333  Historic Site of Lyon
-    576     2    62    188    12.0799  Roskilde Cathedral
-    576     2    62    198    24.2853  Archaeological Site of Philippi
-    576     2    62    186    49.8333  Walled City of Baku with the Shirvanshah's Palace and Maiden Towe
-    576     2    62    203   109.2600  Mausoleum of the First Qin Emperor
-    576     2    62    198   118.0619  Kulangsu, a Historic International Settlement
-    576     2    62    185   178.8345  Levuka Historical Port Town
-    576     1    62    208   -80.4522  Urban Historic Centre of Cienfuegos
-    576     1    62    197    -8.2928  Historic Centre of Guimarães and Couros Zone
-    576     1    62    204     9.5383  Crespi d'Adda
-    576     1    62    225    23.0806  Sanctuary of Asklepios at Epidaurus
-    576     1    62    193    45.2688  Landmarks of the Ancient Kingdom of Saba, Marib
-    576     1    62    224    62.0667  State Historical and Cultural Park “Ancient Merv”
+    576    34    62    211   -66.8907  Ciudad Universitaria de Caracas
+    576    34    62    210    -3.8919  Ancient Ferrous Metallurgy Sites of Burkina Faso
+    576    34    62    191     3.7360  Vézelay, Church and Hill
+    576    34    62    191    27.7360  Ancient City of Nessebar
+    576    34    62    211    35.1083  Hebron/Al-Khalil Old Town
+    576    34    62    191    39.7361  Sacred Mijikenda Kaya Forests
+    576    34    62    178    79.9311  Khajuraho Group of Monuments
+    576    33    62    197   -55.7664  The work of engineer Eladio Dieste: Church of Atlántida
+    576    33    62    197     7.2340  Frontiers of the Roman Empire – The Lower German Limes
+    576    33    62    216    47.4386  The Ahwar of Southern Iraq: Refuge of Biodiversity and the Relict
+    576    33    62    191   135.7342  Buddhist Monuments in the Horyu-ji Area
+    576    32    62    182  -105.3000  Wixárika Route through Sacred Sites to Wirikuta (Tatehuarí Huajuy
+    576    32    62    196   -80.4522  Urban Historic Centre of Cienfuegos
+    576    32    62    183     5.6789  Ir.D.F. Woudagemaal (D.F. Wouda Steam Pumping Station)
+    576    32    62    189     7.9636  Vineyard Landscape of Piedmont: Langhe-Roero and Monferrato
+    576    32    62    183    11.6786  Historic Centre of the City of Pienza
+    576    32    62    183    20.6761  Natural and Cultural Heritage of the Ohrid region
+    576    32    62    189    94.9642  Bagan
+    576    32    62    182   134.7000  Himeji-jo
+    576    32    62    172   178.8345  Levuka Historical Port Town
+    576    31    62    172     4.8333  Historic Site of Lyon
+    576    31    62    216     8.4395  ShUM Sites of Speyer, Worms and Mainz
+    576    31    62    195    16.2514  Historic City of Trogir
+    576    31    62    214    35.4433  Petra
+    576    31    62    172    49.8333  Walled City of Baku with the Shirvanshah's Palace and Maiden Towe
+    576    30    62    188     7.2723  Nice, Winter Resort Town of the Riviera
+    576    29    62    185    -8.2928  Historic Centre of Guimarães and Couros Zone
+    576    29    62    182     6.4689  Timgad
+    576    29    62    193     9.5383  Crespi d'Adda
+    576    28    62    187    15.2674  Kutná Hora: Historical Town Centre with the Church of St Barbara 
+    576    28    62    191    31.2611  Memphis and its Necropolis – the Pyramid Fields from Giza to Dahs
+    576    28    62    191    43.2611  Ashur (Qal'at Sherqat)
+    576    28    62    189    57.5032  Aapravasi Ghat
+    576    28    62    192   109.2600  Mausoleum of the First Qin Emperor
+    576    27    62    173   -77.9186  Historic Centre of Camagüey
+    576    27    62    174    12.0799  Roskilde Cathedral
+    576    27    62    188    18.7000  Natural and Culturo-Historical Region of Kotor
+    576    27    62    182    24.2853  Archaeological Site of Philippi
+    576    27    62    188    75.7002  Ajanta Caves
+    576    26    62    185    33.2792  Archaeological Sites of the Island of Meroe
+    576    26    62    187    45.2688  Landmarks of the Ancient Kingdom of Saba, Marib
+    576    25    62    180   -83.7167  Viñales Valley
+    576    25    62    182    48.2828  Citadel, Ancient City and Fortress Buildings of Derbent
+    576    24    62    190    49.0589  Bolgar Historical and Archaeological Complex
+    576    24    62    188   118.0619  Kulangsu, a Historic International Settlement
+    576    24    62    189   121.0606  Rice Terraces of the Philippine Cordilleras
+    576    22    62    213    23.0806  Sanctuary of Asklepios at Epidaurus
+    576    22    62    213    62.0667  State Historical and Cultural Park “Ancient Merv”
 
-    624     7    61    196     8.6674  Funerary Tradition in the Prehistory of Sardinia – <em>The domus 
-    624     7    61    196    29.6667  Abu Mena
-    624     7    61    196    35.6667  Cultural and Historic Ensemble of the Solovetsky Islands
-    624     7    61    196    44.6664  Monasteries of Haghpat and Sanahin
-    624     7    61    196    77.6665  Fatehpur Sikri
-    624     7    61    196   116.6685  Murujuga Cultural Landscape
-    624     6    61    205    22.0286  Church Town of Gammelstad, Luleå
-    624     5    61    203   -43.9736  Pampulha Modern Ensemble
-    624     5    61    198    -8.5019  Portuguese City of Mazagan (El Jadida)
-    624     5    61    201    -7.0333  Ancient <I>Ksour</I> of Ouadane, Chinguetti, Tichitt and Oualata
-    624     5    61    202     3.9823  Neolithic Flint Mines at Spiennes (Mons)
-    624     5    61    197     9.5000  Old Town of Ghadamès
-    624     5    61    202    13.6200  Žatec and the Landscape of Saaz Hops
-    624     5    61    205    16.2709  Castel del Monte
-    624     5    61    203    16.6161  Tugendhat Villa in Brno
-    624     5    61    197    27.5000  Churches of Moldavia
-    624     5    61    197    33.5008  Ancient City of Tauric Chersonese and its Chora
-    624     5    61    202    37.6204  Kremlin and Red Square, Moscow
-    624     5    61    205   100.9723  Archaeological Heritage of the Lenggong Valley
-    624     5    61    201   126.9911  Changdeokgung Palace Complex
-    624     5    61    202   130.0258  Hidden Christian Sites in the Nagasaki Region
-    624     5    61    197   135.4994  Mozu-Furuichi Kofun Group: Mounded Tombs of Ancient Japan
-    624     5    61    205   151.2153  Sydney Opera House
-    624     4    61    204  -100.3921  Historic Monuments Zone of Querétaro
-    624     4    61    205   -76.3947  Coffee Cultural Landscape of Colombia
-    624     4    61    201   -73.4019  Churches of Chiloé
-    624     4    61    203   -70.3828  Sewell Mining Town
-    624     4    61    201     1.5956  Madriu-Perafita-Claror Valley
-    624     4    61    205    21.7333  Tsodilo
-    624     4    61    229    35.4441  Ancient Jericho/Tell es-Sultan
-    624     4    61    205   103.6053  Mount Qingcheng and the Dujiangyan Irrigation System
-    624     4    61    205   103.9740  Angkor
-    624     3    61    203  -151.3724  Taputapuātea
-    624     3    61    205    -4.0244  Historic City of Toledo
-    624     3    61    198     0.7028  The Loire Valley between Sully-sur-Loire and Chalonnes
-    624     3    61    200    24.9872  Fortress of Suomenlinna
-    624     3    61    200   117.9875  Ancient Villages in Southern Anhui – Xidi and Hongcun
-    624     1    61    199    -5.3421  Gorham's Cave Complex
-    624     1    61    208     6.5495  Roman Monuments, Cathedral of St Peter and Church of Our Lady in 
-    624     1    61    200    19.2880  Mehmed Paša Sokolović Bridge in Višegrad
-    624     1    61    200    21.5117  Old Rauma
-    624     1    61    225    35.0689  Old City of Acre
-    624     1    61    200    99.5107  Historic Town of Sukhothai and Associated Historic Towns
+    624    41    61    191     3.9823  Neolithic Flint Mines at Spiennes (Mons)
+    624    41    61    191    24.9872  Fortress of Suomenlinna
+    624    41    61    191   117.9875  Ancient Villages in Southern Anhui – Xidi and Hongcun
+    624    40    61    192   126.9911  Changdeokgung Palace Complex
+    624    38    61    189  -100.3921  Historic Monuments Zone of Querétaro
+    624    37    61    189   -76.3947  Coffee Cultural Landscape of Colombia
+    624    37    61    188   -73.4019  Churches of Chiloé
+    624    37    61    190     1.5956  Madriu-Perafita-Claror Valley
+    624    37    61    188   103.6053  Mount Qingcheng and the Dujiangyan Irrigation System
+    624    35    61    182    29.6667  Abu Mena
+    624    35    61    182    35.6667  Cultural and Historic Ensemble of the Solovetsky Islands
+    624    35    61    182    44.6664  Monasteries of Haghpat and Sanahin
+    624    35    61    182    77.6665  Fatehpur Sikri
+    624    34    61    182     8.6674  Funerary Tradition in the Prehistory of Sardinia – <em>The domus 
+    624    33    61    186   -70.3828  Sewell Mining Town
+    624    33    61    187   -43.9736  Pampulha Modern Ensemble
+    624    33    61    187    16.6161  Tugendhat Villa in Brno
+    624    33    61    191    21.7333  Tsodilo
+    624    33    61    190    37.6204  Kremlin and Red Square, Moscow
+    624    33    61    183   116.6685  Murujuga Cultural Landscape
+    624    33    61    187   130.0258  Hidden Christian Sites in the Nagasaki Region
+    624    32    61    189    -7.0333  Ancient <I>Ksour</I> of Ouadane, Chinguetti, Tichitt and Oualata
+    624    32    61    190    13.6200  Žatec and the Landscape of Saaz Hops
+    624    32    61    185    22.0286  Church Town of Gammelstad, Luleå
+    624    32    61    215    35.4441  Ancient Jericho/Tell es-Sultan
+    624    31    61    189  -151.3724  Taputapuātea
+    624    31    61    192   100.9723  Archaeological Heritage of the Lenggong Valley
+    624    31    61    200   151.2153  Sydney Opera House
+    624    30    61    191    -4.0244  Historic City of Toledo
+    624    30    61    188    16.2709  Castel del Monte
+    624    30    61    191    19.2880  Mehmed Paša Sokolović Bridge in Višegrad
+    624    30    61    192   103.9740  Angkor
+    624    29    61    190    -8.5019  Portuguese City of Mazagan (El Jadida)
+    624    29    61    196     6.5495  Roman Monuments, Cathedral of St Peter and Church of Our Lady in 
+    624    29    61    189     9.5000  Old Town of Ghadamès
+    624    29    61    189    27.5000  Churches of Moldavia
+    624    29    61    190    33.5008  Ancient City of Tauric Chersonese and its Chora
+    624    29    61    187    99.5107  Historic Town of Sukhothai and Associated Historic Towns
+    624    29    61    189   135.4994  Mozu-Furuichi Kofun Group: Mounded Tombs of Ancient Japan
+    624    28    61    187     0.7028  The Loire Valley between Sully-sur-Loire and Chalonnes
+    624    28    61    187    21.5117  Old Rauma
+    624    26    61    186    -5.3421  Gorham's Cave Complex
+    624    22    61    214    35.0689  Old City of Acre
 
-    667     6    60    198    -4.9904  Medina of Fez
-    667     6    60    198    16.0100  Engelsberg Ironworks
-    667     6    60    205    19.0297  Castle of the Teutonic Order in Malbork
-    667     6    60    202    34.9681  Sites of Human Evolution at Mount Carmel: The Nahal Me’arot / Wad
-    667     6    60    204    58.2110  Parthian Fortresses of Nisa
-    667     6    60    205   139.0317  Tomioka Silk Mill and Related Sites
-    667     5    60    201  -103.8167  Agave Landscape and Ancient Industrial Facilities of Tequila
-    667     5    60    202   -97.3776  El Tajin, Pre-Hispanic City
-    667     5    60    200   -91.4064  Monumental Earthworks of Poverty Point
-    667     5    60    204    -1.7883  Saltaire
-    667     5    60    201    10.1805  Rock Drawings in Valcamonica
-    667     5    60    204    16.6103  The Sassi and the Park of the Rupestrian Churches of Matera
-    667     5    60    200    22.1861  Gamzigrad-Romuliana, Palace of Galerius
-    667     5    60    203    22.9703  Paleochristian and Byzantine Monuments of Thessalonika
-    667     5    60    201    25.1833  Petäjävesi Old Church
-    667     5    60    204    28.2118  Human Rights, Liberation and Reconciliation: Nelson Mandela Legac
-    667     5    60    198    43.0090  Upper Svaneti
-    667     5    60    198   100.0075  Cultural Landscape of Old Tea Forests of the Jingmai Mountain in 
-    667     5    60    198   109.0093  Great Burkhan Khaldun Mountain and its surrounding sacred landsca
-    667     5    60    198   127.0083  Hwaseong Fortress
-    667     5    60    200   127.1864  Namhansanseong
-    667     5    60    204   139.6106  Shrines and Temples of Nikko
-    667     4    60    202   -79.9844  Trinidad and the Valley de los Ingenios
-    667     4    60    201     1.0206  Prehistoric Sites and Decorated Caves of the Vézère Valley
-    667     4    60    206    28.9833  Historic Areas of Istanbul
-    667     4    60    205    70.2133  Dholavira: a Harappan City
-    667     4    60    201    76.1872  Hill Forts of Rajasthan
-    667     4    60    205    88.9833  Ruins of the Buddhist Vihara at Paharpur
-    667     4    60    192   104.6803  Temple of Preah Vihear
-    667     3    60    197   -44.3034  Historic Centre of São Luís
-    667     3    60    197    -2.3039  Jodrell Bank Observatory
-    667     3    60    200     9.9994  Speicherstadt and Kontorhaus District with Chilehaus
-    667     2    60    204  -100.7464  Protective town of San Miguel and the Sanctuary of Jesús Nazareno
-    667     2    60    227    11.0992  Punic Town of Kerkuane and its Necropolis
-    667     2    60    202    13.6464  Hallstatt-Dachstein / Salzkammergut Cultural Landscape
-    667     2    60    202    40.0173  The Historic Town and Archaeological Site of Gedi
-    667     2    60    227    86.0947  Sun Temple, Konârak
-    667     2    60    227   128.0987  Haeinsa Temple Janggyeong Panjeon, the Depositories for the <I>Tr
-    667     1    60    196    21.2756  Bardejov Town Conservation Reserve
-    667     1    60    211    30.5584  Kyiv: Saint-Sophia Cathedral and Related Monastic Buildings, Kyiv
-    667     1    60    210   126.5565  Historic Monuments and Sites in Kaesong
+    667    42    60    194     9.9994  Speicherstadt and Kontorhaus District with Chilehaus
+    667    39    60    193   -79.9844  Trinidad and the Valley de los Ingenios
+    667    39    60    192    -4.9904  Medina of Fez
+    667    39    60    192    16.0100  Engelsberg Ironworks
+    667    39    60    191    40.0173  The Historic Town and Archaeological Site of Gedi
+    667    39    60    192    43.0090  Upper Svaneti
+    667    39    60    192   100.0075  Cultural Landscape of Old Tea Forests of the Jingmai Mountain in 
+    667    39    60    192   109.0093  Great Burkhan Khaldun Mountain and its surrounding sacred landsca
+    667    39    60    192   127.0083  Hwaseong Fortress
+    667    37    60    190   -91.4064  Monumental Earthworks of Poverty Point
+    667    36    60    189     1.0206  Prehistoric Sites and Decorated Caves of the Vézère Valley
+    667    36    60    189    16.6103  The Sassi and the Park of the Rupestrian Churches of Matera
+    667    36    60    188   139.6106  Shrines and Temples of Nikko
+    667    33    60    199    70.2133  Dholavira: a Harappan City
+    667    32    60    190   -97.3776  El Tajin, Pre-Hispanic City
+    667    32    60    195    13.6464  Hallstatt-Dachstein / Salzkammergut Cultural Landscape
+    667    32    60    185    19.0297  Castle of the Teutonic Order in Malbork
+    667    32    60    193    22.9703  Paleochristian and Byzantine Monuments of Thessalonika
+    667    32    60    192    34.9681  Sites of Human Evolution at Mount Carmel: The Nahal Me’arot / Wad
+    667    32    60    184   104.6803  Temple of Preah Vihear
+    667    31    60    196  -100.7464  Protective town of San Miguel and the Sanctuary of Jesús Nazareno
+    667    31    60    189    10.1805  Rock Drawings in Valcamonica
+    667    31    60    191    22.1861  Gamzigrad-Romuliana, Palace of Galerius
+    667    31    60    191   127.1864  Namhansanseong
+    667    31    60    186   139.0317  Tomioka Silk Mill and Related Sites
+    667    30    60    197    -1.7883  Saltaire
+    667    30    60    210    11.0992  Punic Town of Kerkuane and its Necropolis
+    667    30    60    197    28.2118  Human Rights, Liberation and Reconciliation: Nelson Mandela Legac
+    667    30    60    198    30.5584  Kyiv: Saint-Sophia Cathedral and Related Monastic Buildings, Kyiv
+    667    30    60    196    58.2110  Parthian Fortresses of Nisa
+    667    30    60    192    76.1872  Hill Forts of Rajasthan
+    667    30    60    199   126.5565  Historic Monuments and Sites in Kaesong
+    667    30    60    211   128.0987  Haeinsa Temple Janggyeong Panjeon, the Depositories for the <I>Tr
+    667    29    60    189  -103.8167  Agave Landscape and Ancient Industrial Facilities of Tequila
+    667    29    60    189    25.1833  Petäjävesi Old Church
+    667    29    60    191    28.9833  Historic Areas of Istanbul
+    667    29    60    212    86.0947  Sun Temple, Konârak
+    667    29    60    191    88.9833  Ruins of the Buddhist Vihara at Paharpur
+    667    26    60    187   -44.3034  Historic Centre of São Luís
+    667    25    60    187    -2.3039  Jodrell Bank Observatory
+    667    23    60    186    21.2756  Bardejov Town Conservation Reserve
 
-    708     8    59    190    12.1019  Etruscan Necropolises of Cerveteri and Tarquinia
-    708     7    59    190    72.1017  Rani-ki-Vav (the Queen’s Stepwell) at Patan, Gujarat
-    708     6    59    191   -68.9022  Historic Area of Willemstad, Inner City and Harbour, Curaçao
-    708     6    59    191   -47.9000  Brasilia
-    708     6    59    192    12.0992  Old town of Regensburg with Stadtamhof
-    708     6    59    192    18.0994  Skogskyrkogården
-    708     6    59    207    25.2667  Delos
-    708     6    59    191   117.1000  Mount Taishan
-    708     5    59    205     4.2661  Talayotic Menorca
-    708     5    59    190    17.7844  Millenary Benedictine Abbey of Pannonhalma and its Natural Enviro
-    708     5    59    204    31.6258  Nubian Monuments from Abu Simbel to Philae
-    708     5    59    205    31.9861  Gordion
-    708     5    59    204    34.2071  Chongoni Rock-Art Area
-    708     4    59    206   -91.7325  National Archaeological Park Tak’alik Ab’aj
-    708     4    59    200   -80.0031  Fortifications on the Caribbean Side of Panama: Portobelo-San Lor
-    708     4    59    201    -2.4728  Ironbridge Gorge
-    708     4    59    206     4.0340  Cathedral of Notre-Dame, Former Abbey of Saint-Rémi and Palace of
-    708     4    59    207    13.0333  Palaces and Parks of Potsdam and Berlin
-    708     4    59    199    13.5933  Archaeological Area of Agrigento
-    708     4    59    199    13.5933  Episcopal Complex of the Euphrasian Basilica in the Historic Cent
-    708     4    59    185    42.1378  Harar Jugol, the Fortified Historic Town
-    708     4    59    202    84.9939  Mahabodhi Temple Complex at Bodh Gaya
-    708     4    59    179    94.8167  Mogao Caves
-    708     4    59    179   103.8161  Singapore Botanic Gardens
-    708     4    59    179   106.8169  Tusi Sites
-    708     4    59    202   126.9936  Jongmyo Shrine
-    708     3    59    203     4.6307  Arles, Roman and Romanesque Monuments
-    708     3    59    202     4.6494  Mill Network at Kinderdijk-Elshout
-    708     3    59    197    15.4843  Landscape for Breeding and Training of Ceremonial Carriage Horses
-    708     3    59    204    19.2050  Auschwitz Birkenau <br /><small>German Nazi Concentration and Ext
-    708     3    59    202   112.6500  Imperial Tombs of the Ming and Qing Dynasties
-    708     2    59    202   -82.3465  Old Havana and its Fortification System
-    708     2    59    196   -38.5130  Historic Centre of Salvador de Bahia
-    708     2    59    203    -7.7989  Alto Douro Wine Region
-    708     2    59    197    12.4850  Archaeological Site of Sabratha
-    708     2    59    197    48.6528  Assumption Cathedral and Monastery of the town-island of Sviyazhs
-    708     2    59    197    87.6850  Santiniketan
-    708     2    59    196   127.0556  Baekje Historic Areas
-    708     1    59    197   -65.3489  Quebrada de Humahuaca
-    708     1    59    182    -1.1733  Cordouan Lighthouse
-    708     1    59    201    21.5289  Krzemionki Prehistoric Striped Flint Mining Region
-    708     1    59    202    75.5350  Petroglyphs of the Archaeological Landscape of Tanbaly
+    708    42    59    194   -80.0031  Fortifications on the Caribbean Side of Panama: Portobelo-San Lor
+    708    40    59    193    84.9939  Mahabodhi Temple Complex at Bodh Gaya
+    708    40    59    193   126.9936  Jongmyo Shrine
+    708    36    59    189    13.5933  Archaeological Area of Agrigento
+    708    36    59    189    13.5933  Episcopal Complex of the Euphrasian Basilica in the Historic Cent
+    708    34    59    176    42.1378  Harar Jugol, the Fortified Historic Town
+    708    33    59    192    -7.7989  Alto Douro Wine Region
+    708    33    59    191     4.6307  Arles, Roman and Romanesque Monuments
+    708    33    59    182    17.7844  Millenary Benedictine Abbey of Pannonhalma and its Natural Enviro
+    708    32    59    194     4.6494  Mill Network at Kinderdijk-Elshout
+    708    32    59    169    94.8167  Mogao Caves
+    708    32    59    169   106.8169  Tusi Sites
+    708    32    59    194   112.6500  Imperial Tombs of the Ming and Qing Dynasties
+    708    31    59    183   -38.5130  Historic Centre of Salvador de Bahia
+    708    31    59    169    -1.1733  Cordouan Lighthouse
+    708    31    59    186     4.0340  Cathedral of Notre-Dame, Former Abbey of Saint-Rémi and Palace of
+    708    31    59    183    12.4850  Archaeological Site of Sabratha
+    708    31    59    186    13.0333  Palaces and Parks of Potsdam and Berlin
+    708    31    59    183    15.4843  Landscape for Breeding and Training of Ceremonial Carriage Horses
+    708    31    59    189    31.6258  Nubian Monuments from Abu Simbel to Philae
+    708    31    59    194    34.2071  Chongoni Rock-Art Area
+    708    31    59    168   103.8161  Singapore Botanic Gardens
+    708    30    59    192   -82.3465  Old Havana and its Fortification System
+    708    30    59    194    19.2050  Auschwitz Birkenau <br /><small>German Nazi Concentration and Ext
+    708    30    59    193    75.5350  Petroglyphs of the Archaeological Landscape of Tanbaly
+    708    29    59    189   -91.7325  National Archaeological Park Tak’alik Ab’aj
+    708    29    59    191    -2.4728  Ironbridge Gorge
+    708    29    59    191    21.5289  Krzemionki Prehistoric Striped Flint Mining Region
+    708    29    59    189    25.2667  Delos
+    708    29    59    192    31.9861  Gordion
+    708    28    59    172   -68.9022  Historic Area of Willemstad, Inner City and Harbour, Curaçao
+    708    28    59    189     4.2661  Talayotic Menorca
+    708    28    59    189   127.0556  Baekje Historic Areas
+    708    27    59    173    12.0992  Old town of Regensburg with Stadtamhof
+    708    27    59    174    12.1019  Etruscan Necropolises of Cerveteri and Tarquinia
+    708    27    59    171    18.0994  Skogskyrkogården
+    708    26    59    171   -47.9000  Brasilia
+    708    26    59    174    72.1017  Rani-ki-Vav (the Queen’s Stepwell) at Patan, Gujarat
+    708    26    59    171   117.1000  Mount Taishan
+    708    25    59    186    48.6528  Assumption Cathedral and Monastery of the town-island of Sviyazhs
+    708    24    59    187   -65.3489  Quebrada de Humahuaca
+    708    18    59    183    87.6850  Santiniketan
 
-    750     7    58    178   -43.1874  Valongo Wharf Archaeological Site
-    750     7    58    179     4.8084  Roman Theatre and its Surroundings and the "Triumphal Arch" of Or
-    750     6    58    205    34.9873  Bahá’i Holy Places in Haifa and the Western Galilee
-    750     6    58    177   127.8067  Gusuku Sites and Related Properties of the Kingdom of Ryukyu
-    750     5    58    179   -97.1872  Tehuacán-Cuicatlán Valley: originary habitat of Mesoamerica
-    750     5    58    202   -16.3614  Kunta Kinteh Island and Related Sites
-    750     5    58    190    -9.2160  Monastery of the Hieronymites and Tower of Belém in Lisbon
-    750     5    58    190    -3.2167  Old and New Towns of Edinburgh
-    750     5    58    202    -1.3614  Blenheim Palace
-    750     5    58    177     4.8061  Historic Centre of Avignon: Papal Palace, Episcopal Ensemble and 
-    750     5    58    202    10.6386  Medina of Sousse
-    750     5    58    190    14.7814  Longobards in Italy. Places of the Power (568-774 A.D.)
-    750     5    58    202    16.6386  Stari Grad Plain
-    750     5    58    202    34.6372  Hattusha: the Hittite Capital
-    750     5    58    212    36.5686  Ancient Villages of Northern Syria
-    750     5    58    189   113.7808  The Archaeological Heritage of Niah National Park’s Caves Complex
-    750     4    58    211    -8.4064  Tower of Hercules
-    750     4    58    189     0.1075  Le Havre, the City Rebuilt by Auguste Perret
-    750     4    58    175    21.0130  Historic Centre of Warsaw
-    750     4    58    175    36.0126  Petroglyphs of Lake Onega and the White Sea
-    750     3    58    192   -72.2343  National History Park – Citadel, Sans Souci, Ramiers
-    750     3    58    188     5.7717  Schokland and Surroundings
-    750     3    58    212    12.5667  The par force hunting landscape in North Zealand
-    750     3    58    189    20.7675  Levoča, Spišský Hrad and the Associated Cultural Monuments
-    750     3    58    174    24.0072  Monastery of Horezu
-    750     3    58    192    26.7665  Thracian Tomb of Sveshtari
-    750     3    58    184    36.0489  Ouadi Qadisha (the Holy Valley) and the Forest of the Cedars of G
-    750     3    58    191    39.1892  Stone Town of Zanzibar
-    750     3    58    201    51.6778  Meidan Emam, Esfahan
-    750     3    58    201   102.6785  Orkhon Valley Cultural Landscape
-    750     3    58    212   105.5667  Dazu Rock Carvings
-    750     3    58    188   141.1078  Hiraizumi – Temples, Gardens and Archaeological Sites Representin
-    750     2    58    175    -8.9767  Monastery of Alcobaça
-    750     2    58    201    -5.3275  Royal Monastery of Santa María de Guadalupe
-    750     2    58    202    -1.8254  Stonehenge, Avebury and Associated Sites
-    750     2    58    197    51.6853  Masjed-e Jāmé of Isfahan
-    750     2    58    184    54.0500  Land of Frankincense
-    750     2    58    181   105.0431  Temple Zone of Sambor Prei Kuk, Archaeological Site of Ancient Is
-    750     2    58    187   108.1092  My Son Sanctuary
-    750     1    58    196    -7.9078  Historic Centre of Évora
-    750     1    58    186    -3.2081  Heart of Neolithic Orkney
-    750     1    58    184     4.8243  Colonies of Benevolence
-    750     1    58    181    78.0422  Taj Mahal
-    750     0    58    185    57.0720  Rock Paintings of Shulgan-Tash Cave
+    750    35    58    180     5.7717  Schokland and Surroundings
+    750    35    58    182   113.7808  The Archaeological Heritage of Niah National Park’s Caves Complex
+    750    34    58    182    14.7814  Longobards in Italy. Places of the Power (568-774 A.D.)
+    750    33    58    190   -16.3614  Kunta Kinteh Island and Related Sites
+    750    33    58    182    -9.2160  Monastery of the Hieronymites and Tower of Belém in Lisbon
+    750    33    58    182    -3.2167  Old and New Towns of Edinburgh
+    750    33    58    187    -1.8254  Stonehenge, Avebury and Associated Sites
+    750    33    58    190    -1.3614  Blenheim Palace
+    750    33    58    190    10.6386  Medina of Sousse
+    750    33    58    190    16.6386  Stari Grad Plain
+    750    33    58    191    34.6372  Hattusha: the Hittite Capital
+    750    32    58    200    -8.4064  Tower of Hercules
+    750    32    58    178    -3.2081  Heart of Neolithic Orkney
+    750    31    58    169   -97.1872  Tehuacán-Cuicatlán Valley: originary habitat of Mesoamerica
+    750    31    58    181   -72.2343  National History Park – Citadel, Sans Souci, Ramiers
+    750    31    58    169   -43.1874  Valongo Wharf Archaeological Site
+    750    31    58    171     4.8061  Historic Centre of Avignon: Papal Palace, Episcopal Ensemble and 
+    750    31    58    169     4.8084  Roman Theatre and its Surroundings and the "Triumphal Arch" of Or
+    750    31    58    167     4.8243  Colonies of Benevolence
+    750    31    58    181    20.7675  Levoča, Spišský Hrad and the Associated Cultural Monuments
+    750    31    58    181    26.7665  Thracian Tomb of Sveshtari
+    750    31    58    194    34.9873  Bahá’i Holy Places in Haifa and the Western Galilee
+    750    31    58    171   127.8067  Gusuku Sites and Related Properties of the Kingdom of Ryukyu
+    750    29    58    166    21.0130  Historic Centre of Warsaw
+    750    29    58    165    24.0072  Monastery of Horezu
+    750    29    58    166    36.0126  Petroglyphs of Lake Onega and the White Sea
+    750    29    58    164    78.0422  Taj Mahal
+    750    28    58    166    -8.9767  Monastery of Alcobaça
+    750    28    58    166   105.0431  Temple Zone of Sambor Prei Kuk, Archaeological Site of Ancient Is
+    750    27    58    175     0.1075  Le Havre, the City Rebuilt by Auguste Perret
+    750    27    58    198    12.5667  The par force hunting landscape in North Zealand
+    750    27    58    198    36.5686  Ancient Villages of Northern Syria
+    750    27    58    182    39.1892  Stone Town of Zanzibar
+    750    27    58    173    57.0720  Rock Paintings of Shulgan-Tash Cave
+    750    27    58    198   105.5667  Dazu Rock Carvings
+    750    27    58    175   141.1078  Hiraizumi – Temples, Gardens and Archaeological Sites Representin
+    750    26    58    175   108.1092  My Son Sanctuary
+    750    25    58    180    -5.3275  Royal Monastery of Santa María de Guadalupe
+    750    25    58    181    51.6778  Meidan Emam, Esfahan
+    750    25    58    181   102.6785  Orkhon Valley Cultural Landscape
+    750    23    58    168    54.0500  Land of Frankincense
+    750    22    58    167    36.0489  Ouadi Qadisha (the Holy Valley) and the Forest of the Cedars of G
+    750    20    58    185    -7.9078  Historic Centre of Évora
+    750    18    58    183    51.6853  Masjed-e Jāmé of Isfahan
 
-    794     8    57    206    25.9879  Rock-Hewn Churches of Ivanovo
-    794     6    57    202  -109.3657  Rapa Nui National Park
-    794     5    57    212   -56.4295  Red Bay Basque Whaling Station
-    794     5    57    189   -27.2200  Central Zone of the Town of Angra do Heroismo in the Azores
-    794     5    57    176    55.8066  Cultural Sites of Al Ain (Hafit, Hili, Bidaa Bint Saud and Oases 
-    794     4    57    212   -95.4113  Pimachiowin Aki
-    794     4    57    174    -5.9916  Cathedral, Alcázar and Archivo de Indias in Seville
-    794     4    57    185    -2.8650  San Millán Yuso and Suso Monasteries
-    794     4    57    184    -0.1270  Palace of Westminster and Westminster Abbey including Saint Marga
-    794     4    57    193    35.8242  Rachid Karami International Fair-Tripoli
-    794     4    57    201    39.6794  Fort Jesus, Mombasa
-    794     4    57    202    48.5183  Hegmataneh
-    794     4    57    176    55.8066  Faya Palaeolandscape
-    794     3    57    216    -0.9619  Royal Court of Tiébélé
-    794     3    57    185     6.1333  City of Luxembourg: its Old Quarters and Fortifications
-    794     3    57    175    24.0144  L'viv – the Ensemble of the Historic Centre
-    794     3    57    192    32.8281  Neolithic Site of Çatalhöyük
-    794     3    57    191    39.1875  Historic Jeddah, the Gate to Makkah
-    794     3    57    185   102.1333  Town of Luang Prabang
-    794     2    57    184  -107.9481  Archaeological Zone of Paquimé, Casas Grandes
-    794     2    57    185     9.0613  Monastic Island of Reichenau
-    794     2    57    192    11.8339  Røros Mining Town and the Circumference
-    794     2    57    192    35.8339  Kondoa Rock-Art Sites
-    794     2    57    186   120.1408  West Lake Cultural Landscape of Hangzhou
-    794     1    57    189    -0.1553  Jurisdiction of Saint-Emilion
-    794     1    57    197     1.0825  Poblet Monastery
-    794     1    57    196     1.0940  Canterbury Cathedral, St Augustine's Abbey, and St Martin's Churc
-    794     1    57    219    11.0417  Historic Centre of San Gimignano
+    794    35    57    180   120.1408  West Lake Cultural Landscape of Hangzhou
+    794    34    57    182   -27.2200  Central Zone of the Town of Angra do Heroismo in the Azores
+    794    33    57    192  -109.3657  Rapa Nui National Park
+    794    32    57    175    -2.8650  San Millán Yuso and Suso Monasteries
+    794    32    57    175     6.1333  City of Luxembourg: its Old Quarters and Fortifications
+    794    32    57    175   102.1333  Town of Luang Prabang
+    794    31    57    199   -95.4113  Pimachiowin Aki
+    794    31    57    194    25.9879  Rock-Hewn Churches of Ivanovo
+    794    30    57    179    32.8281  Neolithic Site of Çatalhöyük
+    794    30    57    178    35.8242  Rachid Karami International Fair-Tripoli
+    794    30    57    170    55.8066  Faya Palaeolandscape
+    794    30    57    170    55.8066  Cultural Sites of Al Ain (Hafit, Hili, Bidaa Bint Saud and Oases 
+    794    29    57    165    -5.9916  Cathedral, Alcázar and Archivo de Indias in Seville
+    794    29    57    176    -0.1553  Jurisdiction of Saint-Emilion
+    794    29    57    167    24.0144  L'viv – the Ensemble of the Historic Centre
+    794    28    57    173     9.0613  Monastic Island of Reichenau
+    794    28    57    182    39.1875  Historic Jeddah, the Gate to Makkah
+    794    27    57    175    11.8339  Røros Mining Town and the Circumference
+    794    27    57    175    35.8339  Kondoa Rock-Art Sites
+    794    26    57    200   -56.4295  Red Bay Basque Whaling Station
+    794    26    57    187    48.5183  Hegmataneh
+    794    25    57    169  -107.9481  Archaeological Zone of Paquimé, Casas Grandes
+    794    23    57    181    39.6794  Fort Jesus, Mombasa
+    794    22    57    204    -0.9619  Royal Court of Tiébélé
+    794    20    57    172    -0.1270  Palace of Westminster and Westminster Abbey including Saint Marga
+    794    19    57    185     1.0940  Canterbury Cathedral, St Augustine's Abbey, and St Martin's Churc
+    794    19    57    206    11.0417  Historic Centre of San Gimignano
+    794    15    57    182     1.0825  Poblet Monastery
 
-    822     6    56    190   -78.1814  Chankillo Archaeoastronomical Complex
-    822     6    56    191    20.8197  Zagori Cultural Landscape
-    822     6    56    189    38.8167  Rock-Hewn Churches, Lalibela
-    822     6    56    190    44.8185  Monastery of Geghard and the Upper Azat Valley
-    822     6    56    189   110.8167  Sangiran Early Man Site
-    822     6    56    190   129.1740  Petroglyphs along the Bangucheon Stream
-    822     5    56    190    -8.8269  Monastery of Batalha
-    822     5    56    213    -8.4175  Convent of Christ in Tomar
-    822     5    56    212    15.5881  Naval Port of Karlskrona
-    822     5    56    202    39.5228  Ruins of Kilwa Kisiwani and Ruins of Songo Mnara
-    822     5    56    201    48.5221  Tchogha Zanbil
-    822     5    56    212    72.5881  Historic City of Ahmadabad
-    822     5    56    191   126.1762  Capital Cities and Tombs of the Ancient Koguryo Kingdom
-    822     5    56    202   138.5228  Fujisan, sacred place and source of artistic inspiration
-    822     4    56    200   -83.4789  Precolumbian Chiefdom Settlements with Stone Spheres of the Diquí
-    822     4    56    213   -74.4231  Historic Centre of Santa Cruz de Mompox
-    822     4    56    213    -8.4258  University of Coimbra – Alta and Sofia
-    822     4    56    184    24.1167  Historic Centre of Riga
-    822     4    56    212    36.5873  Quseir Amra
-    822     4    56    212    45.5728  Armenian Monastic Ensembles of Iran
-    822     4    56    217   143.0350  Willandra Lakes Region
-    822     3    56    184   -99.1329  Camino Real de Tierra Adentro
-    822     3    56    183    -3.1297  Megaliths of Carnac and of the shores of Morbihan
-    822     3    56    186     8.7978  Maulbronn Monastery Complex
-    822     3    56    179    32.9663  Painted Churches in the Troodos Region
-    822     2    56    175   -71.9787  City of Cuzco
-    822     2    56    186     5.8764  From the Great Saltworks of Salins-les-Bains to the Royal Saltwor
-    822     2    56    177     9.0300  Three Castles, Defensive Wall and Ramparts of the Market-Town of 
-    822     2    56    212    12.5803  Assisi, the Basilica of San Francesco and Other Franciscan Sites
-    822     2    56    185    30.0606  Memorial sites of the Genocide: Nyamata, Murambi, Gisozi and Bise
-    822     2    56    177    51.0297  Al Zubarah Archaeological Site
-    822     2    56    175    78.0215  Agra Fort
-    822     1    56    210    18.6042  Medieval Town of Toruń
-    822     1    56    195    31.0860  The Emergence of Modern Human Behaviour: The Pleistocene Occupati
-    822     0    56    201  -103.3378  Hospicio Cabañas, Guadalajara
-    822     0    56    203    10.1000  Kairouan
+    822    32    56    177     8.7978  Maulbronn Monastery Complex
+    822    31    56    200    15.5881  Naval Port of Karlskrona
+    822    31    56    202    18.6042  Medieval Town of Toruń
+    822    31    56    200    36.5873  Quseir Amra
+    822    31    56    200    72.5881  Historic City of Ahmadabad
+    822    30    56    190  -103.3378  Hospicio Cabañas, Guadalajara
+    822    29    56    165     9.0300  Three Castles, Defensive Wall and Ramparts of the Market-Town of 
+    822    29    56    175    24.1167  Historic Centre of Riga
+    822    29    56    173    30.0606  Memorial sites of the Genocide: Nyamata, Murambi, Gisozi and Bise
+    822    29    56    189    39.5228  Ruins of Kilwa Kisiwani and Ruins of Songo Mnara
+    822    29    56    165    51.0297  Al Zubarah Archaeological Site
+    822    29    56    189   138.5228  Fujisan, sacred place and source of artistic inspiration
+    822    28    56    188   -83.4789  Precolumbian Chiefdom Settlements with Stone Spheres of the Diquí
+    822    28    56    180   -78.1814  Chankillo Archaeoastronomical Complex
+    822    28    56    166   -71.9787  City of Cuzco
+    822    28    56    181    20.8197  Zagori Cultural Landscape
+    822    28    56    164    32.9663  Painted Churches in the Troodos Region
+    822    28    56    177    38.8167  Rock-Hewn Churches, Lalibela
+    822    28    56    180    44.8185  Monastery of Geghard and the Upper Azat Valley
+    822    28    56    188    48.5221  Tchogha Zanbil
+    822    28    56    166    78.0215  Agra Fort
+    822    28    56    177   110.8167  Sangiran Early Man Site
+    822    27    56    181   126.1762  Capital Cities and Tombs of the Ancient Koguryo Kingdom
+    822    27    56    180   129.1740  Petroglyphs along the Bangucheon Stream
+    822    26    56    180    -8.8269  Monastery of Batalha
+    822    26    56    199    -8.4258  University of Coimbra – Alta and Sofia
+    822    26    56    198    -8.4175  Convent of Christ in Tomar
+    822    26    56    199    12.5803  Assisi, the Basilica of San Francesco and Other Franciscan Sites
+    822    25    56    199   -74.4231  Historic Centre of Santa Cruz de Mompox
+    822    24    56    201    45.5728  Armenian Monastic Ensembles of Iran
+    822    24    56    204   143.0350  Willandra Lakes Region
+    822    21    56    172    -3.1297  Megaliths of Carnac and of the shores of Morbihan
+    822    21    56    174     5.8764  From the Great Saltworks of Salins-les-Bains to the Royal Saltwor
+    822    20    56    171   -99.1329  Camino Real de Tierra Adentro
+    822    20    56    185    31.0860  The Emergence of Modern Human Behaviour: The Pleistocene Occupati
+    822    18    56    184    10.1000  Kairouan
 
-    858     7    55    206     7.9914  Historic Centre of Agadez
-    858     6    55    191   -99.1881  Central University City Campus of the <i>Universidad Nacional Aut
-    858     6    55    206     1.9922  Royal Palaces of Abomey
-    858     5    55    205   -79.0044  Historic Centre of Santa Ana de los Ríos de Cuenca
-    858     5    55    188     6.1833  Place Stanislas, Place de la Carrière and Place d'Alliance in Nan
-    858     5    55    206    10.9939  City of Verona
-    858     5    55    206    16.9933  Decorated Farmhouses of Hälsingland
-    858     4    55    180   -21.0373  Þingvellir National Park
-    858     4    55    177    -1.2022  Rock Art of the Mediterranean Basin on the Iberian Peninsula
-    858     4    55    189     8.8075  Town Hall and Roland on the Marketplace of Bremen
-    858     4    55    178    20.9624  Curonian Spit
-    858     4    55    178    22.8000  Archaeological Sites of Mycenae and Tiryns
-    858     3    55    189   -78.2000  Qhapaq Ñan, Andean Road System
-    858     3    55    190    -5.8143  Monuments of Oviedo and the Kingdom of the Asturias
-    858     3    55    202    -4.8342  Heritage of Mercury. Almadén and Idrija
-    858     3    55    201    10.1667  Medina of Tunis
-    858     3    55    182    11.8691  Padua’s fourteenth-century fresco cycles
-    858     3    55    175    35.9667  Lower Valley of the Omo
-    858     3    55    201    55.1690  Gonbad-e Qābus
-    858     3    55    191    89.8000  Historic Mosque City of Bagerhat
-    858     3    55    179   167.9586  Australian Convict Sites
-    858     2    55    190   -75.1500  Independence Hall
-    858     2    55    185     3.0603  Kasbah of Algiers
-    858     2    55    194    12.2331  Early Christian Monuments of Ravenna
-    858     2    55    208   126.6169  Sansa, Buddhist Mountain Monasteries in Korea
-    858     1    55    193   -98.7660  Earliest 16th-Century Monasteries on the Slopes of Popocatepetl
-    858     1    55    185   -75.1486  Lines and Geoglyphs of Nasca and Palpa
-    858     1    55    200    -2.3591  City of Bath
-    858     1    55    191    18.1982  Frontiers of the Roman Empire – The Danube Limes (Western Segment
-    858     1    55    194    36.2042  Baalbek
-    858     0    55    202    49.1191  Astronomical Observatories of Kazan Federal University
+    858    32    55    196   -79.0044  Historic Centre of Santa Ana de los Ríos de Cuenca
+    858    32    55    188    -4.8342  Heritage of Mercury. Almadén and Idrija
+    858    32    55    188    10.1667  Medina of Tunis
+    858    32    55    196    10.9939  City of Verona
+    858    32    55    188    55.1690  Gonbad-e Qābus
+    858    31    55    177   -99.1881  Central University City Campus of the <i>Universidad Nacional Aut
+    858    31    55    195     1.9922  Royal Palaces of Abomey
+    858    31    55    195     7.9914  Historic Centre of Agadez
+    858    31    55    177     8.8075  Town Hall and Roland on the Marketplace of Bremen
+    858    31    55    195    16.9933  Decorated Farmhouses of Hälsingland
+    858    30    55    178   -78.2000  Qhapaq Ñan, Andean Road System
+    858    30    55    171    -1.2022  Rock Art of the Mediterranean Basin on the Iberian Peninsula
+    858    30    55    171    22.8000  Archaeological Sites of Mycenae and Tiryns
+    858    30    55    178    89.8000  Historic Mosque City of Bagerhat
+    858    29    55    173     3.0603  Kasbah of Algiers
+    858    29    55    164    35.9667  Lower Valley of the Omo
+    858    28    55    165   -21.0373  Þingvellir National Park
+    858    28    55    181    -5.8143  Monuments of Oviedo and the Kingdom of the Asturias
+    858    28    55    165    20.9624  Curonian Spit
+    858    28    55    197   126.6169  Sansa, Buddhist Mountain Monasteries in Korea
+    858    28    55    168   167.9586  Australian Convict Sites
+    858    27    55    181     6.1833  Place Stanislas, Place de la Carrière and Place d'Alliance in Nan
+    858    27    55    183    36.2042  Baalbek
+    858    26    55    173   -75.1500  Independence Hall
+    858    26    55    174   -75.1486  Lines and Geoglyphs of Nasca and Palpa
+    858    26    55    183    18.1982  Frontiers of the Roman Empire – The Danube Limes (Western Segment
+    858    24    55    188    -2.3591  City of Bath
+    858    23    55    187    49.1191  Astronomical Observatories of Kazan Federal University
+    858    21    55    184    12.2331  Early Christian Monuments of Ravenna
+    858    20    55    183   -98.7660  Earliest 16th-Century Monasteries on the Slopes of Popocatepetl
+    858    20    55    172    11.8691  Padua’s fourteenth-century fresco cycles
 
-    889     7    54    177    16.8034  Lednice-Valtice Cultural Landscape
-    889     6    54    189    17.8150  Old Bridge Area of the Old City of Mostar
-    889     5    54    193    11.8040  Naumburg Cathedral
-    889     5    54    200   118.1551  Mount Huangshan
-    889     5    54    190   168.1777  Chief Roi Mata’s Domain
-    889     4    54    185   -86.8781  León Cathedral
-    889     4    54    205   -16.3118  San Cristóbal de La Laguna
-    889     4    54    216    -3.9658  The Slate Landscape of Northwest Wales
-    889     4    54    190     9.1710  Church and Dominican Convent of Santa Maria delle Grazie with “Th
-    889     4    54    185    18.1181  Old City of Dubrovnik
-    889     4    54    183    27.1189  Madara Rider
-    889     4    54    184    30.1211  Historic Centre of Saint Petersburg and Related Groups of Monumen
-    889     4    54    191    75.1792  Ellora Caves
-    889     3    54    188   -99.1924  Luis Barragán House and Studio
-    889     3    54    189   -99.1918  Franciscan Missions in the Sierra Gorda of Querétaro
-    889     3    54    179    13.7956  Diy-Gid-Biy Cultural Landscape of the Mandara Mountains
-    889     3    54    189    21.1568  Hortobágy National Park - the <i>Puszta</i>
-    889     3    54    193    24.2167  Mount Athos
-    889     3    54    191    27.1696  Pergamon and its Multi-Layered Cultural Landscape
-    889     2    54    179   -98.9644  Historic Centre of Mexico City and Xochimilco
-    889     2    54    179    -0.0446  Tomb of Askia
-    889     2    54    202    10.6833  Hanseatic City of Lübeck
-    889     2    54    197    16.7227  Fertö / Neusiedlersee Cultural Landscape
-    889     2    54    211    20.0209  Butrint
-    889     2    54    198    28.7236  Aphrodisias
-    889     0    54    188    12.1498  Garden Kingdom of Dessau-Wörlitz
+    889    32    54    178    11.8040  Naumburg Cathedral
+    889    31    54    171    16.8034  Lednice-Valtice Cultural Landscape
+    889    30    54    176   -99.1924  Luis Barragán House and Studio
+    889    30    54    176   -99.1918  Franciscan Missions in the Sierra Gorda of Querétaro
+    889    30    54    164   -98.9644  Historic Centre of Mexico City and Xochimilco
+    889    30    54    179    12.1498  Garden Kingdom of Dessau-Wörlitz
+    889    30    54    171    13.7956  Diy-Gid-Biy Cultural Landscape of the Mandara Mountains
+    889    29    54    175   -86.8781  León Cathedral
+    889    29    54    175    17.8150  Old Bridge Area of the Old City of Mostar
+    889    29    54    175    18.1181  Old City of Dubrovnik
+    889    29    54    179    21.1568  Hortobágy National Park - the <i>Puszta</i>
+    889    29    54    175    27.1189  Madara Rider
+    889    29    54    181    75.1792  Ellora Caves
+    889    28    54    169    -0.0446  Tomb of Askia
+    889    28    54    175    30.1211  Historic Centre of Saint Petersburg and Related Groups of Monumen
+    889    28    54    181   168.1777  Chief Roi Mata’s Domain
+    889    27    54    203    20.0209  Butrint
+    889    26    54    184   118.1551  Mount Huangshan
+    889    25    54    179    24.2167  Mount Athos
+    889    25    54    179    27.1696  Pergamon and its Multi-Layered Cultural Landscape
+    889    24    54    204    -3.9658  The Slate Landscape of Northwest Wales
+    889    24    54    179     9.1710  Church and Dominican Convent of Santa Maria delle Grazie with “Th
+    889    24    54    182    10.6833  Hanseatic City of Lübeck
+    889    21    54    183   -16.3118  San Cristóbal de La Laguna
+    889    18    54    186    16.7227  Fertö / Neusiedlersee Cultural Landscape
+    889    18    54    185    28.7236  Aphrodisias
 
-    915     8    53    177    -0.0038  Maritime Greenwich
-    915     8    53    177   116.9946  Temple and Cemetery of Confucius and the Kong Family Mansion in Q
-    915     6    53    194  -107.7781  Chaco Culture
-    915     5    53    200   -34.8450  Historic Centre of the Town of Olinda
-    915     5    53    195     3.2253  Historic Centre of Brugge
-    915     5    53    193     9.2203  Dougga / Thugga
-    915     5    53    200    19.1547  Wooden Churches of the Slovak part of the Carpathian Mountain Are
-    915     5    53    200   103.1531  Megalithic Jar Sites in Xiengkhuang – Plain of Jars
-    915     4    53    200   -76.8434  The Archaeological Ensemble of 17th Century Port Royal
-    915     4    53    190   -62.8372  Brimstone Hill Fortress National Park
-    915     4    53    198   -43.8608  Sanctuary of Bom Jesus do Congonhas
-    915     4    53    190    -2.8424  Routes of Santiago de Compostela: <i>Camino Francés</i> and Route
-    915     4    53    195    12.2261  Le Colline del Prosecco di Conegliano e Valdobbiadene
-    915     4    53    196    18.2278  Early Christian Necropolis of Pécs (Sopianae)
-    915     4    53    216   107.0314  Zuojiang Huashan Rock Art Cultural Landscape
-    915     4    53    193   129.2200  Gyeongju Historic Areas
-    915     3    53    178   -37.2054  São Francisco Square in the Town of São Cristóvão
-    915     3    53    214     2.0279  Works of Antoni Gaudí
-    915     3    53    177     8.9914  Su Nuraxi di Barumini
-    915     3    53    191    45.1634  The Cultural Landscape of Al-Faw Archaeological Area
-    915     3    53    175   119.9908  Archaeological Ruins of Liangzhu City
-    915     2    53    212   -54.9787  Jodensavanne Archaeological Site: Jodensavanne Settlement and Cas
-    915     2    53    210   -17.4008  Island of Gorée
-    915     2    53    195    31.7186  Wooden Hypostyle Mosques of Medieval Anatolia
-    915     1    53    196   175.7316  Tongariro National Park
+    915    30    53    171   -37.2054  São Francisco Square in the Town of São Cristóvão
+    915    30    53    200   -17.4008  Island of Gorée
+    915    29    53    162    -0.0038  Maritime Greenwich
+    915    28    53    181   -62.8372  Brimstone Hill Fortress National Park
+    915    28    53    184   -43.8608  Sanctuary of Bom Jesus do Congonhas
+    915    28    53    179    -2.8424  Routes of Santiago de Compostela: <i>Camino Francés</i> and Route
+    915    28    53    180    45.1634  The Cultural Landscape of Al-Faw Archaeological Area
+    915    28    53    162   116.9946  Temple and Cemetery of Confucius and the Kong Family Mansion in Q
+    915    27    53    203   -54.9787  Jodensavanne Archaeological Site: Jodensavanne Settlement and Cas
+    915    27    53    161     8.9914  Su Nuraxi di Barumini
+    915    27    53    161   119.9908  Archaeological Ruins of Liangzhu City
+    915    26    53    184   -76.8434  The Archaeological Ensemble of 17th Century Port Royal
+    915    26    53    184   -34.8450  Historic Centre of the Town of Olinda
+    915    26    53    184    19.1547  Wooden Churches of the Slovak part of the Carpathian Mountain Are
+    915    26    53    184   103.1531  Megalithic Jar Sites in Xiengkhuang – Plain of Jars
+    915    25    53    203     2.0279  Works of Antoni Gaudí
+    915    24    53    182  -107.7781  Chaco Culture
+    915    24    53    182     9.2203  Dougga / Thugga
+    915    24    53    204   107.0314  Zuojiang Huashan Rock Art Cultural Landscape
+    915    24    53    182   129.2200  Gyeongju Historic Areas
+    915    22    53    182     3.2253  Historic Centre of Brugge
+    915    21    53    182    12.2261  Le Colline del Prosecco di Conegliano e Valdobbiadene
+    915    21    53    182    18.2278  Early Christian Necropolis of Pécs (Sopianae)
+    915    19    53    187    31.7186  Wooden Hypostyle Mosques of Medieval Anatolia
+    915    19    53    182   175.7316  Tongariro National Park
 
-    940     7    52    204   -89.3692  Joya de Cerén Archaeological Site
-    940     7    52    198     4.1372  The Four Lifts on the Canal du Centre and their Environs, La Louv
-    940     7    52    204    15.6308  Mining Area of the Great Copper Mountain in Falun
-    940     4    52    190   -98.8417  Pre-Hispanic City of Teotihuacan
-    940     4    52    184     8.9300  Genoa: <i>Le Strade Nuove</i> and the system of the<i> Palazzi de
-    940     4    52    215    11.0299  Jewish-Medieval Heritage of Erfurt
-    940     4    52    201    88.1496  Petroglyphic Complexes of the Mongolian Altai
-    940     3    52    200   -70.3215  Settlement and Artificial Mummification of the Chinchorro Culture
-    940     3    52    203   -64.3092  Old Town Lunenburg
-    940     3    52    209    -8.3770  Sanctuary of Bom Jesus do Monte in Braga
-    940     3    52    183    10.7750  The Great Spa Towns of Europe
-    940     3    52    186    11.8807  Botanical Garden (Orto Botanico), Padua
-    940     3    52    212    14.0233  Arab-Norman Palermo and the Cathedral Churches of Cefalú and Monr
-    940     3    52    183    25.7756  Villages with Fortified Churches in Transylvania
-    940     3    52    183    34.7742  White City of Tel-Aviv – the Modern Movement
-    940     3    52    185    38.9358  Asmara: A Modernist African City
-    940     3    52    183   103.7733  Mount Emei Scenic Area, including Leshan Giant Buddha Scenic Area
-    940     2    52    184   -90.0614  Cahokia Mounds State Historic Site
-    940     2    52    182    -3.0878  Pontcysyllte Aqueduct and Canal
-    940     2    52    201    37.1628  Ancient City of Aleppo
-    940     1    52    201   -58.3317  Fray Bentos Industrial Landscape
-    940     1    52    183     4.7868  Al Qal'a of Beni Hammad
-    940     1    52    179    71.9506  Buddhist Ruins of Takht-i-Bahi and Neighbouring City Remains at S
-    940     1    52    184   106.7838  Yen Tu-Vinh Nghiem-Con Son, Kiep Bac Complex of Monuments and Lan
-    940     1    52    186   116.9003  Fujian <em>Tulou</em>
-    940     0    52    189    34.7576  Göreme National Park and the Rock Sites of Cappadocia
+    940    29    52    172     4.7868  Al Qal'a of Beni Hammad
+    940    28    52    179   -98.8417  Pre-Hispanic City of Teotihuacan
+    940    28    52    187    37.1628  Ancient City of Aleppo
+    940    27    52    190   -58.3317  Fray Bentos Industrial Landscape
+    940    27    52    171   106.7838  Yen Tu-Vinh Nghiem-Con Son, Kiep Bac Complex of Monuments and Lan
+    940    26    52    188   -70.3215  Settlement and Artificial Mummification of the Chinchorro Culture
+    940    26    52    184     4.1372  The Four Lifts on the Canal du Centre and their Environs, La Louv
+    940    26    52    175    10.7750  The Great Spa Towns of Europe
+    940    26    52    203    11.0299  Jewish-Medieval Heritage of Erfurt
+    940    26    52    203    14.0233  Arab-Norman Palermo and the Cathedral Churches of Cefalú and Monr
+    940    26    52    175    25.7756  Villages with Fortified Churches in Transylvania
+    940    26    52    176    34.7742  White City of Tel-Aviv – the Modern Movement
+    940    26    52    184    88.1496  Petroglyphic Complexes of the Mongolian Altai
+    940    26    52    176   103.7733  Mount Emei Scenic Area, including Leshan Giant Buddha Scenic Area
+    940    25    52    190   -89.3692  Joya de Cerén Archaeological Site
+    940    25    52    194    -8.3770  Sanctuary of Bom Jesus do Monte in Braga
+    940    25    52    190    15.6308  Mining Area of the Great Copper Mountain in Falun
+    940    24    52    175    -3.0878  Pontcysyllte Aqueduct and Canal
+    940    23    52    170     8.9300  Genoa: <i>Le Strade Nuove</i> and the system of the<i> Palazzi de
+    940    23    52    169    71.9506  Buddhist Ruins of Takht-i-Bahi and Neighbouring City Remains at S
+    940    22    52    174    11.8807  Botanical Garden (Orto Botanico), Padua
+    940    22    52    170    38.9358  Asmara: A Modernist African City
+    940    22    52    176   116.9003  Fujian <em>Tulou</em>
+    940    21    52    172   -90.0614  Cahokia Mounds State Historic Site
+    940    21    52    184   -64.3092  Old Town Lunenburg
+    940    19    52    179    34.7576  Göreme National Park and the Rock Sites of Cappadocia
 
-    966     6    51    203    -5.3667  Medina of Tétouan (formerly known as Titawin)
-    966     6    51    175    -2.9994  Timbuktu
-    966     6    51    177    -0.0005  Pyrénées - Mont Perdu
-    966     6    51    176     9.0000  Tassili n'Ajjer
-    966     6    51    203    12.6333  Historic Centre of Urbino
-    966     6    51    175    81.0006  Ancient City of Polonnaruwa
-    966     6    51    176   111.0000  Ancient Building Complex in the Wudang Mountains
-    966     5    51    206    48.6267  Old Walled City of Shibam
-    966     4    51    209    12.6208  Kronborg Castle
-    966     4    51    184    23.9283  Wooden Churches of Maramureş
-    966     4    51    209   105.6211  Citadel of the Ho Dynasty
-    966     3    51    205   -64.3072  Landscape of Grand Pré
-    966     3    51    206     7.6942  Upper Middle Rhine Valley
-    966     3    51    184    23.9292  Modernist Kaunas: Architecture of Optimism, 1919-1939
-    966     3    51    202    37.6739  Church of the Ascension, Kolomenskoye
-    966     2    51    186   -66.1168  La Fortaleza and San Juan National Historic Site in Puerto Rico
-    966     2    51    183    -3.0881  Blaenavon Industrial Landscape
-    966     2    51    184    17.8833  Royal Domain of Drottningholm
-    966     1    51    198   -76.2977  San Agustín Archaeological Park
-    966     1    51    196    31.7411  Gebel Barkal and the Sites of the Napatan Region
-    966     1    51    209    35.0092  Incense Route - Desert Cities in the Negev
-    966     1    51    209    44.0092  Erbil Citadel
-    966     1    51    186   104.9021  Cambodian Memorial Sites: From centres of repression to places of
-    966     1    51    208   131.0000  Ulu<U>r</U>u-Kata Tju<U>t</U>a National Park
-    966     0    51    185   -64.2339  Jesuit Block and Estancias of Córdoba
-    966     0    51    173    -3.0168  Vizcaya Bridge
-    966     0    51    188    26.8894  Pythagoreion and Heraion of Samos
-    966     0    51    203    49.1065  Historic and Architectural Complex of the Kazan Kremlin
+    966    31    51    197   131.0000  Ulu<U>r</U>u-Kata Tju<U>t</U>a National Park
+    966    30    51    198    35.0092  Incense Route - Desert Cities in the Negev
+    966    30    51    198    44.0092  Erbil Citadel
+    966    28    51    162    -3.0168  Vizcaya Bridge
+    966    28    51    164    -2.9994  Timbuktu
+    966    28    51    163    -0.0005  Pyrénées - Mont Perdu
+    966    28    51    163     9.0000  Tassili n'Ajjer
+    966    28    51    164    81.0006  Ancient City of Polonnaruwa
+    966    28    51    163   111.0000  Ancient Building Complex in the Wudang Mountains
+    966    26    51    179   -64.2339  Jesuit Block and Estancias of Córdoba
+    966    26    51    188    -5.3667  Medina of Tétouan (formerly known as Titawin)
+    966    26    51    197    12.6208  Kronborg Castle
+    966    26    51    188    12.6333  Historic Centre of Urbino
+    966    26    51    197   105.6211  Citadel of the Ho Dynasty
+    966    25    51    190    37.6739  Church of the Ascension, Kolomenskoye
+    966    25    51    192    48.6267  Old Walled City of Shibam
+    966    24    51    175    -3.0881  Blaenavon Industrial Landscape
+    966    24    51    174    26.8894  Pythagoreion and Heraion of Samos
+    966    23    51    169    23.9283  Wooden Churches of Maramureş
+    966    22    51    174   -66.1168  La Fortaleza and San Juan National Historic Site in Puerto Rico
+    966    22    51    186     7.6942  Upper Middle Rhine Valley
+    966    22    51    174    17.8833  Royal Domain of Drottningholm
+    966    22    51    169    23.9292  Modernist Kaunas: Architecture of Optimism, 1919-1939
+    966    22    51    176   104.9021  Cambodian Memorial Sites: From centres of repression to places of
+    966    21    51    185   -64.3072  Landscape of Grand Pré
+    966    19    51    184   -76.2977  San Agustín Archaeological Park
+    966    19    51    181    49.1065  Historic and Architectural Complex of the Kazan Kremlin
+    966    18    51    182    31.7411  Gebel Barkal and the Sites of the Napatan Region
 
-    994     7    50    201    -5.3647  Cornwall and West Devon Mining Landscape
-    994     7    50    200     1.1333  Koutammakou, the Land of the Batammariba
-    994     7    50    198    46.1365  Cultural Landscape of Hawraman/Uramanat
-    994     7    50    200    91.1338  Historic Ensemble of the Potala Palace, Lhasa
-    994     6    50    201    -4.8677  Caliphate City of Medina Azahara
-    994     6    50    201    79.1316  Great Living Chola Temples
-    994     6    50    201   112.1317  Ancient City of Ping Yao
-    994     5    50    202    21.6333  Meteora
-    994     5    50    200    21.6340  Archaeological Site of Olympia
-    994     5    50    184    35.9333  Anjar
-    994     4    50    183    -3.0824  The English Lake District
-    994     4    50    183    38.9224  Göbekli Tepe
-    994     3    50    183    -0.0761  Tower of London
-    994     2    50    202    19.6764  Kalwaria Zebrzydowska: the Mannerist Architectural and Park Lands
-    994     1    50    197   -43.2914  Rio de Janeiro: Carioca Landscapes between the Mountain and the S
-    994     0    50    192     7.7489  Strasbourg, Grande-Île and <em>Neustadt</em>
+    994    26    50    189    -5.3647  Cornwall and West Devon Mining Landscape
+    994    26    50    189    19.6764  Kalwaria Zebrzydowska: the Mannerist Architectural and Park Lands
+    994    26    50    185    46.1365  Cultural Landscape of Hawraman/Uramanat
+    994    25    50    175    -3.0824  The English Lake District
+    994    25    50    171    -0.0761  Tower of London
+    994    25    50    185     1.1333  Koutammakou, the Land of the Batammariba
+    994    25    50    187    21.6333  Meteora
+    994    25    50    187    21.6340  Archaeological Site of Olympia
+    994    25    50    174    38.9224  Göbekli Tepe
+    994    25    50    186    91.1338  Historic Ensemble of the Potala Palace, Lhasa
+    994    24    50    185    -4.8677  Caliphate City of Medina Azahara
+    994    24    50    185    79.1316  Great Living Chola Temples
+    994    24    50    185   112.1317  Ancient City of Ping Yao
+    994    21    50    169    35.9333  Anjar
+    994    19    50    186   -43.2914  Rio de Janeiro: Carioca Landscapes between the Mountain and the S
+    994    19    50    180     7.7489  Strasbourg, Grande-Île and <em>Neustadt</em>
 
-   1010     4    49    182    35.9167  Um er-Rasas (Kastrom Mefa'a)
-   1010     2    49    197    10.7069  Amphitheatre of El Jem
+   1010    26    49    175    35.9167  Um er-Rasas (Kastrom Mefa'a)
+   1010    19    49    186    10.7069  Amphitheatre of El Jem
 
-   1012     2    48    197    40.7358  Island of Mozambique
+   1012    20    48    180    40.7358  Island of Mozambique

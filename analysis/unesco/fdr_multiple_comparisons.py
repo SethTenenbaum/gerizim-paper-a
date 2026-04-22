@@ -80,6 +80,7 @@ def main():
 
     tests   = []   # (label, p_value, category)
     skipped = []   # labels of tests whose key was not found in the store
+    keys    = []   # all test keys, for macro emission
 
     for entry in registry:
         label = entry["label"]
@@ -90,7 +91,8 @@ def main():
             skipped.append((label, key))
             continue
         tests.append((label, float(val), cat))
-
+        keys.append(key)
+ 
     if skipped:
         print(f"\n  WARNING: {len(skipped)} test(s) missing from results store "
               f"(run their producing scripts first):")
@@ -148,6 +150,19 @@ def main():
     print(f"  {'Holm step-down (k={})'.format(m):<35} {sum(holm < 0.05):>12}")
     print(f"  {'Benjamini-Hochberg FDR (k={})'.format(m):<35} {sum(bh_q < 0.05):>12}")
 
+    # ── Full Bonferroni survivors ──────────────────────────────────────────────
+    bonf_survivors = [
+        (names[i], pvals[i], bonf[i])
+        for i in range(m)
+        if bonf[i] < 0.05
+    ]
+    print(f"\n  Key results surviving full Bonferroni correction (k={m}, α=0.05):")
+    if bonf_survivors:
+        for name, p, p_adj in bonf_survivors:
+            print(f"    • {name:<45s}  p = {p:.4f}  p_adj = {p_adj:.4f}")
+    else:
+        print("    • None")
+
     # ── Confirmatory subset ───────────────────────────────────────────────────
     if len(conf_idx) > 0:
         print(f"\n" + "─" * 110)
@@ -202,6 +217,7 @@ def main():
     bonf_threshold = round(0.05 / m, 4) if m > 0 else 0.0
     bonf_threshold_fmt = f"{bonf_threshold:.4f}"
 
+    survivor_macros = {}
     print()
     print("  % LaTeX macros (GROUP 19):")
     print(f"  \\newcommand{{\\NtotalTests}}{{{m}}}           % total tests in FDR analysis")
@@ -212,45 +228,20 @@ def main():
     print(f"  \\newcommand{{\\NtotalTestsP}}{{{bonf_threshold_fmt}}}  "
           f"% Bonferroni threshold = 0.05/{m} (used in FDR table header)")
 
-    # ── Per-test BH q-value and Bonferroni macros ────────────────────────────
-    # Emit \FDRqTest{Macro} and \BonfAllTest{Macro} for every test that has
-    # a 'macro' field in config.json (confirmatory, sensitivity, exploratory).
-    # The macro suffix comes from config so it stays in sync automatically.
-    # Build a proper store_key → position map from the actual tests list.
-    _pkey_to_pos: dict[str, int] = {}
-    for _i, (_label, _p, _cat) in enumerate(tests):
-        for _entry in registry:
-            if _entry["label"] == _label:
-                _pkey_to_pos[_entry["p_key"]] = _i
-                break
+    def _sanitize_macro_name(key: str) -> str:
+        parts = key.split("_")
+        return parts[0] + "".join(p.capitalize() for p in parts[1:])
 
-    # Collect all test entries that have a macro suffix (from all categories)
-    _all_macro_entries = (
-        list(_CONFIG["tests"]["confirmatory"])
-        + list(_CONFIG["tests"].get("sensitivity", []))
-        + [e for e in _CONFIG["tests"].get("exploratory", []) if e.get("macro")]
-    )
-
-    print()
-    print("  % Per-test BH q-values and full-k Bonferroni (confirmatory + sensitivity + exploratory):")
-    for e in _all_macro_entries:
-        macro_suffix = e.get("macro")
-        if not macro_suffix:
-            continue
-        p_key = e["p_key"]
-        pos = _pkey_to_pos.get(p_key)
-        if pos is None:
-            print(f"  % MISSING: {p_key} not in store — run {e['script']}")
-            continue
-        q_val  = round(float(bh_q[pos]),  4)
-        bf_val = round(float(bonf[pos]),  4)
-        print(f"  \\newcommand{{\\FDRqTest{macro_suffix}}}{{{q_val}}}  "
-              f"% BH q, Test {e['id']}: {e['label']}")
-        print(f"  \\newcommand{{\\BonfAllTest{macro_suffix}}}{{{bf_val}}}  "
-              f"% Bonf adj (k={m}), Test {e['id']}: {e['label']}")
-
-    # NOTE: BonfK and pAdjTest* are emitted by bonferroni_correction.py (authoritative).
-    # Do not emit them here to avoid duplicate \newcommand definitions.
+    for i, key in enumerate(keys):
+        macro_name = _sanitize_macro_name(key)
+        if bonf[i] < 0.05:
+            k = f"BonfAllSurvive{macro_name}"
+            survivor_macros[k] = round(float(bonf[i]), 4)
+            print(f"  \\newcommand{{\\{k}}}{{{survivor_macros[k]}}}  % full-k Bonferroni survivor")
+        if bh_q[i] < 0.05:
+            k = f"FDRqSurvive{macro_name}"
+            survivor_macros[k] = round(float(bh_q[i]), 4)
+            print(f"  \\newcommand{{\\{k}}}{{{survivor_macros[k]}}}  % BH q-value survivor")
 
     # ── Write summary counts to store ─────────────────────────────────────────
     ResultsStore().write_many({
@@ -260,6 +251,8 @@ def main():
         "NsurviveBonfAll": n_survive_bonf,
         "NtotalTestsP":    bonf_threshold,
     })
+    if survivor_macros:
+        ResultsStore().write_many(survivor_macros)
     print()
     return 0
 

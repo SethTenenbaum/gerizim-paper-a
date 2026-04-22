@@ -102,7 +102,7 @@ for s in cultural:
 stupa_sites.sort(key=lambda x: x["dev"])
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
-TIER_ORDER = ["A+", "A", "B", "C", "C-"]
+TIER_ORDER = ["A++", "A+", "A", "B", "C", "C-"]
 
 def tier_counts(sites):
     return {t: sum(1 for s in sites if s["tier"] == t) for t in TIER_ORDER}
@@ -170,22 +170,26 @@ def tier_block(sites, label):
     """Format a tier-breakdown block for a region."""
     n   = len(sites)
     tc  = tier_counts(sites)
-    n_ap = tc["A+"]
-    n_a  = tc["A+"] + tc["A"]   # A-or-better
+    n_ap = tc["A++"] + tc["A+"]
+    n_a  = tc["A++"] + tc["A+"] + tc["A"]   # A-or-better
     n_c  = tc["C"]
     n_cm = tc["C-"]
     or_ap, p_ap = fisher_ap(n, n_ap)
     or_a,  p_a  = fisher_a(n, n_a)
     or_c,  p_c  = fisher_c(n, n_c)
     or_cm, p_cm = fisher_cm(n, n_cm)
+    rate_ap = f"{100*n_ap/n:.1f}%" if n else "—"
+    rate_a  = f"{100*n_a/n:.1f}%"  if n else "—"
     lines = []
     lines.append(f"  {label}  (N = {n})")
-    lines.append(f"  {'Tier':<6} {'Count':>5} {'Rate':>7}  {'vs corpus'}")
-    lines.append(f"  {'─'*6} {'─'*5} {'─'*7}  {'─'*30}")
+    lines.append(f"  {'Tier':<12} {'Count':>5} {'Rate':>7}  {'vs corpus'}")
+    lines.append(f"  {'─'*12} {'─'*5} {'─'*7}  {'─'*30}")
     for t in TIER_ORDER:
         c = tc[t]
         rate = f"{100*c/n:.1f}%" if n else "—"
-        lines.append(f"  {t:<6} {c:>5} {rate:>7}")
+        lines.append(f"  {t:<12} {c:>5} {rate:>7}")
+    lines.append(f"  {'Combined A+/A++':<20} {n_ap:>5} {rate_ap:>7}")
+    lines.append(f"  {'Combined A/A+/A++':<20} {n_a:>5} {rate_a:>7}")
     lines.append(f"  {'─'*50}")
     lines.append(f"  A+ Fisher exact: OR = {or_ap}×  p = {p_ap:.4f}  {sig(p_ap)}")
     lines.append(f"  A   Fisher exact: OR = {or_a}×  p = {p_a:.4f}  {sig(p_a)}")
@@ -197,7 +201,8 @@ def site_listing(sites):
     lines = []
     lines.append(f"  {'Tier':<4} {'Dev(km)':>8}  {'Lon':>8}  Keywords / Name")
     lines.append(f"  {'─'*4} {'─'*8}  {'─'*8}  {'─'*60}")
-    for s in sorted(sites, key=lambda x: (TIER_ORDER.index(x["tier"]), x["dev"])):
+    _tier_rank = {t: i for i, t in enumerate(TIER_ORDER)}
+    for s in sorted(sites, key=lambda x: (_tier_rank.get(x["tier"], len(TIER_ORDER)), x["dev"])):
         kws = ", ".join(s["keywords"])
         lines.append(
             f"  [{s['tier']:<3}] {s['dev_km']:>7.1f}km  {s['lon']:>8.3f}°E  "
@@ -216,19 +221,20 @@ lines = []
 lines.append(SEP)
 lines.append("  STUPA GEOGRAPHIC TIER AUDIT")
 lines.append(f"  Generated: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}")
-lines.append(f"  Full corpus background: N = {N_CORPUS},  A+ = {K_AP_CORPUS} ({100*K_AP_CORPUS/N_CORPUS:.1f}%),  A = {K_A_CORPUS} ({100*K_A_CORPUS/N_CORPUS:.1f}%),  C = {K_C_CORPUS} ({100*K_C_CORPUS/N_CORPUS:.1f}%),  C- = {K_CM_CORPUS} ({100*K_CM_CORPUS/N_CORPUS:.1f}%)")
+lines.append(f"  Full corpus background: N = {N_CORPUS},  A+/A++ = {K_AP_CORPUS} ({100*K_AP_CORPUS/N_CORPUS:.1f}%),  A/A+/A++ = {K_A_CORPUS} ({100*K_A_CORPUS/N_CORPUS:.1f}%),  C = {K_C_CORPUS} ({100*K_C_CORPUS/N_CORPUS:.1f}%),  C- = {K_CM_CORPUS} ({100*K_CM_CORPUS/N_CORPUS:.1f}%)")
 lines.append(f"  Stupa keywords: {', '.join(STUPA_KEYWORDS)}")
 lines.append(SEP)
 
 # Summary table across all regions
 lines.append("")
 lines.append("  SUMMARY TABLE")
-hdr = (f"  {'Region':<40} {'N':>4} {'A+':>4} {'A+%':>6} {'OR_A+':>8} {'p_A+':>12}"
-       f"  {'A':>4} {'A%':>6} {'OR_A':>8} {'p_A':>12}"
+lines.append("  Note: Exact A++ and A+ counts appear separately in the region tier blocks; A+/A++ and A/A+/A++ rates are combined counts used for enrichment tests.")
+hdr = (f"  {'Region':<36} {'N':>4} {'A++':>4} {'A+':>4} {'A+/A++%':>8} {'OR_A+':>8} {'p_A+':>12}"
+       f"  {'A/A+/A++':>10} {'A%':>6} {'OR_A':>8} {'p_A':>12}"
        f"  {'C':>4} {'C%':>6} {'OR_C':>8} {'p_C':>12}"
        f"  {'C-':>4} {'C-%':>6} {'OR_Cm':>8} {'p_Cm':>12}")
-sep_row = (f"  {'─'*40} {'─'*4} {'─'*4} {'─'*6} {'─'*8} {'─'*12}"
-           f"  {'─'*4} {'─'*6} {'─'*8} {'─'*12}"
+sep_row = (f"  {'─'*36} {'─'*4} {'─'*4} {'─'*8} {'─'*8} {'─'*12}"
+           f"  {'─'*10} {'─'*6} {'─'*8} {'─'*12}"
            f"  {'─'*4} {'─'*6} {'─'*8} {'─'*12}"
            f"  {'─'*4} {'─'*6} {'─'*8} {'─'*12}")
 lines.append(hdr)
@@ -237,16 +243,19 @@ lines.append(sep_row)
 for label, sites in region_data:
     n    = len(sites)
     tc   = tier_counts(sites)
-    n_ap = tc["A+"]
-    n_a  = tc["A+"] + tc["A"]
+    n_app = tc["A++"]
+    n_ap  = tc["A+"]
+    n_ap_cum = n_app + n_ap
+    n_a_exact = tc["A"]
+    n_a_cum = n_app + n_ap + n_a_exact
     n_c  = tc["C"]
     n_cm = tc["C-"]
-    or_ap, p_ap = fisher_ap(n, n_ap)
-    or_a,  p_a  = fisher_a(n, n_a)
+    or_ap, p_ap = fisher_ap(n, n_ap_cum)
+    or_a,  p_a  = fisher_a(n, n_a_cum)
     or_c,  p_c  = fisher_c(n, n_c)
     or_cm, p_cm = fisher_cm(n, n_cm)
-    rate_ap = f"{100*n_ap/n:.1f}%" if n else "—"
-    rate_a  = f"{100*n_a/n:.1f}%"  if n else "—"
+    rate_ap = f"{100*n_ap_cum/n:.1f}%" if n else "—"
+    rate_a  = f"{100*n_a_cum/n:.1f}%"  if n else "—"
     rate_c  = f"{100*n_c/n:.1f}%"  if n else "—"
     rate_cm = f"{100*n_cm/n:.1f}%" if n else "—"
     def fmt_p(p, label_):
@@ -254,8 +263,8 @@ for label, sites in region_data:
     def fmt_or(or_):
         return f"{or_}×" if or_ == or_ else "—"
     lines.append(
-        f"  {label:<40} {n:>4} {n_ap:>4} {rate_ap:>6} {fmt_or(or_ap):>8} {fmt_p(p_ap, 'A+'):>12}"
-        f"  {n_a:>4} {rate_a:>6} {fmt_or(or_a):>8} {fmt_p(p_a, 'A'):>12}"
+        f"  {label:<36} {n:>4} {n_app:>4} {n_ap:>4} {rate_ap:>8} {fmt_or(or_ap):>8} {fmt_p(p_ap, 'A+'):>12}"
+        f"  {n_a_cum:>10} {rate_a:>6} {fmt_or(or_a):>8} {fmt_p(p_a, 'A'):>12}"
         f"  {n_c:>4} {rate_c:>6} {fmt_or(or_c):>8} {fmt_p(p_c, 'C'):>12}"
         f"  {n_cm:>4} {rate_cm:>6} {fmt_or(or_cm):>8} {fmt_p(p_cm, 'Cm'):>12}"
     )
@@ -289,15 +298,18 @@ for grp_label, grp in [("Java (105°–112°E)", java),
                         ("Outside heartland", outside)]:
     n    = len(grp)
     tc   = tier_counts(grp)
-    n_ap = tc["A+"]
-    n_a  = tc["A+"] + tc["A"]
-    or_ap, p_ap = fisher_ap(n, n_ap)
-    or_a,  p_a  = fisher_a(n, n_a)
-    rate_ap = f"{100*n_ap/n:.1f}%" if n else "—"
-    rate_a  = f"{100*n_a/n:.1f}%"  if n else "—"
+    n_app = tc["A++"]
+    n_ap  = tc["A+"]
+    n_ap_cum = n_app + n_ap
+    n_a_exact = tc["A"]
+    n_a_cum = n_app + n_ap + n_a_exact
+    or_ap, p_ap = fisher_ap(n, n_ap_cum)
+    or_a,  p_a  = fisher_a(n, n_a_cum)
+    rate_ap = f"{100*n_ap_cum/n:.1f}%" if n else "—"
+    rate_a  = f"{100*n_a_cum/n:.1f}%"  if n else "—"
     lines.append(f"  {grp_label}")
-    lines.append(f"    N={n}  A+={n_ap} ({rate_ap})  OR_A+={or_ap}× p={p_ap:.4f} {sig(p_ap)}")
-    lines.append(f"          A={n_a}  ({rate_a})       OR_A={or_a}×  p={p_a:.4f}  {sig(p_a)}")
+    lines.append(f"    N={n}  A+/A++={n_ap_cum} ({rate_ap})  OR_A+={or_ap}× p={p_ap:.4f} {sig(p_ap)}")
+    lines.append(f"          A/A+/A++={n_a_cum}  ({rate_a})       OR_A={or_a}×  p={p_a:.4f}  {sig(p_a)}")
     lines.append(f"    Tier breakdown: " +
                  "  ".join(f"{t}={tier_counts(grp)[t]}" for t in TIER_ORDER))
     lines.append("")

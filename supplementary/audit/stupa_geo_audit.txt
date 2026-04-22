@@ -1,42 +1,46 @@
 ====================================================================================================
   STUPA GEOGRAPHIC TIER AUDIT
-  Generated: 2026-04-20 20:13 UTC
-  Full corpus background: N = 1011,  A+ = 88 (8.7%),  A = 228 (22.6%),  C = 130 (12.9%),  C- = 68 (6.7%)
+  Generated: 2026-04-22 18:10 UTC
+  Full corpus background: N = 1011,  A+/A++ = 88 (8.7%),  A/A+/A++ = 214 (21.2%),  C = 121 (12.0%),  C- = 35 (3.5%)
   Stupa keywords: stupa, stupas, dagoba, chorten
 ====================================================================================================
 
   SUMMARY TABLE
-  Region                                      N   A+    A+%    OR_A+         p_A+     A     A%     OR_A          p_A     C     C%     OR_C          p_C    C-    C-%    OR_Cm         p_Cm
-  ──────────────────────────────────────── ──── ──── ────── ──────── ────────────  ──── ────── ──────── ────────────  ──── ────── ──────── ────────────  ──── ────── ──────── ────────────
-  All stupas                                 18    4  22.2%    3.09×     0.0637 †     7  38.9%    2.22×     0.0874 †     3  16.7%    1.36×    0.4138 ns     1   5.6%    0.81×    0.7176 ns
-  Heartland (70°–110°E)                      13    3  23.1%    3.22×     0.0962 †     3  23.1%    1.03×    0.5900 ns     3  23.1%    2.06×    0.2278 ns     1   7.7%    1.16×    0.5978 ns
-  Non-heartland                               5    1  20.0%    2.64×    0.3664 ns     4  80.0%   13.96×     0.0104 *     0   0.0%     0.0×    1.0000 ns     0   0.0%     0.0×    1.0000 ns
-  Indonesia (95°–141°E)                       5    3  60.0%   16.25×    0.0056 **     4  80.0%   13.96×     0.0104 *     0   0.0%     0.0×    1.0000 ns     0   0.0%     0.0×    1.0000 ns
-  Java (105°–112°E)                           2    2 100.0%     inf×    0.0075 **     2 100.0%     inf×     0.0507 †     0   0.0%     0.0×    1.0000 ns     0   0.0%     0.0×    1.0000 ns
-  India/Nepal (70°–90°E)                      9    1  11.1%    1.31×    0.5609 ns     1  11.1%    0.43×    0.9008 ns     3  33.3%    3.44×     0.0974 †     1  11.1%    1.74×    0.4670 ns
-  SE Asia ex-Indonesia (95°–110°E)            2    2 100.0%     inf×    0.0075 **     2 100.0%     inf×     0.0507 †     0   0.0%     0.0×    1.0000 ns     0   0.0%     0.0×    1.0000 ns
+  Note: Exact A++ and A+ counts appear separately in the region tier blocks; A+/A++ and A/A+/A++ rates are combined counts used for enrichment tests.
+  Region                                  N  A++   A+  A+/A++%    OR_A+         p_A+    A/A+/A++     A%     OR_A          p_A     C     C%     OR_C          p_C    C-    C-%    OR_Cm         p_Cm
+  ──────────────────────────────────── ──── ──── ──────── ──────── ────────────  ────────── ────── ──────── ────────────  ──── ────── ──────── ────────────  ──── ────── ──────── ────────────
+  All stupas                             18    4    0    22.2%    3.09×     0.0637 †           7  38.9%    2.42×     0.0652 †     3  16.7%    1.48×    0.3675 ns     1   5.6%    1.66×    0.4725 ns
+  Heartland (70°–110°E)                  13    3    0    23.1%    3.22×     0.0962 †           3  23.1%    1.12×    0.5416 ns     3  23.1%    2.24×    0.1964 ns     1   7.7%    2.36×    0.3692 ns
+  Non-heartland                           5    1    0    20.0%    2.64×    0.3664 ns           4  80.0%   15.16×    0.0082 **     0   0.0%     0.0×    1.0000 ns     0   0.0%     0.0×    1.0000 ns
+  Indonesia (95°–141°E)                   5    3    0    60.0%   16.25×    0.0056 **           4  80.0%   15.16×    0.0082 **     0   0.0%     0.0×    1.0000 ns     0   0.0%     0.0×    1.0000 ns
+  Java (105°–112°E)                       2    2    0   100.0%     inf×    0.0075 **           2 100.0%     inf×     0.0446 *     0   0.0%     0.0×    1.0000 ns     0   0.0%     0.0×    1.0000 ns
+  India/Nepal (70°–90°E)                  9    1    0    11.1%    1.31×    0.5609 ns           1  11.1%    0.46×    0.8835 ns     3  33.3%    3.75×     0.0819 †     1  11.1%    3.56×    0.2727 ns
+  SE Asia ex-Indonesia (95°–110°E)        2    2    0   100.0%     inf×    0.0075 **           2 100.0%     inf×     0.0446 *     0   0.0%     0.0×    1.0000 ns     0   0.0%     0.0×    1.0000 ns
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────
   All stupas  (N = 18)
-  Tier   Count    Rate  vs corpus
-  ────── ───── ───────  ──────────────────────────────
-  A+         4   22.2%
-  A          3   16.7%
-  B          7   38.9%
-  C          3   16.7%
-  C-         1    5.6%
+  Tier         Count    Rate  vs corpus
+  ──────────── ───── ───────  ──────────────────────────────
+  A++              4   22.2%
+  A+               0    0.0%
+  A                3   16.7%
+  B                7   38.9%
+  C                3   16.7%
+  C-               1    5.6%
+  Combined A+/A++          4   22.2%
+  Combined A/A+/A++        7   38.9%
   ──────────────────────────────────────────────────
   A+ Fisher exact: OR = 3.09×  p = 0.0637  †
-  A   Fisher exact: OR = 2.22×  p = 0.0874  †
-  C   Fisher exact: OR = 1.36×  p = 0.4138  ns
-  C-  Fisher exact: OR = 0.81×  p = 0.7176  ns
+  A   Fisher exact: OR = 2.42×  p = 0.0652  †
+  C   Fisher exact: OR = 1.48×  p = 0.3675  ns
+  C-  Fisher exact: OR = 1.66×  p = 0.4725  ns
 
   Tier  Dev(km)       Lon  Keywords / Name
   ──── ────────  ────────  ────────────────────────────────────────────────────────────
-  [A+ ]     0.8km    83.276°E  (stupas)  Lumbini, the Birthplace of the Lord Buddha
-  [A+ ]     2.3km    95.290°E  (stupas)  Pyu Ancient Cities
-  [A+ ]     2.5km   107.291°E  (stupas)  Silk Roads: the Routes Network of Chang'an-Tianshan Corridor
-  [A+ ]     4.3km   110.230°E  (stupa, stupas)  Borobudur Temple Compounds
+  [A++]     0.8km    83.276°E  (stupas)  Lumbini, the Birthplace of the Lord Buddha
+  [A++]     2.3km    95.290°E  (stupas)  Pyu Ancient Cities
+  [A++]     2.5km   107.291°E  (stupas)  Silk Roads: the Routes Network of Chang'an-Tianshan Corridor
+  [A++]     4.3km   110.230°E  (stupa, stupas)  Borobudur Temple Compounds
   [A  ]    14.4km    68.139°E  (stupa)  Archaeological Ruins at Moenjodaro
   [A  ]    14.6km   128.137°E  (stupas)  Mount Kumgang – Diamond Mountain from the Sea
   [A  ]    22.5km    62.067°E  (stupa)  State Historical and Cultural Park “Ancient Merv”
@@ -54,24 +58,27 @@
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────
   Heartland (70°–110°E)  (N = 13)
-  Tier   Count    Rate  vs corpus
-  ────── ───── ───────  ──────────────────────────────
-  A+         3   23.1%
-  A          0    0.0%
-  B          6   46.2%
-  C          3   23.1%
-  C-         1    7.7%
+  Tier         Count    Rate  vs corpus
+  ──────────── ───── ───────  ──────────────────────────────
+  A++              3   23.1%
+  A+               0    0.0%
+  A                0    0.0%
+  B                6   46.2%
+  C                3   23.1%
+  C-               1    7.7%
+  Combined A+/A++          3   23.1%
+  Combined A/A+/A++        3   23.1%
   ──────────────────────────────────────────────────
   A+ Fisher exact: OR = 3.22×  p = 0.0962  †
-  A   Fisher exact: OR = 1.03×  p = 0.5900  ns
-  C   Fisher exact: OR = 2.06×  p = 0.2278  ns
-  C-  Fisher exact: OR = 1.16×  p = 0.5978  ns
+  A   Fisher exact: OR = 1.12×  p = 0.5416  ns
+  C   Fisher exact: OR = 2.24×  p = 0.1964  ns
+  C-  Fisher exact: OR = 2.36×  p = 0.3692  ns
 
   Tier  Dev(km)       Lon  Keywords / Name
   ──── ────────  ────────  ────────────────────────────────────────────────────────────
-  [A+ ]     0.8km    83.276°E  (stupas)  Lumbini, the Birthplace of the Lord Buddha
-  [A+ ]     2.3km    95.290°E  (stupas)  Pyu Ancient Cities
-  [A+ ]     2.5km   107.291°E  (stupas)  Silk Roads: the Routes Network of Chang'an-Tianshan Corridor
+  [A++]     0.8km    83.276°E  (stupas)  Lumbini, the Birthplace of the Lord Buddha
+  [A++]     2.3km    95.290°E  (stupas)  Pyu Ancient Cities
+  [A++]     2.5km   107.291°E  (stupas)  Silk Roads: the Routes Network of Chang'an-Tianshan Corridor
   [B  ]    33.8km    94.964°E  (stupas)  Bagan
   [B  ]    52.2km    77.740°E  (stupa, stupas)  Buddhist Monuments at Sanchi
   [B  ]    75.7km    71.951°E  (stupa, stupas)  Buddhist Ruins of Takht-i-Bahi and Neighbouring City Remains at Sahr-i-Bahlol
@@ -85,22 +92,25 @@
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────
   Non-heartland  (N = 5)
-  Tier   Count    Rate  vs corpus
-  ────── ───── ───────  ──────────────────────────────
-  A+         1   20.0%
-  A          3   60.0%
-  B          1   20.0%
-  C          0    0.0%
-  C-         0    0.0%
+  Tier         Count    Rate  vs corpus
+  ──────────── ───── ───────  ──────────────────────────────
+  A++              1   20.0%
+  A+               0    0.0%
+  A                3   60.0%
+  B                1   20.0%
+  C                0    0.0%
+  C-               0    0.0%
+  Combined A+/A++          1   20.0%
+  Combined A/A+/A++        4   80.0%
   ──────────────────────────────────────────────────
   A+ Fisher exact: OR = 2.64×  p = 0.3664  ns
-  A   Fisher exact: OR = 13.96×  p = 0.0104  *
+  A   Fisher exact: OR = 15.16×  p = 0.0082  **
   C   Fisher exact: OR = 0.0×  p = 1.0000  ns
   C-  Fisher exact: OR = 0.0×  p = 1.0000  ns
 
   Tier  Dev(km)       Lon  Keywords / Name
   ──── ────────  ────────  ────────────────────────────────────────────────────────────
-  [A+ ]     4.3km   110.230°E  (stupa, stupas)  Borobudur Temple Compounds
+  [A++]     4.3km   110.230°E  (stupa, stupas)  Borobudur Temple Compounds
   [A  ]    14.4km    68.139°E  (stupa)  Archaeological Ruins at Moenjodaro
   [A  ]    14.6km   128.137°E  (stupas)  Mount Kumgang – Diamond Mountain from the Sea
   [A  ]    22.5km    62.067°E  (stupa)  State Historical and Cultural Park “Ancient Merv”
@@ -108,65 +118,74 @@
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────
   Indonesia (95°–141°E)  (N = 5)
-  Tier   Count    Rate  vs corpus
-  ────── ───── ───────  ──────────────────────────────
-  A+         3   60.0%
-  A          1   20.0%
-  B          1   20.0%
-  C          0    0.0%
-  C-         0    0.0%
+  Tier         Count    Rate  vs corpus
+  ──────────── ───── ───────  ──────────────────────────────
+  A++              3   60.0%
+  A+               0    0.0%
+  A                1   20.0%
+  B                1   20.0%
+  C                0    0.0%
+  C-               0    0.0%
+  Combined A+/A++          3   60.0%
+  Combined A/A+/A++        4   80.0%
   ──────────────────────────────────────────────────
   A+ Fisher exact: OR = 16.25×  p = 0.0056  **
-  A   Fisher exact: OR = 13.96×  p = 0.0104  *
+  A   Fisher exact: OR = 15.16×  p = 0.0082  **
   C   Fisher exact: OR = 0.0×  p = 1.0000  ns
   C-  Fisher exact: OR = 0.0×  p = 1.0000  ns
 
   Tier  Dev(km)       Lon  Keywords / Name
   ──── ────────  ────────  ────────────────────────────────────────────────────────────
-  [A+ ]     2.3km    95.290°E  (stupas)  Pyu Ancient Cities
-  [A+ ]     2.5km   107.291°E  (stupas)  Silk Roads: the Routes Network of Chang'an-Tianshan Corridor
-  [A+ ]     4.3km   110.230°E  (stupa, stupas)  Borobudur Temple Compounds
+  [A++]     2.3km    95.290°E  (stupas)  Pyu Ancient Cities
+  [A++]     2.5km   107.291°E  (stupas)  Silk Roads: the Routes Network of Chang'an-Tianshan Corridor
+  [A++]     4.3km   110.230°E  (stupa, stupas)  Borobudur Temple Compounds
   [A  ]    14.6km   128.137°E  (stupas)  Mount Kumgang – Diamond Mountain from the Sea
   [B  ]    89.1km   112.467°E  (stupas)  Longmen Grottoes
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────
   Java (105°–112°E)  (N = 2)
-  Tier   Count    Rate  vs corpus
-  ────── ───── ───────  ──────────────────────────────
-  A+         2  100.0%
-  A          0    0.0%
-  B          0    0.0%
-  C          0    0.0%
-  C-         0    0.0%
+  Tier         Count    Rate  vs corpus
+  ──────────── ───── ───────  ──────────────────────────────
+  A++              2  100.0%
+  A+               0    0.0%
+  A                0    0.0%
+  B                0    0.0%
+  C                0    0.0%
+  C-               0    0.0%
+  Combined A+/A++          2  100.0%
+  Combined A/A+/A++        2  100.0%
   ──────────────────────────────────────────────────
   A+ Fisher exact: OR = inf×  p = 0.0075  **
-  A   Fisher exact: OR = inf×  p = 0.0507  †
+  A   Fisher exact: OR = inf×  p = 0.0446  *
   C   Fisher exact: OR = 0.0×  p = 1.0000  ns
   C-  Fisher exact: OR = 0.0×  p = 1.0000  ns
 
   Tier  Dev(km)       Lon  Keywords / Name
   ──── ────────  ────────  ────────────────────────────────────────────────────────────
-  [A+ ]     2.5km   107.291°E  (stupas)  Silk Roads: the Routes Network of Chang'an-Tianshan Corridor
-  [A+ ]     4.3km   110.230°E  (stupa, stupas)  Borobudur Temple Compounds
+  [A++]     2.5km   107.291°E  (stupas)  Silk Roads: the Routes Network of Chang'an-Tianshan Corridor
+  [A++]     4.3km   110.230°E  (stupa, stupas)  Borobudur Temple Compounds
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────
   India/Nepal (70°–90°E)  (N = 9)
-  Tier   Count    Rate  vs corpus
-  ────── ───── ───────  ──────────────────────────────
-  A+         1   11.1%
-  A          0    0.0%
-  B          4   44.4%
-  C          3   33.3%
-  C-         1   11.1%
+  Tier         Count    Rate  vs corpus
+  ──────────── ───── ───────  ──────────────────────────────
+  A++              1   11.1%
+  A+               0    0.0%
+  A                0    0.0%
+  B                4   44.4%
+  C                3   33.3%
+  C-               1   11.1%
+  Combined A+/A++          1   11.1%
+  Combined A/A+/A++        1   11.1%
   ──────────────────────────────────────────────────
   A+ Fisher exact: OR = 1.31×  p = 0.5609  ns
-  A   Fisher exact: OR = 0.43×  p = 0.9008  ns
-  C   Fisher exact: OR = 3.44×  p = 0.0974  †
-  C-  Fisher exact: OR = 1.74×  p = 0.4670  ns
+  A   Fisher exact: OR = 0.46×  p = 0.8835  ns
+  C   Fisher exact: OR = 3.75×  p = 0.0819  †
+  C-  Fisher exact: OR = 3.56×  p = 0.2727  ns
 
   Tier  Dev(km)       Lon  Keywords / Name
   ──── ────────  ────────  ────────────────────────────────────────────────────────────
-  [A+ ]     0.8km    83.276°E  (stupas)  Lumbini, the Birthplace of the Lord Buddha
+  [A++]     0.8km    83.276°E  (stupas)  Lumbini, the Birthplace of the Lord Buddha
   [B  ]    52.2km    77.740°E  (stupa, stupas)  Buddhist Monuments at Sanchi
   [B  ]    75.7km    71.951°E  (stupa, stupas)  Buddhist Ruins of Takht-i-Bahi and Neighbouring City Remains at Sahr-i-Bahlol
   [B  ]    91.6km    85.444°E  (stupa, stupas)  Archaeological Site of Nalanda Mahavihara at Nalanda, Bihar
@@ -178,23 +197,26 @@
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────
   SE Asia ex-Indonesia (95°–110°E)  (N = 2)
-  Tier   Count    Rate  vs corpus
-  ────── ───── ───────  ──────────────────────────────
-  A+         2  100.0%
-  A          0    0.0%
-  B          0    0.0%
-  C          0    0.0%
-  C-         0    0.0%
+  Tier         Count    Rate  vs corpus
+  ──────────── ───── ───────  ──────────────────────────────
+  A++              2  100.0%
+  A+               0    0.0%
+  A                0    0.0%
+  B                0    0.0%
+  C                0    0.0%
+  C-               0    0.0%
+  Combined A+/A++          2  100.0%
+  Combined A/A+/A++        2  100.0%
   ──────────────────────────────────────────────────
   A+ Fisher exact: OR = inf×  p = 0.0075  **
-  A   Fisher exact: OR = inf×  p = 0.0507  †
+  A   Fisher exact: OR = inf×  p = 0.0446  *
   C   Fisher exact: OR = 0.0×  p = 1.0000  ns
   C-  Fisher exact: OR = 0.0×  p = 1.0000  ns
 
   Tier  Dev(km)       Lon  Keywords / Name
   ──── ────────  ────────  ────────────────────────────────────────────────────────────
-  [A+ ]     2.3km    95.290°E  (stupas)  Pyu Ancient Cities
-  [A+ ]     2.5km   107.291°E  (stupas)  Silk Roads: the Routes Network of Chang'an-Tianshan Corridor
+  [A++]     2.3km    95.290°E  (stupas)  Pyu Ancient Cities
+  [A++]     2.5km   107.291°E  (stupas)  Silk Roads: the Routes Network of Chang'an-Tianshan Corridor
 
 ====================================================================================================
   CROSS-REGION COMPARISON: A+ AND A CONCENTRATION
@@ -204,18 +226,18 @@
   or is it spread across the full heartland?
 
   Java (105°–112°E)
-    N=2  A+=2 (100.0%)  OR_A+=inf× p=0.0075 **
-          A=2  (100.0%)       OR_A=inf×  p=0.0507  †
-    Tier breakdown: A+=2  A=0  B=0  C=0  C-=0
+    N=2  A+/A++=2 (100.0%)  OR_A+=inf× p=0.0075 **
+          A/A+/A++=2  (100.0%)       OR_A=inf×  p=0.0446  *
+    Tier breakdown: A++=2  A+=0  A=0  B=0  C=0  C-=0
 
   Heartland ex-Java (70°–110°E, excl. 105°–112°E)
-    N=12  A+=2 (16.7%)  OR_A+=2.12× p=0.2810 ns
-          A=2  (16.7%)       OR_A=0.68×  p=0.7924  ns
-    Tier breakdown: A+=2  A=0  B=6  C=3  C-=1
+    N=12  A+/A++=2 (16.7%)  OR_A+=2.12× p=0.2810 ns
+          A/A+/A++=2  (16.7%)       OR_A=0.74×  p=0.7585  ns
+    Tier breakdown: A++=2  A+=0  A=0  B=6  C=3  C-=1
 
   Outside heartland
-    N=5  A+=1 (20.0%)  OR_A+=2.64× p=0.3664 ns
-          A=4  (80.0%)       OR_A=13.96×  p=0.0104  *
-    Tier breakdown: A+=1  A=3  B=1  C=0  C-=0
+    N=5  A+/A++=1 (20.0%)  OR_A+=2.64× p=0.3664 ns
+          A/A+/A++=4  (80.0%)       OR_A=15.16×  p=0.0082  **
+    Tier breakdown: A++=1  A+=0  A=3  B=1  C=0  C-=0
 
 ====================================================================================================

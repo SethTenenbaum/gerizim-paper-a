@@ -94,8 +94,8 @@
   },
   "tiers": {
     "A++": {
-      "max_deviation_beru": 0.0002,
-      "approx_km": 0.67,
+      "max_deviation_beru": 0.0016,
+      "approx_km": 5.346,
       "note": "Extremely close to a harmonic"
     },
     "A+": {
@@ -104,8 +104,8 @@
       "note": "Primary threshold for significance testing"
     },
     "A": {
-      "max_deviation_beru": 0.01,
-      "approx_km": 33,
+      "max_deviation_beru": 0.00942,
+      "approx_km": 21.384,
       "note": "Secondary threshold"
     },
     "B": {
@@ -114,8 +114,8 @@
       "note": "Middle zone \u2014 neither near a harmonic nor near a midpoint"
     },
     "C": {
-      "max_dist_from_midpoint_beru": 0.01,
-      "approx_km": 33,
+      "max_dist_from_midpoint_beru": 0.00942,
+      "approx_km": 21.384,
       "note": "Mirror of A: within 33 km of inter-harmonic midpoint (dev >= 0.040)"
     },
     "C-": {
@@ -124,8 +124,8 @@
       "note": "Mirror of A+: within 6.7 km of inter-harmonic midpoint (dev >= 0.048)"
     },
     "C--": {
-      "max_dist_from_midpoint_beru": 0.0002,
-      "approx_km": 0.67,
+      "max_dist_from_midpoint_beru": 0.0016,
+      "approx_km": 5.346,
       "note": "Mirror of A++: within 0.67 km of inter-harmonic midpoint (dev >= 0.0498)"
     }
   },
@@ -276,6 +276,11 @@
     "fdr_all": {
       "note": "Full list of tests for the FDR omnibus table. Each entry maps a human label to a store key. Category: C=Confirmatory, E=Exploratory.",
       "tests": [
+        {
+          "label": "Test 1: Dome/spherical A++ (binomial)",
+          "p_key": "pCircApp",
+          "cat": "C"
+        },
         {
           "label": "Test 1: Dome/spherical A+ (binomial)",
           "p_key": "pCircAp",
@@ -462,6 +467,11 @@
           "cat": "C"
         },
         {
+          "label": "Test 5: Evolution combined A++ (binomial)",
+          "p_key": "pEvoApp",
+          "cat": "C"
+        },
+        {
           "label": "Test 5: Evolution combined A+ (binomial)",
           "p_key": "pEvoAp",
           "cat": "C"
@@ -482,18 +492,23 @@
           "cat": "C"
         },
         {
-          "label": "Judaism A-tier Fisher exact",
-          "p_key": "pJudATierFisher",
+          "label": "Judaism A+ rate",
+          "p_key": "pJudAp",
+          "cat": "E"
+        },
+        {
+          "label": "Hinduism C- binomial",
+          "p_key": "pHinCminus",
+          "cat": "E"
+        },
+        {
+          "label": "Hinduism A+/C- joint (multivariate hyper.)",
+          "p_key": "pHinApCminus",
           "cat": "E"
         },
         {
           "label": "Buddhism A/C-band joint (multivariate hyper.)",
           "p_key": "pBudJoint",
-          "cat": "E"
-        },
-        {
-          "label": "Hinduism A/C-band joint (multivariate hyper.)",
-          "p_key": "pHinJoint",
           "cat": "E"
         }
       ]

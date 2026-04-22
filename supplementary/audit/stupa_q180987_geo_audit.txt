@@ -1,22 +1,23 @@
 ====================================================================================================
   WIKIDATA Q180987 STUPA CORPUS — GEOGRAPHIC TIER BREAKDOWN
-  Generated: 2026-04-20 20:13 UTC
+  Generated: 2026-04-22 18:10 UTC
   Corpus: wikidata_stupas_q180987.csv  |  N = 229
-  Full corpus: A+ = 20 (8.7%)  A-tier = 70 (30.6%)
+  Full corpus: A+ = 20 (8.7%)  A-tier = 67 (29.3%)
   Anchor: Gerizim 35.269°E  |  1 beru = 30.0°
 ====================================================================================================
 
-  SUMMARY TABLE  (A+ = ≤6.7km, A = ≤33km, C = inter-harmonic C/C-/C--)
+  SUMMARY TABLE  (A+ = ≤0.00321 beru, ≤10.7 km, A = ≤0.00942 beru, ≤31 km, C = inter-harmonic C/C-/C--)
+  Note: The All stupas row reports binomial tests vs geometric null; subregions use Fisher exact vs the full corpus.
   Region                                        N   A+    A+%    OR_A+    p_A+ sig      A     A%     OR_A     p_A sig      C     C%     OR_C     p_C sig 
   ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-  All stupas                                  229   20   8.7%     nan×  1.0000 ns      70  30.6%     nan×  1.0000 ns      42  18.3%     nan×  1.0000 ns  
-  Heartland (70°–110°E)                       127    6   4.7%    0.31×  0.9959 ns      19  15.0%    0.18×  1.0000 ns      35  27.6%    5.16×  0.0000 *** 
-  India/Nepal (70°–90°E)                       53    4   7.5%    0.82×  0.7250 ns      13  24.5%    0.68×  0.8974 ns      11  20.8%    1.23×  0.3685 ns  
-  SE Asia / Myanmar-Cambodia (90°–105°E)       67    2   3.0%    0.25×  0.9929 ns       6   9.0%    0.15×  1.0000 ns      24  35.8%    4.47×  0.0000 *** 
-  Java/Sumatra node (105°–115°E)               83   11  13.3%    2.33×  0.0588 †       43  51.8%    4.74×  0.0000 ***      3   3.6%    0.10×  1.0000 ns  
-  Java tight (107°–112°E)                      54   11  20.4%    4.72×  0.0015 **      42  77.8%   18.38×  0.0000 ***      2   3.7%    0.13×  0.9999 ns  
-  Indonesia broad (95°–141°E)                 155   14   9.0%    1.13×  0.5173 ns      51  32.9%    1.42×  0.1695 ns      28  18.1%    0.94×  0.6370 ns  
-  Non-heartland (outside 70°–110°E)           102   14  13.7%    3.21×  0.0152 *       51  50.0%    5.68×  0.0000 ***      7   6.9%    0.19×  1.0000 ns  
+  All stupas                                  229   20   8.7%    1.00×  0.1015 ns      67  29.3%    1.00×  0.0001 ***     41  17.9%    1.00×  1.0000 ns  
+  Heartland (70°–110°E)                       127    6   4.7%    0.31×  0.9959 ns      17  13.4%    0.16×  1.0000 ns      34  26.8%    4.96×  0.0001 *** 
+  India/Nepal (70°–90°E)                       53    4   7.5%    0.82×  0.7250 ns      13  24.5%    0.73×  0.8500 ns      11  20.8%    1.27×  0.3328 ns  
+  SE Asia / Myanmar-Cambodia (90°–105°E)       67    2   3.0%    0.25×  0.9929 ns       4   6.0%    0.10×  1.0000 ns      23  34.3%    4.18×  0.0001 *** 
+  Java/Sumatra node (105°–115°E)               83   11  13.3%    2.33×  0.0588 †       42  50.6%    4.96×  0.0000 ***      3   3.6%    0.11×  1.0000 ns  
+  Java tight (107°–112°E)                      54   11  20.4%    4.72×  0.0015 **      41  75.9%   18.07×  0.0000 ***      2   3.7%    0.13×  0.9999 ns  
+  Indonesia broad (95°–141°E)                 155   14   9.0%    1.13×  0.5173 ns      48  31.0%    1.30×  0.2536 ns      27  17.4%    0.90×  0.6814 ns  
+  Non-heartland (outside 70°–110°E)           102   14  13.7%    3.21×  0.0152 *       50  49.0%    6.22×  0.0000 ***      7   6.9%    0.20×  1.0000 ns  
 
 ====================================================================================================
   CROSS-REGION BREAKDOWN: Java/Sumatra node vs rest of heartland
@@ -24,28 +25,28 @@
 
   Java/Sumatra node (105°–115°E)  (N=83)
     A+: 11 (13.3%)  OR=2.33× p=0.0588 †
-    A:  43 (51.8%)   OR=4.74×  p=0.0000 ***
-    Tiers: A++=1  A+=10  A=32  B=37  C=3
+    A:  42 (50.6%)   OR=4.96×  p=0.0000 ***
+    Tiers: A++=5  A+=6  A=31  B=38  C=3
 
   Heartland ex Java/Sumatra (70°–105°E)  (N=120)
     A+: 6 (5.0%)  OR=0.36× p=0.9908 ns
-    A:  19 (15.8%)   OR=0.21×  p=1.0000 ns
-    Tiers: A++=1  A+=5  A=13  B=66  C=19  C-=16
+    A:  17 (14.2%)   OR=0.19×  p=1.0000 ns
+    Tiers: A++=2  A+=4  A=11  B=69  C=18  C-=7  C--=9
 
     India/Nepal sub (70°–90°E)  (N=53)
     A+: 4 (7.5%)  OR=0.82× p=0.7250 ns
-    A:  13 (24.5%)   OR=0.68×  p=0.8974 ns
+    A:  13 (24.5%)   OR=0.73×  p=0.8500 ns
     Tiers: A++=1  A+=3  A=9  B=29  C=8  C-=3
 
     Myanmar/Cambodia sub (90°–105°E)  (N=67)
     A+: 2 (3.0%)  OR=0.25× p=0.9929 ns
-    A:  6 (9.0%)   OR=0.15×  p=1.0000 ns
-    Tiers: A+=2  A=4  B=37  C=11  C-=13
+    A:  4 (6.0%)   OR=0.10×  p=1.0000 ns
+    Tiers: A++=1  A+=1  A=2  B=40  C=10  C-=4  C--=9
 
   Non-heartland  (N=102)
     A+: 14 (13.7%)  OR=3.21× p=0.0152 *
-    A:  51 (50.0%)   OR=5.68×  p=0.0000 ***
-    Tiers: A++=2  A+=12  A=37  B=44  C=6  C--=1
+    A:  50 (49.0%)   OR=6.22×  p=0.0000 ***
+    Tiers: A++=6  A+=8  A=36  B=45  C=6  C--=1
 
 ====================================================================================================
   BIMODAL ANALYSIS: A-tier (Java node) vs C-band (India/Myanmar heartland)
@@ -55,24 +56,24 @@
 ────────────────────────────────────────────────────────────────────────────────────────────────────
 
   Java/Sumatra node (105°–115°E) — A-tier zone  (N=83)
-    A-tier: 43 (51.8%)  OR=4.74×  p=0.0000 ***
-    C-band: 3 (3.6%)  OR=0.10×  p=1.0000 ns
-    Tiers:  A++=1  A+=10  A=32  B=37  C=3
+    A-tier: 42 (50.6%)  OR=4.96×  p=0.0000 ***
+    C-band: 3 (3.6%)  OR=0.11×  p=1.0000 ns
+    Tiers:  A++=5  A+=6  A=31  B=38  C=3
 
   India/Nepal (70°–90°E) — C-band zone  (N=53)
-    A-tier: 13 (24.5%)  OR=0.68×  p=0.8974 ns
-    C-band: 11 (20.8%)  OR=1.23×  p=0.3685 ns
+    A-tier: 13 (24.5%)  OR=0.73×  p=0.8500 ns
+    C-band: 11 (20.8%)  OR=1.27×  p=0.3328 ns
     Tiers:  A++=1  A+=3  A=9  B=29  C=8  C-=3
 
   Myanmar/Cambodia (90°–105°E) — C-band zone  (N=67)
-    A-tier: 6 (9.0%)  OR=0.15×  p=1.0000 ns
-    C-band: 24 (35.8%)  OR=4.47×  p=0.0000 ***
-    Tiers:  A+=2  A=4  B=37  C=11  C-=13
+    A-tier: 4 (6.0%)  OR=0.10×  p=1.0000 ns
+    C-band: 23 (34.3%)  OR=4.18×  p=0.0001 ***
+    Tiers:  A++=1  A+=1  A=2  B=40  C=10  C-=4  C--=9
 
   Heartland combined (70°–105°E)  (N=120)
-    A-tier: 19 (15.8%)  OR=0.21×  p=1.0000 ns
-    C-band: 35 (29.2%)  OR=6.00×  p=0.0000 ***
-    Tiers:  A++=1  A+=5  A=13  B=66  C=19  C-=16
+    A-tier: 17 (14.2%)  OR=0.19×  p=1.0000 ns
+    C-band: 34 (28.3%)  OR=5.76×  p=0.0000 ***
+    Tiers:  A++=2  A+=4  A=11  B=69  C=18  C-=7  C--=9
 
   INTERPRETATION
   ─────────────
@@ -89,29 +90,29 @@
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────
   All stupas  (N = 229)
-  A+ = 20 (8.7%)  Fisher OR=nan× p=1.0000 ns  |  binomial p=0.1015 ns
-  A  = 70 (30.6%)   Fisher OR=nan×  p=1.0000 ns   |  binomial p=0.0001 ***
+  A+ = 20 (8.7%)  Fisher OR=1.00× p=1.0000 ns  |  binomial p=0.1015 ns
+  A  = 67 (29.3%)   Fisher OR=1.00×  p=1.0000 ns   |  binomial p=0.0001 ***
 
   Tier     N   Rate
   ───── ──── ──────
-  A++      3   1.3%
-  A+      17   7.4%
-  A       50  21.8%
-  B      117  51.1%
-  C       25  10.9%
-  C-      16   7.0%
-  C--      1   0.4%
+  A++      8   3.5%
+  A+      12   5.2%
+  A       47  20.5%
+  B      121  52.8%
+  C       24  10.5%
+  C-       7   3.1%
+  C--     10   4.4%
 
   Tier  Dev(km)       Lon  Country         Name
   ──── ────────  ────────  ──────────────  ──────────────────────────────────────────────────
   [A++]     0.1km    14.268°E  Austria         Stupa
   [A++]     0.4km   110.272°E  Indonesia       Ngawen
   [A++]     0.6km    83.274°E  Nepal           World Peace Pagoda, Lumbini
-  [A+ ]     1.6km   110.283°E  Indonesia       [Q11112985]
-  [A+ ]     3.0km   101.242°E  Thailand        Phra Chedi Klang Nam
-  [A+ ]     3.1km   110.297°E  Indonesia       Gunung Wukir
-  [A+ ]     3.1km   110.297°E  Indonesia       Umbul Temple
-  [A+ ]     4.3km   110.230°E  Indonesia       Mendut Temple
+  [A++]     1.6km   110.283°E  Indonesia       [Q11112985]
+  [A++]     3.0km   101.242°E  Thailand        Phra Chedi Klang Nam
+  [A++]     3.1km   110.297°E  Indonesia       Gunung Wukir
+  [A++]     3.1km   110.297°E  Indonesia       Umbul Temple
+  [A++]     4.3km   110.230°E  Indonesia       Mendut Temple
   [A+ ]     5.5km   110.220°E  Indonesia       Pawon
   [A+ ]     5.7km    17.218°E  Hungary         Peace Stupa Zalaszántó
   [A+ ]     5.8km   104.321°E  Thailand        Phra Maha Chedi Chai Mongkhon
@@ -171,9 +172,9 @@
   [A  ]    27.9km    77.521°E  India           Buddhist stupas along with saru-maru monastric complex
   [A  ]    28.3km   110.524°E  Indonesia       Candi Klero
   [A  ]    31.0km    20.548°E  Hungary         Western Disciple Stupa
-  [A  ]    31.6km   110.553°E  Indonesia       Merak Temple
-  [A  ]    32.3km   101.560°E  Indonesia       [Q106282029]
-  [A  ]    32.5km   101.561°E  Indonesia       [Q106279426]
+  [B  ]    31.6km   110.553°E  Indonesia       Merak Temple
+  [B  ]    32.3km   101.560°E  Indonesia       [Q106282029]
+  [B  ]    32.5km   101.561°E  Indonesia       [Q106279426]
   [B  ]    33.9km    77.575°E  India           Shanti Stupa
   [B  ]    35.0km    77.584°E  India           Tisserru Stupa
   [B  ]    35.1km   112.953°E  People's Republic of China  Ayuwang Pagoda
@@ -291,7 +292,7 @@
   [B  ]   129.6km   100.101°E  Indonesia       [Q12478284]
   [B  ]   129.7km   100.101°E  Thailand        Phra Borom That Nimit Chedi
   [B  ]   129.8km    67.100°E  Uzbekistan      Zurmala Stupa
-  [C  ]   134.2km   100.060°E  Thailand        Phra Pathommachedi
+  [B  ]   134.2km   100.060°E  Thailand        Phra Pathommachedi
   [C  ]   136.2km    13.042°E  Austria         [Q130214579]
   [C  ]   138.5km   127.021°E  South Korea     State Preceptor Hyegeo's stupa at  Mangwolsa
   [C  ]   140.5km    85.003°E  India           Sujata Garh
@@ -323,36 +324,36 @@
   [C- ]   159.7km    72.830°E  Pakistan        Kunala Stupa
   [C- ]   160.3km    72.825°E  Pakistan        Bhallar stupa
   [C- ]   160.7km    99.821°E  Thailand        Chedi Doi Trimoorati
-  [C- ]   161.3km    99.722°E  Indonesia       [Q100988991]
-  [C- ]   161.3km    99.816°E  Thailand        Coral pagoda of Wat Chan
-  [C- ]   161.8km    99.726°E  Indonesia       [Q106278724]
-  [C- ]   162.3km    99.731°E  Indonesia       [Q106278723]
-  [C- ]   162.7km    99.734°E  Indonesia       [Q106278719]
-  [C- ]   164.7km    99.753°E  Indonesia       [Q106278713]
-  [C- ]   164.9km    99.755°E  Indonesia       Sipamutung Temple
-  [C- ]   165.0km    99.756°E  Indonesia       [Q106278715]
-  [C- ]   165.3km    99.758°E  Indonesia       [Q106278717]
+  [C--]   161.3km    99.722°E  Indonesia       [Q100988991]
+  [C--]   161.3km    99.816°E  Thailand        Coral pagoda of Wat Chan
+  [C--]   161.8km    99.726°E  Indonesia       [Q106278724]
+  [C--]   162.3km    99.731°E  Indonesia       [Q106278723]
+  [C--]   162.7km    99.734°E  Indonesia       [Q106278719]
+  [C--]   164.7km    99.753°E  Indonesia       [Q106278713]
+  [C--]   164.9km    99.755°E  Indonesia       Sipamutung Temple
+  [C--]   165.0km    99.756°E  Indonesia       [Q106278715]
+  [C--]   165.3km    99.758°E  Indonesia       [Q106278717]
   [C--]   166.2km    15.766°E  Austria         Stupa am Wagram
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────
   Heartland (70°–110°E)  (N = 127)
   A+ = 6 (4.7%)  Fisher OR=0.31× p=0.9959 ns  |  binomial p=0.8314 ns
-  A  = 19 (15.0%)   Fisher OR=0.18×  p=1.0000 ns   |  binomial p=0.9414 ns
+  A  = 17 (13.4%)   Fisher OR=0.16×  p=1.0000 ns   |  binomial p=0.9589 ns
 
   Tier     N   Rate
   ───── ──── ──────
-  A++      1   0.8%
-  A+       5   3.9%
-  A       13  10.2%
-  B       73  57.5%
-  C       19  15.0%
-  C-      16  12.6%
-  C--      0   0.0%
+  A++      2   1.6%
+  A+       4   3.1%
+  A       11   8.7%
+  B       76  59.8%
+  C       18  14.2%
+  C-       7   5.5%
+  C--      9   7.1%
 
   Tier  Dev(km)       Lon  Country         Name
   ──── ────────  ────────  ──────────────  ──────────────────────────────────────────────────
   [A++]     0.6km    83.274°E  Nepal           World Peace Pagoda, Lumbini
-  [A+ ]     3.0km   101.242°E  Thailand        Phra Chedi Klang Nam
+  [A++]     3.0km   101.242°E  Thailand        Phra Chedi Klang Nam
   [A+ ]     5.8km   104.321°E  Thailand        Phra Maha Chedi Chai Mongkhon
   [A+ ]     6.7km    71.208°E  Pakistan        Sphola Stupa
   [A+ ]     8.0km    77.341°E  India           Chaneti Buddhist Stupa
@@ -368,8 +369,8 @@
   [A  ]    27.1km    83.025°E  India           Dhamek Stupa
   [A  ]    27.2km    83.024°E  India           Chaukhandi Stupa
   [A  ]    27.9km    77.521°E  India           Buddhist stupas along with saru-maru monastric complex
-  [A  ]    32.3km   101.560°E  Indonesia       [Q106282029]
-  [A  ]    32.5km   101.561°E  Indonesia       [Q106279426]
+  [B  ]    32.3km   101.560°E  Indonesia       [Q106282029]
+  [B  ]    32.5km   101.561°E  Indonesia       [Q106279426]
   [B  ]    33.9km    77.575°E  India           Shanti Stupa
   [B  ]    35.0km    77.584°E  India           Tisserru Stupa
   [B  ]    35.8km    71.592°E  Pakistan        Kanishka stupa
@@ -443,7 +444,7 @@
   [B  ]   127.8km    85.118°E  India           Relic Stupa
   [B  ]   129.6km   100.101°E  Indonesia       [Q12478284]
   [B  ]   129.7km   100.101°E  Thailand        Phra Borom That Nimit Chedi
-  [C  ]   134.2km   100.060°E  Thailand        Phra Pathommachedi
+  [B  ]   134.2km   100.060°E  Thailand        Phra Pathommachedi
   [C  ]   140.5km    85.003°E  India           Sujata Garh
   [C  ]   142.2km    81.550°E  Sri Lanka       Kiri Vehera
   [C  ]   143.5km    72.976°E  Pakistan        Bhamala Stupa
@@ -469,20 +470,20 @@
   [C- ]   159.7km    72.830°E  Pakistan        Kunala Stupa
   [C- ]   160.3km    72.825°E  Pakistan        Bhallar stupa
   [C- ]   160.7km    99.821°E  Thailand        Chedi Doi Trimoorati
-  [C- ]   161.3km    99.722°E  Indonesia       [Q100988991]
-  [C- ]   161.3km    99.816°E  Thailand        Coral pagoda of Wat Chan
-  [C- ]   161.8km    99.726°E  Indonesia       [Q106278724]
-  [C- ]   162.3km    99.731°E  Indonesia       [Q106278723]
-  [C- ]   162.7km    99.734°E  Indonesia       [Q106278719]
-  [C- ]   164.7km    99.753°E  Indonesia       [Q106278713]
-  [C- ]   164.9km    99.755°E  Indonesia       Sipamutung Temple
-  [C- ]   165.0km    99.756°E  Indonesia       [Q106278715]
-  [C- ]   165.3km    99.758°E  Indonesia       [Q106278717]
+  [C--]   161.3km    99.722°E  Indonesia       [Q100988991]
+  [C--]   161.3km    99.816°E  Thailand        Coral pagoda of Wat Chan
+  [C--]   161.8km    99.726°E  Indonesia       [Q106278724]
+  [C--]   162.3km    99.731°E  Indonesia       [Q106278723]
+  [C--]   162.7km    99.734°E  Indonesia       [Q106278719]
+  [C--]   164.7km    99.753°E  Indonesia       [Q106278713]
+  [C--]   164.9km    99.755°E  Indonesia       Sipamutung Temple
+  [C--]   165.0km    99.756°E  Indonesia       [Q106278715]
+  [C--]   165.3km    99.758°E  Indonesia       [Q106278717]
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────
   India/Nepal (70°–90°E)  (N = 53)
   A+ = 4 (7.5%)  Fisher OR=0.82× p=0.7250 ns  |  binomial p=0.4451 ns
-  A  = 13 (24.5%)   Fisher OR=0.68×  p=0.8974 ns   |  binomial p=0.2508 ns
+  A  = 13 (24.5%)   Fisher OR=0.73×  p=0.8500 ns   |  binomial p=0.1861 ns
 
   Tier     N   Rate
   ───── ──── ──────
@@ -553,26 +554,26 @@
 ────────────────────────────────────────────────────────────────────────────────────────────────────
   SE Asia / Myanmar-Cambodia (90°–105°E)  (N = 67)
   A+ = 2 (3.0%)  Fisher OR=0.25× p=0.9929 ns  |  binomial p=0.9344 ns
-  A  = 6 (9.0%)   Fisher OR=0.15×  p=1.0000 ns   |  binomial p=0.9957 ns
+  A  = 4 (6.0%)   Fisher OR=0.10×  p=1.0000 ns   |  binomial p=0.9994 ns
 
   Tier     N   Rate
   ───── ──── ──────
-  A++      0   0.0%
-  A+       2   3.0%
-  A        4   6.0%
-  B       37  55.2%
-  C       11  16.4%
-  C-      13  19.4%
-  C--      0   0.0%
+  A++      1   1.5%
+  A+       1   1.5%
+  A        2   3.0%
+  B       40  59.7%
+  C       10  14.9%
+  C-       4   6.0%
+  C--      9  13.4%
 
   Tier  Dev(km)       Lon  Country         Name
   ──── ────────  ────────  ──────────────  ──────────────────────────────────────────────────
-  [A+ ]     3.0km   101.242°E  Thailand        Phra Chedi Klang Nam
+  [A++]     3.0km   101.242°E  Thailand        Phra Chedi Klang Nam
   [A+ ]     5.8km   104.321°E  Thailand        Phra Maha Chedi Chai Mongkhon
   [A  ]    14.0km   101.142°E  Thailand        Phra That Si Song Rak
   [A  ]    19.9km   104.089°E  Indonesia       [Q106280209]
-  [A  ]    32.3km   101.560°E  Indonesia       [Q106282029]
-  [A  ]    32.5km   101.561°E  Indonesia       [Q106279426]
+  [B  ]    32.3km   101.560°E  Indonesia       [Q106282029]
+  [B  ]    32.5km   101.561°E  Indonesia       [Q106279426]
   [B  ]    36.7km   101.599°E  Indonesia       Candi Padang Roco
   [B  ]    61.4km    91.716°E  India           Gorsam Chorten
   [B  ]    64.4km   103.689°E  Indonesia       [Q106278529]
@@ -610,7 +611,7 @@
   [B  ]   120.1km    99.351°E  Thailand        Phra That Si Surat
   [B  ]   129.6km   100.101°E  Indonesia       [Q12478284]
   [B  ]   129.7km   100.101°E  Thailand        Phra Borom That Nimit Chedi
-  [C  ]   134.2km   100.060°E  Thailand        Phra Pathommachedi
+  [B  ]   134.2km   100.060°E  Thailand        Phra Pathommachedi
   [C  ]   144.4km    99.968°E  Thailand        Chedi Laem So
   [C  ]   145.5km    99.580°E  Thailand        Phra Mahathat Chedi Phakdee Prakat
   [C  ]   146.2km   102.952°E  Thailand        Phra That Kham Kaen
@@ -625,27 +626,27 @@
   [C- ]   159.5km    99.706°E  Indonesia       [Q123159020]
   [C- ]   159.5km    99.706°E  Indonesia       [Q106309188]
   [C- ]   160.7km    99.821°E  Thailand        Chedi Doi Trimoorati
-  [C- ]   161.3km    99.722°E  Indonesia       [Q100988991]
-  [C- ]   161.3km    99.816°E  Thailand        Coral pagoda of Wat Chan
-  [C- ]   161.8km    99.726°E  Indonesia       [Q106278724]
-  [C- ]   162.3km    99.731°E  Indonesia       [Q106278723]
-  [C- ]   162.7km    99.734°E  Indonesia       [Q106278719]
-  [C- ]   164.7km    99.753°E  Indonesia       [Q106278713]
-  [C- ]   164.9km    99.755°E  Indonesia       Sipamutung Temple
-  [C- ]   165.0km    99.756°E  Indonesia       [Q106278715]
-  [C- ]   165.3km    99.758°E  Indonesia       [Q106278717]
+  [C--]   161.3km    99.722°E  Indonesia       [Q100988991]
+  [C--]   161.3km    99.816°E  Thailand        Coral pagoda of Wat Chan
+  [C--]   161.8km    99.726°E  Indonesia       [Q106278724]
+  [C--]   162.3km    99.731°E  Indonesia       [Q106278723]
+  [C--]   162.7km    99.734°E  Indonesia       [Q106278719]
+  [C--]   164.7km    99.753°E  Indonesia       [Q106278713]
+  [C--]   164.9km    99.755°E  Indonesia       Sipamutung Temple
+  [C--]   165.0km    99.756°E  Indonesia       [Q106278715]
+  [C--]   165.3km    99.758°E  Indonesia       [Q106278717]
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────
   Java/Sumatra node (105°–115°E)  (N = 83)
   A+ = 11 (13.3%)  Fisher OR=2.33× p=0.0588 †  |  binomial p=0.0170 *
-  A  = 43 (51.8%)   Fisher OR=4.74×  p=0.0000 ***   |  binomial p=0.0000 ***
+  A  = 42 (50.6%)   Fisher OR=4.96×  p=0.0000 ***   |  binomial p=0.0000 ***
 
   Tier     N   Rate
   ───── ──── ──────
-  A++      1   1.2%
-  A+      10  12.0%
-  A       32  38.6%
-  B       37  44.6%
+  A++      5   6.0%
+  A+       6   7.2%
+  A       31  37.3%
+  B       38  45.8%
   C        3   3.6%
   C-       0   0.0%
   C--      0   0.0%
@@ -653,10 +654,10 @@
   Tier  Dev(km)       Lon  Country         Name
   ──── ────────  ────────  ──────────────  ──────────────────────────────────────────────────
   [A++]     0.4km   110.272°E  Indonesia       Ngawen
-  [A+ ]     1.6km   110.283°E  Indonesia       [Q11112985]
-  [A+ ]     3.1km   110.297°E  Indonesia       Gunung Wukir
-  [A+ ]     3.1km   110.297°E  Indonesia       Umbul Temple
-  [A+ ]     4.3km   110.230°E  Indonesia       Mendut Temple
+  [A++]     1.6km   110.283°E  Indonesia       [Q11112985]
+  [A++]     3.1km   110.297°E  Indonesia       Gunung Wukir
+  [A++]     3.1km   110.297°E  Indonesia       Umbul Temple
+  [A++]     4.3km   110.230°E  Indonesia       Mendut Temple
   [A+ ]     5.5km   110.220°E  Indonesia       Pawon
   [A+ ]     7.2km   110.204°E  Indonesia       Borobudur
   [A+ ]     7.9km   110.340°E  Indonesia       [Q12478255]
@@ -694,7 +695,7 @@
   [A  ]    27.0km   110.512°E  Indonesia       Ijo Temple
   [A  ]    27.8km   110.519°E  Indonesia       Candi Lawang
   [A  ]    28.3km   110.524°E  Indonesia       Candi Klero
-  [A  ]    31.6km   110.553°E  Indonesia       Merak Temple
+  [B  ]    31.6km   110.553°E  Indonesia       Merak Temple
   [B  ]    35.1km   112.953°E  People's Republic of China  Ayuwang Pagoda
   [B  ]    39.8km   109.911°E  Indonesia       Candi Dwarawati
   [B  ]    39.8km   109.911°E  Indonesia       Candi Bima
@@ -739,14 +740,14 @@
 ────────────────────────────────────────────────────────────────────────────────────────────────────
   Java tight (107°–112°E)  (N = 54)
   A+ = 11 (20.4%)  Fisher OR=4.72× p=0.0015 **  |  binomial p=0.0006 ***
-  A  = 42 (77.8%)   Fisher OR=18.38×  p=0.0000 ***   |  binomial p=0.0000 ***
+  A  = 41 (75.9%)   Fisher OR=18.07×  p=0.0000 ***   |  binomial p=0.0000 ***
 
   Tier     N   Rate
   ───── ──── ──────
-  A++      1   1.9%
-  A+      10  18.5%
-  A       31  57.4%
-  B       10  18.5%
+  A++      5   9.3%
+  A+       6  11.1%
+  A       30  55.6%
+  B       11  20.4%
   C        2   3.7%
   C-       0   0.0%
   C--      0   0.0%
@@ -754,10 +755,10 @@
   Tier  Dev(km)       Lon  Country         Name
   ──── ────────  ────────  ──────────────  ──────────────────────────────────────────────────
   [A++]     0.4km   110.272°E  Indonesia       Ngawen
-  [A+ ]     1.6km   110.283°E  Indonesia       [Q11112985]
-  [A+ ]     3.1km   110.297°E  Indonesia       Gunung Wukir
-  [A+ ]     3.1km   110.297°E  Indonesia       Umbul Temple
-  [A+ ]     4.3km   110.230°E  Indonesia       Mendut Temple
+  [A++]     1.6km   110.283°E  Indonesia       [Q11112985]
+  [A++]     3.1km   110.297°E  Indonesia       Gunung Wukir
+  [A++]     3.1km   110.297°E  Indonesia       Umbul Temple
+  [A++]     4.3km   110.230°E  Indonesia       Mendut Temple
   [A+ ]     5.5km   110.220°E  Indonesia       Pawon
   [A+ ]     7.2km   110.204°E  Indonesia       Borobudur
   [A+ ]     7.9km   110.340°E  Indonesia       [Q12478255]
@@ -794,7 +795,7 @@
   [A  ]    27.0km   110.512°E  Indonesia       Ijo Temple
   [A  ]    27.8km   110.519°E  Indonesia       Candi Lawang
   [A  ]    28.3km   110.524°E  Indonesia       Candi Klero
-  [A  ]    31.6km   110.553°E  Indonesia       Merak Temple
+  [B  ]    31.6km   110.553°E  Indonesia       Merak Temple
   [B  ]    39.8km   109.911°E  Indonesia       Candi Dwarawati
   [B  ]    39.8km   109.911°E  Indonesia       Candi Bima
   [B  ]    40.2km   109.907°E  Indonesia       Candi Srikandi
@@ -811,26 +812,26 @@
 ────────────────────────────────────────────────────────────────────────────────────────────────────
   Indonesia broad (95°–141°E)  (N = 155)
   A+ = 14 (9.0%)  Fisher OR=1.13× p=0.5173 ns  |  binomial p=0.1247 ns
-  A  = 51 (32.9%)   Fisher OR=1.42×  p=0.1695 ns   |  binomial p=0.0001 ***
+  A  = 48 (31.0%)   Fisher OR=1.30×  p=0.2536 ns   |  binomial p=0.0002 ***
 
   Tier     N   Rate
   ───── ──── ──────
-  A++      1   0.6%
-  A+      13   8.4%
-  A       37  23.9%
-  B       76  49.0%
-  C       15   9.7%
-  C-      13   8.4%
-  C--      0   0.0%
+  A++      6   3.9%
+  A+       8   5.2%
+  A       34  21.9%
+  B       80  51.6%
+  C       14   9.0%
+  C-       4   2.6%
+  C--      9   5.8%
 
   Tier  Dev(km)       Lon  Country         Name
   ──── ────────  ────────  ──────────────  ──────────────────────────────────────────────────
   [A++]     0.4km   110.272°E  Indonesia       Ngawen
-  [A+ ]     1.6km   110.283°E  Indonesia       [Q11112985]
-  [A+ ]     3.0km   101.242°E  Thailand        Phra Chedi Klang Nam
-  [A+ ]     3.1km   110.297°E  Indonesia       Gunung Wukir
-  [A+ ]     3.1km   110.297°E  Indonesia       Umbul Temple
-  [A+ ]     4.3km   110.230°E  Indonesia       Mendut Temple
+  [A++]     1.6km   110.283°E  Indonesia       [Q11112985]
+  [A++]     3.0km   101.242°E  Thailand        Phra Chedi Klang Nam
+  [A++]     3.1km   110.297°E  Indonesia       Gunung Wukir
+  [A++]     3.1km   110.297°E  Indonesia       Umbul Temple
+  [A++]     4.3km   110.230°E  Indonesia       Mendut Temple
   [A+ ]     5.5km   110.220°E  Indonesia       Pawon
   [A+ ]     5.8km   104.321°E  Thailand        Phra Maha Chedi Chai Mongkhon
   [A+ ]     7.2km   110.204°E  Indonesia       Borobudur
@@ -873,9 +874,9 @@
   [A  ]    27.0km   110.512°E  Indonesia       Ijo Temple
   [A  ]    27.8km   110.519°E  Indonesia       Candi Lawang
   [A  ]    28.3km   110.524°E  Indonesia       Candi Klero
-  [A  ]    31.6km   110.553°E  Indonesia       Merak Temple
-  [A  ]    32.3km   101.560°E  Indonesia       [Q106282029]
-  [A  ]    32.5km   101.561°E  Indonesia       [Q106279426]
+  [B  ]    31.6km   110.553°E  Indonesia       Merak Temple
+  [B  ]    32.3km   101.560°E  Indonesia       [Q106282029]
+  [B  ]    32.5km   101.561°E  Indonesia       [Q106279426]
   [B  ]    35.1km   112.953°E  People's Republic of China  Ayuwang Pagoda
   [B  ]    36.7km   101.599°E  Indonesia       Candi Padang Roco
   [B  ]    39.8km   109.911°E  Indonesia       Candi Dwarawati
@@ -952,7 +953,7 @@
   [B  ]   123.0km   112.161°E  Indonesia       Candi Tegowangi
   [B  ]   129.6km   100.101°E  Indonesia       [Q12478284]
   [B  ]   129.7km   100.101°E  Thailand        Phra Borom That Nimit Chedi
-  [C  ]   134.2km   100.060°E  Thailand        Phra Pathommachedi
+  [B  ]   134.2km   100.060°E  Thailand        Phra Pathommachedi
   [C  ]   138.5km   127.021°E  South Korea     State Preceptor Hyegeo's stupa at  Mangwolsa
   [C  ]   143.6km   111.976°E  Indonesia       [Q12478267]
   [C  ]   144.4km    99.968°E  Thailand        Chedi Laem So
@@ -971,27 +972,27 @@
   [C- ]   159.5km    99.706°E  Indonesia       [Q123159020]
   [C- ]   159.5km    99.706°E  Indonesia       [Q106309188]
   [C- ]   160.7km    99.821°E  Thailand        Chedi Doi Trimoorati
-  [C- ]   161.3km    99.722°E  Indonesia       [Q100988991]
-  [C- ]   161.3km    99.816°E  Thailand        Coral pagoda of Wat Chan
-  [C- ]   161.8km    99.726°E  Indonesia       [Q106278724]
-  [C- ]   162.3km    99.731°E  Indonesia       [Q106278723]
-  [C- ]   162.7km    99.734°E  Indonesia       [Q106278719]
-  [C- ]   164.7km    99.753°E  Indonesia       [Q106278713]
-  [C- ]   164.9km    99.755°E  Indonesia       Sipamutung Temple
-  [C- ]   165.0km    99.756°E  Indonesia       [Q106278715]
-  [C- ]   165.3km    99.758°E  Indonesia       [Q106278717]
+  [C--]   161.3km    99.722°E  Indonesia       [Q100988991]
+  [C--]   161.3km    99.816°E  Thailand        Coral pagoda of Wat Chan
+  [C--]   161.8km    99.726°E  Indonesia       [Q106278724]
+  [C--]   162.3km    99.731°E  Indonesia       [Q106278723]
+  [C--]   162.7km    99.734°E  Indonesia       [Q106278719]
+  [C--]   164.7km    99.753°E  Indonesia       [Q106278713]
+  [C--]   164.9km    99.755°E  Indonesia       Sipamutung Temple
+  [C--]   165.0km    99.756°E  Indonesia       [Q106278715]
+  [C--]   165.3km    99.758°E  Indonesia       [Q106278717]
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────
   Non-heartland (outside 70°–110°E)  (N = 102)
   A+ = 14 (13.7%)  Fisher OR=3.21× p=0.0152 *  |  binomial p=0.0057 **
-  A  = 51 (50.0%)   Fisher OR=5.68×  p=0.0000 ***   |  binomial p=0.0000 ***
+  A  = 50 (49.0%)   Fisher OR=6.22×  p=0.0000 ***   |  binomial p=0.0000 ***
 
   Tier     N   Rate
   ───── ──── ──────
-  A++      2   2.0%
-  A+      12  11.8%
-  A       37  36.3%
-  B       44  43.1%
+  A++      6   5.9%
+  A+       8   7.8%
+  A       36  35.3%
+  B       45  44.1%
   C        6   5.9%
   C-       0   0.0%
   C--      1   1.0%
@@ -1000,10 +1001,10 @@
   ──── ────────  ────────  ──────────────  ──────────────────────────────────────────────────
   [A++]     0.1km    14.268°E  Austria         Stupa
   [A++]     0.4km   110.272°E  Indonesia       Ngawen
-  [A+ ]     1.6km   110.283°E  Indonesia       [Q11112985]
-  [A+ ]     3.1km   110.297°E  Indonesia       Gunung Wukir
-  [A+ ]     3.1km   110.297°E  Indonesia       Umbul Temple
-  [A+ ]     4.3km   110.230°E  Indonesia       Mendut Temple
+  [A++]     1.6km   110.283°E  Indonesia       [Q11112985]
+  [A++]     3.1km   110.297°E  Indonesia       Gunung Wukir
+  [A++]     3.1km   110.297°E  Indonesia       Umbul Temple
+  [A++]     4.3km   110.230°E  Indonesia       Mendut Temple
   [A+ ]     5.5km   110.220°E  Indonesia       Pawon
   [A+ ]     5.7km    17.218°E  Hungary         Peace Stupa Zalaszántó
   [A+ ]     7.2km   110.204°E  Indonesia       Borobudur
@@ -1048,7 +1049,7 @@
   [A  ]    27.8km   110.519°E  Indonesia       Candi Lawang
   [A  ]    28.3km   110.524°E  Indonesia       Candi Klero
   [A  ]    31.0km    20.548°E  Hungary         Western Disciple Stupa
-  [A  ]    31.6km   110.553°E  Indonesia       Merak Temple
+  [B  ]    31.6km   110.553°E  Indonesia       Merak Temple
   [B  ]    35.1km   112.953°E  People's Republic of China  Ayuwang Pagoda
   [B  ]    46.3km    -4.148°E  Spain           Stupa of Karma Guen
   [B  ]    53.3km   112.789°E  Indonesia       [Q19942632]

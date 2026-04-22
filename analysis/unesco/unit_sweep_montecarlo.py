@@ -15,6 +15,12 @@ from the full UNESCO longitude distribution.
 Key question: is finding significant spacing peaks surprising, or trivially
 expected from the geographic distribution alone?
 
+For non-3° spacings, the script also checks whether the signal is driven by
+overlap with the 3° node structure. A Fisher exact test evaluates whether
+the off-node subgroup of hits is unusually enriched compared to the overlap
+subgroup; `off_p < ALPHA` means the non-3° spacing has a significant
+off-node component and is not simply an artifact of 3° overlap.
+
 Run from repo root:
     python3 analysis/unesco/unit_sweep_montecarlo.py
 """
@@ -24,7 +30,7 @@ import math
 from fractions import Fraction
 import numpy as np
 from pathlib import Path
-from scipy.stats import binomtest
+from scipy.stats import binomtest, fisher_exact
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus, cultural_sites_with_coords
@@ -98,6 +104,11 @@ def hits_and_pvals(lons: np.ndarray):
     ])
     return hits, pvals
 
+def hits(lons: np.ndarray) -> np.ndarray:
+    """Return raw hit counts for each candidate spacing."""
+    dev = deviation_matrix(lons)
+    return (dev <= TIER_APLUS).sum(axis=0)
+
 def n_sig_vec(pvals: np.ndarray) -> int:
     return int((pvals < ALPHA).sum())
 
@@ -165,6 +176,14 @@ def node_hits_mask_vec(lons: np.ndarray) -> np.ndarray:
     return np.abs(arc - nearest) <= TIER_APLUS
 
 def significant_nonthree_overlap(lons: np.ndarray, hits_arr, pvals_arr):
+    """Identify non-3° significant spacings whose off-node hits are significant.
+
+    For each non-3° spacing that is significant overall, the off-node subgroup
+    (hits not within TIER_APLUS of a 0.1-beru node) is tested with a Fisher exact
+    test against the on-node subgroup. This determines whether the non-3°
+    spacing peak is statistically significant among the subgroup of sites that
+    do not overlap the 3° node structure.
+    """
     node_mask = node_hits_mask_vec(lons)
     out = []
     n = len(lons)
@@ -176,8 +195,18 @@ def significant_nonthree_overlap(lons: np.ndarray, hits_arr, pvals_arr):
         spacing_mask = dev <= TIER_APLUS
         overlap_hits = int((spacing_mask & node_mask).sum())
         off_hits     = int((spacing_mask & ~node_mask).sum())
-        off_p = (binomtest(off_hits, int(hits), float(nr), alternative="greater").pvalue
-                 if hits > 0 else 1.0)
+        overlap_total = int(node_mask.sum())
+        off_total = int((~node_mask).sum())
+        overlap_nonhits = overlap_total - overlap_hits
+        off_nonhits = off_total - off_hits
+        if hits > 0 and overlap_total > 0 and off_total > 0:
+            table = np.array([
+                [off_hits, off_nonhits],
+                [overlap_hits, overlap_nonhits],
+            ])
+            _, off_p = fisher_exact(table, alternative="greater")
+        else:
+            off_p = 1.0
         out.append({
             "spacing": sp_deg,
             "overlap_period": lcm_deg(3.0, sp_deg),
@@ -212,7 +241,7 @@ def perm_collapsed_vectorized(lons_pool: np.ndarray, sample_size: int,
 
     The 'off-node' test for non-3° spacings is approximated vectorially:
     a non-3° spacing counts as independent only if its off-node hits
-    (hits not within TIER_APLUS of a 0.1-beru node) form a significant
+    (hits not within TIER_APLUS of a 0.1 beru node) form a significant
     binomial excess.
     """
     from scipy.stats import binom as _binom
@@ -278,8 +307,16 @@ def perm_collapsed_vectorized(lons_pool: np.ndarray, sample_size: int,
 
 
 # ── Observed ──────────────────────────────────────────────────────────────────
-obs_dome_hits, obs_dome_pvals = hits_and_pvals(dome_lons)
-obs_full_hits, obs_full_pvals = hits_and_pvals(all_lons)
+obs_full_hits = hits(all_lons)
+obs_full_pvals = np.array([
+    binomtest(int(h), N_all, float(nr), alternative="greater").pvalue
+    for h, nr in zip(obs_full_hits, NULL_RATES)
+])
+obs_dome_hits = hits(dome_lons)
+obs_dome_pvals = np.array([
+    binomtest(int(h), N_dome, float(nr), alternative="greater").pvalue
+    for h, nr in zip(obs_dome_hits, NULL_RATES)
+])
 
 obs_dome_nsig = n_sig_vec(obs_dome_pvals)
 obs_full_nsig = n_sig_vec(obs_full_pvals)
@@ -348,10 +385,12 @@ print(f"\n  Running {N_PERM} permutations (collapsed, dome) — vectorized...")
 perm_dome_collapsed = perm_collapsed_vectorized(all_lons, N_dome, N_PERM, replace=False)
 p_ge_collapsed  = (perm_dome_collapsed >= obs_dome_collapsed).mean()
 p_eq1_collapsed = (perm_dome_collapsed == 1).mean()
+p_eq2_collapsed = (perm_dome_collapsed == 2).mean()
 print(f"\n  NULL DISTRIBUTION (collapsed, DOME, N_perm={N_PERM}):")
 print(f"  E[collapsed] = {perm_dome_collapsed.mean():.2f}  SD = {perm_dome_collapsed.std():.2f}")
 print(f"  P(collapsed>={obs_dome_collapsed}) = {p_ge_collapsed:.4f}  {sig(p_ge_collapsed)}")
 print(f"  P(collapsed=1) = {p_eq1_collapsed:.4f}")
+print(f"  P(collapsed=2) = {p_eq2_collapsed:.4f}")
 print(f"  Observed collapsed = {obs_dome_collapsed}")
 
 # ── Permutation null for collapsed count — full corpus bootstrap ──────────────
@@ -359,10 +398,12 @@ print(f"\n  Running {N_PERM} bootstrap permutations (full corpus) — vectorized
 perm_full_collapsed = perm_collapsed_vectorized(all_lons, N_all, N_PERM, replace=True)
 p_ge_full  = (perm_full_collapsed >= obs_full_collapsed).mean()
 p_eq1_full = (perm_full_collapsed == 1).mean()
+p_eq2_full = (perm_full_collapsed == 2).mean()
 print(f"\n  NULL DISTRIBUTION (collapsed, FULL, N_perm={N_PERM}):")
 print(f"  E[collapsed] = {perm_full_collapsed.mean():.2f}  SD = {perm_full_collapsed.std():.2f}")
 print(f"  P(collapsed>={obs_full_collapsed}) = {p_ge_full:.4f}  {sig(p_ge_full)}")
 print(f"  P(collapsed=1) = {p_eq1_full:.4f}")
+print(f"  P(collapsed=2) = {p_eq2_full:.4f}")
 print(f"  Observed collapsed = {obs_full_collapsed}")
 for k in range(int(perm_full_collapsed.max()) + 2):
     frac = (perm_full_collapsed == k).mean()
@@ -391,7 +432,9 @@ print(f"  \\newcommand{{\\mcNonThreeOverlapCount}}{{{len(nonthree_overlap_result
 print(f"  \\newcommand{{\\mcDomeNsigCollapsed}}{{{obs_dome_collapsed}}}  % dome: collapsed independent sig spacings")
 print(f"  \\newcommand{{\\mcFullNsigCollapsed}}{{{obs_full_collapsed}}}  % full: collapsed independent sig spacings")
 print(f"  \\newcommand{{\\mcDomeCollapsedPEqOne}}{{{p_eq1_collapsed:.4f}}}  % dome: P(collapsed=1)")
+print(f"  \\newcommand{{\\mcDomeCollapsedPEqTwo}}{{{p_eq2_collapsed:.4f}}}  % dome: P(collapsed=2)")
 print(f"  \\newcommand{{\\mcFullCollapsedPEqOne}}{{{p_eq1_full:.4f}}}  % full: P(collapsed=1)")
+print(f"  \\newcommand{{\\mcFullCollapsedPEqTwo}}{{{p_eq2_full:.4f}}}  % full: P(collapsed=2)")
 print(f"  \\newcommand{{\\mcFullCollapsedPObsGe}}{{{p_ge_full:.4f}}}  % full: P(collapsed>=obs)")
 print(f"  \\newcommand{{\\mcFullCollapsedMean}}{{{perm_full_collapsed.mean():.2f}}}  % full: E[collapsed] under null")
 print(f"  \\newcommand{{\\mcFullCollapsedSD}}{{{perm_full_collapsed.std():.2f}}}  % full: SD collapsed under null")
@@ -409,7 +452,9 @@ ResultsStore().write_many({
     "mcDomeNsigCollapsed":    obs_dome_collapsed,
     "mcFullNsigCollapsed":    obs_full_collapsed,
     "mcDomeCollapsedPEqOne":  round(float(p_eq1_collapsed), 4),
+    "mcDomeCollapsedPEqTwo":  round(float(p_eq2_collapsed), 4),
     "mcFullCollapsedPEqOne":  round(float(p_eq1_full), 4),
+    "mcFullCollapsedPEqTwo":  round(float(p_eq2_full), 4),
     "mcFullCollapsedPObsGe":  round(float(p_ge_full), 4),
     "mcFullCollapsedMean":    round(float(perm_full_collapsed.mean()), 2),
     "mcFullCollapsedSD":      round(float(perm_full_collapsed.std()), 2),
