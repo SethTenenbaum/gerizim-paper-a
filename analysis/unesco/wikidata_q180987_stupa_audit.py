@@ -327,7 +327,7 @@ def main() -> None:
     print()
 
     print(dash)
-    print("  A+ ENRICHMENT  (A++ + A+  vs geometric null, P_NULL_AP from config)")
+    print("  A+ ENRICHMENT  (A++ + A+  vs 4% geometric null)")
     print(dash)
     print(f"  Observed  : {n_ap_tier}/{N}  = {rate_ap:.1f}%")
     print(f"  Null      : {100*P_NULL_AP:.0f}%")

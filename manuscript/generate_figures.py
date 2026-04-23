@@ -31,7 +31,7 @@ from scipy.stats import binomtest
 
 from data.unesco_corpus import load_corpus, cultural_sites_with_coords
 from lib.beru import (
-    GERIZIM, BERU, TIER_APLUS, TIER_A_MAX, P_NULL_AP,
+    GERIZIM, BERU, TIER_APLUS, TIER_APP, TIER_A_MAX, P_NULL_AP, P_NULL_APP,
     deviation as beru_dev, tier_label as tier, deviation_at_spacing,
 )
 from lib.stats import (
@@ -92,7 +92,8 @@ for s in cultural:
         "yr": yr,
         "dev": d,
         "tier": tier(d),
-        "is_ap": d <= TIER_APLUS,
+        "is_ap":   d <= TIER_APLUS,
+        "is_app":  d <= TIER_APP,
         "is_dome": is_dome_site(s),
     })
 
@@ -174,8 +175,8 @@ def make_devhist():
 #  FIGURE 2: Temporal gradient  (fig:temporal)
 # ══════════════════════════════════════════════════════════════════════════════
 def make_temporal():
-    """Bar chart of A+ rate by inscription-year cohort."""
-    fig, ax = plt.subplots(figsize=(7, 4.2))
+    """Grouped bar chart of A++ and A+ rate by inscription-year cohort."""
+    fig, ax = plt.subplots(figsize=(8, 4.5))
 
     # Five cohorts matching the manuscript
     cohorts = [
@@ -187,10 +188,13 @@ def make_temporal():
     ]
 
     labels = []
-    rates = []
+    rates_ap  = []
+    rates_app = []
     ns = []
     naps = []
-    pvals = []
+    napps = []
+    pvals_ap  = []
+    pvals_app = []
 
     # Only sites with a year
     dated = [s for s in sites if s["yr"] is not None]
@@ -198,69 +202,92 @@ def make_temporal():
     for label, y0, y1 in cohorts:
         subset = [s for s in dated if y0 <= s["yr"] <= y1]
         n = len(subset)
-        nap = sum(1 for s in subset if s["is_ap"])
-        rate = 100.0 * nap / n if n else 0
-        p = binomtest(nap, n, P_NULL_AP, alternative="greater").pvalue if n else 1.0
+        nap  = sum(1 for s in subset if s["is_ap"])
+        napp = sum(1 for s in subset if s["is_app"])
+        rate_ap  = 100.0 * nap  / n if n else 0
+        rate_app = 100.0 * napp / n if n else 0
+        p_ap  = binomtest(nap,  n, P_NULL_AP,  alternative="greater").pvalue if n else 1.0
+        p_app = binomtest(napp, n, P_NULL_APP, alternative="greater").pvalue if n else 1.0
         labels.append(label)
-        rates.append(rate)
+        rates_ap.append(rate_ap)
+        rates_app.append(rate_app)
         ns.append(n)
         naps.append(nap)
-        pvals.append(p)
+        napps.append(napp)
+        pvals_ap.append(p_ap)
+        pvals_app.append(p_app)
 
     x = np.arange(len(labels))
-    bar_colors = [C_BAR_SIG if p < 0.05 else C_BAR_NS for p in pvals]
+    width = 0.38
 
-    bars = ax.bar(x, rates, width=0.65, color=bar_colors, edgecolor="white",
-                  linewidth=0.8, zorder=3)
+    # A++ bars (darker/primary highlight colour)
+    C_APP = "#c0392b"
+    bars_app = ax.bar(x - width/2, rates_app, width=width,
+                      color=[C_APP if p < 0.05 else "#e8a09a" for p in pvals_app],
+                      edgecolor="white", linewidth=0.8, zorder=3,
+                      label="Tier-A++ rate")
 
-    # 4% null baseline
-    ax.axhline(100 * P_NULL_AP, color=C_NULL, linewidth=1.5, linestyle="--",
-               zorder=2, label=f"Null rate ({100*P_NULL_AP:.0f}%)")
+    # A+ bars (existing palette)
+    bars_ap = ax.bar(x + width/2, rates_ap, width=width,
+                     color=[C_BAR_SIG if p < 0.05 else C_BAR_NS for p in pvals_ap],
+                     edgecolor="white", linewidth=0.8, zorder=3,
+                     label="Tier-A+ rate")
 
-    # Annotate each bar with count and significance
-    for i, (rate, n, nap, p) in enumerate(zip(rates, ns, naps, pvals)):
-        sig_txt = sig(p)
-        annotation = f"{nap}/{n}"
-        y_off = 0.3
-        ax.text(i, rate + y_off, annotation,
-                ha="center", va="bottom", fontsize=8, color="#333333")
-        if sig_txt not in ("ns",):
-            ax.text(i, rate + y_off + 0.8, sig_txt,
+    # Null baselines
+    ax.axhline(100 * P_NULL_APP, color=C_APP, linewidth=1.2, linestyle=":",
+               zorder=2, alpha=0.8, label=f"A++ null ({100*P_NULL_APP:.1f}%)")
+    ax.axhline(100 * P_NULL_AP,  color=C_NULL, linewidth=1.5, linestyle="--",
+               zorder=2, label=f"A+ null ({100*P_NULL_AP:.0f}%)")
+
+    # Annotate A++ bars with count/sig
+    for i, (rate, n, napp, p) in enumerate(zip(rates_app, ns, napps, pvals_app)):
+        ax.text(i - width/2, rate + 0.25, f"{napp}/{n}",
+                ha="center", va="bottom", fontsize=7, color="#333333")
+        if sig(p) not in ("ns",):
+            ax.text(i - width/2, rate + 0.25 + 0.85, sig(p),
+                    ha="center", va="bottom", fontsize=8,
+                    fontweight="bold", color=C_APP)
+
+    # Annotate A+ bars with count/sig
+    for i, (rate, n, nap, p) in enumerate(zip(rates_ap, ns, naps, pvals_ap)):
+        ax.text(i + width/2, rate + 0.25, f"{nap}/{n}",
+                ha="center", va="bottom", fontsize=7, color="#333333")
+        if sig(p) not in ("ns",):
+            ax.text(i + width/2, rate + 0.25 + 0.85, sig(p),
                     ha="center", va="bottom", fontsize=8,
                     fontweight="bold", color=C_HIGHLIGHT)
 
     ax.set_xticks(x)
     ax.set_xticklabels(labels, fontsize=9)
     ax.set_xlabel("UNESCO inscription-year cohort")
-    ax.set_ylabel("Tier-A+ rate (%)")
-    ax.set_title("Temporal gradient — A+ rate by inscription cohort")
-    ax.legend(loc="upper right", framealpha=0.9)
-    ax.set_ylim(0, max(rates) + 3)
+    ax.set_ylabel("Rate (%)")
+    ax.set_title("Temporal gradient — A++ and A+ rates by inscription cohort")
+    ax.legend(loc="upper right", framealpha=0.9, fontsize=8)
+    ax.set_ylim(0, max(max(rates_ap), max(rates_app)) + 4)
 
-    # Add Cochran-Armitage annotation.
-    # Values are read from generated_macros.tex to ensure the figure annotation
-    # is always identical to the canonical analysis output (temporal_gradient_test.py).
-    # Do NOT recompute Z here — use the macro values so figure and text are in sync.
+    # Read Cochran-Armitage values from generated_macros.tex (canonical source).
     _macros_path = Path(__file__).resolve().parent / "generated_macros.tex"
-    z_ca3 = None
-    p_ca3 = None
+    z_ap3 = z_app3 = p_ap3 = p_app3 = None
     if _macros_path.exists():
         import re
         _macro_text = _macros_path.read_text()
-        _z_match = re.search(r"\\newcommand\{\\ZcochranThree\}\{([^}]+)\}", _macro_text)
-        _p_match = re.search(r"\\newcommand\{\\pCochranThree\}\{([^}]+)\}", _macro_text)
-        if _z_match and _p_match:
-            z_ca3 = float(_z_match.group(1))
-            p_ca3 = float(_p_match.group(1))
-    if z_ca3 is None:
+        def _read(pat):
+            m = re.search(pat, _macro_text)
+            return float(m.group(1)) if m else None
+        z_ap3   = _read(r"\\newcommand\{\\ZcochranThree\}\{([^}]+)\}")
+        p_ap3   = _read(r"\\newcommand\{\\pCochranThree\}\{([^}]+)\}")
+        z_app3  = _read(r"\\newcommand\{\\ZcochranAppThree\}\{([^}]+)\}")
+        p_app3  = _read(r"\\newcommand\{\\pCochranAppThree\}\{([^}]+)\}")
+    if None in (z_ap3, p_ap3, z_app3, p_app3):
         raise RuntimeError(
-            "Could not read \\ZcochranThree / \\pCochranThree from generated_macros.tex. "
-            "Run temporal_gradient_test.py first to regenerate macros."
+            "Could not read Cochran-Armitage macros from generated_macros.tex. "
+            "Run temporal_gradient_test.py first."
         )
 
-    ax.text(0.98, 0.65,
-            f"Cochran-Armitage (3-cohort)\n"
-            f"Z = {z_ca3:.2f}, p = {p_ca3:.4f}",
+    ax.text(0.98, 0.98,
+            f"Cochran-Armitage (3-cohort, decreasing)\n"
+            f"A++:  Z = {z_app3:.2f}, p = {p_app3:.4f}\n"
+            f"A+:   Z = {z_ap3:.2f},  p = {p_ap3:.4f}",
             transform=ax.transAxes, fontsize=8,
             ha="right", va="top",
             bbox=dict(boxstyle="round,pad=0.4", facecolor="#f0f0f0",

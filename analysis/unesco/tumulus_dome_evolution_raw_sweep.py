@@ -385,9 +385,12 @@ print()
 n_mound_stage    = sum(1 for e in selected if "mound" in e["stages"])
 n_stupa_stage    = sum(1 for e in selected if "stupa" in e["stages"])
 n_dome_stage     = sum(1 for e in selected if "dome"  in e["stages"])
-n_mound_stage_ap = sum(1 for e in selected if "mound" in e["stages"] and e["ap"])
-n_stupa_stage_ap = sum(1 for e in selected if "stupa" in e["stages"] and e["ap"])
-n_dome_stage_ap  = sum(1 for e in selected if "dome"  in e["stages"] and e["ap"])
+n_mound_stage_ap  = sum(1 for e in selected if "mound" in e["stages"] and e["ap"])
+n_stupa_stage_ap  = sum(1 for e in selected if "stupa" in e["stages"] and e["ap"])
+n_dome_stage_ap   = sum(1 for e in selected if "dome"  in e["stages"] and e["ap"])
+n_mound_stage_app = sum(1 for e in selected if "mound" in e["stages"] and is_aplusplus(e["tier"]))
+n_stupa_stage_app = sum(1 for e in selected if "stupa" in e["stages"] and is_aplusplus(e["tier"]))
+n_dome_stage_app  = sum(1 for e in selected if "dome"  in e["stages"] and is_aplusplus(e["tier"]))
 n_mound_stage_a  = sum(1 for e in selected if "mound" in e["stages"] and is_a_or_better(e["tier"]))
 n_stupa_stage_a  = sum(1 for e in selected if "stupa" in e["stages"] and is_a_or_better(e["tier"]))
 n_dome_stage_a   = sum(1 for e in selected if "dome"  in e["stages"] and is_a_or_better(e["tier"]))
@@ -409,39 +412,58 @@ def _fisher_a(n_stage, n_stage_a):
     _, p = fisher_exact(table, alternative="greater")
     return p
 
+def _fisher_app(n_stage, n_stage_app):
+    k_app = K_APP_CORPUS
+    table = [[n_stage_app,         n_stage - n_stage_app],
+             [k_app - n_stage_app, N_CORPUS - n_stage - (k_app - n_stage_app)]]
+    _, p = fisher_exact(table, alternative="greater")
+    return p
+
+def _fisher_app_or(n_stage, n_stage_app):
+    k_app = K_APP_CORPUS
+    table = [[n_stage_app,         n_stage - n_stage_app],
+             [k_app - n_stage_app, N_CORPUS - n_stage - (k_app - n_stage_app)]]
+    or_, _ = fisher_exact(table, alternative="greater")
+    return or_
+
 fp_mound_ap = _fisher_ap(n_mound_stage, n_mound_stage_ap)
 fp_stupa_ap = _fisher_ap(n_stupa_stage, n_stupa_stage_ap)
 fp_dome_ap  = _fisher_ap(n_dome_stage,  n_dome_stage_ap)
 fp_mound_a  = _fisher_a(n_mound_stage,  n_mound_stage_a)
-fp_stupa_a  = _fisher_a(n_stupa_stage,  n_stupa_stage_a)
+fp_stupa_a  = _fisher_a(n_stupa_stage, n_stupa_stage_a)
 fp_dome_a   = _fisher_a(n_dome_stage,   n_dome_stage_a)
+fp_mound_app = _fisher_app(n_mound_stage, n_mound_stage_app)
+fp_stupa_app = _fisher_app(n_stupa_stage, n_stupa_stage_app)
+fp_dome_app  = _fisher_app(n_dome_stage,  n_dome_stage_app)
+or_mound_app = _fisher_app_or(n_mound_stage, n_mound_stage_app)
+or_stupa_app = _fisher_app_or(n_stupa_stage, n_stupa_stage_app)
+or_dome_app  = _fisher_app_or(n_dome_stage,  n_dome_stage_app)
 # Combined
 fp_all_ap   = _fisher_ap(N, n_ap)
 fp_all_a    = _fisher_a(N, n_a)
-# A binomial combined (already computed as bt_a.pvalue)
-
+fp_all_app  = _fisher_app(N, n_app)
+_evo_or_ap, _ = fisher_exact([[n_ap, N - n_ap], [K_AP_CORPUS - n_ap, N_CORPUS - N - (K_AP_CORPUS - n_ap)]], alternative="greater")
+_evo_or_a,  _ = fisher_exact([[n_a,  N - n_a],  [K_A_CORPUS  - n_a,  N_CORPUS - N - (K_A_CORPUS  - n_a)]],  alternative="greater")
+_evo_or_app, _ = fisher_exact([[n_app, N - n_app], [K_APP_CORPUS - n_app, N_CORPUS - N - (K_APP_CORPUS - n_app)]], alternative="greater")
 print(f"  \\newcommand{{\\NevoTotal}}{{{N}}}            % total dome-evolution corpus")
 print(f"  \\newcommand{{\\NevoApp}}{{{n_app}}}            % A++ sites in dome-evolution corpus")
 print(f"  \\newcommand{{\\evoAppRate}}{{{100*n_app/N:.1f}}}          % A++ rate, dome-evolution corpus (%)")
 print(f"  \\newcommand{{\\evoEnrichApp}}{{{enr_app:.2f}}}         % enrichment ratio, A++ in dome corpus")
 print(f"  \\newcommand{{\\pEvoApp}}{{{bt_app.pvalue:.4f}}}         % p-value, A++ binomial (dome corpus)")
+print(f"  \\newcommand{{\\pEvoAppFisher}}{{{fp_all_ap:.4f}}}     % p-value, A++ Fisher exact (dome corpus)")
+print(f"  \\newcommand{{\\evoAppFisherOR}}{{{_evo_or_app:.2f}}}      % OR, A++ Fisher exact (dome corpus)")
 print(f"  \\newcommand{{\\NevoAp}}{{{n_ap}}}             % A+ sites in dome-evolution corpus")
 print(f"  \\newcommand{{\\evoApRate}}{{{100*n_ap/N:.1f}}}           % A+ rate, dome-evolution corpus (%)")
 print(f"  \\newcommand{{\\evoEnrichAp}}{{{enr_ap:.2f}}}          % enrichment ratio, A+ in dome corpus")
 print(f"  \\newcommand{{\\pEvoAp}}{{{bt_ap.pvalue:.4f}}}          % p-value, A+ binomial (dome corpus)")
 print(f"  \\newcommand{{\\pEvoApFisher}}{{{fp_all_ap:.4f}}}      % p-value, A+ Fisher exact (dome corpus)")
-# Fisher ORs for combined
-_evo_or_ap, _ = fisher_exact([[n_ap, N - n_ap], [K_AP_CORPUS - n_ap, N_CORPUS - N - (K_AP_CORPUS - n_ap)]], alternative="greater")
-_evo_or_a,  _ = fisher_exact([[n_a,  N - n_a],  [K_A_CORPUS  - n_a,  N_CORPUS - N - (K_A_CORPUS  - n_a)]],  alternative="greater")
 print(f"  \\newcommand{{\\evoApFisherOR}}{{{_evo_or_ap:.2f}}}    % OR, A+ Fisher exact (dome corpus)")
-print(f"  \\newcommand{{\\pEvoAFisher}}{{{fp_all_a:.4f}}}        % p-value, A Fisher exact (dome corpus)")
-print(f"  \\newcommand{{\\evoAFisherOR}}{{{_evo_or_a:.2f}}}      % OR, A Fisher exact (dome corpus)")
 print(f"  \\newcommand{{\\NevoA}}{{{n_a}}}             % Tier-A sites in dome-evolution corpus")
 print(f"  \\newcommand{{\\evoARate}}{{{100*n_a/N:.1f}}}           % A rate, dome-evolution corpus (%)")
 print(f"  \\newcommand{{\\evoEnrichA}}{{{enr_a:.2f}}}           % enrichment ratio, A in dome corpus")
 print(f"  \\newcommand{{\\pEvoA}}{{{bt_a.pvalue:.4f}}}          % p-value, A binomial (dome corpus)")
-print(f"  \\newcommand{{\\evoExpAp}}{{{N*P_NULL_AP:.2f}}}          % expected A+ count at {P_NULL_AP:.0%} null (dome-evolution corpus)")
-print(f"  \\newcommand{{\\evoExpA}}{{{N*P_NULL_A:.2f}}}           % expected A count at {P_NULL_A:.0%} null (dome-evolution corpus)")
+print(f"  \\newcommand{{\\pEvoAFisher}}{{{fp_all_a:.4f}}}        % p-value, A Fisher exact (dome corpus)")
+print(f"  \\newcommand{{\\evoAFisherOR}}{{{_evo_or_a:.2f}}}      % OR, A Fisher exact (dome corpus)")
 print(f"  \\newcommand{{\\NevoMound}}{{{n_mound_stage}}}           % sites with mound stage")
 print(f"  \\newcommand{{\\NevoMoundAp}}{{{n_mound_stage_ap}}}            % A+ sites with mound stage")
 print(f"  \\newcommand{{\\evoMoundApRate}}{{{100*n_mound_stage_ap/n_mound_stage:.1f}}}           % A+ rate, mound stage (%)")
@@ -484,21 +506,68 @@ print(f"  \\newcommand{{\\evoDomeAFisherOR}}{{{_dome_or_a:.2f}}}     % OR, A Fis
 print(f"  \\newcommand{{\\NevoMoundOnly}}{{{len(mound_only)}}}          % mound-only sites (no later dome/stupa)")
 print(f"  \\newcommand{{\\NevoMoundOnlyAp}}{{{n_mo_ap}}}           % A+ in mound-only sites")
 print(f"  \\newcommand{{\\NevoOverlap}}{{{len(overlap)}}}            % sites with both mound and dome/stupa stages")
+# A++ per-stage
+print(f"  \\newcommand{{\\NevoMoundApp}}{{{n_mound_stage_app}}}           % A++ sites with mound stage")
+print(f"  \\newcommand{{\\evoMoundAppRate}}{{{100*n_mound_stage_app/n_mound_stage:.1f}}}          % A++ rate, mound stage (%)")
+print(f"  \\newcommand{{\\pEvoMoundAppFisher}}{{{fp_mound_app:.4f}}}    % p-value, A++ Fisher exact in mound stage")
+print(f"  \\newcommand{{\\evoMoundAppFisherOR}}{{{or_mound_app:.2f}}}   % OR, A++ Fisher exact in mound stage")
+print(f"  \\newcommand{{\\NevoStupaApp}}{{{n_stupa_stage_app}}}           % A++ sites with stupa stage")
+print(f"  \\newcommand{{\\evoStupaAppRate}}{{{100*n_stupa_stage_app/n_stupa_stage:.1f}}}          % A++ rate, stupa stage (%)")
+print(f"  \\newcommand{{\\pEvoStupaAppFisher}}{{{fp_stupa_app:.4f}}}    % p-value, A++ Fisher exact in stupa stage")
+print(f"  \\newcommand{{\\evoStupaAppFisherOR}}{{{or_stupa_app:.2f}}}   % OR, A++ Fisher exact in stupa stage")
+print(f"  \\newcommand{{\\NevoDomeApp}}{{{n_dome_stage_app}}}            % A++ sites with dome stage")
+print(f"  \\newcommand{{\\evoDomeAppRate}}{{{100*n_dome_stage_app/n_dome_stage:.1f}}}           % A++ rate, dome stage (%)")
+print(f"  \\newcommand{{\\pEvoDomeAppFisher}}{{{fp_dome_app:.4f}}}     % p-value, A++ Fisher exact in dome stage")
+print(f"  \\newcommand{{\\evoDomeAppFisherOR}}{{{or_dome_app:.2f}}}    % OR, A++ Fisher exact in dome stage")
+
+# ── Indonesia sub-region spotlight (95–141°E, stupa stage) ───────────────────
+# Captures Borobudur, Pyu Ancient Cities, Silk Roads Chang'an-Tianshan sites
+# that fall in the Indonesian/mainland-SE-Asia longitude band.
+indonesia_stupa = [e for e in selected if "stupa" in e["stages"] and 95.0 <= e["lon"] <= 141.0]
+n_indon_stupa     = len(indonesia_stupa)
+nap_indon_stupa   = sum(1 for e in indonesia_stupa if e["ap"])
+rate_indon_stupa  = 100.0 * nap_indon_stupa / n_indon_stupa if n_indon_stupa else 0.0
+# Fisher exact vs full UNESCO corpus background (A+ rate)
+if n_indon_stupa > 0:
+    _tbl_indon = [
+        [nap_indon_stupa,            n_indon_stupa - nap_indon_stupa],
+        [K_AP_CORPUS - nap_indon_stupa, N_CORPUS - n_indon_stupa - (K_AP_CORPUS - nap_indon_stupa)],
+    ]
+    _or_indon, _p_indon = fisher_exact(_tbl_indon, alternative="greater")
+else:
+    _or_indon, _p_indon = float("nan"), float("nan")
+
+print(f"  % Indonesia stupa sub-region (95–141°E, stupa-stage sites in UNESCO corpus)")
+print(f"  \\newcommand{{\\evoStupaIndonesiaN}}{{{n_indon_stupa}}}          % stupa-stage sites in 95–141°E")
+print(f"  \\newcommand{{\\evoStupaIndonesiaApN}}{{{nap_indon_stupa}}}         % A+ stupa-stage sites in 95–141°E")
+print(f"  \\newcommand{{\\evoStupaIndonesiaApRate}}{{{rate_indon_stupa:.1f}}}      % A+ rate, stupa-stage 95–141°E (%)")
+print(f"  \\newcommand{{\\evoStupaIndonesiaOR}}{{{_or_indon:.2f}}}       % Fisher OR, stupa-stage 95–141°E vs corpus")
+print(f"  \\newcommand{{\\pEvoStupaIndonesiaP}}{{{_p_indon:.4f}}}       % Fisher p, stupa-stage 95–141°E vs corpus")
 
 # ── Write to results store ────────────────────────────────────────────────────
 ResultsStore().write_many({
-    "pEvoApp":          bt_app.pvalue,   # binomial p, A++ (dome-evolution corpus)
-    "pEvoAp":           bt_ap.pvalue,    # binomial p, A+ (dome-evolution corpus) — Test 2b
-    "pEvoA":            bt_a.pvalue,     # binomial p, A
-    "pEvoApFisher":     fp_all_ap,       # Fisher p, A+ vs full corpus
-    "pEvoAFisher":      fp_all_a,        # Fisher p, A vs full corpus
-    "pEvoMound":        p_mound_stage,   # A+ binomial, mound stage
-    "pEvoStupa":        p_stupa_stage,   # A+ binomial, stupa stage
-    "pEvoDome":         p_dome_stage,    # A+ binomial, dome stage
-    "pEvoMoundFisher":  fp_mound_ap,     # Fisher p, A+, mound stage
-    "pEvoMoundAFisher": fp_mound_a,      # Fisher p, A, mound stage
-    "pEvoStupaFisher":  fp_stupa_ap,     # Fisher p, A+, stupa stage
-    "pEvoDomeFisher":   fp_dome_ap,      # Fisher p, A+, dome stage
-    "NevoTotal":        N,               # total dome-evolution corpus
-    "NevoAp":           n_ap,            # A+ sites
+    "pEvoApp":          bt_app.pvalue,
+    "pEvoAp":           bt_ap.pvalue,
+    "pEvoA":            bt_a.pvalue,
+    "pEvoApFisher":     fp_all_ap,
+    "pEvoAFisher":      fp_all_a,
+    "pEvoAppFisher":    fp_all_app,
+    "pEvoMound":        p_mound_stage,
+    "pEvoStupa":        p_stupa_stage,
+    "pEvoDome":         p_dome_stage,
+    "pEvoMoundFisher":  fp_mound_ap,
+    "pEvoMoundAFisher": fp_mound_a,
+    "pEvoStupaFisher":  fp_stupa_ap,
+    "pEvoDomeFisher":   fp_dome_ap,
+    "NevoTotal":        N,
+    "NevoAp":           n_ap,
+    "NevoApp":          n_app,
+    "pEvoMoundAppFisher":       fp_mound_app,
+    "pEvoStupaAppFisher":       fp_stupa_app,
+    "pEvoDomeAppFisher":        fp_dome_app,
+    "evoStupaIndonesiaN":       n_indon_stupa,
+    "evoStupaIndonesiaApN":     nap_indon_stupa,
+    "evoStupaIndonesiaApRate":  round(rate_indon_stupa, 1),
+    "evoStupaIndonesiaOR":      round(float(_or_indon), 2),
+    "pEvoStupaIndonesiaP":      round(float(_p_indon), 4),
 })

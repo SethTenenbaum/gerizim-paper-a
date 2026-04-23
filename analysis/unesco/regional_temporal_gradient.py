@@ -31,7 +31,7 @@ from scipy.stats import binomtest, norm, fisher_exact
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus, cultural_sites_with_coords
-from lib.beru import GERIZIM, BERU, TIER_APLUS, P_NULL_AP, deviation as beru_dev
+from lib.beru import GERIZIM, BERU, TIER_APLUS, TIER_APP, P_NULL_AP, deviation as beru_dev
 from lib.stats import significance_label as sig
 from lib.results_store import ResultsStore
 
@@ -150,6 +150,7 @@ for s in _cultural:
         "yr": yr,
         "dev": d,
         "is_ap": d <= TIER_AP,
+        "is_app": d <= TIER_APP,
         "region": region,
     })
 
@@ -415,6 +416,61 @@ try:
 
 except ImportError:
     print("  statsmodels not available — skipping logistic regression")
+
+# ── 4c. Ordinal logistic regression: cohort + region → A++ ───────────────────
+print(f"\n" + "=" * 100)
+print("  ORDINAL LOGISTIC REGRESSION: cohort (ordinal 1–3) + region → A++")
+print("=" * 100)
+
+try:
+    import numpy as np
+    import statsmodels.api as sm
+
+    def cohort_score(yr):
+        if yr <= 1984: return 1
+        if yr <= 1999: return 2
+        return 3
+
+    y_app = np.array([int(s["is_app"]) for s in sites])
+    cohort = np.array([cohort_score(s["yr"]) for s in sites], dtype=float)
+
+    region_list = sorted(set(s["region"] for s in sites))
+    ref_region  = region_list[0]
+    region_dummies = {}
+    for reg in region_list[1:]:
+        region_dummies[reg] = np.array([1.0 if s["region"] == reg else 0.0 for s in sites])
+
+    X = np.column_stack([cohort] + list(region_dummies.values()))
+    X = sm.add_constant(X)
+
+    model_app  = sm.Logit(y_app, X)
+    result_app = model_app.fit(disp=0)
+
+    coef_app = result_app.params[1]
+    pval_app = result_app.pvalues[1]
+    se_app   = result_app.bse[1]
+    z_app    = result_app.tvalues[1]
+    or_app   = float(np.exp(coef_app))
+
+    print(f"\n  Reference region: {ref_region}")
+    print(f"  N = {len(y_app)}  |  A++ = {y_app.sum()}  |  converged = {result_app.mle_retvals['converged']}")
+    print(f"\n  Cohort effect (A++):")
+    print(f"    β = {coef_app:.4f}  SE = {se_app:.4f}  Z = {z_app:.3f}  p = {pval_app:.4f}  {sig(pval_app)}")
+    print(f"    OR per cohort step = {or_app:.3f}")
+
+    print(f"\n  LATEX MACROS:")
+    print(f"  \\newcommand{{\\pLogRegCohortApp}}{{{pval_app:.4f}}}   % logistic regression cohort p (A++)")
+    print(f"  \\newcommand{{\\orLogRegCohortApp}}{{{or_app:.3f}}}  % logistic regression cohort OR per step (A++)")
+    print(f"  \\newcommand{{\\zLogRegCohortApp}}{{{z_app:.3f}}}   % logistic regression cohort Z (A++)")
+
+    ResultsStore().write_many({
+        "pLogRegCohortApp": pval_app,
+        "orLogRegCohortApp": or_app,
+        "zLogRegCohortApp":  z_app,
+    })
+
+except ImportError:
+    print("  statsmodels not available — skipping A++ logistic regression")
 
 # ── 5. Summary ───────────────────────────────────────────────────────────────
 print(f"\n" + "=" * 100)

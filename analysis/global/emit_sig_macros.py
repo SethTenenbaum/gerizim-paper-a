@@ -59,9 +59,11 @@ EXPLICIT_P_KEYS = {
     "pCircAp", "pCircA", "pCircApFisher", "pCircAFisher", "pCircChi",
     # Evolution — Fisher and binomial
     "pEvoAp", "pEvoApFisher",
+    "pEvoStupaIndonesiaP",
     "pEvoMoundFisher", "pEvoStupaFisher", "pEvoDomeFisher",
     "pEvoAFisher", "pEvoStupaAFisher", "pEvoDomeAFisher", "pEvoMoundAFisher",
     "pEvoApValidated",
+    "pEvoMoundAppFisher", "pEvoStupaAppFisher", "pEvoDomeAppFisher",
     # Religion
     "pReligUnion", "pReligChiSq", "pBudJoint", "pHinJoint",
     # Anchor comparisons
@@ -80,6 +82,7 @@ EXPLICIT_P_KEYS = {
     # Temporal
     "pCanon", "pPreTwoK", "pModern", "pFirstHalf", "pSecondHalf",
     "pHalfFisher", "pFisherCanonModern", "pCochranThree", "pCochranFive",
+    "pCochranAppThree", "pCochranAppFive", "pCanonApp",
     "pPreCEbinom", "pPreCEfisher", "pFoundDateSpearman",
     # Corridor
     "pCorridorBinom", "pCorridorFisher", "pCorridorAppFisher", "pCorridorMW",

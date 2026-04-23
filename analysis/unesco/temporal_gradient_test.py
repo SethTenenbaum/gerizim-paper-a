@@ -8,7 +8,7 @@ from scipy.stats import binomtest, fisher_exact, spearmanr
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus, cultural_sites_with_coords
 from lib.beru import (
-    GERIZIM, BERU, TIER_APLUS, TIER_B_MAX, P_NULL_AP,
+    GERIZIM, BERU, TIER_APLUS, TIER_APP, TIER_B_MAX, P_NULL_AP, P_NULL_APP,
     deviation as beru_dev, tier_label as tier,
 )
 from lib.stats import significance_label as sig, cochran_armitage
@@ -29,6 +29,7 @@ for s in _cultural:
         "lon": s.longitude, "yr": yr,
         "dev": d, "tier": tier(d),
         "is_ap": d <= TIER_APLUS,
+        "is_app": d <= TIER_APP,
     })
 
 N = len(sites)
@@ -184,12 +185,69 @@ print(f"  p (one-sided, decreasing) = {p_ca5:.6f}  {sig(p_ca5)}")
 
 print()
 print("=" * 90)
+print("  TIER A++ TEMPORAL GRADIENT")
+print(f"  (null rate = {P_NULL_APP:.4f}  ≈ {100*P_NULL_APP:.1f}%)")
+print("=" * 90)
+
+app_cohort_data3 = []
+for label, y0, y1 in [("1978-1984", 1978, 1984), ("1985-1999", 1985, 1999), ("2000-2025", 2000, 2025)]:
+    subset = [s for s in sites if y0 <= s["yr"] <= y1]
+    n = len(subset)
+    napp = sum(1 for s in subset if s["is_app"])
+    rate = napp / n if n else 0
+    p_b = binomtest(napp, n, P_NULL_APP, alternative="greater").pvalue if n else 1.0
+    app_cohort_data3.append((label, n, napp, rate, p_b))
+    print(f"  {label}: N={n:>4},  A++={napp:>3},  rate={100*rate:.1f}%,  p={p_b:.4f} {sig(p_b)}")
+
+ns_app3  = [d[1] for d in app_cohort_data3]
+apps3    = [d[2] for d in app_cohort_data3]
+ca_app3  = cochran_armitage(ns_app3, apps3, scores=[1, 2, 3])
+Z_app3   = ca_app3.z_statistic
+p_app3   = ca_app3.p_value
+
+print(f"\n  Cochran-Armitage A++ (3-cohort) Z = {Z_app3:.4f}, p = {p_app3:.6f}  {sig(p_app3)}")
+print(f"  Direction: {ca_app3.direction}")
+
+app_cohort_data5 = []
+for label, y0, y1 in five_cohorts:
+    subset = [s for s in sites if y0 <= s["yr"] <= y1]
+    n = len(subset)
+    napp = sum(1 for s in subset if s["is_app"])
+    rate = napp / n if n else 0
+    p_b = binomtest(napp, n, P_NULL_APP, alternative="greater").pvalue if n else 1.0
+    app_cohort_data5.append((label, n, napp, rate, p_b))
+    print(f"  {label}: N={n:>4},  A++={napp:>3},  rate={100*rate:.1f}%,  p={p_b:.4f} {sig(p_b)}")
+
+ns_app5 = [d[1] for d in app_cohort_data5]
+apps5_  = [d[2] for d in app_cohort_data5]
+ca_app5 = cochran_armitage(ns_app5, apps5_, scores=[1, 2, 3, 4, 5])
+Z_app5  = ca_app5.z_statistic
+p_app5  = ca_app5.p_value
+
+print(f"\n  Cochran-Armitage A++ (5-cohort) Z = {Z_app5:.4f}, p = {p_app5:.6f}  {sig(p_app5)}")
+print(f"  Direction: {ca_app5.direction}")
+
+print()
+print("=" * 90)
 print("  LATEX MACROS FOR TEMPORAL GRADIENT")
 print("=" * 90)
-print(f"  \\newcommand{{\\ZcochranThree}}{{{Z_ca:.3f}}}       % Cochran-Armitage Z, 3-bin")
-print(f"  \\newcommand{{\\pCochranThree}}{{{p_ca:.4f}}}      % p-value, Cochran-Armitage 3-bin")
-print(f"  \\newcommand{{\\ZcochranFive}}{{{Z5:.3f}}}         % Cochran-Armitage Z, 5-bin")
-print(f"  \\newcommand{{\\pCochranFive}}{{{p_ca5:.4f}}}      % p-value, Cochran-Armitage 5-bin")
+print(f"  \\newcommand{{\\ZcochranThree}}{{{Z_ca:.3f}}}       % Cochran-Armitage Z, A+, 3-bin")
+print(f"  \\newcommand{{\\pCochranThree}}{{{p_ca:.4f}}}      % p-value, Cochran-Armitage A+, 3-bin")
+print(f"  \\newcommand{{\\ZcochranFive}}{{{Z5:.3f}}}         % Cochran-Armitage Z, A+, 5-bin")
+print(f"  \\newcommand{{\\pCochranFive}}{{{p_ca5:.4f}}}      % p-value, Cochran-Armitage A+, 5-bin")
+print(f"  \\newcommand{{\\ZcochranAppThree}}{{{Z_app3:.3f}}}  % Cochran-Armitage Z, A++, 3-bin")
+print(f"  \\newcommand{{\\pCochranAppThree}}{{{p_app3:.4f}}} % p-value, Cochran-Armitage A++, 3-bin")
+print(f"  \\newcommand{{\\ZcochranAppFive}}{{{Z_app5:.3f}}}   % Cochran-Armitage Z, A++, 5-bin")
+print(f"  \\newcommand{{\\pCochranAppFive}}{{{p_app5:.4f}}}  % p-value, Cochran-Armitage A++, 5-bin")
+# A++ canon cohort (1978-1984) macros — app_cohort_data3[0] is the founding canon
+_canon_app_label, _canon_app_n, _canon_app_napp, _canon_app_rate, _canon_app_p = app_cohort_data3[0]
+_modern_app_label, _modern_app_n, _modern_app_napp, _modern_app_rate, _modern_app_p = app_cohort_data3[2]
+print(f"  \\newcommand{{\\pCanonApp}}{{{_canon_app_p:.4f}}}       % p-value, A++ binomial, canon cohort (1978-1984)")
+print(f"  \\newcommand{{\\canonAppRate}}{{{100*_canon_app_rate:.1f}}}     % A++ rate (%), canon cohort")
+print(f"  \\newcommand{{\\NcohortAppA}}{{{_canon_app_n}}}         % N, A++ canon cohort")
+print(f"  \\newcommand{{\\NcohortAppAapp}}{{{_canon_app_napp}}}   % A++ count, canon cohort")
+print(f"  \\newcommand{{\\cohortAppArate}}{{{100*_canon_app_rate:.1f}}}   % A++ rate (%), canon cohort (alias)")
+print(f"  \\newcommand{{\\cohortAppErate}}{{{100*_modern_app_rate:.1f}}}  % A++ rate (%), modern cohort (2000-2025)")
 print(f"  \\newcommand{{\\rhoSpearman}}{{{rho2:.4f}}}        % Spearman rho, A+ rate vs era")
 print(f"  \\newcommand{{\\pSpearman}}{{{p_rho2:.6f}}}        % p-value, Spearman rank correlation")
 
@@ -212,14 +270,33 @@ print(f"  \\newcommand{{\\pAdjTestTwoB}}{{---}}  % Test 2b excluded from Bonferr
 
 # ── Write to results store ────────────────────────────────────────────────────
 store_dict = {
-    "pCochranThree": p_ca,     # Cochran-Armitage 3-cohort p — Test 4
-    "pCochranFive":  p_ca5,    # Cochran-Armitage 5-cohort p
-    "ZcochranThree": Z_ca,     # Z-statistic, 3-cohort
-    "ZcochranFive":  Z5,       # Z-statistic, 5-cohort
+    "pCochranThree":    p_ca,      # A+  Cochran-Armitage 3-cohort p — Test 4
+    "pCochranFive":     p_ca5,     # A+  Cochran-Armitage 5-cohort p
+    "ZcochranThree":    Z_ca,      # Z-statistic, A+, 3-cohort
+    "ZcochranFive":     Z5,        # Z-statistic, A+, 5-cohort
+    "pCochranAppThree": p_app3,    # A++ Cochran-Armitage 3-cohort p
+    "pCochranAppFive":  p_app5,    # A++ Cochran-Armitage 5-cohort p
+    "ZcochranAppThree": Z_app3,    # Z-statistic, A++, 3-cohort
+    "ZcochranAppFive":  Z_app5,    # Z-statistic, A++, 5-cohort
+    "pCanonApp":        _canon_app_p,            # A++ binomial p, canon cohort
+    "canonAppRate":     round(100*_canon_app_rate, 1),
+    "NcohortAppA":      _canon_app_n,
+    "NcohortAppAapp":   _canon_app_napp,
+    "cohortAppArate":   round(100*_canon_app_rate, 1),
+    "cohortAppErate":   round(100*_modern_app_rate, 1),
 }
-# Store 5-cohort breakdown
+# Store 5-cohort A+ breakdown
 for (label, n, nap, rate, p_b), sfx in zip(cohort5_data, suffixes):
     store_dict[f"NcohortRaw{sfx}"]    = n
     store_dict[f"NcohortRaw{sfx}ap"]  = nap
     store_dict[f"cohortRaw{sfx}rate"] = round(100 * rate, 1)
+    # manuscript-compatible aliases
+    store_dict[f"Ncohort{sfx}"]    = n
+    store_dict[f"Ncohort{sfx}ap"]  = nap
+    store_dict[f"cohort{sfx}rate"] = round(100 * rate, 1)
+# Store 5-cohort A++ breakdown
+for (label, n, napp, rate, p_b), sfx in zip(app_cohort_data5, suffixes):
+    store_dict[f"NcohortApp{sfx}"]    = n
+    store_dict[f"NcohortApp{sfx}app"] = napp
+    store_dict[f"cohortApp{sfx}rate"] = round(100 * rate, 1)
 ResultsStore().write_many(store_dict)

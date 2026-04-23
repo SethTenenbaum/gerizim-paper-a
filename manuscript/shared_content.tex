@@ -283,39 +283,18 @@ cluster $p_\mathrm{adj} = \pAdjTestThree$~\pAdjTestThreeSig{}).
 
 \textbf{Other tests.}
 Test~4 (temporal gradient, Cochran-Armitage) is descriptive context;
-the Mantel-Haenszel stratified test is underpowered at the sub-group level,
-but logistic regression with region as a covariate confirms the gradient
-($p = \pLogRegCohort$~\textasciitilde; \S\ref{sec:resultstemporal}),
-and it is not part of the primary family.
+a Mantel-Haenszel stratified test and logistic regression with region as a
+covariate assess the gradient robustly (\S\ref{sec:resultstemporal});
+it is not part of the primary family.
 Test~2b is a sensitivity variant of Test~2.
 Test~5 (founding classifier) is post-hoc (Appendix~\ref{sec:kwdaudit_founding}).
-World religion sub-group analyses (\S\ref{sec:resultsrelig}) are exploratory:
-chi-squared across five groups ($p = \pReligChiSq$, \pReligChiSqSig{});
-Buddhist bimodal ($p = \pBudJoint$, **).
+World religion sub-group analyses (\S\ref{sec:resultsrelig}) are exploratory.
 Tests~A--D (\S\ref{sec:results_rayleigh}) assess the 3\textdegree{} periodicity
 structure: Test~A (full-corpus Rayleigh) is a negative control structurally
 insensitive to the sparse A+ sub-population; Tests~C and~D are positive tests;
 Test~B is tautological by construction and excluded from both tables.
 
-Results of all primary and secondary tests are consolidated
-in Table~\ref{tab:bonferroni_both}.
-
-
-A comprehensive FDR audit (\NtotalTests{} tests;
-\citealt{benjamini1995controlling}) retains \NsurviveFDR{} at $q < 0.05$,
-of which \NsurviveBonfAll{} survive full Bonferroni at $k = \NtotalTests$.
-The \NsurviveBonfAll{} full-$k$ survivors are:
-dome/spherical A++ (Test~1, binomial $p = \BonfAllSurvivepCircApp$);
-cluster permutation (Test~2, $p_\mathrm{adj} = \BonfAllSurviveclusterPermP$);
-harmonic Mann-Whitney ($p_\mathrm{adj} = \BonfAllSurviveclusterHarmonicMWp$);
-sequential-peak permutation ($p_\mathrm{adj} = \BonfAllSurvivepeakSigP$);
-corridor occupancy \corridorPrecHits{}/\corridorPrecN{} harmonics
-($p_\mathrm{adj} = \BonfAllSurvivepCorridorBinom$);
-corridor Fisher combined ($p_\mathrm{adj} = \BonfAllSurvivepCorridorFisher$);
-corridor A++ enrichment ($p_\mathrm{adj} = \BonfAllSurvivepCorridorAppFisher$);
-corridor precision Mann-Whitney ($p_\mathrm{adj} = \BonfAllSurvivepCorridorMW$);
-evolution combined A++ (binomial $p = \BonfAllSurvivepEvoApp$);
-and Hinduism A+/C- joint (multivariate hyper.\ $p_\mathrm{adj} = \BonfAllSurvivepHinApCminus$).
+\subsection{Simulation Null Models}
 \label{sec:methods_simulation}
 
 Three simulation approaches (code: \texttt{simulation\_null\_model.py},
@@ -369,14 +348,13 @@ A+ rates across the five main religion groups
 individual Fisher tests on underpowered sub-groups are not reported.
 Sites associated with any world religion ($N = \NreligUnion$):
 binomial $p = \pReligUnion$~\pReligUnionSig{}.
-The exception is a structural signal in Buddhism ($N = \NbudSitesRelig$):
-A-tier (\NbudATier/\NbudSitesRelig, \budATierRate\%) and C-band
-(\NbudInterHarmonic/\NbudSitesRelig, \budInterHarmonicRate\%) are
-both elevated simultaneously; the joint probability is
-$p = \pBudJoint$~\pBudJointSig{} (multivariate hypergeometric).
-The C-band midpoint is also a 0.05-beru harmonic node, and the same
-6\textdegree{} spacing that reaches significance in the sensitivity
-sweep (\S\ref{sec:metrology}) suggests the bimodal reflects two nested grids.
+The exception is a structural signal in Buddhism’s A-tier (\NbudATier/\NbudSitesRelig,
+\budATierRate\%) and C-band (\NbudInterHarmonic/\NbudSitesRelig, 
+\budInterHarmonicRate\%) elevations are jointly significant at 
+$p = \pBudJoint$~\pBudJointSig{}; Hinduism also shows elevated C-band
+occupancy (\NhinInterHarmonic/\NhinSites, \hinInterHarmonicRate\%)
+and a significant A+/C- joint probability $p = \pHinApCminus$~\pHinApCminusSig{}. 
+(multivariate hypergeometric).
 
 %──────────────────────────────────────────────────────────────────────────────
 \subsection{Domed and Spherical Monuments (Test~2, Primary)}
@@ -495,26 +473,42 @@ sites matching both keyword sets.
 \begin{table*}[!t]
 \centering
 \caption{Test~2b enrichment by evolutionary stage ($N = \NevoTotal$).
-  Null rates: A+ $P_0 = \NullRateAp{}$ (4\%), A $P_0 = \NullRateA{}$ (20\%).
-  Fisher exact tests stage vs.\ full corpus background.}
+  Null rates: A++~$P_0 = \NullRateApp{}$ (3.2\%), A+~$P_0 = \NullRateAp{}$ (4\%), A~$P_0 = \NullRateA{}$ (20\%).
+  Fisher exact tests: stage vs.\ full corpus background.}
 \label{tab:evostages1b}
-\begin{tabular}{lrrrllrl}
+\small
+\adjustbox{max width=\textwidth}{%
+\begin{tabular}{lrrllrllrl}
 \toprule
- & & \multicolumn{3}{c}{Tier A+ ($\leq\ApThreshKm{}$\,km)} & \multicolumn{3}{c}{Tier A ($\leq\ATierThreshKm{}$\,km)} \\
-\cmidrule(lr){3-5}\cmidrule(lr){6-8}
-Stage & $N$ & A+ & Rate & OR\;($p$, Fisher) & A & Rate & OR\;($p$, Fisher) \\
+ & & \multicolumn{2}{c}{Tier~A++ ($\leq\AppThreshKm{}$\,km)} & & \multicolumn{2}{c}{Tier~A+ ($\leq\ApThreshKm{}$\,km)} & & \multicolumn{2}{c}{Tier~A ($\leq\ATierThreshKm{}$\,km)} \\
+\cmidrule(lr){3-4}\cmidrule(lr){6-7}\cmidrule(lr){9-10}
+Stage & $N$ & A++ & Rate OR ($p$) & & A+ & Rate OR ($p$) & & A & Rate OR ($p$) \\
 \midrule
-Mound (tumulus/barrow/kofun) & \NevoMound & \NevoMoundAp & \evoMoundApRate\% & $\evoMoundFisherOR\times$ (\pEvoMoundFisher~\pEvoMoundFisherSig{})            & \NevoMoundA & \evoMoundARate\% & $\evoMoundAFisherOR\times$ (\pEvoMoundAFisher~\pEvoMoundAFisherSig{}) \\
-Stupa (stupa/stupas)         & \NevoStupa & \NevoStupaAp & \evoStupaApRate\% & $\evoStupaFisherOR\times$ (\pEvoStupaFisher~\pEvoStupaFisherSig{})             & \NevoStupaA & \evoStupaARate\% & $\evoStupaAFisherOR\times$ (\pEvoStupaAFisher~$^\dagger$) \\
-Dome (dome/tholos/spherical) & \NevoDome  & \NevoDomeAp  & \evoDomeApRate\%  & $\evoDomeFisherOR\times$ (\pEvoDomeFisher~\pEvoDomeFisherSig{})              & \NevoDomeA  & \evoDomeARate\%  & $\evoDomeAFisherOR\times$ (\pEvoDomeAFisher~$^\dagger$) \\
+Mound\textsuperscript{a} & \NevoMound
+  & \NevoMoundApp & \evoMoundAppRate\% $\evoMoundAppFisherOR\times$ (\pEvoMoundAppFisher~\pEvoMoundAppFisherSig{}) &
+  & \NevoMoundAp  & \evoMoundApRate\%  $\evoMoundFisherOR\times$ (\pEvoMoundFisher~\pEvoMoundFisherSig{}) &
+  & \NevoMoundA   & \evoMoundARate\%   $\evoMoundAFisherOR\times$ (\pEvoMoundAFisher~\pEvoMoundAFisherSig{}) \\
+Stupa\textsuperscript{b} & \NevoStupa
+  & \NevoStupaApp & \evoStupaAppRate\% $\evoStupaAppFisherOR\times$ (\pEvoStupaAppFisher~\pEvoStupaAppFisherSig{}) &
+  & \NevoStupaAp  & \evoStupaApRate\%  $\evoStupaFisherOR\times$ (\pEvoStupaFisher~\pEvoStupaFisherSig{}) &
+  & \NevoStupaA   & \evoStupaARate\%   $\evoStupaAFisherOR\times$ (\pEvoStupaAFisher~$^\dagger$) \\
+Dome\textsuperscript{c}  & \NevoDome
+  & \NevoDomeApp  & \evoDomeAppRate\%  $\evoDomeAppFisherOR\times$ (\pEvoDomeAppFisher~\pEvoDomeAppFisherSig{}) &
+  & \NevoDomeAp   & \evoDomeApRate\%   $\evoDomeFisherOR\times$ (\pEvoDomeFisher~\pEvoDomeFisherSig{}) &
+  & \NevoDomeA    & \evoDomeARate\%    $\evoDomeAFisherOR\times$ (\pEvoDomeAFisher~$^\dagger$) \\
 \midrule
-\textbf{Combined}            & \textbf{\NevoTotal} & \textbf{\NevoAp} & \textbf{\evoApRate\%} & $\mathbf{\evoApFisherOR\times}$ (\textbf{\pEvoApFisher~\pEvoApFisherSig{}}) & \textbf{\NevoA} & \textbf{\evoARate\%} & $\mathbf{\evoAFisherOR\times}$ (\textbf{\pEvoAFisher~\pEvoAFisherSig{}}) \\
+\textbf{Combined} & \textbf{\NevoTotal}
+  & \textbf{\NevoApp} & \textbf{\evoAppRate\%} $\mathbf{\evoAppFisherOR\times}$ (\textbf{\pEvoAppFisher~\pEvoAppFisherSig{}}) &
+  & \textbf{\NevoAp}  & \textbf{\evoApRate\%}  $\mathbf{\evoApFisherOR\times}$ (\textbf{\pEvoApFisher~\pEvoApFisherSig{}}) &
+  & \textbf{\NevoA}   & \textbf{\evoARate\%}   $\mathbf{\evoAFisherOR\times}$ (\textbf{\pEvoAFisher~\pEvoAFisherSig{}}) \\
 \bottomrule
-\multicolumn{8}{p{0.98\linewidth}}{\footnotesize
+\multicolumn{10}{p{1.2\linewidth}}{\footnotesize
+  \textsuperscript{a}tumulus/barrow/kofun.\;
+  \textsuperscript{b}stupa/stupas.\;
+  \textsuperscript{c}dome/tholos/spherical.
   OR = odds ratio; $p$ = one-sided Fisher exact vs.\ full UNESCO cultural corpus ($N = \NclusterTotal$).
-  Stage $N$ values sum to more than the combined total because \NevoOverlap{} sites match multiple stages; combined row counts unique sites.
-  *** $p < 0.001$, ** $p < 0.01$, * $p < 0.05$, $^\dagger$ $p < 0.10$, ns = not significant.} \\
-\end{tabular}
+  Stage $N$ values sum to more than the combined total because \NevoOverlap{} sites match multiple stages.} \\
+\end{tabular}}
 \end{table*}
 
 \noindent The combined population ($N = \NevoTotal$, A+ = \evoApRate\%;
@@ -649,20 +643,34 @@ artifact.
 \subsection{Temporal Gradient (Test~4, Descriptive)}
 \label{sec:resultstemporal}
 
-The A+ rate is highest in the founding canon (1978--1984: \canonApRate\%,
-$\canonEnrich\times$, $p = \pCanon$~\pCanonSig{}) and dilutes toward the null in the
-modern era (\cohortErate\%, \pModernSig{}); Cochran-Armitage three-cohort:
-$p = \pCochranThree$~(*). The gradient holds across all three UNESCO region groups.
-Logistic regression (ordinal cohort + region covariate) confirms the gradient
-($Z = \zLogRegCohort$, $p = \pLogRegCohort$~\textasciitilde,
-OR~$= \orLogRegCohort$), consistent with UNESCO's founding canon having
-prioritized the most historically prominent monuments.
-The gradient is treated as descriptive only (Figure~\ref{fig:temporal}).
+The Tier-A++ rate in the founding canon (1978--1984) is \cohortAppArate\%
+(\NcohortAppAapp/\NcohortAppA{}; $\canonEnrich\times$ the \NullRateApp{} null,
+$p = \pCanonApp$~\pCanonAppSig{}), declining monotonically toward the null
+in later cohorts (2000--2025: \cohortAppErate\%).
+Cochran-Armitage three-cohort trend test (A++, decreasing):
+$Z = \ZcochranAppThree$, $p = \pCochranAppThree$~(\pCochranAppThreeSig{}).
+The five-cohort trend is marginal ($p = \pCochranAppFive$~\pCochranAppFiveSig{}).
+By contrast, the A+ rate shows no significant decreasing trend
+($p = \pCochranThree$~\pCochranThreeSig{}), confirming the gradient is
+specific to the highest-precision tier.
+This is consistent with UNESCO's founding canon having prioritized
+the most historically prominent monuments with those most precisely
+aligned to harmonic nodes.
+The Mantel-Haenszel stratified test is underpowered at the sub-group level;
+Logistic regression with region as a covariate confirms the A++ gradient
+($Z = \zLogRegCohortApp$, $p = \pLogRegCohortApp$~\pLogRegCohortAppSig{},
+OR~$= \orLogRegCohortApp$).
+The gradient is treated as descriptive context only (Figure~\ref{fig:temporal}).
 
 \begin{figure*}[!t]
 \centering
 \includegraphics[width=0.9\textwidth]{../figures/fig_temporal}
-\caption{Tier-A+ rate by UNESCO inscription-year cohort.}
+\caption{Tier-A++ and Tier-A+ rates by UNESCO inscription-year cohort.
+  The founding canon (1978--1984) shows a significantly elevated A++ rate
+  (\cohortAppArate\%, $p = \pCanonApp$~\pCanonAppSig{}) that declines
+  monotonically across later cohorts toward the \NullRateApp{} null (dotted line;
+  Cochran-Armitage $Z = \ZcochranAppThree$, $p = \pCochranAppThree$~\pCochranAppThreeSig{}).
+  The A+ rate (right bars) shows no significant trend ($p = \pCochranThree$~\pCochranThreeSig{}).}
 \label{fig:temporal}
 \end{figure*}
 
@@ -686,6 +694,28 @@ Test~2b (mound evol.)  & \NevoTotal      & \pEvoApFisher$^{a}$ (OR~$= \evoApFish
 \multicolumn{5}{l}{\footnotesize $^{a}$Fisher exact $p$ vs.\ rest of corpus (one-sided, enrichment); $^{b}$permutation $p$. Binomial baselines: Test~2 $p = \pCircAp$~\pCircApSig{}, Test~2b $p = \pEvoAp$~\pEvoApSig{}.} \\
 \end{tabular}}
 \end{table*}
+
+\subsection{FDR audit and Bonferroni correction}
+
+Results of all primary and secondary tests are consolidated
+in Table~\ref{tab:bonferroni_both}.
+
+A comprehensive FDR audit (\NtotalTests{} tests;
+\citealt{benjamini1995controlling}) retains \NsurviveFDR{} at $q < 0.05$,
+of which \NsurviveBonfAll{} survive full Bonferroni at $k = \NtotalTests$.
+The \NsurviveBonfAll{} full-$k$ survivors are:
+dome/spherical A++ (Test~1, binomial $p = \BonfAllSurvivepCircApp$);
+cluster permutation (Test~2, $p_\mathrm{adj} = \BonfAllSurviveclusterPermP$);
+harmonic Mann-Whitney ($p_\mathrm{adj} = \BonfAllSurviveclusterHarmonicMWp$);
+sequential-peak permutation ($p_\mathrm{adj} = \BonfAllSurvivepeakSigP$);
+corridor occupancy \corridorPrecHits{}/\corridorPrecN{} harmonics
+($p_\mathrm{adj} = \BonfAllSurvivepCorridorBinom$);
+corridor Fisher combined ($p_\mathrm{adj} = \BonfAllSurvivepCorridorFisher$);
+corridor A++ enrichment ($p_\mathrm{adj} = \BonfAllSurvivepCorridorAppFisher$);
+corridor precision Mann-Whitney ($p_\mathrm{adj} = \BonfAllSurvivepCorridorMW$);
+evolution combined A++ (binomial $p = \BonfAllSurvivepEvoApp$);
+and Hinduism A+/C- joint (multivariate hyper.\ $p_\mathrm{adj} = \BonfAllSurvivepHinApCminus$).
+
 \section{Robustness Checks}
 \label{sec:robustness}
 
@@ -1011,15 +1041,16 @@ for anchor specificity and periodicity structure.
 The statistical evidence does not identify a mechanism, but the geographic
 structure of the signal points toward the Buddhist tradition as the most
 tractable case. Within the dome-evolution corpus, the stupa sub-stage
-achieves an A+ rate of \evoStupaApRate\% (\NevoStupaAp/\NevoStupa{} sites,
-OR~$= \evoStupaFisherOR\times$, $p = \pEvoStupaFisher$~\pEvoStupaFisherSig{}), the highest
+achieves an A++ rate of \evoStupaAppRate\% (\NevoStupaApp/\NevoStupa{} sites,
+OR~$= \evoStupaAppFisherOR\times$, $p = \pEvoStupaAppFisher$~\pEvoStupaAppFisherSig{}), the highest
 of any keyword-defined sub-population in the analysis and more than five
-times the geometric null. Three of the four UNESCO A+ stupa sites fall in the
+times the geometric null. Three of the four UNESCO A++ stupa sites fall in the
 95\textdegree{}--110\textdegree{}E corridor, including Pyu Ancient Cities,
-Silk Roads Chang'an-Tianshan, and Borobudur (c.~800~CE)
-\citep{miksic1990borobudur}. The fourth is Lumbini (83\textdegree{}E, Nepal).
-The Indonesia sub-region (95\textdegree{}--141\textdegree{}E) achieves
-an A+ rate of 60\% (3/5 sites, OR~$= 26.97\times$, $p = 0.0015$, **).
+Silk Roads Chang'an-Tianshan, Borobudur (c.~800~CE)
+\citep{miksic1990borobudur}, and Lumbini (83\textdegree{}E, Nepal).
+The Indonesia sub-region (95\textdegree{}--141\textdegree{}E) achieves an A+ 
+rate of \evoStupaIndonesiaApRate\% (\evoStupaIndonesiaApN/\evoStupaIndonesiaN{} sites, 
+OR~$= \evoStupaIndonesiaOR\times$, $p = \pEvoStupaIndonesiaP$~\pEvoStupaIndonesiaPSig{}).
 By contrast, the four C-tier stupa sites fall exclusively in the
 India/Pakistan band: Mahabodhi, Elephanta, Taxila, and Ajanta
 (OR~$= \stupaIndiaPakCOR\times$, $p = \stupaIndiaPakCP$~\stupaIndiaPakCPSig{}).
@@ -1063,9 +1094,8 @@ sites than bands without one (Test~3, $p = \clusterPermP$~\clusterPermPSig{}), s
 that the most important sites and the broader heritage record share the
 same longitudinal structure.
 Among architectural sub-populations, spherically shaped monuments show
-the strongest alignment of any class tested
-(OR~$= \circApFisherOR$, $p_\mathrm{adj} = \pAdjTestTwo$~\pAdjTestTwoSig{}),
-exceeding what geography alone predicts (Null~C, $p = \geoNullDomeRestrictedP$~\geoNullDomeRestrictedPSig{}).
+the strongest alignment of any class tested,
+exceeding what geography alone predicts.
 
 Comparison with the Wikidata Q180987 stupa corpus suggests a broader
 pattern: within the stupa tradition, the most historically significant

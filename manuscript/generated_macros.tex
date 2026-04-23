@@ -1,4 +1,4 @@
-% Generated macros — 2026-04-22T20:53:29Z
+% Generated macros — 2026-04-23T04:33:46Z
 % Source: bash manuscript/reproduce_all_macros.sh
 % IMPORTANT: values are computed fresh each run — do NOT hardcode
 
@@ -260,10 +260,20 @@
   \newcommand{\metaBeatingChiPct}{3.3}         % % of keywords beating Gerizim chi-sq
 
 % --- analysis/unesco/temporal_gradient_test.py
-  \newcommand{\ZcochranThree}{-1.001}       % Cochran-Armitage Z, 3-bin
-  \newcommand{\pCochranThree}{0.1584}      % p-value, Cochran-Armitage 3-bin
-  \newcommand{\ZcochranFive}{-0.653}         % Cochran-Armitage Z, 5-bin
-  \newcommand{\pCochranFive}{0.2570}      % p-value, Cochran-Armitage 5-bin
+  \newcommand{\ZcochranThree}{-1.001}       % Cochran-Armitage Z, A+, 3-bin
+  \newcommand{\pCochranThree}{0.1584}      % p-value, Cochran-Armitage A+, 3-bin
+  \newcommand{\ZcochranFive}{-0.653}         % Cochran-Armitage Z, A+, 5-bin
+  \newcommand{\pCochranFive}{0.2570}      % p-value, Cochran-Armitage A+, 5-bin
+  \newcommand{\ZcochranAppThree}{-1.776}  % Cochran-Armitage Z, A++, 3-bin
+  \newcommand{\pCochranAppThree}{0.0379} % p-value, Cochran-Armitage A++, 3-bin
+  \newcommand{\ZcochranAppFive}{-1.561}   % Cochran-Armitage Z, A++, 5-bin
+  \newcommand{\pCochranAppFive}{0.0592}  % p-value, Cochran-Armitage A++, 5-bin
+  \newcommand{\pCanonApp}{0.0137}       % p-value, A++ binomial, canon cohort (1978-1984)
+  \newcommand{\canonAppRate}{7.2}     % A++ rate (%), canon cohort
+  \newcommand{\NcohortAppA}{138}         % N, A++ canon cohort
+  \newcommand{\NcohortAppAapp}{10}   % A++ count, canon cohort
+  \newcommand{\cohortAppArate}{7.2}   % A++ rate (%), canon cohort (alias)
+  \newcommand{\cohortAppErate}{3.5}  % A++ rate (%), modern cohort (2000-2025)
   \newcommand{\rhoSpearman}{-0.0132}        % Spearman rho, A+ rate vs era
   \newcommand{\pSpearman}{0.676052}        % p-value, Spearman rank correlation
   \newcommand{\NcohortRawA}{138}  % 1978-1984 cohort N
@@ -535,6 +545,9 @@
   \newcommand{\pLogRegCohort}{0.2735}   % logistic regression cohort p
   \newcommand{\orLogRegCohort}{0.845}  % logistic regression cohort OR per step
   \newcommand{\zLogRegCohort}{-1.095}   % logistic regression cohort Z
+  \newcommand{\pLogRegCohortApp}{0.0496}   % logistic regression cohort p (A++)
+  \newcommand{\orLogRegCohortApp}{0.668}  % logistic regression cohort OR per step (A++)
+  \newcommand{\zLogRegCohortApp}{-1.963}   % logistic regression cohort Z (A++)
   \newcommand{\MHcommonOR}{1.366}             % MH common OR (early vs late)
   \newcommand{\CMHchisq}{1.822}              % CMH chi-squared
   \newcommand{\pCMH}{0.1771}                  % CMH p-value
@@ -581,20 +594,20 @@
   \newcommand{\evoAppRate}{10.0}          % A++ rate, dome-evolution corpus (%)
   \newcommand{\evoEnrichApp}{3.12}         % enrichment ratio, A++ in dome corpus
   \newcommand{\pEvoApp}{0.0008}         % p-value, A++ binomial (dome corpus)
+  \newcommand{\pEvoAppFisher}{0.0445}     % p-value, A++ Fisher exact (dome corpus)
+  \newcommand{\evoAppFisherOR}{2.92}      % OR, A++ Fisher exact (dome corpus)
   \newcommand{\NevoAp}{15}             % A+ sites in dome-evolution corpus
   \newcommand{\evoApRate}{13.6}           % A+ rate, dome-evolution corpus (%)
   \newcommand{\evoEnrichAp}{2.12}          % enrichment ratio, A+ in dome corpus
   \newcommand{\pEvoAp}{0.0046}          % p-value, A+ binomial (dome corpus)
   \newcommand{\pEvoApFisher}{0.0445}      % p-value, A+ Fisher exact (dome corpus)
   \newcommand{\evoApFisherOR}{1.79}    % OR, A+ Fisher exact (dome corpus)
-  \newcommand{\pEvoAFisher}{0.0401}        % p-value, A Fisher exact (dome corpus)
-  \newcommand{\evoAFisherOR}{1.54}      % OR, A Fisher exact (dome corpus)
   \newcommand{\NevoA}{31}             % Tier-A sites in dome-evolution corpus
   \newcommand{\evoARate}{28.2}           % A rate, dome-evolution corpus (%)
   \newcommand{\evoEnrichA}{1.50}           % enrichment ratio, A in dome corpus
   \newcommand{\pEvoA}{0.0111}          % p-value, A binomial (dome corpus)
-  \newcommand{\evoExpAp}{7.06}          % expected A+ count at 6% null (dome-evolution corpus)
-  \newcommand{\evoExpA}{20.72}           % expected A count at 19% null (dome-evolution corpus)
+  \newcommand{\pEvoAFisher}{0.0401}        % p-value, A Fisher exact (dome corpus)
+  \newcommand{\evoAFisherOR}{1.54}      % OR, A Fisher exact (dome corpus)
   \newcommand{\NevoMound}{24}           % sites with mound stage
   \newcommand{\NevoMoundAp}{2}            % A+ sites with mound stage
   \newcommand{\evoMoundApRate}{8.3}           % A+ rate, mound stage (%)
@@ -631,6 +644,23 @@
   \newcommand{\NevoMoundOnly}{20}          % mound-only sites (no later dome/stupa)
   \newcommand{\NevoMoundOnlyAp}{2}           % A+ in mound-only sites
   \newcommand{\NevoOverlap}{4}            % sites with both mound and dome/stupa stages
+  \newcommand{\NevoMoundApp}{1}           % A++ sites with mound stage
+  \newcommand{\evoMoundAppRate}{4.2}          % A++ rate, mound stage (%)
+  \newcommand{\pEvoMoundAppFisher}{0.6606}    % p-value, A++ Fisher exact in mound stage
+  \newcommand{\evoMoundAppFisherOR}{0.95}   % OR, A++ Fisher exact in mound stage
+  \newcommand{\NevoStupaApp}{4}           % A++ sites with stupa stage
+  \newcommand{\evoStupaAppRate}{22.2}          % A++ rate, stupa stage (%)
+  \newcommand{\pEvoStupaAppFisher}{0.0061}    % p-value, A++ Fisher exact in stupa stage
+  \newcommand{\evoStupaAppFisherOR}{6.81}   % OR, A++ Fisher exact in stupa stage
+  \newcommand{\NevoDomeApp}{7}            % A++ sites with dome stage
+  \newcommand{\evoDomeAppRate}{9.3}           % A++ rate, dome stage (%)
+  \newcommand{\pEvoDomeAppFisher}{0.0383}     % p-value, A++ Fisher exact in dome stage
+  \newcommand{\evoDomeAppFisherOR}{2.50}    % OR, A++ Fisher exact in dome stage
+  \newcommand{\evoStupaIndonesiaN}{5}          % stupa-stage sites in 95–141°E
+  \newcommand{\evoStupaIndonesiaApN}{3}         % A+ stupa-stage sites in 95–141°E
+  \newcommand{\evoStupaIndonesiaApRate}{60.0}      % A+ rate, stupa-stage 95–141°E (%)
+  \newcommand{\evoStupaIndonesiaOR}{16.25}       % Fisher OR, stupa-stage 95–141°E vs corpus
+  \newcommand{\pEvoStupaIndonesiaP}{0.0056}       % Fisher p, stupa-stage 95–141°E vs corpus
 
 % --- analysis/unesco/tumulus_dome_evolution_test.py
   \newcommand{\NevoValidTotal}{104}              % total dome-evolution corpus (context-validated)
@@ -1150,6 +1180,7 @@
   \newcommand{\pBudJointSig}{**}  % auto sig label
   \newcommand{\pBudReligSig}{ns}  % auto sig label
   \newcommand{\pCMHSig}{ns}  % auto sig label
+  \newcommand{\pCanonAppSig}{*}  % auto sig label
   \newcommand{\pCanonFisherSig}{ns}  % auto sig label
   \newcommand{\pCanonPostCESig}{*}  % auto sig label
   \newcommand{\pCanonSig}{ns}  % auto sig label
@@ -1164,6 +1195,8 @@
   \newcommand{\pCircApValidatedSig}{*}  % auto sig label
   \newcommand{\pCircAppSig}{***}  % auto sig label
   \newcommand{\pCircChiSig}{ns}  % auto sig label
+  \newcommand{\pCochranAppFiveSig}{$^\dagger$}  % auto sig label
+  \newcommand{\pCochranAppThreeSig}{*}  % auto sig label
   \newcommand{\pCochranFiveSig}{ns}  % auto sig label
   \newcommand{\pCochranThreeSig}{ns}  % auto sig label
   \newcommand{\pCorridorAppFisherSig}{***}  % auto sig label
@@ -1179,13 +1212,18 @@
   \newcommand{\pEvoApFisherSig}{*}  % auto sig label
   \newcommand{\pEvoApSig}{**}  % auto sig label
   \newcommand{\pEvoApValidatedSig}{*}  % auto sig label
+  \newcommand{\pEvoAppFisherSig}{**}  % auto sig label
   \newcommand{\pEvoAppSig}{***}  % auto sig label
+  \newcommand{\pEvoDomeAppFisherSig}{*}  % auto sig label
   \newcommand{\pEvoDomeFisherSig}{ns}  % auto sig label
   \newcommand{\pEvoDomeSig}{$^\dagger$}  % auto sig label
   \newcommand{\pEvoMoundAFisherSig}{ns}  % auto sig label
+  \newcommand{\pEvoMoundAppFisherSig}{ns}  % auto sig label
   \newcommand{\pEvoMoundFisherSig}{ns}  % auto sig label
   \newcommand{\pEvoMoundSig}{ns}  % auto sig label
+  \newcommand{\pEvoStupaAppFisherSig}{**}  % auto sig label
   \newcommand{\pEvoStupaFisherSig}{$^\dagger$}  % auto sig label
+  \newcommand{\pEvoStupaIndonesiaPSig}{**}  % auto sig label
   \newcommand{\pEvoStupaSig}{*}  % auto sig label
   \newcommand{\pFirstHalfSig}{**}  % auto sig label
   \newcommand{\pFisherCanonModernSig}{ns}  % auto sig label
@@ -1202,6 +1240,7 @@
   \newcommand{\pJudApFisherSigSig}{ns}  % auto sig label
   \newcommand{\pJudApSig}{$^\dagger$}  % auto sig label
   \newcommand{\pKailashAnchorSig}{ns}  % auto sig label
+  \newcommand{\pLogRegCohortAppSig}{*}  % auto sig label
   \newcommand{\pLogRegCohortSig}{ns}  % auto sig label
   \newcommand{\pMeccaAnchorSig}{ns}  % auto sig label
   \newcommand{\pMeruAnchorSig}{ns}  % auto sig label
