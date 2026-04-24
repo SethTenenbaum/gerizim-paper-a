@@ -210,7 +210,10 @@ def main() -> None:
             return float("nan"), float("nan")
         table = [[k_sub, n - k_sub], [K_bg - k_sub, N - n - (K_bg - k_sub)]]
         or_, p = fisher_exact(table, alternative=alternative)
-        return round(or_, 2), round(p, 4)
+        return round(or_, 2), p
+
+    def fmt_p(p):
+        return "< 0.001" if p < 0.001 else f"{p:.3f}"
 
     # Java/Sumatra node 105–115°E
     java115 = [s for s in sites if 105.0 <= s["lon"] <= 115.0]
@@ -400,37 +403,37 @@ def main() -> None:
         ("wikiJavaNodeATierN",       str(na_java115)),
         ("wikiJavaNodeATierRate",    f"{100*na_java115/n_java115:.1f}" if n_java115 else "0"),
         ("wikiJavaNodeATierOR",      f"{or_a_java115:.2f}"),
-        ("wikiJavaNodeATierP",       f"{p_a_java115:.3f}"),
+        ("wikiJavaNodeATierP",       fmt_p(p_a_java115)),
         ("wikiJavaTightN",           str(n_java112)),
         ("wikiJavaTightATierN",      str(na_java112)),
         ("wikiJavaTightATierRate",   f"{100*na_java112/n_java112:.1f}" if n_java112 else "0"),
         ("wikiJavaTightATierOR",     f"{or_a_java112:.2f}"),
-        ("wikiJavaTightATierP",      f"{p_a_java112:.3f}"),
+        ("wikiJavaTightATierP",      fmt_p(p_a_java112)),
         ("wikiJavaTightApN",         str(nap_java112)),
         ("wikiJavaTightApRate",      f"{100*nap_java112/n_java112:.1f}" if n_java112 else "0"),
         ("wikiJavaTightApOR",        f"{or_ap_java112:.2f}"),
-        ("wikiJavaTightApP",         f"{p_ap_java112:.3f}"),
+        ("wikiJavaTightApP",         fmt_p(p_ap_java112)),
         ("wikiMyanmarN",             str(n_myanmar)),
         ("wikiMyanmarCbandN",        str(nc_myanmar)),
         ("wikiMyanmarCbandRate",     f"{100*nc_myanmar/n_myanmar:.1f}" if n_myanmar else "0"),
         ("wikiMyanmarCbandOR",       f"{or_c_myanmar:.2f}"),
-        ("wikiMyanmarCbandP",        f"{p_c_myanmar:.3f}"),
+        ("wikiMyanmarCbandP",        fmt_p(p_c_myanmar)),
         ("wikiHeartlandN",           str(n_hl70)),
         ("wikiHeartlandCbandN",      str(nc_hl70)),
         ("wikiHeartlandCbandRate",   f"{100*nc_hl70/n_hl70:.1f}" if n_hl70 else "0"),
         ("wikiHeartlandCbandOR",     f"{or_c_hl70:.2f}"),
-        ("wikiHeartlandCbandP",      f"{p_c_hl70:.3f}"),
+        ("wikiHeartlandCbandP",      fmt_p(p_c_hl70)),
         # Non-heartland (outside 70–110°E)
         ("wikiNonHeartlandN",        str(n_nonhl)),
         ("wikiNonHeartlandATierN",   str(na_nonhl)),
         ("wikiNonHeartlandATierRate",f"{rate_a_nonhl:.1f}"),
         ("wikiNonHeartlandATierOR",  f"{or_a_nonhl:.2f}"),
-        ("wikiNonHeartlandATierP",   f"{p_a_nonhl:.3f}"),
+        ("wikiNonHeartlandATierP",   fmt_p(p_a_nonhl)),
         ("wikiNonHeartlandApRate",   f"{rate_ap_nonhl:.1f}"),
         ("wikiNonHeartlandApOR",     f"{or_ap_nonhl:.2f}"),
-        ("wikiNonHeartlandApP",      f"{p_ap_nonhl:.3f}"),
+        ("wikiNonHeartlandApP",      fmt_p(p_ap_nonhl)),
         ("wikiNonHeartlandCbandOR",  f"{or_c_nonhl:.2f}"),
-        ("wikiNonHeartlandCbandP",   f"{p_c_nonhl:.3f}"),
+        ("wikiNonHeartlandCbandP",   fmt_p(p_c_nonhl)),
     ]
 
     for name, val in macros:

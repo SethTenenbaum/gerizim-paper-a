@@ -49,8 +49,8 @@ from scipy.stats import binomtest, fisher_exact
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus, cultural_sites_with_coords
 from lib.beru import (
-    GERIZIM, BERU, TIER_APLUS, TIER_APLUS_KM, TIER_A_MAX, TIER_B_MAX, P_NULL_AP,
-    deviation as beru_dev, tier_label as tier, is_aplus, is_a_or_better,
+    GERIZIM, BERU, TIER_APLUS, TIER_APLUS_KM, TIER_A_MAX, TIER_B_MAX, P_NULL_AP, P_NULL_APP,
+    deviation as beru_dev, tier_label as tier, is_aplus, is_aplusplus, is_a_or_better,
 )
 from lib.founding_filter import (
     classify_site as _classify_site_obj,
@@ -228,6 +228,20 @@ ct_kw = [[n_found_kw_ap, total_ap - n_found_kw_ap],
          [n_found_kw_nonap, n_nonap - n_found_kw_nonap]]
 or_kw, p_kw = fisher_exact(ct_kw, alternative="greater")
 
+# A++ founding keyword stats
+aplusplus_sites = [s for s in sites if is_aplusplus(s["tier"])]
+n_total_app = len(aplusplus_sites)
+n_found_kw_app = sum(1 for s in aplusplus_sites if _has_founding_kw(s["text"]))
+n_non_app = len(sites) - n_total_app
+n_found_kw_non_app = n_found_kw_all - n_found_kw_app
+found_kw_app_rate = 100 * n_found_kw_app / n_total_app if n_total_app else 0
+ct_kw_app = [[n_found_kw_app, n_total_app - n_found_kw_app],
+             [n_found_kw_non_app, n_non_app - n_found_kw_non_app]]
+or_kw_app, p_kw_app = fisher_exact(ct_kw_app, alternative="greater")
+
+def fmt_p(p):
+    return "< 0.001" if p < 0.001 else f"{p:.3f}"
+
 print("  % LaTeX macros (GROUP 5 thematic — founding_sites_analysis.py):")
 print(f"  \\newcommand{{\\NthematicTotal}}{{{total_ap}}}                 % total A+ sites")
 print(f"  \\newcommand{{\\NthematicFounding}}{{{founding_n}}}             % A+ with founding/origin theme")
@@ -248,11 +262,18 @@ print(f"  \\newcommand{{\\NfoundKwNonAp}}{{{n_found_kw_nonap}}}           % non-
 print(f"  \\newcommand{{\\foundKwNonApRate}}{{{found_kw_nonap_rate:.1f}}}        % founding keyword rate in non-A+ (%)")
 print(f"  \\newcommand{{\\foundKwFisherOR}}{{{or_kw:.2f}}}          % Fisher OR, A+ vs non-A+ founding keyword")
 print(f"  \\newcommand{{\\pFoundKwFisher}}{{{p_kw:.3f}}}         % p-value, Fisher test founding keyword")
+print(f"  \\newcommand{{\\NfoundKwApp}}{{{n_found_kw_app}}}              % A++ sites with founding keyword")
+print(f"  \\newcommand{{\\NfoundKwTotalApp}}{{{n_total_app}}}           % total A++ sites")
+print(f"  \\newcommand{{\\foundKwAppRate}}{{{found_kw_app_rate:.1f}}}          % founding keyword rate in A++ (%)")
+print(f"  \\newcommand{{\\foundKwAppFisherOR}}{{{or_kw_app:.2f}}}       % Fisher OR, A++ vs non-A++ founding keyword")
+print(f"  \\newcommand{{\\pFoundKwAppFisher}}{{{fmt_p(p_kw_app)}}}    % p-value, Fisher test founding keyword A++")
 
 # ── Write to results store ────────────────────────────────────────────────────
 ResultsStore().write_many({
-    "pFoundKwFisher": p_kw,        # Fisher p, founding keyword enrichment — Test E
-    "foundKwFisherOR": or_kw,      # Fisher OR
+    "pFoundKwFisher":    p_kw,        # Fisher p, founding keyword enrichment — Test E
+    "foundKwFisherOR":   or_kw,       # Fisher OR, A+
+    "pFoundKwAppFisher": p_kw_app,    # Fisher p, A++ founding keyword
+    "foundKwAppFisherOR": or_kw_app,  # Fisher OR, A++
 })
 
 

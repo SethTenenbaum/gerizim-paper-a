@@ -13,6 +13,12 @@
   \newcommand{\NclusterTotalPreCoord}{1013}  % Cultural+Mixed before coordinate filter
   \newcommand{\NexcNatural}{235}  % Natural-only sites excluded from analysis corpus
   \newcommand{\NexcNoCoord}{2}  % Cultural/Mixed sites excluded for missing coordinates
+  \newcommand{\auditNaturalN}{234}  % Natural sites with coordinates
+  \newcommand{\auditNaturalApN}{14}  % Natural A+ sites
+  \newcommand{\auditNaturalApRate}{6.0}  % Natural A+ rate (%)
+  \newcommand{\auditNaturalFisherOR}{0.67}  % Fisher OR natural vs cultural A+
+  \newcommand{\auditNaturalFisherP}{0.188}  % Fisher p natural vs cultural A+ (two-sided)
+  \newcommand{\auditTest1InclNaturalP}{0.008}  % Test 1 p if natural sites included
   \newcommand{\NfineSweepSpacings}{7}  % number of spacings in the fine unit sweep (Table tab:unitsweep_fine)
   \newcommand{\NharmonicsCoarse}{120}  % number of 0.1-beru harmonics in 360 degrees
   \newcommand{\simSeed}{42}  % random seed used in all permutation/simulation tests
@@ -256,6 +262,12 @@
   \newcommand{\foundKwNonApRate}{28.8}        % founding keyword rate in non-A+ (%)
   \newcommand{\foundKwFisherOR}{1.28}          % Fisher OR, A+ vs non-A+ founding keyword
   \newcommand{\pFoundKwFisher}{0.179}         % p-value, Fisher test founding keyword
+  \newcommand{\NfoundKwApp}{22}              % A++ sites with founding keyword
+  \newcommand{\NfoundKwTotalApp}{44}           % total A++ sites
+  \newcommand{\foundKwAppRate}{50.0}          % founding keyword rate in A++ (%)
+  \newcommand{\foundKwAppFisherOR}{2.53}       % Fisher OR, A++ vs non-A++ founding keyword
+  \newcommand{\pFoundKwAppFisher}{0.002}    % p-value, Fisher test founding keyword A++
+  \newcommand{\pFoundKwAppFisherSig}{**}    % auto sig label
 
 % --- analysis/unesco/sacred_origin_test.py
   \newcommand{\sacredHitOne}{Lumbini, the Birthplace of the Lord Buddha}  % top-ranked sacred-origin A+ site (by beru deviation)
@@ -880,31 +892,31 @@
 \newcommand{\wikiJavaNodeATierN}{42}
 \newcommand{\wikiJavaNodeATierRate}{50.6}
 \newcommand{\wikiJavaNodeATierOR}{4.96}
-\newcommand{\wikiJavaNodeATierP}{0.000}
+\newcommand{\wikiJavaNodeATierP}{< 0.001}
 \newcommand{\wikiJavaTightN}{54}
 \newcommand{\wikiJavaTightATierN}{41}
 \newcommand{\wikiJavaTightATierRate}{75.9}
 \newcommand{\wikiJavaTightATierOR}{18.07}
-\newcommand{\wikiJavaTightATierP}{0.000}
+\newcommand{\wikiJavaTightATierP}{< 0.001}
 \newcommand{\wikiJavaTightApN}{11}
 \newcommand{\wikiJavaTightApRate}{20.4}
 \newcommand{\wikiJavaTightApOR}{4.72}
-\newcommand{\wikiJavaTightApP}{0.002}
+\newcommand{\wikiJavaTightApP}{0.001}
 \newcommand{\wikiMyanmarN}{67}
 \newcommand{\wikiMyanmarCbandN}{23}
 \newcommand{\wikiMyanmarCbandRate}{34.3}
 \newcommand{\wikiMyanmarCbandOR}{4.18}
-\newcommand{\wikiMyanmarCbandP}{0.000}
+\newcommand{\wikiMyanmarCbandP}{< 0.001}
 \newcommand{\wikiHeartlandN}{120}
 \newcommand{\wikiHeartlandCbandN}{34}
 \newcommand{\wikiHeartlandCbandRate}{28.3}
 \newcommand{\wikiHeartlandCbandOR}{5.76}
-\newcommand{\wikiHeartlandCbandP}{0.000}
+\newcommand{\wikiHeartlandCbandP}{< 0.001}
 \newcommand{\wikiNonHeartlandN}{102}
 \newcommand{\wikiNonHeartlandATierN}{50}
 \newcommand{\wikiNonHeartlandATierRate}{49.0}
 \newcommand{\wikiNonHeartlandATierOR}{6.22}
-\newcommand{\wikiNonHeartlandATierP}{0.000}
+\newcommand{\wikiNonHeartlandATierP}{< 0.001}
 \newcommand{\wikiNonHeartlandApRate}{13.7}
 \newcommand{\wikiNonHeartlandApOR}{3.21}
 \newcommand{\wikiNonHeartlandApP}{0.015}

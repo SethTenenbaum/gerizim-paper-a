@@ -15,10 +15,10 @@ Sites within $\leq\ApThreshBeru{}$~beru ($\sim\ApThreshKm{}$~km, see
 \S\ref{sec:tier_classification}) of a harmonic node are
 designated Tier-A+; the geometric null rate is \NullRateAp{}.
 The full corpus yields \NclusterAp{} A+ sites against an expected
-\NclusterExpAp{} under this null. The excess of roughly
-\NclusterExcessAp{} sites is modest globally but concentrates in
-identifiable sub-populations. Domed monuments carry a disproportionate
-share (Test~2), and harmonics with a precisely aligned site are
+\NclusterExpAp{} under this null, a statistically significant excess
+that concentrates in identifiable sub-populations: domed monuments show
+the strongest enrichment of any architectural class tested (Test~2),
+and harmonics with a precisely aligned site are
 $\clusterHarmonicRatio\times$ more densely populated overall (Test~3).
 
 A global anchor sweep reveals a 3\textdegree{} periodic structure in the
@@ -37,8 +37,7 @@ and results are fully computationally reproducible from public source
 data \citep{tenenbaum2026audit}.
 
 \textbf{Positioning within quantitative archaeometry.}
-This paper belongs to the tradition of probability-based spatial analysis in
-archaeometry \citep{magli2013,magli2016,ruggles1999astronomy,ruggles2015handbook,silva2020statistical}.
+This analysis follows the tradition of probability-based spatial analysis \citep{magli2013,magli2016,ruggles1999astronomy,ruggles2015handbook,silva2020statistical}.
 
 %──────────────────────────────────────────────────────────────────────────────
 \section{Background}
@@ -63,13 +62,11 @@ inscriptions record inter-regional distances in beru, \textit{kudurru}
 as legally authoritative records \citep{robson2008mathematics,powell1987metrological},
 and the Babylonian \textit{Imago Mundi} marks distances beyond the Salt Sea
 as beru multiples.
-Systematic meridian transit observation and eclipse timing, both attested
-in the cuneiform record \citep{hunger2019mul,neugebauer1975history}, are
-sufficient to derive inter-site angular separations at 1\textdegree{} resolution;
-the gnomon, attested across Mesopotamian, Egyptian, and Indian traditions
-\citep{neugebauer1975history}, provides an independent
-means of establishing true meridian.
-This combination provides the documentary basis for the hypothesis.
+Meridian transit observation and eclipse timing, attested in the cuneiform
+record \citep{hunger2019mul,neugebauer1975history}, are sufficient to
+derive inter-site angular separations at 1\textdegree{} resolution;
+the gnomon \citep{neugebauer1975history} provides an independent means
+of establishing true meridian.
 
 \subsection{Ancient Metrology and Geodetic Practice}
 
@@ -127,11 +124,13 @@ and Mt.\ Kailash ($p \approx \pKailashAnchor$, \pKailashAnchorSig{}) do not appr
 \label{sec:corpus}
 
 The UNESCO World Heritage XML dataset \citep{unescowhc2024xml} contains
-$\NwhcTotal$ inscribed nominations across all categories.
-Two outcome-blind filters yield the analysis corpus:
-(1)~Natural-only sites are excluded ($-\NexcNatural$, retaining
-Cultural and Mixed); (2)~entries lacking geocoordinates are excluded ($-\NexcNoCoord$).
-The result is $N = \NclusterTotal$ sites with valid longitudes.
+$\NwhcTotal$ inscribed nominations. UNESCO designates each site
+\textit{Cultural} (criteria i--vi), \textit{Natural} (criteria vii--x),
+or \textit{Mixed}; sites with cultural heritage alongside natural values
+receive Mixed and are included here.
+Retaining Cultural and Mixed ($-\NexcNatural$ Natural-only) and
+excluding $\NexcNoCoord$ entries lacking geocoordinates (both linear
+route networks) yields $N = \NclusterTotal$ sites.
 
 \subsection{Geodetic Framework}
 \label{sec:geodetic}
@@ -346,7 +345,7 @@ Buddhism shows a joint A-tier/C-band signal
 $p = \pBudJoint$~\pBudJointSig{}, multivariate hypergeometric);
 Hinduism shows elevated C-band occupancy (\NhinInterHarmonic/\NhinSites,
 \hinInterHarmonicRate\%) and a significant A+/C- joint probability
-($p = \pHinApCminus$~\pHinApCminusSig{}).
+(multivariate hypergeometric $p = \pHinApCminus$~\pHinApCminusSig{}).
 
 %──────────────────────────────────────────────────────────────────────────────
 \subsection{Domed and Spherical Monuments (Test~2, Primary)}
@@ -395,8 +394,9 @@ $p = \LOOdomeP$.
 Leave-2-out (worst case across all $\binom{\LKOnAp}{2}$ combinations):
 $p = \LKOworstTwoP$.
 Leave-3-out (worst case): $p = \LKOworstThreeP$, exceeding the
-Bonferroni threshold; the evolution corpus (Test~2b) is more robust (\S\ref{sec:resultsevolution_inline}).
-The A++ concentration is more robust. A leave-3-out worst case across all
+Bonferroni threshold; the evolution corpus (Test~2b) (\S\ref{sec:resultsevolution_inline}) 
+and the A++ concentration are more robust. 
+The A++ leave-3-out worst case across all
 $\binom{\LKOAppNApp}{3} = \LKOAppNCombosThreeApp$ triples yields
 $p = \LKOAppworstThreeP$, remaining significant at $\alpha = 0.05$
 (leave-2-out worst case $p = \LKOAppworstTwoP$).
@@ -431,7 +431,7 @@ the broader footprint at all three windows tested:
 $\pm 2$\textdegree{} ($p = \geoNullDomeRestrictedPtwo$, \geoNullDomeRestrictedPtwoSig{});
 $\pm 5$\textdegree{} ($p = \geoNullDomeRestrictedP$, \geoNullDomeRestrictedPSig{});
 $\pm 10$\textdegree{} ($p = \geoNullDomeRestrictedPten$, \geoNullDomeRestrictedPtenSig{}).
-The result is window-independent.
+Results are window-independent.
 
 \textbf{Reconciliation.}
 Null~A confirms geographic concentration is necessary; Null~C establishes it
@@ -520,7 +520,7 @@ Table~\ref{tab:evostages1b}) is consistent with Test~2. The mound stage does not
 significance (\evoMoundApRate\%, OR $= \evoMoundFisherOR\times$, Fisher $p = \pEvoMoundFisher$, \pEvoMoundFisherSig{}). The signal is carried
 by the stupa (A+ \evoStupaApRate\%, OR $= \evoStupaFisherOR\times$, $p = \pEvoStupaFisher$~\pEvoStupaFisherSig{}) and dome
 sub-stages (A+ \evoDomeApRate\%, OR $= \evoDomeFisherOR\times$, $p = \pEvoDomeFisher$~\pEvoDomeFisherSig{}).
-Leave-one-out checks confirm stability for all sub-stages.
+Leave-one-out checks confirm stability.
 Leave-3-out (worst case, $\EvoLKOnCombosThree{}$ triples):
 $p = \EvoLKOworstThreeP$, within the Bonferroni bound.
 The dome-evolution filter (Fisher $p = \pEvoApFisher$~\pEvoApFisherSig{}, binomial $p = \pEvoAp$~\pEvoApSig{}) is the strongest keyword-filtered
@@ -701,8 +701,7 @@ Test~2b (mound evol.)  & \NevoTotal      & \pEvoApFisher$^{a}$ (OR~$= \evoApFish
 
 \subsection{FDR audit and Bonferroni correction}
 
-Results of all primary and secondary tests are consolidated
-in Table~\ref{tab:bonferroni_both}.
+Primary and secondary results are consolidated in Table~\ref{tab:bonferroni_both}.
 
 A comprehensive FDR audit (\NtotalTests{} tests;
 \citealt{benjamini1995controlling}) retains \NsurviveFDR{} at $q < 0.05$,
@@ -813,8 +812,8 @@ The unit sensitivity sweep (\S\ref{sec:metrology}) and Monte Carlo unit sweep
 (\S\ref{sec:limitations_geo}) independently confirm 3\textdegree{} as the dominant
 period without assuming any particular unit.
 
-The dome-periodicity audit (\texttt{dome\_periodicity\_audit.py})  does not 
-by distinguish alignment from geographic concentration.
+The dome-periodicity audit (\texttt{dome\_periodicity\_audit.py}) does not
+distinguish alignment from geographic concentration.
 Gerizim scores at the \domeGerizimPctile\textsuperscript{th} percentile
 among dome sites, dome site phases are approximately uniform
 ($\chi^2 = \domePhaseChiSq$, df\,=\,9, $p = \domePhaseChiP$, trend-level),
@@ -879,7 +878,7 @@ Using the identical anchor and null, the corpus yields
 binomial $p\ \wikiStupaATierBinomP$, \wikiStupaATierBinomStar;
 permutation $Z = \wikiStupaPermZ$, $p_\mathrm{perm} = \wikiStupaPermP$,
 \wikiStupaPermStar).
-No Tier-A+ enrichment is found ($p = \wikiStupaApBinomP$,
+No Tier-A+ enrichment is found (binomial $p = \wikiStupaApBinomP$,
 \wikiStupaApBinomStar), consistent with cluster-level rather than
 individual-site precision.
 Harmonic nodes with at least one Tier-A site carry $\wikiStupaClusterRatio\times$
@@ -887,21 +886,22 @@ more stupa sites on average than empty nodes, mirroring the cluster-asymmetry
 result of Test~3.
 
 \textbf{Geographic tier breakdown and bimodal structure.}
+All regional p-values below are one-sided Fisher exact tests.
 A sub-regional breakdown reveals a bimodal pattern consistent with the
 Buddhist A/C enrichment in the UNESCO religion audit (\S\ref{sec:resultsrelig}).
 The Java/Sumatra node (105\textdegree--115\textdegree{}E, near the 2.5-beru harmonic at 110.3\textdegree{}E)
-concentrates \wikiJavaNodeATierN{} of \wikiJavaNodeN{} sites at Tier-A (\wikiJavaNodeATierRate\%, OR $= \wikiJavaNodeATierOR\times$, $p = \wikiJavaNodeATierP$~\wikiJavaNodeATierPSig{}),
-rising to \wikiJavaTightATierN/\wikiJavaTightN{} (\wikiJavaTightATierRate\%, OR $= \wikiJavaTightATierOR\times$, $p = \wikiJavaTightATierP$~\wikiJavaTightATierPSig{}) in the 107\textdegree--112\textdegree{}E window,
+concentrates \wikiJavaNodeATierN{} of \wikiJavaNodeN{} sites at Tier-A (\wikiJavaNodeATierRate\%, OR $= \wikiJavaNodeATierOR\times$, $p~\wikiJavaNodeATierP$~\wikiJavaNodeATierPSig{}),
+rising to \wikiJavaTightATierN/\wikiJavaTightN{} (\wikiJavaTightATierRate\%, OR $= \wikiJavaTightATierOR\times$, $p~\wikiJavaTightATierP$~\wikiJavaTightATierPSig{}) in the 107\textdegree--112\textdegree{}E window,
 where A+ is also elevated at \wikiJavaTightApRate\% (OR $= \wikiJavaTightApOR\times$, $p = \wikiJavaTightApP$~\wikiJavaTightApPSig{}).
 The physical heartland, India/Nepal (70\textdegree--90\textdegree{}E) and Myanmar/Cambodia
 (90\textdegree--105\textdegree{}E), is A-tier depleted (OR $= 0.15$--$0.68\times$, \nsLabel{})
 but strongly enriched in the inter-harmonic C-band:
-Myanmar/Cambodia reaches \wikiMyanmarCbandRate\% (OR $= \wikiMyanmarCbandOR\times$, $p = \wikiMyanmarCbandP$~\wikiMyanmarCbandPSig{}) and the
-combined heartland \wikiHeartlandCbandRate\% (OR $= \wikiHeartlandCbandOR\times$, $p = \wikiHeartlandCbandP$~\wikiHeartlandCbandPSig{}).
-The anti-correlation is consistent with a grid-level account (see \S\ref{sec:transmission}).
+Myanmar/Cambodia reaches \wikiMyanmarCbandRate\% (OR $= \wikiMyanmarCbandOR\times$, $p~\wikiMyanmarCbandP$~\wikiMyanmarCbandPSig{}) and the
+combined heartland \wikiHeartlandCbandRate\% (OR $= \wikiHeartlandCbandOR\times$, $p~\wikiHeartlandCbandP$~\wikiHeartlandCbandPSig{}).
+The anti-correlation is consistent with the A/C bimodal pattern observed in the religion audit (\S\ref{sec:resultsrelig}).
 The non-heartland Wikidata stupas (outside 70\textdegree--110\textdegree{}E,
 $N = \wikiNonHeartlandN{}$) show the same A-enriched, C-depleted profile as the UNESCO
-domed monument corpus: \wikiNonHeartlandATierRate\% reach Tier-A (OR $= \wikiNonHeartlandATierOR\times$, $p = \wikiNonHeartlandATierP$~\wikiNonHeartlandATierPSig{})
+domed monument corpus: \wikiNonHeartlandATierRate\% reach Tier-A (OR $= \wikiNonHeartlandATierOR\times$, $p~\wikiNonHeartlandATierP$~\wikiNonHeartlandATierPSig{})
 with no C-band enrichment (OR~$= \wikiNonHeartlandCbandOR\times$, $p = \wikiNonHeartlandCbandP$~\wikiNonHeartlandCbandPSig{}), suggesting that UNESCO inscription preferentially
 captures the most precisely aligned examples within each tradition.
 
@@ -1015,10 +1015,9 @@ orientations across cultures are documented \citep{aveni2001skywatchers,aveni200
 but independent convergence predicts no consistent longitude specificity.
 
 \textbf{(2) Geographic concentration.}
-Null~C directly tests this: other monuments drawn from the same longitude
-footprint as the dome sites are significantly less enriched
-($p = \geoNullDomeRestrictedP$, \geoNullDomeRestrictedPSig{}), establishing
-that the signal is carried by architectural type, not location alone.
+Null~C directly tests this: other monuments from the same longitude footprint
+are significantly less enriched ($p = \geoNullDomeRestrictedP$, \geoNullDomeRestrictedPSig{}),
+establishing that the signal is carried by architectural type, not location.
 The Monte Carlo unit sweep (\S\ref{sec:limitations_geo}) independently
 confirms 3\textdegree{} as the dominant angular period without assuming
 any unit.
@@ -1057,8 +1056,8 @@ Hindu sites display an A/C bimodal structure. Sites in each tradition
 concentrate either near harmonic nodes (A-tier) or near inter-harmonic
 midpoints (C-band), with relatively few in the intermediate B-zone.
 Buddhist sites show a joint A-tier/C-band signal
-($p = \pBudJoint$~\pBudJointSig{}); Hindu sites show a significant A+/C-
-joint probability ($p = \pHinApCminus$~\pHinApCminusSig{}).
+(multivariate hypergeometric $p = \pBudJoint$~\pBudJointSig{}); Hindu sites show a significant A+/C-
+joint probability (multivariate hypergeometric $p = \pHinApCminus$~\pHinApCminusSig{}).
 This bimodal is not observed in other religion sub-groups and is consistent
 with the 0.1-beru grid producing distinct attractor positions rather than
 a continuous distribution.
@@ -1085,17 +1084,16 @@ specificity; identifying the mechanism is a question for future work.
 
 \subsection{Conclusion}
 
-The UNESCO Cultural and Mixed corpus is quantized to the 0.1-beru
-(3\textdegree{}) longitude grid anchored at Gerizim, with the full-corpus
-enrichment surviving Bonferroni correction at $k = \BonfK$.
-Longitude bands that contain a precisely aligned monument are
+The UNESCO Cultural and Mixed corpus shows significant enrichment at
+harmonics of the Babylonian b\={e}ru anchored at Gerizim, with all three
+primary tests surviving Bonferroni correction at $k = \BonfK$.
+Longitude bands containing a precisely aligned monument are
 $\clusterHarmonicRatio\times$ more densely populated with other heritage
-sites than bands without one (Test~3, $p = \clusterPermP$~\clusterPermPSig{}), suggesting
-that the most important sites and the broader heritage record share the
-same longitudinal structure.
+sites than bands without one, indicating that the most celebrated monuments
+and the broader heritage record share the same longitudinal structure.
 Among architectural sub-populations, spherically shaped monuments show
-the strongest alignment of any class tested,
-exceeding what geography alone predicts.
+the strongest alignment of any class tested, exceeding what geography alone
+predicts.
 
 The Wikidata Q180987 stupa corpus reproduces the same pattern independently
 (\S\ref{sec:stupas_q180987}).
@@ -1148,7 +1146,12 @@ Statistics for all four variants are reported in
 
 \textbf{Results.} The classifier finds \foundKwApRate\% of A+ sites
 carry a founding keyword versus \foundKwBaseRate\% in the full corpus
-(OR~$= \foundKwFisherOR$, $p = \pFoundKwFisher$~\pFoundKwFisherSig{}).
+(Fisher OR~$= \foundKwFisherOR$, $p = \pFoundKwFisher$~\pFoundKwFisherSig{}).
+The A++ sub-population (\NfoundKwTotalApp{} sites) shows a stronger
+signal: \foundKwAppRate\% carry a founding keyword
+(OR~$= \foundKwAppFisherOR$, $p = \pFoundKwAppFisher$~\pFoundKwAppFisherSig{}),
+consistent with the most precisely aligned sites being disproportionately
+historically foundational monuments.
 This carries no weight in the primary evidential chain as the classifier
 was iteratively tuned after data inspection.
 
@@ -1179,13 +1182,6 @@ Benjamini, Y. \& Hochberg, Y. (1995).
 Controlling the false discovery rate: a practical and powerful approach
 to multiple testing.
 \textit{Journal of the Royal Statistical Society, Series B}, 57(1), 289--300.
-
-\bibitem[Coningham et al.(2013)]{coningham2013lumbini}
-Coningham, R., Acharya, K.~P., Strickland, K., Davis, C.~E., Manuel, M.~J.,
-Simpson, I.~A., et al. (2013).
-The earliest Buddhist shrine: excavating the birthplace of the Buddha,
-Lumbini (Nepal).
-\textit{Antiquity}, 87(338), 1104--1123.
 
 \bibitem[Crown(1989)]{crown1989}
 Crown, A.~D. (1989).
