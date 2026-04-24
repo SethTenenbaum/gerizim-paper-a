@@ -1,4 +1,4 @@
-% Generated macros — 2026-04-23T04:33:46Z
+% Generated macros — 2026-04-23T21:27:45Z
 % Source: bash manuscript/reproduce_all_macros.sh
 % IMPORTANT: values are computed fresh each run — do NOT hardcode
 
@@ -64,12 +64,15 @@
   \newcommand{\NcircTierApp}{10}           % Tier-A++ hits (raw sweep)
   \newcommand{\NcircTierAp}{13}             % Tier-A+ hits (raw sweep)
   \newcommand{\NcircApRate}{14.4}     % A+ rate (%) = 13/90, rounded to 1 d.p.
+  \newcommand{\NcircAppRate}{11.1}     % A++ rate (%) = 10/90, rounded to 1 d.p.
   \newcommand{\NcircTierA}{26}             % Tier-A hits (raw sweep)
   \newcommand{\NcircTierB}{48}             % Tier-B hits (raw sweep)
   \newcommand{\NcircTierC}{11}               % Tier-C hits (raw sweep)
   \newcommand{\pCircApp}{0.0006}         % p-value, A++ binomial (raw sweep)
   \newcommand{\pCircAp}{0.0049}          % p-value, A+ binomial (raw sweep)
   \newcommand{\pCircA}{0.0136}          % p-value, A  binomial (raw sweep)
+  \newcommand{\pCircAppFisher}{0.0037}      % p-value, A++ Fisher exact vs rest (raw sweep)
+  \newcommand{\circAppFisherOR}{3.26}      % OR, A++ Fisher exact vs rest (raw sweep)
   \newcommand{\pCircApFisher}{0.0401}      % p-value, A+ Fisher exact vs rest (raw sweep)
   \newcommand{\circApFisherOR}{1.90}      % OR, A+ Fisher exact vs rest (raw sweep)
   \newcommand{\pCircAFisher}{0.0439}       % p-value, A Fisher exact vs rest (raw sweep)
@@ -80,6 +83,7 @@
   \newcommand{\circEnrichAp}{2.25}           % enrichment ratio, A+
   \newcommand{\circEnrichA}{1.53}           % enrichment ratio, A
   \newcommand{\circMeanDev}{0.0220}        % mean beru deviation (raw sweep)
+  \newcommand{\circEnrichApp}{3.47}           % enrichment ratio, A++
   \newcommand{\circExpAp}{5.78}         % expected A+ count under H0 (= N × 4%)
   \newcommand{\circExpA}{16.96}          % expected A count under H0 (= N × 20%)
   \newcommand{\circARate}{28.9}         % Tier-A rate (%) = 26/90
@@ -138,6 +142,10 @@
   \newcommand{\clusterCondPeakFrac}{0.1200}    % conditional fraction (peak | cluster)
   \newcommand{\clusterCondPeakFracUncond}{0.0980}    % unconditional peak fraction
   \newcommand{\clusterCondPeakSig}{ns}    % significance label, conditional fraction
+
+% --- analysis/global/emit_cluster_ap_ci.py
+  \newcommand{\clusterApCIlo}{7.0}  % Clopper-Pearson 95\% CI lower, A+ rate (%)
+  \newcommand{\clusterApCIhi}{10.6}  % Clopper-Pearson 95\% CI upper, A+ rate (%)
 
 % --- analysis/unesco/harmonic_density_attractor_test.py
   \newcommand{\attractorApMeanN}{6.65}           % mean 0.3° neighbors, A+ sites
@@ -718,6 +726,21 @@
   \newcommand{\LKOnCombosTwo}{78}  % LKO: C(13,2) leave-2-out combinations
   \newcommand{\LKOnCombosThree}{286}  % LKO: C(13,3) leave-3-out combinations
 
+% --- analysis/unesco/dome_leave_k_out.py (GROUP LOO2-APP, A++ tier)
+  \newcommand{\LKOAppNApp}{10}  % LKO A++: total A++ sites in dome corpus
+  \newcommand{\LKOAppNCombosTwoApp}{45}  % LKO A++: C(10,2) leave-2-out combinations
+  \newcommand{\LKOAppNCombosThreeApp}{120}  % LKO A++: C(10,3) leave-3-out combinations
+  \newcommand{\LKOApptwoN}{88}  % LKO A++: N after removing 2 closest A++ sites
+  \newcommand{\LKOApptwoApp}{8}  % LKO A++: A++ count after removing 2 closest
+  \newcommand{\LKOApptwoRate}{9.1}  % LKO A++: A++ rate (%) after removing 2 closest
+  \newcommand{\LKOApptwoP}{0.0073}  % LKO A++: p-value after removing 2 closest A++ sites
+  \newcommand{\LKOAppthreeN}{87}  % LKO A++: N after removing 3 closest A++ sites
+  \newcommand{\LKOAppthreeApp}{7}  % LKO A++: A++ count after removing 3 closest
+  \newcommand{\LKOAppthreeRate}{8.0}  % LKO A++: A++ rate (%) after removing 3 closest
+  \newcommand{\LKOAppthreeP}{0.0217}  % LKO A++: p-value after removing 3 closest A++ sites
+  \newcommand{\LKOAppworstTwoP}{0.0073}  % LKO A++: worst p across all C(10,2)=45 leave-2-out combos
+  \newcommand{\LKOAppworstThreeP}{0.0217}  % LKO A++: worst p across all C(10,3)=120 leave-3-out combos
+
 % --- analysis/unesco/evo_leave_k_out.py
   \newcommand{\EvoLKOworstTwoP}{0.0212}  % evo LKO worst C(15,2)=105
   \newcommand{\EvoLKOworstThreeP}{0.0420}  % evo LKO worst C(15,3)=455
@@ -893,6 +916,9 @@
   \newcommand{\simDomePermZ}{1.54}         % permutation Z-score, dome corpus
   \newcommand{\simDomePermP}{0.095}          % permutation p, dome corpus
   \newcommand{\simDomeBootP}{0.106}          % bootstrap p, dome corpus
+  \newcommand{\circAppPermZ}{3.58}         % permutation Z-score, dome A++ corpus
+  \newcommand{\circAppPermP}{0.002}          % permutation p, dome A++ corpus
+  \newcommand{\circAppBootP}{0.004}          % bootstrap p, dome A++ corpus
   \newcommand{\simCanonPermP}{0.419}         % permutation p, canonical sites
   \newcommand{\simPreTwoKPermP}{0.136}        % permutation p, pre-2000 BCE sites
   \newcommand{\simPostTwoKPermP}{0.907}       % permutation p, post-2000 BCE sites
@@ -1193,6 +1219,9 @@
   \newcommand{\pCircApFisherSig}{*}  % auto sig label
   \newcommand{\pCircApSig}{**}  % auto sig label
   \newcommand{\pCircApValidatedSig}{*}  % auto sig label
+  \newcommand{\pCircAppBootSig}{**}  % auto sig label
+  \newcommand{\pCircAppFisherSig}{**}  % auto sig label
+  \newcommand{\pCircAppPermSig}{**}  % auto sig label
   \newcommand{\pCircAppSig}{***}  % auto sig label
   \newcommand{\pCircChiSig}{ns}  % auto sig label
   \newcommand{\pCochranAppFiveSig}{$^\dagger$}  % auto sig label
@@ -1214,6 +1243,7 @@
   \newcommand{\pEvoApValidatedSig}{*}  % auto sig label
   \newcommand{\pEvoAppFisherSig}{**}  % auto sig label
   \newcommand{\pEvoAppSig}{***}  % auto sig label
+  \newcommand{\pEvoDomeAFisherSig}{ns}  % auto sig label
   \newcommand{\pEvoDomeAppFisherSig}{*}  % auto sig label
   \newcommand{\pEvoDomeFisherSig}{ns}  % auto sig label
   \newcommand{\pEvoDomeSig}{$^\dagger$}  % auto sig label
@@ -1221,6 +1251,7 @@
   \newcommand{\pEvoMoundAppFisherSig}{ns}  % auto sig label
   \newcommand{\pEvoMoundFisherSig}{ns}  % auto sig label
   \newcommand{\pEvoMoundSig}{ns}  % auto sig label
+  \newcommand{\pEvoStupaAFisherSig}{$^\dagger$}  % auto sig label
   \newcommand{\pEvoStupaAppFisherSig}{**}  % auto sig label
   \newcommand{\pEvoStupaFisherSig}{$^\dagger$}  % auto sig label
   \newcommand{\pEvoStupaIndonesiaPSig}{**}  % auto sig label

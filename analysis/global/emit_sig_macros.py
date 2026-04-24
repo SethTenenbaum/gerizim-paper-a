@@ -75,6 +75,7 @@ EXPLICIT_P_KEYS = {
     "geoNullDomeBootP", "geoNullDomeRestrictedP",
     "geoNullDomeRestrictedPtwo", "geoNullDomeRestrictedPten",
     "stupaGeoBootP", "stupaGeoRestrictedP",
+    "circAppPermP", "circAppBootP",
     # Rayleigh / periodicity formal tests
     "fullRayleighPermP", "rayleighPermP",
     "anchorShiftPermP", "anchorMaxPermP",

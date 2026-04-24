@@ -74,6 +74,7 @@ if [ "${1:-}" != "--full" ]; then
         analysis/unesco/spherical_monument_raw_sweep.py      # → pCircAp, pCircA, pCircChi
         analysis/unesco/spherical_monument_test.py            # → pCircAp_validated (context-validated, Exploratory 2x)
         analysis/unesco/cluster_asymmetry_test.py            # → clusterApBinom, clusterPermP, clusterHarmonicMWpStr
+        analysis/global/emit_cluster_ap_ci.py                # → clusterApCIlo, clusterApCIhi
         analysis/unesco/harmonic_density_attractor_test.py
         analysis/unesco/origin_sites_test.py                 # → pCanon, pPreTwoK, pModern, pReligUnion, pChrist, pBudRelig, pJudATierFisher
         analysis/unesco/founding_sites_analysis.py           # → pFoundKwFisher

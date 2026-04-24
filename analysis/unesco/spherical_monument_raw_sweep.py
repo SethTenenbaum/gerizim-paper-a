@@ -245,12 +245,15 @@ print(f"  \\newcommand{{\\NcircContextRejected}}{{{N_context_rejected}}}        
 print(f"  \\newcommand{{\\NcircTierApp}}{{{nApp}}}           % Tier-A++ hits (raw sweep)")
 print(f"  \\newcommand{{\\NcircTierAp}}{{{nAp}}}             % Tier-A+ hits (raw sweep)")
 print(f"  \\newcommand{{\\NcircApRate}}{{{100*nAp/N_raw:.1f}}}     % A+ rate (%) = {nAp}/{N_raw}, rounded to 1 d.p.")
+print(f"  \\newcommand{{\\NcircAppRate}}{{{100*nApp/N_raw:.1f}}}     % A++ rate (%) = {nApp}/{N_raw}, rounded to 1 d.p.")
 print(f"  \\newcommand{{\\NcircTierA}}{{{nA}}}             % Tier-A hits (raw sweep)")
 print(f"  \\newcommand{{\\NcircTierB}}{{{nB}}}             % Tier-B hits (raw sweep)")
 print(f"  \\newcommand{{\\NcircTierC}}{{{nC}}}               % Tier-C hits (raw sweep)")
 print(f"  \\newcommand{{\\pCircApp}}{{{bt_App.pvalue:.4f}}}         % p-value, A++ binomial (raw sweep)")
 print(f"  \\newcommand{{\\pCircAp}}{{{bt_Ap.pvalue:.4f}}}          % p-value, A+ binomial (raw sweep)")
 print(f"  \\newcommand{{\\pCircA}}{{{bt_A.pvalue:.4f}}}          % p-value, A  binomial (raw sweep)")
+print(f"  \\newcommand{{\\pCircAppFisher}}{{{fisher_p_App:.4f}}}      % p-value, A++ Fisher exact vs rest (raw sweep)")
+print(f"  \\newcommand{{\\circAppFisherOR}}{{{fisher_or_App:.2f}}}      % OR, A++ Fisher exact vs rest (raw sweep)")
 print(f"  \\newcommand{{\\pCircApFisher}}{{{fisher_p_Ap:.4f}}}      % p-value, A+ Fisher exact vs rest (raw sweep)")
 print(f"  \\newcommand{{\\circApFisherOR}}{{{fisher_or_Ap:.2f}}}      % OR, A+ Fisher exact vs rest (raw sweep)")
 print(f"  \\newcommand{{\\pCircAFisher}}{{{fisher_p_A:.4f}}}       % p-value, A Fisher exact vs rest (raw sweep)")
@@ -261,6 +264,7 @@ print(f"  \\newcommand{{\\GerizimPctileA}}{{{pctile:.0f}}}            % anchor-s
 print(f"  \\newcommand{{\\circEnrichAp}}{{{enr_Ap:.2f}}}           % enrichment ratio, A+")
 print(f"  \\newcommand{{\\circEnrichA}}{{{enr_A:.2f}}}           % enrichment ratio, A")
 print(f"  \\newcommand{{\\circMeanDev}}{{{mean_dev:.4f}}}        % mean beru deviation (raw sweep)")
+print(f"  \\newcommand{{\\circEnrichApp}}{{{enr_App:.2f}}}           % enrichment ratio, A++")
 
 # ── Expected counts and Clopper-Pearson CIs ───────────────────────────────────
 circ_exp_ap = round(N_raw * P_NULL_AP, 2)
@@ -292,7 +296,7 @@ ResultsStore().write_many({
     "pCircAp":      bt_Ap.pvalue,   # binomial p, A+ (raw sweep) — Test 2
     "pCircA":       bt_A.pvalue,    # binomial p, A  (raw sweep)
     "pCircApFisher": fisher_p_Ap,   # Fisher p, A+ vs rest (raw sweep)
-    "circApFisherOR": fisher_or_Ap, # Fisher OR, A+ vs rest
+    "circAppFisherOR": fisher_or_Ap, # Fisher OR, A+ vs rest
     "pCircAFisher":  fisher_p_A,    # Fisher p, A vs rest (raw sweep)
     "pCircChi":     chi_p,          # chi-sq uniform, 5 bins, df=4
     "NcircTotal":   N_raw,          # raw-sweep population size
@@ -301,4 +305,7 @@ ResultsStore().write_many({
     "circEnrichAp": enr_Ap,         # enrichment ratio, A+
     "circEnrichCIlo": _enr_ci_lo,   # Clopper-Pearson 95% CI lower, enrichment ratio
     "circEnrichCIhi": _enr_ci_hi,   # Clopper-Pearson 95% CI upper, enrichment ratio
+    "NcircAppRate": round(100 * nApp / N_raw, 1),
+    "circEnrichApp": enr_App,
+    "pCircAppFisher": fisher_p_App,
 })

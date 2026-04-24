@@ -49,6 +49,10 @@ def aplus_mask_vec(lons_arr: np.ndarray) -> np.ndarray:
     """Boolean mask: True where beru deviation <= TIER_APLUS (vectorized)."""
     return beru_deviation_vec(lons_arr) <= TIER_APLUS
 
+def aplusplus_mask_vec(lons_arr: np.ndarray) -> np.ndarray:
+    """Boolean mask: True where beru deviation <= TIER_APP (vectorized)."""
+    return beru_deviation_vec(lons_arr) <= TIER_APP
+
 def count_app(lons):
     return sum(1 for lon in lons if beru_deviation(lon) <= TIER_APP)
 
@@ -93,6 +97,7 @@ def main():
     dome_lons = np.array([s["lon"] for s in dome_sites])
     N_dome = len(dome_sites)
     obs_dome_ap = count_aplus(dome_lons)
+    obs_dome_app = count_app(dome_lons)
 
     canon_sites = [s for s in sites if s["year"] is not None and 1978 <= s["year"] <= 1984]
     canon_lons = np.array([s["lon"] for s in canon_sites])
@@ -139,6 +144,7 @@ def main():
     perm_canon_ap   = np.zeros(N_PERMS, dtype=int)
     perm_pre2k_ap   = np.zeros(N_PERMS, dtype=int)
     perm_post2k_ap  = np.zeros(N_PERMS, dtype=int)
+    perm_dome_app   = np.zeros(N_PERMS, dtype=int)
 
     rng_perm = np.random.default_rng(42)
     import time as _time
@@ -151,8 +157,10 @@ def main():
         perm_mat = np.stack([rng_perm.permutation(lons) for _ in range(bsz)])
         # Vectorised A+ mask: shape (bsz, N)
         ap_mat = aplus_mask_vec(perm_mat)
+        app_mat = aplusplus_mask_vec(perm_mat)
         perm_ap_counts[batch_start:batch_end]  = ap_mat.sum(axis=1)
         perm_dome_ap[batch_start:batch_end]    = ap_mat[:, dome_idxs].sum(axis=1)
+        perm_dome_app[batch_start:batch_end]   = app_mat[:, dome_idxs].sum(axis=1)
         perm_canon_ap[batch_start:batch_end]   = ap_mat[:, canon_idxs].sum(axis=1)
         perm_pre2k_ap[batch_start:batch_end]   = ap_mat[:, pre2k_idxs].sum(axis=1)
         perm_post2k_ap[batch_start:batch_end]  = ap_mat[:, post2k_idxs].sum(axis=1)
@@ -182,13 +190,21 @@ def main():
     mean_dome = perm_dome_ap.mean()
     std_dome = perm_dome_ap.std()
     z_dome = (obs_dome_ap - mean_dome) / std_dome if std_dome > 0 else 0
+    p_perm_dome_app = np.mean(perm_dome_app >= obs_dome_app)
+    mean_dome_app = perm_dome_app.mean()
+    std_dome_app = perm_dome_app.std()
+    z_dome_app = (obs_dome_app - mean_dome_app) / std_dome_app if std_dome_app > 0 else 0
 
     print(f"\n  Dome/spherical (N={N_dome}):")
     print(f"    Observed A+ = {obs_dome_ap}")
+    print(f"    Observed A++ = {obs_dome_app}")
     print(f"    Permutation mean A+ = {mean_dome:.2f} ± {std_dome:.2f}")
     print(f"    Permutation Z = {z_dome:.2f}")
     print(f"    p_perm (≥ {obs_dome_ap}) = {p_perm_dome:.6f}")
     print(f"    → {'SIGNIFICANT' if p_perm_dome < 0.05 else 'NOT significant'} at α=0.05")
+    print(f"    Permutation mean A++ = {mean_dome_app:.2f} ± {std_dome_app:.2f}")
+    print(f"    Permutation Z (A++) = {z_dome_app:.2f}")
+    print(f"    p_perm (A++ ≥ {obs_dome_app}) = {p_perm_dome_app:.6f}")
 
     # Canon sub-population
     p_perm_canon = np.mean(perm_canon_ap >= obs_canon_ap)
@@ -282,11 +298,23 @@ def main():
     boot_dome_std = boot_dome_counts.std()
     z_boot_dome = (obs_dome_ap - boot_dome_mean) / boot_dome_std if boot_dome_std > 0 else 0
 
+    # Dome A++ bootstrap null
+    boot_dome_app_mat = rng_perm.choice(lons, size=(N_PERMS, N_dome), replace=True)
+    boot_dome_app_counts = aplusplus_mask_vec(boot_dome_app_mat).sum(axis=1).astype(int)
+    p_boot_dome_app = np.mean(boot_dome_app_counts >= obs_dome_app)
+    boot_dome_app_mean = boot_dome_app_counts.mean()
+    boot_dome_app_std = boot_dome_app_counts.std()
+    z_boot_dome_app = (obs_dome_app - boot_dome_app_mean) / boot_dome_app_std if boot_dome_app_std > 0 else 0
+
     print(f"\n  Dome/spherical bootstrap (N={N_dome}, {N_PERMS:,} samples):")
     print(f"    Observed A+ = {obs_dome_ap}")
     print(f"    Bootstrap mean A+ = {boot_dome_mean:.2f} ± {boot_dome_std:.2f}")
     print(f"    Bootstrap Z = {z_boot_dome:.2f}")
     print(f"    p_boot_dome (≥ {obs_dome_ap}) = {p_boot_dome:.6f}")
+    print(f"    Observed A++ = {obs_dome_app}")
+    print(f"    Bootstrap mean A++ = {boot_dome_app_mean:.2f} ± {boot_dome_app_std:.2f}")
+    print(f"    Bootstrap Z (A++) = {z_boot_dome_app:.2f}")
+    print(f"    p_boot_dome (A++ ≥ {obs_dome_app}) = {p_boot_dome_app:.6f}")
 
     # ── Summary ──────────────────────────────────────────────────────────────
     print("\n" + "=" * 90)
@@ -338,6 +366,9 @@ def main():
     print(f"  \\newcommand{{\\simDomePermZ}}{{{z_dome:.2f}}}         % permutation Z-score, dome corpus")
     print(f"  \\newcommand{{\\simDomePermP}}{{{p_perm_dome:.3f}}}          % permutation p, dome corpus")
     print(f"  \\newcommand{{\\simDomeBootP}}{{{p_boot_dome:.3f}}}          % bootstrap p, dome corpus")
+    print(f"  \\newcommand{{\\circAppPermZ}}{{{z_dome_app:.2f}}}         % permutation Z-score, dome A++ corpus")
+    print(f"  \\newcommand{{\\circAppPermP}}{{{p_perm_dome_app:.3f}}}          % permutation p, dome A++ corpus")
+    print(f"  \\newcommand{{\\circAppBootP}}{{{p_boot_dome_app:.3f}}}          % bootstrap p, dome A++ corpus")
     print(f"  \\newcommand{{\\simCanonPermP}}{{{p_perm_canon:.3f}}}         % permutation p, canonical sites")
     print(f"  \\newcommand{{\\simPreTwoKPermP}}{{{p_perm_pre2k:.3f}}}        % permutation p, pre-2000 BCE sites")
     print(f"  \\newcommand{{\\simPostTwoKPermP}}{{{p_perm_post2k:.3f}}}       % permutation p, post-2000 BCE sites")
@@ -356,6 +387,9 @@ def main():
         "simCanonPermP":     p_perm_canon,   # permutation p, canonical
         "simPreTwoKPermP":   p_perm_pre2k,   # permutation p, pre-2000
         "simPostTwoKPermP":  p_perm_post2k,  # permutation p, post-2000
+        "pCircAppPerm":      p_perm_dome_app,
+        "circAppPermZ":      z_dome_app,
+        "pCircAppBoot":      p_boot_dome_app,
     })
 
 if __name__ == "__main__":
