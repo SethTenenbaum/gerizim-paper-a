@@ -524,7 +524,7 @@ Leave-one-out checks confirm stability for all sub-stages.
 Leave-3-out (worst case, $\EvoLKOnCombosThree{}$ triples):
 $p = \EvoLKOworstThreeP$, within the Bonferroni bound.
 The dome-evolution filter (Fisher $p = \pEvoApFisher$~\pEvoApFisherSig{}, binomial $p = \pEvoAp$~\pEvoApSig{}) is the strongest keyword-filtered
-signal in this analysis, exceeding even the raw dome sweep (Fisher $p = \pCircApFisher$, binomial $p = \pCircAp$~\pCircApSig{}).
+signal in this analysis, exceeding even the raw dome sweep.
 
 \textbf{Stupa geographic-concentration null.}
 \label{sec:stupa_geo_null}
@@ -591,7 +591,7 @@ are statistically independent.
 \label{sec:results_rayleigh}
 The near-perfect Rayleigh $R$ of the A+ sub-sample is a mathematical
 consequence of the A+ classification criterion (\S\ref{sec:circularity})
-and is reported as a structural description, not independent evidence.
+and is reported as a structural description.
 Three formal permutation tests (\NpermRayleigh{} shuffles each, seed~\simSeed{};
 \texttt{x18\_periodicity\_formal\_test.py}) address distinct aspects of the
 periodicity:
@@ -744,7 +744,7 @@ Specifically, \sweepEightTenDomeBoth{}/\sweepZeroEightDomeHits{}
 to 0.10‑beru, indicating the significance is due to overlap.
 
 A degree-denominated Monte Carlo sweep
-(\S\ref{sec:limitations_geo}) confirms this pattern: candidate intervals
+(\S\ref{sec:limitations_geo}) confirms this pattern. Candidate intervals
 at 4\textdegree{} and 8\textdegree{} reach nominal dome significance, but
 inspection shows that 6 of 7 and all 4 of their hits respectively fall on
 12\textdegree{} and 24\textdegree{} nodes shared with the 3\textdegree{}
@@ -813,8 +813,8 @@ The unit sensitivity sweep (\S\ref{sec:metrology}) and Monte Carlo unit sweep
 (\S\ref{sec:limitations_geo}) independently confirm 3\textdegree{} as the dominant
 period without assuming any particular unit.
 
-The dome-periodicity audit (\texttt{dome\_periodicity\_audit.py}) is consistent
-with beru-alignment but equally consistent with geographic concentration:
+The dome-periodicity audit (\texttt{dome\_periodicity\_audit.py})  does not 
+by distinguish alignment from geographic concentration.
 Gerizim scores at the \domeGerizimPctile\textsuperscript{th} percentile
 among dome sites, dome site phases are approximately uniform
 ($\chi^2 = \domePhaseChiSq$, df\,=\,9, $p = \domePhaseChiP$, trend-level),
@@ -975,8 +975,7 @@ A Monte Carlo unit sweep (\mcNperms{} permutations, \mcNcandidates{} candidate
 spacing values from 0.5\textdegree{} to 15\textdegree{}) identifies which
 angular interval produces clustering beyond geographic concentration without
 assuming any particular unit. The dominant peak is at 3\textdegree{} ($p < 0.001$),
-with harmonics at 6\textdegree{} and 12\textdegree{} also significant; adjacent
-candidates 2.5\textdegree{} and 3.5\textdegree{} do not reach significance.
+with harmonics at 6\textdegree{} and 12\textdegree{} also significant.
 Collapsing harmonics, the dome subset yields \mcDomeNsigCollapsed{} independent
 dominant spacings ($P = \mcDomeCollapsedPEqOne{}$ under the geographic null),
 supporting 3\textdegree{} as the period to which domed monuments are preferentially aligned.
