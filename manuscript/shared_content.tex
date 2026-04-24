@@ -444,10 +444,10 @@ civilizations remains the residual question.
 \includegraphics[width=0.9\textwidth]{../figures/fig_null_c}
 \caption{Null~C bootstrap distributions for the dome sub-population
   ($N = \NcircTotal$, observed A+ $= \NcircTierAp$) at three
-  window widths.  For each window $\pm W$\textdegree{}, all full-corpus
+  window widths. For each window $\pm W$\textdegree{}, all full-corpus
   sites within $\pm W$\textdegree{} of any dome longitude form the
   restricted pool; $10^5$ draws of size $N = \NcircTotal$ from that
-  pool define the expected A+ distribution (blue bars).  The observed
+  pool define the expected A+ distribution (blue bars). The observed
   count (red line) exceeds the pool mean by $Z \approx 2.7$ in all three
   windows ($\pm 2$\textdegree{}: $p = \geoNullDomeRestrictedPtwo$, \geoNullDomeRestrictedPtwoSig{};
   $\pm 5$\textdegree{}: $p = \geoNullDomeRestrictedP$, \geoNullDomeRestrictedPSig{};
@@ -982,10 +982,11 @@ supporting 3\textdegree{} as the period to which domed monuments are preferentia
 
 \subsection{Americas Negative Control}
 \label{sec:americas_negative_control}
-The UNESCO Americas sub-corpus ($N = 145$) shows directional
-depletion (A+ = 2.1\%, $p = \AmericasOneSidedP$, \AmericasOneSidedStar{}) relative to the
-\NullRateAp{} null; the result is directional but uninformative
-at this sample size.
+The UNESCO Americas sub-corpus ($N = \AmericasN$) shows a 
+modestly lower A+ rate (\AmericasApRate\%) than the
+\NullRateAp{} null. The one-sided binomial depletion test 
+gives $p = \AmericasOneSidedP$~\AmericasOneSidedStar{}, but 
+the result is suggestive rather than definitive.
 
 \subsection{Other Limitations}
 
@@ -1120,13 +1121,13 @@ Full site-by-site audit files are in the archived code repository
 \NcircKeywords{} morphological keywords from four roots
 (\textit{stupa/stupas}, \textit{tholos}, \textit{dome/domed/domes},
 \textit{spherical}) are matched as whole words against each site's
-name, XML description, and extended OUV text.  All \NcircTotal{} matching
+name, XML description, and extended OUV text. All \NcircTotal{} matching
 sites are included in Test~2 without context gating.
 
 For Test~2x, ambiguous keywords (\textit{dome, domed, domes, spherical})
 are subject to a two-gate context check: Gate~1 (\NdomeGateNeg{} negative
 patterns) rejects non-architectural uses; Gate~2 (\NdomeGatePos{} positive
-patterns) requires architectural confirmation.  Unambiguous keywords
+patterns) requires architectural confirmation. Unambiguous keywords
 (\textit{stupa/stupas}, \textit{tholos}) are accepted without validation.
 The seven
 rejected sites are: Hiroshima Peace Memorial, Richtersveld, Gyeongju,
@@ -1136,7 +1137,7 @@ and Diqu\'{i}s Stone Spheres.
 \hyperref[sec:resultsevolution_inline]{Test~2b} adds earthen mound-stage
 keywords (\textit{tumulus, tumuli, barrow, barrows, kofun} unambiguous;
 \textit{mound} context-validated) to trace the hemispherical tradition
-from burial mound through stupa to architectural dome.  Test~2bx applies
+from burial mound through stupa to architectural dome. Test~2bx applies
 the same architectural context gates to the extended population.
 Statistics for all four variants are reported in
 \hyperref[sec:resultscircular]{§\ref*{sec:resultscircular}} and

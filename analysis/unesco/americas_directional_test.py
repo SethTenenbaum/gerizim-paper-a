@@ -39,6 +39,8 @@ MANUSCRIPT MACROS PRODUCED
     \\AmericasApRate         — A+ rate (%) in Americas
     \\AmericasOneSidedP      — one-sided binomial p-value (depletion)
     \\AmericasOneSidedStar   — significance label
+    \\AmericasTwoSidedP      — two-sided binomial p-value (deviation from null)
+    \\AmericasTwoSidedStar   — significance label
     \\AmericasDirectional    — "in" or "opposite to" (confirms direction)
     \\AmericasN              — Americas sub-corpus N
 """
@@ -105,6 +107,16 @@ def binomial_p_less(n_ap: int, n_total: int) -> float:
         return float(_bt(n_ap, n_total, P_NULL_AP, alternative="less").pvalue)
 
 
+def binomial_p_two_sided(n_ap: int, n_total: int) -> float:
+    """Two-sided binomial p-value for deviation from the null."""
+    try:
+        from scipy.stats import binom_test
+        return float(binom_test(n_ap, n_total, P_NULL_AP, alternative="two-sided"))
+    except (TypeError, ImportError):
+        from scipy.stats import binomtest as _bt
+        return float(_bt(n_ap, n_total, P_NULL_AP, alternative="two-sided").pvalue)
+
+
 def main():
     corpus = load_corpus()
     cultural = cultural_sites_with_coords(corpus)
@@ -116,45 +128,49 @@ def main():
     n_ap = sum(1 for lon in americas_lons if beru_dev(lon) <= TIER_APLUS)
     rate = 100.0 * n_ap / N_americas if N_americas > 0 else 0.0
     p_one_sided = binomial_p_less(n_ap, N_americas)
-    label = sig_label(p_one_sided)
+    p_two_sided = binomial_p_two_sided(n_ap, N_americas)
+    label_one_sided = sig_label(p_one_sided)
+    label_two_sided = sig_label(p_two_sided)
 
     directional = "in" if rate < 100 * P_NULL_AP else "opposite to"
 
     print("=" * 80)
-    print("  AMERICAS UNESCO SUB-CORPUS — ONE-SIDED DIRECTIONAL TEST")
-    print(f"  H₀: P(A+) = {100*P_NULL_AP:.0f}%   H₁: P(A+) < {100*P_NULL_AP:.0f}%  (depletion)")
+    print("  AMERICAS UNESCO SUB-CORPUS — BINOMIAL TESTS")
+    print(f"  H₀: P(A+) = {100*P_NULL_AP:.0f}%")
     print("=" * 80)
     print(f"\n  Americas sub-corpus N = {N_americas}")
     print(f"  Observed A+ = {n_ap}  ({rate:.1f}%)")
-    print(f"  One-sided binomial p (depletion) = {p_one_sided:.4f}  {label}")
+    print(f"  One-sided binomial p (depletion) = {p_one_sided:.4f}  {label_one_sided}")
+    print(f"  Two-sided binomial p = {p_two_sided:.4f}  {label_two_sided}")
     print(f"  Direction: {directional} the pre-specified direction")
+
     print(f"\n  INTERPRETATION:")
     print(f"    The geometric null predicts {100*P_NULL_AP:.0f}% A+; the Americas shows {rate:.1f}%.")
     if rate < 100 * P_NULL_AP:
-        print(f"    This depletion is consistent with the directional prediction that")
-        print(f"    a Eurasian-anchored beru grid would show lower A+ rates outside")
-        print(f"    the Eurasian heartland (one-sided p = {p_one_sided:.4f}, {label}).")
+        print(f"    The observed rate is below the null, but not significantly so in the conservative")
+        print(f"    two-sided test (p = {p_two_sided:.4f}, {label_two_sided}).")
     else:
-        print(f"    The Americas A+ rate ({rate:.1f}%) is not below the null (4%).")
-        print(f"    The directional prediction is not confirmed in this corpus.")
+        print(f"    The observed rate is not below the null, and the two-sided test is not significant")
+        print(f"    (p = {p_two_sided:.4f}, {label_two_sided}).")
 
-    # ── LaTeX macros ─────────────────────────────────────────────────────────
     print("\n" + "=" * 80)
-    print("  LATEX MACROS (Americas directional test):")
+    print("  LATEX MACROS (Americas binomial tests):")
     print("=" * 80)
     print(f"  \\newcommand{{\\AmericasN}}{{{N_americas}}}")
     print(f"  \\newcommand{{\\AmericasApCount}}{{{n_ap}}}")
     print(f"  \\newcommand{{\\AmericasApRate}}{{{rate:.1f}}}")
     print(f"  \\newcommand{{\\AmericasOneSidedP}}{{{p_one_sided:.4f}}}")
-    print(f"  \\newcommand{{\\AmericasOneSidedStar}}{{{label}}}")
+    print(f"  \\newcommand{{\\AmericasOneSidedStar}}{{{label_one_sided}}}")
+    print(f"  \\newcommand{{\\AmericasTwoSidedP}}{{{p_two_sided:.4f}}}")
+    print(f"  \\newcommand{{\\AmericasTwoSidedStar}}{{{label_two_sided}}}")
     print(f"  \\newcommand{{\\AmericasDirectional}}{{{directional}}}")
 
-    # ── Store ─────────────────────────────────────────────────────────────────
     ResultsStore().write_many({
         "AmericasN":            float(N_americas),
         "AmericasApCount":      float(n_ap),
         "AmericasApRate":       round(rate, 1),
         "AmericasOneSidedP":    round(p_one_sided, 4),
+        "AmericasTwoSidedP":    round(p_two_sided, 4),
         "AmericasDirectional":  directional,
     })
     print("\nResults written to data/store/results.json")

@@ -101,7 +101,7 @@ EXPLICIT_P_KEYS = {
     "wikiJavaNodeATierP", "wikiJavaTightATierP",
     "wikiNonHeartlandATierP", "wikiNonHeartlandApP", "wikiNonHeartlandCbandP",
     # Americas
-    "AmericasOneSidedP",
+    "AmericasOneSidedP", "AmericasTwoSidedP",
     # FDR q-values for the BH test family
     "FDRqTestOne", "FDRqTestTwo", "FDRqTestThree",
     # Unit sweep / slope tests
