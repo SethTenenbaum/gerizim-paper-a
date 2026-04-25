@@ -115,7 +115,7 @@ if [ "${1:-}" != "--full" ]; then
         analysis/unesco/unit_sweep_fill.py
         analysis/unesco/unit_sweep_montecarlo.py              # → mcDomeNsigObs, mcDomePObsGe, mcFullNsigObs, mcNperms
         analysis/unesco/sensitivity_slope_permutation_test.py  # → permSlopeNperms, permSlopePcanon, permSlopePsharp
-        analysis/unesco/sensitivity_slope_specificity_test.py  # → permSlopeCanonRankObs, permSlopeCanonBestJoint, permSlopeCanonRankP, permSlopeCanonCondFraction
+        analysis/unesco/sensitivity_slope_specificity_test.py  # → permSlopeCanonBestJoint{APP,AP,A}, permSlopeCanonRankObs{APP,AP,A}, permSlopeCanonCondFraction{APP,AP,A}
         analysis/unesco/dome_geographic_concentration_test.py  # → geoNullDomeBootP/Z/Mean, geoNullDomeRestrictedP/Z/Mean/N, domeEurasianFraction
         analysis/unesco/stupa_geographic_concentration_test.py # → stupaGeoBootP/Z/Mean, stupaRegionP/Z/N, stupaGeoRestrictedP/Z/N (GROUP 29b)
         analysis/unesco/dome_founding_stratification.py        # → domeStratNfs, domeStratNnfs, domeStratF/NfsAp/Rate/Enrich/P, domeStratFisherOR/P

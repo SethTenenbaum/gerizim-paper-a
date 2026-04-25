@@ -234,13 +234,17 @@ def main() -> None:
     # Myanmar/Cambodia 90–105°E
     myanmar = [s for s in sites if 90.0 <= s["lon"] <= 105.0]
     n_myanmar  = len(myanmar)
+    na_myanmar = sum(1 for s in myanmar if is_a_tier(s))
     nc_myanmar = sum(1 for s in myanmar if is_c_band(s))
+    or_a_myanmar, p_a_myanmar = _fisher(myanmar, na_myanmar, K_A, alternative="less")
     or_c_myanmar, p_c_myanmar = _fisher(myanmar, nc_myanmar, K_C)
 
     # Heartland 70–105°E combined
     heartland70 = [s for s in sites if 70.0 <= s["lon"] <= 105.0]
     n_hl70  = len(heartland70)
+    na_hl70 = sum(1 for s in heartland70 if is_a_tier(s))
     nc_hl70 = sum(1 for s in heartland70 if is_c_band(s))
+    or_a_hl70, p_a_hl70 = _fisher(heartland70, na_hl70, K_A, alternative="less")
     or_c_hl70, p_c_hl70 = _fisher(heartland70, nc_hl70, K_C)
 
     # Non-heartland: outside 70–110°E
@@ -414,11 +418,17 @@ def main() -> None:
         ("wikiJavaTightApOR",        f"{or_ap_java112:.2f}"),
         ("wikiJavaTightApP",         fmt_p(p_ap_java112)),
         ("wikiMyanmarN",             str(n_myanmar)),
+        ("wikiMyanmarATierN",        str(na_myanmar)),
+        ("wikiMyanmarATierOR",       f"{or_a_myanmar:.2f}"),
+        ("wikiMyanmarATierP",        fmt_p(p_a_myanmar)),
         ("wikiMyanmarCbandN",        str(nc_myanmar)),
         ("wikiMyanmarCbandRate",     f"{100*nc_myanmar/n_myanmar:.1f}" if n_myanmar else "0"),
         ("wikiMyanmarCbandOR",       f"{or_c_myanmar:.2f}"),
         ("wikiMyanmarCbandP",        fmt_p(p_c_myanmar)),
         ("wikiHeartlandN",           str(n_hl70)),
+        ("wikiHeartlandATierN",      str(na_hl70)),
+        ("wikiHeartlandATierOR",     f"{or_a_hl70:.2f}"),
+        ("wikiHeartlandATierP",      fmt_p(p_a_hl70)),
         ("wikiHeartlandCbandN",      str(nc_hl70)),
         ("wikiHeartlandCbandRate",   f"{100*nc_hl70/n_hl70:.1f}" if n_hl70 else "0"),
         ("wikiHeartlandCbandOR",     f"{or_c_hl70:.2f}"),

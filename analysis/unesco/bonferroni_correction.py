@@ -30,7 +30,7 @@ TEST NUMBERING (from config.json)
     Test 3   — Cluster Asymmetry
     Test 4   — Temporal Gradient (Cochran-Armitage)
     Test 2b  — Hemispherical Mound Evolution  [sensitivity variant, not in family]
-    Test E   — Founding-Site Enrichment       [exploratory]
+    Test 5   — Founding-Site Enrichment       [exploratory]
 """
 
 from __future__ import annotations

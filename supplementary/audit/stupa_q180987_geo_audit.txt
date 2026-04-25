@@ -1,23 +1,23 @@
 ====================================================================================================
   WIKIDATA Q180987 STUPA CORPUS — GEOGRAPHIC TIER BREAKDOWN
-  Generated: 2026-04-22 18:10 UTC
+  Generated: 2026-04-24 20:33 UTC
   Corpus: wikidata_stupas_q180987.csv  |  N = 229
-  Full corpus: A+ = 20 (8.7%)  A-tier = 67 (29.3%)
+  Full corpus: A+ = 20 (8.7%)  A-tier = 42 (18.3%)
   Anchor: Gerizim 35.269°E  |  1 beru = 30.0°
 ====================================================================================================
 
-  SUMMARY TABLE  (A+ = ≤0.00321 beru, ≤10.7 km, A = ≤0.00942 beru, ≤31 km, C = inter-harmonic C/C-/C--)
+  SUMMARY TABLE  (A+ = ≤0.00321 beru, ≤10.7 km, A = ≤0.00642 beru, ≤21 km, C = inter-harmonic C/C-/C--)
   Note: The All stupas row reports binomial tests vs geometric null; subregions use Fisher exact vs the full corpus.
   Region                                        N   A+    A+%    OR_A+    p_A+ sig      A     A%     OR_A     p_A sig      C     C%     OR_C     p_C sig 
   ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-  All stupas                                  229   20   8.7%    1.00×  0.1015 ns      67  29.3%    1.00×  0.0001 ***     41  17.9%    1.00×  1.0000 ns  
-  Heartland (70°–110°E)                       127    6   4.7%    0.31×  0.9959 ns      17  13.4%    0.16×  1.0000 ns      34  26.8%    4.96×  0.0001 *** 
-  India/Nepal (70°–90°E)                       53    4   7.5%    0.82×  0.7250 ns      13  24.5%    0.73×  0.8500 ns      11  20.8%    1.27×  0.3328 ns  
-  SE Asia / Myanmar-Cambodia (90°–105°E)       67    2   3.0%    0.25×  0.9929 ns       4   6.0%    0.10×  1.0000 ns      23  34.3%    4.18×  0.0001 *** 
-  Java/Sumatra node (105°–115°E)               83   11  13.3%    2.33×  0.0588 †       42  50.6%    4.96×  0.0000 ***      3   3.6%    0.11×  1.0000 ns  
-  Java tight (107°–112°E)                      54   11  20.4%    4.72×  0.0015 **      41  75.9%   18.07×  0.0000 ***      2   3.7%    0.13×  0.9999 ns  
-  Indonesia broad (95°–141°E)                 155   14   9.0%    1.13×  0.5173 ns      48  31.0%    1.30×  0.2536 ns      27  17.4%    0.90×  0.6814 ns  
-  Non-heartland (outside 70°–110°E)           102   14  13.7%    3.21×  0.0152 *       50  49.0%    6.22×  0.0000 ***      7   6.9%    0.20×  1.0000 ns  
+  All stupas                                  229   20   8.7%    1.00×  0.1015 ns      42  18.3%    1.00×  0.0109 *       34  14.8%    1.00×  1.0000 ns  
+  Heartland (70°–110°E)                       127    6   4.7%    0.31×  0.9959 ns      14  11.0%    0.33×  0.9996 ns      30  23.6%    7.58×  0.0000 *** 
+  India/Nepal (70°–90°E)                       53    4   7.5%    0.82×  0.7250 ns      10  18.9%    1.05×  0.5263 ns       8  15.1%    1.03×  0.5535 ns  
+  SE Asia / Myanmar-Cambodia (90°–105°E)       67    2   3.0%    0.25×  0.9929 ns       4   6.0%    0.21×  0.9998 ns      22  32.8%    6.11×  0.0000 *** 
+  Java/Sumatra node (105°–115°E)               83   11  13.3%    2.33×  0.0588 †       22  26.5%    2.27×  0.0138 *        2   2.4%    0.09×  1.0000 ns  
+  Java tight (107°–112°E)                      54   11  20.4%    4.72×  0.0015 **      22  40.7%    5.33×  0.0000 ***      1   1.9%    0.08×  1.0000 ns  
+  Indonesia broad (95°–141°E)                 155   14   9.0%    1.13×  0.5173 ns      28  18.1%    0.94×  0.6370 ns      24  15.5%    1.17×  0.4298 ns  
+  Non-heartland (outside 70°–110°E)           102   14  13.7%    3.21×  0.0152 *       28  27.5%    3.05×  0.0013 **       4   3.9%    0.13×  1.0000 ns  
 
 ====================================================================================================
   CROSS-REGION BREAKDOWN: Java/Sumatra node vs rest of heartland
@@ -25,28 +25,28 @@
 
   Java/Sumatra node (105°–115°E)  (N=83)
     A+: 11 (13.3%)  OR=2.33× p=0.0588 †
-    A:  42 (50.6%)   OR=4.96×  p=0.0000 ***
-    Tiers: A++=5  A+=6  A=31  B=38  C=3
+    A:  22 (26.5%)   OR=2.27×  p=0.0138 *
+    Tiers: A++=5  A+=6  A=11  B=59  C=2
 
   Heartland ex Java/Sumatra (70°–105°E)  (N=120)
     A+: 6 (5.0%)  OR=0.36× p=0.9908 ns
-    A:  17 (14.2%)   OR=0.19×  p=1.0000 ns
-    Tiers: A++=2  A+=4  A=11  B=69  C=18  C-=7  C--=9
+    A:  14 (11.7%)   OR=0.38×  p=0.9983 ns
+    Tiers: A++=2  A+=4  A=8  B=76  C=14  C-=7  C--=9
 
     India/Nepal sub (70°–90°E)  (N=53)
     A+: 4 (7.5%)  OR=0.82× p=0.7250 ns
-    A:  13 (24.5%)   OR=0.73×  p=0.8500 ns
-    Tiers: A++=1  A+=3  A=9  B=29  C=8  C-=3
+    A:  10 (18.9%)   OR=1.05×  p=0.5263 ns
+    Tiers: A++=1  A+=3  A=6  B=35  C=5  C-=3
 
     Myanmar/Cambodia sub (90°–105°E)  (N=67)
     A+: 2 (3.0%)  OR=0.25× p=0.9929 ns
-    A:  4 (6.0%)   OR=0.10×  p=1.0000 ns
-    Tiers: A++=1  A+=1  A=2  B=40  C=10  C-=4  C--=9
+    A:  4 (6.0%)   OR=0.21×  p=0.9998 ns
+    Tiers: A++=1  A+=1  A=2  B=41  C=9  C-=4  C--=9
 
   Non-heartland  (N=102)
     A+: 14 (13.7%)  OR=3.21× p=0.0152 *
-    A:  50 (49.0%)   OR=6.22×  p=0.0000 ***
-    Tiers: A++=6  A+=8  A=36  B=45  C=6  C--=1
+    A:  28 (27.5%)   OR=3.05×  p=0.0013 **
+    Tiers: A++=6  A+=8  A=14  B=70  C=3  C--=1
 
 ====================================================================================================
   BIMODAL ANALYSIS: A-tier (Java node) vs C-band (India/Myanmar heartland)
@@ -56,24 +56,24 @@
 ────────────────────────────────────────────────────────────────────────────────────────────────────
 
   Java/Sumatra node (105°–115°E) — A-tier zone  (N=83)
-    A-tier: 42 (50.6%)  OR=4.96×  p=0.0000 ***
-    C-band: 3 (3.6%)  OR=0.11×  p=1.0000 ns
-    Tiers:  A++=5  A+=6  A=31  B=38  C=3
+    A-tier: 22 (26.5%)  OR=2.27×  p=0.0138 *
+    C-band: 2 (2.4%)  OR=0.09×  p=1.0000 ns
+    Tiers:  A++=5  A+=6  A=11  B=59  C=2
 
   India/Nepal (70°–90°E) — C-band zone  (N=53)
-    A-tier: 13 (24.5%)  OR=0.73×  p=0.8500 ns
-    C-band: 11 (20.8%)  OR=1.27×  p=0.3328 ns
-    Tiers:  A++=1  A+=3  A=9  B=29  C=8  C-=3
+    A-tier: 10 (18.9%)  OR=1.05×  p=0.5263 ns
+    C-band: 8 (15.1%)  OR=1.03×  p=0.5535 ns
+    Tiers:  A++=1  A+=3  A=6  B=35  C=5  C-=3
 
   Myanmar/Cambodia (90°–105°E) — C-band zone  (N=67)
-    A-tier: 4 (6.0%)  OR=0.10×  p=1.0000 ns
-    C-band: 23 (34.3%)  OR=4.18×  p=0.0001 ***
-    Tiers:  A++=1  A+=1  A=2  B=40  C=10  C-=4  C--=9
+    A-tier: 4 (6.0%)  OR=0.21×  p=0.9998 ns
+    C-band: 22 (32.8%)  OR=6.11×  p=0.0000 ***
+    Tiers:  A++=1  A+=1  A=2  B=41  C=9  C-=4  C--=9
 
   Heartland combined (70°–105°E)  (N=120)
-    A-tier: 17 (14.2%)  OR=0.19×  p=1.0000 ns
-    C-band: 34 (28.3%)  OR=5.76×  p=0.0000 ***
-    Tiers:  A++=2  A+=4  A=11  B=69  C=18  C-=7  C--=9
+    A-tier: 14 (11.7%)  OR=0.38×  p=0.9983 ns
+    C-band: 30 (25.0%)  OR=8.75×  p=0.0000 ***
+    Tiers:  A++=2  A+=4  A=8  B=76  C=14  C-=7  C--=9
 
   INTERPRETATION
   ─────────────
@@ -91,15 +91,15 @@
 ────────────────────────────────────────────────────────────────────────────────────────────────────
   All stupas  (N = 229)
   A+ = 20 (8.7%)  Fisher OR=1.00× p=1.0000 ns  |  binomial p=0.1015 ns
-  A  = 67 (29.3%)   Fisher OR=1.00×  p=1.0000 ns   |  binomial p=0.0001 ***
+  A  = 42 (18.3%)   Fisher OR=1.00×  p=1.0000 ns   |  binomial p=0.0109 *
 
   Tier     N   Rate
   ───── ──── ──────
   A++      8   3.5%
   A+      12   5.2%
-  A       47  20.5%
-  B      121  52.8%
-  C       24  10.5%
+  A       22   9.6%
+  B      153  66.8%
+  C       17   7.4%
   C-       7   3.1%
   C--     10   4.4%
 
@@ -147,31 +147,31 @@
   [A  ]    19.9km   104.089°E  Indonesia       [Q106280209]
   [A  ]    21.0km   110.458°E  Indonesia       Gampingan Temple
   [A  ]    21.1km  -105.541°E  United States   The Great Stupa of Dharmakaya
-  [A  ]    22.2km   110.469°E  Indonesia       Morangan Temple
-  [A  ]    22.3km   110.470°E  Indonesia       Kedulan Temple
-  [A  ]    22.3km   110.470°E  Indonesia       Abang Temple
-  [A  ]    22.5km   113.472°E  Indonesia       Jabung
-  [A  ]    22.8km   110.474°E  Indonesia       Sari Temple
-  [A  ]    24.4km   110.489°E  Indonesia       Ratu Boko Temple
-  [A  ]    24.7km   110.491°E  Indonesia       Prambanan Temple
-  [A  ]    24.8km   110.493°E  Indonesia       Sewu
-  [A  ]    24.9km   110.493°E  Indonesia       Bubrah Temple
-  [A  ]    24.9km   110.493°E  Indonesia       Lumbung
-  [A  ]    25.0km   110.494°E  Indonesia       Banyunibo Temple
-  [A  ]    25.2km   110.496°E  Indonesia       Sajiwan
-  [A  ]    25.2km   110.496°E  Indonesia       [Q97307551]
-  [A  ]    25.3km   110.497°E  Indonesia       Barong Temple
-  [A  ]    25.4km   110.498°E  Indonesia       Candi Dawangsari
-  [A  ]    26.1km   110.505°E  Indonesia       Plaosan temple
-  [A  ]    26.5km   110.508°E  Indonesia       Miri Temple
-  [A  ]    27.0km   110.512°E  Indonesia       Ijo Temple
-  [A  ]    27.1km    83.025°E  India           Dhamek Stupa
-  [A  ]    27.2km    83.024°E  India           Chaukhandi Stupa
-  [A  ]    27.4km    68.022°E  Afghanistan     Takht-e Rostam
-  [A  ]    27.8km   110.519°E  Indonesia       Candi Lawang
-  [A  ]    27.9km    77.521°E  India           Buddhist stupas along with saru-maru monastric complex
-  [A  ]    28.3km   110.524°E  Indonesia       Candi Klero
-  [A  ]    31.0km    20.548°E  Hungary         Western Disciple Stupa
+  [B  ]    22.2km   110.469°E  Indonesia       Morangan Temple
+  [B  ]    22.3km   110.470°E  Indonesia       Kedulan Temple
+  [B  ]    22.3km   110.470°E  Indonesia       Abang Temple
+  [B  ]    22.5km   113.472°E  Indonesia       Jabung
+  [B  ]    22.8km   110.474°E  Indonesia       Sari Temple
+  [B  ]    24.4km   110.489°E  Indonesia       Ratu Boko Temple
+  [B  ]    24.7km   110.491°E  Indonesia       Prambanan Temple
+  [B  ]    24.8km   110.493°E  Indonesia       Sewu
+  [B  ]    24.9km   110.493°E  Indonesia       Bubrah Temple
+  [B  ]    24.9km   110.493°E  Indonesia       Lumbung
+  [B  ]    25.0km   110.494°E  Indonesia       Banyunibo Temple
+  [B  ]    25.2km   110.496°E  Indonesia       Sajiwan
+  [B  ]    25.2km   110.496°E  Indonesia       [Q97307551]
+  [B  ]    25.3km   110.497°E  Indonesia       Barong Temple
+  [B  ]    25.4km   110.498°E  Indonesia       Candi Dawangsari
+  [B  ]    26.1km   110.505°E  Indonesia       Plaosan temple
+  [B  ]    26.5km   110.508°E  Indonesia       Miri Temple
+  [B  ]    27.0km   110.512°E  Indonesia       Ijo Temple
+  [B  ]    27.1km    83.025°E  India           Dhamek Stupa
+  [B  ]    27.2km    83.024°E  India           Chaukhandi Stupa
+  [B  ]    27.4km    68.022°E  Afghanistan     Takht-e Rostam
+  [B  ]    27.8km   110.519°E  Indonesia       Candi Lawang
+  [B  ]    27.9km    77.521°E  India           Buddhist stupas along with saru-maru monastric complex
+  [B  ]    28.3km   110.524°E  Indonesia       Candi Klero
+  [B  ]    31.0km    20.548°E  Hungary         Western Disciple Stupa
   [B  ]    31.6km   110.553°E  Indonesia       Merak Temple
   [B  ]    32.3km   101.560°E  Indonesia       [Q106282029]
   [B  ]    32.5km   101.561°E  Indonesia       [Q106279426]
@@ -293,13 +293,13 @@
   [B  ]   129.7km   100.101°E  Thailand        Phra Borom That Nimit Chedi
   [B  ]   129.8km    67.100°E  Uzbekistan      Zurmala Stupa
   [B  ]   134.2km   100.060°E  Thailand        Phra Pathommachedi
-  [C  ]   136.2km    13.042°E  Austria         [Q130214579]
-  [C  ]   138.5km   127.021°E  South Korea     State Preceptor Hyegeo's stupa at  Mangwolsa
-  [C  ]   140.5km    85.003°E  India           Sujata Garh
-  [C  ]   142.2km    81.550°E  Sri Lanka       Kiri Vehera
-  [C  ]   143.5km    72.976°E  Pakistan        Bhamala Stupa
-  [C  ]   143.6km   111.976°E  Indonesia       [Q12478267]
-  [C  ]   144.4km    99.968°E  Thailand        Chedi Laem So
+  [B  ]   136.2km    13.042°E  Austria         [Q130214579]
+  [B  ]   138.5km   127.021°E  South Korea     State Preceptor Hyegeo's stupa at  Mangwolsa
+  [B  ]   140.5km    85.003°E  India           Sujata Garh
+  [B  ]   142.2km    81.550°E  Sri Lanka       Kiri Vehera
+  [B  ]   143.5km    72.976°E  Pakistan        Bhamala Stupa
+  [B  ]   143.6km   111.976°E  Indonesia       [Q12478267]
+  [B  ]   144.4km    99.968°E  Thailand        Chedi Laem So
   [C  ]   145.3km    84.960°E  India           Sagardih fort and stupa
   [C  ]   145.5km    99.580°E  Thailand        Phra Mahathat Chedi Phakdee Prakat
   [C  ]   146.2km   102.952°E  Thailand        Phra That Kham Kaen
@@ -338,15 +338,15 @@
 ────────────────────────────────────────────────────────────────────────────────────────────────────
   Heartland (70°–110°E)  (N = 127)
   A+ = 6 (4.7%)  Fisher OR=0.31× p=0.9959 ns  |  binomial p=0.8314 ns
-  A  = 17 (13.4%)   Fisher OR=0.16×  p=1.0000 ns   |  binomial p=0.9589 ns
+  A  = 14 (11.0%)   Fisher OR=0.33×  p=0.9996 ns   |  binomial p=0.7672 ns
 
   Tier     N   Rate
   ───── ──── ──────
   A++      2   1.6%
   A+       4   3.1%
-  A       11   8.7%
-  B       76  59.8%
-  C       18  14.2%
+  A        8   6.3%
+  B       83  65.4%
+  C       14  11.0%
   C-       7   5.5%
   C--      9   7.1%
 
@@ -366,9 +366,9 @@
   [A  ]    15.7km    83.128°E  India           Site and stupa and monastery of the Sakyas
   [A  ]    18.0km    80.106°E  India           stupa at Jaggaiahpet
   [A  ]    19.9km   104.089°E  Indonesia       [Q106280209]
-  [A  ]    27.1km    83.025°E  India           Dhamek Stupa
-  [A  ]    27.2km    83.024°E  India           Chaukhandi Stupa
-  [A  ]    27.9km    77.521°E  India           Buddhist stupas along with saru-maru monastric complex
+  [B  ]    27.1km    83.025°E  India           Dhamek Stupa
+  [B  ]    27.2km    83.024°E  India           Chaukhandi Stupa
+  [B  ]    27.9km    77.521°E  India           Buddhist stupas along with saru-maru monastric complex
   [B  ]    32.3km   101.560°E  Indonesia       [Q106282029]
   [B  ]    32.5km   101.561°E  Indonesia       [Q106279426]
   [B  ]    33.9km    77.575°E  India           Shanti Stupa
@@ -445,10 +445,10 @@
   [B  ]   129.6km   100.101°E  Indonesia       [Q12478284]
   [B  ]   129.7km   100.101°E  Thailand        Phra Borom That Nimit Chedi
   [B  ]   134.2km   100.060°E  Thailand        Phra Pathommachedi
-  [C  ]   140.5km    85.003°E  India           Sujata Garh
-  [C  ]   142.2km    81.550°E  Sri Lanka       Kiri Vehera
-  [C  ]   143.5km    72.976°E  Pakistan        Bhamala Stupa
-  [C  ]   144.4km    99.968°E  Thailand        Chedi Laem So
+  [B  ]   140.5km    85.003°E  India           Sujata Garh
+  [B  ]   142.2km    81.550°E  Sri Lanka       Kiri Vehera
+  [B  ]   143.5km    72.976°E  Pakistan        Bhamala Stupa
+  [B  ]   144.4km    99.968°E  Thailand        Chedi Laem So
   [C  ]   145.3km    84.960°E  India           Sagardih fort and stupa
   [C  ]   145.5km    99.580°E  Thailand        Phra Mahathat Chedi Phakdee Prakat
   [C  ]   146.2km   102.952°E  Thailand        Phra That Kham Kaen
@@ -483,15 +483,15 @@
 ────────────────────────────────────────────────────────────────────────────────────────────────────
   India/Nepal (70°–90°E)  (N = 53)
   A+ = 4 (7.5%)  Fisher OR=0.82× p=0.7250 ns  |  binomial p=0.4451 ns
-  A  = 13 (24.5%)   Fisher OR=0.73×  p=0.8500 ns   |  binomial p=0.1861 ns
+  A  = 10 (18.9%)   Fisher OR=1.05×  p=0.5263 ns   |  binomial p=0.1355 ns
 
   Tier     N   Rate
   ───── ──── ──────
   A++      1   1.9%
   A+       3   5.7%
-  A        9  17.0%
-  B       29  54.7%
-  C        8  15.1%
+  A        6  11.3%
+  B       35  66.0%
+  C        5   9.4%
   C-       3   5.7%
   C--      0   0.0%
 
@@ -507,9 +507,9 @@
   [A  ]    15.5km    83.129°E  India           Piprahwa_Stupa
   [A  ]    15.7km    83.128°E  India           Site and stupa and monastery of the Sakyas
   [A  ]    18.0km    80.106°E  India           stupa at Jaggaiahpet
-  [A  ]    27.1km    83.025°E  India           Dhamek Stupa
-  [A  ]    27.2km    83.024°E  India           Chaukhandi Stupa
-  [A  ]    27.9km    77.521°E  India           Buddhist stupas along with saru-maru monastric complex
+  [B  ]    27.1km    83.025°E  India           Dhamek Stupa
+  [B  ]    27.2km    83.024°E  India           Chaukhandi Stupa
+  [B  ]    27.9km    77.521°E  India           Buddhist stupas along with saru-maru monastric complex
   [B  ]    33.9km    77.575°E  India           Shanti Stupa
   [B  ]    35.0km    77.584°E  India           Tisserru Stupa
   [B  ]    35.8km    71.592°E  Pakistan        Kanishka stupa
@@ -539,9 +539,9 @@
   [B  ]   124.9km    84.394°E  India           Nandangarh Stupa and Rampart
   [B  ]   126.4km    85.130°E  India           Buddha Samyak Darshan Museum and Memorial Stupa
   [B  ]   127.8km    85.118°E  India           Relic Stupa
-  [C  ]   140.5km    85.003°E  India           Sujata Garh
-  [C  ]   142.2km    81.550°E  Sri Lanka       Kiri Vehera
-  [C  ]   143.5km    72.976°E  Pakistan        Bhamala Stupa
+  [B  ]   140.5km    85.003°E  India           Sujata Garh
+  [B  ]   142.2km    81.550°E  Sri Lanka       Kiri Vehera
+  [B  ]   143.5km    72.976°E  Pakistan        Bhamala Stupa
   [C  ]   145.3km    84.960°E  India           Sagardih fort and stupa
   [C  ]   147.9km    72.936°E  India           Ancient Bricks stupa at Elephanta Island
   [C  ]   153.3km    72.888°E  Pakistan        Mohra Muradu
@@ -554,15 +554,15 @@
 ────────────────────────────────────────────────────────────────────────────────────────────────────
   SE Asia / Myanmar-Cambodia (90°–105°E)  (N = 67)
   A+ = 2 (3.0%)  Fisher OR=0.25× p=0.9929 ns  |  binomial p=0.9344 ns
-  A  = 4 (6.0%)   Fisher OR=0.10×  p=1.0000 ns   |  binomial p=0.9994 ns
+  A  = 4 (6.0%)   Fisher OR=0.21×  p=0.9998 ns   |  binomial p=0.9787 ns
 
   Tier     N   Rate
   ───── ──── ──────
   A++      1   1.5%
   A+       1   1.5%
   A        2   3.0%
-  B       40  59.7%
-  C       10  14.9%
+  B       41  61.2%
+  C        9  13.4%
   C-       4   6.0%
   C--      9  13.4%
 
@@ -612,7 +612,7 @@
   [B  ]   129.6km   100.101°E  Indonesia       [Q12478284]
   [B  ]   129.7km   100.101°E  Thailand        Phra Borom That Nimit Chedi
   [B  ]   134.2km   100.060°E  Thailand        Phra Pathommachedi
-  [C  ]   144.4km    99.968°E  Thailand        Chedi Laem So
+  [B  ]   144.4km    99.968°E  Thailand        Chedi Laem So
   [C  ]   145.5km    99.580°E  Thailand        Phra Mahathat Chedi Phakdee Prakat
   [C  ]   146.2km   102.952°E  Thailand        Phra That Kham Kaen
   [C  ]   146.8km    99.947°E  Thailand        [Q13017469]
@@ -639,15 +639,15 @@
 ────────────────────────────────────────────────────────────────────────────────────────────────────
   Java/Sumatra node (105°–115°E)  (N = 83)
   A+ = 11 (13.3%)  Fisher OR=2.33× p=0.0588 †  |  binomial p=0.0170 *
-  A  = 42 (50.6%)   Fisher OR=4.96×  p=0.0000 ***   |  binomial p=0.0000 ***
+  A  = 22 (26.5%)   Fisher OR=2.27×  p=0.0138 *   |  binomial p=0.0006 ***
 
   Tier     N   Rate
   ───── ──── ──────
   A++      5   6.0%
   A+       6   7.2%
-  A       31  37.3%
-  B       38  45.8%
-  C        3   3.6%
+  A       11  13.3%
+  B       59  71.1%
+  C        2   2.4%
   C-       0   0.0%
   C--      0   0.0%
 
@@ -675,26 +675,26 @@
   [A  ]    18.9km   110.439°E  Indonesia       Ngempon Temple
   [A  ]    19.8km   110.447°E  Indonesia       Sambisari Temple
   [A  ]    21.0km   110.458°E  Indonesia       Gampingan Temple
-  [A  ]    22.2km   110.469°E  Indonesia       Morangan Temple
-  [A  ]    22.3km   110.470°E  Indonesia       Kedulan Temple
-  [A  ]    22.3km   110.470°E  Indonesia       Abang Temple
-  [A  ]    22.5km   113.472°E  Indonesia       Jabung
-  [A  ]    22.8km   110.474°E  Indonesia       Sari Temple
-  [A  ]    24.4km   110.489°E  Indonesia       Ratu Boko Temple
-  [A  ]    24.7km   110.491°E  Indonesia       Prambanan Temple
-  [A  ]    24.8km   110.493°E  Indonesia       Sewu
-  [A  ]    24.9km   110.493°E  Indonesia       Bubrah Temple
-  [A  ]    24.9km   110.493°E  Indonesia       Lumbung
-  [A  ]    25.0km   110.494°E  Indonesia       Banyunibo Temple
-  [A  ]    25.2km   110.496°E  Indonesia       Sajiwan
-  [A  ]    25.2km   110.496°E  Indonesia       [Q97307551]
-  [A  ]    25.3km   110.497°E  Indonesia       Barong Temple
-  [A  ]    25.4km   110.498°E  Indonesia       Candi Dawangsari
-  [A  ]    26.1km   110.505°E  Indonesia       Plaosan temple
-  [A  ]    26.5km   110.508°E  Indonesia       Miri Temple
-  [A  ]    27.0km   110.512°E  Indonesia       Ijo Temple
-  [A  ]    27.8km   110.519°E  Indonesia       Candi Lawang
-  [A  ]    28.3km   110.524°E  Indonesia       Candi Klero
+  [B  ]    22.2km   110.469°E  Indonesia       Morangan Temple
+  [B  ]    22.3km   110.470°E  Indonesia       Kedulan Temple
+  [B  ]    22.3km   110.470°E  Indonesia       Abang Temple
+  [B  ]    22.5km   113.472°E  Indonesia       Jabung
+  [B  ]    22.8km   110.474°E  Indonesia       Sari Temple
+  [B  ]    24.4km   110.489°E  Indonesia       Ratu Boko Temple
+  [B  ]    24.7km   110.491°E  Indonesia       Prambanan Temple
+  [B  ]    24.8km   110.493°E  Indonesia       Sewu
+  [B  ]    24.9km   110.493°E  Indonesia       Bubrah Temple
+  [B  ]    24.9km   110.493°E  Indonesia       Lumbung
+  [B  ]    25.0km   110.494°E  Indonesia       Banyunibo Temple
+  [B  ]    25.2km   110.496°E  Indonesia       Sajiwan
+  [B  ]    25.2km   110.496°E  Indonesia       [Q97307551]
+  [B  ]    25.3km   110.497°E  Indonesia       Barong Temple
+  [B  ]    25.4km   110.498°E  Indonesia       Candi Dawangsari
+  [B  ]    26.1km   110.505°E  Indonesia       Plaosan temple
+  [B  ]    26.5km   110.508°E  Indonesia       Miri Temple
+  [B  ]    27.0km   110.512°E  Indonesia       Ijo Temple
+  [B  ]    27.8km   110.519°E  Indonesia       Candi Lawang
+  [B  ]    28.3km   110.524°E  Indonesia       Candi Klero
   [B  ]    31.6km   110.553°E  Indonesia       Merak Temple
   [B  ]    35.1km   112.953°E  People's Republic of China  Ayuwang Pagoda
   [B  ]    39.8km   109.911°E  Indonesia       Candi Dwarawati
@@ -733,22 +733,22 @@
   [B  ]   117.6km   112.209°E  Indonesia       Penataran
   [B  ]   118.0km   112.206°E  Indonesia       [Q12478280]
   [B  ]   123.0km   112.161°E  Indonesia       Candi Tegowangi
-  [C  ]   143.6km   111.976°E  Indonesia       [Q12478267]
+  [B  ]   143.6km   111.976°E  Indonesia       [Q12478267]
   [C  ]   148.3km   114.933°E  Indonesia       Candi Laras
   [C  ]   152.8km   111.892°E  Indonesia       Candi Lor
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────
   Java tight (107°–112°E)  (N = 54)
   A+ = 11 (20.4%)  Fisher OR=4.72× p=0.0015 **  |  binomial p=0.0006 ***
-  A  = 41 (75.9%)   Fisher OR=18.07×  p=0.0000 ***   |  binomial p=0.0000 ***
+  A  = 22 (40.7%)   Fisher OR=5.33×  p=0.0000 ***   |  binomial p=0.0000 ***
 
   Tier     N   Rate
   ───── ──── ──────
   A++      5   9.3%
   A+       6  11.1%
-  A       30  55.6%
-  B       11  20.4%
-  C        2   3.7%
+  A       11  20.4%
+  B       31  57.4%
+  C        1   1.9%
   C-       0   0.0%
   C--      0   0.0%
 
@@ -776,25 +776,25 @@
   [A  ]    18.9km   110.439°E  Indonesia       Ngempon Temple
   [A  ]    19.8km   110.447°E  Indonesia       Sambisari Temple
   [A  ]    21.0km   110.458°E  Indonesia       Gampingan Temple
-  [A  ]    22.2km   110.469°E  Indonesia       Morangan Temple
-  [A  ]    22.3km   110.470°E  Indonesia       Kedulan Temple
-  [A  ]    22.3km   110.470°E  Indonesia       Abang Temple
-  [A  ]    22.8km   110.474°E  Indonesia       Sari Temple
-  [A  ]    24.4km   110.489°E  Indonesia       Ratu Boko Temple
-  [A  ]    24.7km   110.491°E  Indonesia       Prambanan Temple
-  [A  ]    24.8km   110.493°E  Indonesia       Sewu
-  [A  ]    24.9km   110.493°E  Indonesia       Bubrah Temple
-  [A  ]    24.9km   110.493°E  Indonesia       Lumbung
-  [A  ]    25.0km   110.494°E  Indonesia       Banyunibo Temple
-  [A  ]    25.2km   110.496°E  Indonesia       Sajiwan
-  [A  ]    25.2km   110.496°E  Indonesia       [Q97307551]
-  [A  ]    25.3km   110.497°E  Indonesia       Barong Temple
-  [A  ]    25.4km   110.498°E  Indonesia       Candi Dawangsari
-  [A  ]    26.1km   110.505°E  Indonesia       Plaosan temple
-  [A  ]    26.5km   110.508°E  Indonesia       Miri Temple
-  [A  ]    27.0km   110.512°E  Indonesia       Ijo Temple
-  [A  ]    27.8km   110.519°E  Indonesia       Candi Lawang
-  [A  ]    28.3km   110.524°E  Indonesia       Candi Klero
+  [B  ]    22.2km   110.469°E  Indonesia       Morangan Temple
+  [B  ]    22.3km   110.470°E  Indonesia       Kedulan Temple
+  [B  ]    22.3km   110.470°E  Indonesia       Abang Temple
+  [B  ]    22.8km   110.474°E  Indonesia       Sari Temple
+  [B  ]    24.4km   110.489°E  Indonesia       Ratu Boko Temple
+  [B  ]    24.7km   110.491°E  Indonesia       Prambanan Temple
+  [B  ]    24.8km   110.493°E  Indonesia       Sewu
+  [B  ]    24.9km   110.493°E  Indonesia       Bubrah Temple
+  [B  ]    24.9km   110.493°E  Indonesia       Lumbung
+  [B  ]    25.0km   110.494°E  Indonesia       Banyunibo Temple
+  [B  ]    25.2km   110.496°E  Indonesia       Sajiwan
+  [B  ]    25.2km   110.496°E  Indonesia       [Q97307551]
+  [B  ]    25.3km   110.497°E  Indonesia       Barong Temple
+  [B  ]    25.4km   110.498°E  Indonesia       Candi Dawangsari
+  [B  ]    26.1km   110.505°E  Indonesia       Plaosan temple
+  [B  ]    26.5km   110.508°E  Indonesia       Miri Temple
+  [B  ]    27.0km   110.512°E  Indonesia       Ijo Temple
+  [B  ]    27.8km   110.519°E  Indonesia       Candi Lawang
+  [B  ]    28.3km   110.524°E  Indonesia       Candi Klero
   [B  ]    31.6km   110.553°E  Indonesia       Merak Temple
   [B  ]    39.8km   109.911°E  Indonesia       Candi Dwarawati
   [B  ]    39.8km   109.911°E  Indonesia       Candi Bima
@@ -806,21 +806,21 @@
   [B  ]    72.1km   107.919°E  Indonesia       Cangkuang
   [B  ]    95.7km   111.131°E  Indonesia       Sukuh
   [B  ]    98.6km   111.157°E  Indonesia       Cetho
-  [C  ]   143.6km   111.976°E  Indonesia       [Q12478267]
+  [B  ]   143.6km   111.976°E  Indonesia       [Q12478267]
   [C  ]   152.8km   111.892°E  Indonesia       Candi Lor
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────
   Indonesia broad (95°–141°E)  (N = 155)
   A+ = 14 (9.0%)  Fisher OR=1.13× p=0.5173 ns  |  binomial p=0.1247 ns
-  A  = 48 (31.0%)   Fisher OR=1.30×  p=0.2536 ns   |  binomial p=0.0002 ***
+  A  = 28 (18.1%)   Fisher OR=0.94×  p=0.6370 ns   |  binomial p=0.0386 *
 
   Tier     N   Rate
   ───── ──── ──────
   A++      6   3.9%
   A+       8   5.2%
-  A       34  21.9%
-  B       80  51.6%
-  C       14   9.0%
+  A       14   9.0%
+  B      103  66.5%
+  C       11   7.1%
   C-       4   2.6%
   C--      9   5.8%
 
@@ -854,26 +854,26 @@
   [A  ]    19.8km   110.447°E  Indonesia       Sambisari Temple
   [A  ]    19.9km   104.089°E  Indonesia       [Q106280209]
   [A  ]    21.0km   110.458°E  Indonesia       Gampingan Temple
-  [A  ]    22.2km   110.469°E  Indonesia       Morangan Temple
-  [A  ]    22.3km   110.470°E  Indonesia       Kedulan Temple
-  [A  ]    22.3km   110.470°E  Indonesia       Abang Temple
-  [A  ]    22.5km   113.472°E  Indonesia       Jabung
-  [A  ]    22.8km   110.474°E  Indonesia       Sari Temple
-  [A  ]    24.4km   110.489°E  Indonesia       Ratu Boko Temple
-  [A  ]    24.7km   110.491°E  Indonesia       Prambanan Temple
-  [A  ]    24.8km   110.493°E  Indonesia       Sewu
-  [A  ]    24.9km   110.493°E  Indonesia       Bubrah Temple
-  [A  ]    24.9km   110.493°E  Indonesia       Lumbung
-  [A  ]    25.0km   110.494°E  Indonesia       Banyunibo Temple
-  [A  ]    25.2km   110.496°E  Indonesia       Sajiwan
-  [A  ]    25.2km   110.496°E  Indonesia       [Q97307551]
-  [A  ]    25.3km   110.497°E  Indonesia       Barong Temple
-  [A  ]    25.4km   110.498°E  Indonesia       Candi Dawangsari
-  [A  ]    26.1km   110.505°E  Indonesia       Plaosan temple
-  [A  ]    26.5km   110.508°E  Indonesia       Miri Temple
-  [A  ]    27.0km   110.512°E  Indonesia       Ijo Temple
-  [A  ]    27.8km   110.519°E  Indonesia       Candi Lawang
-  [A  ]    28.3km   110.524°E  Indonesia       Candi Klero
+  [B  ]    22.2km   110.469°E  Indonesia       Morangan Temple
+  [B  ]    22.3km   110.470°E  Indonesia       Kedulan Temple
+  [B  ]    22.3km   110.470°E  Indonesia       Abang Temple
+  [B  ]    22.5km   113.472°E  Indonesia       Jabung
+  [B  ]    22.8km   110.474°E  Indonesia       Sari Temple
+  [B  ]    24.4km   110.489°E  Indonesia       Ratu Boko Temple
+  [B  ]    24.7km   110.491°E  Indonesia       Prambanan Temple
+  [B  ]    24.8km   110.493°E  Indonesia       Sewu
+  [B  ]    24.9km   110.493°E  Indonesia       Bubrah Temple
+  [B  ]    24.9km   110.493°E  Indonesia       Lumbung
+  [B  ]    25.0km   110.494°E  Indonesia       Banyunibo Temple
+  [B  ]    25.2km   110.496°E  Indonesia       Sajiwan
+  [B  ]    25.2km   110.496°E  Indonesia       [Q97307551]
+  [B  ]    25.3km   110.497°E  Indonesia       Barong Temple
+  [B  ]    25.4km   110.498°E  Indonesia       Candi Dawangsari
+  [B  ]    26.1km   110.505°E  Indonesia       Plaosan temple
+  [B  ]    26.5km   110.508°E  Indonesia       Miri Temple
+  [B  ]    27.0km   110.512°E  Indonesia       Ijo Temple
+  [B  ]    27.8km   110.519°E  Indonesia       Candi Lawang
+  [B  ]    28.3km   110.524°E  Indonesia       Candi Klero
   [B  ]    31.6km   110.553°E  Indonesia       Merak Temple
   [B  ]    32.3km   101.560°E  Indonesia       [Q106282029]
   [B  ]    32.5km   101.561°E  Indonesia       [Q106279426]
@@ -954,9 +954,9 @@
   [B  ]   129.6km   100.101°E  Indonesia       [Q12478284]
   [B  ]   129.7km   100.101°E  Thailand        Phra Borom That Nimit Chedi
   [B  ]   134.2km   100.060°E  Thailand        Phra Pathommachedi
-  [C  ]   138.5km   127.021°E  South Korea     State Preceptor Hyegeo's stupa at  Mangwolsa
-  [C  ]   143.6km   111.976°E  Indonesia       [Q12478267]
-  [C  ]   144.4km    99.968°E  Thailand        Chedi Laem So
+  [B  ]   138.5km   127.021°E  South Korea     State Preceptor Hyegeo's stupa at  Mangwolsa
+  [B  ]   143.6km   111.976°E  Indonesia       [Q12478267]
+  [B  ]   144.4km    99.968°E  Thailand        Chedi Laem So
   [C  ]   145.5km    99.580°E  Thailand        Phra Mahathat Chedi Phakdee Prakat
   [C  ]   146.2km   102.952°E  Thailand        Phra That Kham Kaen
   [C  ]   146.8km    99.947°E  Thailand        [Q13017469]
@@ -985,15 +985,15 @@
 ────────────────────────────────────────────────────────────────────────────────────────────────────
   Non-heartland (outside 70°–110°E)  (N = 102)
   A+ = 14 (13.7%)  Fisher OR=3.21× p=0.0152 *  |  binomial p=0.0057 **
-  A  = 50 (49.0%)   Fisher OR=6.22×  p=0.0000 ***   |  binomial p=0.0000 ***
+  A  = 28 (27.5%)   Fisher OR=3.05×  p=0.0013 **   |  binomial p=0.0001 ***
 
   Tier     N   Rate
   ───── ──── ──────
   A++      6   5.9%
   A+       8   7.8%
-  A       36  35.3%
-  B       45  44.1%
-  C        6   5.9%
+  A       14  13.7%
+  B       70  68.6%
+  C        3   2.9%
   C-       0   0.0%
   C--      1   1.0%
 
@@ -1027,28 +1027,28 @@
   [A  ]    19.8km   110.447°E  Indonesia       Sambisari Temple
   [A  ]    21.0km   110.458°E  Indonesia       Gampingan Temple
   [A  ]    21.1km  -105.541°E  United States   The Great Stupa of Dharmakaya
-  [A  ]    22.2km   110.469°E  Indonesia       Morangan Temple
-  [A  ]    22.3km   110.470°E  Indonesia       Kedulan Temple
-  [A  ]    22.3km   110.470°E  Indonesia       Abang Temple
-  [A  ]    22.5km   113.472°E  Indonesia       Jabung
-  [A  ]    22.8km   110.474°E  Indonesia       Sari Temple
-  [A  ]    24.4km   110.489°E  Indonesia       Ratu Boko Temple
-  [A  ]    24.7km   110.491°E  Indonesia       Prambanan Temple
-  [A  ]    24.8km   110.493°E  Indonesia       Sewu
-  [A  ]    24.9km   110.493°E  Indonesia       Bubrah Temple
-  [A  ]    24.9km   110.493°E  Indonesia       Lumbung
-  [A  ]    25.0km   110.494°E  Indonesia       Banyunibo Temple
-  [A  ]    25.2km   110.496°E  Indonesia       Sajiwan
-  [A  ]    25.2km   110.496°E  Indonesia       [Q97307551]
-  [A  ]    25.3km   110.497°E  Indonesia       Barong Temple
-  [A  ]    25.4km   110.498°E  Indonesia       Candi Dawangsari
-  [A  ]    26.1km   110.505°E  Indonesia       Plaosan temple
-  [A  ]    26.5km   110.508°E  Indonesia       Miri Temple
-  [A  ]    27.0km   110.512°E  Indonesia       Ijo Temple
-  [A  ]    27.4km    68.022°E  Afghanistan     Takht-e Rostam
-  [A  ]    27.8km   110.519°E  Indonesia       Candi Lawang
-  [A  ]    28.3km   110.524°E  Indonesia       Candi Klero
-  [A  ]    31.0km    20.548°E  Hungary         Western Disciple Stupa
+  [B  ]    22.2km   110.469°E  Indonesia       Morangan Temple
+  [B  ]    22.3km   110.470°E  Indonesia       Kedulan Temple
+  [B  ]    22.3km   110.470°E  Indonesia       Abang Temple
+  [B  ]    22.5km   113.472°E  Indonesia       Jabung
+  [B  ]    22.8km   110.474°E  Indonesia       Sari Temple
+  [B  ]    24.4km   110.489°E  Indonesia       Ratu Boko Temple
+  [B  ]    24.7km   110.491°E  Indonesia       Prambanan Temple
+  [B  ]    24.8km   110.493°E  Indonesia       Sewu
+  [B  ]    24.9km   110.493°E  Indonesia       Bubrah Temple
+  [B  ]    24.9km   110.493°E  Indonesia       Lumbung
+  [B  ]    25.0km   110.494°E  Indonesia       Banyunibo Temple
+  [B  ]    25.2km   110.496°E  Indonesia       Sajiwan
+  [B  ]    25.2km   110.496°E  Indonesia       [Q97307551]
+  [B  ]    25.3km   110.497°E  Indonesia       Barong Temple
+  [B  ]    25.4km   110.498°E  Indonesia       Candi Dawangsari
+  [B  ]    26.1km   110.505°E  Indonesia       Plaosan temple
+  [B  ]    26.5km   110.508°E  Indonesia       Miri Temple
+  [B  ]    27.0km   110.512°E  Indonesia       Ijo Temple
+  [B  ]    27.4km    68.022°E  Afghanistan     Takht-e Rostam
+  [B  ]    27.8km   110.519°E  Indonesia       Candi Lawang
+  [B  ]    28.3km   110.524°E  Indonesia       Candi Klero
+  [B  ]    31.0km    20.548°E  Hungary         Western Disciple Stupa
   [B  ]    31.6km   110.553°E  Indonesia       Merak Temple
   [B  ]    35.1km   112.953°E  People's Republic of China  Ayuwang Pagoda
   [B  ]    46.3km    -4.148°E  Spain           Stupa of Karma Guen
@@ -1094,9 +1094,9 @@
   [B  ]   123.0km   112.161°E  Indonesia       Candi Tegowangi
   [B  ]   128.4km    15.426°E  Austria         Peace stupa
   [B  ]   129.8km    67.100°E  Uzbekistan      Zurmala Stupa
-  [C  ]   136.2km    13.042°E  Austria         [Q130214579]
-  [C  ]   138.5km   127.021°E  South Korea     State Preceptor Hyegeo's stupa at  Mangwolsa
-  [C  ]   143.6km   111.976°E  Indonesia       [Q12478267]
+  [B  ]   136.2km    13.042°E  Austria         [Q130214579]
+  [B  ]   138.5km   127.021°E  South Korea     State Preceptor Hyegeo's stupa at  Mangwolsa
+  [B  ]   143.6km   111.976°E  Indonesia       [Q12478267]
   [C  ]   148.3km   114.933°E  Indonesia       Candi Laras
   [C  ]   152.8km   111.892°E  Indonesia       Candi Lor
   [C  ]   153.6km    66.885°E  Afghanistan     Nava Vihara

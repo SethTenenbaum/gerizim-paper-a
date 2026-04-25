@@ -1,9 +1,9 @@
 UNESCO A-TIER SITES: GERIZIM vs JERUSALEM ANCHOR COMPARISON
-Generated : Wed Apr 22 18:09:47 UTC 2026
+Generated : Fri Apr 24 23:44:19 UTC 2026
 Script    : tools/generate_audit_aplus_sites.py
 Corpus    : 1011 inscribed Cultural/Mixed UNESCO sites with coordinates
            + 1 synthetic Gerizim entry = 1012 extended corpus
-Beru      : 30.0°  |  A+ threshold: <= 0.00321 beru (10.7 km)  |  A threshold: <= 0.00942 beru (31 km)
+Beru      : 30.0°  |  A+ threshold: <= 0.00321 beru (10.7 km)  |  A threshold: <= 0.00642 beru (21 km)
 Gerizim   : 35.269°E  (Tentative List, ref. 5706 — not yet inscribed)
 Jerusalem : 35.2317°E  (inscribed corpus member)  [0.0373° = 4.1 km separation]
 Self-exclusion: each anchor removes itself → both test against N=1011.
@@ -13,12 +13,20 @@ Self-exclusion: each anchor removes itself → both test against N=1011.
 ────────────────────────────────────────────────────────────────────────────────────────────────
 SUMMARY
 
-  Anchor           N corpus    A++     A+   A (all)    A+ %       A+ p           A %        A p      
+  Anchor           N corpus    A++    A++%     A++ p          A+    A+ %      A+ p          A %       A p
   --------------------------------------------------------------------------------------
-  Gerizim              1011     44     88       214    8.7%     0.0027    **   21.2%     0.0334     *
-  Jerusalem            1011     48     88       210    8.7%     0.0027    **   20.8%     0.0643     ~
+  Gerizim              1011     44    4.4%     0.0273    *     88    8.7%     0.0027    **       157   15.5%     0.0071    **
+  Jerusalem            1011     48    4.7%     0.0052   **     88    8.7%     0.0027    **       148   14.6%     0.0501     ~
 
-  A+ null rate: 6%   A null rate: 19%
+  A++ null rate: 3%   A+ null rate: 6%   A null rate: 13%
+  Conditional nulls: P(A+|A) null = 0.50   P(A++|A+) null = 0.50
+
+  NESTED JOINT PROBABILITY  P(A) × P(A+|A) × P(A++|A+)  [chain rule, dependent tiers]
+  Anchor               p(A)    p(A+|A)    p(A++|A+)       joint p      
+  ------------------------------------------------------------------
+  Gerizim            0.0071     0.0753       0.5308      0.000283   ***
+  Jerusalem          0.0501     0.0131       0.2191      0.000143   ***
+
   A+ overlap (both anchors): 71 sites
   A+ unique to Gerizim: 17 sites
   A+ unique to Jerusalem: 17 sites
@@ -97,7 +105,7 @@ COUNTRY / REGION BREAKDOWN — JERUSALEM (35.2317°E)  (A+ sites, N=88)
   Angola                                           1
 
 ────────────────────────────────────────────────────────────────────────────────────────────────
-GERIZIM (35.269°E) — ALL A-TIER SITES  (A++=44, A+=88, A=126, total=214)
+GERIZIM (35.269°E) — ALL A-TIER SITES  (A++=44, A+=88, A=69, total=157)
   Tier   Dev (beru)      km  Dir  Harmonic      Lon°E  Tags                          Site
   --------------------------------------------------------------------------------------------------------------------
   --- A++ ---
@@ -262,66 +270,9 @@ GERIZIM (35.269°E) — ALL A-TIER SITES  (A++=44, A+=88, A=126, total=214)
   A        0.006167    20.5    W       4.7  -105.5460  Christianity                  Taos Pueblo
   A        0.006281    20.9    W       0.4    23.0806  dome, mound, Christianity     Sanctuary of Asklepios at Epidaurus
   A        0.006400    21.3    W       0.6    17.0770  dome, mound, Christianity     Centennial Hall in Wrocław
-  A        0.006459    21.5    W       4.2   -90.5372  founding, Christianity        Historic Fortified Town of Campeche
-  A        0.006462    21.5    E       0.3    44.4629  —                             Ḥimā Cultural Area
-  A        0.006585    21.9    W       3.6   -72.5334  dome, mound                   Historic Sanctuary of Machu Picchu
-  A        0.006589    21.9    W       0.8    11.4667  Christianity                  Historic Centres of Stralsund and Wismar
-  A        0.006589    21.9    W       3.7   -75.5333  founding, Christianity        Port, Fortresses and Group of Monuments, Cartagena
-  A        0.006670    22.2    W       0.0    35.0689  founding, Christianity, Islam  Old City of Acre
-  A        0.006671    22.2    W       1.0     5.4691  Christianity                  Flemish Béguinages
-  A        0.006744    22.5    E       0.9    62.0667  dome, founding, mound, Buddhism, Islam  State Historical and Cultural Park “Ancient Merv”
-  A        0.006791    22.6    W       0.3    26.4727  —                             Mir Castle Complex
-  A        0.007027    23.4    W       3.1   -57.9418  founding                      The Architectural Work of Le Corbusier, an Outstanding Contribution to the Modern Movement
-  A        0.007144    23.8    W       1.7   -15.5167  mound                         Stone Circles of Senegambia
-  A        0.007191    23.9    W       1.3    -3.5153  —                             Archaeological Site of Atapuerca
-  A        0.007237    24.1    W       0.7    14.4861  —                             Archaeological Areas of Pompei, Herculaneum and Torre Annunziata
-  A        0.007297    24.3    W       3.8   -78.5121  founding, Christianity        City of Quito
-  A        0.007422    24.7    E       2.5   110.4917  Buddhism, Hinduism            Prambanan Temple Compounds
-  A        0.007578    25.2    W       0.8    11.0417  dome, founding, mound, Christianity  Historic Centre of San Gimignano
-  A        0.007695    25.6    W       1.2    -0.9619  mound                         Royal Court of Tiébélé
-  A        0.007800    26.0    E       3.6   143.0350  —                             Willandra Lakes Region
-  A        0.007828    26.1    W       1.3    -3.9658  founding, Christianity        The Slate Landscape of Northwest Wales
-  A        0.007885    26.3    E       0.5    50.5056  mound                         Dilmun Burial Mounds
-  A        0.007894    26.3    W       0.7    14.5058  founding, Christianity        The works of Jože Plečnik in Ljubljana – Human Centred Urban Design
-  A        0.007913    26.4    W       1.2    -0.4936  founding, Christianity        Forts and Castles, Volta, Greater Accra, Central and Western Regions
-  A        0.007920    26.4    E       2.4   107.0314  founding                      Zuojiang Huashan Rock Art Cultural Landscape
-  A        0.007929    26.4    W       0.7    14.5069  —                             Ħal Saflieni Hypogeum
-  A        0.007950    26.5    E       3.0   125.5075  Buddhism                      Complex of Koguryo Tombs
-  A        0.007970    26.5    W       0.8    11.0299  Christianity, Judaism         Jewish-Medieval Heritage of Erfurt
-  A        0.008035    26.8    W       1.1     2.0279  Christianity                  Works of Antoni Gaudí
-  A        0.008181    27.2    W       0.7    14.5144  founding, Christianity        City of Valletta
-  A        0.008181    27.2    W       4.8  -108.4856  —                             Mesa Verde National Park
-  A        0.008189    27.3    W       0.7    14.0233  founding, Christianity, Islam, Judaism  Arab-Norman Palermo and the Cathedral Churches of Cefalú and Monreale
-  A        0.008257    27.5    W       3.0   -54.9787  Judaism                       Jodensavanne Archaeological Site: Jodensavanne Settlement and Cassipora Creek Cemetery
-  A        0.008268    27.5    W       0.5    20.0209  founding, Christianity, Islam  Butrint
-  A        0.008311    27.7    E       0.5    50.5183  founding, Islam               Qal’at al-Bahrain – Ancient Harbour and Capital of Dilmun
-  A        0.008517    28.4    W       1.4    -6.4755  founding, Christianity        Brú na Bóinne - Archaeological Ensemble of the Bend of the Boyne
-  A        0.008661    28.8    W       0.0    35.0092  founding                      Incense Route - Desert Cities in the Negev
-  A        0.008661    28.8    E       0.3    44.0092  Islam                         Erbil Citadel
-  A        0.008733    29.1    W       1.3    -3.4690  founding, Christianity, Islam, Judaism  Renaissance Monumental Ensembles of Úbeda and Baeza
-  A        0.008756    29.2    W       0.5    20.5317  dome, founding, mound, Christianity  Studenica Monastery
-  A        0.008913    29.7    E       2.6   113.5364  Christianity                  Historic Centre of Macao
-  A        0.008941    29.8    E       2.3   104.5372  founding                      Koh Ker: Archaeological Site of Ancient Lingapura or Chok Gargyar
-  A        0.008967    29.9    E       3.2   131.0000  dome, founding, mound         Ulu<U>r</U>u-Kata Tju<U>t</U>a National Park
-  A        0.009052    30.1    W       0.2    29.5406  —                             Maloti-Drakensberg Park
-  A        0.009061    30.2    E       0.0    35.5408  —                             Ngorongoro Conservation Area
-  A        0.009113    30.3    W       3.8   -79.0044  founding, Christianity        Historic Centre of Santa Ana de los Ríos de Cuenca
-  A        0.009121    30.4    W       0.6    17.5426  Christianity                  Birka and Hovgården
-  A        0.009158    30.5    W       1.0     5.5438  founding                      Eisinga Planetarium in Franeker
-  A        0.009170    30.5    W       0.8    10.9939  Christianity                  City of Verona
-  A        0.009189    30.6    W       0.6    16.9933  Christianity, Judaism         Decorated Farmhouses of Hälsingland
-  A        0.009226    30.7    W       1.1     1.9922  —                             Royal Palaces of Abomey
-  A        0.009254    30.8    W       0.9     7.9914  Islam                         Historic Centre of Agadez
-  A        0.009367    31.2    W       0.8    11.5500  founding, Christianity        Val d'Orcia
-  A        0.009367    31.2    W       0.3    26.5500  founding, Christianity, Islam  The Historic Centre (Chorá) with the Monastery of Saint-John the Theologian and the Cave of the Apocalypse on the Island of Pátmos
-  A        0.009367    31.2    W       0.7    14.5500  founding, Christianity, Judaism  Historic Centre of Prague
-  A        0.009370    31.2    W       0.3    25.9879  Christianity, Islam           Rock-Hewn Churches of Ivanovo
-  A        0.009378    31.2    W       0.8    11.5503  Christianity                  Luther Memorials in Eisleben and Wittenberg
-  A        0.009391    31.3    W       0.0    34.9873  founding                      Bahá’i Holy Places in Haifa and the Western Galilee
-  A        0.009413    31.3    W       0.1    32.5514  dome, founding, mound         Tombs of Buganda Kings at Kasubi
 
 ────────────────────────────────────────────────────────────────────────────────────────────────
-JERUSALEM (35.2317°E) — ALL A-TIER SITES  (A++=48, A+=88, A=122, total=210)
+JERUSALEM (35.2317°E) — ALL A-TIER SITES  (A++=48, A+=88, A=60, total=148)
   Tier   Dev (beru)      km  Dir  Harmonic      Lon°E  Tags                          Site
   --------------------------------------------------------------------------------------------------------------------
   --- A++ ---
@@ -477,68 +428,6 @@ JERUSALEM (35.2317°E) — ALL A-TIER SITES  (A++=48, A+=88, A=122, total=210)
   A        0.006304    21.0    E       0.3    44.4208  founding                      Babylon
   A        0.006334    21.1    W       0.8    11.0417  dome, founding, mound, Christianity  Historic Centre of San Gimignano
   A        0.006369    21.2    W       0.5    20.4228  founding, Christianity        Stari Ras and Sopoćani
-  A        0.006452    21.5    W       1.2    -0.9619  mound                         Royal Court of Tiébélé
-  A        0.006492    21.6    W       4.6  -102.5735  dome, mound, Christianity     Historic Centre of Zacatecas
-  A        0.006536    21.8    W       1.2    -0.5722  —                             Bordeaux, Port of the Moon
-  A        0.006557    21.8    E       3.6   143.0350  —                             Willandra Lakes Region
-  A        0.006584    21.9    W       1.3    -3.9658  founding, Christianity        The Slate Landscape of Northwest Wales
-  A        0.006677    22.2    E       2.4   107.0314  founding                      Zuojiang Huashan Rock Art Cultural Landscape
-  A        0.006727    22.4    W       0.8    11.0299  Christianity, Judaism         Jewish-Medieval Heritage of Erfurt
-  A        0.006740    22.4    E       0.0    35.4339  founding                      Wadi Rum Protected Area
-  A        0.006792    22.6    W       1.1     2.0279  Christianity                  Works of Antoni Gaudí
-  A        0.006832    22.8    E       0.4    47.4367  founding                      Bisotun
-  A        0.006836    22.8    W       0.7    14.4368  —                             Megalithic Temples of Malta
-  A        0.006897    23.0    E       0.4    47.4386  dome, founding, mound         The Ahwar of Southern Iraq: Refuge of Biodiversity and the Relict Landscape of the Mesopotamian Cities
-  A        0.006928    23.1    W       0.9     8.4395  founding, Christianity, Judaism, Hinduism  ShUM Sites of Speyer, Worms and Mainz
-  A        0.006946    23.1    W       0.7    14.0233  founding, Christianity, Islam, Judaism  Arab-Norman Palermo and the Cathedral Churches of Cefalú and Monreale
-  A        0.007014    23.4    W       3.0   -54.9787  Judaism                       Jodensavanne Archaeological Site: Jodensavanne Settlement and Cassipora Creek Cemetery
-  A        0.007023    23.4    W       0.9     8.4424  dome, mound, Christianity     Speyer Cathedral
-  A        0.007025    23.4    W       0.5    20.0209  founding, Christianity, Islam  Butrint
-  A        0.007054    23.5    E       0.0    35.4433  Christianity, Islam           Petra
-  A        0.007079    23.6    E       0.0    35.4441  —                             Ancient Jericho/Tell es-Sultan
-  A        0.007101    23.6    E       2.7   116.4447  founding                      Temple of Heaven: an Imperial Sacrificial Altar in Beijing
-  A        0.007372    24.5    E       3.1   128.4529  —                             Royal Tombs of the Joseon Dynasty
-  A        0.007410    24.7    W       4.7  -105.5460  Christianity                  Taos Pueblo
-  A        0.007418    24.7    W       0.0    35.0092  founding                      Incense Route - Desert Cities in the Negev
-  A        0.007418    24.7    E       0.3    44.0092  Islam                         Erbil Citadel
-  A        0.007703    25.6    W       4.2   -90.5372  founding, Christianity        Historic Fortified Town of Campeche
-  A        0.007705    25.7    E       0.3    44.4629  —                             Ḥimā Cultural Area
-  A        0.007723    25.7    E       3.2   131.0000  dome, founding, mound         Ulu<U>r</U>u-Kata Tju<U>t</U>a National Park
-  A        0.007829    26.1    W       3.6   -72.5334  dome, mound                   Historic Sanctuary of Machu Picchu
-  A        0.007832    26.1    W       0.8    11.4667  Christianity                  Historic Centres of Stralsund and Wismar
-  A        0.007832    26.1    W       3.7   -75.5333  founding, Christianity        Port, Fortresses and Group of Monuments, Cartagena
-  A        0.007869    26.2    W       3.8   -79.0044  founding, Christianity        Historic Centre of Santa Ana de los Ríos de Cuenca
-  A        0.007915    26.4    W       1.0     5.4691  Christianity                  Flemish Béguinages
-  A        0.007927    26.4    W       0.8    10.9939  Christianity                  City of Verona
-  A        0.007946    26.5    W       0.6    16.9933  Christianity, Judaism         Decorated Farmhouses of Hälsingland
-  A        0.007983    26.6    W       1.1     1.9922  —                             Royal Palaces of Abomey
-  A        0.008010    26.7    W       0.9     7.9914  Islam                         Historic Centre of Agadez
-  A        0.008034    26.8    W       0.3    26.4727  —                             Mir Castle Complex
-  A        0.008127    27.1    W       0.3    25.9879  Christianity, Islam           Rock-Hewn Churches of Ivanovo
-  A        0.008147    27.1    W       0.0    34.9873  founding                      Bahá’i Holy Places in Haifa and the Western Galilee
-  A        0.008186    27.3    W       0.1    31.9861  founding, mound               Gordion
-  A        0.008279    27.6    W       0.2    28.9833  dome, founding, mound, Christianity, Islam  Historic Areas of Istanbul
-  A        0.008279    27.6    E       1.8    88.9833  Buddhism, Islam, Hinduism     Ruins of the Buddhist Vihara at Paharpur
-  A        0.008388    27.9    W       1.7   -15.5167  mound                         Stone Circles of Senegambia
-  A        0.008434    28.1    W       1.3    -3.5153  —                             Archaeological Site of Atapuerca
-  A        0.008480    28.2    W       0.7    14.4861  —                             Archaeological Areas of Pompei, Herculaneum and Torre Annunziata
-  A        0.008538    28.4    W       1.3    -4.0244  founding, Christianity, Islam, Judaism  Historic City of Toledo
-  A        0.008541    28.4    W       3.8   -78.5121  founding, Christianity        City of Quito
-  A        0.008590    28.6    E       2.3   103.9740  founding                      Angkor
-  A        0.008646    28.8    E       2.2   100.9723  —                             Archaeological Heritage of the Lenggong Valley
-  A        0.008666    28.9    E       2.5   110.4917  Buddhism, Hinduism            Prambanan Temple Compounds
-  A        0.008713    29.0    W       0.4    22.9703  dome, mound, Christianity     Paleochristian and Byzantine Monuments of Thessalonika
-  A        0.008788    29.3    W       0.0    34.9681  —                             Sites of Human Evolution at Mount Carmel: The Nahal Me’arot / Wadi el-Mughara Caves
-  A        0.008834    29.4    W       1.4    -7.0333  founding, Islam               Ancient <I>Ksour</I> of Ouadane, Chinguetti, Tichitt and Oualata
-  A        0.008918    29.7    E       2.0    94.9642  dome, founding, mound, Buddhism  Bagan
-  A        0.008936    29.8    W       0.9     7.9636  founding, Christianity        Vineyard Landscape of Piedmont: Langhe-Roero and Monferrato
-  A        0.009129    30.4    E       0.5    50.5056  mound                         Dilmun Burial Mounds
-  A        0.009138    30.4    W       0.7    14.5058  founding, Christianity        The works of Jože Plečnik in Ljubljana – Human Centred Urban Design
-  A        0.009156    30.5    W       1.2    -0.4936  founding, Christianity        Forts and Castles, Volta, Greater Accra, Central and Western Regions
-  A        0.009173    30.5    W       0.7    14.5069  —                             Ħal Saflieni Hypogeum
-  A        0.009193    30.6    E       3.0   125.5075  Buddhism                      Complex of Koguryo Tombs
-  A        0.009223    30.7    E       0.1    37.9550  founding, Islam               Hegra Archaeological Site (al-Hijr / Madā ͐ in Ṣāliḥ)
-  A        0.009358    31.2    W       3.7   -76.0490  —                             National Archeological Park of Tierradentro
 
 ────────────────────────────────────────────────────────────────────────────────────────────────
 A+ OVERLAP: SITES IN A+ BAND FOR BOTH ANCHORS  (N=71)

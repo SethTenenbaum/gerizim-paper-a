@@ -29,6 +29,7 @@ from data.unesco_corpus import (
 from lib.beru import (
     GERIZIM, BERU, TIER_APP, TIER_APLUS, TIER_A_MAX,
     P_NULL_AP, P_NULL_A,
+    P_NULL_APP,
     tier_label, is_aplus, is_a_or_better,
     load_keywords, load_religion_sets,
 )
@@ -155,6 +156,19 @@ def run():
     p_jer_ap = binomtest(j_ap, N_JER, P_NULL_AP, alternative="greater").pvalue
     p_ger_a  = binomtest(g_a,  N_GER, P_NULL_A,  alternative="greater").pvalue
     p_jer_a  = binomtest(j_a,  N_JER, P_NULL_A,  alternative="greater").pvalue
+    p_ger_app = binomtest(g_app, N_GER, P_NULL_APP, alternative="greater").pvalue
+    p_jer_app = binomtest(j_app, N_JER, P_NULL_APP, alternative="greater").pvalue
+
+    # Chain-rule joint probability: P(A) × P(A+|A) × P(A++|A+)
+    # Conditional nulls from nested tier thresholds
+    p0_ap_given_a   = P_NULL_AP  / P_NULL_A    # ≈ 0.5
+    p0_app_given_ap = P_NULL_APP / P_NULL_AP   # ≈ 0.5
+    p_ger_ap_given_a   = binomtest(g_ap,  g_a,   p0_ap_given_a,   alternative="greater").pvalue
+    p_ger_app_given_ap = binomtest(g_app, g_ap,  p0_app_given_ap, alternative="greater").pvalue
+    p_jer_ap_given_a   = binomtest(j_ap,  j_a,   p0_ap_given_a,   alternative="greater").pvalue
+    p_jer_app_given_ap = binomtest(j_app, j_ap,  p0_app_given_ap, alternative="greater").pvalue
+    p_ger_joint = p_ger_a * p_ger_ap_given_a * p_ger_app_given_ap
+    p_jer_joint = p_jer_a * p_jer_ap_given_a * p_jer_app_given_ap
 
     # Overlap: sites in A+ for both anchors
     ger_ap_names = {s["name"] for s in ger if s["tier"] in ("A++", "A+")}
@@ -188,17 +202,24 @@ def run():
         SEP,
         "SUMMARY",
         "",
-        f"  {'Anchor':<14}  {'N corpus':>9}  {'A++':>5}  {'A+':>5}  {'A (all)':>8}  "
-        f"{'A+ %':>6}  {'A+ p':>9}  {'':>4}  {'A %':>6}  {'A p':>9}  {'':>4}",
+        f"  {'Anchor':<14}  {'N corpus':>9}  {'A++':>5}  {'A++%':>6} {'A++ p':>9} {'':>4}  {'A+':>5}  {'A+ %':>6} {'A+ p':>9} {'':>4}  {'A %':>6} {'A p':>9}",
         "  " + "-" * 86,
-        f"  {'Gerizim':<14}  {N_GER:>9}  {g_app:>5}  {g_ap:>5}  {g_a:>8}  "
-        f"{100*g_ap/N_GER:>5.1f}%  {p_ger_ap:>9.4f}  {sig(p_ger_ap):>4}  "
-        f"{100*g_a/N_GER:>5.1f}%  {p_ger_a:>9.4f}  {sig(p_ger_a):>4}",
-        f"  {'Jerusalem':<14}  {N_JER:>9}  {j_app:>5}  {j_ap:>5}  {j_a:>8}  "
-        f"{100*j_ap/N_JER:>5.1f}%  {p_jer_ap:>9.4f}  {sig(p_jer_ap):>4}  "
-        f"{100*j_a/N_JER:>5.1f}%  {p_jer_a:>9.4f}  {sig(p_jer_a):>4}",
+        f"  {'Gerizim':<14}  {N_GER:>9}  {g_app:>5}  {100*g_app/N_GER:>5.1f}%  {p_ger_app:>9.4f} {sig(p_ger_app):>4}  "
+        f"{g_ap:>5}  {100*g_ap/N_GER:>5.1f}%  {p_ger_ap:>9.4f}  {sig(p_ger_ap):>4}  "
+        f"{g_a:>8}  {100*g_a/N_GER:>5.1f}%  {p_ger_a:>9.4f}  {sig(p_ger_a):>4}",
+        f"  {'Jerusalem':<14}  {N_JER:>9}  {j_app:>5}  {100*j_app/N_JER:>5.1f}%  {p_jer_app:>9.4f} {sig(p_jer_app):>4}  "
+        f"{j_ap:>5}  {100*j_ap/N_JER:>5.1f}%  {p_jer_ap:>9.4f}  {sig(p_jer_ap):>4}  "
+        f"{j_a:>8}  {100*j_a/N_JER:>5.1f}%  {p_jer_a:>9.4f}  {sig(p_jer_a):>4}",
         "",
-        f"  A+ null rate: {P_NULL_AP:.0%}   A null rate: {P_NULL_A:.0%}",
+        f"  A++ null rate: {P_NULL_APP:.0%}   A+ null rate: {P_NULL_AP:.0%}   A null rate: {P_NULL_A:.0%}",
+        f"  Conditional nulls: P(A+|A) null = {p0_ap_given_a:.2f}   P(A++|A+) null = {p0_app_given_ap:.2f}",
+        "",
+        "  NESTED JOINT PROBABILITY  P(A) × P(A+|A) × P(A++|A+)  [chain rule, dependent tiers]",
+        f"  {'Anchor':<14}  {'p(A)':>9}  {'p(A+|A)':>9}  {'p(A++|A+)':>11}  {'joint p':>12}  {'':>4}",
+        "  " + "-" * 66,
+        f"  {'Gerizim':<14}  {p_ger_a:>9.4f}  {p_ger_ap_given_a:>9.4f}  {p_ger_app_given_ap:>11.4f}  {p_ger_joint:>12.6f}  {sig(p_ger_joint):>4}",
+        f"  {'Jerusalem':<14}  {p_jer_a:>9.4f}  {p_jer_ap_given_a:>9.4f}  {p_jer_app_given_ap:>11.4f}  {p_jer_joint:>12.6f}  {sig(p_jer_joint):>4}",
+        "",
         f"  A+ overlap (both anchors): {len(both_ap)} sites",
         f"  A+ unique to Gerizim: {len(ger_only_ap)} sites",
         f"  A+ unique to Jerusalem: {len(jer_only_ap)} sites",

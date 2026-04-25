@@ -536,8 +536,8 @@ def make_geo_trail():
     approximate Silk Road overland and maritime routes are drawn as reference.
 
     Tier colour scheme:
-      A++ / A+  → crimson   (≤6.7 km from harmonic)
-      A         → orange    (≤33 km from harmonic)
+      A++ / A+  → crimson   (≤11 km from harmonic)
+      A         → orange    (≤21 km from harmonic)
       B         → grey
       C / C-    → steel-blue (inter-harmonic band)
 
@@ -715,9 +715,9 @@ def make_geo_trail():
     from matplotlib.lines import Line2D
     tier_handles = [
         Line2D([0],[0], marker="o", color="w", markerfacecolor="#c0392b",
-               markersize=8, label="Tier A$^{+}$/A$^{++}$  (≤6.7 km)"),
+               markersize=8, label="Tier A$^{+}$/A$^{++}$  (≤11 km)"),
         Line2D([0],[0], marker="o", color="w", markerfacecolor="#e67e22",
-               markersize=6, label="Tier A  (≤33 km)"),
+               markersize=6, label="Tier A  (≤21 km)"),
         Line2D([0],[0], marker="o", color="w", markerfacecolor="#aaaaaa",
                markersize=5, label="Tier B"),
         Line2D([0],[0], marker="o", color="w", markerfacecolor="#3498db",
@@ -736,7 +736,7 @@ def make_geo_trail():
               handletextpad=0.4, borderpad=0.5, columnspacing=0.8)
 
     ax.set_title(
-        "Buddhist transmission corridor — UNESCO dome/stupa and Wikidata Q180987 stupa tier distribution\n"
+        "Silk Roads corridor — UNESCO dome/stupa and Wikidata Q180987 stupa tier distribution\n"
         "Circles = UNESCO ($N=90$); triangles = Wikidata ($N=229$).  "
         "Dashed grid: 0.1-beru harmonics.  Crimson = A$^{+}$, orange = A-tier.",
         fontsize=8.5, pad=5,
@@ -744,6 +744,470 @@ def make_geo_trail():
 
     fig.tight_layout(pad=0.3)
     outpath = OUTDIR / "fig_geo_trail.pdf"
+    fig.savefig(outpath)
+    fig.savefig(outpath.with_suffix(".png"))
+    plt.close(fig)
+    print(f"  ✓ {outpath.name} ({outpath.with_suffix('.png').name})")
+    return outpath
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  FIGURE S1: Supplementary global tier map — all UNESCO + Wikidata A/C tiers
+# ══════════════════════════════════════════════════════════════════════════════
+def make_supp_global_tiers():
+    """Supplementary world map showing all UNESCO cultural sites and Wikidata
+    Q180987 stupas classified into harmonic tiers A/A+/A++ (near harmonic) and
+    C/C-/C-- (near inter-harmonic midpoint).  Silk Road routes shown as reference.
+
+    Tier colour scheme:
+      A++  → deep red      (≤5 km from harmonic)
+      A+   → crimson       (≤11 km from harmonic)
+      A    → orange        (≤21 km from harmonic)
+      C    → light blue    (≤21 km from midpoint)
+      C-   → medium blue   (≤11 km from midpoint)
+      C--  → deep blue     (≤5 km from midpoint)
+      B    → light grey    (remainder, shown small)
+    """
+    import cartopy.crs as ccrs
+    import cartopy.feature as cfeature
+    import csv
+    from lib.beru import TIER_C_MAX, TIER_CMINUS, TIER_CMINUS2
+
+    SHOW_B = False   # set True to also render B-tier background scatter
+
+    def _tier_style(t):
+        """(color, markersize, alpha, zorder)"""
+        return {
+            "A++": ("#922b21", 60, 1.0,  7),
+            "A+":  ("#c0392b", 40, 0.92, 6),
+            "A":   ("#e67e22", 20, 0.82, 5),
+            "C":   ("#7fb3d3", 20, 0.82, 5),
+            "C-":  ("#2471a3", 40, 0.92, 6),
+            "C--": ("#1a3a6b", 60, 1.0,  7),
+            "B":   ("#cccccc",  6, 0.30, 3),
+        }.get(t, ("#cccccc", 6, 0.30, 3))
+
+    SHOW_TIERS = {"A++", "A+", "A", "C", "C-", "C--"}
+    if SHOW_B:
+        SHOW_TIERS.add("B")
+
+    # ── UNESCO: all cultural sites with coordinates ───────────────────────────
+    from data.unesco_corpus import cultural_sites_with_coords
+    all_cultural = cultural_sites_with_coords(load_corpus())
+    from lib.dome_filter import is_dome_site_raw as _is_dome_raw
+
+    un_rows = []
+    for s in all_cultural:
+        lat = getattr(s, "latitude", None)
+        lon = getattr(s, "longitude", None)
+        if lat is None or lon is None:
+            continue
+        d  = beru_dev(lon)
+        t  = tier(d)
+        if t not in SHOW_TIERS:
+            continue
+        is_dome = _is_dome_raw(s)
+        clr, sz, alpha, zo = _tier_style(t)
+        un_rows.append((lon, lat, t, clr, sz, alpha, zo, is_dome))
+
+    # ── Wikidata Q180987 ──────────────────────────────────────────────────────
+    _CSV = PROJECT_ROOT / "data" / "store" / "unesco" / "wikidata_stupas_q180987.csv"
+    wiki_rows = []
+    with open(_CSV, newline="", encoding="utf-8") as fh:
+        reader = csv.DictReader(row for row in fh if not row.startswith("#"))
+        for rec in reader:
+            try:
+                lat = float(rec["lat"])
+                lon = float(rec["lon"])
+            except (ValueError, KeyError):
+                continue
+            d  = beru_dev(lon)
+            t  = tier(d)
+            if t not in SHOW_TIERS:
+                continue
+            clr, sz, alpha, zo = _tier_style(t)
+            wiki_rows.append((lon, lat, t, clr, sz, alpha, zo))
+
+    # ── Silk Road routes (same waypoints as fig_geo_trail) ───────────────────
+    _silk_north = [
+        (GERIZIM, 32.2), (36.3, 36.2), (38.7, 39.9), (44.5, 40.5),
+        (51.4, 35.7), (59.0, 37.9), (63.6, 40.1), (69.3, 41.3),
+        (76.9, 43.2), (80.3, 42.9), (87.6, 43.8), (98.5, 39.7),
+        (107.3, 34.3),
+    ]
+    _silk_med = [
+        (GERIZIM, 32.2), (33.0, 35.1), (28.2, 36.4), (23.7, 37.9),
+        (14.5, 35.9), (12.5, 41.9), (10.2, 37.0), (5.4, 43.3), (2.2, 41.4),
+    ]
+    _silk_sea = [
+        (GERIZIM, 32.2), (38.0, 21.5), (44.0, 12.8), (55.0, 23.6),
+        (66.9, 24.9), (72.8, 18.9), (80.3, 7.9), (92.5, 13.1),
+        (96.1, 16.9), (100.5, 5.4), (107.6, -6.2), (110.2, -7.6),
+    ]
+
+    # ── Map ───────────────────────────────────────────────────────────────────
+    proj = ccrs.Robinson(central_longitude=60.0)
+    fig  = plt.figure(figsize=(16, 8))
+    ax   = fig.add_axes([0.01, 0.06, 0.98, 0.86], projection=proj)
+    ax.set_global()
+
+    ax.add_feature(cfeature.LAND,      facecolor="#f5f1eb", zorder=0)
+    ax.add_feature(cfeature.OCEAN,     facecolor="#daeaf5", zorder=0)
+    ax.add_feature(cfeature.COASTLINE, linewidth=0.35, edgecolor="#999999", zorder=1)
+    ax.add_feature(cfeature.BORDERS,   linewidth=0.2,  edgecolor="#cccccc",
+                   linestyle=":", zorder=1)
+
+    # Harmonic grid lines: every 3° from Gerizim, all longitudes
+    for k in range(-60, 61):
+        hlon = GERIZIM + k * 3.0
+        if -180 <= hlon <= 180:
+            ax.plot([hlon, hlon], [-85, 85], transform=ccrs.PlateCarree(),
+                    color="#e0e0e0", linewidth=0.4, linestyle="--",
+                    alpha=0.5, zorder=2)
+
+    # Gerizim anchor meridian highlighted
+    ax.plot([GERIZIM, GERIZIM], [-85, 85], transform=ccrs.PlateCarree(),
+            color="#7f8c8d", linewidth=1.0, linestyle="-", alpha=0.7, zorder=3)
+
+    # Silk Road routes
+    def _plot_route(pts, color, lw, ls, label, zorder=4):
+        lons = [p[0] for p in pts]
+        lats = [p[1] for p in pts]
+        ax.plot(lons, lats, transform=ccrs.PlateCarree(),
+                color=color, linewidth=lw, linestyle=ls,
+                alpha=0.60, zorder=zorder, label=label)
+
+    _plot_route(_silk_north, "#8e44ad", 1.6, "-",  "Overland Silk Road")
+    _plot_route(_silk_med,   "#16a085", 1.6, "--", "Maritime Silk Road")
+    _plot_route(_silk_sea,   "#16a085", 1.6, "--", "_nolegend_")
+
+    # ── Plot tiers back-to-front ──────────────────────────────────────────────
+    for draw_tier in ["A", "C", "A+", "C-", "A++", "C--"]:
+        # UNESCO — non-dome (small circle, hollow)
+        pts = [(r[0], r[1], r[2], r[3], r[4], r[5], r[6])
+               for r in un_rows if r[2] == draw_tier and not r[7]]
+        if pts:
+            lons, lats = [p[0] for p in pts], [p[1] for p in pts]
+            clr, sz, alpha, zo = pts[0][3], pts[0][4], pts[0][5], pts[0][6]
+            ax.scatter(lons, lats, transform=ccrs.PlateCarree(),
+                       s=sz * 0.7, c=clr, alpha=alpha * 0.75,
+                       marker="o", edgecolors=clr, linewidths=0.4,
+                       facecolors="none", zorder=zo)
+
+        # UNESCO — dome (filled circle)
+        pts = [(r[0], r[1], r[2], r[3], r[4], r[5], r[6])
+               for r in un_rows if r[2] == draw_tier and r[7]]
+        if pts:
+            lons, lats = [p[0] for p in pts], [p[1] for p in pts]
+            clr, sz, alpha, zo = pts[0][3], pts[0][4], pts[0][5], pts[0][6]
+            ax.scatter(lons, lats, transform=ccrs.PlateCarree(),
+                       s=sz, c=clr, alpha=alpha,
+                       marker="o", edgecolors="white", linewidths=0.5, zorder=zo)
+
+        # Wikidata (triangle)
+        pts = [(r[0], r[1], r[3], r[4], r[5], r[6])
+               for r in wiki_rows if r[2] == draw_tier]
+        if pts:
+            lons, lats = [p[0] for p in pts], [p[1] for p in pts]
+            clr, sz, alpha, zo = pts[0][2], pts[0][3], pts[0][4], pts[0][5]
+            ax.scatter(lons, lats, transform=ccrs.PlateCarree(),
+                       s=sz * 0.65, c=clr, alpha=alpha,
+                       marker="^", edgecolors="white", linewidths=0.4, zorder=zo)
+
+    # ── Legend ────────────────────────────────────────────────────────────────
+    from matplotlib.lines import Line2D
+    from matplotlib.patches import Patch
+    handles = [
+        # A-side
+        Line2D([0],[0], marker="o", color="w", markerfacecolor="#922b21",
+               markersize=9,  label="A$^{++}$ (≤5 km from harmonic)"),
+        Line2D([0],[0], marker="o", color="w", markerfacecolor="#c0392b",
+               markersize=7,  label="A$^{+}$  (≤11 km)"),
+        Line2D([0],[0], marker="o", color="w", markerfacecolor="#e67e22",
+               markersize=5,  label="A   (≤21 km)"),
+        # separator
+        Patch(facecolor="none", edgecolor="none", label=" "),
+        # C-side
+        Line2D([0],[0], marker="o", color="w", markerfacecolor="#7fb3d3",
+               markersize=5,  label="C   (≤21 km from midpoint)"),
+        Line2D([0],[0], marker="o", color="w", markerfacecolor="#2471a3",
+               markersize=7,  label="C$^{-}$  (≤11 km from midpoint)"),
+        Line2D([0],[0], marker="o", color="w", markerfacecolor="#1a3a6b",
+               markersize=9,  label="C$^{--}$ (≤5 km from midpoint)"),
+        # separator
+        Patch(facecolor="none", edgecolor="none", label=" "),
+        # corpus
+        Line2D([0],[0], marker="o", color="w", markerfacecolor="#555555",
+               markersize=6,  label="● UNESCO dome/stupa (filled)"),
+        Line2D([0],[0], marker="o", color="none", markeredgecolor="#555555",
+               markersize=6,  markeredgewidth=0.8,
+               label="○ UNESCO other cultural (hollow)"),
+        Line2D([0],[0], marker="^", color="w", markerfacecolor="#555555",
+               markersize=6,  label="▲ Wikidata Q180987 stupa"),
+        # separator
+        Patch(facecolor="none", edgecolor="none", label=" "),
+        # routes
+        Line2D([0],[0], color="#8e44ad", linewidth=1.5,
+               label="Overland Silk Road"),
+        Line2D([0],[0], color="#16a085", linewidth=1.5, linestyle="--",
+               label="Maritime Silk Road"),
+    ]
+    ax.legend(handles=handles, loc="lower left",
+              fontsize=6.8, framealpha=0.92, ncol=2,
+              title="Harmonic tier / corpus / route", title_fontsize=7.2,
+              handletextpad=0.35, borderpad=0.5, columnspacing=0.7,
+              labelspacing=0.3)
+
+    # Tier counts for title
+    n_un_a   = sum(1 for r in un_rows if r[2] in ("A++","A+","A"))
+    n_un_c   = sum(1 for r in un_rows if r[2] in ("C","C-","C--"))
+    n_wiki_a = sum(1 for r in wiki_rows if r[2] in ("A++","A+","A"))
+    n_wiki_c = sum(1 for r in wiki_rows if r[2] in ("C","C-","C--"))
+
+    ax.set_title(
+        "Supplementary Figure — Global harmonic tier distribution: "
+        "UNESCO cultural sites and Wikidata Q180987 stupas\n"
+        f"UNESCO A-tiers: $N={n_un_a}$;  C-tiers: $N={n_un_c}$.  "
+        f"Wikidata A-tiers: $N={n_wiki_a}$;  C-tiers: $N={n_wiki_c}$.  "
+        "Dashed grid: 0.1-bēru (3°) harmonics from Gerizim anchor.",
+        fontsize=8.5, pad=6,
+    )
+
+    fig.tight_layout(pad=0.3)
+    outpath = OUTDIR / "fig_supp_global_tiers.pdf"
+    fig.savefig(outpath)
+    fig.savefig(outpath.with_suffix(".png"))
+    plt.close(fig)
+    print(f"  ✓ {outpath.name} ({outpath.with_suffix('.png').name})")
+    return outpath
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  FIGURE S2: Supplementary Silk Road A/C tier map — non-dome as squares
+#                                   (fig:supp_silkroad_ac)
+# ══════════════════════════════════════════════════════════════════════════════
+def make_supp_silkroad_ac_tiers():
+    """Silk Road corridor map (Levant → Java) showing only A/A+/A++ and
+    C/C-/C-- UNESCO cultural sites and Wikidata Q180987 stupas.
+
+    Marker shapes:
+      UNESCO dome/stupa sites  → circle  (●)
+      UNESCO non-dome sites    → square  (■)
+      Wikidata Q180987 stupas  → triangle (▲)
+
+    Tier colour scheme (same as make_supp_global_tiers):
+      A++  → deep red   (#922b21)
+      A+   → crimson    (#c0392b)
+      A    → orange     (#e67e22)
+      C    → light blue (#7fb3d3)
+      C-   → mid blue   (#2471a3)
+      C--  → deep blue  (#1a3a6b)
+    """
+    import cartopy.crs as ccrs
+    import cartopy.feature as cfeature
+    import csv
+    from lib.beru import TIER_C_MAX, TIER_CMINUS, TIER_CMINUS2
+    from lib.dome_filter import is_dome_site_raw as _is_dome_raw
+
+    def _tier_style(t):
+        """(color, markersize, alpha, zorder)"""
+        return {
+            "A++": ("#922b21", 60, 1.0,  7),
+            "A+":  ("#c0392b", 40, 0.92, 6),
+            "A":   ("#e67e22", 20, 0.82, 5),
+            "C":   ("#7fb3d3", 20, 0.82, 5),
+            "C-":  ("#2471a3", 40, 0.92, 6),
+            "C--": ("#1a3a6b", 60, 1.0,  7),
+        }.get(t, ("#cccccc", 6, 0.30, 3))
+
+    SHOW_TIERS = {"A++", "A+", "A", "C", "C-", "C--"}
+
+    # ── UNESCO: all cultural sites with coordinates ───────────────────────────
+    from data.unesco_corpus import cultural_sites_with_coords
+    all_cultural = cultural_sites_with_coords(load_corpus())
+
+    un_rows = []
+    for s in all_cultural:
+        lat = getattr(s, "latitude", None)
+        lon = getattr(s, "longitude", None)
+        if lat is None or lon is None:
+            continue
+        d  = beru_dev(lon)
+        t  = tier(d)
+        if t not in SHOW_TIERS:
+            continue
+        is_dome = _is_dome_raw(s)
+        clr, sz, alpha, zo = _tier_style(t)
+        un_rows.append((lon, lat, t, clr, sz, alpha, zo, is_dome))
+
+    # ── Wikidata Q180987 ──────────────────────────────────────────────────────
+    _CSV = PROJECT_ROOT / "data" / "store" / "unesco" / "wikidata_stupas_q180987.csv"
+    wiki_rows = []
+    with open(_CSV, newline="", encoding="utf-8") as fh:
+        reader = csv.DictReader(row for row in fh if not row.startswith("#"))
+        for rec in reader:
+            try:
+                lat = float(rec["lat"])
+                lon = float(rec["lon"])
+            except (ValueError, KeyError):
+                continue
+            d  = beru_dev(lon)
+            t  = tier(d)
+            if t not in SHOW_TIERS:
+                continue
+            clr, sz, alpha, zo = _tier_style(t)
+            wiki_rows.append((lon, lat, t, clr, sz, alpha, zo))
+
+    # ── Silk Road routes (same waypoints as fig_geo_trail) ───────────────────
+    _silk_north = [
+        (GERIZIM, 32.2), (36.3, 36.2), (38.7, 39.9), (44.5, 40.5),
+        (51.4, 35.7), (59.0, 37.9), (63.6, 40.1), (69.3, 41.3),
+        (76.9, 43.2), (80.3, 42.9), (87.6, 43.8), (98.5, 39.7),
+        (107.3, 34.3),
+    ]
+    _silk_med = [
+        (GERIZIM, 32.2), (33.0, 35.1), (28.2, 36.4), (23.7, 37.9),
+        (14.5, 35.9), (12.5, 41.9), (10.2, 37.0), (5.4, 43.3), (2.2, 41.4),
+    ]
+    _silk_sea = [
+        (GERIZIM, 32.2), (38.0, 21.5), (44.0, 12.8), (55.0, 23.6),
+        (66.9, 24.9), (72.8, 18.9), (80.3, 7.9), (92.5, 13.1),
+        (96.1, 16.9), (100.5, 5.4), (107.6, -6.2), (110.2, -7.6),
+    ]
+
+    # ── Map (Silk Road corridor extent, same as fig_geo_trail) ───────────────
+    proj = ccrs.Mercator(central_longitude=80.0, min_latitude=-15, max_latitude=65)
+    fig  = plt.figure(figsize=(13, 6.5))
+    ax   = fig.add_axes([0.01, 0.04, 0.98, 0.88], projection=proj)
+    ax.set_extent([-5, 145, -12, 58], crs=ccrs.PlateCarree())
+
+    ax.add_feature(cfeature.LAND,      facecolor="#f2ede6", zorder=0)
+    ax.add_feature(cfeature.OCEAN,     facecolor="#d6e8f2", zorder=0)
+    ax.add_feature(cfeature.COASTLINE, linewidth=0.4,  edgecolor="#999999", zorder=1)
+    ax.add_feature(cfeature.BORDERS,   linewidth=0.25, edgecolor="#bbbbbb",
+                   linestyle=":", zorder=1)
+
+    # Harmonic grid lines (every 3° from Gerizim, within view)
+    for k in range(-15, 40):
+        hlon = GERIZIM + k * 3.0
+        if -5 <= hlon <= 145:
+            ax.plot([hlon, hlon], [-14, 60], transform=ccrs.PlateCarree(),
+                    color="#dddddd", linewidth=0.5, linestyle="--",
+                    alpha=0.6, zorder=2)
+
+    # Gerizim anchor and Java node meridians
+    java_lon = GERIZIM + 25 * 3.0
+    for hlon in [GERIZIM, java_lon]:
+        ax.plot([hlon, hlon], [-14, 60], transform=ccrs.PlateCarree(),
+                color="#7f8c8d", linewidth=1.2, linestyle="-",
+                alpha=0.8, zorder=3)
+
+    # Silk Road routes
+    def _plot_route(pts, color, lw, ls, label, zorder=3):
+        lons = [p[0] for p in pts]
+        lats = [p[1] for p in pts]
+        ax.plot(lons, lats, transform=ccrs.PlateCarree(),
+                color=color, linewidth=lw, linestyle=ls,
+                alpha=0.55, zorder=zorder, label=label)
+
+    _plot_route(_silk_north, "#8e44ad", 1.4, "-",  "Overland route (N.)")
+    _plot_route(_silk_med,   "#16a085", 1.4, "--", "Maritime route")
+    _plot_route(_silk_sea,   "#16a085", 1.4, "--", "_nolegend_")
+
+    # ── Plot tiers back-to-front ──────────────────────────────────────────────
+    for draw_tier in ["A", "C", "A+", "C-", "A++", "C--"]:
+        # UNESCO — non-dome → square
+        pts = [(r[0], r[1], r[3], r[4], r[5], r[6])
+               for r in un_rows if r[2] == draw_tier and not r[7]]
+        if pts:
+            lons = [p[0] for p in pts]
+            lats = [p[1] for p in pts]
+            clr, sz, alpha, zo = pts[0][2], pts[0][3], pts[0][4], pts[0][5]
+            ax.scatter(lons, lats, transform=ccrs.PlateCarree(),
+                       s=sz * 0.80, c=clr, alpha=alpha * 0.85,
+                       marker="s", edgecolors="white", linewidths=0.4,
+                       zorder=zo)
+
+        # UNESCO — dome → circle
+        pts = [(r[0], r[1], r[3], r[4], r[5], r[6])
+               for r in un_rows if r[2] == draw_tier and r[7]]
+        if pts:
+            lons = [p[0] for p in pts]
+            lats = [p[1] for p in pts]
+            clr, sz, alpha, zo = pts[0][2], pts[0][3], pts[0][4], pts[0][5]
+            ax.scatter(lons, lats, transform=ccrs.PlateCarree(),
+                       s=sz, c=clr, alpha=alpha,
+                       marker="o", edgecolors="white", linewidths=0.5,
+                       zorder=zo)
+
+        # Wikidata → triangle
+        pts = [(r[0], r[1], r[3], r[4], r[5], r[6])
+               for r in wiki_rows if r[2] == draw_tier]
+        if pts:
+            lons = [p[0] for p in pts]
+            lats = [p[1] for p in pts]
+            clr, sz, alpha, zo = pts[0][2], pts[0][3], pts[0][4], pts[0][5]
+            ax.scatter(lons, lats, transform=ccrs.PlateCarree(),
+                       s=sz * 0.65, c=clr, alpha=alpha,
+                       marker="^", edgecolors="white", linewidths=0.4,
+                       zorder=zo)
+
+    # ── Legend ────────────────────────────────────────────────────────────────
+    from matplotlib.lines import Line2D
+    from matplotlib.patches import Patch
+    handles = [
+        # A-side tiers
+        Line2D([0],[0], marker="o", color="w", markerfacecolor="#922b21",
+               markersize=9,  label="A$^{++}$ (≤5 km from harmonic)"),
+        Line2D([0],[0], marker="o", color="w", markerfacecolor="#c0392b",
+               markersize=7,  label="A$^{+}$  (≤11 km)"),
+        Line2D([0],[0], marker="o", color="w", markerfacecolor="#e67e22",
+               markersize=5,  label="A   (≤21 km)"),
+        Patch(facecolor="none", edgecolor="none", label=" "),
+        # C-side tiers
+        Line2D([0],[0], marker="o", color="w", markerfacecolor="#7fb3d3",
+               markersize=5,  label="C   (≤21 km from midpoint)"),
+        Line2D([0],[0], marker="o", color="w", markerfacecolor="#2471a3",
+               markersize=7,  label="C$^{-}$  (≤11 km from midpoint)"),
+        Line2D([0],[0], marker="o", color="w", markerfacecolor="#1a3a6b",
+               markersize=9,  label="C$^{--}$ (≤5 km from midpoint)"),
+        Patch(facecolor="none", edgecolor="none", label=" "),
+        # corpus / marker shape
+        Line2D([0],[0], marker="o", color="w", markerfacecolor="#555555",
+               markersize=6,  label="● UNESCO dome/stupa"),
+        Line2D([0],[0], marker="s", color="w", markerfacecolor="#555555",
+               markersize=6,  label="■ UNESCO non-dome cultural"),
+        Line2D([0],[0], marker="^", color="w", markerfacecolor="#555555",
+               markersize=6,  label="▲ Wikidata Q180987 stupa"),
+        Patch(facecolor="none", edgecolor="none", label=" "),
+        # routes
+        Line2D([0],[0], color="#8e44ad", linewidth=1.4, label="Overland Silk Road"),
+        Line2D([0],[0], color="#16a085", linewidth=1.4, linestyle="--",
+               label="Maritime Silk Road"),
+    ]
+    ax.legend(handles=handles, loc="lower left",
+              fontsize=6.8, framealpha=0.92, ncol=2,
+              title="Harmonic tier / corpus / route", title_fontsize=7.2,
+              handletextpad=0.35, borderpad=0.5, columnspacing=0.7,
+              labelspacing=0.3)
+
+    # Tier counts for title
+    n_un_a   = sum(1 for r in un_rows if r[2] in ("A++","A+","A"))
+    n_un_c   = sum(1 for r in un_rows if r[2] in ("C","C-","C--"))
+    n_wiki_a = sum(1 for r in wiki_rows if r[2] in ("A++","A+","A"))
+    n_wiki_c = sum(1 for r in wiki_rows if r[2] in ("C","C-","C--"))
+
+    ax.set_title(
+        "Supplementary Figure — Silk Road corridor: A/A$^{+}$/A$^{++}$ and C/C$^{-}$/C$^{--}$ tier sites\n"
+        f"UNESCO A-tiers: $N={n_un_a}$;  C-tiers: $N={n_un_c}$.  "
+        f"Wikidata A-tiers: $N={n_wiki_a}$;  C-tiers: $N={n_wiki_c}$.  "
+        "Circles = dome/stupa; squares = other cultural.  "
+        "Dashed grid: 0.1-bēru (3°) harmonics.",
+        fontsize=8.5, pad=5,
+    )
+
+    fig.tight_layout(pad=0.3)
+    outpath = OUTDIR / "fig_supp_silkroad_ac.pdf"
     fig.savefig(outpath)
     fig.savefig(outpath.with_suffix(".png"))
     plt.close(fig)
@@ -775,6 +1239,9 @@ if __name__ == "__main__":
     print("\nFigure 5 — Geographic tier trail / Silk Road corridor (fig:geo_trail)")
     p5 = make_geo_trail()
 
+    print("\nFigure S2 — Supp. Silk Road A/C tier map, non-dome as squares (fig:supp_silkroad_ac)")
+    ps2 = make_supp_silkroad_ac_tiers()
+
     print()
     print("=" * 70)
     print(f"  All figures saved to: {OUTDIR}/")
@@ -786,3 +1253,4 @@ if __name__ == "__main__":
     print(f"  \\includegraphics[width=0.9\\textwidth]{{figures/fig_temporal}}")
     print(f"  \\includegraphics[width=0.9\\textwidth]{{figures/fig_unitsweep}}")
     print(f"  \\includegraphics[width=\\textwidth]{{figures/fig_null_c}}")
+    print(f"  \\includegraphics[width=\\textwidth]{{figures/fig_supp_silkroad_ac}}")

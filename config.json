@@ -104,9 +104,9 @@
       "note": "Primary threshold for significance testing"
     },
     "A": {
-      "max_deviation_beru": 0.00942,
+      "max_deviation_beru": 0.00642,
       "approx_km": 21.384,
-      "note": "Secondary threshold"
+      "note": "One barid = 2 distance-beru = 2 x 0.00321 beru"
     },
     "B": {
       "max_deviation_beru": 0.05,
@@ -114,9 +114,9 @@
       "note": "Middle zone \u2014 neither near a harmonic nor near a midpoint"
     },
     "C": {
-      "max_dist_from_midpoint_beru": 0.00942,
+      "max_dist_from_midpoint_beru": 0.00642,
       "approx_km": 21.384,
-      "note": "Mirror of A: within 33 km of inter-harmonic midpoint (dev >= 0.040)"
+      "note": "Mirror of A: within 21 km of inter-harmonic midpoint (dev >= 0.04358)"
     },
     "C-": {
       "max_dist_from_midpoint_beru": 0.00321,
@@ -249,10 +249,10 @@
         "script": "analysis/unesco/temporal_gradient_test.py"
       },
       {
-        "id": "E",
+        "id": "5",
         "label": "Founding-site classifier enrichment",
         "p_key": "pFoundKwFisher",
-        "macro": "TestE",
+        "macro": "Five",
         "note": "Founding-site classifier iteratively tuned post-hoc.",
         "script": "analysis/unesco/founding_sites_analysis.py"
       },

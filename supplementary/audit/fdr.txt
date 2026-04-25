@@ -7,52 +7,52 @@
   Test                                          Cat     p_raw      Bonf      Holm      BH q   Sig
   --------------------------------------------- --- --------- --------- --------- --------- -----
   Test 1: Dome/spherical A++ (binomial)           C    0.0006    0.0293    0.0249    0.0034    **
-  Test 1: Dome/spherical A+ (binomial)            C    0.0049    0.2303    0.1568    0.0144     *
-  Test 1: Dome/spherical A (binomial)             C    0.0136    0.6413    0.3548    0.0287     *
-  Test 1: Dome chi-sq uniform                     C    0.2652    1.0000    1.0000    0.3041    ns
-  Test 2/4: Full corpus A+ (binomial)             C    0.0027    0.1280    0.0980    0.0098    **
-  Test 2: Cluster MWU (one-tailed)                C    0.0089    0.4184    0.2671    0.0232     *
-  Test 2: Cluster permutation                     C    0.0003    0.0141    0.0123    0.0020    **
+  Test 1: Dome/spherical A+ (binomial)            C    0.0049    0.2303    0.1454    0.0121     *
+  Test 1: Dome/spherical A (binomial)             C    0.0020    0.0923    0.0727    0.0084    **
+  Test 1: Dome chi-sq uniform                     C    0.0000    0.0000    0.0000    0.0000   ***
+  Test 2/4: Full corpus A+ (binomial)             C    0.0027    0.1280    0.0926    0.0086    **
+  Test 2: Cluster MWU (one-tailed)                C    0.0048    0.2278    0.1454    0.0121     *
+  Test 2: Cluster permutation                     C    0.0002    0.0094    0.0082    0.0013    **
   Test 2: Harmonic-level MWU                      C    0.0000    0.0004    0.0004    0.0001   ***
-  Cochran-Armitage 3-cohort                       C    0.1584    1.0000    1.0000    0.2012    ns
-  Cochran-Armitage 5-cohort                       C    0.2570    1.0000    1.0000    0.3020    ns
-  Canon (1978-84) A+ binomial                     C    0.1070    1.0000    1.0000    0.1571    ns
-  Pre-2000 A+ binomial                            C    0.0025    0.1175    0.0925    0.0098    **
-  Modern (2000+) A+ binomial                      C    0.1493    1.0000    1.0000    0.2005    ns
+  Cochran-Armitage 3-cohort                       C    0.1584    1.0000    1.0000    0.1959    ns
+  Cochran-Armitage 5-cohort                       C    0.2570    1.0000    1.0000    0.2946    ns
+  Canon (1978-84) A+ binomial                     C    0.1070    1.0000    1.0000    0.1524    ns
+  Pre-2000 A+ binomial                            C    0.0025    0.1175    0.0875    0.0086    **
+  Modern (2000+) A+ binomial                      C    0.1493    1.0000    1.0000    0.1950    ns
   Fisher canon vs modern                          C    0.3000    1.0000    1.0000    0.3357    ns
-  First-half A+ binomial                          C    0.0029    0.1374    0.0998    0.0098    **
-  Second-half A+ binomial                         C    0.1384    1.0000    1.0000    0.1914    ns
-  Fisher first-half vs second-half                C    0.1553    1.0000    1.0000    0.2012    ns
+  First-half A+ binomial                          C    0.0029    0.1374    0.0941    0.0086    **
+  Second-half A+ binomial                         C    0.1384    1.0000    1.0000    0.1859    ns
+  Fisher first-half vs second-half                C    0.1553    1.0000    1.0000    0.1959    ns
   Sequential peak                                 E    0.0007    0.0306    0.0254    0.0034    **
-  Any-religion A+ binomial                        C    0.0140    0.6593    0.3548    0.0287     *
-  Christian A+ binomial                           E    0.0156    0.7342    0.3749    0.0306     *
-  Pre-CE A+ binomial                              E    0.0912    1.0000    1.0000    0.1532    ns
+  Any-religion A+ binomial                        C    0.0140    0.6593    0.3367    0.0275     *
+  Christian A+ binomial                           E    0.0156    0.7342    0.3593    0.0294     *
+  Pre-CE A+ binomial                              E    0.0912    1.0000    1.0000    0.1479    ns
   Deep temporal: Spearman (founding date vs A+)   E    0.4856    1.0000    1.0000    0.4962    ns
   Deep temporal: Fisher (pre-CE vs post-CE rate)   E    0.4214    1.0000    1.0000    0.4501    ns
-  Founding keyword Fisher exact                   C    0.1793    1.0000    1.0000    0.2160    ns
-  Spatial: DEFF-corrected binomial (0.25° band)   C    0.0165    0.7778    0.3806    0.0311     *
-  Spatial: DEFF-corrected binomial (0.50° band)   C    0.0113    0.5327    0.3139    0.0254     *
-  Spatial: block-bootstrap Z-test                 C    0.0106    0.4974    0.3069    0.0254     *
-  CMH stratified test (early vs late, by region)   C    0.1771    1.0000    1.0000    0.2160    ns
-  Sim: Dome permutation                           C    0.0954    1.0000    1.0000    0.1547    ns
-  Sim: Dome bootstrap                             C    0.1056    1.0000    1.0000    0.1571    ns
-  Sim: KDE full corpus                            C    0.0029    0.1340    0.0998    0.0098    **
+  Founding keyword Fisher exact                   C    0.1793    1.0000    1.0000    0.2106    ns
+  Spatial: DEFF-corrected binomial (0.25° band)   C    0.0165    0.7778    0.3641    0.0299     *
+  Spatial: DEFF-corrected binomial (0.50° band)   C    0.0113    0.5327    0.3027    0.0232     *
+  Spatial: block-bootstrap Z-test                 C    0.0106    0.4974    0.2963    0.0232     *
+  CMH stratified test (early vs late, by region)   C    0.1771    1.0000    1.0000    0.2106    ns
+  Sim: Dome permutation                           C    0.0954    1.0000    1.0000    0.1495    ns
+  Sim: Dome bootstrap                             C    0.1056    1.0000    1.0000    0.1524    ns
+  Sim: KDE full corpus                            C    0.0029    0.1340    0.0941    0.0086    **
   Sim: Canon permutation                          C    0.4194    1.0000    1.0000    0.4501    ns
-  Sim: Pre-2000 permutation                       C    0.1360    1.0000    1.0000    0.1914    ns
+  Sim: Pre-2000 permutation                       C    0.1360    1.0000    1.0000    0.1859    ns
   Sim: Post-2000 permutation                      C    0.9067    1.0000    1.0000    0.9067    ns
   Corridor: Occupancy binomial (17/17)            C    0.0000    0.0000    0.0000    0.0000   ***
   Corridor: Fisher combined p                     C    0.0000    0.0000    0.0000    0.0000   ***
-  Corridor: A++ enrichment (Fisher)               C    0.0000    0.0023    0.0021    0.0006   ***
-  Corridor: Precision MW (corridor < global)      C    0.0001    0.0035    0.0032    0.0007   ***
+  Corridor: A++ enrichment (Fisher)               C    0.0000    0.0023    0.0021    0.0005   ***
+  Corridor: Precision MW (corridor < global)      C    0.0001    0.0035    0.0031    0.0006   ***
   Test 5: Evolution combined A++ (binomial)       C    0.0008    0.0392    0.0317    0.0039    **
-  Test 5: Evolution combined A+ (binomial)        C    0.0046    0.2155    0.1513    0.0144     *
+  Test 5: Evolution combined A+ (binomial)        C    0.0046    0.2155    0.1421    0.0121     *
   Test 5: Stupa stage A+ (binomial)               C    0.0251    1.0000    0.5279    0.0438     *
-  Test 5: Dome stage A+ (binomial)                C    0.0214    1.0000    0.4717    0.0388     *
+  Test 5: Dome stage A+ (binomial)                C    0.0693    1.0000    1.0000    0.1163    ns
   Test 5: Mound stage A+ (binomial)               C    0.4616    1.0000    1.0000    0.4822    ns
-  Judaism A+ rate                                 E    0.0997    1.0000    1.0000    0.1561    ns
-  Hinduism C- binomial                            E    0.0112    0.5270    0.3139    0.0254     *
-  Hinduism A+/C- joint (multivariate hyper.)      E    0.0002    0.0098    0.0088    0.0016    **
-  Buddhism A/C-band joint (multivariate hyper.)   E    0.0067    0.3134    0.2067    0.0184     *
+  Judaism A+ rate                                 E    0.0997    1.0000    1.0000    0.1511    ns
+  Hinduism C- binomial                            E    0.0112    0.5270    0.3027    0.0232     *
+  Hinduism A+/C- joint (multivariate hyper.)      E    0.0023    0.1062    0.0813    0.0086    **
+  Buddhism A/C-band joint (multivariate hyper.)   E    0.0113    0.5308    0.3027    0.0232     *
 
 ──────────────────────────────────────────────────────────────────────────────────────────────────────────────
   SUMMARY: How many tests survive each correction at α = 0.05?
@@ -65,7 +65,8 @@
 
   Key results surviving full Bonferroni correction (k=47, α=0.05):
     • Test 1: Dome/spherical A++ (binomial)          p = 0.0006  p_adj = 0.0293
-    • Test 2: Cluster permutation                    p = 0.0003  p_adj = 0.0141
+    • Test 1: Dome chi-sq uniform                    p = 0.0000  p_adj = 0.0000
+    • Test 2: Cluster permutation                    p = 0.0002  p_adj = 0.0094
     • Test 2: Harmonic-level MWU                     p = 0.0000  p_adj = 0.0004
     • Sequential peak                                p = 0.0007  p_adj = 0.0306
     • Corridor: Occupancy binomial (17/17)           p = 0.0000  p_adj = 0.0000
@@ -73,22 +74,21 @@
     • Corridor: A++ enrichment (Fisher)              p = 0.0000  p_adj = 0.0023
     • Corridor: Precision MW (corridor < global)     p = 0.0001  p_adj = 0.0035
     • Test 5: Evolution combined A++ (binomial)      p = 0.0008  p_adj = 0.0392
-    • Hinduism A+/C- joint (multivariate hyper.)     p = 0.0002  p_adj = 0.0098
 
 ──────────────────────────────────────────────────────────────────────────────────────────────────────────────
   CONFIRMATORY TESTS ONLY (pre-specified, N=38)
   Correction                           Significant   of 38
   ----------------------------------- ------------ ----
   Raw (uncorrected)                             22
-  Bonferroni (k=38)                              8
-  Holm step-down (k=38)                          8
+  Bonferroni (k=38)                              9
+  Holm step-down (k=38)                          9
   Benjamini-Hochberg FDR (k=38)                 22
 
 ──────────────────────────────────────────────────────────────────────────────────────────────────────────────
   PAPER'S BONFERRONI (k=3, family_alpha=0.05) — READ FROM CONFIG + STORE
   Test   1  Global enrichment — full corpus A+ (binomial)       p_raw=0.0027  p_adj=0.0082  *
   Test   2  Domed/spherical A+ — RAW sweep (binomial)           p_raw=0.0049  p_adj=0.0147  *
-  Test   3  Cluster asymmetry — permutation p                   p_raw=0.0003  p_adj=0.0009  *
+  Test   3  Cluster asymmetry — permutation p                   p_raw=0.0002  p_adj=0.0006  *
 
 ==============================================================================================================
 
@@ -97,34 +97,34 @@
 
   Key results surviving full FDR correction (q < 0.05):
     • Test 1: Dome/spherical A++ (binomial)          p = 0.0006  q = 0.0034
-    • Test 1: Dome/spherical A+ (binomial)           p = 0.0049  q = 0.0144
-    • Test 1: Dome/spherical A (binomial)            p = 0.0136  q = 0.0287
-    • Test 2/4: Full corpus A+ (binomial)            p = 0.0027  q = 0.0098
-    • Test 2: Cluster MWU (one-tailed)               p = 0.0089  q = 0.0232
-    • Test 2: Cluster permutation                    p = 0.0003  q = 0.0020
+    • Test 1: Dome/spherical A+ (binomial)           p = 0.0049  q = 0.0121
+    • Test 1: Dome/spherical A (binomial)            p = 0.0020  q = 0.0084
+    • Test 1: Dome chi-sq uniform                    p = 0.0000  q = 0.0000
+    • Test 2/4: Full corpus A+ (binomial)            p = 0.0027  q = 0.0086
+    • Test 2: Cluster MWU (one-tailed)               p = 0.0048  q = 0.0121
+    • Test 2: Cluster permutation                    p = 0.0002  q = 0.0013
     • Test 2: Harmonic-level MWU                     p = 0.0000  q = 0.0001
-    • Pre-2000 A+ binomial                           p = 0.0025  q = 0.0098
-    • First-half A+ binomial                         p = 0.0029  q = 0.0098
+    • Pre-2000 A+ binomial                           p = 0.0025  q = 0.0086
+    • First-half A+ binomial                         p = 0.0029  q = 0.0086
     • Sequential peak                                p = 0.0007  q = 0.0034
-    • Any-religion A+ binomial                       p = 0.0140  q = 0.0287
-    • Christian A+ binomial                          p = 0.0156  q = 0.0306
-    • Spatial: DEFF-corrected binomial (0.25° band)  p = 0.0165  q = 0.0311
-    • Spatial: DEFF-corrected binomial (0.50° band)  p = 0.0113  q = 0.0254
-    • Spatial: block-bootstrap Z-test                p = 0.0106  q = 0.0254
-    • Sim: KDE full corpus                           p = 0.0029  q = 0.0098
+    • Any-religion A+ binomial                       p = 0.0140  q = 0.0275
+    • Christian A+ binomial                          p = 0.0156  q = 0.0294
+    • Spatial: DEFF-corrected binomial (0.25° band)  p = 0.0165  q = 0.0299
+    • Spatial: DEFF-corrected binomial (0.50° band)  p = 0.0113  q = 0.0232
+    • Spatial: block-bootstrap Z-test                p = 0.0106  q = 0.0232
+    • Sim: KDE full corpus                           p = 0.0029  q = 0.0086
     • Corridor: Occupancy binomial (17/17)           p = 0.0000  q = 0.0000
     • Corridor: Fisher combined p                    p = 0.0000  q = 0.0000
-    • Corridor: A++ enrichment (Fisher)              p = 0.0000  q = 0.0006
-    • Corridor: Precision MW (corridor < global)     p = 0.0001  q = 0.0007
+    • Corridor: A++ enrichment (Fisher)              p = 0.0000  q = 0.0005
+    • Corridor: Precision MW (corridor < global)     p = 0.0001  q = 0.0006
     • Test 5: Evolution combined A++ (binomial)      p = 0.0008  q = 0.0039
-    • Test 5: Evolution combined A+ (binomial)       p = 0.0046  q = 0.0144
+    • Test 5: Evolution combined A+ (binomial)       p = 0.0046  q = 0.0121
     • Test 5: Stupa stage A+ (binomial)              p = 0.0251  q = 0.0438
-    • Test 5: Dome stage A+ (binomial)               p = 0.0214  q = 0.0388
-    • Hinduism C- binomial                           p = 0.0112  q = 0.0254
-    • Hinduism A+/C- joint (multivariate hyper.)     p = 0.0002  q = 0.0016
-    • Buddhism A/C-band joint (multivariate hyper.)  p = 0.0067  q = 0.0184
+    • Hinduism C- binomial                           p = 0.0112  q = 0.0232
+    • Hinduism A+/C- joint (multivariate hyper.)     p = 0.0023  q = 0.0086
+    • Buddhism A/C-band joint (multivariate hyper.)  p = 0.0113  q = 0.0232
 
 ──────────────────────────────────────────────────────────────────────────────────────────────────────────────
-Generated : Wed Apr 22 19:23:55 UTC 2026
+Generated : Fri Apr 24 20:33:02 UTC 2026
 Script    : tools/generate_audit_fdr.py
 LaTeX macros for this analysis are in manuscript/generated_macros.tex

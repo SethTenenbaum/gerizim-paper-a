@@ -36,6 +36,6 @@ Joint significance requires both dome and full-corpus p < 0.05.
 A ±0.3% shift from canonical collapses joint significance in at least one population.
 
 ────────────────────────────────────────────────────────────────────────────────
-Generated : Wed Apr 22 18:09:58 UTC 2026
+Generated : Fri Apr 24 20:33:06 UTC 2026
 Script    : tools/generate_audit_fine_sweep.py
 Source    : analysis/unesco/fine_sweep_audit.py

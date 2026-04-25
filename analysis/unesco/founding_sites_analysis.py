@@ -270,7 +270,7 @@ print(f"  \\newcommand{{\\pFoundKwAppFisher}}{{{fmt_p(p_kw_app)}}}    % p-value,
 
 # ── Write to results store ────────────────────────────────────────────────────
 ResultsStore().write_many({
-    "pFoundKwFisher":    p_kw,        # Fisher p, founding keyword enrichment — Test E
+    "pFoundKwFisher":    p_kw,        # Fisher p, founding keyword enrichment — Test 5
     "foundKwFisherOR":   or_kw,       # Fisher OR, A+
     "pFoundKwAppFisher": p_kw_app,    # Fisher p, A++ founding keyword
     "foundKwAppFisherOR": or_kw_app,  # Fisher OR, A++

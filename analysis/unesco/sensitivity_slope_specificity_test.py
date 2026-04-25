@@ -24,30 +24,28 @@ joint significance in the real data while permuted data produces sharp peaks at
 arbitrary spacings, then the *location* of the peak at the canonical unit is
 informative, even if the sharpness alone is not unusual.
 
-THREE STATISTICS ARE COMPUTED
-------------------------------
-(1) permSlopeCanonBestJoint:
+THREE STATISTICS ARE COMPUTED (per tier: A++, A+, A)
+------------------------------------------------------
+(1) permSlopeCanonBestJoint<Tier>:
     Fraction of permutations where 0.1000 produces joint significance AND is the
     unique best spacing (smallest combined -log p summed over dome + full).
 
-(2) permSlopeCanonRank:
+(2) permSlopeCanonRank<Tier>:
     In the real data, what is the rank of 0.1000 by combined -log p among all
     fine spacings?  (rank 1 = best, 7 = worst).  Compared with the distribution
     of ranks across permutations.
 
-(3) permSlopeCanonBestGivenSharp:
+(3) permSlopeCanonBestGivenSharp<Tier>:
     Of the permutations that DO show a sharp-peak pattern anywhere in the window,
-    what fraction have the peak specifically at 0.1000?  This conditional fraction
-    addresses the question: given that a sharp peak appears, how often does it
-    happen to land exactly on the metrologically attested spacing?
+    what fraction have the peak specifically at 0.1000?
 
-MACROS EMITTED
---------------
-    \\permSlopeSpecN             — number of permutations (same as permSlopeNperms)
-    \\permSlopeCanonBestJoint    — p-value for statistic (1) above
-    \\permSlopeCanonRankObs      — observed rank of 0.1000 in the real data (integer)
-    \\permSlopeCanonRankPct      — percentile of that rank among permuted datasets
-    \\permSlopeCanonBestGivenSharp — fraction of sharp-peak permutations where peak is at 0.1000
+MACROS EMITTED (suffix APP = A++, AP = A+, A = A)
+--------------------------------------------------
+    \\permSlopeSpecN                     — number of permutations
+    \\permSlopeCanonBestJoint{APP,AP,A}  — p-value for statistic (1)
+    \\permSlopeCanonRankObs{APP,AP,A}    — observed rank of 0.1000
+    \\permSlopeCanonRankPct{APP,AP,A}    — percentile of that rank
+    \\permSlopeCanonBestGivenSharp{APP,AP,A} — cond. fraction
 
 CODE
 ----
@@ -68,57 +66,69 @@ from scipy.stats import binomtest
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus, cultural_sites_with_coords
-from lib.beru import TIER_APLUS
-from lib.dome_filter import is_dome_site
+from lib.beru import TIER_APP, TIER_APLUS, TIER_A_MAX, GERIZIM, BERU
+from lib.dome_filter import is_dome_site, UNAMBIGUOUS_KEYWORDS, FORM_KEYWORD_RES
 from lib.results_store import ResultsStore
+
+# Import evo corpus loader — defined as a function in the evolution test script.
+# We import the function directly rather than executing the script.
+import importlib.util as _ilu
+_evo_spec = _ilu.spec_from_file_location(
+    "tumulus_dome_evolution_test",
+    Path(__file__).parent / "tumulus_dome_evolution_test.py",
+)
+_evo_mod = _ilu.module_from_spec(_evo_spec)
+_evo_spec.loader.exec_module(_evo_mod)
+_load_validated_corpus = _evo_mod.load_validated_corpus
 
 # ── Configuration ──────────────────────────────────────────────────────────────
 N_PERMS = 10_000
 SEED = 42
 
-# Fine spacings: same set as sensitivity_slope_permutation_test.py
 FINE_SPACINGS = [0.0990, 0.0993, 0.0995, 0.1000, 0.1001, 0.1003, 0.1010]
 CANONICAL = 0.1000
-
-# Off-canonical: spacings ≥ 0.0003 beru from canonical (the "collapse" threshold)
 OFF_CANONICAL = [s for s in FINE_SPACINGS if abs(s - CANONICAL) >= 0.0003]
+ALPHA = 0.05
 
-ALPHA = 0.05  # significance threshold for joint-significance tests
+TIERS = [
+    ("APP", "A++", TIER_APP),
+    ("AP",  "A+",  TIER_APLUS),
+    ("A",   "A",   TIER_A_MAX),
+]
+
+# Filter variants: (macro_suffix, label)
+# Masks are built in main() after corpus load.
+FILTER_KEYS = [
+    ("Dome", "dome filter (is_dome_site)"),
+    ("Evo",  "dome-evolution filter (validated mound/stupa/dome corpus)"),
+]
 
 
 # ── Core helpers ───────────────────────────────────────────────────────────────
 
-def null_rate(spacing: float) -> float:
+def null_rate(spacing: float, threshold: float) -> float:
     """Geometric null rate: window_width / harmonic_spacing."""
-    return 2 * TIER_APLUS / spacing
+    return 2 * threshold / spacing
 
 
-def count_hits(lons: np.ndarray, spacing: float) -> int:
-    """Count sites within TIER_APLUS of the nearest harmonic at given spacing."""
-    beru_vals = np.abs(lons) / 30.0          # distance from anchor in beru
-    # deviation from nearest harmonic node
-    nearest = np.round(beru_vals / spacing) * spacing
-    devs = np.abs(beru_vals - nearest)
-    return int(np.sum(devs <= TIER_APLUS))
+def _dev_at_spacing_vec(lons_arr: np.ndarray, spacing: float) -> np.ndarray:
+    arc     = np.abs(lons_arr - GERIZIM) / BERU
+    nearest = np.round(arc / spacing) * spacing
+    return np.abs(arc - nearest)
 
 
-def sweep_scores(dome_lons: np.ndarray, all_lons: np.ndarray):
-    """
-    For each spacing in FINE_SPACINGS, compute dome_p, full_p, and
-    the combined score -log10(dome_p) - log10(full_p) (higher = more significant).
+def count_hits(lons: np.ndarray, spacing: float, threshold: float) -> int:
+    return int(np.sum(_dev_at_spacing_vec(np.asarray(lons), spacing) <= threshold))
 
-    Returns
-    -------
-    scores    : list of (spacing, dome_p, full_p, combined_score)
-    """
+
+def sweep_scores(dome_lons: np.ndarray, all_lons: np.ndarray, threshold: float):
     scores = []
     for sp in FINE_SPACINGS:
-        nr = null_rate(sp)
-        d_hits = count_hits(dome_lons, sp)
-        f_hits = count_hits(all_lons, sp)
-        d_p = binomtest(d_hits, len(dome_lons), nr, alternative='greater').pvalue
-        f_p = binomtest(f_hits, len(all_lons), nr, alternative='greater').pvalue
-        # Clamp to avoid log(0); p is always > 0 for binomtest
+        nr  = null_rate(sp, threshold)
+        d_p = binomtest(count_hits(dome_lons, sp, threshold), len(dome_lons), nr,
+                        alternative='greater').pvalue
+        f_p = binomtest(count_hits(all_lons,  sp, threshold), len(all_lons),  nr,
+                        alternative='greater').pvalue
         combined = -np.log10(max(d_p, 1e-15)) + -np.log10(max(f_p, 1e-15))
         scores.append((sp, d_p, f_p, combined))
     return scores
@@ -129,36 +139,19 @@ def is_jointly_significant(d_p: float, f_p: float) -> bool:
 
 
 def sharp_peak_spacing(scores):
-    """
-    Return the spacing of the sharp-peak pattern if it exists, else None.
-    Sharp-peak: exactly one spacing is jointly significant AND it is jointly
-    significant while all spacings >= 0.0003 from canonical are not
-    jointly significant.  This generalises the original test to return
-    WHICH spacing is the peak (not just whether one exists at canonical).
-    """
-    jointly_sig_spacings = [sp for (sp, d_p, f_p, _) in scores
-                             if is_jointly_significant(d_p, f_p)]
-    if len(jointly_sig_spacings) == 0:
+    jointly_sig = [sp for (sp, d_p, f_p, _) in scores if is_jointly_significant(d_p, f_p)]
+    if not jointly_sig:
         return None
-    # Any off-canonical spacing jointly significant? → not a clean sharp peak
-    off_canon_joint = any(sp in OFF_CANONICAL for sp in jointly_sig_spacings)
-    if off_canon_joint:
+    if any(sp in OFF_CANONICAL for sp in jointly_sig):
         return None
-    # The only jointly-significant spacing must be near-canonical (<0.0003 from 0.1000)
-    near_canon = [sp for sp in jointly_sig_spacings if abs(sp - CANONICAL) < 0.0003]
+    near_canon = [sp for sp in jointly_sig if abs(sp - CANONICAL) < 0.0003]
     if near_canon:
-        # Return the one that has the best combined score among near-canonical
-        near_scores = [(sp, comb) for (sp, d_p, f_p, comb) in scores
-                       if sp in near_canon]
+        near_scores = [(sp, comb) for (sp, d_p, f_p, comb) in scores if sp in near_canon]
         return max(near_scores, key=lambda x: x[1])[0]
     return None
 
 
 def rank_of_canonical(scores) -> int:
-    """
-    Rank of 0.1000 by combined -log p score.
-    Rank 1 = highest combined score (most significant joint result).
-    """
     sorted_scores = sorted(scores, key=lambda x: x[3], reverse=True)
     for rank, (sp, _, _, _) in enumerate(sorted_scores, start=1):
         if sp == CANONICAL:
@@ -166,128 +159,197 @@ def rank_of_canonical(scores) -> int:
     return len(FINE_SPACINGS)
 
 
-# ── Main ───────────────────────────────────────────────────────────────────────
+def sweep_scores_single(lons: np.ndarray, threshold: float):
+    """Single-population sweep — for full-corpus geographic bootstrap."""
+    scores = []
+    for sp in FINE_SPACINGS:
+        nr  = null_rate(sp, threshold)
+        p   = binomtest(count_hits(lons, sp, threshold), len(lons), nr,
+                        alternative='greater').pvalue
+        comb = -np.log10(max(p, 1e-15))
+        scores.append((sp, p, comb))
+    return scores
 
-def main():
-    rng = np.random.default_rng(SEED)
 
-    # Load data
-    corpus = load_corpus()
-    cultural = cultural_sites_with_coords(corpus)
-    all_lons_abs = np.array([abs(s.longitude - 35.272)  # deviation from Gerizim anchor
-                              for s in cultural])
-    # Note: we work with absolute angular distances from Gerizim,
-    # matching the beru deviation computation in lib/beru.py.
-    # The sign of (lon - anchor) does not matter for count_hits.
-    all_lons_full = np.array([s.longitude for s in cultural])
-    dome_mask = np.array([is_dome_site(s) for s in cultural])
+def sharp_peak_spacing_single(scores):
+    """Sharp-peak criterion for a single population."""
+    sig = [sp for (sp, p, _) in scores if p < ALPHA]
+    if not sig:
+        return None
+    if any(sp in OFF_CANONICAL for sp in sig):
+        return None
+    near_canon = [sp for sp in sig if abs(sp - CANONICAL) < 0.0003]
+    if near_canon:
+        near_scores = [(sp, comb) for (sp, p, comb) in scores if sp in near_canon]
+        return max(near_scores, key=lambda x: x[1])[0]
+    return None
 
-    # Recompute using the same approach as sensitivity_slope_permutation_test.py:
-    # work with raw longitudes, not pre-subtracted deviations, since deviation_at_spacing
-    # uses lib/beru constants internally.
-    from lib.beru import GERIZIM, BERU, deviation_at_spacing
 
-    def _dev_at_spacing_vec(lons_arr: np.ndarray, spacing: float) -> np.ndarray:
-        """Vectorized deviation_at_spacing for an array of raw longitudes."""
-        arc      = np.abs(lons_arr - GERIZIM) / BERU        # beru units
-        nearest  = np.round(arc / spacing) * spacing
-        return np.abs(arc - nearest)
+def run_full_corpus_tier(tier_key: str, tier_label: str, threshold: float,
+                         all_lons_full: np.ndarray,
+                         rng: np.random.Generator) -> dict:
+    """Geographic bootstrap for the full cultural corpus.
 
-    def count_hits_correct(lons: np.ndarray, spacing: float) -> int:
-        """Vectorized version — identical result to the old scalar loop."""
-        return int(np.sum(_dev_at_spacing_vec(np.asarray(lons), spacing) <= TIER_APLUS))
-
+    Permutes all longitudes (destroys geographic clustering) and asks:
+    how often does 0.1000 beru remain the unique best spacing?
+    """
     N_all = len(all_lons_full)
-    N_dome = int(dome_mask.sum())
-    print(f"Loaded {N_all} Cultural/Mixed sites, {N_dome} dome/spherical sites")
-    print(f"Running {N_PERMS:,} permutations (seed={SEED})\n")
 
-    # ── Observed sweep ─────────────────────────────────────────────────────────
-    dome_lons_obs = all_lons_full[dome_mask]
+    print(f"\n{'═'*60}")
+    print(f"  Filter: Full corpus  |  Tier {tier_label}  (threshold = {threshold} beru)")
+    print(f"{'═'*60}")
 
-    def sweep_correct(dome_lons, all_lons):
-        scores = []
-        for sp in FINE_SPACINGS:
-            nr = null_rate(sp)
-            d_hits = count_hits_correct(dome_lons, sp)
-            f_hits = count_hits_correct(all_lons, sp)
-            d_p = binomtest(d_hits, len(dome_lons), nr, alternative='greater').pvalue
-            f_p = binomtest(f_hits, len(all_lons), nr, alternative='greater').pvalue
-            combined = -np.log10(max(d_p, 1e-15)) + -np.log10(max(f_p, 1e-15))
-            scores.append((sp, d_p, f_p, combined))
-        return scores
+    obs_scores  = sweep_scores_single(all_lons_full, threshold)
+    obs_peak_sp = sharp_peak_spacing_single(obs_scores)
+    obs_canon_is_best = (obs_peak_sp == CANONICAL)
 
-    print("── Observed fine sweep ──")
-    obs_scores = sweep_correct(dome_lons_obs, all_lons_full)
-    for sp, d_p, f_p, comb in obs_scores:
+    print("── Observed fine sweep (full corpus) ──")
+    for sp, p, comb in obs_scores:
         mark = " <<<" if sp == CANONICAL else ""
-        js = "JOINT-SIG" if is_jointly_significant(d_p, f_p) else ""
-        print(f"  {sp:.4f}  dome_p={d_p:.4f}  full_p={f_p:.4f}  "
-              f"combined={comb:.3f}  {js}{mark}")
+        sig  = "SIG" if p < ALPHA else ""
+        print(f"  {sp:.4f}  p={p:.4f}  combined={comb:.3f}  {sig}{mark}")
+    print(f"\n  Sharp-peak spacing: {obs_peak_sp}")
+    print(f"  0.1000 is unique best: {obs_canon_is_best}")
 
-    obs_canon_rank = rank_of_canonical(obs_scores)
-    obs_sharp_peak_spacing = sharp_peak_spacing(obs_scores)
-    obs_canon_is_best_joint = (obs_sharp_peak_spacing == CANONICAL)
-
-    print(f"\nObserved:")
-    print(f"  Rank of 0.1000 beru by combined -log p:  {obs_canon_rank} of {len(FINE_SPACINGS)}")
-    print(f"  Sharp-peak spacing:  {obs_sharp_peak_spacing}")
-    print(f"  0.1000 is unique best joint-sig spacing:  {obs_canon_is_best_joint}")
-
-    # ── Permutation loop — vectorized over spacings ────────────────────────────
-    print(f"\n── Permutation test ({N_PERMS:,} trials) — vectorized ──")
-
-    spacings_arr   = np.array(FINE_SPACINGS)                             # (S,)
-    null_rates_arr = np.array([null_rate(sp) for sp in FINE_SPACINGS])   # (S,)
-    canon_idx      = FINE_SPACINGS.index(CANONICAL)
-    off_mask       = np.array([sp in OFF_CANONICAL for sp in FINE_SPACINGS])  # (S,)
+    spacings_arr   = np.array(FINE_SPACINGS)
+    null_rates_arr = np.array([null_rate(sp, threshold) for sp in FINE_SPACINGS])
 
     def _hits_all_spacings(lons_arr: np.ndarray) -> np.ndarray:
-        """Return (S,) integer hit counts for all spacings simultaneously."""
-        arc     = np.abs(lons_arr[:, None] - GERIZIM) / BERU            # (n, S)
-        nearest = np.round(arc / spacings_arr) * spacings_arr            # (n, S)
-        dev     = np.abs(arc - nearest)                                  # (n, S)
-        return (dev <= TIER_APLUS).sum(axis=0).astype(int)               # (S,)
+        arc     = np.abs(lons_arr[:, None] - GERIZIM) / BERU
+        nearest = np.round(arc / spacings_arr) * spacings_arr
+        dev     = np.abs(arc - nearest)
+        return (dev <= threshold).sum(axis=0).astype(int)
 
-    # stat 1: fraction where canonical is unique best joint-sig spacing
-    n_canon_best_joint = 0
-    # stat 2: distribution of canonical rank
-    perm_canon_ranks = []
-    # stat 3: conditional — of sharp-peak perms, how many have peak AT canonical?
+    n_canon_best       = 0
     n_sharp_peak_total = 0
     n_sharp_peak_at_canon = 0
 
+    print(f"\n── Geographic bootstrap ({N_PERMS:,} trials) ──")
+    for i in range(N_PERMS):
+        perm_lons = rng.permutation(all_lons_full)
+        f_hits    = _hits_all_spacings(perm_lons)
+
+        f_pvals  = np.array([binomtest(int(f_hits[j]), N_all, null_rates_arr[j],
+                                       alternative='greater').pvalue
+                             for j in range(len(FINE_SPACINGS))])
+        combined = -np.log10(np.maximum(f_pvals, 1e-15))
+        perm_scores = [(FINE_SPACINGS[j], f_pvals[j], combined[j])
+                       for j in range(len(FINE_SPACINGS))]
+
+        perm_peak_sp = sharp_peak_spacing_single(perm_scores)
+        if perm_peak_sp == CANONICAL:
+            n_canon_best += 1
+        if perm_peak_sp is not None:
+            n_sharp_peak_total += 1
+            if perm_peak_sp == CANONICAL:
+                n_sharp_peak_at_canon += 1
+
+        if (i + 1) % 1000 == 0:
+            print(f"  {i+1:>6}/{N_PERMS}  canon_best={n_canon_best}  "
+                  f"sharp_peaks={n_sharp_peak_total}")
+
+    p_canon_best   = n_canon_best / N_PERMS
+    cond_fraction  = (n_sharp_peak_at_canon / n_sharp_peak_total
+                      if n_sharp_peak_total > 0 else 0.0)
+
+    suffix = f"Full{tier_key}"
+    print(f"\n══ Results — Full corpus / Tier {tier_label} ══")
+    print(f"Stat 1 — 0.1000 unique best:  {n_canon_best}/{N_PERMS}  (p = {p_canon_best:.4f})")
+    print(f"Stat 3 — cond fraction:  {n_sharp_peak_at_canon}/{n_sharp_peak_total} = {cond_fraction:.4f}")
+
+    return {
+        f"permSlopeCanonBestJoint{suffix}":    round(p_canon_best, 4),
+        f"permSlopeCanonBestJointSig{suffix}": sig_label(p_canon_best),
+        f"permSlopeSharpPeakTotal{suffix}":    n_sharp_peak_total,
+        f"permSlopeSharpAtCanon{suffix}":      n_sharp_peak_at_canon,
+        f"permSlopeCanonCondFraction{suffix}": round(cond_fraction, 3),
+    }
+
+
+def sig_label(p: float) -> str:
+    if p < 0.001: return "***"
+    if p < 0.01:  return "**"
+    if p < 0.05:  return "*"
+    if p < 0.10:  return "$\\sim$"
+    return "ns"
+
+
+def fmt_p(p: float, n_perms: int) -> str:
+    if p == 0.0:
+        return f"$< {1/n_perms:.4f}$"
+    return f"{p:.4f}"
+
+
+# ── Per-tier analysis ──────────────────────────────────────────────────────────
+
+def run_tier(tier_key: str, tier_label: str, threshold: float,
+             dome_lons_obs: np.ndarray, all_lons_full: np.ndarray,
+             dome_mask: np.ndarray, rng: np.random.Generator,
+             filter_key: str = "Dome") -> dict:
+
+    N_all  = len(all_lons_full)
+    N_dome = int(dome_mask.sum())
+
+    print(f"\n{'═'*60}")
+    print(f"  Filter: {filter_key}  |  Tier {tier_label}  (threshold = {threshold} beru)")
+    print(f"{'═'*60}")
+
+    # Observed
+    obs_scores           = sweep_scores(dome_lons_obs, all_lons_full, threshold)
+    obs_canon_rank       = rank_of_canonical(obs_scores)
+    obs_sharp_peak_sp    = sharp_peak_spacing(obs_scores)
+    obs_canon_is_best    = (obs_sharp_peak_sp == CANONICAL)
+
+    print("── Observed fine sweep ──")
+    for sp, d_p, f_p, comb in obs_scores:
+        mark = " <<<" if sp == CANONICAL else ""
+        js   = "JOINT-SIG" if is_jointly_significant(d_p, f_p) else ""
+        print(f"  {sp:.4f}  dome_p={d_p:.4f}  full_p={f_p:.4f}  "
+              f"combined={comb:.3f}  {js}{mark}")
+    print(f"\n  Rank of 0.1000: {obs_canon_rank} of {len(FINE_SPACINGS)}")
+    print(f"  Sharp-peak spacing: {obs_sharp_peak_sp}")
+    print(f"  0.1000 is unique best joint-sig: {obs_canon_is_best}")
+
+    # Vectorised permutation loop
+    spacings_arr   = np.array(FINE_SPACINGS)
+    null_rates_arr = np.array([null_rate(sp, threshold) for sp in FINE_SPACINGS])
+
+    def _hits_all_spacings(lons_arr: np.ndarray) -> np.ndarray:
+        arc     = np.abs(lons_arr[:, None] - GERIZIM) / BERU
+        nearest = np.round(arc / spacings_arr) * spacings_arr
+        dev     = np.abs(arc - nearest)
+        return (dev <= threshold).sum(axis=0).astype(int)
+
+    n_canon_best_joint  = 0
+    perm_canon_ranks    = []
+    n_sharp_peak_total  = 0
+    n_sharp_peak_at_canon = 0
+
+    print(f"\n── Permutation test ({N_PERMS:,} trials) ──")
     for i in range(N_PERMS):
         perm_lons      = rng.permutation(all_lons_full)
         perm_dome_lons = perm_lons[dome_mask]
 
-        d_hits = _hits_all_spacings(perm_dome_lons)   # (S,)
-        f_hits = _hits_all_spacings(perm_lons)         # (S,)
+        d_hits = _hits_all_spacings(perm_dome_lons)
+        f_hits = _hits_all_spacings(perm_lons)
 
-        # Compute p-values for all spacings at once
         d_pvals = np.array([binomtest(int(d_hits[j]), N_dome, null_rates_arr[j],
                                       alternative='greater').pvalue
                             for j in range(len(FINE_SPACINGS))])
-        f_pvals = np.array([binomtest(int(f_hits[j]), N_all, null_rates_arr[j],
+        f_pvals = np.array([binomtest(int(f_hits[j]), N_all,  null_rates_arr[j],
                                       alternative='greater').pvalue
                             for j in range(len(FINE_SPACINGS))])
         combined   = (-np.log10(np.maximum(d_pvals, 1e-15))
-                      - np.log10(np.maximum(f_pvals, 1e-15)))            # (S,)
-        joint_sig  = (d_pvals < ALPHA) & (f_pvals < ALPHA)              # (S,)
-
-        # Build scores list for compatibility with helpers
+                      - np.log10(np.maximum(f_pvals, 1e-15)))
         perm_scores = [(FINE_SPACINGS[j], d_pvals[j], f_pvals[j], combined[j])
                        for j in range(len(FINE_SPACINGS))]
 
-        # stat 1
         perm_peak_sp = sharp_peak_spacing(perm_scores)
         if perm_peak_sp == CANONICAL:
             n_canon_best_joint += 1
 
-        # stat 2
         perm_canon_ranks.append(rank_of_canonical(perm_scores))
 
-        # stat 3
         if perm_peak_sp is not None:
             n_sharp_peak_total += 1
             if perm_peak_sp == CANONICAL:
@@ -299,104 +361,160 @@ def main():
                   f"sharp_peaks={n_sharp_peak_total}  "
                   f"sharp_at_canon={n_sharp_peak_at_canon}")
 
-    # ── Compute statistics ─────────────────────────────────────────────────────
-    # stat 1: p-value = fraction of perms where canonical is unique best joint-sig
+    # Statistics
     p_canon_best_joint = n_canon_best_joint / N_PERMS
+    perm_canon_ranks   = np.array(perm_canon_ranks)
+    pct_as_good        = float(np.mean(perm_canon_ranks <= obs_canon_rank))
+    p_canon_rank       = float(np.mean(perm_canon_ranks >= obs_canon_rank))
+    cond_fraction      = (n_sharp_peak_at_canon / n_sharp_peak_total
+                          if n_sharp_peak_total > 0 else 0.0)
 
-    # stat 2: percentile of observed rank among permuted ranks
-    perm_canon_ranks = np.array(perm_canon_ranks)
-    # lower rank = better; what fraction of perms have rank <= observed rank?
-    # (fraction as good or better than observed)
-    pct_as_good = float(np.mean(perm_canon_ranks <= obs_canon_rank))
-    # p-value for "canonical ranks this well or better" = fraction with rank >= obs
-    # (unusual = obs rank is unusually low = unusually high combined score)
-    p_canon_rank = float(np.mean(perm_canon_ranks >= obs_canon_rank))
-
-    # stat 3: conditional fraction
-    cond_fraction = (n_sharp_peak_at_canon / n_sharp_peak_total
-                     if n_sharp_peak_total > 0 else 0.0)
-    n_fine_spacings = len(FINE_SPACINGS)
-    # Under the null, the sharp peak (if it appears) is equally likely at any
-    # of the ~2 near-canonical spacings (0.1000, 0.1001).  The null expectation
-    # for the conditional fraction is approximately 1/2 (since the sharp-peak
-    # criterion requires a near-canonical peak by definition).
-    # We report the raw fraction for transparency.
-
-    # ── Print results ──────────────────────────────────────────────────────────
-    print(f"\n══ Results ══")
-    print(f"N permutations:  {N_PERMS:,}")
-    print()
-    print(f"Statistic 1 — Canonical spacing (0.1000) is unique best joint-sig peak:")
-    print(f"  Observed data:   {'YES' if obs_canon_is_best_joint else 'NO'}")
-    print(f"  Perm fraction:   {n_canon_best_joint}/{N_PERMS}  "
-          f"(p = {p_canon_best_joint:.4f})")
-    print()
-    print(f"Statistic 2 — Rank of 0.1000 by combined -log p among {n_fine_spacings} fine spacings:")
-    print(f"  Observed rank:   {obs_canon_rank} of {n_fine_spacings}  "
-          f"(rank 1 = most jointly significant)")
-    print(f"  Perm distribution:  "
-          f"mean={perm_canon_ranks.mean():.2f}  "
-          f"median={np.median(perm_canon_ranks):.1f}  "
-          f"std={perm_canon_ranks.std():.2f}")
-    print(f"  P(perm rank <= obs rank):  {pct_as_good:.4f}")
-    print(f"  P-value (rank as good or better):  {p_canon_rank:.4f}")
-    print()
-    print(f"Statistic 3 — Of {n_sharp_peak_total} sharp-peak permutations, "
-          f"{n_sharp_peak_at_canon} had peak AT 0.1000:")
-    print(f"  Conditional fraction:  "
+    suffix = f"{filter_key}{tier_key}"
+    print(f"\n══ Results — {filter_key} / Tier {tier_label} ══")
+    print(f"Stat 1 — 0.1000 unique best joint-sig:  "
+          f"{n_canon_best_joint}/{N_PERMS}  (p = {p_canon_best_joint:.4f})")
+    print(f"Stat 2 — rank of 0.1000:  observed={obs_canon_rank}  "
+          f"perm mean={perm_canon_ranks.mean():.2f}  p={p_canon_rank:.4f}")
+    print(f"Stat 3 — cond fraction:  "
           f"{n_sharp_peak_at_canon}/{n_sharp_peak_total} = {cond_fraction:.4f}")
-    print(f"  (Under the null, expected ~{1/2:.2f} since only 0.1000 and 0.1001 "
-          f"can produce a sharp peak by the collapse criterion)")
-    print()
 
-    # ── Format macro values ────────────────────────────────────────────────────
-    def fmt_p(p: float) -> str:
-        if p == 0.0:
-            return f"$< {1/N_PERMS:.4f}$"
-        return f"{p:.4f}"
-
-    def sig_label(p: float) -> str:
-        if p < 0.001:
-            return "***"
-        elif p < 0.01:
-            return "**"
-        elif p < 0.05:
-            return "*"
-        elif p < 0.10:
-            return "$\\sim$"
-        else:
-            return "ns"
-
-    print("── LaTeX macros ──")
-    macros = {
-        "permSlopeSpecN":              N_PERMS,
-        "permSlopeCanonRankObs":       obs_canon_rank,
-        "permSlopeCanonBestJoint":     round(p_canon_best_joint, 4),
-        "permSlopeCanonRankP":         round(p_canon_rank, 4),
-        "permSlopeCanonRankPctile":    round(100 * pct_as_good, 1),
-        "permSlopeCanonCondFraction":  round(cond_fraction, 3),
-        "permSlopeSharpPeakTotal":     n_sharp_peak_total,
-        "permSlopeSharpAtCanon":       n_sharp_peak_at_canon,
+    return {
+        f"permSlopeCanonBestJoint{suffix}":      round(p_canon_best_joint, 4),
+        f"permSlopeCanonBestJointSig{suffix}":   sig_label(p_canon_best_joint),
+        f"permSlopeCanonRankObs{suffix}":        obs_canon_rank,
+        f"permSlopeCanonRankP{suffix}":          round(p_canon_rank, 4),
+        f"permSlopeCanonRankSig{suffix}":        sig_label(p_canon_rank),
+        f"permSlopeCanonRankPctile{suffix}":     round(100 * pct_as_good, 1),
+        f"permSlopeCanonCondFraction{suffix}":   round(cond_fraction, 3),
+        f"permSlopeSharpPeakTotal{suffix}":      n_sharp_peak_total,
+        f"permSlopeSharpAtCanon{suffix}":        n_sharp_peak_at_canon,
     }
 
-    for key, val in macros.items():
-        if isinstance(val, float):
-            print(f"  \\newcommand{{\\{key}}}{{{val:.4f}}}")
-        else:
-            print(f"  \\newcommand{{\\{key}}}{{{val}}}")
 
-    print()
-    print(f"  % Significance labels for key statistics:")
-    print(f"  \\newcommand{{\\permSlopeCanonBestJointSig}}{{{sig_label(p_canon_best_joint)}}}")
-    print(f"  \\newcommand{{\\permSlopeCanonRankSig}}{{{sig_label(p_canon_rank)}}}")
+# ── Main ───────────────────────────────────────────────────────────────────────
 
-    # ── Write to results store ─────────────────────────────────────────────────
-    store_vals = {k: (float(v) if not isinstance(v, str) else v)
-                  for k, v in macros.items()}
-    store_vals["permSlopeCanonBestJointSig"] = sig_label(p_canon_best_joint)
-    store_vals["permSlopeCanonRankSig"] = sig_label(p_canon_rank)
+def main():
+    corpus   = load_corpus()
+    cultural = cultural_sites_with_coords(corpus)
+    all_lons_full = np.array([s.longitude for s in cultural])
+
+    # ── Build filter masks ─────────────────────────────────────────────────────
+    dome_mask = np.array([is_dome_site(s) for s in cultural])
+
+    # Kw mask: unambiguous keywords only (stupa/stupas/tholos) — no ambiguous
+    # dome/domed/domes/spherical — the most conservative focal population.
+    def _is_unamb(s):
+        ft = s.full_text or ""
+        return any(FORM_KEYWORD_RES[k].search(ft) for k in UNAMBIGUOUS_KEYWORDS)
+    kw_mask = np.array([_is_unamb(s) for s in cultural])
+
+    # Evo mask: sites present in the context-validated mound/stupa/dome corpus.
+    evo_selected, _, _ = _load_validated_corpus()
+    evo_site_ids = {(e["name"], round(e["lon"], 4)) for e in evo_selected}
+    evo_mask = np.array([
+        (s.site, round(s.longitude, 4)) in evo_site_ids for s in cultural
+    ])
+
+    FILTERS = [
+        ("Dome", dome_mask),
+        ("Kw",   kw_mask),
+        ("Evo",  evo_mask),
+    ]
+
+    N_all = len(all_lons_full)
+    for fkey, fmask in FILTERS:
+        print(f"Filter {fkey}: {int(fmask.sum())} focal sites out of {N_all}")
+    print(f"Running {N_PERMS:,} permutations per filter × tier (seed={SEED})\n")
+
+    all_results: dict = {"permSlopeSpecN": N_PERMS}
+
+    for fkey, fmask in FILTERS:
+        focal_lons = all_lons_full[fmask]
+        for tier_key, tier_label, threshold in TIERS:
+            rng = np.random.default_rng(SEED)   # independent seed per cell
+            tier_results = run_tier(tier_key, tier_label, threshold,
+                                    focal_lons, all_lons_full, fmask, rng,
+                                    filter_key=fkey)
+            all_results.update(tier_results)
+
+    # Full corpus geographic bootstrap
+    print(f"\n\n{'━'*60}")
+    print("  Full corpus geographic bootstrap")
+    print(f"{'━'*60}")
+    for tier_key, tier_label, threshold in TIERS:
+        rng = np.random.default_rng(SEED)
+        all_results.update(
+            run_full_corpus_tier(tier_key, tier_label, threshold, all_lons_full, rng)
+        )
+
+    # Print LaTeX macros
+    print("\n\n── LaTeX macros ──")
+    print(f"  \\newcommand{{\\permSlopeSpecN}}{{{N_PERMS}}}")
+    for fkey, _ in FILTERS:
+        for tier_key, tier_label, _ in TIERS:
+            suffix = f"{fkey}{tier_key}"
+            print(f"\n  % {fkey} / Tier {tier_label}")
+            keys = [
+                f"permSlopeCanonBestJoint{suffix}",
+                f"permSlopeCanonBestJointSig{suffix}",
+                f"permSlopeCanonRankObs{suffix}",
+                f"permSlopeCanonRankP{suffix}",
+                f"permSlopeCanonRankSig{suffix}",
+                f"permSlopeCanonRankPctile{suffix}",
+                f"permSlopeCanonCondFraction{suffix}",
+                f"permSlopeSharpPeakTotal{suffix}",
+                f"permSlopeSharpAtCanon{suffix}",
+            ]
+            for k in keys:
+                v = all_results[k]
+                if isinstance(v, float):
+                    print(f"  \\newcommand{{\\{k}}}{{{v:.4f}}}")
+                else:
+                    print(f"  \\newcommand{{\\{k}}}{{{v}}}")
+    for tier_key, tier_label, _ in TIERS:
+        suffix = f"Full{tier_key}"
+        print(f"\n  % Full corpus / Tier {tier_label}")
+        for k in [f"permSlopeCanonBestJoint{suffix}",
+                  f"permSlopeCanonBestJointSig{suffix}",
+                  f"permSlopeCanonCondFraction{suffix}",
+                  f"permSlopeSharpPeakTotal{suffix}",
+                  f"permSlopeSharpAtCanon{suffix}"]:
+            v = all_results[k]
+            if isinstance(v, float):
+                print(f"  \\newcommand{{\\{k}}}{{{v:.4f}}}")
+            else:
+                print(f"  \\newcommand{{\\{k}}}{{{v}}}")
+
+    # Write to results store
+    store_vals = {k: (float(v) if isinstance(v, (int, float)) and not isinstance(v, bool) else v)
+                  for k, v in all_results.items()}
     ResultsStore().write_many(store_vals)
     print("\nResults written to data/store/results.json")
+
+    # Backward-compat: keep the old unprefixed A+ macros (Dome filter, A+ tier)
+    # so existing manuscript references don't break until they are updated.
+    compat = {
+        "permSlopeCanonBestJoint":     all_results["permSlopeCanonBestJointDomeAP"],
+        "permSlopeCanonBestJointSig":  all_results["permSlopeCanonBestJointSigDomeAP"],
+        "permSlopeCanonRankObs":       all_results["permSlopeCanonRankObsDomeAP"],
+        "permSlopeCanonRankP":         all_results["permSlopeCanonRankPDomeAP"],
+        "permSlopeCanonRankSig":       all_results["permSlopeCanonRankSigDomeAP"],
+        "permSlopeCanonRankPctile":    all_results["permSlopeCanonRankPctileDomeAP"],
+        "permSlopeCanonCondFraction":  all_results["permSlopeCanonCondFractionDomeAP"],
+        "permSlopeSharpPeakTotal":     all_results["permSlopeSharpPeakTotalDomeAP"],
+        "permSlopeSharpAtCanon":       all_results["permSlopeSharpAtCanonDomeAP"],
+        # Per-tier backward compat (old macros without filter prefix = Dome)
+        "permSlopeCanonBestJointAPP":    all_results["permSlopeCanonBestJointDomeAPP"],
+        "permSlopeCanonBestJointSigAPP": all_results["permSlopeCanonBestJointSigDomeAPP"],
+        "permSlopeCanonBestJointAP":     all_results["permSlopeCanonBestJointDomeAP"],
+        "permSlopeCanonBestJointSigAP":  all_results["permSlopeCanonBestJointSigDomeAP"],
+        "permSlopeCanonBestJointA":      all_results["permSlopeCanonBestJointDomeA"],
+        "permSlopeCanonBestJointSigA":   all_results["permSlopeCanonBestJointSigDomeA"],
+    }
+    ResultsStore().write_many(
+        {k: (float(v) if isinstance(v, (int, float)) and not isinstance(v, bool) else v)
+         for k, v in compat.items()}
+    )
 
 
 if __name__ == "__main__":

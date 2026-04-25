@@ -1,4 +1,4 @@
-% Generated macros — 2026-04-24T04:05:13Z
+% Generated macros — 2026-04-24T20:28:15Z
 % Source: bash manuscript/reproduce_all_macros.sh
 % IMPORTANT: values are computed fresh each run — do NOT hardcode
 
@@ -13,33 +13,27 @@
   \newcommand{\NclusterTotalPreCoord}{1013}  % Cultural+Mixed before coordinate filter
   \newcommand{\NexcNatural}{235}  % Natural-only sites excluded from analysis corpus
   \newcommand{\NexcNoCoord}{2}  % Cultural/Mixed sites excluded for missing coordinates
-  \newcommand{\auditNaturalN}{234}  % Natural sites with coordinates
-  \newcommand{\auditNaturalApN}{14}  % Natural A+ sites
-  \newcommand{\auditNaturalApRate}{6.0}  % Natural A+ rate (%)
-  \newcommand{\auditNaturalFisherOR}{0.67}  % Fisher OR natural vs cultural A+
-  \newcommand{\auditNaturalFisherP}{0.188}  % Fisher p natural vs cultural A+ (two-sided)
-  \newcommand{\auditTest1InclNaturalP}{0.008}  % Test 1 p if natural sites included
   \newcommand{\NfineSweepSpacings}{7}  % number of spacings in the fine unit sweep (Table tab:unitsweep_fine)
   \newcommand{\NharmonicsCoarse}{120}  % number of 0.1-beru harmonics in 360 degrees
   \newcommand{\simSeed}{42}  % random seed used in all permutation/simulation tests
   \newcommand{\NullRateApp}{3.2\%}  % geometric null rate for Tier-A++
   \newcommand{\NullRateAp}{6.42\%}  % geometric null rate for Tier-A+
-  \newcommand{\NullRateA}{18.84\%}  % geometric null rate for Tier-A
+  \newcommand{\NullRateA}{12.84\%}  % geometric null rate for Tier-A
   \newcommand{\NullRateB}{100\%}  % geometric null rate for Tier-B
-  \newcommand{\NullRateC}{18.84\%}  % geometric null rate for Tier-C (= A, symmetric)
+  \newcommand{\NullRateC}{12.84\%}  % geometric null rate for Tier-C (= A, symmetric)
   \newcommand{\NullRateCMinus}{6.42\%}  % geometric null rate for Tier-C− (= A+, symmetric)
   \newcommand{\NullRateCMinusTwo}{3.2\%}  % geometric null rate for Tier-C−− (= A++, symmetric)
   \newcommand{\ApThreshBeru}{0.00321}  % A+ threshold (beru)
   \newcommand{\ApThreshKm}{10.7}  % A+ threshold (km, equatorial)
   \newcommand{\AppThreshBeru}{0.0016}  % A++ threshold (beru)
   \newcommand{\AppThreshKm}{5.33}  % A++ threshold (km, equatorial)
-  \newcommand{\ATierThreshBeru}{0.00942}  % A-tier threshold (beru)
-  \newcommand{\ATierThreshKm}{31}  % A-tier threshold (km, equatorial)
+  \newcommand{\ATierThreshBeru}{0.00642}  % A-tier threshold (beru)
+  \newcommand{\ATierThreshKm}{21}  % A-tier threshold (km, equatorial)
   \newcommand{\BTierThreshBeru}{0.05}  % B-tier threshold (beru)
   \newcommand{\BTierThreshKm}{166}  % B-tier threshold (km, equatorial)
   \newcommand{\CMinusThreshBeru}{0.00321}  % C− threshold (beru, = A+ mirror)
   \newcommand{\CMinusThreshKm}{10.7}  % C− threshold (km)
-  \newcommand{\CTierThreshBeru}{0.00942}  % C-tier threshold (beru, = A mirror)
+  \newcommand{\CTierThreshBeru}{0.00642}  % C-tier threshold (beru, = A mirror)
   \newcommand{\CMinusTwoThreshBeru}{0.0016}  % C−− threshold (beru, = A++ mirror)
   \newcommand{\NullRateApPct}{6.42}  % A+ null rate as plain number (no %)
   \newcommand{\NullRateApFormula}{$2 \times \ApThreshBeru{} / 0.1$}  % null rate formula
@@ -71,39 +65,39 @@
   \newcommand{\NcircTierAp}{13}             % Tier-A+ hits (raw sweep)
   \newcommand{\NcircApRate}{14.4}     % A+ rate (%) = 13/90, rounded to 1 d.p.
   \newcommand{\NcircAppRate}{11.1}     % A++ rate (%) = 10/90, rounded to 1 d.p.
-  \newcommand{\NcircTierA}{26}             % Tier-A hits (raw sweep)
-  \newcommand{\NcircTierB}{48}             % Tier-B hits (raw sweep)
-  \newcommand{\NcircTierC}{11}               % Tier-C hits (raw sweep)
+  \newcommand{\NcircTierA}{22}             % Tier-A hits (raw sweep)
+  \newcommand{\NcircTierB}{58}             % Tier-B hits (raw sweep)
+  \newcommand{\NcircTierC}{5}               % Tier-C hits (raw sweep)
   \newcommand{\pCircApp}{0.0006}         % p-value, A++ binomial (raw sweep)
   \newcommand{\pCircAp}{0.0049}          % p-value, A+ binomial (raw sweep)
-  \newcommand{\pCircA}{0.0136}          % p-value, A  binomial (raw sweep)
+  \newcommand{\pCircA}{0.0020}          % p-value, A  binomial (raw sweep)
   \newcommand{\pCircAppFisher}{0.0037}      % p-value, A++ Fisher exact vs rest (raw sweep)
   \newcommand{\circAppFisherOR}{3.26}      % OR, A++ Fisher exact vs rest (raw sweep)
   \newcommand{\pCircApFisher}{0.0401}      % p-value, A+ Fisher exact vs rest (raw sweep)
   \newcommand{\circApFisherOR}{1.90}      % OR, A+ Fisher exact vs rest (raw sweep)
-  \newcommand{\pCircAFisher}{0.0439}       % p-value, A Fisher exact vs rest (raw sweep)
-  \newcommand{\circAFisherOR}{1.58}       % OR, A Fisher exact vs rest (raw sweep)
-  \newcommand{\pCircChi}{0.2652}          % chi-sq uniform, 5 bins, df=4 (raw sweep)
+  \newcommand{\pCircAFisher}{0.0140}       % p-value, A Fisher exact vs rest (raw sweep)
+  \newcommand{\circAFisherOR}{1.88}       % OR, A Fisher exact vs rest (raw sweep)
+  \newcommand{\pCircChi}{0.0000}          % chi-sq uniform, 5 bins, df=4 (raw sweep)
   \newcommand{\GerizimPctileAp}{98}            % anchor-sweep percentile, A+ (raw sweep)
   \newcommand{\GerizimPctileA}{98}            % anchor-sweep percentile, A  (raw sweep)
   \newcommand{\circEnrichAp}{2.25}           % enrichment ratio, A+
-  \newcommand{\circEnrichA}{1.53}           % enrichment ratio, A
+  \newcommand{\circEnrichA}{1.90}           % enrichment ratio, A
   \newcommand{\circMeanDev}{0.0220}        % mean beru deviation (raw sweep)
   \newcommand{\circEnrichApp}{3.47}           % enrichment ratio, A++
   \newcommand{\circExpAp}{5.78}         % expected A+ count under H0 (= N × 4%)
-  \newcommand{\circExpA}{16.96}          % expected A count under H0 (= N × 20%)
-  \newcommand{\circARate}{28.9}         % Tier-A rate (%) = 26/90
+  \newcommand{\circExpA}{11.56}          % expected A count under H0 (= N × 20%)
+  \newcommand{\circARate}{24.4}         % Tier-A rate (%) = 22/90
   \newcommand{\circApCIlo}{7.9}         % Clopper-Pearson 95% CI lower, A+ rate (%)
   \newcommand{\circApCIhi}{23.4}         % Clopper-Pearson 95% CI upper, A+ rate (%)
-  \newcommand{\circACIlo}{19.8}          % Clopper-Pearson 95% CI lower, A rate (%)
-  \newcommand{\circACIhi}{39.4}          % Clopper-Pearson 95% CI upper, A rate (%)
+  \newcommand{\circACIlo}{16.0}          % Clopper-Pearson 95% CI lower, A rate (%)
+  \newcommand{\circACIhi}{34.6}          % Clopper-Pearson 95% CI upper, A rate (%)
   \newcommand{\circEnrichCIlo}{1.23}        % Clopper-Pearson 95% CI lower, A+ enrichment ratio
   \newcommand{\circEnrichCIhi}{3.64}        % Clopper-Pearson 95% CI upper, A+ enrichment ratio
   \newcommand{\NcircValidatedApRate}{15.7}  % A+ rate (%) = 13/83, validated pop
 
 % --- analysis/unesco/spherical_monument_test.py
   \newcommand{\pCircApValidated}{0.0170}  % p-value, A+ binomial (context-validated dome corpus)
-  \newcommand{\pCircAValidated}{0.0313}   % p-value, A binomial (context-validated dome corpus)
+  \newcommand{\pCircAValidated}{0.0037}   % p-value, A binomial (context-validated dome corpus)
   \newcommand{\circEnrichApValidated}{2.06}  % enrichment ratio, A+ (context-validated dome corpus)
   \newcommand{\NdomeGateNeg}{28}  % number of negative-context gate patterns (Gate 1)
   \newcommand{\NdomeGatePos}{86}  % number of positive-context gate patterns (Gate 2)
@@ -116,12 +110,12 @@
   \newcommand{\NclusterExpAp}{64.9}           % expected A+ count under geometric null
   \newcommand{\NclusterExcessAp}{23}          % excess A+ above chance (observed - expected)
   \newcommand{\clusterApBinom}{0.0027}        % binomial p, A+
-  \newcommand{\clusterApMean}{6.35}          % mean cluster size, A+ sites
-  \newcommand{\clusterNonApMean}{4.76}          % mean cluster size, non-A+ sites
-  \newcommand{\clusterRatio}{1.33}           % A+/non-A+ cluster size ratio
-  \newcommand{\clusterMWp}{0.0089}        % Mann-Whitney p (site-level)
-  \newcommand{\clusterPermP}{0.0003}        % permutation p (site-level)
-  \newcommand{\clusterPermZ}{3.45}          % permutation Z-score
+  \newcommand{\clusterApMean}{4.36}          % mean cluster size, A+ sites
+  \newcommand{\clusterNonApMean}{3.17}          % mean cluster size, non-A+ sites
+  \newcommand{\clusterRatio}{1.37}           % A+/non-A+ cluster size ratio
+  \newcommand{\clusterMWp}{0.0048}        % Mann-Whitney p (site-level)
+  \newcommand{\clusterPermP}{0.0002}        % permutation p (site-level)
+  \newcommand{\clusterPermZ}{3.61}          % permutation Z-score
   \newcommand{\NpermCluster}{10,000}         % permutation draws, cluster asymmetry test
   \newcommand{\NclusterApHarmonics}{35}              % harmonics with ≥1 A+ site
   \newcommand{\NclusterNonApHarmonics}{20}              % harmonics with 0 A+ sites
@@ -132,20 +126,20 @@
   \newcommand{\clusterHarmonicMWpStr}{< 0.0001}  % formatted harmonic MW p-value string
   \newcommand{\NclusterNodeAp}{43}              % node-side A+ sites (phase-split)
   \newcommand{\NclusterAntiAp}{35}              % anti-side A+ sites (phase-split)
-  \newcommand{\clusterNodeApMean}{8.91}          % mean cluster size, node-side A+
-  \newcommand{\clusterAntiApMean}{5.37}          % mean cluster size, anti-side A+
-  \newcommand{\clusterNodeNonApMean}{7.59}          % mean cluster size, node-side non-A+
-  \newcommand{\clusterAntiNonApMean}{6.94}          % mean cluster size, anti-side non-A+
-  \newcommand{\clusterNodeVsAntiApRatio}{1.66}           % node A+ / anti A+ cluster ratio
-  \newcommand{\clusterNodeVsAntiApMWp}{0.0209}        % Mann-Whitney p, node A+ > anti A+
-  \newcommand{\clusterNodeAllMean}{7.70}          % mean cluster size, all node-side
-  \newcommand{\clusterAntiAllMean}{6.83}          % mean cluster size, all anti-side
-  \newcommand{\clusterNodeVsAntiAllMWp}{0.0147}        % Mann-Whitney p, all node > all anti
+  \newcommand{\clusterNodeApMean}{6.21}          % mean cluster size, node-side A+
+  \newcommand{\clusterAntiApMean}{3.94}          % mean cluster size, anti-side A+
+  \newcommand{\clusterNodeNonApMean}{5.20}          % mean cluster size, node-side non-A+
+  \newcommand{\clusterAntiNonApMean}{4.79}          % mean cluster size, anti-side non-A+
+  \newcommand{\clusterNodeVsAntiApRatio}{1.57}           % node A+ / anti A+ cluster ratio
+  \newcommand{\clusterNodeVsAntiApMWp}{0.0351}        % Mann-Whitney p, node A+ > anti A+
+  \newcommand{\clusterNodeAllMean}{5.29}          % mean cluster size, all node-side
+  \newcommand{\clusterAntiAllMean}{4.73}          % mean cluster size, all anti-side
+  \newcommand{\clusterNodeVsAntiAllMWp}{0.0355}        % Mann-Whitney p, all node > all anti
   \newcommand{\clusterCondN}{50000}          % perms in conditional subtest
-  \newcommand{\clusterCondClusterOk}{25}    % perms reproducing observed clustering
-  \newcommand{\clusterCondClusterP}{0.0005}    % p-value, clustering alone (cluster ok / N_COND_PERMS)
-  \newcommand{\clusterCondPeakAndCluster}{3}    % perms with clustering AND unit peak
-  \newcommand{\clusterCondPeakFrac}{0.1200}    % conditional fraction (peak | cluster)
+  \newcommand{\clusterCondClusterOk}{10}    % perms reproducing observed clustering
+  \newcommand{\clusterCondClusterP}{0.0002}    % p-value, clustering alone (cluster ok / N_COND_PERMS)
+  \newcommand{\clusterCondPeakAndCluster}{1}    % perms with clustering AND unit peak
+  \newcommand{\clusterCondPeakFrac}{0.1000}    % conditional fraction (peak | cluster)
   \newcommand{\clusterCondPeakFracUncond}{0.0980}    % unconditional peak fraction
   \newcommand{\clusterCondPeakSig}{ns}    % significance label, conditional fraction
 
@@ -208,11 +202,11 @@
   \newcommand{\pChrist}{0.0156}         % p-value, Christian sites A+ binomial
   \newcommand{\pChristFisher}{0.3266}      % p-value, Christian A+ Fisher exact vs rest
   \newcommand{\christFisherOR}{1.13}      % OR, Christian A+ Fisher exact
-  \newcommand{\NchristA}{86}              % Christian sites A-tier count
-  \newcommand{\christARate}{21.7}            % Christian sites A-tier rate (%)
-  \newcommand{\pChristA}{0.0864}         % p-value, Christian sites A-tier binomial
-  \newcommand{\pChristAFisher}{0.4074}     % p-value, Christian A-tier Fisher exact vs rest
-  \newcommand{\christAFisherOR}{1.05}     % OR, Christian A-tier Fisher exact
+  \newcommand{\NchristA}{58}              % Christian sites A-tier count
+  \newcommand{\christARate}{14.6}            % Christian sites A-tier rate (%)
+  \newcommand{\pChristA}{0.1635}         % p-value, Christian sites A-tier binomial
+  \newcommand{\pChristAFisher}{0.7691}     % p-value, Christian A-tier Fisher exact vs rest
+  \newcommand{\christAFisherOR}{0.89}     % OR, Christian A-tier Fisher exact
   \newcommand{\NIslam}{178}            % Islam sacred sites N
   \newcommand{\IslamApCount}{19}              % Islam A+ count
   \newcommand{\IslamApRate}{10.7}            % Islam A+ rate (%)
@@ -220,29 +214,29 @@
   \newcommand{\pIslamFisher}{0.1875}        % p-value, Islam A+ Fisher exact vs rest
   \newcommand{\islamFisherOR}{1.32}        % OR, Islam A+ Fisher exact
   \newcommand{\NbudSitesRelig}{71}            % Buddhism religion-tagged sites N
-  \newcommand{\NbudATier}{19}              % Buddhism A-tier count (dev <= 0.010 beru)
-  \newcommand{\budATierRate}{26.8}            % Buddhism A-tier rate (%)
+  \newcommand{\NbudATier}{16}              % Buddhism A-tier count (dev <= 0.010 beru)
+  \newcommand{\budATierRate}{22.5}            % Buddhism A-tier rate (%)
   \newcommand{\budApRateRelig}{9.9}            % Buddhism religion-tagged A+ rate (%)
   \newcommand{\pBudRelig}{0.1701}         % p-value, Buddhism religion-tagged A+ binomial
   \newcommand{\pBudFisher}{0.4243}         % p-value, Buddhism A+ Fisher exact vs rest
   \newcommand{\budFisherOR}{1.16}         % OR, Buddhism A+ Fisher exact
-  \newcommand{\NbudInterHarmonic}{18}             % Buddhist C-tier sites (dist_mid <= 0.010 beru)
-  \newcommand{\budInterHarmonicRate}{25.4}            % Buddhist C-tier rate (%)
-  \newcommand{\budInterHarmonicEnrich}{1.32}           % Buddhist C-tier enrichment vs corpus
-  \newcommand{\NInterHarmonicCorpus}{194}           % full-corpus C-tier count
-  \newcommand{\corpusInterHarmonicRate}{19.2}           % full-corpus C-tier rate (%)
-  \newcommand{\pBudJoint}{0.0067}         % joint p: Buddhism A >= 19 AND C-tier >= 18 (multivariate hypergeometric)
+  \newcommand{\NbudInterHarmonic}{11}             % Buddhist C-tier sites (dist_mid <= 0.010 beru)
+  \newcommand{\budInterHarmonicRate}{15.5}            % Buddhist C-tier rate (%)
+  \newcommand{\budInterHarmonicEnrich}{1.23}           % Buddhist C-tier enrichment vs corpus
+  \newcommand{\NInterHarmonicCorpus}{127}           % full-corpus C-tier count
+  \newcommand{\corpusInterHarmonicRate}{12.6}           % full-corpus C-tier rate (%)
+  \newcommand{\pBudJoint}{0.0113}         % joint p: Buddhism A >= 16 AND C-tier >= 11 (multivariate hypergeometric)
   \newcommand{\NhinSites}{39}            % Hinduism-tagged sites N
   \newcommand{\hinApCount}{4}               % Hinduism A+ count
   \newcommand{\hinApRate}{10.3}            % Hinduism A+ rate (%)
-  \newcommand{\NhinInterHarmonic}{10}             % Hinduism C-tier sites
-  \newcommand{\hinInterHarmonicRate}{25.6}            % Hinduism C-tier rate (%)
-  \newcommand{\pHinJoint}{0.1900}         % joint p: Hinduism A >= 10 AND C-tier >= 10 (multivariate hypergeometric)
+  \newcommand{\NhinInterHarmonic}{9}             % Hinduism C-tier sites
+  \newcommand{\hinInterHarmonicRate}{23.1}            % Hinduism C-tier rate (%)
+  \newcommand{\pHinJoint}{0.0365}         % joint p: Hinduism A >= 9 AND C-tier >= 9 (multivariate hypergeometric)
   \newcommand{\NhinCminus}{7}            % Hinduism C- tier sites
   \newcommand{\hinCminusRate}{17.9}            % Hinduism C- tier rate (%)
   \newcommand{\hinCminusEnrich}{2.49}           % Hinduism C- tier enrichment vs corpus
   \newcommand{\pHinCminus}{0.0112}         % p-value, Hinduism C- tier binomial
-  \newcommand{\pHinApCminus}{0.0002}         % joint p: Hinduism A+ >= 4 AND C- >= 7 (multivariate hypergeometric)
+  \newcommand{\pHinApCminus}{0.0023}         % joint p: Hinduism A+ >= 4 AND C- >= 7 (multivariate hypergeometric)
 
 % --- analysis/unesco/founding_sites_analysis.py
   \newcommand{\NthematicTotal}{88}                 % total A+ sites
@@ -267,17 +261,47 @@
   \newcommand{\foundKwAppRate}{50.0}          % founding keyword rate in A++ (%)
   \newcommand{\foundKwAppFisherOR}{2.53}       % Fisher OR, A++ vs non-A++ founding keyword
   \newcommand{\pFoundKwAppFisher}{0.002}    % p-value, Fisher test founding keyword A++
-  \newcommand{\pFoundKwAppFisherSig}{**}    % auto sig label
 
 % --- analysis/unesco/sacred_origin_test.py
   \newcommand{\sacredHitOne}{Lumbini, the Birthplace of the Lord Buddha}  % top-ranked sacred-origin A+ site (by beru deviation)
   \newcommand{\sacredHitTwo}{Historic Centre of Oaxaca and Archaeological Site of Monte Albán}  % 2nd-ranked sacred-origin A+ site
   \newcommand{\sacredHitThree}{Old City of Jerusalem and its Walls}  % 3rd-ranked sacred-origin A+ site
 
-% --- analysis/unesco/meta_keyword_test.py
-  \newcommand{\NmetaKeywords}{1741}          % total keyword permutations tested
-  \newcommand{\NmetaBeatingChi}{57}           % keywords beating Gerizim chi-sq
-  \newcommand{\metaBeatingChiPct}{3.3}         % % of keywords beating Gerizim chi-sq
+
+% --- analysis/global/anchor_corridor_audit.py
+  \newcommand{\corridorSharedAp}{71}     % A+ sites shared by Gerizim and Jerusalem
+  \newcommand{\corridorUniqueGer}{17}    % A+ sites unique to Gerizim anchor
+  \newcommand{\corridorUniqueJer}{17}    % A+ sites unique to Jerusalem anchor
+
+% --- analysis/unesco/tier_logsweep_sensitivity.py
+  \newcommand{\logSweepNtaus}{73}           % thresholds tested in log sweep
+  \newcommand{\logSweepNsig}{57}            % thresholds with p_dome < 0.05
+  \newcommand{\logSweepNinversions}{7}         % non-monotone inversions in dome curve
+  \newcommand{\logSweepAregionNtaus}{28}       % thresholds in ±1 log-decade around A+
+  \newcommand{\logSweepAregionNsig}{27}        % of those with p_dome < 0.05
+  \newcommand{\logSweepMinEnrichCanon}{1.82}   % min dome enrichment at any A-canon tier
+  \newcommand{\logSweepMaxEnrichCanon}{3.77}   % max dome enrichment at any A-canon tier
+  \newcommand{\logSweepApEnrich}{2.17}      % dome enrichment at A+ canonical value
+  \newcommand{\logSweepAppEnrich}{3.77}     % dome enrichment at A++ canonical value
+  \newcommand{\logSweepAEnrich}{1.82}       % dome enrichment at A canonical value
+  \newcommand{\logSweepApP}{0.012}     % dome p at A+ canonical threshold
+  \newcommand{\logSweepAppP}{< 0.001}    % dome p at A++ canonical threshold
+  \newcommand{\logSweepAP}{0.007}      % dome p at A canonical threshold
+  \newcommand{\logSweepOptPtau}{0.00149}    % data-optimal tau (min p, n>=5)
+  \newcommand{\logSweepOptPtauKm}{5.0}     % data-optimal tau in km
+  \newcommand{\logSweepOptPval}{< 0.001}     % p at data-optimal tau
+  \newcommand{\logSweepOptEnrich}{4.56}   % max enrichment at any tau (n>=5)
+  \newcommand{\logSweepOptEnrichKm}{2.6}  % km at max enrichment tau
+  \newcommand{\logSweepApOptLogDist}{0.333}  % log-decades from A+ to best-p tau
+  \newcommand{\logSweepOptApBeru}{0.00275}   % optimal A+ threshold (beru)
+  \newcommand{\logSweepOptApKm}{9.2}      % optimal A+ threshold (km)
+  \newcommand{\logSweepOptABeru}{0.00509}    % optimal A threshold (beru)
+  \newcommand{\logSweepOptAKm}{17.0}       % optimal A threshold (km)
+  \newcommand{\logSweepOptRatio}{1.87}      % optimal geometric step ratio
+
+% --- wikidata depletion sig labels (derived from p-values above)
+  \newcommand{\wikiHeartlandATierPSig}{**}   % sig label for wikiHeartlandATierP=0.005
+  \newcommand{\wikiMyanmarATierPSig}{***}    % sig label for wikiMyanmarATierP<0.001
 
 % --- analysis/unesco/temporal_gradient_test.py
   \newcommand{\ZcochranThree}{-1.001}       % Cochran-Armitage Z, A+, 3-bin
@@ -392,12 +416,12 @@
   \newcommand{\optimalPhaseApA}{92}           % max A+ at any x.18°E anchor
   \newcommand{\GerizimSweepApp}{44}             % Gerizim A++ in sweep
   \newcommand{\GerizimSweepAp}{88}              % Gerizim A+ in sweep
-  \newcommand{\GerizimSweepA}{214}             % Gerizim A in sweep
+  \newcommand{\GerizimSweepA}{157}             % Gerizim A in sweep
   \newcommand{\anchorSweepPctile}{98.0}          % Gerizim percentile in A+ anchor sweep
   \newcommand{\anchorSweepGeApPct}{2.99}          % % of anchors beating Gerizim A+
   \newcommand{\JerusalemSweepApp}{48}           % Jerusalem A++ in sweep
   \newcommand{\JerusalemSweepAp}{88}            % Jerusalem A+ in sweep
-  \newcommand{\JerusalemSweepA}{210}           % Jerusalem A in sweep
+  \newcommand{\JerusalemSweepA}{148}           % Jerusalem A in sweep
   \newcommand{\JerusalemSweepPctile}{98.0}        % Jerusalem percentile in A+ anchor sweep
   \newcommand{\anchorSweepJerApPct}{2.99}          % % of anchors beating Jerusalem A+
   \newcommand{\anchorSweepTopPct}{2.0}          % top-N% globally (corridor, both anchors)
@@ -622,45 +646,45 @@
   \newcommand{\pEvoAp}{0.0046}          % p-value, A+ binomial (dome corpus)
   \newcommand{\pEvoApFisher}{0.0445}      % p-value, A+ Fisher exact (dome corpus)
   \newcommand{\evoApFisherOR}{1.79}    % OR, A+ Fisher exact (dome corpus)
-  \newcommand{\NevoA}{31}             % Tier-A sites in dome-evolution corpus
-  \newcommand{\evoARate}{28.2}           % A rate, dome-evolution corpus (%)
-  \newcommand{\evoEnrichA}{1.50}           % enrichment ratio, A in dome corpus
-  \newcommand{\pEvoA}{0.0111}          % p-value, A binomial (dome corpus)
-  \newcommand{\pEvoAFisher}{0.0401}        % p-value, A Fisher exact (dome corpus)
-  \newcommand{\evoAFisherOR}{1.54}      % OR, A Fisher exact (dome corpus)
+  \newcommand{\NevoA}{24}             % Tier-A sites in dome-evolution corpus
+  \newcommand{\evoARate}{21.8}           % A rate, dome-evolution corpus (%)
+  \newcommand{\evoEnrichA}{1.70}           % enrichment ratio, A in dome corpus
+  \newcommand{\pEvoA}{0.0061}          % p-value, A binomial (dome corpus)
+  \newcommand{\pEvoAFisher}{0.0406}        % p-value, A Fisher exact (dome corpus)
+  \newcommand{\evoAFisherOR}{1.61}      % OR, A Fisher exact (dome corpus)
   \newcommand{\NevoMound}{24}           % sites with mound stage
   \newcommand{\NevoMoundAp}{2}            % A+ sites with mound stage
   \newcommand{\evoMoundApRate}{8.3}           % A+ rate, mound stage (%)
-  \newcommand{\NevoMoundA}{5}            % A-tier sites with mound stage
-  \newcommand{\evoMoundARate}{20.8}           % A-tier rate, mound stage (%)
+  \newcommand{\NevoMoundA}{2}            % A-tier sites with mound stage
+  \newcommand{\evoMoundARate}{8.3}           % A-tier rate, mound stage (%)
   \newcommand{\evoMoundEnrich}{1.30}          % enrichment ratio, mound stage
   \newcommand{\pEvoMound}{0.4616}          % p-value, A+ binomial in mound stage
   \newcommand{\pEvoMoundFisher}{0.6336}      % p-value, A+ Fisher exact in mound stage
   \newcommand{\evoMoundFisherOR}{0.95}    % OR, A+ Fisher exact in mound stage
-  \newcommand{\pEvoMoundAFisher}{0.5980}      % p-value, A Fisher exact in mound stage
-  \newcommand{\evoMoundAFisherOR}{0.98}    % OR, A Fisher exact in mound stage
+  \newcommand{\pEvoMoundAFisher}{0.9084}      % p-value, A Fisher exact in mound stage
+  \newcommand{\evoMoundAFisherOR}{0.49}    % OR, A Fisher exact in mound stage
   \newcommand{\NevoStupa}{18}            % sites with stupa stage
   \newcommand{\NevoStupaAp}{4}             % A+ sites with stupa stage
   \newcommand{\evoStupaApRate}{22.2}            % A+ rate, stupa stage (%)
-  \newcommand{\NevoStupaA}{7}             % A-tier sites with stupa stage
-  \newcommand{\evoStupaARate}{38.9}            % A-tier rate, stupa stage (%)
+  \newcommand{\NevoStupaA}{6}             % A-tier sites with stupa stage
+  \newcommand{\evoStupaARate}{33.3}            % A-tier rate, stupa stage (%)
   \newcommand{\evoStupaEnrich}{3.46}           % enrichment ratio, stupa stage
   \newcommand{\pEvoStupa}{0.0251}          % p-value, A+ binomial in stupa stage
   \newcommand{\pEvoStupaFisher}{0.0637}      % p-value, A+ Fisher exact in stupa stage
   \newcommand{\evoStupaFisherOR}{3.09}    % OR, A+ Fisher exact in stupa stage
-  \newcommand{\pEvoStupaAFisher}{0.0652}      % p-value, A Fisher exact in stupa stage
-  \newcommand{\evoStupaAFisherOR}{2.42}    % OR, A Fisher exact in stupa stage
+  \newcommand{\pEvoStupaAFisher}{0.0470}      % p-value, A Fisher exact in stupa stage
+  \newcommand{\evoStupaAFisherOR}{2.79}    % OR, A Fisher exact in stupa stage
   \newcommand{\NevoDome}{75}            % sites with dome stage
   \newcommand{\NevoDomeAp}{10}             % A+ sites with dome stage
   \newcommand{\evoDomeApRate}{13.3}            % A+ rate, dome stage (%)
-  \newcommand{\NevoDomeA}{20}             % A-tier sites with dome stage
-  \newcommand{\evoDomeARate}{26.7}            % A-tier rate, dome stage (%)
+  \newcommand{\NevoDomeA}{17}             % A-tier sites with dome stage
+  \newcommand{\evoDomeARate}{22.7}            % A-tier rate, dome stage (%)
   \newcommand{\evoDomeEnrich}{2.08}           % enrichment ratio, dome stage
   \newcommand{\pEvoDome}{0.0214}          % p-value, A+ binomial in dome stage
   \newcommand{\pEvoDomeFisher}{0.1067}       % p-value, A+ Fisher exact in dome stage
   \newcommand{\evoDomeFisherOR}{1.69}     % OR, A+ Fisher exact in dome stage
-  \newcommand{\pEvoDomeAFisher}{0.1439}       % p-value, A Fisher exact in dome stage
-  \newcommand{\evoDomeAFisherOR}{1.39}     % OR, A Fisher exact in dome stage
+  \newcommand{\pEvoDomeAFisher}{0.0586}       % p-value, A Fisher exact in dome stage
+  \newcommand{\evoDomeAFisherOR}{1.67}     % OR, A Fisher exact in dome stage
   \newcommand{\NevoMoundOnly}{20}          % mound-only sites (no later dome/stupa)
   \newcommand{\NevoMoundOnlyAp}{2}           % A+ in mound-only sites
   \newcommand{\NevoOverlap}{4}            % sites with both mound and dome/stupa stages
@@ -688,7 +712,7 @@
   \newcommand{\evoValidApRate}{12.5}             % A+ rate, context-validated (%)
   \newcommand{\evoValidEnrichAp}{1.95}            % enrichment ratio A+ (context-validated)
   \newcommand{\pEvoApValidated}{0.0159}          % p-value A+ binomial, context-validated (Exploratory)
-  \newcommand{\pEvoAValidated}{0.0274}           % p-value A  binomial, context-validated (Exploratory)
+  \newcommand{\pEvoAValidated}{0.0121}           % p-value A  binomial, context-validated (Exploratory)
   \newcommand{\NevoValidRejected}{6}           % sites rejected by context validation
 
 % --- analysis/unesco/mound_keyword_context_audit.py
@@ -863,64 +887,70 @@
 
 % --- analysis/unesco/wikidata_q180987_stupa_audit.py
 \newcommand{\wikiStupaTotal}{229}
-\newcommand{\wikiStupaATierCount}{67}
-\newcommand{\wikiStupaATierRate}{29.3}
-\newcommand{\wikiStupaATierEnrich}{1.55}
-\newcommand{\wikiStupaATierBinomP}{< 0.001}
-\newcommand{\wikiStupaATierBinomStar}{***}
+\newcommand{\wikiStupaATierCount}{42}
+\newcommand{\wikiStupaATierRate}{18.3}
+\newcommand{\wikiStupaATierEnrich}{1.43}
+\newcommand{\wikiStupaATierBinomP}{0.011}
+\newcommand{\wikiStupaATierBinomStar}{*}
 \newcommand{\wikiStupaPermNperms}{100,000}
-\newcommand{\wikiStupaPermZ}{1.60}
-\newcommand{\wikiStupaPermP}{0.075}
-\newcommand{\wikiStupaPermStar}{\ensuremath{\sim}}
+\newcommand{\wikiStupaPermZ}{1.00}
+\newcommand{\wikiStupaPermP}{0.149}
+\newcommand{\wikiStupaPermStar}{ns}
 \newcommand{\wikiStupaApCount}{20}
 \newcommand{\wikiStupaApRate}{8.7}
 \newcommand{\wikiStupaApEnrich}{1.36}
 \newcommand{\wikiStupaApBinomP}{0.102}
 \newcommand{\wikiStupaApBinomStar}{ns}
 \newcommand{\wikiStupaJavaTotal}{83}
-\newcommand{\wikiStupaJavaATierCount}{42}
-\newcommand{\wikiStupaJavaATierRate}{50.6}
-\newcommand{\wikiStupaClusterRatio}{2.56}
-\newcommand{\wikiStupaClusterAMean}{11.9}
-\newcommand{\wikiStupaClusterNonAMean}{4.6}
+\newcommand{\wikiStupaJavaATierCount}{22}
+\newcommand{\wikiStupaJavaATierRate}{26.5}
+\newcommand{\wikiStupaClusterRatio}{1.73}
+\newcommand{\wikiStupaClusterAMean}{11.2}
+\newcommand{\wikiStupaClusterNonAMean}{6.5}
 \newcommand{\wikiStupaBorobudurDevKm}{7.23}
 \newcommand{\wikiStupaNgawenDevKm}{0.381}
 \newcommand{\wikiStupaNgawenDevM}{381}
 \newcommand{\wikiStupaLumbiniDevKm}{0.555}
 \newcommand{\wikiStupaLumbiniDevM}{555}
 \newcommand{\wikiJavaNodeN}{83}
-\newcommand{\wikiJavaNodeATierN}{42}
-\newcommand{\wikiJavaNodeATierRate}{50.6}
-\newcommand{\wikiJavaNodeATierOR}{4.96}
-\newcommand{\wikiJavaNodeATierP}{< 0.001}
+\newcommand{\wikiJavaNodeATierN}{22}
+\newcommand{\wikiJavaNodeATierRate}{26.5}
+\newcommand{\wikiJavaNodeATierOR}{2.27}
+\newcommand{\wikiJavaNodeATierP}{0.014}
 \newcommand{\wikiJavaTightN}{54}
-\newcommand{\wikiJavaTightATierN}{41}
-\newcommand{\wikiJavaTightATierRate}{75.9}
-\newcommand{\wikiJavaTightATierOR}{18.07}
+\newcommand{\wikiJavaTightATierN}{22}
+\newcommand{\wikiJavaTightATierRate}{40.7}
+\newcommand{\wikiJavaTightATierOR}{5.33}
 \newcommand{\wikiJavaTightATierP}{< 0.001}
 \newcommand{\wikiJavaTightApN}{11}
 \newcommand{\wikiJavaTightApRate}{20.4}
 \newcommand{\wikiJavaTightApOR}{4.72}
 \newcommand{\wikiJavaTightApP}{0.001}
 \newcommand{\wikiMyanmarN}{67}
-\newcommand{\wikiMyanmarCbandN}{23}
-\newcommand{\wikiMyanmarCbandRate}{34.3}
-\newcommand{\wikiMyanmarCbandOR}{4.18}
+\newcommand{\wikiMyanmarATierN}{4}
+\newcommand{\wikiMyanmarATierOR}{0.21}
+\newcommand{\wikiMyanmarATierP}{< 0.001}
+\newcommand{\wikiMyanmarCbandN}{22}
+\newcommand{\wikiMyanmarCbandRate}{32.8}
+\newcommand{\wikiMyanmarCbandOR}{6.11}
 \newcommand{\wikiMyanmarCbandP}{< 0.001}
 \newcommand{\wikiHeartlandN}{120}
-\newcommand{\wikiHeartlandCbandN}{34}
-\newcommand{\wikiHeartlandCbandRate}{28.3}
-\newcommand{\wikiHeartlandCbandOR}{5.76}
+\newcommand{\wikiHeartlandATierN}{14}
+\newcommand{\wikiHeartlandATierOR}{0.38}
+\newcommand{\wikiHeartlandATierP}{0.005}
+\newcommand{\wikiHeartlandCbandN}{30}
+\newcommand{\wikiHeartlandCbandRate}{25.0}
+\newcommand{\wikiHeartlandCbandOR}{8.75}
 \newcommand{\wikiHeartlandCbandP}{< 0.001}
 \newcommand{\wikiNonHeartlandN}{102}
-\newcommand{\wikiNonHeartlandATierN}{50}
-\newcommand{\wikiNonHeartlandATierRate}{49.0}
-\newcommand{\wikiNonHeartlandATierOR}{6.22}
-\newcommand{\wikiNonHeartlandATierP}{< 0.001}
+\newcommand{\wikiNonHeartlandATierN}{28}
+\newcommand{\wikiNonHeartlandATierRate}{27.5}
+\newcommand{\wikiNonHeartlandATierOR}{3.05}
+\newcommand{\wikiNonHeartlandATierP}{0.001}
 \newcommand{\wikiNonHeartlandApRate}{13.7}
 \newcommand{\wikiNonHeartlandApOR}{3.21}
 \newcommand{\wikiNonHeartlandApP}{0.015}
-\newcommand{\wikiNonHeartlandCbandOR}{0.20}
+\newcommand{\wikiNonHeartlandCbandOR}{0.13}
 \newcommand{\wikiNonHeartlandCbandP}{1.000}
 
 % --- analysis/unesco/simulation_null_model.py
@@ -1063,6 +1093,51 @@
   \newcommand{\permSlopeSharpPeakTotal}{2417}
   \newcommand{\permSlopeSharpAtCanon}{1037}
   \newcommand{\permSlopeCanonRankSig}{ns}
+  % Tier A++
+  \newcommand{\permSlopeCanonBestJointAPP}{0.0503}
+  \newcommand{\permSlopeCanonBestJointSigAPP}{$\sim$}
+  \newcommand{\permSlopeCanonRankObsAPP}{1}
+  \newcommand{\permSlopeCanonRankPAPP}{1.0000}
+  \newcommand{\permSlopeCanonRankSigAPP}{ns}
+  \newcommand{\permSlopeCanonRankPctileAPP}{30.4}
+  \newcommand{\permSlopeCanonCondFractionAPP}{0.4770}
+  \newcommand{\permSlopeSharpPeakTotalAPP}{1055}
+  \newcommand{\permSlopeSharpAtCanonAPP}{503}
+  % Tier A+
+  \newcommand{\permSlopeCanonBestJointAP}{0.1037}
+  \newcommand{\permSlopeCanonBestJointSigAP}{ns}
+  \newcommand{\permSlopeCanonRankObsAP}{1}
+  \newcommand{\permSlopeCanonRankPAP}{1.0000}
+  \newcommand{\permSlopeCanonRankSigAP}{ns}
+  \newcommand{\permSlopeCanonRankPctileAP}{36.0}
+  \newcommand{\permSlopeCanonCondFractionAP}{0.4290}
+  \newcommand{\permSlopeSharpPeakTotalAP}{2417}
+  \newcommand{\permSlopeSharpAtCanonAP}{1037}
+  % Tier A
+  \newcommand{\permSlopeCanonBestJointA}{0.0620}
+  \newcommand{\permSlopeCanonBestJointSigA}{$\sim$}
+  \newcommand{\permSlopeCanonRankObsA}{1}
+  \newcommand{\permSlopeCanonRankPA}{1.0000}
+  \newcommand{\permSlopeCanonRankSigA}{ns}
+  \newcommand{\permSlopeCanonRankPctileA}{44.0}
+  \newcommand{\permSlopeCanonCondFractionA}{0.8710}
+  \newcommand{\permSlopeSharpPeakTotalA}{712}
+  \newcommand{\permSlopeSharpAtCanonA}{620}
+  % Kw filter (unambiguous keywords only: stupa/stupas/tholos, n=22)
+  \newcommand{\permSlopeCanonBestJointKwAPP}{0.0448}
+  \newcommand{\permSlopeCanonBestJointSigKwAPP}{$\sim$}
+  \newcommand{\permSlopeCanonBestJointKwAP}{0.0560}
+  \newcommand{\permSlopeCanonBestJointSigKwAP}{$\sim$}
+  \newcommand{\permSlopeCanonBestJointKwA}{0.0248}
+  \newcommand{\permSlopeCanonBestJointSigKwA}{*}
+  \newcommand{\permSlopeKwN}{22}
+  % Full corpus geographic bootstrap (N=1011, shuffle all longitudes)
+  \newcommand{\permSlopeCanonBestJointFullAPP}{$< 0.0001$}
+  \newcommand{\permSlopeCanonBestJointSigFullAPP}{***}
+  \newcommand{\permSlopeCanonBestJointFullAP}{$< 0.0001$}
+  \newcommand{\permSlopeCanonBestJointSigFullAP}{***}
+  \newcommand{\permSlopeCanonBestJointFullA}{$< 0.0001$}
+  \newcommand{\permSlopeCanonBestJointSigFullA}{***}
 
 % --- analysis/unesco/dome_geographic_concentration_test.py
   \newcommand{\geoNullDomeBootP}{0.5462}   % within-dome bootstrap p
@@ -1099,8 +1174,8 @@
 \newcommand{\stupaGeoRestrictedN}{168}
 \newcommand{\stupaHeartlandFrac}{72}
 \newcommand{\fullCorpusHeartlandFrac}{10}
-\newcommand{\stupaIndiaPakCOR}{3.75}
-\newcommand{\stupaIndiaPakCP}{0.0819}
+\newcommand{\stupaIndiaPakCOR}{5.22}
+\newcommand{\stupaIndiaPakCP}{0.0792}
 
 % --- analysis/unesco/dome_founding_stratification.py
   \newcommand{\domeStratNfs}{23}                % dome sites that are F/S
@@ -1132,45 +1207,46 @@
   \newcommand{\NtotalTests}{47}           % total tests in FDR analysis
   \newcommand{\NconfTests}{38}           % confirmatory tests
   \newcommand{\NexplTests}{9}           % exploratory tests
-  \newcommand{\NsurviveFDR}{26}           % tests surviving BH FDR (q<0.05)
+  \newcommand{\NsurviveFDR}{27}           % tests surviving BH FDR (q<0.05)
   \newcommand{\NsurviveBonfAll}{10}           % tests surviving Bonferroni (all tests)
   \newcommand{\NtotalTestsP}{0.0011}  % Bonferroni threshold = 0.05/47 (used in FDR table header)
   \newcommand{\BonfAllSurvivepCircApp}{0.0293}  % full-k Bonferroni survivor
   \newcommand{\FDRqSurvivepCircApp}{0.0034}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepCircAp}{0.0144}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepCircA}{0.0287}  % BH q-value survivor
-  \newcommand{\FDRqSurviveclusterApBinom}{0.0098}  % BH q-value survivor
-  \newcommand{\FDRqSurviveclusterMWp}{0.0232}  % BH q-value survivor
-  \newcommand{\BonfAllSurviveclusterPermP}{0.0141}  % full-k Bonferroni survivor
-  \newcommand{\FDRqSurviveclusterPermP}{0.002}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepCircAp}{0.0121}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepCircA}{0.0084}  % BH q-value survivor
+  \newcommand{\BonfAllSurvivepCircChi}{0.0}  % full-k Bonferroni survivor
+  \newcommand{\FDRqSurvivepCircChi}{0.0}  % BH q-value survivor
+  \newcommand{\FDRqSurviveclusterApBinom}{0.0086}  % BH q-value survivor
+  \newcommand{\FDRqSurviveclusterMWp}{0.0121}  % BH q-value survivor
+  \newcommand{\BonfAllSurviveclusterPermP}{0.0094}  % full-k Bonferroni survivor
+  \newcommand{\FDRqSurviveclusterPermP}{0.0013}  % BH q-value survivor
   \newcommand{\BonfAllSurviveclusterHarmonicMWp}{0.0004}  % full-k Bonferroni survivor
   \newcommand{\FDRqSurviveclusterHarmonicMWp}{0.0001}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepPreTwoK}{0.0098}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepFirstHalf}{0.0098}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepPreTwoK}{0.0086}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepFirstHalf}{0.0086}  % BH q-value survivor
   \newcommand{\BonfAllSurvivepeakSigP}{0.0306}  % full-k Bonferroni survivor
   \newcommand{\FDRqSurvivepeakSigP}{0.0034}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepReligUnion}{0.0287}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepChrist}{0.0306}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepNeffQuarter}{0.0311}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepNeffHalf}{0.0254}  % BH q-value survivor
-  \newcommand{\FDRqSurviveblockBootZP}{0.0254}  % BH q-value survivor
-  \newcommand{\FDRqSurvivesimKDEP}{0.0098}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepReligUnion}{0.0275}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepChrist}{0.0294}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepNeffQuarter}{0.0299}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepNeffHalf}{0.0232}  % BH q-value survivor
+  \newcommand{\FDRqSurviveblockBootZP}{0.0232}  % BH q-value survivor
+  \newcommand{\FDRqSurvivesimKDEP}{0.0086}  % BH q-value survivor
   \newcommand{\BonfAllSurvivepCorridorBinom}{0.0}  % full-k Bonferroni survivor
   \newcommand{\FDRqSurvivepCorridorBinom}{0.0}  % BH q-value survivor
   \newcommand{\BonfAllSurvivepCorridorFisher}{0.0}  % full-k Bonferroni survivor
   \newcommand{\FDRqSurvivepCorridorFisher}{0.0}  % BH q-value survivor
   \newcommand{\BonfAllSurvivepCorridorAppFisher}{0.0023}  % full-k Bonferroni survivor
-  \newcommand{\FDRqSurvivepCorridorAppFisher}{0.0006}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepCorridorAppFisher}{0.0005}  % BH q-value survivor
   \newcommand{\BonfAllSurvivepCorridorMW}{0.0035}  % full-k Bonferroni survivor
-  \newcommand{\FDRqSurvivepCorridorMW}{0.0007}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepCorridorMW}{0.0006}  % BH q-value survivor
   \newcommand{\BonfAllSurvivepEvoApp}{0.0392}  % full-k Bonferroni survivor
   \newcommand{\FDRqSurvivepEvoApp}{0.0039}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepEvoAp}{0.0144}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepEvoStupa}{0.0454}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepHinCminus}{0.0254}  % BH q-value survivor
-  \newcommand{\BonfAllSurvivepHinApCminus}{0.0098}  % full-k Bonferroni survivor
-  \newcommand{\FDRqSurvivepHinApCminus}{0.0016}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepBudJoint}{0.0184}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepEvoAp}{0.0121}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepEvoStupa}{0.0438}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepHinCminus}{0.0232}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepHinApCminus}{0.0086}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepBudJoint}{0.0232}  % BH q-value survivor
 
 % --- analysis/unesco/bonferroni_correction.py
   \newcommand{\BonfK}{3}  % k = confirmatory tests (Tests 1, 2, 3)
@@ -1192,7 +1268,7 @@
   \newcommand{\FDRqTestB}{---}  % FDR q: N/A (structural, excluded)
   \newcommand{\BonfAllTestB}{---}  % Bonf adj: N/A (structural, excluded)
   \newcommand{\pRawTestB}{0.0001}  % Rayleigh permutation p
-  \newcommand{\pAdjClusterMW}{0.027}  % Bonf-adj p, cluster MW (= 0.0089 × 3)
+  \newcommand{\pAdjClusterMW}{0.015}  % Bonf-adj p, cluster MW (= 0.0048 × 3)
 
 % --- analysis/global/emit_sig_macros.py
   \newcommand{\AmericasOneSidedPSig}{ns}  % auto sig label
@@ -1216,7 +1292,7 @@
   \newcommand{\pBlockOneSig}{ns}  % auto sig label
   \newcommand{\pBlockThreeSig}{*}  % auto sig label
   \newcommand{\pBudFisherSig}{ns}  % auto sig label
-  \newcommand{\pBudJointSig}{**}  % auto sig label
+  \newcommand{\pBudJointSig}{*}  % auto sig label
   \newcommand{\pBudReligSig}{ns}  % auto sig label
   \newcommand{\pCMHSig}{ns}  % auto sig label
   \newcommand{\pCanonAppSig}{*}  % auto sig label
@@ -1227,8 +1303,8 @@
   \newcommand{\pChristFisherSig}{ns}  % auto sig label
   \newcommand{\pChristSig}{*}  % auto sig label
   \newcommand{\pCircAFisherSig}{*}  % auto sig label
-  \newcommand{\pCircASig}{*}  % auto sig label
-  \newcommand{\pCircAValidatedSig}{*}  % auto sig label
+  \newcommand{\pCircASig}{**}  % auto sig label
+  \newcommand{\pCircAValidatedSig}{**}  % auto sig label
   \newcommand{\pCircApFisherSig}{*}  % auto sig label
   \newcommand{\pCircApSig}{**}  % auto sig label
   \newcommand{\pCircApValidatedSig}{*}  % auto sig label
@@ -1236,7 +1312,7 @@
   \newcommand{\pCircAppFisherSig}{**}  % auto sig label
   \newcommand{\pCircAppPermSig}{**}  % auto sig label
   \newcommand{\pCircAppSig}{***}  % auto sig label
-  \newcommand{\pCircChiSig}{ns}  % auto sig label
+  \newcommand{\pCircChiSig}{***}  % auto sig label
   \newcommand{\pCochranAppFiveSig}{$^\dagger$}  % auto sig label
   \newcommand{\pCochranAppThreeSig}{*}  % auto sig label
   \newcommand{\pCochranFiveSig}{ns}  % auto sig label
@@ -1249,14 +1325,14 @@
   \newcommand{\pEighteenBinomASig}{***}  % auto sig label
   \newcommand{\pEighteenBinomBSig}{***}  % auto sig label
   \newcommand{\pEvoAFisherSig}{*}  % auto sig label
-  \newcommand{\pEvoASig}{*}  % auto sig label
+  \newcommand{\pEvoASig}{**}  % auto sig label
   \newcommand{\pEvoAValidatedSig}{*}  % auto sig label
   \newcommand{\pEvoApFisherSig}{*}  % auto sig label
   \newcommand{\pEvoApSig}{**}  % auto sig label
   \newcommand{\pEvoApValidatedSig}{*}  % auto sig label
   \newcommand{\pEvoAppFisherSig}{**}  % auto sig label
   \newcommand{\pEvoAppSig}{***}  % auto sig label
-  \newcommand{\pEvoDomeAFisherSig}{ns}  % auto sig label
+  \newcommand{\pEvoDomeAFisherSig}{$^\dagger$}  % auto sig label
   \newcommand{\pEvoDomeAppFisherSig}{*}  % auto sig label
   \newcommand{\pEvoDomeFisherSig}{ns}  % auto sig label
   \newcommand{\pEvoDomeSig}{$^\dagger$}  % auto sig label
@@ -1264,7 +1340,7 @@
   \newcommand{\pEvoMoundAppFisherSig}{ns}  % auto sig label
   \newcommand{\pEvoMoundFisherSig}{ns}  % auto sig label
   \newcommand{\pEvoMoundSig}{ns}  % auto sig label
-  \newcommand{\pEvoStupaAFisherSig}{$^\dagger$}  % auto sig label
+  \newcommand{\pEvoStupaAFisherSig}{*}  % auto sig label
   \newcommand{\pEvoStupaAppFisherSig}{**}  % auto sig label
   \newcommand{\pEvoStupaFisherSig}{$^\dagger$}  % auto sig label
   \newcommand{\pEvoStupaIndonesiaPSig}{**}  % auto sig label
@@ -1272,14 +1348,15 @@
   \newcommand{\pFirstHalfSig}{**}  % auto sig label
   \newcommand{\pFisherCanonModernSig}{ns}  % auto sig label
   \newcommand{\pFoundDateSpearmanSig}{ns}  % auto sig label
+  \newcommand{\pFoundKwAppFisherSig}{**}  % auto sig label
   \newcommand{\pFoundKwFisherSig}{ns}  % auto sig label
   \newcommand{\pHalfFisherSig}{ns}  % auto sig label
-  \newcommand{\pHinApCminusSig}{***}  % auto sig label
+  \newcommand{\pHinApCminusSig}{**}  % auto sig label
   \newcommand{\pHinCminusSig}{*}  % auto sig label
-  \newcommand{\pHinJointSig}{ns}  % auto sig label
+  \newcommand{\pHinJointSig}{*}  % auto sig label
   \newcommand{\pIslamFisherSig}{ns}  % auto sig label
   \newcommand{\pJerusalemApSig}{**}  % auto sig label
-  \newcommand{\pJudATierFisherSig}{$^\dagger$}  % auto sig label
+  \newcommand{\pJudATierFisherSig}{ns}  % auto sig label
   \newcommand{\pJudApFisherSig}{ns}  % auto sig label
   \newcommand{\pJudApFisherSigSig}{ns}  % auto sig label
   \newcommand{\pJudApSig}{$^\dagger$}  % auto sig label
@@ -1317,12 +1394,12 @@
   \newcommand{\targetedPApSig}{***}  % auto sig label
   \newcommand{\targetedPfullSig}{*}  % auto sig label
   \newcommand{\wikiHeartlandCbandPSig}{***}  % auto sig label
-  \newcommand{\wikiJavaNodeATierPSig}{***}  % auto sig label
+  \newcommand{\wikiJavaNodeATierPSig}{*}  % auto sig label
   \newcommand{\wikiJavaTightATierPSig}{***}  % auto sig label
   \newcommand{\wikiJavaTightApPSig}{**}  % auto sig label
   \newcommand{\wikiMyanmarCbandPSig}{***}  % auto sig label
-  \newcommand{\wikiNonHeartlandATierPSig}{***}  % auto sig label
+  \newcommand{\wikiNonHeartlandATierPSig}{**}  % auto sig label
   \newcommand{\wikiNonHeartlandApPSig}{*}  % auto sig label
   \newcommand{\wikiNonHeartlandCbandPSig}{ns}  % auto sig label
-  \newcommand{\wikiStupaATierBinomPSig}{***}  % auto sig label
+  \newcommand{\wikiStupaATierBinomPSig}{*}  % auto sig label
 

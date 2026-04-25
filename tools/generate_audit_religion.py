@@ -20,9 +20,9 @@ from lib.beru import (
     GERIZIM, BERU, TIER_APLUS, TIER_A_MAX,
     TIER_C_MAX, TIER_CMINUS, TIER_CMINUS2, MIDPOINT,
     deviation as beru_deviation, tier_label,
-    is_aplus, is_a_or_better, is_c_or_better, is_cminus_or_better,
+    is_aplus, is_aplusplus, is_a_or_better, is_c_or_better, is_cminus_or_better,
     load_religion_sets,
-    P_NULL_AP, P_NULL_A, P_NULL_C, P_NULL_CMINUS, P_NULL_CMINUS2,
+    P_NULL_AP, P_NULL_A, P_NULL_C, P_NULL_CMINUS, P_NULL_CMINUS2, P_NULL_APP,
 )
 from scipy.stats import binomtest, fisher_exact
 
@@ -57,6 +57,8 @@ def run():
     n_a_all  = sum(1 for s in sites if is_a_or_better(s["tier"]))
     n_c_all  = sum(1 for s in sites if is_c_or_better(s["tier"]))
     n_cm_all = sum(1 for s in sites if is_cminus_or_better(s["tier"]))
+    n_app_all= sum(1 for s in sites if is_aplusplus(s["tier"]))
+    n_cm2_all= sum(1 for s in sites if s["tier"] == "C--")
 
     RELIGION_SETS = load_religion_sets()
     any_relig_kws = [k for _, kws in RELIGION_SETS for k in kws]
@@ -68,15 +70,21 @@ def run():
         na   = sum(1 for s in subset if is_a_or_better(s["tier"]))
         nc   = sum(1 for s in subset if is_c_or_better(s["tier"]))
         ncm  = sum(1 for s in subset if is_cminus_or_better(s["tier"]))
+        napp = sum(1 for s in subset if is_aplusplus(s["tier"]))
+        ncm2 = sum(1 for s in subset if s["tier"] == "C--")
         enr_ap = (nap / n) / P_NULL_AP     if n else 0
         enr_a  = (na  / n) / P_NULL_A      if n else 0
         enr_c  = (nc  / n) / P_NULL_C      if n else 0
         enr_cm = (ncm / n) / P_NULL_CMINUS if n else 0
+        enr_app= (napp / n) / P_NULL_APP   if n else 0
+        enr_cm2= (ncm2 / n) / P_NULL_CMINUS2 if n else 0
         # Fisher exact: sub-corpus vs rest of full corpus (one-sided, greater)
         nap_rest = n_ap_all - nap;  n_rest = N_ALL - n
         na_rest  = n_a_all  - na
         nc_rest  = n_c_all  - nc
         ncm_rest = n_cm_all - ncm
+        napp_rest = n_app_all - napp
+        ncm2_rest = n_cm2_all - ncm2
         def _f(k, n_sub, k_rest, n_rest_):
             if n_sub < 1: return 1.0, float('nan')
             tbl = [[k, n_sub - k], [k_rest, n_rest_ - k_rest]]
@@ -86,7 +94,9 @@ def run():
         p_a,  or_a  = _f(na,  n, na_rest,  n_rest)
         p_c,  or_c  = _f(nc,  n, nc_rest,  n_rest)
         p_cm, or_cm = _f(ncm, n, ncm_rest, n_rest)
-        return n, nap, na, nc, ncm, p_ap, p_a, p_c, p_cm, enr_ap, enr_a, enr_c, enr_cm, or_ap, or_a, or_c, or_cm
+        p_app, or_app = _f(napp, n, napp_rest, n_rest)
+        p_cm2, or_cm2 = _f(ncm2, n, ncm2_rest, n_rest)
+        return n, napp, nap, na, nc, ncm, ncm2, p_app, p_ap, p_a, p_c, p_cm, p_cm2, enr_app, enr_ap, enr_a, enr_c, enr_cm, enr_cm2, or_app, or_ap, or_a, or_c, or_cm, or_cm2
 
     def sig(p):
         if p < 0.001: return "***"
@@ -112,9 +122,10 @@ def run():
     lines += [
         SEP,
         "A-SIDE SUMMARY  (harmonic alignment)  — Fisher exact: sub-corpus vs rest of full corpus",
-        f"  {'Religion':<20} {'N':>5}  {'A+':>4} {'A+%':>6} {'A+p(F)':>9} {'OR':>6} {'':>4}  "
+        f"  {'Religion':<20} {'N':>5}  {'A++':>4} {'A++%':>6} {'A+p(F)':>9} {'OR':>6} {'':>4}  "
+        f"{'A+':>4} {'A+%':>6} {'A+p(F)':>9} {'OR':>6} {'':>4}  "
         f"{'A':>4} {'A%':>6} {'Ap(F)':>9} {'OR':>6} {'':>4}",
-        "  " + "-" * 96,
+        "  " + "-" * 120,
     ]
 
     religion_data = {}
@@ -122,22 +133,24 @@ def run():
         matched = [s for s in sites if any(k in s["text"] for k in kws)]
         r = stats(matched)
         religion_data[religion] = (matched, r, kws)
-        n, nap, na, nc, ncm, p_ap, p_a, p_c, p_cm, enr_ap, enr_a, enr_c, enr_cm, or_ap, or_a, *_ = r
+        n, napp, nap, na, nc, ncm, ncm2, p_app, p_ap, p_a, p_c, p_cm, p_cm2, enr_app, enr_ap, enr_a, enr_c, enr_cm, enr_cm2, or_app, or_ap, or_a, or_c, or_cm, or_cm2 = r
         if n < 5:
             continue
         lines.append(
-            f"  {religion:<20} {n:>5}  {nap:>4} {100*nap/n:>5.1f}% {p_ap:>9.4f} {or_ap:>5.2f}x {sig(p_ap):>4}  "
+            f"  {religion:<20} {n:>5}  {napp:>4} {100*napp/n:>5.1f}% {p_app:>9.4f} {or_app:>5.2f}x {sig(p_app):>4}  "
+            f"{nap:>4} {100*nap/n:>5.1f}% {p_ap:>9.4f} {or_ap:>5.2f}x {sig(p_ap):>4}  "
             f"{na:>4} {100*na/n:>5.1f}% {p_a:>9.4f} {or_a:>5.2f}x {sig(p_a):>4}"
         )
 
     r_u = stats(any_relig)
-    n_u, nap_u, na_u, nc_u, ncm_u, p_ap_u, p_a_u, p_c_u, p_cm_u, enr_ap_u, enr_a_u, enr_c_u, enr_cm_u, or_ap_u, or_a_u, or_c_u, or_cm_u = r_u
+    n_u, napp_u, nap_u, na_u, nc_u, ncm_u, ncm2_u, p_app_u, p_ap_u, p_a_u, p_c_u, p_cm_u, p_cm2_u, enr_app_u, enr_ap_u, enr_a_u, enr_c_u, enr_cm_u, enr_cm2_u, or_app_u, or_ap_u, or_a_u, or_c_u, or_cm_u, or_cm2_u = r_u
     lines += [
-        "  " + "-" * 96,
-        f"  {'UNION (any)':<20} {n_u:>5}  {nap_u:>4} {100*nap_u/n_u:>5.1f}% {p_ap_u:>9.4f} {or_ap_u:>5.2f}x "
-        f"{sig(p_ap_u):>4}  {na_u:>4} {100*na_u/n_u:>5.1f}% {p_a_u:>9.4f} {or_a_u:>5.2f}x {sig(p_a_u):>4}",
+        "  " + "-" * 120,
+        f"  {'UNION (any)':<20} {n_u:>5}  {napp_u:>4} {100*napp_u/n_u:>5.1f}% {p_app_u:>9.4f} {or_app_u:>5.2f}x "
+        f"{sig(p_app_u):>4}  {nap_u:>4} {100*nap_u/n_u:>5.1f}% {p_ap_u:>9.4f} {or_ap_u:>5.2f}x {sig(p_ap_u):>4}  "
+        f"{na_u:>4} {100*na_u/n_u:>5.1f}% {p_a_u:>9.4f} {or_a_u:>5.2f}x {sig(p_a_u):>4}",
         "",
-        f"  Full corpus: N={N_ALL}, A+ rate={100*n_ap_all/N_ALL:.1f}% ({n_ap_all}), A rate={100*n_a_all/N_ALL:.1f}% ({n_a_all})",
+        f"  Full corpus: N={N_ALL}, A++ rate={100*n_app_all/N_ALL:.1f}% ({n_app_all}), A+ rate={100*n_ap_all/N_ALL:.1f}% ({n_ap_all}), A rate={100*n_a_all/N_ALL:.1f}% ({n_a_all})",
         f"  Fisher exact: one-sided (greater), sub-corpus vs rest of full corpus.",
         "",
     ]
@@ -149,26 +162,28 @@ def run():
         f"  Full-corpus C rate: {100*n_c_all/N_ALL:.1f}%  |  C-/C-- rate: {100*n_cm_all/N_ALL:.1f}%",
         "",
         f"  {'Religion':<20} {'N':>5}  {'C':>4} {'C%':>6} {'Cp(F)':>9} {'OR':>6} {'':>4}  "
-        f"{'C-':>4} {'C-%':>6} {'C-p(F)':>9} {'OR':>6} {'':>4}",
-        "  " + "-" * 96,
+        f"{'C-':>4} {'C-%':>6} {'C-p(F)':>9} {'OR':>6} {'':>4}  {'C--':>4} {'C--%':>6} {'C--p(F)':>9} {'OR':>6} {'':>4}",
+        "  " + "-" * 140,
     ]
 
     for religion, kws in RELIGION_SETS:
         if religion not in religion_data:
             continue
         matched, r, _ = religion_data[religion]
-        n, nap, na, nc, ncm, p_ap, p_a, p_c, p_cm, enr_ap, enr_a, enr_c, enr_cm, or_ap, or_a, or_c, or_cm = r
+        n, napp, nap, na, nc, ncm, ncm2, p_app, p_ap, p_a, p_c, p_cm, p_cm2, enr_app, enr_ap, enr_a, enr_c, enr_cm, enr_cm2, or_app, or_ap, or_a, or_c, or_cm, or_cm2 = r
         if n < 5:
             continue
         lines.append(
             f"  {religion:<20} {n:>5}  {nc:>4} {100*nc/n:>5.1f}% {p_c:>9.4f} {or_c:>5.2f}x {sig(p_c):>4}  "
-            f"{ncm:>4} {100*ncm/n:>5.1f}% {p_cm:>9.4f} {or_cm:>5.2f}x {sig(p_cm):>4}"
+            f"{ncm:>4} {100*ncm/n:>5.1f}% {p_cm:>9.4f} {or_cm:>5.2f}x {sig(p_cm):>4}  "
+            f"{ncm2:>4} {100*ncm2/n:>5.1f}% {p_cm2:>9.4f} {or_cm2:>5.2f}x {sig(p_cm2):>4}"
         )
 
     lines += [
-        "  " + "-" * 96,
+        "  " + "-" * 140,
         f"  {'UNION (any)':<20} {n_u:>5}  {nc_u:>4} {100*nc_u/n_u:>5.1f}% {p_c_u:>9.4f} {or_c_u:>5.2f}x "
-        f"{sig(p_c_u):>4}  {ncm_u:>4} {100*ncm_u/n_u:>5.1f}% {p_cm_u:>9.4f} {or_cm_u:>5.2f}x {sig(p_cm_u):>4}",
+        f"{sig(p_c_u):>4}  {ncm_u:>4} {100*ncm_u/n_u:>5.1f}% {p_cm_u:>9.4f} {or_cm_u:>5.2f}x {sig(p_cm_u):>4}  "
+        f"{ncm2_u:>4} {100*ncm2_u/n_u:>5.1f}% {p_cm2_u:>9.4f} {or_cm2_u:>5.2f}x {sig(p_cm2_u):>4}",
         "",
         f"  Full corpus: N={N_ALL}, C-tier count={n_c_all} ({100*n_c_all/N_ALL:.1f}%), C-/C-- count={n_cm_all} ({100*n_cm_all/N_ALL:.1f}%)",
         "",
@@ -224,8 +239,7 @@ def run():
     jud_data = religion_data.get("Judaism")
     if jud_data:
         matched_jud, r_jud, _ = jud_data
-        n_jud, nap_jud, na_jud, nc_jud, ncm_jud, p_ap_jud, p_a_jud, p_c_jud, p_cm_jud, \
-            enr_ap_jud, enr_a_jud, enr_c_jud, enr_cm_jud, or_ap_jud, or_a_jud, *_ = r_jud
+        n_jud, napp_jud, nap_jud, na_jud, nc_jud, ncm_jud, ncm2_jud, p_app_jud, p_ap_jud, p_a_jud, p_c_jud, p_cm_jud, p_cm2_jud, enr_app_jud, enr_ap_jud, enr_a_jud, enr_c_jud, enr_cm_jud, enr_cm2_jud, or_app_jud, or_ap_jud, or_a_jud, or_c_jud, or_cm_jud, or_cm2_jud = r_jud
         non_jud_ap = n_ap_all - nap_jud
         non_jud_a  = n_a_all - na_jud
         non_jud_n  = N_ALL - n_jud
@@ -254,16 +268,18 @@ def run():
         if religion not in religion_data:
             continue
         matched, r, _ = religion_data[religion]
-        n, nap, na, nc, ncm, p_ap, p_a, p_c, p_cm, enr_ap, enr_a, enr_c, enr_cm, or_ap, or_a, or_c, or_cm = r
+        n, napp, nap, na, nc, ncm, ncm2, p_app, p_ap, p_a, p_c, p_cm, p_cm2, enr_app, enr_ap, enr_a, enr_c, enr_cm, enr_cm2, or_app, or_ap, or_a, or_c, or_cm, or_cm2 = r
         if n < 1:
             continue
 
         matched_sorted = sorted(matched, key=lambda s: (tier_order.get(s["tier"], 9), s["dev"]))
-        aplus_sites = [s for s in matched_sorted if is_aplus(s["tier"])]
+        aplusplus_sites = [s for s in matched_sorted if is_aplusplus(s["tier"])]
+        aplus_sites = [s for s in matched_sorted if is_aplus(s["tier"]) and not is_aplusplus(s["tier"])]
         a_sites     = [s for s in matched_sorted if s["tier"] == "A"]
         b_sites     = [s for s in matched_sorted if s["tier"] == "B"]
         c_sites     = [s for s in matched_sorted if s["tier"] == "C"]
         cm_sites    = [s for s in matched_sorted if s["tier"] in ("C-", "C--")]
+        cm2_sites   = [s for s in matched_sorted if s["tier"] == "C--"]
 
         # Per-keyword tier breakdown (sorted by total hits descending)
         kw_tier_rows = []
@@ -288,6 +304,7 @@ def run():
             f"  A   : {na}/{n} = {100*na/n:.1f}%  enrich {enr_a:.2f}x  Fisher p={p_a:.4f} {sig(p_a)}  OR={or_a:.2f}x",
             f"  C   : {nc}/{n} = {100*nc/n:.1f}%  enrich {enr_c:.2f}x  Fisher p={p_c:.4f} {sig(p_c)}  OR={or_c:.2f}x",
             f"  C-  : {ncm}/{n} = {100*ncm/n:.1f}%  enrich {enr_cm:.2f}x  Fisher p={p_cm:.4f} {sig(p_cm)}  OR={or_cm:.2f}x",
+            f"  C-- : {ncm2}/{n} = {100*ncm2/n:.1f}%  enrich {enr_cm2:.2f}x  Fisher p={p_cm2:.4f} {sig(p_cm2)}  OR={or_cm2:.2f}x",
             "",
             f"  Keyword tier breakdown (sorted by total hits):",
             f"    {'keyword':<20}  {'total':>7}  {'A+':>4}  {'A':>5}  {'B':>5}  {'C':>5}  {'C-':>4}",
@@ -308,6 +325,12 @@ def run():
             country = f"  ({s['states']})" if s.get("states") else ""
             return (f"    {s['tier']:<4}  {s['km']:>6.1f} km  {s['lon']:>9.4f}°E"
                     f"  dist_mid={dist_mid:>5.1f} km  [{kw_hit(s)}]  {s['name']}{country}")
+
+        if aplusplus_sites:
+            lines.append(f"  A++ SITES ({len(aplusplus_sites)}):")
+            for s in aplusplus_sites:
+                lines.append(site_line(s))
+            lines.append("")
 
         if aplus_sites:
             lines.append(f"  A+ SITES ({len(aplus_sites)}):")
@@ -338,6 +361,11 @@ def run():
             for s in cm_sites:
                 lines.append(site_line_c(s))
             lines.append("")
+        if cm2_sites and len(cm2_sites) != len(cm_sites):
+            lines.append(f"  C-- SITES ({len(cm2_sites)}) — extremely close to midpoint:")
+            for s in cm2_sites:
+                lines.append(site_line_c(s))
+            lines.append("")
 
     # ── Union listing ─────────────────────────────────────────────────────────
     lines += [
@@ -347,10 +375,11 @@ def run():
         f"  A   : {na_u}/{n_u} = {100*na_u/n_u:.1f}%  enrich {enr_a_u:.2f}x  p={p_a_u:.4f} {sig(p_a_u)}",
         f"  C   : {nc_u}/{n_u} = {100*nc_u/n_u:.1f}%  enrich {enr_c_u:.2f}x  p={p_c_u:.4f} {sig(p_c_u)}",
         f"  C-  : {ncm_u}/{n_u} = {100*ncm_u/n_u:.1f}%  enrich {enr_cm_u:.2f}x  p={p_cm_u:.4f} {sig(p_cm_u)}",
+        f"  C-- : {ncm2_u}/{n_u} = {100*ncm2_u/n_u:.1f}%  enrich {enr_cm2_u:.2f}x  p={p_cm2_u:.4f} {sig(p_cm2_u)}",
         "",
         f"  {'Site':<55} {'Tier':<5} {'km':>7}  Religion (keyword)",
         "  " + "-" * 90,
-    ]
+     ]
     any_relig_sorted = sorted(any_relig,
                               key=lambda s: (tier_order.get(s["tier"], 9), s["dev"]))
     for s in any_relig_sorted:
