@@ -5,8 +5,7 @@
 Seth Tenenbaum · Independent Scholar
 ORCID: [0009-0008-5797-2498](https://orcid.org/0009-0008-5797-2498)
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19574076.svg)](https://doi.org/10.5281/zenodo.19574076)
-> **v1.3.0 release in progress.** A new Zenodo DOI will be assigned on publication of this tag. The badge above resolves to the latest version via the concept DOI.
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19772198.svg)](https://doi.org/10.5281/zenodo.19772198)
 
 ---
 

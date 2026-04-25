@@ -1,7 +1,7 @@
 # Changelog
 
 ### v1.3.0 — 2026-04-25
-**DOI:** (this release — Zenodo will assign DOI on publication of this tag)
+**DOI:** [10.5281/zenodo.19772198](https://doi.org/10.5281/zenodo.19772198)
 
 #### Analysis changes
 - **Religion keyword audit expanded:** `tools/generate_audit_religion.py` updated
