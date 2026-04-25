@@ -5,11 +5,8 @@
 \section{Introduction}
 \label{sec:introduction}
 
-This study applies a one-dimensional angular enrichment test to the
-externally curated UNESCO Cultural and Mixed corpus ($N = \NclusterTotal$),
-using a reproducible computational pipeline.
-The approach is intended as a reusable framework for spatial pattern‑detection studies in archaeological
-heritage data.
+This study applies a reproducible one-dimensional angular enrichment test to the
+externally curated UNESCO Cultural and Mixed corpus ($N = \NclusterTotal$).
 
 Sites within $\leq\ApThreshBeru{}$~beru ($\sim\ApThreshKm{}$~km, see 
 \S\ref{sec:tier_classification}) of a harmonic node are
@@ -23,16 +20,16 @@ $\clusterHarmonicRatio\times$ more densely populated overall (Test~3).
 
 A global anchor sweep reveals a 3\textdegree{} periodic structure in the
 corpus longitude distribution consistent with the 0.1-beru unit; the full
-treatment and its methodological implications are in
-\S\ref{sec:sensitivity_global} and \S\ref{sec:limitations_circularity}.
+treatment is in \S\ref{sec:sensitivity_global} and \S\ref{sec:limitations_circularity}.
 
 \textbf{Why this design addresses key methodological criticisms.}
 Prior metrological investigations were criticized for investigator-assembled
 site lists \citep{williamson1983leylines,freeman1976,kendall1974}.
 Three features distinguish this study: (1)~the UNESCO site list was compiled
 without reference to this hypothesis and is fixed; (2)~the 0.1-beru interval
-is documented in cuneiform sources \citep{hunger2019mul} as the finest
-integer subdivision, limiting the parameter space; (3)~all sub-populations 
+equals 3~\textit{u\v{s}}, the finest integer multiple of the smallest
+attested cuneiform subdivision (1~\textit{u\v{s}} = $\tfrac{1}{30}$~beru)
+\citep{hunger2019mul,powell1987metrological}, limiting the parameter space; (3)~all sub-populations 
 and results are fully computationally reproducible from public source 
 data \citep{tenenbaum2026audit}.
 
@@ -82,11 +79,8 @@ probability-based frameworks for evaluating orientation claims
 \citep{ruggles1999astronomy,ruggles2015handbook,silva2020statistical}.
 The ICOMOS-IAU thematic study \citep{ruggles2010icomos} provides
 institutional context for archaeoastronomical analysis of World Heritage
-properties. Medieval mappamundi and qibla charts similarly employed sacred
+properties.  Medieval mappamundi and qibla charts similarly employed sacred
 meridians (Jerusalem, Mecca) as orienting references \citep{harvey1987mappamundi}.
-
-
-
 
 \subsection{The Anchor: Mount Gerizim}
 \label{sec:anchor}
@@ -95,10 +89,9 @@ Mount Gerizim (\GerizimLon\textdegree{}E) is the primary reference
 anchor because of its documented \textit{tabbur ha-aretz} (``navel of the
 earth'') role in Samaritan cosmographic tradition
 \citep{purvis1968,macdonald1964,crown1989}, analogous to Babylon's meridian
-in cuneiform astronomical records \citep{hunger2019mul}. As a prominent
-mountain (881~m) in the central highlands, it would have served as a
-natural survey reference point. No optimization
-across alternative Levantine anchors was performed.
+in cuneiform astronomical records \citep{hunger2019mul}. At 881~m in the
+central highlands, it would have served as a natural survey reference point.
+No alternative Levantine anchors were tested.
 
 Gerizim's tentative-list coordinate (ref.~5706, DMS \GerizimLonDMS{}) is
 externally sourced and does not appear in the UNESCO inscribed corpus
@@ -155,11 +148,8 @@ $\delta = |B - \operatorname{round}(B, 0.1)|$.
 The tier classification is a fixed angular criterion.
 Kilometer labels (e.g.\ $\lesssim\ApThreshKm{}$~km for Tier-A+) are equatorial
 approximations computed as $\delta \times 30 \times 111$~km/\textdegree{},
-becoming smaller at higher latitudes. This makes the angular criterion
-\emph{conservative} at high latitudes. A geodesic sensitivity check confirms
-that applying a strict physical threshold would increase the A+ count to
-\GeodesicApPhysical{}, strengthening all primary results. No latitude
-correction is applied.
+becoming smaller at higher latitudes; the angular criterion is consequently
+conservative at high latitudes. No latitude correction is applied.
 
 The geometric null for Tier-A+ is $2 \times \ApThreshBeru{} / 0.1 = \NullRateApPct{}\%$,
 assuming uniform longitudes. This serves as a convenient reference, but
@@ -171,13 +161,14 @@ geometric null is not materially inflated by longitude clumping.
 \subsection{Metrological Basis for the 0.1-Beru Spacing}
 \label{sec:metrology_basis}
 
-The harmonic spacing tested is 0.1~beru (3\textdegree{}), the smallest integer
-sub-division of the beru attested in cuneiform metrology, equalling exactly
-3~\textit{u\v{s}} \citep{hunger2019mul,robson2008mathematics,powell1987metrological}.
-It was selected because it is the finest metrologically attested integer
-sub-division that yields a tractable test (\NharmonicsCoarse{} harmonics, \NullRateAp{} geometric null).
-Coarser spacings (0.5~beru, 1~beru) are uninformative; finer sub-divisions
-(0.02~beru) do not produce the signal (\S\ref{sec:metrology}).
+The harmonic spacing tested is 0.1~beru (3\textdegree{}).
+The \textit{u\v{s}} is the smallest subdivision of the beru in cuneiform
+metrology (1~beru $=$ 30~\textit{u\v{s}}), and 0.1~beru $=$ 3~\textit{u\v{s}}
+is its finest integer multiple attested in astronomical records
+\citep{hunger2019mul,robson2008mathematics,powell1987metrological}.
+It yields a tractable test (\NharmonicsCoarse{} harmonics, \NullRateAp{} geometric null);
+coarser spacings are uninformative and finer ones produce no signal
+(\S\ref{sec:metrology}).
 
 The 0.05‑beru spacing (1.5\textdegree{}) also reaches significance, but this 
 is structurally expected because every 0.10‑beru (3\textdegree{}) node is also 
@@ -195,9 +186,9 @@ distance-\textit{beru} (French ``la lieue'') from 180
 $180 \times 59.4 = 10{,}692$\,m.
 At 111\,km/°, 10,692\,m equals 0.00321\, angular-beru.
 Two parasangs equal one distance-beru(\citealt[p.~467]{powell1987metrological}),
-and one barid equals two distance-b\={e}rus
+and one barid equals two distance-berus
 (\citealt[vol.~2, p.~63, n.~2]{burton1893pilgrimage}),
-giving $2 \times 0.00321 = 0.00642$~angular-b\={e}ru.
+giving $2 \times 0.00321 = 0.00642$~angular-beru.
 
 The same longitude offset corresponds to a smaller ground distance at
 higher latitudes. The km values are only approximate, while the
@@ -763,12 +754,12 @@ than independent angular units.
 \subsection{Sensitivity Slope at the Canonical Unit}
 \label{sec:sensitivity_slope_perm}
 
-A fine sweep within $\pm 1\%$ of 0.10~b\={e}ru (\texttt{fine\_sweep\_audit.py})
+A fine sweep within $\pm 1\%$ of 0.10~beru (\texttt{fine\_sweep\_audit.py})
 shows a $\pm 0.3\%$ shift collapses joint significance in at least one
 population. A geographic bootstrap of the full cultural corpus finds no
 permutation in \permSlopeSpecN{} trials that reproduces the canonical-unit
 sharp peak at any precision tier ($p \permSlopeCanonBestJointFullAP{}$,
-\permSlopeCanonBestJointSigFullAP{}), confirming 0.10~b\={e}ru as a specific
+\permSlopeCanonBestJointSigFullAP{}), confirming 0.10~beru as a specific
 address. The dome-filter specificity test yields marginal results across all
 tiers (A$^{++}$: $p = \permSlopeCanonBestJointAPP{}$,
 \permSlopeCanonBestJointSigAPP{}; A$^{+}$: $p = \permSlopeCanonBestJointAP{}$,
@@ -783,11 +774,11 @@ independently confirmed by Tests~C and~D (\S\ref{sec:results_rayleigh}).
 A log-scale threshold sweep (\logSweepNtaus{} values,
 \logSweepAregionNsig/\logSweepAregionNtaus{} significant within $\pm$1
 log-decade of A+) yields data-optimal bands
-A$^{++}{\approx}\logSweepOptPtau{}$~b\={e}ru,
-A$^{+}{\approx}\logSweepOptApBeru{}$~b\={e}ru,
-A${\approx}\logSweepOptABeru{}$~b\={e}ru
+A$^{++}{\approx}\logSweepOptPtau{}$~beru,
+A$^{+}{\approx}\logSweepOptApBeru{}$~beru,
+A${\approx}\logSweepOptABeru{}$~beru
 (geometric ratio $r^{*}{=}\logSweepOptRatio{}$);
-the canonical metrological values (\AppThreshBeru{}, \ApThreshBeru{}, \ATierThreshBeru{}~b\={e}ru)
+the canonical metrological values (\AppThreshBeru{}, \ApThreshBeru{}, \ATierThreshBeru{}~beru)
 are the nearest Babylonian sub-unit boundaries to these optima.
 
 \subsection{Global Anchor Sweep}
@@ -824,8 +815,9 @@ gap $\phaseGap$\textdegree{} $\approx \phaseGapKm$~km) is within
 coordinate uncertainty.
 
 \textbf{Non-independence note.} \emph{The 3\textdegree{} periodicity and the unit
-sensitivity sweep (\S\ref{sec:metrology}) are two views of a single
-pattern; neither provides evidential value beyond Tests~2 and~3
+sensitivity sweep (\S\ref{sec:metrology}) are consistent manifestations of the
+same underlying structure rather than independent lines of evidence; their
+primary evidential role is as robustness checks for Tests~2 and~3
 (\S\ref{sec:circularity}).}
 
 \subsubsection*{Formal statistical tests for the $x.18$\textdegree{} periodicity}
@@ -960,8 +952,7 @@ confirms that the enrichment is a property of the $\sim$35\textdegree{}E
 corridor. Every $x.18$\textdegree{}E anchor produces the same result, and
 Gerizim and Jerusalem both place the corridor in the global top
 \anchorSweepTopPct\% of \anchorSweepNanchors{} trial anchors.
-Historical justifications could be constructed post-hoc for many
-high-scoring anchors in the global sweep. What distinguishes Gerizim
+What distinguishes Gerizim
 is pre-existing documentary evidence, the \textit{tabbur ha-aretz}
 cosmographic role (\S\ref{sec:anchor}), that predates this analysis entirely.
 
@@ -1018,8 +1009,7 @@ the result is suggestive rather than definitive.
 
 \textbf{Geocoding precision.}
 UNESCO XML coordinates are administrative centroids, introducing
-unsystematic noise but not directional bias. Dome enrichment is robust
-across raw and context-validated populations.
+unsystematic noise but not directional bias.
 
 \textbf{Metrological evidence.}
 No physical surveying instrument calibrated in beru subdivisions has been 
@@ -1036,9 +1026,8 @@ a novel empirical observation.
 \label{sec:alt_explanations}
 
 \textbf{(1) Independent convergence.}
-Hemispherical structures are a recurring architectural solution and convergent
-orientations across cultures are documented \citep{aveni2001skywatchers,aveni2003archaeoastronomy},
-but independent convergence predicts no consistent longitude specificity.
+Hemispherical structures are a recurring architectural solution across cultures \citep{aveni2001skywatchers,aveni2003archaeoastronomy},
+but independent convergence predicts no longitude specificity.
 
 \textbf{(2) Geographic concentration.}
 Null~C directly tests this: other monuments from the same longitude footprint
@@ -1055,14 +1044,13 @@ permutation ($p = \simDomePermP$~\simDomePermPSig{}) and bootstrap
 but highly significant for the A++ sub-population
 (permutation $p = \circAppPermP$~\pCircAppPermSig{};
 bootstrap $p = \circAppBootP$~\pCircAppBootSig{}).
-Tests~C and~D (\S\ref{sec:results_rayleigh}) provide positive evidence
-for anchor specificity and periodicity structure.
+Tests~C and~D (\S\ref{sec:results_rayleigh}) confirm anchor specificity and periodicity structure.
 
 \subsection{Architectural Stratification}
 \label{sec:transmission}
 
 The corpus-wide A+ enrichment (Test~1) is not uniform across architectural
-types. Among all keyword-defined sub-populations tested, domed and spherical
+types. Among keyword-defined sub-populations, domed and spherical
 monuments show the strongest alignment: \NcircTierAp/\NcircTotal{} reach
 Tier-A+ ($\circEnrichAp\times$ the null, Bonferroni $p_\mathrm{adj} =
 \pAdjTestTwo$~\pAdjTestTwoSig{}), and the Tier-A++ concentration
@@ -1092,21 +1080,16 @@ architectural keyword filter, indicating the longitude structure is a
 property of the corpus as a whole, not only of the dome sub-population
 (Figure~\ref{fig:geo_trail}).
 
-Whether the architectural and religious stratification reflects systematic
-metrological practice in monument placement, a shared geodetic framework
-underlying the most historically significant sites, or an as-yet-unmodeled
-aspect of civilizational geography is beyond the scope of this analysis.
-The statistical evidence establishes the pattern and its architectural
-specificity; identifying the mechanism is a question for future work.
+The mechanism underlying this stratification is beyond the scope of this analysis.
 
 \begin{figure*}[!t]
   \centering
   \includegraphics[width=\textwidth]{../figures/fig_geo_trail}
   \caption{Tier distribution of UNESCO domed/stupa and Wikidata Q180987
   stupa sites along the Eurasian corridor, illustrating the architectural
-  stratification of the enrichment signal.
-  An interactive version with corpus and tier filters is provided as
-  supplementary material
+  stratification of the enrichment signal. Silk Road route after
+  \citet{hansen2012silkroad}.
+  An interactive version is provided as supplementary material
   (\texttt{supplementary/interactive\_map/silkroad\_interactive.html}).}
   \label{fig:geo_trail}
 \end{figure*}
@@ -1114,7 +1097,7 @@ specificity; identifying the mechanism is a question for future work.
 \subsection{Conclusion}
 
 The UNESCO Cultural and Mixed corpus shows significant enrichment at
-harmonics of the Babylonian b\={e}ru anchored at Gerizim, with all three
+harmonics of the Babylonian beru anchored at Gerizim, with all three
 primary tests surviving Bonferroni correction at $k = \BonfK$.
 Longitude bands containing a precisely aligned monument are
 $\clusterHarmonicRatio\times$ more densely populated with other heritage
@@ -1128,9 +1111,9 @@ The Wikidata Q180987 stupa corpus reproduces the same pattern independently
 (\S\ref{sec:stupas_q180987}).
 
 Geographically, Mount Gerizim lies between the Mediterranean to the west and
-the overland Silk Road to the east, placing it at a natural node of the
-corridors through which architectural canons circulated in antiquity
-(Figure~\ref{fig:geo_trail}).
+the overland Silk Road \citep{hansen2012silkroad} to the east, placing it
+at a natural node of the corridors through which architectural canons
+circulated in antiquity (Figure~\ref{fig:geo_trail}).
 
 
 \appendix
@@ -1227,6 +1210,11 @@ Good, P.~I. (2005).
 \textit{Permutation, Parametric, and Bootstrap Tests of Hypotheses}
 (3rd ed.).
 Springer.
+
+\bibitem[Hansen(2012)]{hansen2012silkroad}
+Hansen, V. (2012).
+\textit{The Silk Road: A New History}.
+Oxford University Press.
 
 \bibitem[Harvey(1987)]{harvey1987mappamundi}
 Harvey, P.~D.~A. (1987).

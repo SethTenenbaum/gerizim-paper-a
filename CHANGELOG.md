@@ -1,5 +1,52 @@
 # Changelog
 
+### v1.3.0 — 2026-04-25
+**DOI:** (this release — Zenodo will assign DOI on publication of this tag)
+
+#### Analysis changes
+- **Religion keyword audit expanded:** `tools/generate_audit_religion.py` updated
+  to include A++ and C-- counts, enrichment ratios, and Fisher p-values in all
+  per-religion summary tables and site listings. Output regenerated at
+  `supplementary/audit/religion_keyword_audit.txt`.
+- **A+ site audit expanded:** `tools/generate_audit_aplus_sites.py` updated to
+  include A++ p-values and significance stars in the summary table, and a
+  chain-rule joint probability (P(A) × P(A+|A) × P(A++|A+)) for the nested
+  A/A+/A++ tiers using conditional binomial tests for both Gerizim and
+  Jerusalem anchors. Output regenerated at `supplementary/audit/aplus_sites_audit.txt`.
+
+#### Supplementary audit files
+- **Nine new audit files added** (all generated deterministically from scripts in
+  `tools/`; regenerate with `bash tools/update_all_audits.sh`):
+  - `aplus_sites_audit.txt` — A/A+/A++ tier listing with joint probabilities
+  - `anchor_sweep_audit.txt` — global anchor sweep ranking (36,000 anchors)
+  - `corridor_audit.txt` — Levantine corridor site breakdown
+  - `fine_sweep_audit.txt` — fine unit sweep (±1% of 0.10 bēru)
+  - `interharmonic_audit.txt` — C-band / inter-harmonic site listing
+  - `religion_keyword_audit.txt` — religion keyword audit (A++/A+/A/C-- tiers)
+  - `site_as_anchor_audit.txt` — site-as-own-anchor ranking
+  - `stupa_geo_audit.txt` — stupa geographic concentration audit
+  - `stupa_q180987_geo_audit.txt` — Wikidata Q180987 stupa geographic audit
+- **`tools/update_all_audits.sh` added** — regenerates all audit files in one pass.
+- **`tools/generate_interactive_map.py` added** — generates an interactive HTML
+  map of tier-classified sites.
+
+#### Manuscript / figures
+- **Two new figures added:**
+  - `fig_null_c.{pdf,png}` — Null C bootstrap distributions (Figure 4)
+  - `fig_geo_trail.{pdf,png}` — Eurasian corridor tier distribution (Figure 5)
+  - `fig_supp_silkroad_ac.{pdf,png}` — supplementary Silk Road A/C bimodal
+- **`shared_content.tex` updated** with expanded religion sub-group results,
+  Wikidata Q180987 stupa corpus section (Test 6), and updated robustness /
+  sensitivity sections referencing the new audit outputs.
+
+#### Housekeeping
+- All version references (`CITATION.cff`, `README.md`, both `.tex` files)
+  bumped to `v1.3.0`.
+- README directory structure updated to reflect current `supplementary/audit/`,
+  `tools/`, and `manuscript/figures/` contents.
+
+---
+
 ### v1.2.0 — 2026-04-15
 **DOI:** (this release — Zenodo will assign DOI automatically on publication)
 

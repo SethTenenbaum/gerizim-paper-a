@@ -1,11 +1,12 @@
 # Domed Monuments Cluster at Babylonian Bēru Harmonics: A Longitude Enrichment Test on the UNESCO World Heritage List
 
-**Paper A — Primary UNESCO Analysis** · `v1.2.0`
+**Paper A — Primary UNESCO Analysis** · `v1.3.0`
 
-Seth Tenenbaum · Fourth Temple Research  
+Seth Tenenbaum · Independent Scholar
 ORCID: [0009-0008-5797-2498](https://orcid.org/0009-0008-5797-2498)
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19574076.svg)](https://doi.org/10.5281/zenodo.19574076)
+> **v1.3.0 release in progress.** A new Zenodo DOI will be assigned on publication of this tag. The badge above resolves to the latest version via the concept DOI.
 
 ---
 
@@ -56,9 +57,12 @@ gerizim-paper-a/
 │   ├── reproduce_all_macros.sh       # Shell script to regenerate all macros + figures
 │   ├── generate_figures.py           # Generates all 3 manuscript figures
 │   └── figures/
-│       ├── fig_devhist.{pdf,png}     # Figure 1: Beru deviation histogram
-│       ├── fig_temporal.{pdf,png}    # Figure 2: Temporal gradient
-│       └── fig_unitsweep.{pdf,png}   # Figure 3: Unit sensitivity sweep
+│       ├── fig_devhist.{pdf,png}          # Figure 1: Beru deviation histogram
+│       ├── fig_temporal.{pdf,png}         # Figure 2: Temporal gradient
+│       ├── fig_unitsweep.{pdf,png}        # Figure 3: Unit sensitivity sweep
+│       ├── fig_null_c.{pdf,png}           # Figure 4: Null C bootstrap distributions
+│       ├── fig_geo_trail.{pdf,png}        # Figure 5: Eurasian corridor tier distribution
+│       └── fig_supp_silkroad_ac.{pdf,png} # Supplementary: Silk Road A/C bimodal
 │
 ├── analysis/
 │   ├── unesco/                       # Primary UNESCO corpus tests
@@ -139,12 +143,20 @@ gerizim-paper-a/
 │       └── wikidata/                       # (empty — P1435 corpus removed in v1.2.0)
 │
 ├── supplementary/
-│   ├── audit/                        # Keyword-classification audit files (reproducible)
+│   ├── audit/                        # Keyword-classification and tier audit files (reproducible)
 │   │   ├── dome_keyword_audit.txt         # Dome/spherical monument sweep (Test 2)
 │   │   ├── dome_mound_keyword_audit.txt   # Dome + mound evolution sweep (Test 2b)
-│   │   ├── founding_keyword_audit.txt     # Founding/sacred-origin classifier (Test E)
+│   │   ├── founding_keyword_audit.txt     # Founding/sacred-origin classifier (Test 5)
+│   │   ├── aplus_sites_audit.txt          # A/A+/A++ tier site listing (Gerizim & Jerusalem)
+│   │   ├── anchor_sweep_audit.txt         # Global anchor sweep ranking
+│   │   ├── corridor_audit.txt             # Levantine corridor site breakdown
+│   │   ├── fine_sweep_audit.txt           # Fine unit sweep (±1% of 0.10 bēru)
+│   │   ├── interharmonic_audit.txt        # C-band / inter-harmonic site listing
+│   │   ├── religion_keyword_audit.txt     # Religion keyword audit (A++/A+/A/C tiers)
+│   │   ├── site_as_anchor_audit.txt       # Site-as-own-anchor ranking
+│   │   ├── stupa_geo_audit.txt            # Stupa geographic concentration audit
+│   │   ├── stupa_q180987_geo_audit.txt    # Wikidata Q180987 stupa geographic audit
 │   │   ├── fdr.txt                        # FDR multiple-comparisons output
-│   │   ├── unesco_site_by_site_audit.txt  # Site-by-site manual audit notes
 │   │   └── README_audit.txt              # Audit provenance and reproducibility notes
 │   └── UNESCO/                       # Archived source materials for anchor citation (ref. 5706)
 │       ├── unesco_5706_rendered.html # Archived rendered UNESCO Tentative List page
@@ -152,10 +164,22 @@ gerizim-paper-a/
 │       └── unesco_5706.png           # Screenshot
 │
 ├── tools/                            # Audit generation scripts
-│   ├── generate_audit_dome.py        # Regenerate dome_keyword_audit.txt
-│   ├── generate_audit_dome_mound.py  # Regenerate dome_mound_keyword_audit.txt
-│   ├── generate_audit_founding.py    # Regenerate founding_keyword_audit.txt
-│   └── md2pdf.sh                     # Markdown → PDF utility
+│   ├── generate_audit_dome.py               # Regenerate dome_keyword_audit.txt
+│   ├── generate_audit_dome_mound.py         # Regenerate dome_mound_keyword_audit.txt
+│   ├── generate_audit_founding.py           # Regenerate founding_keyword_audit.txt
+│   ├── generate_audit_aplus_sites.py        # Regenerate aplus_sites_audit.txt
+│   ├── generate_audit_anchor_sweep.py       # Regenerate anchor_sweep_audit.txt
+│   ├── generate_audit_corridor.py           # Regenerate corridor_audit.txt
+│   ├── generate_audit_fine_sweep.py         # Regenerate fine_sweep_audit.txt
+│   ├── generate_audit_interharmonic.py      # Regenerate interharmonic_audit.txt
+│   ├── generate_audit_religion.py           # Regenerate religion_keyword_audit.txt
+│   ├── generate_audit_site_as_anchor.py     # Regenerate site_as_anchor_audit.txt
+│   ├── generate_audit_stupa_geo.py          # Regenerate stupa_geo_audit.txt
+│   ├── generate_audit_stupa_q180987_geo.py  # Regenerate stupa_q180987_geo_audit.txt
+│   ├── generate_audit_fdr.py                # Regenerate fdr.txt
+│   ├── update_all_audits.sh                 # Regenerate all audit files in one pass
+│   ├── generate_interactive_map.py          # Generate interactive HTML map
+│   └── md2pdf.sh                            # Markdown → PDF utility
 │
 ├── results/                          # Cached permutation null distributions
 │   ├── x18_maxperm_null_A.npy
