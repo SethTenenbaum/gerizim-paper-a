@@ -450,6 +450,7 @@ def main():
     # Print LaTeX macros
     print("\n\n── LaTeX macros ──")
     print(f"  \\newcommand{{\\permSlopeSpecN}}{{{N_PERMS}}}")
+    print(f"  \\newcommand{{\\permSlopeKwN}}{{{int(kw_mask.sum())}}}  % N sites in unambiguous-kw subset (stupa/stupas/tholos)")
     for fkey, _ in FILTERS:
         for tier_key, tier_label, _ in TIERS:
             suffix = f"{fkey}{tier_key}"

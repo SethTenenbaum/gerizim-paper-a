@@ -71,7 +71,6 @@ class TestDeviation:
         offset_deg = 0.001 * BERU  # 0.03°
         dev = deviation(GERIZIM + 30.0 + offset_deg)
         assert dev == pytest.approx(0.001, abs=1e-6)
-
     def test_symmetry(self):
         """Deviation is the same east and west of the anchor."""
         dev_east = deviation(GERIZIM + 15.0)  # 0.5 beru east
@@ -155,29 +154,46 @@ class TestDeviationAtSpacing:
 # ---------------------------------------------------------------------------
 
 class TestTierLabel:
-    """Test tier classification boundaries."""
+    """Test tier classification boundaries.
+
+    All assertions are derived from the live config thresholds
+    (TIER_APP, TIER_APLUS, TIER_A_MAX, TIER_B_MAX) rather than
+    hardcoded numeric literals, so the suite stays green when the
+    metrological derivation in config.json is updated.
+    """
 
     def test_tier_app(self):
         assert tier_label(0.0) == "A++"
-        assert tier_label(0.0001) == "A++"
-        assert tier_label(0.0002) == "A++"
+        assert tier_label(TIER_APP / 2) == "A++"
+        assert tier_label(TIER_APP) == "A++"
 
     def test_tier_aplus(self):
-        assert tier_label(0.0003) == "A+"
-        assert tier_label(0.001) == "A+"
-        assert tier_label(0.002) == "A+"
+        # Just above A++, well below A+
+        eps = 1e-9
+        assert tier_label(TIER_APP + eps) == "A+"
+        assert tier_label((TIER_APP + TIER_APLUS) / 2) == "A+"
+        assert tier_label(TIER_APLUS) == "A+"
 
     def test_tier_a(self):
-        assert tier_label(0.003) == "A"
-        assert tier_label(0.010) == "A"
+        eps = 1e-9
+        assert tier_label(TIER_APLUS + eps) == "A"
+        assert tier_label((TIER_APLUS + TIER_A_MAX) / 2) == "A"
+        assert tier_label(TIER_A_MAX) == "A"
 
     def test_tier_b(self):
-        assert tier_label(0.011) == "B"
-        assert tier_label(0.050) == "B"
+        """Mid-band sites (between A and the C-mirror) should be B."""
+        # Pick a deviation safely between TIER_A_MAX and the C-mirror band.
+        # The C-band starts at MIDPOINT - TIER_A_MAX = 0.05 - 0.00642 ≈ 0.04358
+        from lib.beru import MIDPOINT
+        mid_b = (TIER_A_MAX + (MIDPOINT - TIER_A_MAX)) / 2  # ≈ 0.025
+        assert tier_label(mid_b) == "B"
 
-    def test_tier_c(self):
-        assert tier_label(0.051) == "C"
-        assert tier_label(0.1) == "C"
+    def test_tier_c_mirror(self):
+        """Deviations near the inter-harmonic midpoint fall into C/C-/C--."""
+        from lib.beru import MIDPOINT, TIER_C_MAX
+        # Just inside the C band (dist_mid <= TIER_C_MAX)
+        assert tier_label(MIDPOINT) == "C--"
+        assert tier_label(MIDPOINT - TIER_C_MAX / 2) == "C"
 
     def test_boundary_aplus_to_a(self):
         """Boundary at exactly TIER_APLUS should be A+."""

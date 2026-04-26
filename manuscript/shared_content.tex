@@ -375,8 +375,7 @@ concentration at harmonic nodes.
 Tier-B (middle zone): \NcircTierB/\NcircTotal{} sites;
 mean $\delta = \circMeanDev$~beru.
 
-\noindent\textbf{Tier-A+ sites} ($N = \NcircTierAp$, \NcircApRate\%, $\circEnrichAp\times$,
-Bonferroni $p_\mathrm{adj} = \pAdjTestTwo$, $k = \BonfK$):
+\noindent\textbf{Tier-A+ sites}:
 Khoja Ahmed Yasawi (0.2~km),
 Boyana Church (0.3~km),
 Lumbini (0.8~km),
@@ -692,7 +691,7 @@ Test & $N$ & Raw $p$ & $p_\mathrm{adj}$, $k{=}\BonfK$ & Status \\
 \midrule
 Test~1 (full corpus)   & \NclusterTotal  & \clusterApBinom$^{a}$ & \pAdjTestOne~\pAdjTestOneSig{}     & \textbf{Primary} \\
 Test~2 (dome A+)       & \NcircTotal     & \pCircApFisher$^{a}$ (OR~$= \circApFisherOR$) & \pAdjTestTwo~\pAdjTestTwoSig{}   & \textbf{Primary} \\
-Test~3 (cluster asym.) & \NclusterTotal  & \clusterPermP$^{b}$ & \pAdjTestThree~\pAdjTestThreeSig{}  & \textbf{Primary} \\
+Test~3 (cluster asym.) & \NclusterTotal  & \clusterPermP$^{b}$ & $\pAdjTestThree$~\pAdjTestThreeSig{}  & \textbf{Primary} \\
 \midrule
 Test~4 (temporal)      & \NoriginCorpus  & \pCochranThree$^{b}$ & ---                & Descriptive \\
 Test~2b (mound evol.)  & \NevoTotal      & \pEvoApFisher$^{a}$ (OR~$= \evoApFisherOR$) & N/A                & Sensitivity \\
@@ -761,14 +760,14 @@ permutation in \permSlopeSpecN{} trials that reproduces the canonical-unit
 sharp peak at any precision tier ($p \permSlopeCanonBestJointFullAP{}$,
 \permSlopeCanonBestJointSigFullAP{}), confirming 0.10~beru as a specific
 address. The dome-filter specificity test yields marginal results across all
-tiers (A$^{++}$: $p = \permSlopeCanonBestJointAPP{}$,
-\permSlopeCanonBestJointSigAPP{}; A$^{+}$: $p = \permSlopeCanonBestJointAP{}$,
-\permSlopeCanonBestJointSigAP{}; A: $p = \permSlopeCanonBestJointA{}$,
-\permSlopeCanonBestJointSigA{}), consistent with the test being underpowered
+tiers (A$^{++}$: $p = \permSlopeCanonBestJointDomeAPP{}$,
+\permSlopeCanonBestJointSigDomeAPP{}; A$^{+}$: $p = \permSlopeCanonBestJointDomeAP{}$,
+\permSlopeCanonBestJointSigDomeAP{}; A: $p = \permSlopeCanonBestJointDomeA{}$,
+\permSlopeCanonBestJointSigDomeA{}), consistent with the test being underpowered
 at $n = \NcircValidated{}$ sites. Restricting to the \permSlopeKwN{}
 morphologically unambiguous spherical forms (stupa, tholos) recovers
-significance at the A tier ($p = \permSlopeCanonBestJointKwA{}$,
-\permSlopeCanonBestJointSigKwA{}). The 3\textdegree{} periodicity is
+significance at the A tier
+($p = \permSlopeCanonBestJointKwA{}$, \permSlopeCanonBestJointSigKwA{}). The 3\textdegree{} periodicity is
 independently confirmed by Tests~C and~D (\S\ref{sec:results_rayleigh}).
 
 A log-scale threshold sweep (\logSweepNtaus{} values,

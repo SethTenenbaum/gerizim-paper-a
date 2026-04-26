@@ -165,17 +165,31 @@ print()
 print(f"  %% Bonferroni family size")
 print(f"  \\newcommand{{\\BonfK}}{{{K}}}  % k = confirmatory tests (Tests {', '.join(t[0] for t in confirmatory)})")
 print()
+
+def _fmt_padj(p: float) -> str:
+    """Format an adjusted p-value for the manuscript.
+
+    Rules:
+      • p ≥ 0.001  → 3 decimal places, trailing zeros trimmed (e.g. "0.012" → "0.012", "0.100" → "0.1")
+      • p < 0.001  → scientific notation with 1 significant digit (e.g. "1e-04")
+        so the manuscript never shows the misleading literal "0" or "0.0".
+      • p == 0.0   → "<1e-12" (below double-precision floor for our pipeline)
+    """
+    if p <= 0.0:
+        return "<1\\!\\times\\!10^{-12}"
+    if p < 1e-3:
+        # sci-notation, 1 sig fig
+        s = f"{p:.0e}"  # e.g. "1e-04"
+        mant, exp = s.split("e")
+        return f"{int(mant)}\\!\\times\\!10^{{{int(exp)}}}"
+    s = f"{round(p, 4):.3f}".rstrip("0").rstrip(".")
+    return s if "." in s else (s + ".0")
+
 for tid, lbl, raw_p, p_bonf, p_holm, survives, macro, _ in results:
-    # Bonferroni macro
     p_bonf_rounded = round(p_bonf, 4)
-    p_bonf_3 = f"{p_bonf_rounded:.3f}".rstrip('0').rstrip('.')
-    if '.' not in p_bonf_3:
-        p_bonf_3 += '.0'
-    # Holm macro (3 sig figs for display)
     p_holm_rounded = round(p_holm, 4)
-    p_holm_3 = f"{p_holm_rounded:.3f}".rstrip('0').rstrip('.')
-    if '.' not in p_holm_3:
-        p_holm_3 += '.0'
+    p_bonf_3 = _fmt_padj(p_bonf)
+    p_holm_3 = _fmt_padj(p_holm)
     # Survival decision uses Holm (primary), but T4 is labelled descriptive-only
     # because it is partially dependent on regional composition (see manuscript).
     # We keep its Holm-adj for transparency but flag it in the comment.
@@ -184,9 +198,9 @@ for tid, lbl, raw_p, p_bonf, p_holm, survives, macro, _ in results:
               if descriptive_only and survives
               else "SURVIVES" if survives else "ns")
     print(f"  % Test {tid} — {lbl}")
-    print(f"  %   raw p = {raw_p:.6f}")
-    print(f"  %   Bonferroni: {raw_p:.6f} × {K} = {p_bonf_rounded:.4f}")
-    print(f"  %   Holm (step-down): adj p = {p_holm_rounded:.4f}  [{status}]")
+    print(f"  %   raw p = {raw_p:.6g}")
+    print(f"  %   Bonferroni: {raw_p:.6g} × {K} = {p_bonf:.6g}")
+    print(f"  %   Holm (step-down): adj p = {p_holm:.6g}  [{status}]")
     print(f"  \\newcommand{{\\pAdjTest{macro}}}{{{p_bonf_3}}}  % Bonferroni-adj p, Test {tid} ({lbl})")
     print(f"  \\newcommand{{\\pHolmTest{macro}}}{{{p_holm_3}}}  % Holm-adj p, Test {tid} ({lbl})")
     print()

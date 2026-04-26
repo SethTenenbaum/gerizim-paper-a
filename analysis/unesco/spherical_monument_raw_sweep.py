@@ -56,6 +56,7 @@ from lib.beru import (
 )
 from lib.dome_filter import FORM_KEYWORDS, FORM_KEYWORD_RES, AMBIGUOUS_KEYWORDS
 from lib.stats import significance_label as sig
+from lib.stats import chi_square_uniform
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 def beru_dev_fields(lon: float):
@@ -115,6 +116,14 @@ obs_bins = [0] * 5
 for s in raw_sites:
     obs_bins[min(int(s["dev"] / TIER_A_MAX), 4)] += 1
 _, chi_p = chisquare(obs_bins, f_exp=[N_raw / 5.0] * 5)
+# NB: the bin layout above is non-uniform (bin 4 collapses 0.0257..0.05),
+# which biases the test. The correct chi-square uses equal-width bins
+# spanning the full deviation domain [0, 0.05]; that result is the one
+# we report and store. The non-uniform variant is retained only for
+# diagnostic continuity in the per-site table.
+_chi_uniform = chi_square_uniform([s["dev"] for s in raw_sites], n_bins=5, max_dev=0.05)
+chi_p = _chi_uniform.p_value
+obs_bins = _chi_uniform.observed_bins
 
 enr_App = (nApp / N_raw) / P_NULL_APP if N_raw else 0
 enr_Ap = (nAp / N_raw) / P_NULL_AP if N_raw else 0
@@ -196,13 +205,26 @@ print(SEP)
 print("  COMPARISON: RAW SWEEP vs CONTEXT-VALIDATED (Test 2)")
 print(SEP)
 print()
+# Pull validated numbers from the ResultsStore (written by spherical_monument_test.py).
+# If that script hasn't run yet, fall back to dashes rather than hardcoding stale values.
+_store_v = ResultsStore()
+_v_N      = _store_v.read("NcircValidated", default=None)
+_v_nAp    = _store_v.read("NcircValidatedAp", default=None)
+_v_rate   = _store_v.read("NcircValidatedApRate", default=None)
+_v_p      = _store_v.read("pCircApValidated", default=None)
+_v_enr    = _store_v.read("circEnrichApValidated", default=None)
+
+def _fmt(v, spec, missing="—"):
+    return format(v, spec) if v is not None else missing
+
 print(f"  {'':30}  {'Raw sweep':>14}  {'Validated (Test 2)':>20}")
 print(f"  {'-'*70}")
-print(f"  {'N (population)':<30}  {N_raw:>14}  {'83':>20}")
-print(f"  {'n A+ hits':<30}  {nAp:>14}  {'11':>20}")
-print(f"  {'A+ rate':<30}  {100*nAp/N_raw:>13.1f}%  {'13.3%':>20}")
-print(f"  {'Binomial p (A+)':<30}  {bt_Ap.pvalue:>14.4f}  {'0.0005':>20}")
-print(f"  {'Enrichment vs geometric null':<30}  {enr_Ap:>13.2f}×  {11/83/P_NULL_AP:>19.2f}×")
+print(f"  {'N (population)':<30}  {N_raw:>14}  {_fmt(_v_N, 'd'):>20}")
+print(f"  {'n A+ hits':<30}  {nAp:>14}  {_fmt(_v_nAp, 'd'):>20}")
+print(f"  {'A+ rate':<30}  {100*nAp/N_raw:>13.1f}%  {(_fmt(_v_rate, '.1f')+'%' if _v_rate is not None else '—'):>20}")
+print(f"  {'Binomial p (A+)':<30}  {bt_Ap.pvalue:>14.4f}  {_fmt(_v_p, '.4f'):>20}")
+_v_enr_str = (_fmt(_v_enr, '.2f') + '×') if _v_enr is not None else '—'
+print(f"  {'Enrichment vs geometric null':<30}  {enr_Ap:>13.2f}×  {_v_enr_str:>20}")
 print(f"  {'Anchor pctile (A+)':<30}  {pctile:>13.0f}th  ")
 print()
 
@@ -233,8 +255,10 @@ print()
 # ── LaTeX macros (GROUP 1) ────────────────────────────────────────────────────
 enr_A = (nA / N_raw) / P_NULL_A if N_raw else 0
 mean_dev = float(np.mean([s["dev"] for s in raw_sites])) if raw_sites else 0
-N_validated = 83
-N_context_rejected = N_raw - N_validated
+# Validated population size pulled from ResultsStore (written by Test 2 / 2x).
+# If unavailable, omit the dependent macros rather than emit a stale literal.
+N_validated = _v_N if _v_N is not None else 0
+N_context_rejected = (N_raw - N_validated) if N_validated else 0
 
 print("  % LaTeX macros (GROUP 1):")
 print(f"  \\newcommand{{\\NcircTotal}}{{{N_raw}}}           % raw-sweep population size")
@@ -288,7 +312,7 @@ _enr_ci_lo = round(_cp_ap_lo / (P_NULL_AP * 100), 2) if nAp > 0 else 0.0
 _enr_ci_hi = round(_cp_ap_hi / (P_NULL_AP * 100), 2)
 print(f"  \\newcommand{{\\circEnrichCIlo}}{{{_enr_ci_lo}}}        % Clopper-Pearson 95% CI lower, A+ enrichment ratio")
 print(f"  \\newcommand{{\\circEnrichCIhi}}{{{_enr_ci_hi}}}        % Clopper-Pearson 95% CI upper, A+ enrichment ratio")
-print(f"  \\newcommand{{\\NcircValidatedApRate}}{{{100*nAp/N_validated:.1f}}}  % A+ rate (%) = {nAp}/{N_validated}, validated pop")
+print(f"  \\newcommand{{\\NcircValidatedApRate}}{{{(100*nAp/N_validated if N_validated else 0):.1f}}}  % A+ rate (%) = {nAp}/{N_validated}, validated pop"  )
 
 # ── Write to results store ────────────────────────────────────────────────────
 ResultsStore().write_many({

@@ -467,6 +467,11 @@ ResultsStore().write_many({
     "NevoValidTotal":   N,                # corpus size, context-validated
     "NevoValidAp":      n_ap,             # A+ hits, context-validated
     "NevoValidRejected": len(raw_rejected), # sites removed by context filter
+    # camelCase mirrors used by tumulus_dome_evolution_raw_sweep.py comparison table
+    "pEvoApValidated":      bt_ap.pvalue,
+    "pEvoAValidated":       bt_a.pvalue,
+    "evoApValidatedRate":   round(100.0 * n_ap / N, 1) if N else 0.0,
+    "evoEnrichApValidated": round(((n_ap / N) / P_NULL_AP) if N else 0.0, 4),
     **{f"evo{sfx}ApRate": round(100 * stage_stat_results[k]["rate"], 1)
        for k, sfx in [("dome","Dome"),("mound","Mound"),("stupa","Stupa")]
        if k in stage_stat_results},

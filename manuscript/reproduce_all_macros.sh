@@ -71,8 +71,8 @@ if [ "${1:-}" != "--full" ]; then
         analysis/global/emit_constants.py                    # → GerizimLon, NwhcTotal, etc.
         analysis/global/geodesic_sensitivity.py              # → GeodesicApCurrent, GeodesicDropOut, GeodesicGainIn, etc.
         # ── Primary analysis (write to store) ─────────────────────────────
-        analysis/unesco/spherical_monument_raw_sweep.py      # → pCircAp, pCircA, pCircChi
-        analysis/unesco/spherical_monument_test.py            # → pCircAp_validated (context-validated, Exploratory 2x)
+        analysis/unesco/spherical_monument_test.py            # → pCircApValidated, NcircValidated (context-validated, Exploratory 2x) — runs FIRST so raw_sweep can read it
+        analysis/unesco/spherical_monument_raw_sweep.py      # → pCircAp, pCircA, pCircChi (reads validated counts from store for comparison table)
         analysis/unesco/cluster_asymmetry_test.py            # → clusterApBinom, clusterPermP, clusterHarmonicMWpStr
         analysis/global/emit_cluster_ap_ci.py                # → clusterApCIlo, clusterApCIhi
         analysis/unesco/harmonic_density_attractor_test.py
@@ -91,8 +91,8 @@ if [ "${1:-}" != "--full" ]; then
         analysis/global/anchor_site_comparison.py            # → NjerSelfExclCorpus, NgerizimSweepCorpus
         analysis/unesco/spatial_independence_test.py         # → pNeffQuarter, pNeffHalf
         analysis/unesco/regional_temporal_gradient.py        # → pCMH
-        analysis/unesco/tumulus_dome_evolution_raw_sweep.py  # → pEvoAp (Test 2b)
-        analysis/unesco/tumulus_dome_evolution_test.py        # → pEvoAp_validated (context-validated, Exploratory 2bx)
+        analysis/unesco/tumulus_dome_evolution_test.py        # → pEvoAp_validated, NevoValidTotal (context-validated, Exploratory 2bx) — runs FIRST so raw_sweep can read it
+        analysis/unesco/tumulus_dome_evolution_raw_sweep.py  # → pEvoAp (Test 2b) (reads validated counts from store for comparison table)
         analysis/unesco/mound_keyword_context_audit.py        # → NmoundRaw/Accepted/Rejected, moundFPRate, moundKwFPRate, pmoundAccAp, moundEnrichAcc
         analysis/unesco/leave_one_out_sensitivity.py         # → LOOdomeN/Ap/Rate/Enrich/P, LOOstupaN/Ap/Rate/P
         analysis/unesco/dome_leave_k_out.py                  # → LKOsiteOne/Two/ThreeName/DevKm, LKOtwo*/three*/worstTwo/ThreeP
@@ -121,6 +121,10 @@ if [ "${1:-}" != "--full" ]; then
         analysis/unesco/dome_founding_stratification.py        # → domeStratNfs, domeStratNnfs, domeStratF/NfsAp/Rate/Enrich/P, domeStratFisherOR/P
         # ── Geographic concentration robustness ───────────────────────────
         analysis/unesco/region_conditioned_permutation.py    # → regionCondPermP/Z/Obs/Mean/Std/Nregions/Nperms (GROUP 35)
+        # ── Global corridor / anchor comparison ───────────────────────────
+        analysis/global/anchor_corridor_audit.py             # → corridorSharedAp, corridorUniqueGer, corridorUniqueJer
+        # ── Tier log-sweep sensitivity ────────────────────────────────────
+        analysis/unesco/tier_logsweep_sensitivity.py         # → logSweepNtaus, logSweepAregionNsig/Ntaus, logSweepOpt*
         # ── Summary scripts (read from store) ─────────────────────────────
         analysis/unesco/fdr_multiple_comparisons.py          # reads all keys from config+store
         analysis/unesco/bonferroni_correction.py             # reads confirmatory keys from store

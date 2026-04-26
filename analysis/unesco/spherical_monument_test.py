@@ -434,4 +434,11 @@ print()
 ResultsStore().write_many({
     "pCircAp_validated": bt_Ap.pvalue,   # binomial p, A+ (context-validated dome corpus) — Exploratory 2x
     "pCircA_validated":  bt_A.pvalue,    # binomial p, A  (context-validated dome corpus)
+    # camelCase mirrors (used by raw-sweep comparison table and emit_sig_macros)
+    "pCircApValidated":      bt_Ap.pvalue,
+    "pCircAValidated":       bt_A.pvalue,
+    "circEnrichApValidated": round(float(enr_Ap), 4),
+    "NcircValidated":        N,
+    "NcircValidatedAp":      n_Ap,
+    "NcircValidatedApRate":  round(100.0 * n_Ap / N, 1) if N else 0.0,
 })

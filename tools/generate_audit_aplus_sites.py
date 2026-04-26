@@ -159,16 +159,63 @@ def run():
     p_ger_app = binomtest(g_app, N_GER, P_NULL_APP, alternative="greater").pvalue
     p_jer_app = binomtest(j_app, N_JER, P_NULL_APP, alternative="greater").pvalue
 
-    # Chain-rule joint probability: P(A) × P(A+|A) × P(A++|A+)
-    # Conditional nulls from nested tier thresholds
-    p0_ap_given_a   = P_NULL_AP  / P_NULL_A    # ≈ 0.5
-    p0_app_given_ap = P_NULL_APP / P_NULL_AP   # ≈ 0.5
-    p_ger_ap_given_a   = binomtest(g_ap,  g_a,   p0_ap_given_a,   alternative="greater").pvalue
-    p_ger_app_given_ap = binomtest(g_app, g_ap,  p0_app_given_ap, alternative="greater").pvalue
-    p_jer_ap_given_a   = binomtest(j_ap,  j_a,   p0_ap_given_a,   alternative="greater").pvalue
-    p_jer_app_given_ap = binomtest(j_app, j_ap,  p0_app_given_ap, alternative="greater").pvalue
-    p_ger_joint = p_ger_a * p_ger_ap_given_a * p_ger_app_given_ap
-    p_jer_joint = p_jer_a * p_jer_ap_given_a * p_jer_app_given_ap
+    # ── Joint exceedance probability for the nested A++ ⊂ A+ ⊂ A tiers ────
+    #
+    # PREVIOUS APPROACH (REMOVED): a "chain-rule" product
+    #     p_joint = P(count_A ≥ a) · P(count_A+ ≥ b | count_A = a) · P(count_A++ ≥ c | count_A+ = b)
+    # This is statistically invalid: the chain rule applies to probabilities of
+    # *events*, not to one-sided tail probabilities. The product has no defined
+    # null distribution, so it cannot be interpreted as a p-value.
+    #
+    # CORRECT APPROACH: directly compute the joint exceedance probability under
+    # the geometric null using the multinomial distribution of (n_A++, n_A+, n_A,
+    # n_other) given N trials. The three nested-tier counts are exchangeable
+    # multinomial outcomes with cell probabilities (P_NULL_APP, P_NULL_AP - P_NULL_APP,
+    # P_NULL_A - P_NULL_AP, 1 - P_NULL_A). We sum the multinomial probability over
+    # all (x_app, x_extra_ap, x_extra_a) with x_app ≥ obs_app, x_app + x_extra_ap ≥ obs_ap,
+    # and x_app + x_extra_ap + x_extra_a ≥ obs_a.
+    from math import lgamma, exp, log
+    def _joint_p_nested(N_, n_app_obs, n_ap_obs, n_a_obs):
+        if N_ <= 0:
+            return 1.0
+        p1 = P_NULL_APP                       # A++ shell
+        p2 = P_NULL_AP  - P_NULL_APP          # A+ but not A++
+        p3 = P_NULL_A   - P_NULL_AP           # A  but not A+
+        p4 = 1.0 - P_NULL_A                   # below A
+        log_p = [log(p) if p > 0 else float("-inf") for p in (p1, p2, p3, p4)]
+        log_fact_N = lgamma(N_ + 1)
+        # Exact upper bounds
+        max_x1 = min(N_, N_)  # iterate x1 from n_app_obs upward
+        log_total = float("-inf")
+        for x1 in range(n_app_obs, N_ + 1):
+            # x1 + x2 ≥ n_ap_obs ⇒ x2 ≥ max(0, n_ap_obs - x1)
+            x2_lo = max(0, n_ap_obs - x1)
+            x2_hi = N_ - x1
+            for x2 in range(x2_lo, x2_hi + 1):
+                # x1 + x2 + x3 ≥ n_a_obs ⇒ x3 ≥ max(0, n_a_obs - x1 - x2)
+                x3_lo = max(0, n_a_obs - x1 - x2)
+                x3_hi = N_ - x1 - x2
+                if x3_lo > x3_hi:
+                    continue
+                for x3 in range(x3_lo, x3_hi + 1):
+                    x4 = N_ - x1 - x2 - x3
+                    log_term = (
+                        log_fact_N
+                        - lgamma(x1 + 1) - lgamma(x2 + 1)
+                        - lgamma(x3 + 1) - lgamma(x4 + 1)
+                        + x1 * log_p[0] + x2 * log_p[1]
+                        + x3 * log_p[2] + x4 * log_p[3]
+                    )
+                    if log_total == float("-inf"):
+                        log_total = log_term
+                    elif log_term > log_total:
+                        log_total = log_term + log(1 + exp(log_total - log_term))
+                    else:
+                        log_total = log_total + log(1 + exp(log_term - log_total))
+        return exp(log_total) if log_total > float("-inf") else 0.0
+
+    p_ger_joint = _joint_p_nested(N_GER, g_app, g_ap, g_a)
+    p_jer_joint = _joint_p_nested(N_JER, j_app, j_ap, j_a)
 
     # Overlap: sites in A+ for both anchors
     ger_ap_names = {s["name"] for s in ger if s["tier"] in ("A++", "A+")}
@@ -212,13 +259,14 @@ def run():
         f"{j_a:>8}  {100*j_a/N_JER:>5.1f}%  {p_jer_a:>9.4f}  {sig(p_jer_a):>4}",
         "",
         f"  A++ null rate: {P_NULL_APP:.0%}   A+ null rate: {P_NULL_AP:.0%}   A null rate: {P_NULL_A:.0%}",
-        f"  Conditional nulls: P(A+|A) null = {p0_ap_given_a:.2f}   P(A++|A+) null = {p0_app_given_ap:.2f}",
         "",
-        "  NESTED JOINT PROBABILITY  P(A) × P(A+|A) × P(A++|A+)  [chain rule, dependent tiers]",
-        f"  {'Anchor':<14}  {'p(A)':>9}  {'p(A+|A)':>9}  {'p(A++|A+)':>11}  {'joint p':>12}  {'':>4}",
+        "  JOINT EXCEEDANCE PROBABILITY  P(n_A++ ≥ obs ∩ n_A+ ≥ obs ∩ n_A ≥ obs)",
+        "  computed exactly from the multinomial null over the four nested tiers",
+        "  (cells: A++, A+ \\ A++, A \\ A+, below-A).",
+        f"  {'Anchor':<14}  {'p(A)':>9}  {'p(A+)':>9}  {'p(A++)':>9}  {'joint p':>12}  {'':>4}",
         "  " + "-" * 66,
-        f"  {'Gerizim':<14}  {p_ger_a:>9.4f}  {p_ger_ap_given_a:>9.4f}  {p_ger_app_given_ap:>11.4f}  {p_ger_joint:>12.6f}  {sig(p_ger_joint):>4}",
-        f"  {'Jerusalem':<14}  {p_jer_a:>9.4f}  {p_jer_ap_given_a:>9.4f}  {p_jer_app_given_ap:>11.4f}  {p_jer_joint:>12.6f}  {sig(p_jer_joint):>4}",
+        f"  {'Gerizim':<14}  {p_ger_a:>9.4f}  {p_ger_ap:>9.4f}  {p_ger_app:>9.4f}  {p_ger_joint:>12.6f}  {sig(p_ger_joint):>4}",
+        f"  {'Jerusalem':<14}  {p_jer_a:>9.4f}  {p_jer_ap:>9.4f}  {p_jer_app:>9.4f}  {p_jer_joint:>12.6f}  {sig(p_jer_joint):>4}",
         "",
         f"  A+ overlap (both anchors): {len(both_ap)} sites",
         f"  A+ unique to Gerizim: {len(ger_only_ap)} sites",

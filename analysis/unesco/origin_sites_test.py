@@ -388,6 +388,8 @@ K_rest_g  = N_ALL - K_a_g - K_inter_g
 # Buddhism: use A-tier count (na_bud_r), not A+
 na_bud_r  = sum(1 for s in buddhist_relig if is_a_or_better(s["tier"]))
 
+import numpy as _np_lse  # numpy.logaddexp gives a numerically stable log-sum-exp
+
 def _lc(n, k):
     if k < 0 or k > n: return float('-inf')
     return lgamma(n+1) - lgamma(k+1) - lgamma(n-k+1)
@@ -400,10 +402,7 @@ for _x1 in range(na_bud_r, min(K_a_g, n_bud_r) + 1):
         if _x3 < 0 or _x3 > K_rest_g:
             continue
         _lp = _lc(K_a_g, _x1) + _lc(K_inter_g, _x2) + _lc(K_rest_g, _x3) - _log_denom
-        if _lp > _log_joint:
-            _log_joint = _lp + log(1 + exp(_log_joint - _lp)) if _log_joint > float('-inf') else _lp
-        elif _lp > _log_joint - 50:
-            _log_joint = _log_joint + log(1 + exp(_lp - _log_joint))
+        _log_joint = float(_np_lse.logaddexp(_log_joint, _lp))
 p_bud_joint = exp(_log_joint)
 
 # ── Hinduism: A-tier + C-tier enrichment + joint probability ─────────────────
@@ -416,18 +415,16 @@ hin_inter_rate = 100 * n_hin_inter / n_hin_r
 hin_inter_enr  = (n_hin_inter / n_hin_r) / (N_inter_corpus / N_ALL)
 
 # Exact joint P(A>=obs AND C>=obs) — A-tier paired with C-tier
+# (parallels the Buddhism block above, which uses na_bud_r)
 _log_denom_h = _lc(N_ALL, n_hin_r)
 _log_joint_h = float('-inf')
-for _x1 in range(nap_hin_r, min(K_a_g, n_hin_r) + 1):
+for _x1 in range(na_hin_r, min(K_a_g, n_hin_r) + 1):
     for _x2 in range(n_hin_inter, min(K_inter_g, n_hin_r - _x1) + 1):
         _x3 = n_hin_r - _x1 - _x2
         if _x3 < 0 or _x3 > K_rest_g:
             continue
         _lp = _lc(K_a_g, _x1) + _lc(K_inter_g, _x2) + _lc(K_rest_g, _x3) - _log_denom_h
-        if _lp > _log_joint_h:
-            _log_joint_h = _lp + log(1 + exp(_log_joint_h - _lp)) if _log_joint_h > float('-inf') else _lp
-        elif _lp > _log_joint_h - 50:
-            _log_joint_h = _log_joint_h + log(1 + exp(_lp - _log_joint_h))
+        _log_joint_h = float(_np_lse.logaddexp(_log_joint_h, _lp))
 p_hin_joint = exp(_log_joint_h)
 
 hin_cminus = [s for s in hindu if is_cminus_or_better(s["tier"])]
@@ -444,17 +441,13 @@ for _x1 in range(nap_hin_r, min(K_a_g, n_hin_r) + 1):
         if _x3 < 0 or _x3 > K_rest_g:
             continue
         _lp = _lc(K_a_g, _x1) + _lc(N_cminus_corpus, _x2) + _lc(K_rest_g, _x3) - _log_denom_h_cminus
-        if _lp > _log_joint_h_cminus:
-            _log_joint_h_cminus = _lp + log(1 + exp(_log_joint_h_cminus - _lp)) if _log_joint_h_cminus > float('-inf') else _lp
-        elif _lp > _log_joint_h_cminus - 50:
-            _log_joint_h_cminus = _log_joint_h_cminus + log(1 + exp(_lp - _log_joint_h_cminus))
+        _log_joint_h_cminus = float(_np_lse.logaddexp(_log_joint_h_cminus, _lp))
 p_hin_ap_cminus = exp(_log_joint_h_cminus)
 
 jewish_kws = next(kws for name, kws in RELIGION_SETS if name.lower().startswith("jud"))
 jewish = [s for s in sites if any(k in s["text"] for k in jewish_kws)]
 n_jud = len(jewish)
 na_jud = sum(1 for s in jewish if is_a_or_better(s["tier"]))  # A-tier count
-p_jud_a_binom = binomtest(na_jud, n_jud, P_NULL_A, alternative="greater").pvalue
 # Fisher's exact: Judaism A-tier vs rest of corpus
 _jud_table = [[na_jud, n_jud - na_jud],
               [na_corpus - na_jud, (N_ALL - n_jud) - (na_corpus - na_jud)]]

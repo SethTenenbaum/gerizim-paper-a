@@ -59,7 +59,6 @@ F_ALL         = F_UNAMBIGUOUS + F_AMBIGUOUS
 
 F_KEYWORD_RES = {
     kw: re.compile(r"\b" + re.escape(kw) + r"\b", re.IGNORECASE)
-    if " " in kw else re.compile(re.escape(kw), re.IGNORECASE)
     for kw in F_ALL
 }
 
@@ -92,7 +91,6 @@ S_ALL         = S_UNAMBIGUOUS + S_AMBIGUOUS
 
 S_KEYWORD_RES = {
     kw: re.compile(r"\b" + re.escape(kw) + r"\b", re.IGNORECASE)
-    if " " in kw else re.compile(re.escape(kw), re.IGNORECASE)
     for kw in S_ALL
 }
 
@@ -125,7 +123,6 @@ M_ALL         = M_UNAMBIGUOUS + M_AMBIGUOUS
 
 M_KEYWORD_RES = {
     kw: re.compile(r"\b" + re.escape(kw) + r"\b", re.IGNORECASE)
-    if " " in kw else re.compile(re.escape(kw), re.IGNORECASE)
     for kw in M_ALL
 }
 
@@ -164,7 +161,6 @@ X_REGEX_UNAMBIGUOUS = [
 
 X_KEYWORD_RES = {
     kw: re.compile(r"\b" + re.escape(kw) + r"\b", re.IGNORECASE)
-    if " " in kw else re.compile(re.escape(kw), re.IGNORECASE)
     for kw in X_ALL
 }
 
@@ -197,7 +193,6 @@ L_ALL         = L_UNAMBIGUOUS + L_AMBIGUOUS
 
 L_KEYWORD_RES = {
     kw: re.compile(r"\b" + re.escape(kw) + r"\b", re.IGNORECASE)
-    if " " in kw else re.compile(re.escape(kw), re.IGNORECASE)
     for kw in L_ALL
 }
 

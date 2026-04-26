@@ -1,5 +1,5 @@
 UNESCO HARMONIC INTER-HARMONIC ZONE AUDIT
-Generated  : Fri Apr 24 20:33:04 UTC 2026
+Generated  : Sat Apr 25 22:19:48 UTC 2026
 Script     : tools/generate_audit_interharmonic.py
 Corpus     : 1011 Cultural/Mixed UNESCO sites with year
 Anchor     : Gerizim 35.269°E   |   Beru = 30.0°

@@ -1,4 +1,4 @@
-% Generated macros — 2026-04-24T20:28:15Z
+% Generated macros — 2026-04-25T22:09:40Z
 % Source: bash manuscript/reproduce_all_macros.sh
 % IMPORTANT: values are computed fresh each run — do NOT hardcode
 
@@ -55,6 +55,13 @@
   \newcommand{\GeodesicThresholdKm}{10.689300000000001}  % physical km threshold used in geodesic check
   \newcommand{\GeodesicKmPerDegAtSixty}{55.7}  % east-west km per degree at 60.0°N
 
+% --- analysis/unesco/spherical_monument_test.py
+  \newcommand{\pCircApValidated}{0.0170}  % p-value, A+ binomial (context-validated dome corpus)
+  \newcommand{\pCircAValidated}{0.0037}   % p-value, A binomial (context-validated dome corpus)
+  \newcommand{\circEnrichApValidated}{2.06}  % enrichment ratio, A+ (context-validated dome corpus)
+  \newcommand{\NdomeGateNeg}{28}  % number of negative-context gate patterns (Gate 1)
+  \newcommand{\NdomeGatePos}{86}  % number of positive-context gate patterns (Gate 2)
+
 % --- analysis/unesco/spherical_monument_raw_sweep.py
   \newcommand{\NcircTotal}{90}           % raw-sweep population size
   \newcommand{\NcircValidated}{83}             % context-validated population (Test 2)
@@ -77,7 +84,7 @@
   \newcommand{\circApFisherOR}{1.90}      % OR, A+ Fisher exact vs rest (raw sweep)
   \newcommand{\pCircAFisher}{0.0140}       % p-value, A Fisher exact vs rest (raw sweep)
   \newcommand{\circAFisherOR}{1.88}       % OR, A Fisher exact vs rest (raw sweep)
-  \newcommand{\pCircChi}{0.0000}          % chi-sq uniform, 5 bins, df=4 (raw sweep)
+  \newcommand{\pCircChi}{0.0732}          % chi-sq uniform, 5 bins, df=4 (raw sweep)
   \newcommand{\GerizimPctileAp}{98}            % anchor-sweep percentile, A+ (raw sweep)
   \newcommand{\GerizimPctileA}{98}            % anchor-sweep percentile, A  (raw sweep)
   \newcommand{\circEnrichAp}{2.25}           % enrichment ratio, A+
@@ -94,13 +101,6 @@
   \newcommand{\circEnrichCIlo}{1.23}        % Clopper-Pearson 95% CI lower, A+ enrichment ratio
   \newcommand{\circEnrichCIhi}{3.64}        % Clopper-Pearson 95% CI upper, A+ enrichment ratio
   \newcommand{\NcircValidatedApRate}{15.7}  % A+ rate (%) = 13/83, validated pop
-
-% --- analysis/unesco/spherical_monument_test.py
-  \newcommand{\pCircApValidated}{0.0170}  % p-value, A+ binomial (context-validated dome corpus)
-  \newcommand{\pCircAValidated}{0.0037}   % p-value, A binomial (context-validated dome corpus)
-  \newcommand{\circEnrichApValidated}{2.06}  % enrichment ratio, A+ (context-validated dome corpus)
-  \newcommand{\NdomeGateNeg}{28}  % number of negative-context gate patterns (Gate 1)
-  \newcommand{\NdomeGatePos}{86}  % number of positive-context gate patterns (Gate 2)
 
 % --- analysis/unesco/cluster_asymmetry_test.py
   \newcommand{\NclusterTotal}{1011}          % full Cultural/Mixed corpus
@@ -231,7 +231,7 @@
   \newcommand{\hinApRate}{10.3}            % Hinduism A+ rate (%)
   \newcommand{\NhinInterHarmonic}{9}             % Hinduism C-tier sites
   \newcommand{\hinInterHarmonicRate}{23.1}            % Hinduism C-tier rate (%)
-  \newcommand{\pHinJoint}{0.0365}         % joint p: Hinduism A >= 9 AND C-tier >= 9 (multivariate hypergeometric)
+  \newcommand{\pHinJoint}{0.0028}         % joint p: Hinduism A >= 9 AND C-tier >= 9 (multivariate hypergeometric)
   \newcommand{\NhinCminus}{7}            % Hinduism C- tier sites
   \newcommand{\hinCminusRate}{17.9}            % Hinduism C- tier rate (%)
   \newcommand{\hinCminusEnrich}{2.49}           % Hinduism C- tier enrichment vs corpus
@@ -240,68 +240,37 @@
 
 % --- analysis/unesco/founding_sites_analysis.py
   \newcommand{\NthematicTotal}{88}                 % total A+ sites
-  \newcommand{\NthematicFounding}{30}             % A+ with founding/origin theme
-  \newcommand{\thematicFoundingPct}{34}          % % of A+ with founding theme
+  \newcommand{\NthematicFounding}{29}             % A+ with founding/origin theme
+  \newcommand{\thematicFoundingPct}{33}          % % of A+ with founding theme
   \newcommand{\NthematicCapital}{15}             % founding/capital theme count
-  \newcommand{\NthematicMonument}{6}             % monument theme count
+  \newcommand{\NthematicMonument}{5}             % monument theme count
   \newcommand{\NthematicSacred}{5}              % sacred/religious theme count
   \newcommand{\NthematicAxis}{4}              % cosmic axis theme count
   \newcommand{\NthematicLandscape}{5}           % sacred landscape theme count
-  \newcommand{\NthematicUnclassified}{53}         % unclassified A+ sites
-  \newcommand{\NfoundKwAll}{296}                % corpus sites with founding keyword
-  \newcommand{\foundKwBaseRate}{29.3}          % base rate, founding keyword (%)
-  \newcommand{\NfoundKwAp}{30}             % A+ sites with founding keyword
-  \newcommand{\foundKwApRate}{34.1}          % founding keyword rate in A+ (%)
-  \newcommand{\NfoundKwNonAp}{266}           % non-A+ sites with founding keyword
-  \newcommand{\foundKwNonApRate}{28.8}        % founding keyword rate in non-A+ (%)
-  \newcommand{\foundKwFisherOR}{1.28}          % Fisher OR, A+ vs non-A+ founding keyword
-  \newcommand{\pFoundKwFisher}{0.179}         % p-value, Fisher test founding keyword
-  \newcommand{\NfoundKwApp}{22}              % A++ sites with founding keyword
+  \newcommand{\NthematicUnclassified}{54}         % unclassified A+ sites
+  \newcommand{\NfoundKwAll}{290}                % corpus sites with founding keyword
+  \newcommand{\foundKwBaseRate}{28.7}          % base rate, founding keyword (%)
+  \newcommand{\NfoundKwAp}{29}             % A+ sites with founding keyword
+  \newcommand{\foundKwApRate}{33.0}          % founding keyword rate in A+ (%)
+  \newcommand{\NfoundKwNonAp}{261}           % non-A+ sites with founding keyword
+  \newcommand{\foundKwNonApRate}{28.3}        % founding keyword rate in non-A+ (%)
+  \newcommand{\foundKwFisherOR}{1.25}          % Fisher OR, A+ vs non-A+ founding keyword
+  \newcommand{\pFoundKwFisher}{0.209}         % p-value, Fisher test founding keyword
+  \newcommand{\NfoundKwApp}{21}              % A++ sites with founding keyword
   \newcommand{\NfoundKwTotalApp}{44}           % total A++ sites
-  \newcommand{\foundKwAppRate}{50.0}          % founding keyword rate in A++ (%)
-  \newcommand{\foundKwAppFisherOR}{2.53}       % Fisher OR, A++ vs non-A++ founding keyword
-  \newcommand{\pFoundKwAppFisher}{0.002}    % p-value, Fisher test founding keyword A++
+  \newcommand{\foundKwAppRate}{47.7}          % founding keyword rate in A++ (%)
+  \newcommand{\foundKwAppFisherOR}{2.37}       % Fisher OR, A++ vs non-A++ founding keyword
+  \newcommand{\pFoundKwAppFisher}{0.005}    % p-value, Fisher test founding keyword A++
 
 % --- analysis/unesco/sacred_origin_test.py
   \newcommand{\sacredHitOne}{Lumbini, the Birthplace of the Lord Buddha}  % top-ranked sacred-origin A+ site (by beru deviation)
   \newcommand{\sacredHitTwo}{Historic Centre of Oaxaca and Archaeological Site of Monte Albán}  % 2nd-ranked sacred-origin A+ site
   \newcommand{\sacredHitThree}{Old City of Jerusalem and its Walls}  % 3rd-ranked sacred-origin A+ site
 
-
-% --- analysis/global/anchor_corridor_audit.py
-  \newcommand{\corridorSharedAp}{71}     % A+ sites shared by Gerizim and Jerusalem
-  \newcommand{\corridorUniqueGer}{17}    % A+ sites unique to Gerizim anchor
-  \newcommand{\corridorUniqueJer}{17}    % A+ sites unique to Jerusalem anchor
-
-% --- analysis/unesco/tier_logsweep_sensitivity.py
-  \newcommand{\logSweepNtaus}{73}           % thresholds tested in log sweep
-  \newcommand{\logSweepNsig}{57}            % thresholds with p_dome < 0.05
-  \newcommand{\logSweepNinversions}{7}         % non-monotone inversions in dome curve
-  \newcommand{\logSweepAregionNtaus}{28}       % thresholds in ±1 log-decade around A+
-  \newcommand{\logSweepAregionNsig}{27}        % of those with p_dome < 0.05
-  \newcommand{\logSweepMinEnrichCanon}{1.82}   % min dome enrichment at any A-canon tier
-  \newcommand{\logSweepMaxEnrichCanon}{3.77}   % max dome enrichment at any A-canon tier
-  \newcommand{\logSweepApEnrich}{2.17}      % dome enrichment at A+ canonical value
-  \newcommand{\logSweepAppEnrich}{3.77}     % dome enrichment at A++ canonical value
-  \newcommand{\logSweepAEnrich}{1.82}       % dome enrichment at A canonical value
-  \newcommand{\logSweepApP}{0.012}     % dome p at A+ canonical threshold
-  \newcommand{\logSweepAppP}{< 0.001}    % dome p at A++ canonical threshold
-  \newcommand{\logSweepAP}{0.007}      % dome p at A canonical threshold
-  \newcommand{\logSweepOptPtau}{0.00149}    % data-optimal tau (min p, n>=5)
-  \newcommand{\logSweepOptPtauKm}{5.0}     % data-optimal tau in km
-  \newcommand{\logSweepOptPval}{< 0.001}     % p at data-optimal tau
-  \newcommand{\logSweepOptEnrich}{4.56}   % max enrichment at any tau (n>=5)
-  \newcommand{\logSweepOptEnrichKm}{2.6}  % km at max enrichment tau
-  \newcommand{\logSweepApOptLogDist}{0.333}  % log-decades from A+ to best-p tau
-  \newcommand{\logSweepOptApBeru}{0.00275}   % optimal A+ threshold (beru)
-  \newcommand{\logSweepOptApKm}{9.2}      % optimal A+ threshold (km)
-  \newcommand{\logSweepOptABeru}{0.00509}    % optimal A threshold (beru)
-  \newcommand{\logSweepOptAKm}{17.0}       % optimal A threshold (km)
-  \newcommand{\logSweepOptRatio}{1.87}      % optimal geometric step ratio
-
-% --- wikidata depletion sig labels (derived from p-values above)
-  \newcommand{\wikiHeartlandATierPSig}{**}   % sig label for wikiHeartlandATierP=0.005
-  \newcommand{\wikiMyanmarATierPSig}{***}    % sig label for wikiMyanmarATierP<0.001
+% --- analysis/unesco/meta_keyword_test.py
+  \newcommand{\NmetaKeywords}{1741}          % total keyword permutations tested
+  \newcommand{\NmetaBeatingChi}{703}           % keywords beating Gerizim chi-sq
+  \newcommand{\metaBeatingChiPct}{40.4}         % % of keywords beating Gerizim chi-sq
 
 % --- analysis/unesco/temporal_gradient_test.py
   \newcommand{\ZcochranThree}{-1.001}       % Cochran-Armitage Z, A+, 3-bin
@@ -632,6 +601,8 @@
   \newcommand{\LatAmEarlyApRate}{7.9}  % early A+ rate (pre-2000), Latin America & Caribbean
   \newcommand{\LatAmLateApRate}{3.9}   % late A+ rate (2000+), Latin America & Caribbean
 
+% --- analysis/unesco/tumulus_dome_evolution_test.py
+
 % --- analysis/unesco/tumulus_dome_evolution_raw_sweep.py
   \newcommand{\NevoTotal}{110}            % total dome-evolution corpus
   \newcommand{\NevoApp}{11}            % A++ sites in dome-evolution corpus
@@ -705,15 +676,6 @@
   \newcommand{\evoStupaIndonesiaApRate}{60.0}      % A+ rate, stupa-stage 95–141°E (%)
   \newcommand{\evoStupaIndonesiaOR}{16.25}       % Fisher OR, stupa-stage 95–141°E vs corpus
   \newcommand{\pEvoStupaIndonesiaP}{0.0056}       % Fisher p, stupa-stage 95–141°E vs corpus
-
-% --- analysis/unesco/tumulus_dome_evolution_test.py
-  \newcommand{\NevoValidTotal}{104}              % total dome-evolution corpus (context-validated)
-  \newcommand{\NevoValidAp}{13}               % A+ sites (context-validated)
-  \newcommand{\evoValidApRate}{12.5}             % A+ rate, context-validated (%)
-  \newcommand{\evoValidEnrichAp}{1.95}            % enrichment ratio A+ (context-validated)
-  \newcommand{\pEvoApValidated}{0.0159}          % p-value A+ binomial, context-validated (Exploratory)
-  \newcommand{\pEvoAValidated}{0.0121}           % p-value A  binomial, context-validated (Exploratory)
-  \newcommand{\NevoValidRejected}{6}           % sites rejected by context validation
 
 % --- analysis/unesco/mound_keyword_context_audit.py
   \newcommand{\NmoundRaw}{110}           % raw-sweep population (no context filter)
@@ -1084,60 +1046,111 @@
   \newcommand{\permSlopePsharpBound}{0.1785}
 
 % --- analysis/unesco/sensitivity_slope_specificity_test.py
+  \newcommand{\NevoValidTotal}{104}              % total dome-evolution corpus (context-validated)
+  \newcommand{\NevoValidAp}{13}               % A+ sites (context-validated)
+  \newcommand{\evoValidApRate}{12.5}             % A+ rate, context-validated (%)
+  \newcommand{\evoValidEnrichAp}{1.95}            % enrichment ratio A+ (context-validated)
+  \newcommand{\pEvoApValidated}{0.0159}          % p-value A+ binomial, context-validated (Exploratory)
+  \newcommand{\pEvoAValidated}{0.0121}           % p-value A  binomial, context-validated (Exploratory)
+  \newcommand{\NevoValidRejected}{6}           % sites rejected by context validation
   \newcommand{\permSlopeSpecN}{10000}
-  \newcommand{\permSlopeCanonRankObs}{1}
-  \newcommand{\permSlopeCanonBestJoint}{0.1037}
-  \newcommand{\permSlopeCanonRankP}{1.0000}
-  \newcommand{\permSlopeCanonRankPctile}{36.0000}
-  \newcommand{\permSlopeCanonCondFraction}{0.4290}
-  \newcommand{\permSlopeSharpPeakTotal}{2417}
-  \newcommand{\permSlopeSharpAtCanon}{1037}
-  \newcommand{\permSlopeCanonRankSig}{ns}
-  % Tier A++
-  \newcommand{\permSlopeCanonBestJointAPP}{0.0503}
-  \newcommand{\permSlopeCanonBestJointSigAPP}{$\sim$}
-  \newcommand{\permSlopeCanonRankObsAPP}{1}
-  \newcommand{\permSlopeCanonRankPAPP}{1.0000}
-  \newcommand{\permSlopeCanonRankSigAPP}{ns}
-  \newcommand{\permSlopeCanonRankPctileAPP}{30.4}
-  \newcommand{\permSlopeCanonCondFractionAPP}{0.4770}
-  \newcommand{\permSlopeSharpPeakTotalAPP}{1055}
-  \newcommand{\permSlopeSharpAtCanonAPP}{503}
-  % Tier A+
-  \newcommand{\permSlopeCanonBestJointAP}{0.1037}
-  \newcommand{\permSlopeCanonBestJointSigAP}{ns}
-  \newcommand{\permSlopeCanonRankObsAP}{1}
-  \newcommand{\permSlopeCanonRankPAP}{1.0000}
-  \newcommand{\permSlopeCanonRankSigAP}{ns}
-  \newcommand{\permSlopeCanonRankPctileAP}{36.0}
-  \newcommand{\permSlopeCanonCondFractionAP}{0.4290}
-  \newcommand{\permSlopeSharpPeakTotalAP}{2417}
-  \newcommand{\permSlopeSharpAtCanonAP}{1037}
-  % Tier A
-  \newcommand{\permSlopeCanonBestJointA}{0.0620}
-  \newcommand{\permSlopeCanonBestJointSigA}{$\sim$}
-  \newcommand{\permSlopeCanonRankObsA}{1}
-  \newcommand{\permSlopeCanonRankPA}{1.0000}
-  \newcommand{\permSlopeCanonRankSigA}{ns}
-  \newcommand{\permSlopeCanonRankPctileA}{44.0}
-  \newcommand{\permSlopeCanonCondFractionA}{0.8710}
-  \newcommand{\permSlopeSharpPeakTotalA}{712}
-  \newcommand{\permSlopeSharpAtCanonA}{620}
-  % Kw filter (unambiguous keywords only: stupa/stupas/tholos, n=22)
+  \newcommand{\permSlopeKwN}{22}  % N sites in unambiguous-kw subset (stupa/stupas/tholos)
+  \newcommand{\permSlopeCanonBestJointDomeAPP}{0.0503}
+  \newcommand{\permSlopeCanonBestJointSigDomeAPP}{$\sim$}
+  \newcommand{\permSlopeCanonRankObsDomeAPP}{1}
+  \newcommand{\permSlopeCanonRankPDomeAPP}{1.0000}
+  \newcommand{\permSlopeCanonRankSigDomeAPP}{ns}
+  \newcommand{\permSlopeCanonRankPctileDomeAPP}{30.4000}
+  \newcommand{\permSlopeCanonCondFractionDomeAPP}{0.4770}
+  \newcommand{\permSlopeSharpPeakTotalDomeAPP}{1055}
+  \newcommand{\permSlopeSharpAtCanonDomeAPP}{503}
+  \newcommand{\permSlopeCanonBestJointDomeAP}{0.1037}
+  \newcommand{\permSlopeCanonBestJointSigDomeAP}{ns}
+  \newcommand{\permSlopeCanonRankObsDomeAP}{1}
+  \newcommand{\permSlopeCanonRankPDomeAP}{1.0000}
+  \newcommand{\permSlopeCanonRankSigDomeAP}{ns}
+  \newcommand{\permSlopeCanonRankPctileDomeAP}{36.0000}
+  \newcommand{\permSlopeCanonCondFractionDomeAP}{0.4290}
+  \newcommand{\permSlopeSharpPeakTotalDomeAP}{2417}
+  \newcommand{\permSlopeSharpAtCanonDomeAP}{1037}
+  \newcommand{\permSlopeCanonBestJointDomeA}{0.0620}
+  \newcommand{\permSlopeCanonBestJointSigDomeA}{$\sim$}
+  \newcommand{\permSlopeCanonRankObsDomeA}{1}
+  \newcommand{\permSlopeCanonRankPDomeA}{1.0000}
+  \newcommand{\permSlopeCanonRankSigDomeA}{ns}
+  \newcommand{\permSlopeCanonRankPctileDomeA}{44.0000}
+  \newcommand{\permSlopeCanonCondFractionDomeA}{0.8710}
+  \newcommand{\permSlopeSharpPeakTotalDomeA}{712}
+  \newcommand{\permSlopeSharpAtCanonDomeA}{620}
   \newcommand{\permSlopeCanonBestJointKwAPP}{0.0448}
-  \newcommand{\permSlopeCanonBestJointSigKwAPP}{$\sim$}
+  \newcommand{\permSlopeCanonBestJointSigKwAPP}{*}
+  \newcommand{\permSlopeCanonRankObsKwAPP}{1}
+  \newcommand{\permSlopeCanonRankPKwAPP}{1.0000}
+  \newcommand{\permSlopeCanonRankSigKwAPP}{ns}
+  \newcommand{\permSlopeCanonRankPctileKwAPP}{21.4000}
+  \newcommand{\permSlopeCanonCondFractionKwAPP}{0.4260}
+  \newcommand{\permSlopeSharpPeakTotalKwAPP}{1052}
+  \newcommand{\permSlopeSharpAtCanonKwAPP}{448}
   \newcommand{\permSlopeCanonBestJointKwAP}{0.0560}
   \newcommand{\permSlopeCanonBestJointSigKwAP}{$\sim$}
+  \newcommand{\permSlopeCanonRankObsKwAP}{1}
+  \newcommand{\permSlopeCanonRankPKwAP}{1.0000}
+  \newcommand{\permSlopeCanonRankSigKwAP}{ns}
+  \newcommand{\permSlopeCanonRankPctileKwAP}{22.0000}
+  \newcommand{\permSlopeCanonCondFractionKwAP}{0.3470}
+  \newcommand{\permSlopeSharpPeakTotalKwAP}{1612}
+  \newcommand{\permSlopeSharpAtCanonKwAP}{560}
   \newcommand{\permSlopeCanonBestJointKwA}{0.0248}
   \newcommand{\permSlopeCanonBestJointSigKwA}{*}
-  \newcommand{\permSlopeKwN}{22}
-  % Full corpus geographic bootstrap (N=1011, shuffle all longitudes)
-  \newcommand{\permSlopeCanonBestJointFullAPP}{$< 0.0001$}
+  \newcommand{\permSlopeCanonRankObsKwA}{1}
+  \newcommand{\permSlopeCanonRankPKwA}{1.0000}
+  \newcommand{\permSlopeCanonRankSigKwA}{ns}
+  \newcommand{\permSlopeCanonRankPctileKwA}{50.1000}
+  \newcommand{\permSlopeCanonCondFractionKwA}{0.8410}
+  \newcommand{\permSlopeSharpPeakTotalKwA}{295}
+  \newcommand{\permSlopeSharpAtCanonKwA}{248}
+  \newcommand{\permSlopeCanonBestJointEvoAPP}{0.1137}
+  \newcommand{\permSlopeCanonBestJointSigEvoAPP}{ns}
+  \newcommand{\permSlopeCanonRankObsEvoAPP}{1}
+  \newcommand{\permSlopeCanonRankPEvoAPP}{1.0000}
+  \newcommand{\permSlopeCanonRankSigEvoAPP}{ns}
+  \newcommand{\permSlopeCanonRankPctileEvoAPP}{31.5000}
+  \newcommand{\permSlopeCanonCondFractionEvoAPP}{0.4590}
+  \newcommand{\permSlopeSharpPeakTotalEvoAPP}{2478}
+  \newcommand{\permSlopeSharpAtCanonEvoAPP}{1137}
+  \newcommand{\permSlopeCanonBestJointEvoAP}{0.1083}
+  \newcommand{\permSlopeCanonBestJointSigEvoAP}{ns}
+  \newcommand{\permSlopeCanonRankObsEvoAP}{1}
+  \newcommand{\permSlopeCanonRankPEvoAP}{1.0000}
+  \newcommand{\permSlopeCanonRankSigEvoAP}{ns}
+  \newcommand{\permSlopeCanonRankPctileEvoAP}{37.0000}
+  \newcommand{\permSlopeCanonCondFractionEvoAP}{0.4340}
+  \newcommand{\permSlopeSharpPeakTotalEvoAP}{2496}
+  \newcommand{\permSlopeSharpAtCanonEvoAP}{1083}
+  \newcommand{\permSlopeCanonBestJointEvoA}{0.0702}
+  \newcommand{\permSlopeCanonBestJointSigEvoA}{$\sim$}
+  \newcommand{\permSlopeCanonRankObsEvoA}{1}
+  \newcommand{\permSlopeCanonRankPEvoA}{1.0000}
+  \newcommand{\permSlopeCanonRankSigEvoA}{ns}
+  \newcommand{\permSlopeCanonRankPctileEvoA}{44.5000}
+  \newcommand{\permSlopeCanonCondFractionEvoA}{0.8940}
+  \newcommand{\permSlopeSharpPeakTotalEvoA}{785}
+  \newcommand{\permSlopeSharpAtCanonEvoA}{702}
+  \newcommand{\permSlopeCanonBestJointFullAPP}{0.0000}
   \newcommand{\permSlopeCanonBestJointSigFullAPP}{***}
-  \newcommand{\permSlopeCanonBestJointFullAP}{$< 0.0001$}
+  \newcommand{\permSlopeCanonCondFractionFullAPP}{0.0000}
+  \newcommand{\permSlopeSharpPeakTotalFullAPP}{10000}
+  \newcommand{\permSlopeSharpAtCanonFullAPP}{0}
+  \newcommand{\permSlopeCanonBestJointFullAP}{0.0000}
   \newcommand{\permSlopeCanonBestJointSigFullAP}{***}
-  \newcommand{\permSlopeCanonBestJointFullA}{$< 0.0001$}
+  \newcommand{\permSlopeCanonCondFractionFullAP}{0.0000}
+  \newcommand{\permSlopeSharpPeakTotalFullAP}{10000}
+  \newcommand{\permSlopeSharpAtCanonFullAP}{0}
+  \newcommand{\permSlopeCanonBestJointFullA}{0.0000}
   \newcommand{\permSlopeCanonBestJointSigFullA}{***}
+  \newcommand{\permSlopeCanonCondFractionFullA}{0.0000}
+  \newcommand{\permSlopeSharpPeakTotalFullA}{0}
+  \newcommand{\permSlopeSharpAtCanonFullA}{0}
 
 % --- analysis/unesco/dome_geographic_concentration_test.py
   \newcommand{\geoNullDomeBootP}{0.5462}   % within-dome bootstrap p
@@ -1203,50 +1216,79 @@
   \newcommand{\regionCondBPermZ}{---}      % Strategy B Z
   \newcommand{\regionCondBNblocks}{61}         % Strategy B blocks
 
+% --- analysis/global/anchor_corridor_audit.py
+\newcommand{\corridorSharedAp}{71}     % A+ sites shared by Gerizim and Jerusalem
+\newcommand{\corridorUniqueGer}{17}    % A+ sites unique to Gerizim anchor
+\newcommand{\corridorUniqueJer}{17}    % A+ sites unique to Jerusalem anchor
+
+% --- analysis/unesco/tier_logsweep_sensitivity.py
+\newcommand{\logSweepNtaus}{73}           % thresholds tested in log sweep
+\newcommand{\logSweepNsig}{57}            % thresholds with p_dome < 0.05
+\newcommand{\logSweepNinversions}{7}         % non-monotone inversions in dome curve
+\newcommand{\logSweepAregionNtaus}{28}       % thresholds in ±1 log-decade around A+
+\newcommand{\logSweepAregionNsig}{27}        % of those with p_dome < 0.05
+\newcommand{\logSweepMinEnrichCanon}{1.82}   % min dome enrichment at any A-canon tier
+\newcommand{\logSweepMaxEnrichCanon}{3.77}   % max dome enrichment at any A-canon tier
+\newcommand{\logSweepApEnrich}{2.17}      % dome enrichment at A+ canonical value
+\newcommand{\logSweepAppEnrich}{3.77}     % dome enrichment at A++ canonical value
+\newcommand{\logSweepAEnrich}{1.82}       % dome enrichment at A canonical value
+\newcommand{\logSweepApP}{0.012}     % dome p at A+ canonical threshold
+\newcommand{\logSweepAppP}{< 0.001}    % dome p at A++ canonical threshold
+\newcommand{\logSweepAP}{0.007}      % dome p at A canonical threshold
+\newcommand{\logSweepOptPtau}{0.00149}    % data-optimal tau (min p, n>=5)
+\newcommand{\logSweepOptPtauKm}{5.0}     % data-optimal tau in km
+\newcommand{\logSweepOptPval}{< 0.001}     % p at data-optimal tau
+\newcommand{\logSweepOptEnrich}{4.56}   % max enrichment at any tau (n>=5)
+\newcommand{\logSweepOptEnrichKm}{2.6}  % km at max enrichment tau
+\newcommand{\logSweepApOptLogDist}{0.333}  % log-decades from A+ to best-p tau
+\newcommand{\logSweepOptApBeru}{0.00275}   % optimal A+ threshold (beru)
+\newcommand{\logSweepOptApKm}{9.2}      % optimal A+ threshold (km)
+\newcommand{\logSweepOptABeru}{0.00509}    % optimal A threshold (beru)
+\newcommand{\logSweepOptAKm}{17.0}       % optimal A threshold (km)
+\newcommand{\logSweepOptRatio}{1.87}      % optimal geometric step ratio
+
 % --- analysis/unesco/fdr_multiple_comparisons.py
   \newcommand{\NtotalTests}{47}           % total tests in FDR analysis
   \newcommand{\NconfTests}{38}           % confirmatory tests
   \newcommand{\NexplTests}{9}           % exploratory tests
-  \newcommand{\NsurviveFDR}{27}           % tests surviving BH FDR (q<0.05)
-  \newcommand{\NsurviveBonfAll}{10}           % tests surviving Bonferroni (all tests)
+  \newcommand{\NsurviveFDR}{26}           % tests surviving BH FDR (q<0.05)
+  \newcommand{\NsurviveBonfAll}{9}           % tests surviving Bonferroni (all tests)
   \newcommand{\NtotalTestsP}{0.0011}  % Bonferroni threshold = 0.05/47 (used in FDR table header)
   \newcommand{\BonfAllSurvivepCircApp}{0.0293}  % full-k Bonferroni survivor
-  \newcommand{\FDRqSurvivepCircApp}{0.0034}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepCircAp}{0.0121}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepCircA}{0.0084}  % BH q-value survivor
-  \newcommand{\BonfAllSurvivepCircChi}{0.0}  % full-k Bonferroni survivor
-  \newcommand{\FDRqSurvivepCircChi}{0.0}  % BH q-value survivor
-  \newcommand{\FDRqSurviveclusterApBinom}{0.0086}  % BH q-value survivor
-  \newcommand{\FDRqSurviveclusterMWp}{0.0121}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepCircApp}{0.0038}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepCircAp}{0.0128}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepCircA}{0.0092}  % BH q-value survivor
+  \newcommand{\FDRqSurviveclusterApBinom}{0.0092}  % BH q-value survivor
+  \newcommand{\FDRqSurviveclusterMWp}{0.0128}  % BH q-value survivor
   \newcommand{\BonfAllSurviveclusterPermP}{0.0094}  % full-k Bonferroni survivor
-  \newcommand{\FDRqSurviveclusterPermP}{0.0013}  % BH q-value survivor
+  \newcommand{\FDRqSurviveclusterPermP}{0.0016}  % BH q-value survivor
   \newcommand{\BonfAllSurviveclusterHarmonicMWp}{0.0004}  % full-k Bonferroni survivor
   \newcommand{\FDRqSurviveclusterHarmonicMWp}{0.0001}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepPreTwoK}{0.0086}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepFirstHalf}{0.0086}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepPreTwoK}{0.0092}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepFirstHalf}{0.0092}  % BH q-value survivor
   \newcommand{\BonfAllSurvivepeakSigP}{0.0306}  % full-k Bonferroni survivor
-  \newcommand{\FDRqSurvivepeakSigP}{0.0034}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepReligUnion}{0.0275}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepChrist}{0.0294}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepNeffQuarter}{0.0299}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepNeffHalf}{0.0232}  % BH q-value survivor
-  \newcommand{\FDRqSurviveblockBootZP}{0.0232}  % BH q-value survivor
-  \newcommand{\FDRqSurvivesimKDEP}{0.0086}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepeakSigP}{0.0038}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepReligUnion}{0.0287}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepChrist}{0.0306}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepNeffQuarter}{0.0311}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepNeffHalf}{0.0242}  % BH q-value survivor
+  \newcommand{\FDRqSurviveblockBootZP}{0.0242}  % BH q-value survivor
+  \newcommand{\FDRqSurvivesimKDEP}{0.0092}  % BH q-value survivor
   \newcommand{\BonfAllSurvivepCorridorBinom}{0.0}  % full-k Bonferroni survivor
   \newcommand{\FDRqSurvivepCorridorBinom}{0.0}  % BH q-value survivor
   \newcommand{\BonfAllSurvivepCorridorFisher}{0.0}  % full-k Bonferroni survivor
   \newcommand{\FDRqSurvivepCorridorFisher}{0.0}  % BH q-value survivor
   \newcommand{\BonfAllSurvivepCorridorAppFisher}{0.0023}  % full-k Bonferroni survivor
-  \newcommand{\FDRqSurvivepCorridorAppFisher}{0.0005}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepCorridorAppFisher}{0.0006}  % BH q-value survivor
   \newcommand{\BonfAllSurvivepCorridorMW}{0.0035}  % full-k Bonferroni survivor
-  \newcommand{\FDRqSurvivepCorridorMW}{0.0006}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepCorridorMW}{0.0007}  % BH q-value survivor
   \newcommand{\BonfAllSurvivepEvoApp}{0.0392}  % full-k Bonferroni survivor
-  \newcommand{\FDRqSurvivepEvoApp}{0.0039}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepEvoAp}{0.0121}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepEvoStupa}{0.0438}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepHinCminus}{0.0232}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepHinApCminus}{0.0086}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepBudJoint}{0.0232}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepEvoApp}{0.0044}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepEvoAp}{0.0128}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepEvoStupa}{0.0454}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepHinCminus}{0.0242}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepHinApCminus}{0.0092}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepBudJoint}{0.0242}  % BH q-value survivor
 
 % --- analysis/unesco/bonferroni_correction.py
   \newcommand{\BonfK}{3}  % k = confirmatory tests (Tests 1, 2, 3)
@@ -1254,17 +1296,17 @@
   \newcommand{\pHolmTestOne}{0.005}  % Holm-adj p, Test 1 (Global enrichment — full corpus A+ (binomial))
   \newcommand{\pAdjTestTwo}{0.015}  % Bonferroni-adj p, Test 2 (Domed/spherical A+ — RAW sweep (binomial))
   \newcommand{\pHolmTestTwo}{0.005}  % Holm-adj p, Test 2 (Domed/spherical A+ — RAW sweep (binomial))
-  \newcommand{\pAdjTestThree}{0.001}  % Bonferroni-adj p, Test 3 (Cluster asymmetry — permutation p)
-  \newcommand{\pHolmTestThree}{0.001}  % Holm-adj p, Test 3 (Cluster asymmetry — permutation p)
+  \newcommand{\pAdjTestThree}{6\!\times\!10^{-4}}  % Bonferroni-adj p, Test 3 (Cluster asymmetry — permutation p)
+  \newcommand{\pHolmTestThree}{6\!\times\!10^{-4}}  % Holm-adj p, Test 3 (Cluster asymmetry — permutation p)
   \newcommand{\FDRqTestTwoB}{---}  % FDR q: N/A (excluded from family)
   \newcommand{\BonfAllTestTwoB}{---}  % Bonf adj: N/A (excluded from family)
   \newcommand{\pRawTestTwoB}{0.0046}  % raw p, Test 2b (Hemispherical mound evolution A+ — RAW sweep (binomial))
   \newcommand{\FDRqTestFour}{---}  % FDR q: N/A (excluded from family)
   \newcommand{\BonfAllTestFour}{---}  % Bonf adj: N/A (excluded from family)
   \newcommand{\pRawTestFour}{0.1584}  % raw p, Test 4 (Temporal gradient (Cochran-Armitage 3-cohort))
-  \newcommand{\FDRqTestTestE}{---}  % FDR q: N/A (excluded from family)
-  \newcommand{\BonfAllTestTestE}{---}  % Bonf adj: N/A (excluded from family)
-  \newcommand{\pRawTestTestE}{0.1793}  % raw p, Test E (Founding-site classifier enrichment)
+  \newcommand{\FDRqTestFive}{---}  % FDR q: N/A (excluded from family)
+  \newcommand{\BonfAllTestFive}{---}  % Bonf adj: N/A (excluded from family)
+  \newcommand{\pRawTestFive}{0.2094}  % raw p, Test 5 (Founding-site classifier enrichment)
   \newcommand{\FDRqTestB}{---}  % FDR q: N/A (structural, excluded)
   \newcommand{\BonfAllTestB}{---}  % Bonf adj: N/A (structural, excluded)
   \newcommand{\pRawTestB}{0.0001}  % Rayleigh permutation p
@@ -1312,7 +1354,7 @@
   \newcommand{\pCircAppFisherSig}{**}  % auto sig label
   \newcommand{\pCircAppPermSig}{**}  % auto sig label
   \newcommand{\pCircAppSig}{***}  % auto sig label
-  \newcommand{\pCircChiSig}{***}  % auto sig label
+  \newcommand{\pCircChiSig}{$^\dagger$}  % auto sig label
   \newcommand{\pCochranAppFiveSig}{$^\dagger$}  % auto sig label
   \newcommand{\pCochranAppThreeSig}{*}  % auto sig label
   \newcommand{\pCochranFiveSig}{ns}  % auto sig label
@@ -1353,7 +1395,7 @@
   \newcommand{\pHalfFisherSig}{ns}  % auto sig label
   \newcommand{\pHinApCminusSig}{**}  % auto sig label
   \newcommand{\pHinCminusSig}{*}  % auto sig label
-  \newcommand{\pHinJointSig}{*}  % auto sig label
+  \newcommand{\pHinJointSig}{**}  % auto sig label
   \newcommand{\pIslamFisherSig}{ns}  % auto sig label
   \newcommand{\pJerusalemApSig}{**}  % auto sig label
   \newcommand{\pJudATierFisherSig}{ns}  % auto sig label
@@ -1393,6 +1435,7 @@
   \newcommand{\sweepEightFullPSig}{ns}  % auto sig label
   \newcommand{\targetedPApSig}{***}  % auto sig label
   \newcommand{\targetedPfullSig}{*}  % auto sig label
+  \newcommand{\wikiHeartlandATierPSig}{**}  % auto sig label
   \newcommand{\wikiHeartlandCbandPSig}{***}  % auto sig label
   \newcommand{\wikiJavaNodeATierPSig}{*}  % auto sig label
   \newcommand{\wikiJavaTightATierPSig}{***}  % auto sig label

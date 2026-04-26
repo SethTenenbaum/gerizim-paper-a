@@ -1,5 +1,5 @@
 UNESCO FOUNDING / SACRED-ORIGIN SITE KEYWORD AUDIT
-Generated  : Fri Apr 24 20:32:59 UTC 2026
+Generated  : Sat Apr 25 22:16:53 UTC 2026
 Script     : tools/generate_audit_founding.py
 Keywords   : loaded from keywords.json via lib/founding_filter.py
 
@@ -19,15 +19,15 @@ KEYWORD LISTS (from keywords.json)
 SUMMARY
 ────────────────────────────────────────────────────────────────────────────────────────
   Cultural/Mixed sites in corpus : 1013
-  Classified (≥1 category)       : 355
-  A+ among classified            : 35
+  Classified (≥1 category)       : 351
+  A+ among classified            : 34
 
   Category breakdown (sites may appear in multiple categories):
   Cat     N   A++    A+     A    C-     C     A+%       p(A+)
   ------------------------------------------------------------
   F    192     9    15    25     7     9    7.8%  2.5289e-01  ns  (FOUNDING CAPITAL / SEAT OF POWER)
   S     56     4     5    10     1     2    8.9%  2.8996e-01  ns  (SACRED ORIGIN / BIRTH OF A TRADITION)
-  M     70     7     8    14     4     2   11.4%  7.9250e-02  ~  (FOUNDING MONUMENT / PROTOTYPE)
+  M     62     5     6    11     4     2    9.7%  2.0641e-01  ns  (FOUNDING MONUMENT / PROTOTYPE)
   L     82     4     6    13     5     4    7.3%  4.3182e-01  ns  (ANCIENT CONTINUOUS LANDSCAPE)
   X     26     5     7     8     1     1   26.9%  9.9586e-04  ***  (FOUNDING AXIS / IMPERIAL INFRASTRUCTURE)
 
@@ -124,12 +124,6 @@ the property lies along the eastern edge of the main ethiopian rift, on the stee
 the town of mbanza kongo, located on a plateau at an altitude of 570 m, was the political a"
       ↳ [context-validated:capital of] "brief synthesis the town of mbanza kongo was the political and spiritual capital of the kingdom of kongo, one of the largest constituted states of southern afri"
 
-  Pyu Ancient Cities ★  (Myanmar)
-    LON     : 95.2900°E  |  dev 0.0007 beru  (2.3 km)  |  Tier A++
-    PRIMARY : M — FOUNDING MONUMENT / PROTOTYPE
-    ALL CATS: ['M']
-    [M] reasons : ['context-validated:prototype']
-
   Medici Villas and Gardens in Tuscany ★  (Italy)
     LON     : 11.2478°E  |  dev 0.0007 beru  (2.4 km)  |  Tier A++
     PRIMARY : M — FOUNDING MONUMENT / PROTOTYPE
@@ -166,11 +160,10 @@ this property is a 5,000 km section of the extensive silk roads network, stretc
   Red Fort Complex ★  (India)
     LON     : 77.2408°E  |  dev 0.0009 beru  (3.1 km)  |  Tier A++
     PRIMARY : F — FOUNDING CAPITAL / SEAT OF POWER
-    ALL CATS: ['F', 'M']
+    ALL CATS: ['F']
     [F] reasons : ['context-validated:capital of']
       ↳ [context-validated:capital of] "red fort complex
 the red fort complex was built as the palace fort of shahjahanabad – the new capital of the fifth mughal emperor of india, shah jahan."
-    [M] reasons : ['context-validated:prototype']
 
   Xanthos-Letoon ★  (Türkiye)
     LON     : 29.2976°E  |  dev 0.0010 beru  (3.2 km)  |  Tier A++
@@ -513,12 +506,6 @@ on the outskirts of stari ras, the first capital of serbia, there is an impressi
     [X] reasons : ['context-validated:trade route']
       ↳ [context-validated:trade route] "bisotun
 bisotun is located along the ancient trade route linking the iranian high plateau with mesopotamia and features remains from the prehistoric times to th"
-
-  ShUM Sites of Speyer, Worms and Mainz  (Germany)
-    LON     : 8.4395°E  |  dev 0.0057 beru  (18.9 km)  |  Tier A
-    PRIMARY : M — FOUNDING MONUMENT / PROTOTYPE
-    ALL CATS: ['M']
-    [M] reasons : ['context-validated:prototype']
 
   Old City of Acre  (Israel)
     LON     : 35.0689°E  |  dev 0.0067 beru  (22.2 km)  |  Tier B
@@ -938,12 +925,6 @@ the church, baptistry, basilicas, public buildings, streets, monasteries, houses
     [M] reasons : ['context-validated:model for']
       ↳ [context-validated:model for] "criterion (iv): the group of ancient buildings at the white deer cave academy represents the architectural model for chinese traditional academies."
       ↳ [context-validated:model for] "zhu xi revitalized the white deer cave academy, making it the model for the popularization of song and ming dynasty confucian idealist philosophy and the model "
-
-  Architectural, Residential and Cultural Complex of the Radziwill Family at Nesvizh  (Belarus)
-    LON     : 26.6914°E  |  dev 0.0141 beru  (46.9 km)  |  Tier B
-    PRIMARY : M — FOUNDING MONUMENT / PROTOTYPE
-    ALL CATS: ['M']
-    [M] reasons : ['context-validated:prototype']
 
   Cultural Landscape of the Serra de Tramuntana  (Spain)
     LON     : 2.6947°E  |  dev 0.0142 beru  (47.3 km)  |  Tier B
@@ -1584,7 +1565,8 @@ the austere, grandiose site of hampi was the last capital of the last great hind
     ALL CATS: ['F', 'M', 'S']
     [F] reasons : ['context-validated:seat of the']
       ↳ [context-validated:seat of the] "facing the altar, the emperor sat on the gallery; the carolingian stone throne was the coronation seat of the kings of the holy roman empire of german nation fr"
-    [M] reasons : ['context-validated:prototype']
+    [M] reasons : ['context-validated:which inspired']
+      ↳ [context-validated:which inspired] "criterion (ii): bearing the strong imprint of both classic and byzantine tradition this chapel remained, during the carolingian renaissance and even at the begi"
     [S] reasons : ['context-validated:pilgrimage site']
       ↳ [context-validated:pilgrimage site] "authenticity form and design, material and substance, use and function as church and most important pilgrimage site north of the alps have remained unchanged."
 
@@ -1597,11 +1579,10 @@ the austere, grandiose site of hampi was the last capital of the last great hind
 
   Archaeological Site of Nalanda Mahavihara at Nalanda, Bihar  (India)
     LON     : 85.4439°E  |  dev 0.0275 beru  (91.6 km)  |  Tier B
-    PRIMARY : M — FOUNDING MONUMENT / PROTOTYPE
-    ALL CATS: ['L', 'M']
+    PRIMARY : L — ANCIENT CONTINUOUS LANDSCAPE
+    ALL CATS: ['L']
     [L] reasons : ['context-validated:oldest surviving']
       ↳ [context-validated:oldest surviving] "nalanda's layers of construction, iconography and records testify these remains to be its oldest surviving parts."
-    [M] reasons : ['context-validated:prototype']
 
   Historic Area of Willemstad, Inner City and Harbour, Curaçao  (Netherlands (Kingdom of the))
     LON     : -68.9022°E  |  dev 0.0276 beru  (92.0 km)  |  Tier B
@@ -1620,11 +1601,10 @@ the austere, grandiose site of hampi was the last capital of the last great hind
 
   Mount Taishan  (China)
     LON     : 117.1000°E  |  dev 0.0277 beru  (92.2 km)  |  Tier B
-    PRIMARY : M — FOUNDING MONUMENT / PROTOTYPE
-    ALL CATS: ['L', 'M']
+    PRIMARY : L — ANCIENT CONTINUOUS LANDSCAPE
+    ALL CATS: ['L']
     [L] reasons : ['context-validated:age-old']
       ↳ [context-validated:age-old] "the age-old geological relics, ancient architectural ensembles, stone tablets and inscriptions, and ancient and rare trees all have been carefully protected and"
-    [M] reasons : ['context-validated:prototype']
 
   Brasilia  (Brazil)
     LON     : -47.9000°E  |  dev 0.0277 beru  (92.2 km)  |  Tier B
@@ -2000,12 +1980,6 @@ situated on the ancient trade route between central asia and northern europe, no
     [F] reasons : ['context-validated:capital of']
       ↳ [context-validated:capital of] "in the case of crac des chevaliers, the management system involves the village of al-hosn, and in the case of the qal'at salah el-din, the dgam collaborates wit"
 
-  Antigua Naval Dockyard and Related Archaeological Sites  (Antigua and Barbuda)
-    LON     : -61.7617°E  |  dev 0.0344 beru  (114.4 km)  |  Tier B
-    PRIMARY : M — FOUNDING MONUMENT / PROTOTYPE
-    ALL CATS: ['M']
-    [M] reasons : ['context-validated:prototype']
-
   Historic Cairo  (Egypt)
     LON     : 31.2334°E  |  dev 0.0345 beru  (114.9 km)  |  Tier B
     PRIMARY : F — FOUNDING CAPITAL / SEAT OF POWER
@@ -2051,11 +2025,10 @@ situated on the ancient trade route between central asia and northern europe, no
   Yin Xu  (China)
     LON     : 114.3252°E  |  dev 0.0352 beru  (117.2 km)  |  Tier B
     PRIMARY : F — FOUNDING CAPITAL / SEAT OF POWER
-    ALL CATS: ['F', 'M']
+    ALL CATS: ['F']
     [F] reasons : ['unambiguous:ancient capital']
       ↳ [unambiguous:ancient capital] "yin xu
 the archaeological site of yin xu, close to anyang city, some 500 km south of beijing, is an ancient capital city of the late shang dynasty (1300 - 1046 "
-    [M] reasons : ['context-validated:prototype']
 
   Human Rights, Liberation and Reconciliation: Nelson Mandela Legacy Sites  (South Africa)
     LON     : 28.2118°E  |  dev 0.0352 beru  (117.4 km)  |  Tier B
@@ -2951,6 +2924,6 @@ nara was the capital of japan from 710 to 784."
       ↳ [context-validated:cultural landscape] "falaj al jeela is an excellent example of a traditional falaj cultural landscape that continues to function today."
       ↳ [context-validated:cultural landscape] "it is also an outstanding example of a cultural landscape that is millennia old, still in use today."
 
-Total included: 355
+Total included: 351
 Generated by  : tools/generate_audit_founding.py
-Timestamp     : Fri Apr 24 20:32:59 UTC 2026
+Timestamp     : Sat Apr 25 22:16:53 UTC 2026

@@ -45,6 +45,7 @@ from lib.beru import (
     deviation as _beru_dev, tier_label, is_aplusplus, is_aplus, is_a_or_better,
 )
 from lib.stats import significance_label as sig
+from lib.stats import chi_square_uniform
 from lib.results_store import ResultsStore
 
 # ── Load keyword sets from keywords.json ─────────────────────────────────────
@@ -195,6 +196,10 @@ obs_bins = [0] * 5
 for e in selected:
     obs_bins[min(int(e["dev"] / TIER_A_MAX), 4)] += 1
 _, chi_p = chisquare(obs_bins, f_exp=[N / 5.0] * 5)
+# Use equal-width bins over the full [0, 0.05] domain (correct uniform null)
+_chi_uniform = chi_square_uniform([e["dev"] for e in selected], n_bins=5, max_dev=0.05)
+chi_p = _chi_uniform.p_value
+obs_bins = _chi_uniform.observed_bins
 
 # Anchor sweep
 sweep  = np.arange(34.0, 37.001, 0.001)
@@ -352,13 +357,25 @@ print(SEP)
 print("  COMPARISON: RAW SWEEP (Test 2b primary) vs CONTEXT-VALIDATED (Exploratory)")
 print(SEP)
 print()
+# Pull validated numbers from the ResultsStore (written by tumulus_dome_evolution_test.py).
+_store_v2b = ResultsStore()
+_v2b_N    = _store_v2b.read("NevoValidTotal", default=None)
+_v2b_nAp  = _store_v2b.read("NevoValidAp",    default=None)
+_v2b_p    = _store_v2b.read("pEvoApValidated", default=None)
+_v2b_rate = _store_v2b.read("evoApValidatedRate", default=None)
+_v2b_enr  = _store_v2b.read("evoEnrichApValidated", default=None)
+
+def _f2b(v, spec, missing="—"):
+    return format(v, spec) if v is not None else missing
+
 print(f"  {'':35}  {'Raw sweep':>12}  {'Validated':>12}")
 print(f"  {'─'*62}")
-print(f"  {'N (population)':<35}  {N:>12}  {'104':>12}")
-print(f"  {'n A+ hits':<35}  {n_ap:>12}  {'13':>12}")
-print(f"  {'A+ rate':<35}  {100*n_ap/N:>11.1f}%  {'12.5%':>12}")
-print(f"  {'Binomial p (A+)':<35}  {bt_ap.pvalue:>12.4f}  {'0.0003':>12}")
-print(f"  {f'Enrichment vs {P_NULL_AP:.0%} null':<35}  {enr_ap:>11.2f}×  {'3.12×':>12}")
+print(f"  {'N (population)':<35}  {N:>12}  {_f2b(_v2b_N, 'd'):>12}")
+print(f"  {'n A+ hits':<35}  {n_ap:>12}  {_f2b(_v2b_nAp, 'd'):>12}")
+print(f"  {'A+ rate':<35}  {100*n_ap/N:>11.1f}%  {(_f2b(_v2b_rate, '.1f')+'%' if _v2b_rate is not None else '—'):>12}")
+print(f"  {'Binomial p (A+)':<35}  {bt_ap.pvalue:>12.4f}  {_f2b(_v2b_p, '.4f'):>12}")
+_v2b_enr_str = (_f2b(_v2b_enr, '.2f') + '×') if _v2b_enr is not None else '—'
+print(f"  {f'Enrichment vs {P_NULL_AP:.0%} null':<35}  {enr_ap:>11.2f}×  {_v2b_enr_str:>12}")
 print(f"  {'Anchor pctile (A+)':<35}  {pctile:>11.0f}th  ")
 
 # ── Audit ─────────────────────────────────────────────────────────────────────

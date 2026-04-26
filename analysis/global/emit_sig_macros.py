@@ -97,7 +97,7 @@ EXPLICIT_P_KEYS = {
     "pFoundKwFisher",
     # Wikidata
     "wikiJavaTightApP", "stupaIndiaPakCP",
-    "wikiStupaATierBinomP", "wikiHeartlandCbandP", "wikiMyanmarCbandP",
+    "wikiStupaATierBinomP", "wikiHeartlandATierP", "wikiHeartlandCbandP", "wikiMyanmarCbandP",
     "wikiJavaNodeATierP", "wikiJavaTightATierP",
     "wikiNonHeartlandATierP", "wikiNonHeartlandApP", "wikiNonHeartlandCbandP",
     # Americas

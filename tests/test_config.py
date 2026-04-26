@@ -17,7 +17,7 @@ class TestConfigIntegrity:
             return json.load(f)
 
     def test_config_has_required_sections(self, config):
-        for section in ["anchors", "units", "tiers", "null_rates", "anchor_sweep"]:
+        for section in ["anchors", "units", "tiers", "anchor_sweep"]:
             assert section in config, f"Missing section: {section}"
 
     def test_gerizim_anchor(self, config):
@@ -40,16 +40,18 @@ class TestConfigIntegrity:
         assert app < ap < a < b
 
     def test_null_rates_consistent(self, config):
-        """Null rates should equal tier_width / baseline_width."""
+        """Null rates derived in lib.beru should equal 2 × threshold / step.
+
+        config.json itself does not store null_rates (they are derived
+        constants in lib.beru); we test the derivation against the
+        live config thresholds and harmonic step.
+        """
+        from lib.beru import P_NULL_AP, P_NULL_A
         ap_threshold = config["tiers"]["A+"]["max_deviation_beru"]
-        a_threshold = config["tiers"]["A"]["max_deviation_beru"]
-        b_threshold = config["tiers"]["B"]["max_deviation_beru"]
-        assert config["null_rates"]["tier_aplus"] == pytest.approx(
-            ap_threshold / b_threshold, abs=1e-10
-        )
-        assert config["null_rates"]["tier_a"] == pytest.approx(
-            a_threshold / b_threshold, abs=1e-10
-        )
+        a_threshold  = config["tiers"]["A"]["max_deviation_beru"]
+        step         = config["units"]["harmonic_step"]
+        assert P_NULL_AP == pytest.approx(2 * ap_threshold / step, abs=1e-12)
+        assert P_NULL_A  == pytest.approx(2 * a_threshold  / step, abs=1e-12)
 
     def test_lib_beru_matches_config(self, config):
         """lib.beru constants should match config.json values."""
