@@ -49,21 +49,60 @@ KEYWORDS_PATH = PROJECT_ROOT / "keywords.json"
 
 SHOW_TIERS = {"A++", "A+", "A", "B", "C", "C-", "C--"}
 
-# Silk Road waypoints — edit here if routes change
-SILK_NORTH = [
-    [32.2, GERIZIM], [36.2, 36.3], [39.9, 38.7], [40.5, 44.5],
-    [35.7, 51.4], [37.9, 59.0], [40.1, 63.6], [41.3, 69.3],
-    [43.2, 76.9], [42.9, 80.3], [43.8, 87.6], [39.7, 98.5], [34.3, 107.3],
-]
-SILK_MED = [
-    [32.2, GERIZIM], [35.1, 33.0], [36.4, 28.2], [37.9, 23.7],
-    [35.9, 14.5], [41.9, 12.5], [37.0, 10.2], [43.3, 5.4], [41.4, 2.2],
-]
-SILK_SEA = [
-    [32.2, GERIZIM], [21.5, 38.0], [12.8, 44.0], [23.6, 55.0],
-    [24.9, 66.9], [18.9, 72.8], [7.9, 80.3], [13.1, 92.5],
-    [16.9, 96.1], [5.4, 100.5], [-6.2, 107.6], [-7.6, 110.2],
-]
+SILK_ROAD_DIR = PROJECT_ROOT / "data" / "store" / "silk_road"
+
+
+def _load_route_polylines(filename):
+    """Return {route_name: [[lat, lon], ...]} from a curated polyline CSV.
+
+    Rows carry route,order,lon,lat; grouped by route and sorted by order.
+    Returns Leaflet-order [lat, lon] pairs.
+    """
+    import csv as _csv
+    path = SILK_ROAD_DIR / filename
+    by_route = {}
+    if not path.exists():
+        return by_route
+    with open(path, newline="", encoding="utf-8") as fh:
+        for row in _csv.DictReader(r for r in fh if not r.startswith("#")):
+            try:
+                r  = row["route"].strip()
+                o  = int(row["order"])
+                ln = float(row["lon"])
+                lt = float(row["lat"])
+            except (ValueError, KeyError):
+                continue
+            by_route.setdefault(r, []).append((o, lt, ln))
+    return {k: [[lt, ln] for _, lt, ln in sorted(v)] for k, v in by_route.items()}
+
+
+def _load_owtrad_edges():
+    """Return list of [[lat1,lon1],[lat2,lon2]] edge pairs from OWTRAD route network."""
+    import csv as _csv
+    path = SILK_ROAD_DIR / "owtrad_routes.csv"
+    edges = []
+    if not path.exists():
+        return edges
+    with open(path, newline="", encoding="utf-8") as fh:
+        for row in _csv.DictReader(r for r in fh if not r.startswith("#")):
+            try:
+                edges.append([
+                    [float(row["lat1"]), float(row["lon1"])],
+                    [float(row["lat2"]), float(row["lon2"])],
+                ])
+            except (ValueError, KeyError):
+                pass
+    return edges
+
+
+def _load_silk_road_routes():
+    """Return (overland_trunk, owtrad_edges, maritime_routes)."""
+    overland = _load_route_polylines("overland_trunk.csv")
+    maritime = _load_route_polylines("maritime_routes.csv")
+    overland_list = [overland[k] for k in ("north", "south") if overland.get(k)]
+    maritime_list = [maritime[k] for k in ("med", "sea") if maritime.get(k)]
+    owtrad_edges  = _load_owtrad_edges()
+    return overland_list, owtrad_edges, maritime_list
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -206,8 +245,13 @@ def build_site_data():
 #  HTML generation
 # ══════════════════════════════════════════════════════════════════════════════
 
-def build_html(sites):
-    sites_json = json.dumps(sites, ensure_ascii=False)
+def build_html(sites, overland_routes=None, owtrad_edges=None, maritime_routes=None,
+               midpoints=None):
+    sites_json    = json.dumps(sites, ensure_ascii=False)
+    overland_routes = overland_routes or []
+    owtrad_edges    = owtrad_edges    or []
+    maritime_routes = maritime_routes or []
+    midpoints       = midpoints       or []
 
     html = """\
 <!DOCTYPE html>
@@ -430,6 +474,13 @@ body { font-family: 'Georgia', serif; background: #111; }
     </div>
   </div>
   <div class="section-divider">
+    <div class="rt-row" id="toggle-midpoints">
+      <input type="checkbox"/>
+      <span style="width:13px;height:13px;border-radius:50%;background:#7d3c98;flex-shrink:0;display:inline-block"></span>
+      <span class="rt-label">OWTRAD edge midpoints</span>
+    </div>
+  </div>
+  <div class="section-divider">
     <button id="draw-btn">&#11042; Draw area</button>
   </div>
   </div><!-- end panel-body -->
@@ -468,9 +519,11 @@ body { font-family: 'Georgia', serif; background: #111; }
 const SITES = """ + sites_json + """;
 const GERIZIM = """ + str(GERIZIM) + """;
 const HARM_STEP_DEG = """ + str(HARM_STEP_DEG) + """;
-const SILK_NORTH = """ + json.dumps(SILK_NORTH) + """;
-const SILK_MED   = """ + json.dumps(SILK_MED) + """;
-const SILK_SEA   = """ + json.dumps(SILK_SEA) + """;
+const OVERLAND_ROUTES = """ + json.dumps(overland_routes) + """;
+const OWTRAD_EDGES    = """ + json.dumps(owtrad_edges) + """;
+const MARITIME_ROUTES = """ + json.dumps(maritime_routes) + """;
+const MIDPOINTS       = """ + json.dumps(midpoints) + """;
+const OWTRAD_ZOOM_THRESHOLD = 5;
 
 const TIER_COLOR  = { "A++":"#922b21","A+":"#c0392b","A":"#e67e22","C":"#7fb3d3","C-":"#2471a3","C--":"#1a3a6b","B":"#aaaaaa" };
 const TIER_RADIUS = { "A++":9,"A+":7,"A":5,"C":5,"C-":7,"C--":9,"B":4 };
@@ -491,21 +544,57 @@ for (let k = -GRID_STEPS; k <= GRID_STEPS; k++) {
   const lon = GERIZIM + k * HARM_STEP_DEG;
   if (lon < -180 || lon > 180) continue;
   L.polyline([[-85,lon],[85,lon]], {
-    color: k===0 ? "#7f8c8d" : "#bbbbbb",
-    weight: k===0 ? 1.2 : 0.6,
-    opacity: k===0 ? 0.75 : 0.45,
+    color: k===0 ? "#444444" : "#888888",
+    weight: k===0 ? 1.4 : 0.8,
+    opacity: k===0 ? 0.85 : 0.65,
     dashArray: k===0 ? null : "4 7",
   }).addTo(gridLayer);
 }
 gridLayer.addTo(map);
 
-const overlandLayer = L.polyline(SILK_NORTH, { color:"#8e44ad", weight:2.2, opacity:0.65 });
-const maritimeLayer = L.layerGroup([
-  L.polyline(SILK_MED, { color:"#16a085", weight:2.2, opacity:0.65, dashArray:"8 5" }),
-  L.polyline(SILK_SEA, { color:"#16a085", weight:2.2, opacity:0.65, dashArray:"8 5" }),
-]);
-overlandLayer.addTo(map);
+// Overland: trunk (low zoom) swaps to dense OWTRAD edges at OWTRAD_ZOOM_THRESHOLD
+const trunkLayer  = L.layerGroup(
+  OVERLAND_ROUTES.map(pts => L.polyline(pts, { color:"#8e44ad", weight:2.2, opacity:0.65 }))
+);
+const owtradLayer = L.layerGroup(
+  OWTRAD_EDGES.map(([a,b]) => L.polyline([a,b], { color:"#8e44ad", weight:1.0, opacity:0.45 }))
+);
+const maritimeLayer = L.layerGroup(
+  MARITIME_ROUTES.map(pts => L.polyline(pts, { color:"#16a085", weight:2.2, opacity:0.65, dashArray:"8 5" }))
+);
+
+let overlandOn = true;
+function _applyOverlandZoom() {
+  if (!overlandOn) return;
+  const detailed = map.getZoom() >= OWTRAD_ZOOM_THRESHOLD;
+  if (detailed) {
+    if (map.hasLayer(trunkLayer))  map.removeLayer(trunkLayer);
+    if (!map.hasLayer(owtradLayer)) owtradLayer.addTo(map);
+  } else {
+    if (map.hasLayer(owtradLayer)) map.removeLayer(owtradLayer);
+    if (!map.hasLayer(trunkLayer))  trunkLayer.addTo(map);
+  }
+}
+_applyOverlandZoom();
+map.on("zoomend", _applyOverlandZoom);
 maritimeLayer.addTo(map);
+
+// OWTRAD edge midpoints — purple fill, tier-coloured ring, hidden by default
+const TIER_COLOR_MID = { "A++":"#922b21","A+":"#c0392b","A":"#e67e22","C":"#7fb3d3","C-":"#2471a3","C--":"#1a3a6b","B":"#aaaaaa" };
+const midpointLayer = L.layerGroup();
+MIDPOINTS.forEach(m => {
+  const r = 5, size = r*2+6, c = r+3;
+  const ring = TIER_COLOR_MID[m.tier] || "#aaaaaa";
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}"><circle cx="${c}" cy="${c}" r="${r}" fill="#7d3c98" stroke="${ring}" stroke-width="2"/></svg>`;
+  const icon = L.divIcon({ html: svg, iconSize:[size,size], iconAnchor:[c,c], className:"" });
+  L.marker([m.mid_lat, m.mid_lon], { icon })
+   .bindTooltip(`<div class="tt-name">Midpoint: ${m.node1} → ${m.node2}</div>
+     <div class="tt-tier">Tier <strong style="color:#fff">${m.tier}</strong> &middot; &delta; = ${m.dev}</div>
+     <div class="tt-row"><span class="tt-label">Mid lon:</span><span class="tt-val">${m.mid_lon.toFixed(3)}°E</span></div>
+     <div class="tt-row"><span class="tt-label">Dataset:</span><span class="tt-val">${m.dataset}</span></div>`,
+     { sticky:true, opacity:1, direction:"top" })
+   .addTo(midpointLayer);
+});
 
 function makeIcon(shape, color, r) {
   const size = r * 2 + 5, c = r + 2.5;
@@ -613,9 +702,20 @@ function bindToggle(id, layer) {
     cb.checked ? layer.addTo(map) : map.removeLayer(layer);
   });
 }
-bindToggle("toggle-overland", overlandLayer);
-bindToggle("toggle-maritime", maritimeLayer);
-bindToggle("toggle-grid",     gridLayer);
+document.getElementById("toggle-overland").addEventListener("click", function(e) {
+  const cb = this.querySelector("input");
+  if (e.target !== cb) cb.checked = !cb.checked;
+  overlandOn = cb.checked;
+  if (!overlandOn) {
+    map.removeLayer(trunkLayer);
+    map.removeLayer(owtradLayer);
+  } else {
+    _applyOverlandZoom();
+  }
+});
+bindToggle("toggle-maritime",   maritimeLayer);
+bindToggle("toggle-grid",       gridLayer);
+bindToggle("toggle-midpoints",  midpointLayer);
 
 // ── Legend minimize / maximize ────────────────────────────────────────────────
 document.getElementById("legend-toggle").addEventListener("click", () => {
@@ -899,8 +999,38 @@ if __name__ == "__main__":
     sites = build_site_data()
     print()
 
+    print("Loading Silk Road routes…")
+    overland_routes, owtrad_edges, maritime_routes = _load_silk_road_routes()
+    print(f"  {len(overland_routes)} overland trunk polyline(s), {len(owtrad_edges)} OWTRAD edges, {len(maritime_routes)} maritime polyline(s)")
+
+    print("Building edge midpoints…")
+    import csv as _csv
+    midpoints = []
+    with open(SILK_ROAD_DIR / "owtrad_routes.csv", newline="", encoding="utf-8") as fh:
+        for row in _csv.DictReader(r for r in fh if not r.startswith("#")):
+            try:
+                lon1 = float(row["lon1"]); lat1 = float(row["lat1"])
+                lon2 = float(row["lon2"]); lat2 = float(row["lat2"])
+            except (ValueError, KeyError):
+                continue
+            mid_lon = (lon1 + lon2) / 2
+            mid_lat = (lat1 + lat2) / 2
+            from lib.beru import deviation as _dev, tier_label as _tier
+            d = _dev(mid_lon)
+            midpoints.append({
+                "mid_lat": round(mid_lat, 5),
+                "mid_lon": round(mid_lon, 5),
+                "node1":   row.get("node1", ""),
+                "node2":   row.get("node2", ""),
+                "dataset": row.get("dataset", ""),
+                "tier":    _tier(d),
+                "dev":     round(d, 5),
+            })
+    print(f"  {len(midpoints)} edge midpoints")
+    print()
+
     print("Building HTML…")
-    html = build_html(sites)
+    html = build_html(sites, overland_routes, owtrad_edges, maritime_routes, midpoints)
 
     out = OUTDIR / "silkroad_interactive.html"
     out.write_text(html, encoding="utf-8")

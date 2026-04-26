@@ -1,0 +1,45 @@
+# overland_trunk.csv — OWTRAD-sourced overland Silk Road trunk polyline
+# DO NOT HAND-EDIT. Regenerate: python3 data/scripts/build_owtrad_trunk.py
+# Generated: 2026-04-26T02:43:34Z
+#
+# SOURCE: All waypoints from OWTRAD-GIS datasets (Ciolek 2004+).
+#   Ciolek, T.M. (2004+). Old World Trade Routes (OWTRAD) Project.
+#   www.ciolek.com/owtrad.html  Canberra: Asia Pacific Research Online.
+#   Licence: Open Publication License v1.0
+#   Datasets: tmcZCAm1000, tmcIRa0100, tmcCNm1000, tmcKGa0100d
+# Exception: Mt. Gerizim (dataset=study_anchor) is the pre-registered
+#   study anchor (35.274°E, 32.199°N), not an OWTRAD node.
+#
+# Columns: route, order, lon, lat, name, dataset, owtrad_node_id
+route,order,lon,lat,name,dataset,owtrad_node_id
+north,1,35.274,32.199,Mt. Gerizim (study anchor),study_anchor,
+north,2,36.116669,36.233334,Antioch / Antakya,tmcIRa0100,1
+north,3,37.966667,37.033333,Zeugma (Euphrates crossing),tmcIRa0100,243
+north,4,38.283,34.55,Palmyra,tmcIRa0100,169
+north,5,44.583332,33.083332,Ctesiphon / Seleucia (Mesopotamia),tmcIRa0100,10
+north,6,47.067,34.317,Kermanshah,tmcIRa0100,21
+north,7,48.583,34.767,Hamadan / Ecbatana,tmcZCAm1000,59
+north,8,51.417,35.583,Rhagae / Rey (Tehran),tmcIRa0100,136
+north,9,59.59861,36.305,Meshed / Nishapur area,tmcIRa0100,98
+north,10,62.166668,37.616669,Merv,tmcZCAm1000,620
+north,11,64.416664,39.799999,Bukhara,tmcZCAm1000,232
+north,12,66.95,39.667,Samarkand,tmcKGa0100d,141
+north,13,71.417,42.833,Taraz / Jambul,tmcKGa0100d,515
+north,14,76.033,39.483,Kashgar,tmcZCAm1000,77
+north,15,80.23333,41.25,Aksu (N. Tarim),tmcZCAm1000,174
+north,16,82.900002,41.716667,Kucha,tmcZCAm1000,89
+north,17,86.566666,42.066666,Qara Shahr / Karashahr,tmcZCAm1000,217
+north,18,87.583336,43.799999,Beshbaliq / Urumqi area,tmcZCAm1000,173
+north,19,89.1,42.917,Qocho / Turpan,tmcZCAm1000,170
+north,20,94.683334,40.166668,Dunhuang / Mogao,tmcZCAm1000,50
+north,21,108.935547,34.260277,Chang'an / Xi'an,tmcZCAm1000,175
+south,1,62.166668,37.616669,Merv (junction),tmcZCAm1000,620
+south,2,62.2,34.333,Herat / Alexandria Areion,tmcIRa0100,60
+south,3,66.9,36.75,Balkh / Bactra,tmcZCAm1000,22
+south,4,67.26667,37.233334,Termez,tmcKGa0100d,532
+south,5,75.23333,37.783333,Tashkurgan (Pamir crossing),tmcIRa0100,164
+south,6,76.033,39.483,Kashgar (junction),tmcZCAm1000,77
+south,7,77.267,38.45,Yarkand,tmcIRa0100,149
+south,8,79.9166,37.1166,Khotan,tmcZCAm1000,68
+south,9,89.75,40.533333,Lop Nor / Lou-lan,tmcZCAm1000,92
+south,10,94.683334,40.166668,Dunhuang (joins north),tmcZCAm1000,50

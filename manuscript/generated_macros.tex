@@ -1,4 +1,4 @@
-% Generated macros — 2026-04-25T22:09:40Z
+% Generated macros — 2026-04-26T22:32:55Z
 % Source: bash manuscript/reproduce_all_macros.sh
 % IMPORTANT: values are computed fresh each run — do NOT hardcode
 
@@ -54,6 +54,29 @@
   \newcommand{\GeodesicGainIn}{21}  % non-A+ sites within 10.689300000000001 km physically
   \newcommand{\GeodesicThresholdKm}{10.689300000000001}  % physical km threshold used in geodesic check
   \newcommand{\GeodesicKmPerDegAtSixty}{55.7}  % east-west km per degree at 60.0°N
+
+% --- analysis/global/owtrad_route_alignment.py
+\newcommand{\NOwtradEdges}{251}
+\newcommand{\NOwtradVertices}{194}
+\newcommand{\NOwtradMidApp}{15}
+\newcommand{\NOwtradMidAp}{24}
+\newcommand{\NOwtradVertexApp}{9}
+\newcommand{\NOwtradVertexAp}{12}
+\newcommand{\NOwtradPerms}{100000}
+\newcommand{\owtradMidAppEnrich}{1.87}
+\newcommand{\owtradMidApEnrich}{1.49}
+\newcommand{\zOwtradMidApp}{2.50}
+\newcommand{\zOwtradMidAp}{2.03}
+\newcommand{\pOwtradMidApp}{0.0162}
+\newcommand{\pOwtradMidAp}{0.0342}
+\newcommand{\pOwtradMidAppAdj}{0.0647}
+\newcommand{\pOwtradMidApAdj}{0.1367}
+\newcommand{\pOwtradVertexApp}{0.1717}
+\newcommand{\pOwtradVertexAp}{0.5946}
+\newcommand{\pOwtradMidAppPerm}{0.0163}
+\newcommand{\pOwtradMidApPerm}{0.0306}
+\newcommand{\pOwtradMidAppPhase}{0.0272}
+\newcommand{\pOwtradMidApPhase}{0.0559}
 
 % --- analysis/unesco/spherical_monument_test.py
   \newcommand{\pCircApValidated}{0.0170}  % p-value, A+ binomial (context-validated dome corpus)
@@ -1410,6 +1433,16 @@
   \newcommand{\pModernSig}{ns}  % auto sig label
   \newcommand{\pNeffHalfSig}{*}  % auto sig label
   \newcommand{\pNeffQuarterSig}{*}  % auto sig label
+  \newcommand{\pOwtradMidApAdjSig}{ns}  % auto sig label
+  \newcommand{\pOwtradMidApPermSig}{*}  % auto sig label
+  \newcommand{\pOwtradMidApPhaseSig}{$^\dagger$}  % auto sig label
+  \newcommand{\pOwtradMidApSig}{*}  % auto sig label
+  \newcommand{\pOwtradMidAppAdjSig}{$^\dagger$}  % auto sig label
+  \newcommand{\pOwtradMidAppPermSig}{*}  % auto sig label
+  \newcommand{\pOwtradMidAppPhaseSig}{*}  % auto sig label
+  \newcommand{\pOwtradMidAppSig}{*}  % auto sig label
+  \newcommand{\pOwtradVertexApSig}{ns}  % auto sig label
+  \newcommand{\pOwtradVertexAppSig}{ns}  % auto sig label
   \newcommand{\pPreCEbinomSig}{$^\dagger$}  % auto sig label
   \newcommand{\pPreCEfisherSig}{ns}  % auto sig label
   \newcommand{\pPreTwoKFisherSig}{ns}  % auto sig label

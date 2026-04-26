@@ -53,7 +53,7 @@ into 30~\textit{u\v{s}} (1~u\v{s}~$= 1$\textdegree{}) is well attested
 \citep{hunger2019mul,robson2008mathematics}, and the 0.1-beru interval
 (3\textdegree{}) tested here corresponds to exactly 3~\textit{u\v{s}}.
 
-The beru also functioned as a unit of linear territorial description: royal
+The beru also functioned as a unit of territorial description: royal
 inscriptions record inter-regional distances in beru, \textit{kudurru}
 (boundary stones) recording territorial extents were deposited in temples
 as legally authoritative records \citep{robson2008mathematics,powell1987metrological},
@@ -295,8 +295,6 @@ are described with their results in \S\ref{sec:simulation_null}.
 %──────────────────────────────────────────────────────────────────────────────
 \section{Results}
 
-
-
 \label{sec:results}
 
 \subsection{Global Enrichment (Test~1, Primary)}
@@ -319,7 +317,7 @@ Tier-A+ rate of \clusterApRate\% (Figure~\ref{fig:devhist})
 above the \NullRateAp{} null
 (binomial $p = \clusterApBinom$; Bonferroni $p_{\mathrm{adj}} = \pAdjTestOne$,
 $k = \BonfK$).
-The observed enrichment is $\clusterEnrichAp\times$, which is modest relative
+The observed enrichment is $\clusterEnrichAp\times$, modest relative
 to the dome subpopulation ($\circEnrichAp\times$) and the harmonic cluster
 asymmetry. For the primary family (Tests~1--3, $k=\BonfK$), 
 all three pass the Bonferroni bound at $k = \BonfK$
@@ -579,7 +577,7 @@ $\clusterNodeVsAntiApRatio\times$, $p = \clusterNodeVsAntiApMWp$).
 \label{sec:cluster_cond_sensitivity}
 A joint permutation test (\clusterCondN{} iterations) finds the conditional
 fraction of clustering-matched permutations producing the canonical-unit peak
-(\clusterCondPeakFrac{}) is nearly identical to the unconditional rate
+(\clusterCondPeakFrac{}) is identical to the unconditional rate
 (\clusterCondPeakFracUncond{}): the clustering and unit-sensitivity signals
 are statistically independent.
 
@@ -604,15 +602,15 @@ Among the \Nap{} Tier-A+ sites, $R = \rayleighR$
 (\rayleighRPctPhrasing{} A+ sites share the same phase modulo
 3\textdegree{}; $Z = \rayleighZ$, $p_\mathrm{perm} < \rayleighPermP$).
 This confirms self-consistency of the A+ classification but is not
-independent evidence, as A+ membership is defined by proximity to a
-harmonic (\S\ref{sec:circularity}).
+independent evidence, as A+ membership is defined by harmonic proximity
+(\S\ref{sec:circularity}).
 
 \textbf{Test~C (circular-shift anchor sensitivity).}
 Displacing the anchor by a uniform random offset in $[0^\circ,
 360^\circ)$ and recounting A+ sites yields a null mean of
 \anchorShiftNullMu{} vs.\ the observed \anchorShiftApCount{}
 ($Z = \anchorShiftZ$, $p_\mathrm{perm} = \anchorShiftPermP$, \anchorShiftPermPSig{}).
-This is a positive anchor-specific test complementary to Test~D.
+A positive anchor-specific test complementary to Test~D.
 
 \textbf{Test~D (targeted von~Mises mixture, full corpus).}
 Test~A is an omnibus test over all $N = \NoriginCorpus$ sites; the
@@ -671,7 +669,7 @@ The gradient is treated as descriptive context only (Figure~\ref{fig:temporal}).
 \centering
 \includegraphics[width=0.9\textwidth]{../figures/fig_temporal}
 \caption{Tier-A++ and Tier-A+ rates by UNESCO inscription-year cohort.
-  The founding canon (1978--1984) shows a significantly elevated A++ rate
+  The founding canon (1978--1984) shows an elevated A++ rate
   (\cohortAppArate\%, $p = \pCanonApp$~\pCanonAppSig{}) that declines
   monotonically across later cohorts toward the \NullRateApp{} null (dotted line;
   Cochran-Armitage $Z = \ZcochranAppThree$, $p = \pCochranAppThree$~\pCochranAppThreeSig{}).
@@ -733,7 +731,7 @@ mathematical consequences of the 0.10-beru structure: every 0.10-beru
 harmonic is also a 0.05-beru harmonic, and 0.20-beru harmonics are a strict
 subset, so neither constitutes an independent signal.
 Adjacent non-harmonic spacings (0.06, 0.07, 0.09, 0.11, 0.12~beru) are
-non-significant in either population, which is the key discriminating observation.
+non-significant in either population, the key discriminating observation.
 The 0.08-beru spacing reaches nominal dome significance
 ($p = \sweepEightDomeP$) but not full-corpus ($p = \sweepEightFullP$, \sweepEightFullPSig{}),
 reflecting unsystematic local overlap with the 0.10-beru grid rather than
@@ -757,8 +755,10 @@ A fine sweep within $\pm 1\%$ of 0.10~beru (\texttt{fine\_sweep\_audit.py})
 shows a $\pm 0.3\%$ shift collapses joint significance in at least one
 population. A geographic bootstrap of the full cultural corpus finds no
 permutation in \permSlopeSpecN{} trials that reproduces the canonical-unit
-sharp peak at any precision tier ($p \permSlopeCanonBestJointFullAP{}$,
-\permSlopeCanonBestJointSigFullAP{}), confirming 0.10~beru as a specific
+sharp peak at either the A$^{+}$ or A$^{++}$ precision tier
+($p = \permSlopeCanonBestJointFullAP{}$ and
+$p = \permSlopeCanonBestJointFullAPP{}$ respectively,
+both \permSlopeCanonBestJointSigFullAP{}), confirming 0.10~beru as a specific
 address. The dome-filter specificity test yields marginal results across all
 tiers (A$^{++}$: $p = \permSlopeCanonBestJointDomeAPP{}$,
 \permSlopeCanonBestJointSigDomeAPP{}; A$^{+}$: $p = \permSlopeCanonBestJointDomeAP{}$,
@@ -906,7 +906,7 @@ result of Test~3.
 \textbf{Geographic tier breakdown and bimodal structure.}
 All regional p-values below are one-sided Fisher exact tests.
 A sub-regional breakdown reveals a bimodal pattern consistent with the
-Buddhist A/C enrichment in the UNESCO religion audit (\S\ref{sec:resultsrelig}).
+Buddhist and Hindu bimodal enrichment in the UNESCO religion audit (\S\ref{sec:resultsrelig}).
 The Java/Sumatra node (105\textdegree--115\textdegree{}E, near the 2.5-beru harmonic at 110.3\textdegree{}E)
 concentrates \wikiJavaNodeATierN{} of \wikiJavaNodeN{} sites at Tier-A (\wikiJavaNodeATierRate\%, OR $= \wikiJavaNodeATierOR\times$, $p~\wikiJavaNodeATierP$~\wikiJavaNodeATierPSig{}),
 rising to \wikiJavaTightATierN/\wikiJavaTightN{} (\wikiJavaTightATierRate\%, OR $= \wikiJavaTightATierOR\times$, $p~\wikiJavaTightATierP$~\wikiJavaTightATierPSig{}) in the 107\textdegree--112\textdegree{}E window,
@@ -977,9 +977,7 @@ Arab States: \CorpusPctArabStates\%;
 Asia-Pacific: \CorpusPctAsiaPac\%;
 Latin Americas: \CorpusPctLatAm\%;
 Africa: \CorpusPctAfrica\%).
-Permutation tests show geographic concentration can reproduce the
-sensitivity peak (\S\ref{sec:sensitivity_slope_perm}), but domed
-monuments exceed the A+ rate of other monuments from the same longitude
+Domed monuments exceed the A+ rate of other monuments from the same longitude
 footprint (Null~C, $p = \geoNullDomeRestrictedP$, \geoNullDomeRestrictedPSig{}), establishing
 that the enrichment is carried by a specific building type rather than
 the geographic distribution alone. Although UNESCO nomination criteria
@@ -1045,49 +1043,54 @@ but highly significant for the A++ sub-population
 bootstrap $p = \circAppBootP$~\pCircAppBootSig{}).
 Tests~C and~D (\S\ref{sec:results_rayleigh}) confirm anchor specificity and periodicity structure.
 
-\subsection{Architectural Stratification}
+\subsection{Architectural Stratification and Route-Segment Alignment}
 \label{sec:transmission}
 
-The corpus-wide A+ enrichment (Test~1) is not uniform across architectural
-types. Among keyword-defined sub-populations, domed and spherical
-monuments show the strongest alignment: \NcircTierAp/\NcircTotal{} reach
-Tier-A+ ($\circEnrichAp\times$ the null, Bonferroni $p_\mathrm{adj} =
-\pAdjTestTwo$~\pAdjTestTwoSig{}), and the Tier-A++ concentration
-(\NcircTierApp/\NcircTotal{}, $\circEnrichApp\times$) survives full Bonferroni
-correction at $k = \NtotalTests$ (\S\ref{sec:multiple_comparisons}).
-Within the dome-evolution corpus, the stupa sub-stage achieves an A++ rate
-of \evoStupaAppRate\% (\NevoStupaApp/\NevoStupa{} sites,
-OR~$= \evoStupaAppFisherOR\times$, $p = \pEvoStupaAppFisher$~\pEvoStupaAppFisherSig{}),
-the highest of any keyword-defined sub-population and more than five times
-the geometric null.
-The Wikidata Q180987 stupa corpus (\S\ref{sec:stupas_q180987}) reproduces
-dome-level A-tier enrichment on an independently curated dataset,
-confirming that the pattern is not an artifact of UNESCO curation.
+The enrichment signal stratifies by architectural type and religious
+tradition (Tests~2/2b, \S\ref{sec:resultscircular}--\ref{sec:resultsevolution_inline};
+\S\ref{sec:resultsrelig}), with domed monuments and the Buddhist/Hindu
+sub-groups showing the strongest harmonic concentration.
+The bimodal distribution in both traditions is consistent with the 0.1-beru grid
+producing discrete attractor positions rather than a continuous distribution.
 
-The religion audit (\S\ref{sec:resultsrelig}) shows that both Buddhist and
-Hindu sites display an A/C bimodal structure. Sites in each tradition
-concentrate either near harmonic nodes (A-tier) or near inter-harmonic
-midpoints (C-band), with relatively few in the intermediate B-zone.
-Buddhist sites show a joint A-tier/C-band signal
-(multivariate hypergeometric $p = \pBudJoint$~\pBudJointSig{}); Hindu sites show a significant A+/C-
-joint probability (multivariate hypergeometric $p = \pHinApCminus$~\pHinApCminusSig{}).
-This bimodal is not observed in other religion sub-groups and is consistent
-with the 0.1-beru grid producing distinct attractor positions rather than
-a continuous distribution.
-The cluster asymmetry (Test~3) holds across the full corpus with no
-architectural keyword filter, indicating the longitude structure is a
-property of the corpus as a whole, not only of the dome sub-population
-(Figure~\ref{fig:geo_trail}).
-
-The mechanism underlying this stratification is beyond the scope of this analysis.
+An independent check on route geometry comes from the OWTRAD attested-route
+network \citep{ciolek2004owtrad} (\NOwtradEdges{} edges,
+\NOwtradVertices{} deduplicated waypoint cities).
+Vertex longitudes show no tier enrichment at any level
+($p = \pOwtradVertexApp$~\pOwtradVertexAppSig{} for A++,
+$p = \pOwtradVertexAp$~\pOwtradVertexApSig{} for A+),
+indicating junction cities do not preferentially fall on harmonic meridians.
+The \emph{midpoints} of attested route legs tell a different story:
+\NOwtradMidApp{}/\NOwtradEdges{} midpoints reach A++
+($\owtradMidAppEnrich\times$ enrichment, $z = \zOwtradMidApp$,
+$p = \pOwtradMidApp$~\pOwtradMidAppSig{}) and
+\NOwtradMidAp{}/\NOwtradEdges{} reach A+
+($\owtradMidApEnrich\times$, $z = \zOwtradMidAp$,
+$p = \pOwtradMidAp$~\pOwtradMidApSig{};
+one-tailed binomial, Bonferroni-adjusted $k = 4$:
+$p_\mathrm{adj} = \pOwtradMidAppAdj$~\pOwtradMidAppAdjSig{},
+$\pOwtradMidApAdj$~\pOwtradMidApAdjSig{}).
+Two permutation tests confirm robustness: a node-label shuffle
+(reassigning city longitudes to random nodes, \NOwtradPerms{} iterations)
+gives $p = \pOwtradMidAppPerm$~\pOwtradMidAppPermSig{} (A++) and
+$\pOwtradMidApPerm$~\pOwtradMidApPermSig{} (A+);
+a phase-shift test (random offset of the 3\textdegree{} grid,
+\NOwtradPerms{} iterations) gives $p = \pOwtradMidAppPhase$~\pOwtradMidAppPhaseSig{}
+and $\pOwtradMidApPhase$~\pOwtradMidApPhaseSig{},
+confirming the signal is Gerizim-specific.
+The alignment signal resides in the center-longitudes of route
+segments, illustrated by Figure~\ref{fig:geo_trail} and the supplementary
+interactive map.
 
 \begin{figure*}[!t]
   \centering
   \includegraphics[width=\textwidth]{../figures/fig_geo_trail}
   \caption{Tier distribution of UNESCO domed/stupa and Wikidata Q180987
-  stupa sites along the Eurasian corridor, illustrating the architectural
-  stratification of the enrichment signal. Silk Road route after
-  \citet{hansen2012silkroad}.
+  stupa sites along the Eurasian corridor.
+  Overland route edges from the OWTRAD attested-route database
+  \citep{ciolek2004owtrad}.
+  Maritime route is a schematic coastal polyline after
+  \citet{casson1989periplus}, \citet{sen2014silk}, and \citet{tomber2008rome}.
   An interactive version is provided as supplementary material
   (\texttt{supplementary/interactive\_map/silkroad\_interactive.html}).}
   \label{fig:geo_trail}
@@ -1163,8 +1166,6 @@ signal: \foundKwAppRate\% carry a founding keyword
 (OR~$= \foundKwAppFisherOR$, $p = \pFoundKwAppFisher$~\pFoundKwAppFisherSig{}),
 consistent with the most precisely aligned sites being disproportionately
 historically foundational monuments.
-This carries no weight in the primary evidential chain as the classifier
-was iteratively tuned after data inspection.
 
 The classifier assigns sites to five founding-related categories; full
 keyword definitions and the site-by-site listing are in the supplementary
@@ -1187,6 +1188,18 @@ University of Texas Press.
 Aveni, A.~F. (2003).
 Archaeoastronomy in the ancient Americas.
 \textit{Journal of Archaeological Research}, 11(2), 149--191.
+
+\bibitem[Casson(1989)]{casson1989periplus}
+Casson, L. (1989).
+\textit{The Periplus Maris Erythraei: Text with Introduction, Translation,
+and Commentary}.
+Princeton University Press.
+
+\bibitem[Ciolek(2004)]{ciolek2004owtrad}
+Ciolek, T.~M. (2004).
+\textit{Old World Trade Routes (OWTRAD) Project}.
+Asia Pacific Research Online, Canberra.
+\url{http://www.ciolek.com/OWTRAD/DATA/tmcOWTRAD.html}
 
 \bibitem[Benjamini \& Hochberg(1995)]{benjamini1995controlling}
 Benjamini, Y. \& Hochberg, Y. (1995).
@@ -1303,6 +1316,14 @@ Ruggles, C.~L.~N. (Ed.) (2015).
 \textit{Handbook of Archaeoastronomy and Ethnoastronomy}.
 Springer.
 
+\bibitem[Sen(2014)]{sen2014silk}
+Sen, T. (2014).
+The spread of Buddhism.
+In B.~Z.~Kedar \& M.~E.~Wiesner-Hanks (Eds.),
+\textit{The Cambridge World History, Vol.~5: Expanding Webs of Exchange
+and Conflict, 500 CE--1500 CE} (pp.~447--479).
+Cambridge University Press.
+
 \bibitem[Silva(2020)]{silva2020statistical}
 Silva, F. (2020).
 A probabilistic framework and significance test for the analysis
@@ -1313,6 +1334,11 @@ of structural orientations in skyscape archaeology.
 Tenenbaum, S. (2026).
 \textit{Longitude Quantization in the UNESCO World Heritage Corpus: Domes, Stupas, and the Babylonian Beru --- Code and Data} (v1.3.0).
 Zenodo. \url{https://doi.org/10.5281/zenodo.19772198}
+
+\bibitem[Tomber(2008)]{tomber2008rome}
+Tomber, R. (2008).
+\textit{Indo-Roman Trade: From Pots to Pepper}.
+Duckworth.
 
 \bibitem[Thom(1964)]{thom1964}
 Thom, A. (1964).

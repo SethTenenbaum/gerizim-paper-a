@@ -109,6 +109,12 @@ EXPLICIT_P_KEYS = {
     "permSlopeCanonBestJoint", "permSlopeCanonRank",
     # Cluster harmonic string (has embedded p-value name)
     "clusterHarmonicMWpStr",
+    # OWTRAD route alignment
+    "pOwtradMidApp", "pOwtradMidAp",
+    "pOwtradMidAppAdj", "pOwtradMidApAdj",
+    "pOwtradVertexApp", "pOwtradVertexAp",
+    "pOwtradMidAppPerm", "pOwtradMidApPerm",
+    "pOwtradMidAppPhase", "pOwtradMidApPhase",
 }
 
 

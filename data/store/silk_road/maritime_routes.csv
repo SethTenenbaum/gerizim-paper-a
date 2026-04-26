@@ -1,0 +1,128 @@
+# maritime_routes.csv — curated Silk Road maritime polylines
+#
+# Two named segments, each a coast-following polyline of waypoints chosen so
+# the rendered line stays in water (no land-crossings) and passes through the
+# major attested ancient harbours of the Periplus Maris Erythraei (1st c. CE)
+# and the medieval Indian-Ocean / South-China-Sea sea lanes (Hansen 2012;
+# Sen 2014; Casson 1989; Tomber 2008).
+#
+# Each waypoint is tagged with its modern name so reviewers can audit the choice.
+# Routes are drawn as straight-line (PlateCarree) polylines in order listed.
+# Density is high enough that no segment crosses land.
+#
+# Columns: route, order, lon, lat, name
+# Routes:
+#   med  — Eastern->Western Mediterranean coastal route from Levant to Cadiz.
+#   sea  — Indian Ocean Maritime Silk Road, Levant->Java.
+#
+# DO NOT HAND-EDIT silently — keep order column monotonically increasing integers.
+route,order,lon,lat,name
+# Mediterranean (Levant -> Iberia)
+# Note: route through Aegean goes E of Peloponnese via Cape Sounion to avoid
+# drawing over the Peloponnese peninsula. N. African waypoints are pushed
+# ~0.8-1.0 deg north of the coastline (which lies at 35.7-37.3 deg N).
+med,10,35.07,32.50,Caesarea Maritima (Levant terminus)
+med,20,34.65,33.10,Levantine coast off Akko/Tyre
+med,30,34.00,34.50,off Beirut
+med,40,33.10,35.10,Pafos / SW Cyprus
+med,50,32.45,34.75,SE Cyprus offing
+med,60,30.80,35.00,N. of Alexandria offing
+med,70,28.20,36.40,Rhodes
+med,80,26.90,37.00,Kos / SE Aegean
+med,90,25.30,36.20,S. Cretan Sea (Heraklion offing)
+med,100,24.10,37.40,off Cape Sounion (SE Attica — avoids Peloponnese)
+med,110,23.50,37.00,off E. Peloponnese coast
+med,120,23.00,36.50,off Cape Malea (SE Peloponnese tip)
+med,130,22.50,36.40,off Cape Matapan (S. tip of Peloponnese)
+med,140,21.70,37.00,W. Peloponnese (Methoni)
+med,150,19.80,39.50,Otranto Strait
+med,160,18.10,40.10,Brindisi
+med,170,17.20,38.70,off Calabria / Cape Rizzuto (avoids toe of Italy)
+med,180,15.90,37.90,off Cape Spartivento (S. tip of Calabria)
+med,190,15.60,38.20,Strait of Messina
+med,200,14.50,35.90,Malta channel
+med,210,12.50,37.10,W. Sicily / Lilybaeum
+med,220,11.10,37.50,Sicilian Channel (N. of Tunisia coast)
+med,230,10.20,37.70,Carthage / Tunis offing (coast at ~37.0 N — stay north)
+med,240,9.10,38.00,Cap Bon offing (N. of cape at 37.1 N)
+med,250,8.00,38.00,Bizerte offing
+med,260,5.40,38.00,Bejaia offing (coast at 36.75 N — stay north)
+med,270,3.00,37.80,Algiers offing (coast at 36.77 N — stay north)
+med,280,0.00,37.20,off Mostaganem / W. Algeria
+med,290,-0.65,36.80,Oran offing (Oran city at 35.70 N — stay north)
+med,300,-2.40,36.20,Melilla offing (coast at ~35.3 N)
+med,310,-4.40,35.90,Strait of Gibraltar (Pillars of Hercules)
+med,320,-5.60,36.10,Gulf of Cadiz
+med,330,-6.30,36.50,Cadiz
+# Indian Ocean Maritime Silk Road (Levant -> Java)
+# Levant -> Red Sea: coastal waypoints stay offshore of Sinai/Gaza.
+# Aden -> Cana: dips south into Gulf of Aden (~12.5-13 N) to avoid Yemen
+# coast (which rises from 12.8 N at Aden to ~14.5 N at Mukalla).
+# Sayhut -> Khor Rori: intermediate waypoint at Ras Fartak to avoid Dhofar.
+sea,10,35.07,32.50,Caesarea Maritima (terminus)
+sea,20,34.45,31.50,off Gaza coast (offshore)
+sea,30,33.50,31.10,off N. Sinai coast (offshore)
+sea,40,33.05,31.05,Pelusium (Nile Delta caravan head)
+sea,50,32.55,29.95,Suez (head of Gulf of Suez)
+sea,60,33.30,28.30,N. Gulf of Suez
+sea,70,34.30,27.30,mid Gulf of Suez
+sea,80,35.35,26.10,Hurghada offing
+sea,90,35.50,24.10,Berenike Troglodytica (Roman Red-Sea port)
+sea,100,36.80,22.40,Suakin offing
+sea,110,38.50,20.20,Massawa / Adulis (Aksumite emporion)
+sea,120,40.10,17.30,Dahlak offing
+sea,130,42.10,15.30,Kamaran / Tihama coast
+sea,140,43.30,13.60,Bab-el-Mandeb
+sea,150,44.95,12.78,Aden (Eudaemon Arabia)
+sea,160,46.00,12.60,Gulf of Aden (clear of Yemen coast — Yemen at ~13.3 N here)
+sea,170,47.50,12.90,Gulf of Aden mid (Yemen coast at ~13.6 N here)
+sea,180,48.50,13.50,approaching Cana from open sea
+sea,190,49.10,14.10,Cana / Bir Ali (Hadramawt frankincense port)
+sea,200,50.50,14.20,off Mukalla (Yemen coast at ~14.5 N — stay south)
+sea,210,51.50,14.90,off E. Yemen / Sayhut approach
+sea,220,52.20,15.20,Sayhut offing
+sea,230,53.00,16.00,off Ras Fartak / W. Dhofar (avoids headland)
+sea,240,54.00,17.00,Khor Rori / Sumhuram (Dhofar)
+sea,250,55.00,17.00,Mirbat (E. Dhofar coast)
+sea,260,56.50,17.20,off Hasik (E. Dhofar)
+sea,270,57.70,19.70,Duqm coast
+sea,280,58.70,20.70,off Masirah Island
+sea,290,59.80,22.50,Ras al-Hadd (E. tip of Arabia)
+sea,300,59.50,22.70,Sur / Gulf of Oman entrance
+sea,310,61.50,24.00,Makran coast (Gwadar)
+sea,320,64.30,24.60,Sonmiani / Karachi offing
+sea,330,67.00,24.85,Indus delta / Barbarikon
+sea,340,69.30,22.50,Gulf of Kutch
+sea,350,70.40,20.90,off Veraval / Somnath (SW Kathiawar)
+sea,360,71.00,20.70,off Diu (rounding S. Kathiawar)
+sea,370,72.80,21.00,Bharuch / Barygaza (Gulf of Khambhat)
+sea,380,72.90,19.10,Sopara / Mumbai offing
+sea,390,73.20,15.50,Goa coast
+sea,400,74.60,12.90,Mangalore offing
+sea,410,75.95,10.80,Muziris / Pattanam (Malabar)
+sea,420,76.60,8.90,Cochin / Quilon (Kollam)
+sea,430,77.55,8.07,Cape Comorin (Kanyakumari)
+sea,440,79.00,8.20,Mannar offing
+sea,450,79.85,7.20,Colombo
+sea,460,80.70,6.00,Galle (Sri Lanka S. tip)
+sea,470,81.80,7.00,Trincomalee offing
+sea,480,82.70,9.50,off Jaffna
+sea,490,84.50,12.50,Bay of Bengal mid-passage
+sea,500,87.50,15.00,off Bengal coast
+sea,510,89.50,16.50,Chittagong offing
+sea,520,92.20,12.10,N. Andaman Sea
+sea,530,93.10,9.50,Andaman Islands
+sea,540,95.30,7.50,off Aceh / N. Sumatra
+sea,550,97.20,5.40,Strait of Malacca (NW entry)
+sea,560,99.10,4.30,Penang / Kedah Tua
+sea,570,101.30,2.80,Malacca
+sea,580,103.50,1.30,Singapore Strait
+sea,590,104.80,0.50,Riau Archipelago
+sea,600,104.30,-0.90,E. Sumatra coast (off Jambi)
+sea,610,105.30,-2.50,Bangka Strait (N. entrance)
+sea,620,106.00,-3.10,Bangka Strait (mid, E. of Bangka Island)
+sea,630,106.50,-4.00,Bangka Strait (S. exit / Gaspar Strait)
+sea,640,107.20,-5.10,Java Sea (W. approach, clear of Bangka)
+sea,650,106.80,-5.60,Java Sea off Jakarta
+sea,660,108.50,-5.80,Java Sea off Cirebon
+sea,670,110.40,-6.20,Java Sea off Semarang (terminal)

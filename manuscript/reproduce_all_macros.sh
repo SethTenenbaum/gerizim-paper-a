@@ -70,6 +70,7 @@ if [ "${1:-}" != "--full" ]; then
         # ── Constants (config.json + corpus size) — no corpus analysis needed ──
         analysis/global/emit_constants.py                    # → GerizimLon, NwhcTotal, etc.
         analysis/global/geodesic_sensitivity.py              # → GeodesicApCurrent, GeodesicDropOut, GeodesicGainIn, etc.
+        analysis/global/owtrad_route_alignment.py            # → pOwtradMidApp/Ap, NOwtradEdges/Vertices, etc.
         # ── Primary analysis (write to store) ─────────────────────────────
         analysis/unesco/spherical_monument_test.py            # → pCircApValidated, NcircValidated (context-validated, Exploratory 2x) — runs FIRST so raw_sweep can read it
         analysis/unesco/spherical_monument_raw_sweep.py      # → pCircAp, pCircA, pCircChi (reads validated counts from store for comparison table)
