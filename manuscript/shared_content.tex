@@ -33,9 +33,6 @@ attested cuneiform subdivision (1~\textit{u\v{s}} = $\tfrac{1}{30}$~beru)
 and results are fully computationally reproducible from public source 
 data \citep{tenenbaum2026audit}.
 
-\textbf{Positioning within quantitative archaeometry.}
-This analysis follows the tradition of probability-based spatial analysis \citep{magli2013,magli2016,ruggles1999astronomy,ruggles2015handbook,silva2020statistical}.
-
 %──────────────────────────────────────────────────────────────────────────────
 \section{Background}
 \label{sec:prior}
@@ -91,14 +88,15 @@ earth'') role in Samaritan cosmographic tradition
 \citep{purvis1968,macdonald1964,crown1989}, analogous to Babylon's meridian
 in cuneiform astronomical records \citep{hunger2019mul}. At 881~m in the
 central highlands, it would have served as a natural survey reference point.
-No alternative Levantine anchors were tested.
+Jerusalem (\JerusalemLon\textdegree{}E) is also evaluated as a Levantine
+anchor in the sensitivity sweep (\S\ref{sec:sensitivity_global}).
 
 Gerizim's tentative-list coordinate (ref.~5706, DMS \GerizimLonDMS{}) is
 externally sourced and does not appear in the UNESCO inscribed corpus
 (UNESCO World Heritage Centre, Tentative List ref.~5706, State of Palestine,
 submitted 02~April~2012; archived at
 \url{https://whc.unesco.org/en/tentativelists/5706/}).
-Jerusalem (35.2317\textdegree{}E), approximately \GerizimJerusalemKm~km east
+Jerusalem (\JerusalemLon\textdegree{}E), approximately \GerizimJerusalemKm~km east
 of Gerizim, is an inscribed corpus member. It is self-excluded when used as
 anchor and produces a similar A+ count (\S\ref{sec:sensitivity_global}).
 Both lie within the \textit{Levantine corridor} ($\sim$35\textdegree{}E,
@@ -161,19 +159,12 @@ geometric null is not materially inflated by longitude clumping.
 \subsection{Metrological Basis for the 0.1-Beru Spacing}
 \label{sec:metrology_basis}
 
-The harmonic spacing tested is 0.1~beru (3\textdegree{}).
-The \textit{u\v{s}} is the smallest subdivision of the beru in cuneiform
-metrology (1~beru $=$ 30~\textit{u\v{s}}), and 0.1~beru $=$ 3~\textit{u\v{s}}
-is its finest integer multiple attested in astronomical records
-\citep{hunger2019mul,robson2008mathematics,powell1987metrological}.
-It yields a tractable test (\NharmonicsCoarse{} harmonics, \NullRateAp{} geometric null);
-coarser spacings are uninformative and finer ones produce no signal
-(\S\ref{sec:metrology}).
-
-The 0.05‑beru spacing (1.5\textdegree{}) also reaches significance, but this 
-is structurally expected because every 0.10‑beru (3\textdegree{}) node is also 
-a node of the finer 0.05‑beru grid; hence 0.05‑beru is a finer sub‑sampling of 
-the same periodicity, not an independent signal.
+The 0.1-beru (3\textdegree{}) spacing yields \NharmonicsCoarse{} harmonics at
+the \NullRateAp{} geometric null; coarser spacings are uninformative and finer
+ones produce no signal (\S\ref{sec:metrology}).
+The 0.05-beru spacing also reaches significance, but is structurally expected:
+every 0.10-beru node is also a 0.05-beru node, so it is a finer sub-sampling
+of the same periodicity, not an independent signal.
 
 
 \subsection{Tier Classification}
@@ -663,6 +654,8 @@ The Mantel-Haenszel stratified test is underpowered at the sub-group level;
 Logistic regression with region as a covariate confirms the A++ gradient
 ($Z = \zLogRegCohortApp$, $p = \pLogRegCohortApp$~\pLogRegCohortAppSig{},
 OR~$= \orLogRegCohortApp$).
+The declining rate in later cohorts may also partly reflect UNESCO's geographic
+expansion into regions where hemispherical traditions are less prevalent.
 The gradient is treated as descriptive context only (Figure~\ref{fig:temporal}).
 
 \begin{figure*}[!t]
@@ -1379,6 +1372,8 @@ World's Work.
 All data and analysis code are openly available. A permanent archival
 snapshot (v1.3.0) is deposited at Zenodo
 (\citealt{tenenbaum2026audit}; \url{https://doi.org/10.5281/zenodo.19772198}).
+The UNESCO World Heritage XML dataset version used in this study is preserved
+in the Zenodo archive; the primary source is \citealt{unescowhc2024xml}.
 
 \section*{Acknowledgements}
 The UNESCO World Heritage Centre maintains the publicly accessible XML

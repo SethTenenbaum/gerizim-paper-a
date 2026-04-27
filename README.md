@@ -21,7 +21,7 @@ non-randomly concentrated near integer-multiple longitudes of the Babylonian
 The primary exploratory test finds that **domed/spherical UNESCO monuments** cluster
 on beru harmonics at rates significantly exceeding the geometric null
 (binomial *p* < 0.001), with supporting evidence from cluster asymmetry
-(harmonics containing a site within ≤6.7 km host more total sites than
+(harmonics containing an A+ site within ≤10.7 km host more total sites than
 harmonics without one), a temporal gradient
 (pre-2000 vs. post-2000 inscription cohorts), morphological evolution
 (hemispherical mound → dome), unit-sensitivity sweep, and global robustness
