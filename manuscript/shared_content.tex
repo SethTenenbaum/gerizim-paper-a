@@ -702,12 +702,12 @@ The \NsurviveBonfAll{} full-$k$ survivors are:
 dome/spherical A++ (binomial $p = \BonfAllSurvivepCircApp$);
 cluster permutation ($p_\mathrm{adj} = \BonfAllSurviveclusterPermP$);
 harmonic Mann-Whitney ($p_\mathrm{adj} = \BonfAllSurviveclusterHarmonicMWp$);
-sequential-peak permutation ($p_\mathrm{adj} = \BonfAllSurvivepeakSigP$);
+sequential-peak permutation ($p_\mathrm{adj} = \BonfAllSurvivepeakSigP$; \S\ref{sec:resultstemporal});
 corridor occupancy \corridorPrecHits{}/\corridorPrecN{} harmonics
-($p_\mathrm{adj} = \BonfAllSurvivepCorridorBinom$);
-corridor Fisher combined ($p_\mathrm{adj} = \BonfAllSurvivepCorridorFisher$);
-corridor A++ enrichment ($p_\mathrm{adj} = \BonfAllSurvivepCorridorAppFisher$);
-corridor precision Mann-Whitney ($p_\mathrm{adj} = \BonfAllSurvivepCorridorMW$);
+($p_\mathrm{adj} = \BonfAllSurvivepCorridorBinom$; \S\ref{sec:sensitivity_global});
+corridor Fisher combined ($p_\mathrm{adj} = \BonfAllSurvivepCorridorFisher$; \S\ref{sec:sensitivity_global});
+corridor A++ enrichment ($p_\mathrm{adj} = \BonfAllSurvivepCorridorAppFisher$; \S\ref{sec:sensitivity_global});
+corridor precision Mann-Whitney ($p_\mathrm{adj} = \BonfAllSurvivepCorridorMW$; \S\ref{sec:sensitivity_global});
 and evolution combined A++ (binomial $p = \BonfAllSurvivepEvoApp$).
 
 \section{Robustness Checks}
@@ -1059,7 +1059,7 @@ Testing each unique endpoint once gives
 \NOwtradVertexApp{}/\NOwtradVertices{} at A++ and \NOwtradVertexAp{} at A+
 ($\owtradVertexAppEnrich\times$, $z = \zOwtradVertexApp$,
 $p = \pOwtradVertexApp$~\pOwtradVertexAppSig{} for A++;
-$p = \pOwtradVertexAp$~\pOwtradVertexApSig{} for A+).
+$p = \pOwtradVertexAp$~\pOwtradVertexApSig{} for A+; one-tailed binomial).
 A phase-shift test (random offset of the 3\textdegree{} grid,
 \NOwtradPerms{} iterations) gives $p = \pOwtradVertexAppPhase$~\pOwtradVertexAppPhaseSig{},
 confirming the enrichment is specific to the Gerizim anchor.
@@ -1084,7 +1084,7 @@ The Silk Road corridor is illustrated in Figure~\ref{fig:geo_trail}.
   \label{fig:geo_trail}
 \end{figure*}
 
-\subsection{Conclusion}
+\section{Conclusion}
 
 The UNESCO Cultural and Mixed corpus shows significant enrichment at
 harmonics of the Babylonian beru anchored at Gerizim, with all three
