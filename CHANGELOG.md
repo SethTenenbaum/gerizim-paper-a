@@ -1,5 +1,26 @@
 # Changelog
 
+### v1.3.1 — 2026-04-27
+
+#### Housekeeping
+- README abstract stats updated to match current pipeline output (Bonferroni
+  *p*adj values; macro count updated to 1,375).
+- Citation block updated: title aligned with Archaeometry submission title;
+  GitHub URL replaced with Zenodo DOI.
+- Contact email updated to seth@fourthtemple.com throughout.
+- Affiliation in primary manuscript changed from "Fourth Temple Research, USA"
+  to "Independent Scholar, USA".
+- CITATION.cff title and version bumped to v1.3.1.
+- `shared_content.tex`: "No alternative Levantine anchors were tested" replaced
+  with correct statement that Jerusalem is evaluated in the sensitivity sweep;
+  hardcoded Jerusalem longitude replaced with `\JerusalemLon` macro; UNESCO XML
+  version note added to Data Availability Statement; temporal cohort confound
+  acknowledged in Test 4; §2.4 first paragraph condensed (duplicate of §2.1);
+  "Positioning within quantitative archaeometry" sentence removed (~50-word net
+  reduction to bring compiled PDF under 8,000 words).
+
+---
+
 ### v1.3.0 — 2026-04-25
 **DOI:** [10.5281/zenodo.19772198](https://doi.org/10.5281/zenodo.19772198)
 

@@ -1,6 +1,6 @@
 # Domed Monuments Cluster at Babylonian Bēru Harmonics: A Longitude Enrichment Test on the UNESCO World Heritage List
 
-**Paper A — Primary UNESCO Analysis** · `v1.3.0`
+**Paper A — Primary UNESCO Analysis** · `v1.3.1`
 
 Seth Tenenbaum · Independent Scholar
 ORCID: [0009-0008-5797-2498](https://orcid.org/0009-0008-5797-2498)
@@ -18,14 +18,13 @@ spherical monumental heritage sites in the UNESCO World Heritage List are
 non-randomly concentrated near integer-multiple longitudes of the Babylonian
 *beru* (30° of arc) measured from Mount Gerizim (35.269°E).
 
-The primary exploratory test finds that **domed/spherical UNESCO monuments** cluster
-on beru harmonics at rates significantly exceeding the geometric null
-(binomial *p* < 0.001), with supporting evidence from cluster asymmetry
-(harmonics containing an A+ site within ≤10.7 km host more total sites than
-harmonics without one), a temporal gradient
-(pre-2000 vs. post-2000 inscription cohorts), morphological evolution
-(hemispherical mound → dome), unit-sensitivity sweep, and global robustness
-checks.
+All three primary tests pass Bonferroni correction (*k* = 3):
+full-corpus enrichment (*p*adj = 0.008),
+domed/spherical monument enrichment (*p*adj = 0.015, 2.25× null),
+and cluster asymmetry — harmonics containing an A+ site within ≤10.7 km
+host significantly more total sites than harmonics without one (*p*adj = 6×10⁻⁴).
+Supporting evidence includes morphological evolution (hemispherical mound → stupa → dome),
+a temporal gradient, unit-sensitivity sweep, and global robustness checks.
 
 ## Repository Structure
 
@@ -280,7 +279,7 @@ bash manuscript/reproduce_all_macros.sh --full   # slow: reruns all analysis scr
 
 Both manuscripts (`primary/` and `archaeometry/`) import `../generated_macros.tex`
 so that **every number in the PDF is pipeline-driven** — no values are
-hand-curated. As of v1.1.0 the manuscripts contain 439 macros, all emitted
+hand-curated. As of v1.3.0 the manuscripts contain 1,375 macros, all emitted
 by analysis scripts, with zero value mismatches between the manuscripts and
 the pipeline.
 
@@ -339,9 +338,9 @@ See `LICENSE_NOTES.md` for the full per-file breakdown.
 If you use this code or data, please cite:
 
 > Tenenbaum, S. (2026). Domed Monuments Cluster at Babylonian Bēru Harmonics:
-> A Longitude Enrichment Test on the UNESCO World Heritage List. *Preprint.*
-> https://github.com/SethTenenbaum/gerizim-paper-a
+> A Longitude Enrichment Test on the UNESCO Cultural and Mixed Heritage Corpus.
+> https://doi.org/10.5281/zenodo.19772198
 
 ## Contact
 
-Seth Tenenbaum — sethtenenbaum1@gmail.com
+Seth Tenenbaum — seth@fourthtemple.com
