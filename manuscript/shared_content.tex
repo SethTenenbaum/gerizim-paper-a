@@ -703,11 +703,11 @@ dome/spherical A++ (binomial $p = \BonfAllSurvivepCircApp$);
 cluster permutation ($p_\mathrm{adj} = \BonfAllSurviveclusterPermP$);
 harmonic Mann-Whitney ($p_\mathrm{adj} = \BonfAllSurviveclusterHarmonicMWp$);
 sequential-peak permutation ($p_\mathrm{adj} = \BonfAllSurvivepeakSigP$; \S\ref{sec:resultstemporal});
-corridor occupancy \corridorPrecHits{}/\corridorPrecN{} harmonics
-($p_\mathrm{adj} = \BonfAllSurvivepCorridorBinom$; \S\ref{sec:sensitivity_global});
-corridor Fisher combined ($p_\mathrm{adj} = \BonfAllSurvivepCorridorFisher$; \S\ref{sec:sensitivity_global});
-corridor A++ enrichment ($p_\mathrm{adj} = \BonfAllSurvivepCorridorAppFisher$; \S\ref{sec:sensitivity_global});
-corridor precision Mann-Whitney ($p_\mathrm{adj} = \BonfAllSurvivepCorridorMW$; \S\ref{sec:sensitivity_global});
+band occupancy \corridorPrecHits{}/\corridorPrecN{} harmonics
+($p_\mathrm{adj} = \BonfAllSurvivepCorridorBinom$; \S\ref{sec:corridor_precision});
+band Fisher combined ($p_\mathrm{adj} = \BonfAllSurvivepCorridorFisher$; \S\ref{sec:corridor_precision});
+band A++ enrichment ($p_\mathrm{adj} = \BonfAllSurvivepCorridorAppFisher$; \S\ref{sec:corridor_precision});
+band precision Mann-Whitney ($p_\mathrm{adj} = \BonfAllSurvivepCorridorMW$; \S\ref{sec:corridor_precision});
 and evolution combined A++ (binomial $p = \BonfAllSurvivepEvoApp$).
 
 \section{Robustness Checks}
@@ -718,7 +718,8 @@ and evolution combined A++ (binomial $p = \BonfAllSurvivepEvoApp$).
 
 Varying harmonic spacing from 0.05 to 0.20~beru (physical threshold
 fixed at \ApThreshKm{}~km), the 0.1-beru spacing produces the strongest joint
-significance across both the dome and full-corpus populations.
+significance across both the dome and full-corpus populations
+(Online Supplementary Figure~S1).
 The 0.05-beru and 0.20-beru spacings also reach significance, but both are
 mathematical consequences of the 0.10-beru structure: every 0.10-beru
 harmonic is also a 0.05-beru harmonic, and 0.20-beru harmonics are a strict
@@ -791,6 +792,18 @@ Jerusalem: \JerusalemSweepAp{} A+, \JerusalemSweepPctile\textsuperscript{th} per
 full table in Online Supplementary Table~S4), and the result is anchor-invariant
 within the \GerizimJerusalemKm\,km corridor window.
 No other historical meridian reaches significance.
+
+\subsubsection*{Gerizim to Lumbini band precision}
+\label{sec:corridor_precision}
+
+The 1.6-beru span from Gerizim (35.3\textdegree{}E) to Lumbini,
+the birthplace of the Buddha (83.3\textdegree{}E), covers
+\corridorPrecN{} harmonics.
+All \corridorPrecHits{}/\corridorPrecN{} contain at least one A+ UNESCO site
+(binomial $p \ll 10^{-10}$); \corridorPrecApp{}/\corridorPrecN{} contain
+an A++ site (OR~$= \corridorAppOR$ vs sites outside this band);
+A+ sites within the band are $\corridorPrecRatio\times$ more precise
+than the global A+ mean.
 
 \subsubsection*{The $x.18$\textdegree{}E periodic structure}
 \label{sec:x18artifact}
@@ -1068,7 +1081,7 @@ harmonics containing at least one A++ endpoint (\NOwtradAppHarmonics{} harmonics
 carry \owtradClustDegRatio$\times$ more total route-connectivity than
 harmonics without one (\NOwtradNonAppHarmonics{} harmonics;
 $p = \pOwtradClustDeg$~\pOwtradClustDegSig{}, Mann-Whitney one-tailed).
-The Silk Road corridor is illustrated in Figure~\ref{fig:geo_trail}.
+The Silk Road corridor is illustrated in Figure~\ref{fig:geo_trail} (tier histograms: Online Supplementary Figure~S2).
 
 \begin{figure*}[!t]
   \centering
@@ -1112,8 +1125,10 @@ circulated in antiquity (Figure~\ref{fig:geo_trail}).
 \section{Keyword Audit Summary}
 \label{sec:kwdaudit}
 
-Full site-by-site audit files are in the archived code repository
-(\citealt{tenenbaum2026audit}).
+Full site-by-site audit files covering keyword classification, tier listings,
+anchor sweep, corridor precision, unit sweep, stupa geography, and FDR output
+are provided in \texttt{supplementary/audit/} in the archived repository
+(\citealt{tenenbaum2026audit}); all regenerable from scripts in \texttt{tools/}.
 
 \subsection{Dome/Spherical Monument Filter (Tests~2, 2b, 2x, 2bx)}
 \label{sec:kwdaudit_dome}
