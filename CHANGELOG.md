@@ -1,6 +1,7 @@
 # Changelog
 
 ### v1.4.0 — 2026-04-27
+**DOI:** [10.5281/zenodo.19821766](https://doi.org/10.5281/zenodo.19821766)
 
 #### OWTRAD Silk Road analysis
 - **Expanded OWTRAD network** from 842 to 1,946 route edges and 1,674 unique
