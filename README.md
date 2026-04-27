@@ -1,6 +1,6 @@
 # Domed Monuments Cluster at Babylonian Bēru Harmonics: A Longitude Enrichment Test on the UNESCO World Heritage List
 
-**Paper A — Primary UNESCO Analysis** · `v1.3.1`
+**Paper A — Primary UNESCO Analysis** · `v1.4.0`
 
 Seth Tenenbaum · Independent Scholar
 ORCID: [0009-0008-5797-2498](https://orcid.org/0009-0008-5797-2498)
@@ -60,7 +60,7 @@ gerizim-paper-a/
 │       ├── fig_unitsweep.{pdf,png}        # Figure 3: Unit sensitivity sweep
 │       ├── fig_null_c.{pdf,png}           # Figure 4: Null C bootstrap distributions
 │       ├── fig_geo_trail.{pdf,png}        # Figure 5: Eurasian corridor tier distribution
-│       └── fig_supp_silkroad_ac.{pdf,png} # Supplementary: Silk Road A/C bimodal
+│       └── fig_owtrad_tiers.{pdf,png}     # Figure 6: OWTRAD Silk Road harmonic tiers
 │
 ├── analysis/
 │   ├── unesco/                       # Primary UNESCO corpus tests
@@ -110,7 +110,8 @@ gerizim-paper-a/
 │   │   ├── x18_periodicity_formal_test.py         # x.18°E formal periodicity test
 │   │   ├── x18_max_permutation_test.py            # x.18°E max permutation test
 │   │   ├── x18_optimal_band_significance.py       # x.18°E optimal band significance
-│   │   └── emit_constants.py                      # Emit pure constants as LaTeX macros
+│   │   ├── emit_constants.py                      # Emit pure constants as LaTeX macros
+│   │   └── owtrad_route_alignment.py              # OWTRAD vertex tier + cluster asymmetry tests
 │   │
 │   └── americas/                     # Control comparison (directional test scripts only)
 │
@@ -130,7 +131,8 @@ gerizim-paper-a/
 │   ├── scripts/
 │   │   ├── unesco_corpus.py                # Canonical UNESCO data loader
 │   │   ├── fetch_extended.py               # Fetch extended descriptions from UNESCO
-│   │   └── fetch_wikidata_q180987.py       # Fetch / validate Wikidata Q180987 stupa corpus
+│   │   ├── fetch_wikidata_q180987.py       # Fetch / validate Wikidata Q180987 stupa corpus
+│   │   └── fetch_owtrad_silk_road.py       # Download and parse OWTRAD route datasets
 │   └── store/
 │       ├── results.json                    # Aggregated pipeline results
 │       ├── unesco/
@@ -138,6 +140,12 @@ gerizim-paper-a/
 │       │   ├── extended_cache.json         # Cached extended descriptions
 │       │   ├── meta_keyword_results.json   # Pre-computed keyword results
 │       │   └── wikidata_stupas_q180987.csv # Wikidata Q180987 stupa corpus (229 sites)
+│       ├── silk_road/
+│       │   ├── owtrad_nodes.csv            # OWTRAD network nodes (1,674 unique cities)
+│       │   ├── owtrad_routes.csv           # OWTRAD route edges (1,946 segments)
+│       │   ├── owtrad_tier_report.txt      # Tier analysis report
+│       │   ├── maritime_routes.csv         # Curated maritime Silk Road polylines
+│       │   └── overland_trunk.csv          # Curated overland trunk route
 │       └── wikidata/                       # (empty — P1435 corpus removed in v1.2.0)
 │
 ├── supplementary/
@@ -156,6 +164,8 @@ gerizim-paper-a/
 │   │   ├── stupa_q180987_geo_audit.txt    # Wikidata Q180987 stupa geographic audit
 │   │   ├── fdr.txt                        # FDR multiple-comparisons output
 │   │   └── README_audit.txt              # Audit provenance and reproducibility notes
+│   ├── interactive_map/
+│   │   └── silkroad_interactive.html  # Interactive Silk Road tier map (Leaflet)
 │   └── UNESCO/                       # Archived source materials for anchor citation (ref. 5706)
 │       ├── unesco_5706_rendered.html # Archived rendered UNESCO Tentative List page
 │       ├── unesco_5706.pdf           # PDF snapshot
@@ -176,7 +186,8 @@ gerizim-paper-a/
 │   ├── generate_audit_stupa_q180987_geo.py  # Regenerate stupa_q180987_geo_audit.txt
 │   ├── generate_audit_fdr.py                # Regenerate fdr.txt
 │   ├── update_all_audits.sh                 # Regenerate all audit files in one pass
-│   ├── generate_interactive_map.py          # Generate interactive HTML map
+│   ├── generate_interactive_map.py          # Generate interactive HTML Silk Road map
+│   ├── owtrad_tier_analysis.py              # OWTRAD harmonic tier analysis + fig_owtrad_tiers
 │   └── md2pdf.sh                            # Markdown → PDF utility
 │
 ├── results/                          # Cached permutation null distributions
@@ -292,10 +303,15 @@ the pipeline.
 | UNESCO World Heritage List | [whc.unesco.org/en/list/xml](https://whc.unesco.org/en/list/xml) | 1,248 sites |
 | Extended descriptions | Scraped from individual UNESCO site pages | 1,248 entries |
 | Wikidata Q180987 stupa corpus | [query.wikidata.org](https://query.wikidata.org) (P31/P279* wd:Q180987, with P625) | 229 sites |
+| OWTRAD Silk Road network | [ciolek.com/owtrad](http://www.ciolek.com/owtrad.html) — 29 MapInfo datasets (Ciolek 2004) | 1,946 edges, 1,674 nodes |
 
 The UNESCO XML is included in `data/store/unesco/unesco.xml`. To refresh
 the extended descriptions cache, run `python3 data/scripts/fetch_extended.py`
 (requires internet; may take ~20 min due to rate limiting).
+
+The OWTRAD data is pre-processed in `data/store/silk_road/`. To re-download
+and rebuild from source, run `python3 data/scripts/fetch_owtrad_silk_road.py`
+(requires internet; fetches 29 MapInfo ZIP archives from ciolek.com).
 
 ## Manuscripts
 
