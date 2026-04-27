@@ -1,5 +1,43 @@
 # Changelog
 
+### v1.4.0 — 2026-04-27
+
+#### OWTRAD Silk Road analysis
+- **Expanded OWTRAD network** from 842 to 1,946 route edges and 1,674 unique
+  nodes by adding 18 new datasets covering Persia, Central Asia, India, China,
+  and Southeast Asia (Turkey, Iran, Kyrgyzstan, Tajikistan, Turkmenistan,
+  India, Cambodia, and additional Chinese regional datasets).
+- **`analysis/global/owtrad_route_alignment.py`** extended with degree-weighted
+  vertex tier tests, phase-shift permutation (100,000 iterations), z-scores,
+  enrichment ratios, and cluster asymmetry test (Mann-Whitney, mirroring Test 3).
+- **New macros emitted:** `NOwtradDegW`, `NOwtradDegWApp`, `NOwtradDegWAp`,
+  `owtradDegWAppEnrich`, `zOwtradDegWApp`, `pOwtradDegWApp`, `pOwtradDegWAp`,
+  `pOwtradVertexAppPhase`, `NOwtradAppHarmonics`, `NOwtradNonAppHarmonics`,
+  `owtradClustDegRatio`, `pOwtradClustDeg`.
+
+#### Figures
+- **`fig_owtrad_tiers.{pdf,png}`** (Figure 6) added — OWTRAD harmonic tier
+  histogram for degree-weighted vertices and deduplicated vertices; generated
+  by `tools/owtrad_tier_analysis.py`, now called automatically from
+  `manuscript/generate_figures.py`.
+- **`fig_supp_global_tiers`** removed — superseded by the interactive map.
+- **`fig_supp_silkroad_ac`** removed — duplicate of `fig_geo_trail` content.
+- **`fig_geo_trail`** updated: map extent expanded to −12°E to include all
+  OWTRAD data; midpoint scatter removed; Echmiatsin annotation removed;
+  Lumbini annotation repositioned.
+
+#### Interactive map
+- **`supplementary/interactive_map/silkroad_interactive.html`** updated:
+  1,946 OWTRAD edges; midpoint layer removed; mound classification fixed
+  (now requires literal word "mound" + context keyword, not context alone).
+
+#### Manuscript
+- **OWTRAD prose** (`shared_content.tex`) rewritten to lead with degree-weighted
+  endpoint results, add A+ reporting for both populations, add cluster asymmetry
+  paragraph mirroring Test 3, and add phase-shift permutation result.
+
+---
+
 ### v1.3.1 — 2026-04-27
 
 #### Housekeeping
