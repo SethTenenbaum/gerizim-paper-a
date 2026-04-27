@@ -144,7 +144,14 @@ _MOUND_CHAIN_LABELS = ["mound", "tumulus/barrow", "stupa/dagoba", "dome/tholos"]
 
 def _find_mound_stages(text, mound_evo):
     stages = []
-    for label, key in zip(_MOUND_CHAIN_LABELS, _MOUND_CHAIN_KEYS):
+    # "mound" stage: literal word "mound" must appear AND a positive-context keyword
+    ctx_kws = mound_evo.get("mound_positive_context", [])
+    if re.search(r"\bmound\b", text, re.I) and any(
+        re.search(r"\b" + re.escape(k) + r"\b", text, re.I) for k in ctx_kws
+    ):
+        stages.append("mound")
+    # remaining chain: mound_unambiguous → stupa → dome
+    for label, key in zip(_MOUND_CHAIN_LABELS[1:], _MOUND_CHAIN_KEYS[1:]):
         kws = mound_evo.get(key, [])
         if any(re.search(r"\b" + re.escape(k) + r"\b", text, re.I) for k in kws):
             stages.append(label)
@@ -245,13 +252,11 @@ def build_site_data():
 #  HTML generation
 # ══════════════════════════════════════════════════════════════════════════════
 
-def build_html(sites, overland_routes=None, owtrad_edges=None, maritime_routes=None,
-               midpoints=None):
+def build_html(sites, overland_routes=None, owtrad_edges=None, maritime_routes=None):
     sites_json    = json.dumps(sites, ensure_ascii=False)
     overland_routes = overland_routes or []
     owtrad_edges    = owtrad_edges    or []
     maritime_routes = maritime_routes or []
-    midpoints       = midpoints       or []
 
     html = """\
 <!DOCTYPE html>
@@ -474,13 +479,6 @@ body { font-family: 'Georgia', serif; background: #111; }
     </div>
   </div>
   <div class="section-divider">
-    <div class="rt-row" id="toggle-midpoints">
-      <input type="checkbox"/>
-      <span style="width:13px;height:13px;border-radius:50%;background:#7d3c98;flex-shrink:0;display:inline-block"></span>
-      <span class="rt-label">OWTRAD edge midpoints</span>
-    </div>
-  </div>
-  <div class="section-divider">
     <button id="draw-btn">&#11042; Draw area</button>
   </div>
   </div><!-- end panel-body -->
@@ -522,7 +520,6 @@ const HARM_STEP_DEG = """ + str(HARM_STEP_DEG) + """;
 const OVERLAND_ROUTES = """ + json.dumps(overland_routes) + """;
 const OWTRAD_EDGES    = """ + json.dumps(owtrad_edges) + """;
 const MARITIME_ROUTES = """ + json.dumps(maritime_routes) + """;
-const MIDPOINTS       = """ + json.dumps(midpoints) + """;
 const OWTRAD_ZOOM_THRESHOLD = 5;
 
 const TIER_COLOR  = { "A++":"#922b21","A+":"#c0392b","A":"#e67e22","C":"#7fb3d3","C-":"#2471a3","C--":"#1a3a6b","B":"#aaaaaa" };
@@ -578,23 +575,6 @@ function _applyOverlandZoom() {
 _applyOverlandZoom();
 map.on("zoomend", _applyOverlandZoom);
 maritimeLayer.addTo(map);
-
-// OWTRAD edge midpoints — purple fill, tier-coloured ring, hidden by default
-const TIER_COLOR_MID = { "A++":"#922b21","A+":"#c0392b","A":"#e67e22","C":"#7fb3d3","C-":"#2471a3","C--":"#1a3a6b","B":"#aaaaaa" };
-const midpointLayer = L.layerGroup();
-MIDPOINTS.forEach(m => {
-  const r = 5, size = r*2+6, c = r+3;
-  const ring = TIER_COLOR_MID[m.tier] || "#aaaaaa";
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}"><circle cx="${c}" cy="${c}" r="${r}" fill="#7d3c98" stroke="${ring}" stroke-width="2"/></svg>`;
-  const icon = L.divIcon({ html: svg, iconSize:[size,size], iconAnchor:[c,c], className:"" });
-  L.marker([m.mid_lat, m.mid_lon], { icon })
-   .bindTooltip(`<div class="tt-name">Midpoint: ${m.node1} → ${m.node2}</div>
-     <div class="tt-tier">Tier <strong style="color:#fff">${m.tier}</strong> &middot; &delta; = ${m.dev}</div>
-     <div class="tt-row"><span class="tt-label">Mid lon:</span><span class="tt-val">${m.mid_lon.toFixed(3)}°E</span></div>
-     <div class="tt-row"><span class="tt-label">Dataset:</span><span class="tt-val">${m.dataset}</span></div>`,
-     { sticky:true, opacity:1, direction:"top" })
-   .addTo(midpointLayer);
-});
 
 function makeIcon(shape, color, r) {
   const size = r * 2 + 5, c = r + 2.5;
@@ -715,7 +695,6 @@ document.getElementById("toggle-overland").addEventListener("click", function(e)
 });
 bindToggle("toggle-maritime",   maritimeLayer);
 bindToggle("toggle-grid",       gridLayer);
-bindToggle("toggle-midpoints",  midpointLayer);
 
 // ── Legend minimize / maximize ────────────────────────────────────────────────
 document.getElementById("legend-toggle").addEventListener("click", () => {
@@ -1003,34 +982,8 @@ if __name__ == "__main__":
     overland_routes, owtrad_edges, maritime_routes = _load_silk_road_routes()
     print(f"  {len(overland_routes)} overland trunk polyline(s), {len(owtrad_edges)} OWTRAD edges, {len(maritime_routes)} maritime polyline(s)")
 
-    print("Building edge midpoints…")
-    import csv as _csv
-    midpoints = []
-    with open(SILK_ROAD_DIR / "owtrad_routes.csv", newline="", encoding="utf-8") as fh:
-        for row in _csv.DictReader(r for r in fh if not r.startswith("#")):
-            try:
-                lon1 = float(row["lon1"]); lat1 = float(row["lat1"])
-                lon2 = float(row["lon2"]); lat2 = float(row["lat2"])
-            except (ValueError, KeyError):
-                continue
-            mid_lon = (lon1 + lon2) / 2
-            mid_lat = (lat1 + lat2) / 2
-            from lib.beru import deviation as _dev, tier_label as _tier
-            d = _dev(mid_lon)
-            midpoints.append({
-                "mid_lat": round(mid_lat, 5),
-                "mid_lon": round(mid_lon, 5),
-                "node1":   row.get("node1", ""),
-                "node2":   row.get("node2", ""),
-                "dataset": row.get("dataset", ""),
-                "tier":    _tier(d),
-                "dev":     round(d, 5),
-            })
-    print(f"  {len(midpoints)} edge midpoints")
-    print()
-
     print("Building HTML…")
-    html = build_html(sites, overland_routes, owtrad_edges, maritime_routes, midpoints)
+    html = build_html(sites, overland_routes, owtrad_edges, maritime_routes)
 
     out = OUTDIR / "silkroad_interactive.html"
     out.write_text(html, encoding="utf-8")

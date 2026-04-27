@@ -17,10 +17,51 @@ Research School of Pacific and Asian Studies, Australian National University.
 
 DATASETS DOWNLOADED
 -------------------
-  tmcZCAm1000  Central Asia 1–1400 CE          lon 25–135°E, lat 25–50°N
-  tmcIRa0100   Iran / Persia 50 BCE–300 CE      lon 30–80°E,  lat 10–45°N
-  tmcCNm1000   NW China 100–1400 CE             lon 74–94°E,  lat 36–44°N
-  tmcKGa0100d  Kyrgyzstan 100 BCE–1400 CE       lon 65–82°E,  lat 36–45°N  (local)
+  Remote (downloaded from interchange/):
+  Mediterranean & Turkey:
+    tmcXMEm1400  Mediterranean ~1400 CE          lon  -10– 40°E, lat 25–55°N
+    tmcTRm1200a  Turkey 1200 CE (part a)         lon   25– 45°E, lat 35–45°N
+    tmcTRm1200b  Turkey 1200 CE (part b)         lon   25–120°E, lat 35–45°N
+    tmcTRm1300   Turkey / Anatolia 1300 CE       lon   12– 48°E, lat 35–45°N
+  Persia / Iran:
+    tmcIRa0100   Iran/Persia 50 BCE–300 CE       lon   30– 80°E, lat 10–45°N
+    tmcIRa0500   Iran/Persia 300–700 CE          lon   30– 80°E, lat 10–45°N
+  Central Asia:
+    tmcZCAm0200  Iran & China 200 BCE–500 CE     lon   25–120°E, lat 15–55°N
+    tmcZCAm0600  Mediterranean–China 200 BCE–    lon    0–120°E, lat 15–55°N
+                 1400 CE
+    tmcZCAm0800  Central Asia 700–1000 CE        lon   25–120°E, lat 25–55°N
+    tmcZCAm1000  Central Asia 1–1400 CE          lon   25–135°E, lat 25–50°N
+    tmcZCAm1000a Central Asia 1–1400 CE (var a)  lon   25–135°E, lat 25–50°N
+    tmcTMm1100   Turkmenistan 1100 CE            lon   50– 64°E, lat 35–45°N
+    tmcTJm0400a  Tajikistan 400 CE (part a)      lon   65– 82°E, lat 36–45°N
+    tmcTJm0400b  Tajikistan 400 CE (part b)      lon   65– 82°E, lat 36–45°N
+    tmcKGa0100a  Kyrgyzstan (part a)             lon   65– 82°E, lat 36–45°N
+    tmcKGa0100b  Kyrgyzstan (part b)             lon   65– 82°E, lat 36–45°N
+    tmcKGa0100c  Kyrgyzstan (part c)             lon   65– 82°E, lat 36–45°N
+    tmcKGa0100e  Kyrgyzstan (part e)             lon   65– 82°E, lat 36–45°N
+  Middle East & India:
+    tmcZMEm1300  Middle East & India 1300–       lon   25– 90°E, lat  5–45°N
+                 1600 CE
+    tmcINm1550   India 1550–1650 CE              lon   65– 90°E, lat  8–35°N
+  China (all periods):
+    tmcCNm1000   NW China 100–1400 CE            lon   74– 94°E, lat 36–44°N
+    tmcCNm0620   China 620 CE (Tang routes)      lon   87–104°E, lat 30–45°N
+    tmcCNm0680a  China 680 CE (part a)           lon   88–104°E, lat 30–45°N
+    tmcCNm0680b  China 680 CE (part b)           lon   88–104°E, lat 30–45°N
+    tmcCNm0680c  China 680 CE (part c)           lon   88–104°E, lat 30–45°N
+    tmcCNm1500   China Ming courier 1368–1644 CE lon  102–121°E, lat 20–50°N
+    tmcCNm1700   China Qing routes 1644–1800 CE  lon  115–121°E, lat 25–45°N
+    tmcCNm1850   China routes 1800–1900 CE       lon   98–117°E, lat 25–45°N
+    tmcCNm1920   China routes 1900–1949 CE       lon   80–117°E, lat 20–50°N
+  Southeast Asia:
+    tmcKHm1200   Khmer / Cambodia 1200–1300 CE   lon  100–110°E, lat 10–20°N
+
+  Local (pre-existing):
+  tmcKGa0100d  Kyrgyzstan 100 BCE–1400 CE        lon   65– 82°E, lat 36–45°N
+
+NOTE: Not all datasets have a zip in the interchange directory. fetch_zip()
+will skip with a warning on HTTP 404 rather than crashing.
 
 OUTPUT
 ------
@@ -46,10 +87,17 @@ import sys
 import time
 import zipfile
 from pathlib import Path
+from typing import Optional
 
 try:
     import requests
-    requests.packages.urllib3.disable_warnings()
+    # Suppress InsecureRequestWarning from verify=False — OWTRAD server has
+    # a self-signed / expired certificate; verify=False is intentional.
+    try:
+        import urllib3
+        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+    except Exception:
+        requests.packages.urllib3.disable_warnings()
 except ImportError:
     sys.exit("pip install requests  (required)")
 
@@ -66,27 +114,227 @@ BASE_URL    = "http://www.ciolek.com/OWTRAD/DATA/interchange"
 
 # ── Datasets to download ──────────────────────────────────────────────────────
 # Ordered west-to-east by coverage; deduplication happens at parse time.
+# Not all datasets have a zip in the interchange directory — fetch_zip()
+# returns None on 404 and those are silently skipped.
 DATASETS = [
+    # ── Mediterranean & Turkey ─────────────────────────────────────────────────
     {
-        "id":      "tmcZCAm1000",
-        "desc":    "Central Asia 1–1400 CE",
-        "bbox":    (25, 135, 25, 50),  # lon_min, lon_max, lat_min, lat_max
-        "url":     f"{BASE_URL}/owtrad-gis-tmcZCAm1000.zip",
-        "cite":    "Ciolek 2004+, tmcZCAm1000",
+        "id":   "tmcXMEm1400",
+        "desc": "Mediterranean ~1400 CE",
+        "bbox": (-10, 40, 25, 55),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcXMEm1400.zip",
+        "cite": "Ciolek 2004+, tmcXMEm1400",
     },
     {
-        "id":      "tmcIRa0100",
-        "desc":    "Iran/Persia 50 BCE–300 CE",
-        "bbox":    (30, 80, 10, 45),
-        "url":     f"{BASE_URL}/owtrad-gis-tmcIRa0100.zip",
-        "cite":    "Ciolek 2004+, tmcIRa0100",
+        "id":   "tmcTRm1200a",
+        "desc": "Turkey 1200 CE (part a)",
+        "bbox": (25, 45, 35, 45),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcTRm1200a.zip",
+        "cite": "Ciolek 2004+, tmcTRm1200a",
     },
     {
-        "id":      "tmcCNm1000",
-        "desc":    "NW China 100–1400 CE",
-        "bbox":    (74, 94, 36, 44),
-        "url":     f"{BASE_URL}/owtrad-gis-tmcCNm1000.zip",
-        "cite":    "Ciolek 2004+, tmcCNm1000",
+        "id":   "tmcTRm1200b",
+        "desc": "Turkey 1200 CE (part b)",
+        "bbox": (25, 120, 35, 45),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcTRm1200b.zip",
+        "cite": "Ciolek 2004+, tmcTRm1200b",
+    },
+    {
+        "id":   "tmcTRm1300",
+        "desc": "Turkey / Anatolia 1300 CE",
+        "bbox": (12, 48, 35, 45),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcTRm1300.zip",
+        "cite": "Ciolek 2004+, tmcTRm1300",
+    },
+    # ── Persia / Iran ──────────────────────────────────────────────────────────
+    {
+        "id":   "tmcIRa0100",
+        "desc": "Iran/Persia 50 BCE–300 CE",
+        "bbox": (30, 80, 10, 45),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcIRa0100.zip",
+        "cite": "Ciolek 2004+, tmcIRa0100",
+    },
+    {
+        "id":   "tmcIRa0500",
+        "desc": "Iran/Persia 300–700 CE",
+        "bbox": (30, 80, 10, 45),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcIRa0500.zip",
+        "cite": "Ciolek 2004+, tmcIRa0500",
+    },
+    # ── Central Asia (Zone CA) ─────────────────────────────────────────────────
+    {
+        "id":   "tmcZCAm0200",
+        "desc": "Iran & China 200 BCE–500 CE",
+        "bbox": (25, 120, 15, 55),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcZCAm0200.zip",
+        "cite": "Ciolek 2004+, tmcZCAm0200",
+    },
+    {
+        "id":   "tmcZCAm0600",
+        "desc": "Mediterranean–China 200 BCE–1400 CE",
+        "bbox": (0, 120, 15, 55),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcZCAm0600.zip",
+        "cite": "Ciolek 2004+, tmcZCAm0600",
+    },
+    {
+        "id":   "tmcZCAm0800",
+        "desc": "Central Asia 700–1000 CE",
+        "bbox": (25, 120, 25, 55),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcZCAm0800.zip",
+        "cite": "Ciolek 2004+, tmcZCAm0800",
+    },
+    {
+        "id":   "tmcZCAm1000",
+        "desc": "Central Asia 1–1400 CE",
+        "bbox": (25, 135, 25, 50),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcZCAm1000.zip",
+        "cite": "Ciolek 2004+, tmcZCAm1000",
+    },
+    {
+        "id":   "tmcZCAm1000a",
+        "desc": "Central Asia 1–1400 CE (variant a)",
+        "bbox": (25, 135, 25, 50),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcZCAm1000a.zip",
+        "cite": "Ciolek 2004+, tmcZCAm1000a",
+    },
+    # ── Turkmenistan ───────────────────────────────────────────────────────────
+    {
+        "id":   "tmcTMm1100",
+        "desc": "Turkmenistan 1100 CE",
+        "bbox": (50, 64, 35, 45),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcTMm1100.zip",
+        "cite": "Ciolek 2004+, tmcTMm1100",
+    },
+    # ── Tajikistan ─────────────────────────────────────────────────────────────
+    {
+        "id":   "tmcTJm0400a",
+        "desc": "Tajikistan 400 CE (part a)",
+        "bbox": (65, 82, 36, 45),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcTJm0400a.zip",
+        "cite": "Ciolek 2004+, tmcTJm0400a",
+    },
+    {
+        "id":   "tmcTJm0400b",
+        "desc": "Tajikistan 400 CE (part b)",
+        "bbox": (65, 82, 36, 45),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcTJm0400b.zip",
+        "cite": "Ciolek 2004+, tmcTJm0400b",
+    },
+    # ── Kyrgyzstan (additional parts) ─────────────────────────────────────────
+    {
+        "id":   "tmcKGa0100a",
+        "desc": "Kyrgyzstan 100 BCE–1400 CE (part a)",
+        "bbox": (65, 82, 36, 45),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcKGa0100a.zip",
+        "cite": "Ciolek 2004+, tmcKGa0100a",
+    },
+    {
+        "id":   "tmcKGa0100b",
+        "desc": "Kyrgyzstan 100 BCE–1400 CE (part b)",
+        "bbox": (65, 82, 36, 45),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcKGa0100b.zip",
+        "cite": "Ciolek 2004+, tmcKGa0100b",
+    },
+    {
+        "id":   "tmcKGa0100c",
+        "desc": "Kyrgyzstan 100 BCE–1400 CE (part c)",
+        "bbox": (65, 82, 36, 45),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcKGa0100c.zip",
+        "cite": "Ciolek 2004+, tmcKGa0100c",
+    },
+    {
+        "id":   "tmcKGa0100e",
+        "desc": "Kyrgyzstan 100 BCE–1400 CE (part e)",
+        "bbox": (65, 82, 36, 45),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcKGa0100e.zip",
+        "cite": "Ciolek 2004+, tmcKGa0100e",
+    },
+    # ── Middle East & India ────────────────────────────────────────────────────
+    {
+        "id":   "tmcZMEm1300",
+        "desc": "Middle East & India 1300–1600 CE",
+        "bbox": (25, 90, 5, 45),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcZMEm1300.zip",
+        "cite": "Ciolek 2004+, tmcZMEm1300",
+    },
+    {
+        "id":   "tmcINm1550",
+        "desc": "India 1550–1650 CE",
+        "bbox": (65, 90, 8, 35),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcINm1550.zip",
+        "cite": "Ciolek 2004+, tmcINm1550",
+    },
+    # ── China (all periods) ────────────────────────────────────────────────────
+    {
+        "id":   "tmcCNm1000",
+        "desc": "NW China 100–1400 CE",
+        "bbox": (74, 94, 36, 44),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcCNm1000.zip",
+        "cite": "Ciolek 2004+, tmcCNm1000",
+    },
+    {
+        "id":   "tmcCNm0620",
+        "desc": "China 620 CE (Tang routes)",
+        "bbox": (87, 104, 30, 45),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcCNm0620.zip",
+        "cite": "Ciolek 2004+, tmcCNm0620",
+    },
+    {
+        "id":   "tmcCNm0680a",
+        "desc": "China 680 CE (part a)",
+        "bbox": (88, 104, 30, 45),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcCNm0680a.zip",
+        "cite": "Ciolek 2004+, tmcCNm0680a",
+    },
+    {
+        "id":   "tmcCNm0680b",
+        "desc": "China 680 CE (part b)",
+        "bbox": (88, 104, 30, 45),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcCNm0680b.zip",
+        "cite": "Ciolek 2004+, tmcCNm0680b",
+    },
+    {
+        "id":   "tmcCNm0680c",
+        "desc": "China 680 CE (part c)",
+        "bbox": (88, 104, 30, 45),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcCNm0680c.zip",
+        "cite": "Ciolek 2004+, tmcCNm0680c",
+    },
+    {
+        "id":   "tmcCNm1500",
+        "desc": "China Ming-era courier routes 1368–1644 CE",
+        "bbox": (102, 121, 20, 50),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcCNm1500.zip",
+        "cite": "Ciolek 2004+, tmcCNm1500",
+    },
+    {
+        "id":   "tmcCNm1700",
+        "desc": "China Qing-era routes 1644–1800 CE",
+        "bbox": (115, 121, 25, 45),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcCNm1700.zip",
+        "cite": "Ciolek 2004+, tmcCNm1700",
+    },
+    {
+        "id":   "tmcCNm1850",
+        "desc": "China routes 1800–1900 CE",
+        "bbox": (98, 117, 25, 45),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcCNm1850.zip",
+        "cite": "Ciolek 2004+, tmcCNm1850",
+    },
+    {
+        "id":   "tmcCNm1920",
+        "desc": "China routes 1900–1949 CE",
+        "bbox": (80, 117, 20, 50),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcCNm1920.zip",
+        "cite": "Ciolek 2004+, tmcCNm1920",
+    },
+    # ── Southeast Asia ─────────────────────────────────────────────────────────
+    {
+        "id":   "tmcKHm1200",
+        "desc": "Khmer/Cambodia 1200–1300 CE",
+        "bbox": (100, 110, 10, 20),
+        "url":  f"{BASE_URL}/owtrad-gis-tmcKHm1200.zip",
+        "cite": "Ciolek 2004+, tmcKHm1200",
     },
 ]
 
@@ -97,7 +345,8 @@ NODE_FIELDNAMES  = ["dataset", "name", "lon", "lat", "country", "node_id"]
 
 # ── Download ──────────────────────────────────────────────────────────────────
 
-def fetch_zip(url: str, cache_path: Path, retries: int = 3) -> bytes:
+def fetch_zip(url: str, cache_path: Path, retries: int = 3) -> Optional[bytes]:
+    """Download a zip file, returning None if the server returns 404."""
     if cache_path.exists():
         print(f"    [cached] {cache_path.name}")
         return cache_path.read_bytes()
@@ -106,6 +355,9 @@ def fetch_zip(url: str, cache_path: Path, retries: int = 3) -> bytes:
             print(f"    Downloading {url} ...", flush=True)
             r = requests.get(url, headers={"User-Agent": USER_AGENT},
                              timeout=120, verify=False, stream=True)
+            if r.status_code == 404:
+                print(f"    [skip] 404 — no interchange zip for this dataset")
+                return None
             r.raise_for_status()
             chunks = []
             total = 0
@@ -123,8 +375,9 @@ def fetch_zip(url: str, cache_path: Path, retries: int = 3) -> bytes:
                 print(f"    [retry {attempt+1}/{retries}: {e}]")
                 time.sleep(10)
             else:
-                raise
-    return b""
+                print(f"    [skip] download failed after {retries} attempts: {e}")
+                return None
+    return None
 
 
 # ── MIF/MID parsers ───────────────────────────────────────────────────────────
@@ -293,12 +546,13 @@ def dedup_nodes(rows: list) -> list:
 # ── Write CSV ─────────────────────────────────────────────────────────────────
 
 def write_routes(rows: list, fetch_date: str) -> None:
+    dataset_ids = ", ".join(ds["id"] for ds in DATASETS) + ", tmcKGa0100d"
     with open(ROUTES_CSV, "w", newline="", encoding="utf-8") as f:
         f.write("# owtrad_routes.csv — OWTRAD Silk Road route network (edge list)\n")
         f.write("# DO NOT HAND-EDIT. Regenerate: python3 data/scripts/fetch_owtrad_silk_road.py\n")
         f.write(f"# Generated: {fetch_date}\n")
         f.write("# Source: Ciolek, T.M. (2004+). OWTRAD Project. www.ciolek.com/owtrad.html\n")
-        f.write("# Datasets: tmcZCAm1000, tmcIRa0100, tmcCNm1000, tmcKGa0100d\n")
+        f.write(f"# Datasets attempted: {dataset_ids}\n")
         f.write("# Licence: Open Publication License v1.0\n")
         f.write(f"# N = {len(rows)} edges\n")
         w = csv.DictWriter(f, fieldnames=ROUTE_FIELDNAMES)
@@ -364,14 +618,20 @@ def main():
 
     # 2. Remote datasets
     if not args.local:
+        skipped = []
         for ds in DATASETS:
             print(f"\n  Dataset: {ds['id']} — {ds['desc']}")
             cache = CACHE_DIR / f"owtrad-gis-{ds['id']}.zip"
             data  = fetch_zip(ds["url"], cache)
+            if data is None:
+                skipped.append(ds["id"])
+                continue
             r, n  = parse_zip(data, ds["id"])
             print(f"    Routes: {len(r)}  Nodes: {len(n)}")
             all_routes += r
             all_nodes  += n
+        if skipped:
+            print(f"\n  [info] No interchange zip found for: {', '.join(skipped)}")
 
     # 3. Deduplicate
     all_routes = dedup_routes(all_routes)

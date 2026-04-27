@@ -1046,34 +1046,29 @@ sub-groups showing the strongest harmonic concentration.
 The bimodal distribution in both traditions is consistent with the 0.1-beru grid
 producing discrete attractor positions rather than a continuous distribution.
 
-An independent check on route geometry comes from the OWTRAD attested-route
-network \citep{ciolek2004owtrad} (\NOwtradEdges{} edges,
-\NOwtradVertices{} deduplicated waypoint cities).
-Vertex longitudes show no tier enrichment at any level
-($p = \pOwtradVertexApp$~\pOwtradVertexAppSig{} for A++,
-$p = \pOwtradVertexAp$~\pOwtradVertexApSig{} for A+),
-indicating junction cities do not preferentially fall on harmonic meridians.
-The \emph{midpoints} of attested route legs tell a different story:
-\NOwtradMidApp{}/\NOwtradEdges{} midpoints reach A++
-($\owtradMidAppEnrich\times$ enrichment, $z = \zOwtradMidApp$,
-$p = \pOwtradMidApp$~\pOwtradMidAppSig{}) and
-\NOwtradMidAp{}/\NOwtradEdges{} reach A+
-($\owtradMidApEnrich\times$, $z = \zOwtradMidAp$,
-$p = \pOwtradMidAp$~\pOwtradMidApSig{};
-one-tailed binomial, Bonferroni-adjusted $k = 4$:
-$p_\mathrm{adj} = \pOwtradMidAppAdj$~\pOwtradMidAppAdjSig{},
-$\pOwtradMidApAdj$~\pOwtradMidApAdjSig{}).
-Two permutation tests confirm robustness: a node-label shuffle
-(reassigning city longitudes to random nodes, \NOwtradPerms{} iterations)
-gives $p = \pOwtradMidAppPerm$~\pOwtradMidAppPermSig{} (A++) and
-$\pOwtradMidApPerm$~\pOwtradMidApPermSig{} (A+);
-a phase-shift test (random offset of the 3\textdegree{} grid,
-\NOwtradPerms{} iterations) gives $p = \pOwtradMidAppPhase$~\pOwtradMidAppPhaseSig{}
-and $\pOwtradMidApPhase$~\pOwtradMidApPhaseSig{},
-confirming the signal is Gerizim-specific.
-The alignment signal resides in the center-longitudes of route
-segments, illustrated by Figure~\ref{fig:geo_trail} and the supplementary
-interactive map.
+An independent check on route geography comes from the OWTRAD attested-route
+network \citep{ciolek2004owtrad} (\NOwtradEdges{} route segments,
+\NOwtradVertices{} unique endpoints).
+Testing all \NOwtradDegW{} endpoint positions across the full edge list
+(each city weighted by the number of segments it connects),
+\NOwtradDegWApp{} fall at A++ harmonics and \NOwtradDegWAp{} at A+
+($\owtradDegWAppEnrich\times$ null rate, $z = \zOwtradDegWApp$,
+$p = \pOwtradDegWApp$~\pOwtradDegWAppSig{} for A++;
+$p = \pOwtradDegWAp$~\pOwtradDegWApSig{} for A+; one-tailed binomial).
+Testing each unique endpoint once gives
+\NOwtradVertexApp{}/\NOwtradVertices{} at A++ and \NOwtradVertexAp{} at A+
+($\owtradVertexAppEnrich\times$, $z = \zOwtradVertexApp$,
+$p = \pOwtradVertexApp$~\pOwtradVertexAppSig{} for A++;
+$p = \pOwtradVertexAp$~\pOwtradVertexApSig{} for A+).
+A phase-shift test (random offset of the 3\textdegree{} grid,
+\NOwtradPerms{} iterations) gives $p = \pOwtradVertexAppPhase$~\pOwtradVertexAppPhaseSig{},
+confirming the enrichment is specific to the Gerizim anchor.
+A cluster asymmetry test mirrors Test~3 of the primary family:
+harmonics containing at least one A++ endpoint (\NOwtradAppHarmonics{} harmonics)
+carry \owtradClustDegRatio$\times$ more total route-connectivity than
+harmonics without one (\NOwtradNonAppHarmonics{} harmonics;
+$p = \pOwtradClustDeg$~\pOwtradClustDegSig{}, Mann-Whitney one-tailed).
+The Silk Road corridor is illustrated in Figure~\ref{fig:geo_trail}.
 
 \begin{figure*}[!t]
   \centering

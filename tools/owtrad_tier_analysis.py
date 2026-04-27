@@ -191,14 +191,16 @@ def make_figure(vertex_stats, midpoint_stats, all_node_lons, all_mid_lons):
         ax.axvspan(0, TIER_A_MAX, color=C_A,   alpha=0.05, zorder=1)
 
         expected = s["n"] / n_bins
-        ax.axhline(expected, color=C_NULL, linewidth=1.5, linestyle="--",
-                   zorder=4, label=f"Uniform null ({expected:.1f}/bin)")
+        ax.axhline(expected, color=C_NULL, linewidth=1.5, linestyle="--", zorder=4)
+        # Label the null line at the far-right edge of the plot
+        ax.text(max_dev * 0.99, expected * 1.04,
+                f"null ({expected:.1f}/bin)",
+                color=C_NULL, fontsize=7.5, ha="right", va="bottom", zorder=5)
 
         ax.axvline(TIER_APP,   color=C_APP, linewidth=0.8, linestyle=":", alpha=0.7, zorder=4)
         ax.axvline(TIER_APLUS, color=C_AP,  linewidth=0.8, linestyle=":", alpha=0.7, zorder=4)
         ax.axvline(TIER_A_MAX, color=C_A,   linewidth=0.8, linestyle=":", alpha=0.7, zorder=4)
 
-        # Annotations
         y_max = counts.max()
         stats_txt = (
             f"A++: {s['n_app']}/{s['n']}  {sig_label(s['p_app'])}\n"
@@ -216,17 +218,17 @@ def make_figure(vertex_stats, midpoint_stats, all_node_lons, all_mid_lons):
         ax.set_title(title)
         ax.set_xlim(0, max_dev)
         ax.set_ylim(0, y_max * 1.25)
-        ax.legend(loc="upper right", framealpha=0.9, fontsize=8)
 
     _panel(axes[0], vertex_stats,   all_node_lons,
            f"OWTRAD vertices (N = {vertex_stats['n']}, deduplicated)")
     _panel(axes[1], midpoint_stats, all_mid_lons,
-           f"OWTRAD edge midpoints (N = {midpoint_stats['n']} edges)")
+           f"OWTRAD vertices degree-weighted (Σdeg = {midpoint_stats['n']})")
 
     fig.suptitle(
         "OWTRAD Silk Road network — beru deviation distribution\n"
+        "Left: each city once.  Right: each city weighted by its route-count.\n"
         "Shaded: A++ / A+ / A windows.  Dashed: uniform null expectation.",
-        fontsize=10, y=1.01,
+        fontsize=10, y=1.02,
     )
     fig.tight_layout()
     out = OUTDIR / "fig_owtrad_tiers.pdf"
@@ -354,8 +356,8 @@ if __name__ == "__main__":
         print(f"  {e['tier']:<4}  δ={e['dev']:.4f}  mid={e['mid_lon']:>9.3f}°E"
               f"  {e['node1']} → {e['node2']}")
 
-    # Figure
-    make_figure(vstats, mstats, node_lons, mid_lons)
+    # Figure: vertices (raw) vs degree-weighted vertices
+    make_figure(vstats, wstats, node_lons, weighted_lons)
 
     print()
     print("=" * 60)
