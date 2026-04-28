@@ -764,9 +764,8 @@ A global sweep (0--360\textdegree{}E, 0.01\textdegree{} resolution,
 \anchorSweepNanchors{} trial anchors) assesses whether the
 $\sim$35\textdegree{}E corridor is unusual globally.
 The sweep uses the extended corpus described in \S\ref{sec:geodetic}
-($N_\mathrm{ext} = 1012$): each trial anchor self-excludes any entry
-within $0.001$\textdegree{}, so every focal anchor tests against
-$N = \NgerizimSweepCorpus$.
+($N_\mathrm{ext} = 1012$), each anchor excluding its own entry,
+so the focal anchors test against $N = \NgerizimSweepCorpus$.
 
 Both anchors place the corridor in the global top \anchorSweepTopPct\%
 (\anchorSweepNanchors{} trial anchors, 0--360\textdegree{}E;
@@ -776,16 +775,15 @@ full table in Online Supplementary Table~S4), and the result is anchor-invariant
 within the \GerizimJerusalemKm\,km corridor window.
 No other historical meridian reaches significance.
 
-\subsubsection*{The $x.18$\textdegree{}E periodic structure}
+\subsubsection*{The $\xbandLabel$\textdegree{}E periodic structure}
 \label{sec:x18artifact}
 
-The most striking result of the global sweep is that every longitude of
-the form $x.18$\textdegree{}E (all \NharmonicsCoarse{} such anchors) produces identically
-the maximum A+ count. The spacing between consecutive $x.18$\textdegree{}E
-anchors is exactly 3\textdegree{} = 0.1~beru.
+Every $\xbandLabel$\textdegree{}E longitude (\NharmonicsCoarse{} anchors) produces identically
+the maximum A+ count, spaced exactly 3\textdegree{} = 0.1~beru apart.
 
-The label ``$x.18$\textdegree{}E'' is a rounded shorthand for the phase
-$\approx 2.18$\textdegree{} mod 3.0\textdegree{}.
+The label ``$\xbandLabel$\textdegree{}E'' denotes phase $\approx \optimalPhase$\textdegree{}
+mod 3.0\textdegree{} (tier-definition-dependent: a wider or narrower A+ threshold
+shifts this phase).
 Gerizim's phase ($\GerizimLon \bmod 3.0 = \GerizimPhase$\textdegree{},
 gap $\phaseGap$\textdegree{} $\approx \phaseGapKm$~km) is within
 coordinate uncertainty.
@@ -796,7 +794,7 @@ same underlying structure rather than independent lines of evidence; their
 primary evidential role is as robustness checks for Tests~2 and~3
 (\S\ref{sec:circularity}).}
 
-\subsubsection*{Formal statistical tests for the $x.18$\textdegree{} periodicity}
+\subsubsection*{Formal statistical tests for the $\xbandLabel$\textdegree{} periodicity}
 \label{sec:x18_formal}
 
 The full-corpus Rayleigh ($p_\mathrm{perm} = \fullRayleighPermP$, \fullRayleighPermPSig{}) confirms no
@@ -813,7 +811,7 @@ Gerizim scores at the \domeGerizimPctile\textsuperscript{th} percentile
 among dome sites, dome site phases are approximately uniform
 ($\chi^2 = \domePhaseChiSq$, df\,=\,9, $p = \domePhaseChiP$, trend-level),
 and all \NcircTierAp{} dome A+ sites have phases within
-$\pm 0.15$\textdegree{} of the $x.18$\textdegree{} optimal phase.
+$\pm 0.15$\textdegree{} of the $\xbandLabel$\textdegree{} optimal phase.
 
 \textbf{Corridor and landmark ranking.}
 Of the \corridorUniqueGer{} A+ sites unique to Gerizim and \corridorUniqueJer{} unique to Jerusalem,
@@ -924,7 +922,7 @@ the pattern exists and whether the anchor was chosen on independent grounds.
 
 Both are answered directly. The global anchor sweep (\S\ref{sec:sensitivity_global})
 confirms that the enrichment is a property of the $\sim$35\textdegree{}E
-corridor. Every $x.18$\textdegree{}E anchor produces the same result, and
+corridor. Every $\xbandLabel$\textdegree{}E anchor produces the same result, and
 Gerizim and Jerusalem both place the corridor in the global top
 \anchorSweepTopPct\% of \anchorSweepNanchors{} trial anchors.
 What distinguishes Gerizim
@@ -934,7 +932,7 @@ cosmographic role (\S\ref{sec:anchor}), that predates this analysis entirely.
 The 3\textdegree{} periodic structure is recoverable by any unanchored
 \NharmonicsCoarse-phase scan without reference to Gerizim. The dome
 enrichment (Test~2) is identical across all \NharmonicsCoarse{}
-$x.18$\textdegree{}E anchors. The cluster asymmetry (Test~3) requires
+$\xbandLabel$\textdegree{}E anchors. The cluster asymmetry (Test~3) requires
 no keyword filter and no anchor. Test~B is tautological by construction
 (\S\ref{sec:results_rayleigh}) and is noted as such.
 

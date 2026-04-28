@@ -32,7 +32,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
-from data.unesco_corpus import load_corpus, cultural_sites_with_coords
+from data.unesco_corpus import load_corpus, cultural_sites_with_coords, cultural_sites_with_coords_extended
 from lib.beru import GERIZIM, BERU, TIER_APP, TIER_APLUS, TIER_A_MAX, P_NULL_AP
 
 # ── Constants from config.json ────────────────────────────────────────────────
@@ -119,6 +119,7 @@ def main():
     sites = [{"name": s.site, "lon": s.longitude, "lat": s.latitude}
              for s in cultural]
     lons = np.array([s["lon"] for s in sites])
+    N_ext = len(cultural_sites_with_coords_extended(corpus))  # 1012: standard + Gerizim synthetic
 
     # ── Count A++ from Gerizim ────────────────────────────────────────────
     arcs = np.abs(lons - GERIZIM)
@@ -329,7 +330,7 @@ def main():
     jer_p = _binom2(jer_ap_count, len(sites) - 1, P_NULL_AP, alternative="greater").pvalue
     print(f"  \\newcommand{{\\JerusalemAp}}{{{jer_ap_count}}}  % Jerusalem A+ count (self-excluded corpus)")
     print(f"  \\newcommand{{\\NjerSelfExclCorpus}}{{{len(sites) - 1}}}  % corpus size, Jerusalem self-excluded (Sweep B)")
-    print(f"  \\newcommand{{\\NgerizimSweepCorpus}}{{{len(sites) - 1}}}  % corpus size, Gerizim sweep (Jerusalem removed, Sweep A)")
+    print(f"  \\newcommand{{\\NgerizimSweepCorpus}}{{{N_ext - 1}}}  % corpus size for sweep focal anchors (extended 1012, self-exclusion -1)")
     def _pfmt(p):
         """Format p-value for LaTeX: scientific notation if it would round to zero."""
         if p < 0.0001:
@@ -351,7 +352,7 @@ def main():
     ResultsStore().write_many({
         "JerusalemAp":          jer_ap_count,
         "NjerSelfExclCorpus":   len(sites) - 1,
-        "NgerizimSweepCorpus":  len(sites) - 1,
+        "NgerizimSweepCorpus":  N_ext - 1,
         "pJerusalemAp":         jer_p,
         "MeccaAp":              mecca_ap,
         "pMeccaAnchor":         mecca_p,
