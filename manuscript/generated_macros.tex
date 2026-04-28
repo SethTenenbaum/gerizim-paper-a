@@ -438,7 +438,7 @@
   \newcommand{\anchorSweepApStd}{8.8}            % std A+ count across all anchors
   \newcommand{\anchorSweepGlobalMax}{92}           % global max A+ at any anchor
   \newcommand{\anchorSweepGlobalMaxA}{92}           % global max A+ (symmetric corpus)
-  \newcommand{\optimalPhaseApA}{92}           % max A+ at any x.18°E anchor
+  \newcommand{\optimalPhaseApA}{92}           % max A+ at any x.21°E anchor
   \newcommand{\GerizimSweepApp}{44}             % Gerizim A++ in sweep
   \newcommand{\GerizimSweepAp}{88}              % Gerizim A+ in sweep
   \newcommand{\GerizimSweepA}{157}             % Gerizim A in sweep
@@ -453,7 +453,8 @@
   \newcommand{\sweepABDiff}{0}          % A+ count difference Gerizim vs Jerusalem
 
 % --- analysis/unesco/verify_x18_periodicity.py
-  \newcommand{\optimalPhase}{2.21}          % optimal x.18° phase (degrees mod 3)
+  \newcommand{\xbandLabel}{x.21}         % optimal phase band label (e.g. x.21°E)
+  \newcommand{\optimalPhase}{2.21}          % optimal phase (degrees mod 3)
   \newcommand{\optimalPhaseAp}{91}           % A+ count at optimal phase
   \newcommand{\GerizimPhase}{2.269}         % Gerizim longitude mod 3
   \newcommand{\phaseGap}{0.059}           % gap between Gerizim and optimal phase (°)
@@ -575,7 +576,7 @@
   \newcommand{\appSiteDevMTen}{1431}  % A++ table rank Ten: m
   \newcommand{\JerusalemAp}{87}  % Jerusalem A+ count (self-excluded corpus)
   \newcommand{\NjerSelfExclCorpus}{1010}  % corpus size, Jerusalem self-excluded (Sweep B)
-  \newcommand{\NgerizimSweepCorpus}{1010}  % corpus size, Gerizim sweep (Jerusalem removed, Sweep A)
+  \newcommand{\NgerizimSweepCorpus}{1011}  % corpus size for sweep focal anchors (extended 1012, self-exclusion -1)
   \newcommand{\pJerusalemAp}{0.0038}  % p-value, Jerusalem A+ binomial (self-excluded)
   \newcommand{\MeccaAp}{74}  % Mecca A+ count (full corpus)
   \newcommand{\pMeccaAnchor}{0.1358}  % p-value, Mecca binomial (A+, one-sided)

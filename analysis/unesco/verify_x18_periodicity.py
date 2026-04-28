@@ -217,7 +217,9 @@ print("=" * 95)
 print("  LATEX MACRO VALUES")
 print("=" * 95)
 
-print(f"  \\newcommand{{\\optimalPhase}}{{{best_phase:.2f}}}          % optimal x.18° phase (degrees mod 3)")
+_frac = f"{best_phase:.2f}".split('.')[1]   # e.g. "21" from "2.21"
+print(f"  \\newcommand{{\\xbandLabel}}{{x.{_frac}}}         % optimal phase band label (e.g. x.21°E)")
+print(f"  \\newcommand{{\\optimalPhase}}{{{best_phase:.2f}}}          % optimal phase (degrees mod 3)")
 print(f"  \\newcommand{{\\optimalPhaseAp}}{{{best_count}}}           % A+ count at optimal phase")
 print(f"  \\newcommand{{\\GerizimPhase}}{{{GERIZIM % 3.0:.3f}}}         % Gerizim longitude mod 3")
 print(f"  \\newcommand{{\\phaseGap}}{{{abs(GERIZIM % 3.0 - best_phase):.3f}}}           % gap between Gerizim and optimal phase (°)")
