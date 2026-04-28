@@ -45,7 +45,7 @@ For every Cultural/Mixed UNESCO site with coordinates:
      anti-node-side (closer to a midpoint).
   3. Apply A+ threshold (≤0.002 beru) within each phase partition.
   4. Compute cluster size = other UNESCO sites within ±Tier-A beru window
-     (TIER_A_MAX × BERU = 0.3° ≈ 33.3 km), the same radius used in the
+     (TIER_A_MAX × BERU ≈ 0.19° ≈ 21 km), the same radius used in the
      stupa cluster enrichment test.
   5. Compare: node A+ vs node non-A+; anti-node A+ vs anti-node non-A+;
      node A+ vs anti-node A+; all node-side vs all anti-node-side.
@@ -79,12 +79,12 @@ N_PERM_CLUSTER = _CFG["simulation"]["n_permutations_cluster"]  # 10,000
 
 # Cluster radius: defined by the Tier-A beru threshold, matching the
 # metrological framework of the stupa cluster enrichment test.
-# TIER_A_MAX = 0.010 beru = 0.010 × 30° = 0.3° ≈ 33.3 km at equator.
+# TIER_A_MAX × BERU (from config) ≈ 0.19° ≈ 21 km at equator.
 # All neighborhood radii in the stupa test are beru-derived
 # (A+ = 6.7 km, A = 33.3 km, B = 166.5 km); this script uses the same
 # Tier-A window so that cluster size is measured in the same metrological
 # unit as the primary proximity tests.
-CLUSTER_RADIUS_DEG = TIER_A_MAX * BERU   # 0.010 × 30 = 0.3°  ≈ 33.3 km
+CLUSTER_RADIUS_DEG = TIER_A_MAX * BERU   # derived from config: TIER_A_MAX × BERU
 
 
 # ── Load ALL UNESCO Cultural/Mixed sites with coordinates ───────────────────
@@ -281,7 +281,7 @@ for s in sorted(ap_sites, key=lambda x: -x["cluster_size"]):
 
 import math as _math
 
-PHASE_CLUSTER_RADIUS_BERU = 1.5 * TIER_A_MAX                 # 1.5 × 0.010 = 0.015 beru
+PHASE_CLUSTER_RADIUS_BERU = 1.5 * TIER_A_MAX                 # 1.5 × TIER_A_MAX beru
 PHASE_CLUSTER_RADIUS      = PHASE_CLUSTER_RADIUS_BERU * BERU  # → degrees (for distance calc)
 
 # Recompute cluster sizes with the 0.015-beru radius for the phase-split test
@@ -533,6 +533,7 @@ mean_ap_h = np.mean(density_at_ap_harmonics) if density_at_ap_harmonics else 0
 mean_nonap_h = np.mean(density_at_nonap_harmonics) if density_at_nonap_harmonics else 0
 
 print("  % LaTeX macros (GROUP 2):")
+print(f"  \\newcommand{{\\clusterRadiusDeg}}{{{CLUSTER_RADIUS_DEG:.2f}}}       % cluster radius in degrees (TIER_A_MAX × BERU)")
 print(f"  \\newcommand{{\\NclusterTotal}}{{{N}}}          % full Cultural/Mixed corpus")
 print(f"  \\newcommand{{\\NclusterAp}}{{{n_Ap}}}              % Tier-A+ sites")
 print(f"  \\newcommand{{\\clusterApRate}}{{{100*n_Ap/N:.1f}}}           % A+ rate (%)")

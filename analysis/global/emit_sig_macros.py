@@ -66,6 +66,7 @@ EXPLICIT_P_KEYS = {
     "pEvoMoundAppFisher", "pEvoStupaAppFisher", "pEvoDomeAppFisher",
     # Religion
     "pReligUnion", "pReligChiSq", "pBudJoint", "pHinJoint",
+    "pBudExclJoint", "pHinExclJoint",
     # Anchor comparisons
     "pMeccaAnchor", "pMeruAnchor", "pKailashAnchor",
     # Simulation null models

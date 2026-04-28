@@ -153,6 +153,7 @@
   \newcommand{\NcircValidatedApRate}{15.7}  % A+ rate (%) = 13/83, validated pop
 
 % --- analysis/unesco/cluster_asymmetry_test.py
+  \newcommand{\clusterRadiusDeg}{0.19}       % cluster radius in degrees (TIER_A_MAX × BERU)
   \newcommand{\NclusterTotal}{1011}          % full Cultural/Mixed corpus
   \newcommand{\NclusterAp}{88}              % Tier-A+ sites
   \newcommand{\clusterApRate}{8.7}           % A+ rate (%)
@@ -277,6 +278,8 @@
   \newcommand{\corpusInterHarmonicRate}{12.6}           % full-corpus C-tier rate (%)
   \newcommand{\pBudJoint}{0.0113}         % joint p: Buddhism A >= 16 AND C-tier >= 11 (multivariate hypergeometric)
   \newcommand{\NhinSites}{39}            % Hinduism-tagged sites N
+  \newcommand{\NhinATier}{9}             % Hinduism A-tier count
+  \newcommand{\hinATierRate}{23.1}       % Hinduism A-tier rate (%)
   \newcommand{\hinApCount}{4}               % Hinduism A+ count
   \newcommand{\hinApRate}{10.3}            % Hinduism A+ rate (%)
   \newcommand{\NhinInterHarmonic}{9}             % Hinduism C-tier sites
@@ -287,6 +290,9 @@
   \newcommand{\hinCminusEnrich}{2.49}           % Hinduism C- tier enrichment vs corpus
   \newcommand{\pHinCminus}{0.0112}         % p-value, Hinduism C- tier binomial
   \newcommand{\pHinApCminus}{0.0023}         % joint p: Hinduism A+ >= 4 AND C- >= 7 (multivariate hypergeometric)
+  \newcommand{\NBudHinShared}{14}            % Buddhism-Hinduism co-tagged sites
+  \newcommand{\pBudExclJoint}{0.0129}        % joint p: Buddhism exclusive of shared Hindu sites
+  \newcommand{\pHinExclJoint}{0.0027}        % joint p: Hinduism exclusive of shared Buddhist sites
 
 % --- analysis/unesco/founding_sites_analysis.py
   \newcommand{\NthematicTotal}{88}                 % total A+ sites
@@ -1420,6 +1426,8 @@
   \newcommand{\pHinApCminusSig}{**}  % auto sig label
   \newcommand{\pHinCminusSig}{*}  % auto sig label
   \newcommand{\pHinJointSig}{**}  % auto sig label
+  \newcommand{\pBudExclJointSig}{*}  % auto sig label
+  \newcommand{\pHinExclJointSig}{**}  % auto sig label
   \newcommand{\pIslamFisherSig}{ns}  % auto sig label
   \newcommand{\pJerusalemApSig}{**}  % auto sig label
   \newcommand{\pJudATierFisherSig}{ns}  % auto sig label
