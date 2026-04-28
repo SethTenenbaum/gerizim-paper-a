@@ -1,6 +1,6 @@
 # Domed Monuments Cluster at Babylonian Bēru Harmonics: A Longitude Enrichment Test on the UNESCO World Heritage List
 
-**Paper A — Primary UNESCO Analysis** · `v1.4.0`
+**Paper A — Primary UNESCO Analysis** · `v1.5.0`
 
 Seth Tenenbaum · Independent Scholar
 ORCID: [0009-0008-5797-2498](https://orcid.org/0009-0008-5797-2498)
@@ -162,6 +162,7 @@ gerizim-paper-a/
 │   │   ├── site_as_anchor_audit.txt       # Site-as-own-anchor ranking
 │   │   ├── stupa_geo_audit.txt            # Stupa geographic concentration audit
 │   │   ├── stupa_q180987_geo_audit.txt    # Wikidata Q180987 stupa geographic audit
+│   │   ├── owtrad_audit.txt               # OWTRAD Silk Road harmonic alignment audit
 │   │   ├── fdr.txt                        # FDR multiple-comparisons output
 │   │   └── README_audit.txt              # Audit provenance and reproducibility notes
 │   ├── interactive_map/
@@ -185,6 +186,7 @@ gerizim-paper-a/
 │   ├── generate_audit_stupa_geo.py          # Regenerate stupa_geo_audit.txt
 │   ├── generate_audit_stupa_q180987_geo.py  # Regenerate stupa_q180987_geo_audit.txt
 │   ├── generate_audit_fdr.py                # Regenerate fdr.txt
+│   ├── generate_audit_owtrad.py             # Regenerate owtrad_audit.txt
 │   ├── update_all_audits.sh                 # Regenerate all audit files in one pass
 │   ├── generate_interactive_map.py          # Generate interactive HTML Silk Road map
 │   ├── owtrad_tier_analysis.py              # OWTRAD harmonic tier analysis + fig_owtrad_tiers
