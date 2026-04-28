@@ -51,31 +51,28 @@ python3 tools/generate_audit_founding.py
 echo "  [4/13] World religion keyword audit..."
 python3 tools/generate_audit_religion.py
 
-echo "  [5/13] Corridor precision audit..."
-python3 tools/generate_audit_corridor.py
-
-echo "  [6/13] Gerizim vs Jerusalem A-tier site comparison..."
+echo "  [5/12] Gerizim vs Jerusalem A-tier site comparison..."
 python3 tools/generate_audit_aplus_sites.py
 
-echo "  [7/13] FDR / multiple-comparisons audit..."
+echo "  [6/12] FDR / multiple-comparisons audit..."
 python3 tools/generate_audit_fdr.py
 
-echo "  [8/13] Global anchor sweep ranking audit..."
+echo "  [7/12] Global anchor sweep ranking audit..."
 python3 tools/generate_audit_anchor_sweep.py
 
-echo "  [9/13] Site-as-anchor ranking audit..."
+echo "  [8/12] Site-as-anchor ranking audit..."
 python3 tools/generate_audit_site_as_anchor.py
 
-echo "  [10/13] Interharmonic audit..."
+echo "  [9/12] Interharmonic audit..."
 python3 tools/generate_audit_interharmonic.py
 
-echo "  [11/13] Fine sweep audit..."
+echo "  [10/12] Fine sweep audit..."
 python3 tools/generate_audit_fine_sweep.py
 
-echo "  [12/13] Stupa geo audit..."
+echo "  [11/12] Stupa geo audit..."
 python3 tools/generate_audit_stupa_geo.py
 
-echo "  [13/13] Stupa q180987 audit..."
+echo "  [12/12] Stupa q180987 audit..."
 python3 tools/generate_audit_stupa_q180987_geo.py
 
 echo ""

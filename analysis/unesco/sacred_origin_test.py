@@ -324,8 +324,7 @@ def main():
     # ── LaTeX macros (GROUP 7) ────────────────────────────────────────────────
     # Sort sacred-origin A+ sites by deviation for top-3 naming.
     # NOTE: these macros are named \sacredHitOne/Two/Three to avoid collision
-    # with \topHitOne/Two/Three, which are corridor-precision macros produced
-    # by corridor_precision_test.py and anchor_site_comparison.py.
+    # with \topHitOne/Two/Three produced by anchor_site_comparison.py.
     so_ap_sites = sorted(
         [(s, beru_deviation(s.longitude)) for s in so_sites
          if beru_deviation(s.longitude) <= TIER_AP],

@@ -85,8 +85,6 @@ EXPLICIT_P_KEYS = {
     "pHalfFisher", "pFisherCanonModern", "pCochranThree", "pCochranFive",
     "pCochranAppThree", "pCochranAppFive", "pCanonApp",
     "pPreCEbinom", "pPreCEfisher", "pFoundDateSpearman",
-    # Corridor
-    "pCorridorBinom", "pCorridorFisher", "pCorridorAppFisher", "pCorridorMW",
     # Spatial independence
     "pNeffQuarter", "pNeffHalf", "blockBootZ_p",
     # CMH

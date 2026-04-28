@@ -47,8 +47,8 @@ sys.path.insert(0, str(ROOT))
 
 from lib.beru import (
     GERIZIM, BERU, HARMONIC_STEP,
-    TIER_APP, TIER_APLUS,
-    P_NULL_APP, P_NULL_AP,
+    TIER_APP, TIER_APLUS, TIER_A_MAX,
+    P_NULL_APP, P_NULL_AP, P_NULL_A,
     deviation as beru_dev,
 )
 from lib.results_store import ResultsStore
@@ -127,8 +127,10 @@ def run():
 
     obs_m_app = int((mid_devs <= TIER_APP).sum())
     obs_m_ap  = int((mid_devs <= TIER_APLUS).sum())
+    obs_m_a   = int((mid_devs <= TIER_A_MAX).sum())
     obs_v_app = int((v_devs   <= TIER_APP).sum())
     obs_v_ap  = int((v_devs   <= TIER_APLUS).sum())
+    obs_v_a   = int((v_devs   <= TIER_A_MAX).sum())
 
     # ── Degree-weighted vertices ───────────────────────────────────────────────
     from collections import Counter as _Counter
@@ -153,6 +155,7 @@ def run():
     dw_devs    = _beru_devs_np(dw_lons)
     obs_dw_app = int((dw_devs <= TIER_APP).sum())
     obs_dw_ap  = int((dw_devs <= TIER_APLUS).sum())
+    obs_dw_a   = int((dw_devs <= TIER_A_MAX).sum())
 
     # ── Cluster asymmetry: A++-bearing harmonics vs non-A++ harmonics ──────────
     from collections import defaultdict as _dd
@@ -182,10 +185,13 @@ def run():
     # ── Binomial tests ─────────────────────────────────────────────────────────
     p_m_app = binomtest(obs_m_app, n_edges, P_NULL_APP, alternative="greater").pvalue
     p_m_ap  = binomtest(obs_m_ap,  n_edges, P_NULL_AP,  alternative="greater").pvalue
+    p_m_a   = binomtest(obs_m_a,   n_edges, P_NULL_A,   alternative="greater").pvalue
     p_v_app = binomtest(obs_v_app, n_vertices, P_NULL_APP, alternative="greater").pvalue
     p_v_ap  = binomtest(obs_v_ap,  n_vertices, P_NULL_AP,  alternative="greater").pvalue
+    p_v_a   = binomtest(obs_v_a,   n_vertices, P_NULL_A,   alternative="greater").pvalue
     p_dw_app = binomtest(obs_dw_app, n_dw, P_NULL_APP, alternative="greater").pvalue
     p_dw_ap  = binomtest(obs_dw_ap,  n_dw, P_NULL_AP,  alternative="greater").pvalue
+    p_dw_a   = binomtest(obs_dw_a,   n_dw, P_NULL_A,   alternative="greater").pvalue
 
     p_m_app_adj = min(p_m_app * BONF_K, 1.0)
     p_m_ap_adj  = min(p_m_ap  * BONF_K, 1.0)
@@ -193,14 +199,20 @@ def run():
     # ── Z-scores ───────────────────────────────────────────────────────────────
     z_m_app  = _zscore(obs_m_app,  n_edges,    P_NULL_APP)
     z_m_ap   = _zscore(obs_m_ap,   n_edges,    P_NULL_AP)
+    z_m_a    = _zscore(obs_m_a,    n_edges,    P_NULL_A)
     z_v_app  = _zscore(obs_v_app,  n_vertices, P_NULL_APP)
+    z_v_a    = _zscore(obs_v_a,    n_vertices, P_NULL_A)
     z_dw_app = _zscore(obs_dw_app, n_dw,       P_NULL_APP)
+    z_dw_a   = _zscore(obs_dw_a,   n_dw,       P_NULL_A)
 
     # ── Enrichment ratios ──────────────────────────────────────────────────────
     enrich_m_app  = (obs_m_app  / n_edges)    / P_NULL_APP
     enrich_m_ap   = (obs_m_ap   / n_edges)    / P_NULL_AP
+    enrich_m_a    = (obs_m_a    / n_edges)    / P_NULL_A
     enrich_v_app  = (obs_v_app  / n_vertices) / P_NULL_APP
+    enrich_v_a    = (obs_v_a    / n_vertices) / P_NULL_A
     enrich_dw_app = (obs_dw_app / n_dw)       / P_NULL_APP
+    enrich_dw_a   = (obs_dw_a   / n_dw)       / P_NULL_A
 
     # ── Node-label permutation ─────────────────────────────────────────────────
     # Build node-name → index map using coordinates from the edge file directly,
@@ -285,29 +297,40 @@ def run():
         "NOwtradVertices":       n_vertices,
         "NOwtradMidApp":         obs_m_app,
         "NOwtradMidAp":          obs_m_ap,
+        "NOwtradMidA":           obs_m_a,
         "NOwtradVertexApp":      obs_v_app,
         "NOwtradVertexAp":       obs_v_ap,
+        "NOwtradVertexA":        obs_v_a,
         "NOwtradPerms":          N_PERMS,
         # Degree-weighted counts
         "NOwtradDegW":           n_dw,
         "NOwtradDegWApp":        obs_dw_app,
         "NOwtradDegWAp":         obs_dw_ap,
+        "NOwtradDegWA":          obs_dw_a,
         # Enrichment
         "owtradVertexAppEnrich": round(enrich_v_app,  2),
+        "owtradVertexAEnrich":   round(enrich_v_a,    2),
         "owtradDegWAppEnrich":   round(enrich_dw_app, 2),
+        "owtradDegWAEnrich":     round(enrich_dw_a,   2),
         "owtradMidAppEnrich":    round(enrich_m_app,  2),
         "owtradMidApEnrich":     round(enrich_m_ap,   2),
+        "owtradMidAEnrich":      round(enrich_m_a,    2),
         # Z-scores
         "zOwtradVertexApp":      round(z_v_app,  2),
+        "zOwtradVertexA":        round(z_v_a,    2),
         "zOwtradDegWApp":        round(z_dw_app, 2),
+        "zOwtradDegWA":          round(z_dw_a,   2),
         "zOwtradMidApp":         round(z_m_app,  2),
         "zOwtradMidAp":          round(z_m_ap,   2),
+        "zOwtradMidA":           round(z_m_a,    2),
         # Vertex binomial
         "pOwtradVertexApp":      p_v_app,
         "pOwtradVertexAp":       p_v_ap,
+        "pOwtradVertexA":        p_v_a,
         # Degree-weighted binomial
         "pOwtradDegWApp":        p_dw_app,
         "pOwtradDegWAp":         p_dw_ap,
+        "pOwtradDegWA":          p_dw_a,
         # Midpoint binomial (kept for reference)
         "pOwtradMidApp":         p_m_app,
         "pOwtradMidAp":          p_m_ap,

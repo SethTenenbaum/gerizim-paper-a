@@ -88,7 +88,6 @@ if [ "${1:-}" != "--full" ]; then
         analysis/global/peak_geography_audit.py
         analysis/global/landmark_anchor_ranking.py
         analysis/global/global_corridor_comparison.py
-        analysis/global/corridor_precision_test.py           # → pCorridorBinom, pCorridorFisher
         analysis/global/anchor_site_comparison.py            # → NjerSelfExclCorpus, NgerizimSweepCorpus
         analysis/unesco/spatial_independence_test.py         # → pNeffQuarter, pNeffHalf
         analysis/unesco/regional_temporal_gradient.py        # → pCMH
@@ -277,9 +276,6 @@ run_script "GROUP 13: Landmark Anchor Ranking"                     \
 
 run_script "GROUP 14: Global Corridor Comparison"                  \
            analysis/global/global_corridor_comparison.py
-
-run_script "GROUP 15: Corridor Precision Test"                     \
-           analysis/global/corridor_precision_test.py
 
 run_script "GROUP 16 + 22: Anchor Site Comparison"                 \
            analysis/global/anchor_site_comparison.py
