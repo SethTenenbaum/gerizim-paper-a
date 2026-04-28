@@ -1,6 +1,6 @@
 ====================================================================================================
   WIKIDATA Q180987 STUPA CORPUS — GEOGRAPHIC TIER BREAKDOWN
-  Generated: 2026-04-25 22:19 UTC
+  Generated: 2026-04-27 18:34 UTC
   Corpus: wikidata_stupas_q180987.csv  |  N = 229
   Full corpus: A+ = 20 (8.7%)  A-tier = 42 (18.3%)
   Anchor: Gerizim 35.269°E  |  1 beru = 30.0°

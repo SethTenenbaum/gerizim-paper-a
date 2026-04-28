@@ -624,11 +624,12 @@ function showResult(n, N, fisherRes, jointPairs) {
   el.style.display = "block";
 }
 
-// ── Freehand lasso draw tool ──────────────────────────────────────────────────
-let drawMode = false, lassoPts = [], lassoLine = null, lassoPolygon = null;
+// ── Lasso draw tool (click to start, move freely, click to complete) ──────────
+let drawMode = false, drawing = false, lassoPts = [], lassoLine = null, lassoPolygon = null;
 const drawBtn = document.getElementById("draw-btn");
 
 function resetDraw() {
+  drawing = false;
   lassoPts = [];
   if (lassoLine)    { map.removeLayer(lassoLine);    lassoLine    = null; }
   if (lassoPolygon) { map.removeLayer(lassoPolygon); lassoPolygon = null; }
@@ -637,7 +638,6 @@ function resetDraw() {
   drawBtn.classList.remove("active");
   drawBtn.textContent = "⬢ Draw area";
   map.getContainer().style.cursor = "";
-  map.dragging.enable();
 }
 
 drawBtn.addEventListener("click", () => {
@@ -655,41 +655,35 @@ document.addEventListener("mousedown", e => {
     resetDraw();
 }, true);
 
-// Lasso drawing — intercept at container level to suppress map drag
-// Skip if click originated inside the panel or result overlay
-map.getContainer().addEventListener("mousedown", e => {
+// First click: start collecting; second click: complete polygon
+map.on("click", function(e) {
   if (!drawMode) return;
-  if (document.getElementById("panel").contains(e.target)) return;
-  if (document.getElementById("draw-result").contains(e.target)) return;
-  map.dragging.disable();
-  const latlng = map.mouseEventToLatLng(e);
-  lassoPts = [latlng];
-  if (lassoPolygon) { map.removeLayer(lassoPolygon); lassoPolygon = null; }
-  if (lassoLine)    { map.removeLayer(lassoLine);    lassoLine    = null; }
-}, true);
+  if (!drawing) {
+    drawing = true;
+    lassoPts = [e.latlng];
+    if (lassoPolygon) { map.removeLayer(lassoPolygon); lassoPolygon = null; }
+    if (lassoLine)    { map.removeLayer(lassoLine);    lassoLine    = null; }
+  } else if (lassoPts.length >= 6) {
+    drawing = false;
+    if (lassoLine) { map.removeLayer(lassoLine); lassoLine = null; }
+    lassoPolygon = L.polygon(lassoPts, {
+      color:"#e74c3c", weight:1.5, fillColor:"#e74c3c", fillOpacity:0.07
+    }).addTo(map);
+    analyzeSelection(lassoPts);
+    drawMode = false;
+    drawBtn.classList.remove("active");
+    drawBtn.textContent = "⬢ Draw area";
+    map.getContainer().style.cursor = "";
+  }
+});
 
-map.getContainer().addEventListener("mousemove", e => {
-  if (!drawMode || lassoPts.length === 0) return;
-  if (document.getElementById("panel").contains(e.target)) return;
-  const latlng = map.mouseEventToLatLng(e);
-  lassoPts.push(latlng);
+// Collect points as mouse moves while drawing
+map.on("mousemove", function(e) {
+  if (!drawMode || !drawing) return;
+  lassoPts.push(e.latlng);
   if (lassoLine) map.removeLayer(lassoLine);
   lassoLine = L.polyline(lassoPts, { color:"#e74c3c", weight:2, dashArray:"4 3", opacity:0.9 }).addTo(map);
-}, true);
-
-map.getContainer().addEventListener("mouseup", e => {
-  if (!drawMode || lassoPts.length < 6) return;
-  map.dragging.enable();
-  if (lassoLine) { map.removeLayer(lassoLine); lassoLine = null; }
-  lassoPolygon = L.polygon(lassoPts, {
-    color:"#e74c3c", weight:1.5, fillColor:"#e74c3c", fillOpacity:0.07
-  }).addTo(map);
-  analyzeSelection(lassoPts);
-  drawMode = false;
-  drawBtn.classList.remove("active");
-  drawBtn.textContent = "⬢ Draw area";
-  map.getContainer().style.cursor = "";
-}, true);
+});
 </script>
 </body>
 </html>

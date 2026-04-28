@@ -447,26 +447,6 @@
           "cat": "C"
         },
         {
-          "label": "Corridor: Occupancy binomial (17/17)",
-          "p_key": "pCorridorBinom",
-          "cat": "C"
-        },
-        {
-          "label": "Corridor: Fisher combined p",
-          "p_key": "pCorridorFisher",
-          "cat": "C"
-        },
-        {
-          "label": "Corridor: A++ enrichment (Fisher)",
-          "p_key": "pCorridorAppFisher",
-          "cat": "C"
-        },
-        {
-          "label": "Corridor: Precision MW (corridor < global)",
-          "p_key": "pCorridorMW",
-          "cat": "C"
-        },
-        {
           "label": "Test 5: Evolution combined A++ (binomial)",
           "p_key": "pEvoApp",
           "cat": "C"

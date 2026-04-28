@@ -248,7 +248,7 @@ Cochran-Armitage trend test on the full corpus based on year of
 inscription into the UNESCO corpus, no keyword filter.
 
 \textbf{Test~5 (founding classifier, post-hoc).}
-A context-aware keyword classifier (\texttt{lib/founding\_filter.py}), refined after initial data inspection, addresses what kinds of sites beyond domed monuments fall on harmonic nodes; it carries no weight in the primary evidential chain (Appendix~\ref{sec:kwdaudit_founding}).
+A keyword classifier (\texttt{lib/founding\_filter.py}) identifies what site types beyond domed monuments fall on harmonic nodes; post-hoc, no weight in the primary evidential chain (Appendix~\ref{sec:kwdaudit_founding}).
 
 \subsection{Multiple-Comparisons Protocol}
 \label{sec:bonferroni}
@@ -604,18 +604,10 @@ Displacing the anchor by a uniform random offset in $[0^\circ,
 A positive anchor-specific test complementary to Test~D.
 
 \textbf{Test~D (targeted von~Mises mixture, full corpus).}
-Test~A is an omnibus test over all $N = \NoriginCorpus$ sites; the
-${\approx}\targetedBgPct\%$ near-uniform background dilutes the A+ phase
-signal, making it \emph{structurally insensitive} to the small but
-concentrated A+ sub-population.
-Test~D addresses this directly.
-We fit a von~Mises/uniform two-component mixture to all $N = \NoriginCorpus$
-folded angles, with $\mu_0$ fixed at the Gerizim phase on the 3\textdegree{}
-circle; $\hat{w}$ and $\hat{\kappa}$ are estimated by EM.
-The likelihood-ratio statistic $D = 2(\hat{\ell} - \ell_0)$ is referred to
-a parametric bootstrap ($B = \targetedB$ null samples) for an empirical $p$-value.
-Fixing $\mu$ rather than searching it targets the test at the alternative of
-interest, retaining sensitivity to cluster weights of a few percent.
+A von~Mises/uniform two-component mixture is fit to all $N = \NoriginCorpus$
+folded angles with $\mu_0$ fixed at the Gerizim phase; $\hat{w}$ and
+$\hat{\kappa}$ estimated by EM; $D = 2(\hat{\ell} - \ell_0)$ referred to a
+parametric bootstrap ($B = \targetedB$) for an empirical $p$-value.
 On the full corpus: $D = \targetedDfull$,
 $\hat{w} = \targetedWfull$ (i.e.\ ${\approx}\targetedWfullPct\%$ of all
 sites), $\hat{\kappa} = \targetedKfull$
@@ -624,10 +616,7 @@ $p_\mathrm{boot} = \targetedPfull$ (\targetedPfullSig{}).
 On the A+ subset alone: $D = \targetedDAp$, $\hat{w} = \targetedWAp$,
 $\hat{\kappa} = \targetedKAp$ (angular SD $\approx \targetedSdApDeg$\textdegree{}),
 $p_\mathrm{boot} = \targetedPAp$ (\targetedPApSig{}).
-Together, Tests~B--D provide convergent, methodologically independent
-evidence that the 3\textdegree{} periodicity at the Gerizim anchor is
-a real structural feature of the UNESCO corpus and not a statistical
-artifact.
+Tests~B--D together confirm that the 3\textdegree{} periodicity is anchor-specific and not a statistical artifact.
 
 \textbf{Test~E (anchor discovery correction).}
 A global sweep of \anchorSweepNanchors{} trial anchors asks whether the
@@ -654,8 +643,7 @@ The Mantel-Haenszel stratified test is underpowered at the sub-group level;
 Logistic regression with region as a covariate confirms the A++ gradient
 ($Z = \zLogRegCohortApp$, $p = \pLogRegCohortApp$~\pLogRegCohortAppSig{},
 OR~$= \orLogRegCohortApp$).
-The declining rate in later cohorts may also partly reflect UNESCO's geographic
-expansion into regions where hemispherical traditions are less prevalent.
+The declining rate may partly reflect UNESCO's expansion into regions where hemispherical traditions are less prevalent.
 The gradient is treated as descriptive context only (Figure~\ref{fig:temporal}).
 
 \begin{figure*}[!t]
@@ -703,11 +691,6 @@ dome/spherical A++ (binomial $p = \BonfAllSurvivepCircApp$);
 cluster permutation ($p_\mathrm{adj} = \BonfAllSurviveclusterPermP$);
 harmonic Mann-Whitney ($p_\mathrm{adj} = \BonfAllSurviveclusterHarmonicMWp$);
 sequential-peak permutation ($p_\mathrm{adj} = \BonfAllSurvivepeakSigP$; \S\ref{sec:resultstemporal});
-band occupancy \corridorPrecHits{}/\corridorPrecN{} harmonics
-($p_\mathrm{adj} = \BonfAllSurvivepCorridorBinom$; \S\ref{sec:corridor_precision});
-band Fisher combined ($p_\mathrm{adj} = \BonfAllSurvivepCorridorFisher$; \S\ref{sec:corridor_precision});
-band A++ enrichment ($p_\mathrm{adj} = \BonfAllSurvivepCorridorAppFisher$; \S\ref{sec:corridor_precision});
-band precision Mann-Whitney ($p_\mathrm{adj} = \BonfAllSurvivepCorridorMW$; \S\ref{sec:corridor_precision});
 and evolution combined A++ (binomial $p = \BonfAllSurvivepEvoApp$).
 
 \section{Robustness Checks}
@@ -792,18 +775,6 @@ Jerusalem: \JerusalemSweepAp{} A+, \JerusalemSweepPctile\textsuperscript{th} per
 full table in Online Supplementary Table~S4), and the result is anchor-invariant
 within the \GerizimJerusalemKm\,km corridor window.
 No other historical meridian reaches significance.
-
-\subsubsection*{Gerizim to Lumbini band precision}
-\label{sec:corridor_precision}
-
-The 1.6-beru span from Gerizim (35.3\textdegree{}E) to Lumbini,
-the birthplace of the Buddha (83.3\textdegree{}E), covers
-\corridorPrecN{} harmonics.
-All \corridorPrecHits{}/\corridorPrecN{} contain at least one A+ UNESCO site
-(binomial $p \ll 10^{-10}$); \corridorPrecApp{}/\corridorPrecN{} contain
-an A++ site (OR~$= \corridorAppOR$ vs sites outside this band);
-A+ sites within the band are $\corridorPrecRatio\times$ more precise
-than the global A+ mean.
 
 \subsubsection*{The $x.18$\textdegree{}E periodic structure}
 \label{sec:x18artifact}
@@ -923,12 +894,11 @@ $p~\wikiHeartlandATierP$~\wikiHeartlandATierPSig{}, one-sided depletion test)
 but strongly enriched in the inter-harmonic C-band:
 Myanmar/Cambodia reaches \wikiMyanmarCbandRate\% (OR $= \wikiMyanmarCbandOR\times$, $p~\wikiMyanmarCbandP$~\wikiMyanmarCbandPSig{}) and the
 combined heartland \wikiHeartlandCbandRate\% (OR $= \wikiHeartlandCbandOR\times$, $p~\wikiHeartlandCbandP$~\wikiHeartlandCbandPSig{}).
-The anti-correlation is consistent with the A/C bimodal pattern observed in the religion audit (\S\ref{sec:resultsrelig}).
-The non-heartland Wikidata stupas (outside 70\textdegree--110\textdegree{}E,
-$N = \wikiNonHeartlandN{}$) show the same A-enriched, C-depleted profile as the UNESCO
-domed monument corpus: \wikiNonHeartlandATierRate\% reach Tier-A (OR $= \wikiNonHeartlandATierOR\times$, $p~\wikiNonHeartlandATierP$~\wikiNonHeartlandATierPSig{})
-with no C-band enrichment (OR~$= \wikiNonHeartlandCbandOR\times$, $p = \wikiNonHeartlandCbandP$~\wikiNonHeartlandCbandPSig{}), suggesting that UNESCO inscription preferentially
-captures the most precisely aligned examples within each tradition.
+This A/C anti-correlation mirrors the bimodal pattern in the religion audit (\S\ref{sec:resultsrelig}).
+Non-heartland Wikidata stupas (outside 70\textdegree--110\textdegree{}E,
+$N = \wikiNonHeartlandN{}$) show the same A-enriched, C-depleted profile:
+\wikiNonHeartlandATierRate\% reach Tier-A (OR $= \wikiNonHeartlandATierOR\times$, $p~\wikiNonHeartlandATierP$~\wikiNonHeartlandATierPSig{})
+with no C-band enrichment (OR~$= \wikiNonHeartlandCbandOR\times$, $p = \wikiNonHeartlandCbandP$~\wikiNonHeartlandCbandPSig{}).
 
 \subsection{Multiple Comparisons}
 \label{sec:multiple_comparisons}
@@ -985,11 +955,7 @@ Latin Americas: \CorpusPctLatAm\%;
 Africa: \CorpusPctAfrica\%).
 Domed monuments exceed the A+ rate of other monuments from the same longitude
 footprint (Null~C, $p = \geoNullDomeRestrictedP$, \geoNullDomeRestrictedPSig{}), establishing
-that the enrichment is carried by a specific building type rather than
-the geographic distribution alone. Although UNESCO nomination criteria
-make no reference to longitude, it cannot be ruled out that the
-inscription process carries some of the same longitudinal structure
-observed here.
+that the enrichment is carried by architectural type, not location alone.
 
 A Monte Carlo unit sweep (\mcNperms{} permutations, \mcNcandidates{} candidate
 spacing values from 0.5\textdegree{} to 15\textdegree{}) identifies which
@@ -1064,15 +1030,17 @@ network \citep{ciolek2004owtrad} (\NOwtradEdges{} route segments,
 \NOwtradVertices{} unique endpoints).
 Testing all \NOwtradDegW{} endpoint positions across the full edge list
 (each city weighted by the number of segments it connects),
-\NOwtradDegWApp{} fall at A++ harmonics and \NOwtradDegWAp{} at A+
+\NOwtradDegWApp{} fall at A++ harmonics, \NOwtradDegWAp{} at A+, and \NOwtradDegWA{} at A
 ($\owtradDegWAppEnrich\times$ null rate, $z = \zOwtradDegWApp$,
 $p = \pOwtradDegWApp$~\pOwtradDegWAppSig{} for A++;
-$p = \pOwtradDegWAp$~\pOwtradDegWApSig{} for A+; one-tailed binomial).
+$p = \pOwtradDegWAp$~\pOwtradDegWApSig{} for A+;
+$p = \pOwtradDegWA$~\pOwtradDegWASig{} for A; one-tailed binomial).
 Testing each unique endpoint once gives
-\NOwtradVertexApp{}/\NOwtradVertices{} at A++ and \NOwtradVertexAp{} at A+
+\NOwtradVertexApp{}/\NOwtradVertices{} at A++, \NOwtradVertexAp{} at A+, and \NOwtradVertexA{} at A
 ($\owtradVertexAppEnrich\times$, $z = \zOwtradVertexApp$,
 $p = \pOwtradVertexApp$~\pOwtradVertexAppSig{} for A++;
-$p = \pOwtradVertexAp$~\pOwtradVertexApSig{} for A+; one-tailed binomial).
+$p = \pOwtradVertexAp$~\pOwtradVertexApSig{} for A+;
+$p = \pOwtradVertexA$~\pOwtradVertexASig{} for A; one-tailed binomial).
 A phase-shift test (random offset of the 3\textdegree{} grid,
 \NOwtradPerms{} iterations) gives $p = \pOwtradVertexAppPhase$~\pOwtradVertexAppPhaseSig{},
 confirming the enrichment is specific to the Gerizim anchor.
@@ -1081,7 +1049,18 @@ harmonics containing at least one A++ endpoint (\NOwtradAppHarmonics{} harmonics
 carry \owtradClustDegRatio$\times$ more total route-connectivity than
 harmonics without one (\NOwtradNonAppHarmonics{} harmonics;
 $p = \pOwtradClustDeg$~\pOwtradClustDegSig{}, Mann-Whitney one-tailed).
-The Silk Road corridor is illustrated in Figure~\ref{fig:geo_trail} (tier histograms: Online Supplementary Figure~S2).
+The Silk Road corridor is illustrated in Figure~\ref{fig:geo_trail}; harmonic tier distributions for both OWTRAD populations are shown in Figure~\ref{fig:owtrad_tiers}.
+
+\begin{figure*}[!t]
+  \centering
+  \includegraphics[width=\textwidth]{../figures/fig_owtrad_tiers}
+  \caption{OWTRAD Silk Road endpoint tier distributions:
+  \NOwtradVertices{} deduplicated endpoints (left) and \NOwtradDegW{} degree-weighted positions (right).
+  Both show significant A++ enrichment
+  (deduplicated: $z = \zOwtradVertexApp$, $p = \pOwtradVertexApp$~\pOwtradVertexAppSig{};
+  degree-weighted: $z = \zOwtradDegWApp$, $p = \pOwtradDegWApp$~\pOwtradDegWAppSig{}).}
+  \label{fig:owtrad_tiers}
+\end{figure*}
 
 \begin{figure*}[!t]
   \centering

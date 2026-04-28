@@ -60,24 +60,35 @@
 \newcommand{\NOwtradVertices}{1674}
 \newcommand{\NOwtradMidApp}{74}
 \newcommand{\NOwtradMidAp}{136}
+\newcommand{\NOwtradMidA}{415}
 \newcommand{\NOwtradVertexApp}{72}
 \newcommand{\NOwtradVertexAp}{114}
+\newcommand{\NOwtradVertexA}{242}
 \newcommand{\NOwtradPerms}{100000}
 \newcommand{\NOwtradDegW}{3498}
 \newcommand{\NOwtradDegWApp}{156}
 \newcommand{\NOwtradDegWAp}{250}
+\newcommand{\NOwtradDegWA}{530}
 \newcommand{\owtradVertexAppEnrich}{1.34}
+\newcommand{\owtradVertexAEnrich}{1.13}
 \newcommand{\owtradDegWAppEnrich}{1.39}
+\newcommand{\owtradDegWAEnrich}{1.18}
 \newcommand{\owtradMidAppEnrich}{1.19}
 \newcommand{\owtradMidApEnrich}{1.09}
+\newcommand{\owtradMidAEnrich}{1.06}
 \newcommand{\zOwtradVertexApp}{2.56}
+\newcommand{\zOwtradVertexA}{1.98}
 \newcommand{\zOwtradDegWApp}{4.23}
+\newcommand{\zOwtradDegWA}{4.09}
 \newcommand{\zOwtradMidApp}{1.51}
 \newcommand{\zOwtradMidAp}{1.02}
+\newcommand{\zOwtradMidA}{1.19}
 \newcommand{\pOwtradVertexApp}{0.0084}
 \newcommand{\pOwtradVertexAp}{0.2708}
+\newcommand{\pOwtradVertexA}{0.0276}
 \newcommand{\pOwtradDegWApp}{< 0.0001}
 \newcommand{\pOwtradDegWAp}{0.0445}
+\newcommand{\pOwtradDegWA}{< 0.0001}
 \newcommand{\pOwtradMidApp}{0.0769}
 \newcommand{\pOwtradMidAp}{0.1640}
 \newcommand{\pOwtradMidAppAdj}{0.3074}
@@ -462,20 +473,6 @@
   \newcommand{\corridorRivalN}{46}              % best rival corridor match count
   \newcommand{\corridorRivalSum}{3134}           % sum of best rival corridor A+ hits
 
-% --- analysis/global/corridor_precision_test.py
-  \newcommand{\corridorPrecN}{17}            % harmonics tested in corridor precision
-  \newcommand{\corridorPrecHits}{17}           % harmonics with corridor hit
-  \newcommand{\corridorPrecApp}{14}            % A++ hits in corridor precision test
-  \newcommand{\corridorPrecApOnly}{3}         % A+-only hits (not A++) in corridor
-  \newcommand{\pCorridorBinom}{5.3 \times 10^{-21}}       % p-value, corridor binomial test
-  \newcommand{\pCorridorFisher}{1.5 \times 10^{-19}}       % p-value, corridor Fisher test
-  \newcommand{\corridorAppOR}{15.56}           % Fisher OR, A++ vs A+ in corridor
-  \newcommand{\pCorridorAppFisher}{0.0000}       % p-value, A++ Fisher test in corridor
-  \newcommand{\corridorMeanDevKm}{2.26}        % mean deviation within corridor (km)
-  \newcommand{\corridorGlobalMeanKm}{5.31}      % mean deviation global (km)
-  \newcommand{\corridorPrecRatio}{2.35}        % precision ratio, global/corridor deviation
-  \newcommand{\pCorridorMW}{0.000}           % p-value, Mann-Whitney corridor precision
-  \newcommand{\corridorJeruHits}{17}          % corridor hits with Jerusalem anchor
 
 % --- analysis/global/anchor_site_comparison.py
   \newcommand{\LumbiniDevKm}{0.79}          % Lumbini deviation from Gerizim (km)
@@ -840,15 +837,15 @@
 \newcommand{\targetedB}{200}
 
 % --- analysis/global/x18_max_permutation_test.py
-\newcommand{\anchorMaxPermObsMax}{92}
-\newcommand{\anchorMaxPermNullMu}{84.56}
-\newcommand{\anchorMaxPermNullSD}{4.02}
-\newcommand{\anchorMaxPermZ}{1.85}
-\newcommand{\anchorMaxPermP}{0.0564}
+\newcommand{\anchorMaxPermObsMax}{91}
+\newcommand{\anchorMaxPermNullMu}{84.62}
+\newcommand{\anchorMaxPermNullSD}{4.06}
+\newcommand{\anchorMaxPermZ}{1.57}
+\newcommand{\anchorMaxPermP}{0.0830}
 \newcommand{\anchorMaxPermNperms}{10{,}000}
-\newcommand{\anchorMaxPermBootMu}{95.84}
-\newcommand{\anchorMaxPermBootSD}{6.56}
-\newcommand{\anchorMaxPermBootZ}{-0.59}
+\newcommand{\anchorMaxPermBootMu}{96.37}
+\newcommand{\anchorMaxPermBootSD}{6.67}
+\newcommand{\anchorMaxPermBootZ}{-0.80}
 \newcommand{\anchorMaxPermBootP}{0.7268}
 
 % --- analysis/global/x18_optimal_band_significance.py
@@ -1287,12 +1284,12 @@
 \newcommand{\logSweepOptRatio}{1.87}      % optimal geometric step ratio
 
 % --- analysis/unesco/fdr_multiple_comparisons.py
-  \newcommand{\NtotalTests}{47}           % total tests in FDR analysis
-  \newcommand{\NconfTests}{38}           % confirmatory tests
+  \newcommand{\NtotalTests}{43}           % total tests in FDR analysis
+  \newcommand{\NconfTests}{34}           % confirmatory tests
   \newcommand{\NexplTests}{9}           % exploratory tests
-  \newcommand{\NsurviveFDR}{26}           % tests surviving BH FDR (q<0.05)
-  \newcommand{\NsurviveBonfAll}{9}           % tests surviving Bonferroni (all tests)
-  \newcommand{\NtotalTestsP}{0.0011}  % Bonferroni threshold = 0.05/47 (used in FDR table header)
+  \newcommand{\NsurviveFDR}{22}           % tests surviving BH FDR (q<0.05)
+  \newcommand{\NsurviveBonfAll}{5}           % tests surviving Bonferroni (all tests)
+  \newcommand{\NtotalTestsP}{0.0012}  % Bonferroni threshold = 0.05/43 (used in FDR table header)
   \newcommand{\BonfAllSurvivepCircApp}{0.0293}  % full-k Bonferroni survivor
   \newcommand{\FDRqSurvivepCircApp}{0.0038}  % BH q-value survivor
   \newcommand{\FDRqSurvivepCircAp}{0.0128}  % BH q-value survivor
@@ -1313,14 +1310,6 @@
   \newcommand{\FDRqSurvivepNeffHalf}{0.0242}  % BH q-value survivor
   \newcommand{\FDRqSurviveblockBootZP}{0.0242}  % BH q-value survivor
   \newcommand{\FDRqSurvivesimKDEP}{0.0092}  % BH q-value survivor
-  \newcommand{\BonfAllSurvivepCorridorBinom}{0.0}  % full-k Bonferroni survivor
-  \newcommand{\FDRqSurvivepCorridorBinom}{0.0}  % BH q-value survivor
-  \newcommand{\BonfAllSurvivepCorridorFisher}{0.0}  % full-k Bonferroni survivor
-  \newcommand{\FDRqSurvivepCorridorFisher}{0.0}  % BH q-value survivor
-  \newcommand{\BonfAllSurvivepCorridorAppFisher}{0.0023}  % full-k Bonferroni survivor
-  \newcommand{\FDRqSurvivepCorridorAppFisher}{0.0006}  % BH q-value survivor
-  \newcommand{\BonfAllSurvivepCorridorMW}{0.0035}  % full-k Bonferroni survivor
-  \newcommand{\FDRqSurvivepCorridorMW}{0.0007}  % BH q-value survivor
   \newcommand{\BonfAllSurvivepEvoApp}{0.0392}  % full-k Bonferroni survivor
   \newcommand{\FDRqSurvivepEvoApp}{0.0044}  % BH q-value survivor
   \newcommand{\FDRqSurvivepEvoAp}{0.0128}  % BH q-value survivor
@@ -1398,10 +1387,6 @@
   \newcommand{\pCochranAppThreeSig}{*}  % auto sig label
   \newcommand{\pCochranFiveSig}{ns}  % auto sig label
   \newcommand{\pCochranThreeSig}{ns}  % auto sig label
-  \newcommand{\pCorridorAppFisherSig}{***}  % auto sig label
-  \newcommand{\pCorridorBinomSig}{***}  % auto sig label
-  \newcommand{\pCorridorFisherSig}{***}  % auto sig label
-  \newcommand{\pCorridorMWSig}{***}  % auto sig label
   \newcommand{\pEarlyModernSig}{ns}  % auto sig label
   \newcommand{\pEighteenBinomASig}{***}  % auto sig label
   \newcommand{\pEighteenBinomBSig}{***}  % auto sig label
@@ -1451,6 +1436,7 @@
   \newcommand{\pNeffQuarterSig}{*}  % auto sig label
   \newcommand{\pOwtradClustCountSig}{***}  % auto sig label
   \newcommand{\pOwtradClustDegSig}{***}  % auto sig label
+  \newcommand{\pOwtradDegWASig}{***}  % auto sig label
   \newcommand{\pOwtradDegWApSig}{*}  % auto sig label
   \newcommand{\pOwtradDegWAppSig}{***}  % auto sig label
   \newcommand{\pOwtradMidApAdjSig}{ns}  % auto sig label
@@ -1462,6 +1448,7 @@
   \newcommand{\pOwtradMidAppPhaseSig}{$^\dagger$}  % auto sig label
   \newcommand{\pOwtradMidAppSig}{$^\dagger$}  % auto sig label
   \newcommand{\pOwtradVertexApPhaseSig}{ns}  % auto sig label
+  \newcommand{\pOwtradVertexASig}{*}  % auto sig label
   \newcommand{\pOwtradVertexApSig}{ns}  % auto sig label
   \newcommand{\pOwtradVertexAppPhaseSig}{*}  % auto sig label
   \newcommand{\pOwtradVertexAppSig}{**}  % auto sig label

@@ -51,31 +51,20 @@ N_PERMS       = 10_000
 SEED          = 42
 ANCHOR_STEP   = 0.01   # matches the anchor sweep resolution
 
-# ── Read observed optimum from store ─────────────────────────────────────────
+# ── Load corpus longitudes ────────────────────────────────────────────────────
+# Use the extended corpus (1011 inscribed + Gerizim synthetic = 1012 sites),
+# excluding Gerizim (the focal anchor) so N = 1011.  Jerusalem is retained —
+# it is a real inscribed site and legitimate corpus member for all non-Jerusalem
+# anchors.  obs_max is computed fresh from the same corpus so obs and null match.
 rs = ResultsStore()
-try:
-    obs_max = int(rs.read("anchorSweepGlobalMaxA"))  # 59, Sweep A (Jerusalem removed)
-    N_corpus = int(rs.read("anchorSweepNsweep"))     # 1010
-except (KeyError, TypeError):
-    raise SystemExit(
-        "ERROR: anchorSweepGlobalMaxA / anchorSweepNsweep not in results store.\n"
-        "Run analysis/global/anchor_uniqueness_audit.py first."
-    )
-
-# ── Load corpus longitudes (Sweep A: Jerusalem removed) ──────────────────────
-# NOTE: The extended corpus (anchor_uniqueness_audit.py) is 1012 sites
-# (1011 inscribed + Gerizim synthetic).  Sweep A removes the focal anchor
-# itself (Gerizim, 1 site) AND Jerusalem (1 site) → N = 1010.
-# N_corpus from the store reflects the self-exclusion count (1011); we
-# recompute from the loaded data to stay consistent with any future
-# corpus changes rather than relying on the stored value.
 from lib.beru import CONFIG
-JERUSALEM_ID = "148"
+GERIZIM_ID = "gerizim_synthetic"  # synthetic entry added by cultural_sites_with_coords_extended
 corpus   = load_corpus()
-cultural = cultural_sites_with_coords(corpus)
+from data.unesco_corpus import cultural_sites_with_coords_extended
+cultural = cultural_sites_with_coords_extended(corpus)
 lons     = np.array([s.longitude for s in cultural
-                     if s.id_number != JERUSALEM_ID])
-N_corpus = len(lons)   # derive from data; do not assert against stale store value
+                     if s.id_number != GERIZIM_ID])
+N_corpus = len(lons)   # should be 1011
 
 # ── Vectorized max A+ across all anchors ─────────────────────────────────────
 # Key insight: A+ membership depends only on (lon mod HARMONIC_STEP) relative
@@ -119,8 +108,8 @@ def max_ap_fast(site_phases: np.ndarray) -> int:
     counts = np.sum(diff <= thresh_deg, axis=0)                     # (M,)
     return int(counts.max())
 
-# Verify against stored observed maximum
-obs_max_check = max_ap_fast(phases_obs)
+# Compute observed max from the same corpus used for the null (N=1011)
+obs_max = max_ap_fast(phases_obs)
 
 anchors = np.arange(0.0, 360.0, ANCHOR_STEP)   # kept for reference / print only
 
@@ -137,7 +126,7 @@ anchors = np.arange(0.0, 360.0, ANCHOR_STEP)   # kept for reference / print only
 
 print("=" * 70)
 print("  x.18° BAND — DISCOVERY-CORRECTED MAX-PERMUTATION TEST (GROUP 11c)")
-print(f"  N={N_corpus}  Observed optimum max A+={obs_max}  (cross-check: {obs_max_check})")
+print(f"  N={N_corpus}  Observed optimum max A+={obs_max}")
 print(f"  Vectorized over {len(anchor_phases)} phase values (equiv. to {len(anchors):,} anchors)")
 print(f"  Running {N_PERMS:,} permutations (seed={SEED})...")
 print(f"  Null A: uniform random phases on [0, {HARMONIC_STEP}°)")

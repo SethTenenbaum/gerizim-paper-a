@@ -192,7 +192,6 @@ def make_figure(vertex_stats, midpoint_stats, all_node_lons, all_mid_lons):
 
         expected = s["n"] / n_bins
         ax.axhline(expected, color=C_NULL, linewidth=1.5, linestyle="--", zorder=4)
-        # Label the null line at the far-right edge of the plot
         ax.text(max_dev * 0.99, expected * 1.04,
                 f"null ({expected:.1f}/bin)",
                 color=C_NULL, fontsize=7.5, ha="right", va="bottom", zorder=5)
