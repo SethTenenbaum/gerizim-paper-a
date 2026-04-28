@@ -427,6 +427,31 @@ for _x1 in range(na_hin_r, min(K_a_g, n_hin_r) + 1):
         _log_joint_h = float(_np_lse.logaddexp(_log_joint_h, _lp))
 p_hin_joint = exp(_log_joint_h)
 
+# ── Exclusive-subset check: remove co-tagged sites ───────────────────────────
+_bud_names    = set(s["name"] for s in buddhist_relig)
+_hin_names    = set(s["name"] for s in hindu)
+_shared_names = _bud_names & _hin_names
+n_bud_hin_shared = len(_shared_names)
+
+bud_excl = [s for s in buddhist_relig if s["name"] not in _shared_names]
+hin_excl = [s for s in hindu          if s["name"] not in _shared_names]
+
+def _joint_ac(subset):
+    n  = len(subset)
+    na = sum(1 for s in subset if is_a_or_better(s["tier"]))
+    nc = sum(1 for s in subset if is_c_or_better(s["tier"]))
+    denom = _lc(N_ALL, n)
+    lp = float('-inf')
+    for x1 in range(na, min(K_a_g, n) + 1):
+        for x2 in range(nc, min(K_inter_g, n - x1) + 1):
+            x3 = n - x1 - x2
+            if x3 < 0 or x3 > K_rest_g: continue
+            lp = float(_np_lse.logaddexp(lp, _lc(K_a_g,x1)+_lc(K_inter_g,x2)+_lc(K_rest_g,x3)-denom))
+    return exp(lp)
+
+p_bud_excl_joint = _joint_ac(bud_excl)
+p_hin_excl_joint = _joint_ac(hin_excl)
+
 hin_cminus = [s for s in hindu if is_cminus_or_better(s["tier"])]
 n_hin_cminus = len(hin_cminus)
 hin_cminus_rate = 100 * n_hin_cminus / n_hin_r
@@ -566,6 +591,8 @@ print(f"  \\newcommand{{\\NInterHarmonicCorpus}}{{{N_inter_corpus}}}           %
 print(f"  \\newcommand{{\\corpusInterHarmonicRate}}{{{100*N_inter_corpus/N_ALL:.1f}}}           % full-corpus C-tier rate (%)")
 print(f"  \\newcommand{{\\pBudJoint}}{{{p_bud_joint:.4f}}}         % joint p: Buddhism A >= {na_bud_r} AND C-tier >= {n_bud_inter} (multivariate hypergeometric)")
 print(f"  \\newcommand{{\\NhinSites}}{{{n_hin_r}}}            % Hinduism-tagged sites N")
+print(f"  \\newcommand{{\\NhinATier}}{{{na_hin_r}}}             % Hinduism A-tier count")
+print(f"  \\newcommand{{\\hinATierRate}}{{{100*na_hin_r/n_hin_r:.1f}}}       % Hinduism A-tier rate (%)")
 print(f"  \\newcommand{{\\hinApCount}}{{{nap_hin_r}}}               % Hinduism A+ count")
 print(f"  \\newcommand{{\\hinApRate}}{{{100*nap_hin_r/n_hin_r:.1f}}}            % Hinduism A+ rate (%)")
 print(f"  \\newcommand{{\\NhinInterHarmonic}}{{{n_hin_inter}}}             % Hinduism C-tier sites")
@@ -576,6 +603,9 @@ print(f"  \\newcommand{{\\hinCminusRate}}{{{hin_cminus_rate:.1f}}}            % 
 print(f"  \\newcommand{{\\hinCminusEnrich}}{{{hin_cminus_enr:.2f}}}           % Hinduism C- tier enrichment vs corpus")
 print(f"  \\newcommand{{\\pHinCminus}}{{{p_hin_cminus:.4f}}}         % p-value, Hinduism C- tier binomial")
 print(f"  \\newcommand{{\\pHinApCminus}}{{{p_hin_ap_cminus:.4f}}}         % joint p: Hinduism A+ >= {nap_hin_r} AND C- >= {n_hin_cminus} (multivariate hypergeometric)")
+print(f"  \\newcommand{{\\NBudHinShared}}{{{n_bud_hin_shared}}}            % Buddhism-Hinduism co-tagged sites")
+print(f"  \\newcommand{{\\pBudExclJoint}}{{{p_bud_excl_joint:.4f}}}         % joint p: Buddhism exclusive of shared Hindu sites")
+print(f"  \\newcommand{{\\pHinExclJoint}}{{{p_hin_excl_joint:.4f}}}         % joint p: Hinduism exclusive of shared Buddhist sites")
 
 # ── Write to results store ────────────────────────────────────────────────────
 ResultsStore().write_many({
@@ -597,9 +627,13 @@ ResultsStore().write_many({
     "pBudRelig":          p_bud_r,          # Buddhism religion-tagged A+ binomial p
     "pBudFisher":         p_bud_fisher,     # Buddhism A+ Fisher p
     "pBudJoint":          p_bud_joint,      # joint p: Buddhism A+ and C-tier both enriched
+    "NhinATier":          na_hin_r,         # Hinduism A-tier count
     "pHinJoint":          p_hin_joint,      # joint p: Hinduism A+ and C-tier both enriched
     "pHinCminus":         p_hin_cminus,     # Hinduism C- binomial p
     "pHinApCminus":       p_hin_ap_cminus,  # Hinduism A+ and C- joint p
+    "NBudHinShared":      n_bud_hin_shared, # Buddhism-Hinduism co-tagged count
+    "pBudExclJoint":      p_bud_excl_joint, # Buddhism exclusive joint p
+    "pHinExclJoint":      p_hin_excl_joint, # Hinduism exclusive joint p
     "pJudATierFisher":    p_jud_fisher,     # Judaism A-tier Fisher exact p
     "judATierOR":         jud_fisher_or,    # Judaism A-tier odds ratio
     "pJudAp":            p_jud_ap,        # Judaism A+ binomial p

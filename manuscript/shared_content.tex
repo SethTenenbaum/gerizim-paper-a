@@ -327,13 +327,13 @@ Religion sub-populations are defined by keyword sets in \texttt{keywords.json}.
 A chi-squared test finds no significant A+ rate difference across the five main
 religion groups ($\chi^2 = \religChiSqStat$, df\,=\,\religChiSqDof,
 $p = \pReligChiSq$, \pReligChiSqSig{}).
-Buddhism shows a joint A-tier/C-band signal
-(\NbudATier/\NbudSitesRelig{} A-tier, \budATierRate\%;
+Both Buddhism (\NbudATier/\NbudSitesRelig{} A-tier, \budATierRate\%;
 \NbudInterHarmonic/\NbudSitesRelig{} C-band, \budInterHarmonicRate\%;
-$p = \pBudJoint$~\pBudJointSig{}, multivariate hypergeometric);
-Hinduism shows elevated C-band occupancy (\NhinInterHarmonic/\NhinSites,
-\hinInterHarmonicRate\%) and a significant A+/C- joint probability
-(multivariate hypergeometric $p = \pHinApCminus$~\pHinApCminusSig{}).
+$p = \pBudJoint$~\pBudJointSig{}) and Hinduism (\NhinATier/\NhinSites{} A-tier, \hinATierRate\%;
+\NhinInterHarmonic/\NhinSites{} C-band, \hinInterHarmonicRate\%;
+$p = \pHinJoint$~\pHinJointSig{}) show a joint A-tier/C-band signal
+(multivariate hypergeometric); both persist in tradition-exclusive sites
+($p = \pBudExclJoint$~\pBudExclJointSig{}, $p = \pHinExclJoint$~\pHinExclJointSig{}).
 
 %──────────────────────────────────────────────────────────────────────────────
 \subsection{Domed and Spherical Monuments (Test~2, Primary)}
@@ -522,7 +522,7 @@ Null~C (restricted $\pm 5$\textdegree{} draw): $p = \stupaGeoRestrictedP$ (\stup
 \label{sec:resultscluster}
 
 Full corpus ($N = \NclusterTotal$), no keyword filter (see \S\ref{sec:test_populations}).
-For each site, count other UNESCO sites within $\pm 0.3$\textdegree{}
+For each site, count other UNESCO sites within $\pm \clusterRadiusDeg$\textdegree{}
 longitude; compare cluster sizes for A+ vs.\ non-A+ sites (Mann-Whitney $U$,
 permutation test). At the harmonic level, compare per-harmonic site counts
 for A+-bearing vs.\ non-A+ harmonics.
@@ -530,7 +530,7 @@ for A+-bearing vs.\ non-A+ harmonics.
 \begin{table*}[!t]
 \centering
 \caption{Cluster asymmetry: A+ vs.\ non-A+ sites in the full UNESCO corpus
-  ($N = \NclusterTotal$; cluster radius $\pm 0.3$\textdegree{} lon)}
+  ($N = \NclusterTotal$; cluster radius $\pm \clusterRadiusDeg$\textdegree{} lon)}
 \label{tab:clusterasym}
 \small
 \adjustbox{max width=\textwidth}{%
@@ -538,7 +538,7 @@ for A+-bearing vs.\ non-A+ harmonics.
 \toprule
 Metric & A+ sites & Non-A+ sites & Ratio / $Z$ & $p$ \\
 \midrule
-Mean cluster size (sites within $\pm 0.3$\textdegree{} lon)
+Mean cluster size (sites within $\pm \clusterRadiusDeg$\textdegree{} lon)
   & \clusterApMean & \clusterNonApMean & \clusterRatio$\times$ & \\
 Mann-Whitney $U$ (one-tailed)
   & & & & \clusterMWp~\clusterMWpSig{} \\
@@ -1083,19 +1083,17 @@ harmonics of the Babylonian beru anchored at Gerizim, with all three
 primary tests surviving Bonferroni correction at $k = \BonfK$.
 Longitude bands containing a precisely aligned monument are
 $\clusterHarmonicRatio\times$ more densely populated with other heritage
-sites than bands without one, indicating that the most celebrated monuments
-and the broader heritage record share the same longitudinal structure.
-Among architectural sub-populations, spherically shaped monuments show
-the strongest alignment of any class tested, exceeding what geography alone
-predicts.
+sites than bands without one. Precise alignment is most concentrated among the earliest-dated sites
+and declines in later cohorts, consistent with a founding canon. The 3-degree periodicity is
+recoverable without specifying an anchor in advance;
+Gerizim has independent documentary support as a sacred mountain. The
+Q180987 stupa corpus and the OWTRAD route network each reproduce the
+harmonic independently (\S\ref{sec:stupas_q180987}).
 
-The Wikidata Q180987 stupa corpus reproduces the same pattern independently
-(\S\ref{sec:stupas_q180987}).
-
-Geographically, Mount Gerizim lies between the Mediterranean to the west and
-the overland Silk Road \citep{hansen2012silkroad} to the east, placing it
-at a natural node of the corridors through which architectural canons
-circulated in antiquity (Figure~\ref{fig:geo_trail}).
+Geographically, Mount Gerizim lies between the Mediterranean and the
+overland Silk Road \citep{hansen2012silkroad}, placing it at a natural
+node of corridors through which architectural canons circulated in
+antiquity (Figure~\ref{fig:geo_trail}).
 
 
 \appendix
