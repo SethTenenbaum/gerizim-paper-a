@@ -5,7 +5,7 @@
 Seth Tenenbaum · Independent Scholar
 ORCID: [0009-0008-5797-2498](https://orcid.org/0009-0008-5797-2498)
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19821766.svg)](https://doi.org/10.5281/zenodo.19821766)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19868418.svg)](https://doi.org/10.5281/zenodo.19868418)
 
 ---
 
@@ -357,7 +357,7 @@ If you use this code or data, please cite:
 
 > Tenenbaum, S. (2026). Domed Monuments Cluster at Babylonian Bēru Harmonics:
 > A Longitude Enrichment Test on the UNESCO Cultural and Mixed Heritage Corpus.
-> https://doi.org/10.5281/zenodo.19821766
+> https://doi.org/10.5281/zenodo.19868418
 
 ## Contact
 
