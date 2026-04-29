@@ -796,7 +796,8 @@ def make_geo_trail():
         fontsize=8.5, pad=5,
     )
 
-    fig.tight_layout(pad=0.3)
+    # tight_layout is incompatible with Cartopy GeoAxes (axes were manually
+    # positioned above, so no adjustment needed — just suppress the warning).
     outpath = OUTDIR / "fig_geo_trail.pdf"
     fig.savefig(outpath)
     fig.savefig(outpath.with_suffix(".png"))

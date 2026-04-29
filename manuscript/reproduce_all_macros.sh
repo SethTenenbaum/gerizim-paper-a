@@ -84,7 +84,7 @@ if [ "${1:-}" != "--full" ]; then
         analysis/unesco/temporal_gradient_test.py            # → pCochranThree, pCochranFive
         analysis/unesco/deep_temporal_analysis.py            # → peakSigP, pFoundDateSpearman
         analysis/global/anchor_uniqueness_audit.py
-        analysis/unesco/verify_x18_periodicity.py
+        analysis/unesco/verify_phase_peak_periodicity.py
         analysis/global/peak_geography_audit.py
         analysis/global/landmark_anchor_ranking.py
         analysis/global/global_corridor_comparison.py
@@ -98,9 +98,9 @@ if [ "${1:-}" != "--full" ]; then
         analysis/unesco/dome_leave_k_out.py                  # → LKOsiteOne/Two/ThreeName/DevKm, LKOtwo*/three*/worstTwo/ThreeP
         analysis/unesco/evo_leave_k_out.py                   # → EvoLKOnCombosTwo, EvoLKOnCombosThree
         analysis/global/dome_periodicity_audit.py
-        analysis/global/x18_periodicity_formal_test.py       # → rayleighR/Z/PermP, fullRayleighR/Z/PermP, maxApCount/Z/PermP (GROUP 11b)
-        analysis/global/x18_max_permutation_test.py          # → anchorMaxPermObsMax/NullMu/NullSD/Z/P/Nperms/BootMu/BootSD/BootZ/BootP (GROUP 11c)
-        analysis/global/x18_optimal_band_significance.py     # → x18OptApCount/B/N/BinomP/B/Enrich/B  (GROUP 11d)
+        analysis/global/phase_peak_periodicity_formal_test.py       # → rayleighR/Z/PermP, fullRayleighR/Z/PermP, maxApCount/Z/PermP (GROUP 11b)
+        analysis/global/phase_peak_max_permutation_test.py          # → anchorMaxPermObsMax/NullMu/NullSD/Z/P/Nperms/BootMu/BootSD/BootZ/BootP (GROUP 11c)
+        analysis/global/phase_peak_optimal_band_significance.py     # → phasePeakOptApCount/B/N/BinomP/B/Enrich/B  (GROUP 11d)
         # ── Reviewer robustness checks ────────────────────────────────────
         analysis/unesco/dome_footprint_window_sensitivity.py   # → geoNullDomeTwoDeg*, geoNullDomeTenDeg*
         analysis/unesco/stupa_coordinate_perturbation.py       # → stupaCoordPerturb*
@@ -265,8 +265,8 @@ run_script "GROUP 10: Deep Temporal Analysis"                      \
 run_script "GROUP 11: Global Anchor Sweep"                         \
            analysis/global/anchor_uniqueness_audit.py
 
-run_script "GROUP 12: x.18° Periodicity Verification"             \
-           analysis/unesco/verify_x18_periodicity.py
+run_script "GROUP 12: phase-peak° Periodicity Verification"             \
+           analysis/unesco/verify_phase_peak_periodicity.py
 
 run_script "GROUP 12b: Peak Geography Audit"                       \
            analysis/global/peak_geography_audit.py
@@ -305,16 +305,16 @@ run_script "GROUP 20d: Leave-2-out / Leave-3-out Stability (dome corpus)" \
 run_script "GROUP 24: Dome Periodicity Audit"                      \
            analysis/global/dome_periodicity_audit.py
 
-echo "─── GROUP 24b: x.18° Periodicity Formal Test (may take ~30 seconds) ───"
-python3 analysis/global/x18_periodicity_formal_test.py 2>&1 | tail -40
+echo "─── GROUP 24b: phase-peak° Periodicity Formal Test (may take ~30 seconds) ───"
+python3 analysis/global/phase_peak_periodicity_formal_test.py 2>&1 | tail -40
 echo ""
 
-echo "─── GROUP 24c: x.18° Discovery-Corrected Max-Permutation Test (may take several minutes) ───"
-python3 analysis/global/x18_max_permutation_test.py 2>&1 | tail -40
+echo "─── GROUP 24c: phase-peak° Discovery-Corrected Max-Permutation Test (may take several minutes) ───"
+python3 analysis/global/phase_peak_max_permutation_test.py 2>&1 | tail -40
 echo ""
 
-run_script "GROUP 24d: x.18° Optimal Band Binomial Significance (reads store)" \
-           analysis/global/x18_optimal_band_significance.py
+run_script "GROUP 24d: phase-peak° Optimal Band Binomial Significance (reads store)" \
+           analysis/global/phase_peak_optimal_band_significance.py
 
 echo "─── GROUP 25: Simulation Null Model (may take several minutes) ───"
 python3 analysis/unesco/simulation_null_model.py 2>&1 | tail -40
