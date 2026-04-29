@@ -1,4 +1,4 @@
-% Generated macros — 2026-04-27T11:58:21Z
+% Generated macros — 2026-04-29T04:07:33Z
 % Source: bash manuscript/reproduce_all_macros.sh
 % IMPORTANT: values are computed fresh each run — do NOT hardcode
 
@@ -60,7 +60,7 @@
 \newcommand{\NOwtradVertices}{1674}
 \newcommand{\NOwtradMidApp}{74}
 \newcommand{\NOwtradMidAp}{136}
-\newcommand{\NOwtradMidA}{415}
+\newcommand{\NOwtradMidA}{272}
 \newcommand{\NOwtradVertexApp}{72}
 \newcommand{\NOwtradVertexAp}{114}
 \newcommand{\NOwtradVertexA}{242}
@@ -75,14 +75,14 @@
 \newcommand{\owtradDegWAEnrich}{1.18}
 \newcommand{\owtradMidAppEnrich}{1.19}
 \newcommand{\owtradMidApEnrich}{1.09}
-\newcommand{\owtradMidAEnrich}{1.06}
+\newcommand{\owtradMidAEnrich}{1.09}
 \newcommand{\zOwtradVertexApp}{2.56}
 \newcommand{\zOwtradVertexA}{1.98}
 \newcommand{\zOwtradDegWApp}{4.23}
 \newcommand{\zOwtradDegWA}{4.09}
 \newcommand{\zOwtradMidApp}{1.51}
 \newcommand{\zOwtradMidAp}{1.02}
-\newcommand{\zOwtradMidA}{1.19}
+\newcommand{\zOwtradMidA}{1.50}
 \newcommand{\pOwtradVertexApp}{0.0084}
 \newcommand{\pOwtradVertexAp}{0.2708}
 \newcommand{\pOwtradVertexA}{0.0276}
@@ -111,6 +111,15 @@
   \newcommand{\circEnrichApValidated}{2.06}  % enrichment ratio, A+ (context-validated dome corpus)
   \newcommand{\NdomeGateNeg}{28}  % number of negative-context gate patterns (Gate 1)
   \newcommand{\NdomeGatePos}{86}  % number of positive-context gate patterns (Gate 2)
+  \newcommand{\pCircAppValidatedFisher}{0.0020}  % p-value, A++ Fisher exact dome-validated vs corpus
+  \newcommand{\pCircApValidatedFisher}{0.0960}   % p-value, A+ Fisher exact dome-validated vs corpus
+  \newcommand{\pCircAValidatedFisher}{0.0222}    % p-value, A Fisher exact dome-validated vs corpus
+  \newcommand{\circAppValidatedFisherOR}{3.60}  % OR, A++ Fisher exact dome-validated vs corpus
+  \newcommand{\circApValidatedFisherOR}{1.69}   % OR, A+ Fisher exact dome-validated vs corpus
+  \newcommand{\circAValidatedFisherOR}{1.83}    % OR, A Fisher exact dome-validated vs corpus
+  \newcommand{\NcircValidatedApp}{10}  % Tier-A++ hits (context-validated dome corpus)
+  \newcommand{\NcircValidatedAp}{11}   % Tier-A+ hits (context-validated dome corpus)
+  \newcommand{\NcircValidatedA}{20}    % Tier-A hits (context-validated dome corpus)
 
 % --- analysis/unesco/spherical_monument_raw_sweep.py
   \newcommand{\NcircTotal}{90}           % raw-sweep population size
@@ -291,8 +300,8 @@
   \newcommand{\pHinCminus}{0.0112}         % p-value, Hinduism C- tier binomial
   \newcommand{\pHinApCminus}{0.0023}         % joint p: Hinduism A+ >= 4 AND C- >= 7 (multivariate hypergeometric)
   \newcommand{\NBudHinShared}{14}            % Buddhism-Hinduism co-tagged sites
-  \newcommand{\pBudExclJoint}{0.0129}        % joint p: Buddhism exclusive of shared Hindu sites
-  \newcommand{\pHinExclJoint}{0.0027}        % joint p: Hinduism exclusive of shared Buddhist sites
+  \newcommand{\pBudExclJoint}{0.0129}         % joint p: Buddhism exclusive of shared Hindu sites
+  \newcommand{\pHinExclJoint}{0.0027}         % joint p: Hinduism exclusive of shared Buddhist sites
 
 % --- analysis/unesco/founding_sites_analysis.py
   \newcommand{\NthematicTotal}{88}                 % total A+ sites
@@ -438,7 +447,7 @@
   \newcommand{\anchorSweepApStd}{8.8}            % std A+ count across all anchors
   \newcommand{\anchorSweepGlobalMax}{92}           % global max A+ at any anchor
   \newcommand{\anchorSweepGlobalMaxA}{92}           % global max A+ (symmetric corpus)
-  \newcommand{\optimalPhaseApA}{92}           % max A+ at any x.21°E anchor
+  \newcommand{\optimalPhaseApA}{92}           % max A+ at any x.18°E anchor
   \newcommand{\GerizimSweepApp}{44}             % Gerizim A++ in sweep
   \newcommand{\GerizimSweepAp}{88}              % Gerizim A+ in sweep
   \newcommand{\GerizimSweepA}{157}             % Gerizim A in sweep
@@ -479,7 +488,6 @@
   \newcommand{\corridorRivalLon}{11}          % longitude of best rival corridor
   \newcommand{\corridorRivalN}{46}              % best rival corridor match count
   \newcommand{\corridorRivalSum}{3134}           % sum of best rival corridor A+ hits
-
 
 % --- analysis/global/anchor_site_comparison.py
   \newcommand{\LumbiniDevKm}{0.79}          % Lumbini deviation from Gerizim (km)
@@ -853,7 +861,7 @@
 \newcommand{\anchorMaxPermBootMu}{96.37}
 \newcommand{\anchorMaxPermBootSD}{6.67}
 \newcommand{\anchorMaxPermBootZ}{-0.80}
-\newcommand{\anchorMaxPermBootP}{0.7268}
+\newcommand{\anchorMaxPermBootP}{0.8027}
 
 % --- analysis/global/x18_optimal_band_significance.py
 \newcommand{\xOptBandApCount}{92}
@@ -1090,12 +1098,20 @@
 
 % --- analysis/unesco/sensitivity_slope_specificity_test.py
   \newcommand{\NevoValidTotal}{104}              % total dome-evolution corpus (context-validated)
+  \newcommand{\NevoValidApp}{11}               % A++ sites (context-validated)
   \newcommand{\NevoValidAp}{13}               % A+ sites (context-validated)
+  \newcommand{\NevoValidA}{22}               % A sites (context-validated)
   \newcommand{\evoValidApRate}{12.5}             % A+ rate, context-validated (%)
   \newcommand{\evoValidEnrichAp}{1.95}            % enrichment ratio A+ (context-validated)
   \newcommand{\pEvoApValidated}{0.0159}          % p-value A+ binomial, context-validated (Exploratory)
   \newcommand{\pEvoAValidated}{0.0121}           % p-value A  binomial, context-validated (Exploratory)
   \newcommand{\NevoValidRejected}{6}           % sites rejected by context validation
+  \newcommand{\pEvoAppValidatedFisher}{0.0026}  % p-value A++ Fisher exact evo-validated vs corpus
+  \newcommand{\pEvoApValidatedFisher}{0.0730}   % p-value A+ Fisher exact evo-validated vs corpus
+  \newcommand{\pEvoAValidatedFisher}{0.0465}    % p-value A  Fisher exact evo-validated vs corpus
+  \newcommand{\evoAppValidatedFisherOR}{3.18}  % OR A++ Fisher exact evo-validated vs corpus
+  \newcommand{\evoApValidatedFisherOR}{1.69}   % OR A+ Fisher exact evo-validated vs corpus
+  \newcommand{\evoAValidatedFisherOR}{1.60}    % OR A  Fisher exact evo-validated vs corpus
   \newcommand{\permSlopeSpecN}{10000}
   \newcommand{\permSlopeKwN}{22}  % N sites in unambiguous-kw subset (stupa/stupas/tholos)
   \newcommand{\permSlopeCanonBestJointDomeAPP}{0.0503}
@@ -1297,33 +1313,33 @@
   \newcommand{\NsurviveFDR}{22}           % tests surviving BH FDR (q<0.05)
   \newcommand{\NsurviveBonfAll}{5}           % tests surviving Bonferroni (all tests)
   \newcommand{\NtotalTestsP}{0.0012}  % Bonferroni threshold = 0.05/43 (used in FDR table header)
-  \newcommand{\BonfAllSurvivepCircApp}{0.0293}  % full-k Bonferroni survivor
-  \newcommand{\FDRqSurvivepCircApp}{0.0038}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepCircAp}{0.0128}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepCircA}{0.0092}  % BH q-value survivor
-  \newcommand{\FDRqSurviveclusterApBinom}{0.0092}  % BH q-value survivor
-  \newcommand{\FDRqSurviveclusterMWp}{0.0128}  % BH q-value survivor
-  \newcommand{\BonfAllSurviveclusterPermP}{0.0094}  % full-k Bonferroni survivor
-  \newcommand{\FDRqSurviveclusterPermP}{0.0016}  % BH q-value survivor
+  \newcommand{\BonfAllSurvivepCircApp}{0.0268}  % full-k Bonferroni survivor
+  \newcommand{\FDRqSurvivepCircApp}{0.007}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepCircAp}{0.015}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepCircA}{0.0114}  % BH q-value survivor
+  \newcommand{\FDRqSurviveclusterApBinom}{0.0114}  % BH q-value survivor
+  \newcommand{\FDRqSurviveclusterMWp}{0.015}  % BH q-value survivor
+  \newcommand{\BonfAllSurviveclusterPermP}{0.0086}  % full-k Bonferroni survivor
+  \newcommand{\FDRqSurviveclusterPermP}{0.0043}  % BH q-value survivor
   \newcommand{\BonfAllSurviveclusterHarmonicMWp}{0.0004}  % full-k Bonferroni survivor
-  \newcommand{\FDRqSurviveclusterHarmonicMWp}{0.0001}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepPreTwoK}{0.0092}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepFirstHalf}{0.0092}  % BH q-value survivor
-  \newcommand{\BonfAllSurvivepeakSigP}{0.0306}  % full-k Bonferroni survivor
-  \newcommand{\FDRqSurvivepeakSigP}{0.0038}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepReligUnion}{0.0287}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepChrist}{0.0306}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepNeffQuarter}{0.0311}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepNeffHalf}{0.0242}  % BH q-value survivor
-  \newcommand{\FDRqSurviveblockBootZP}{0.0242}  % BH q-value survivor
-  \newcommand{\FDRqSurvivesimKDEP}{0.0092}  % BH q-value survivor
-  \newcommand{\BonfAllSurvivepEvoApp}{0.0392}  % full-k Bonferroni survivor
-  \newcommand{\FDRqSurvivepEvoApp}{0.0044}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepEvoAp}{0.0128}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepEvoStupa}{0.0454}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepHinCminus}{0.0242}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepHinApCminus}{0.0092}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepBudJoint}{0.0242}  % BH q-value survivor
+  \newcommand{\FDRqSurviveclusterHarmonicMWp}{0.0004}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepPreTwoK}{0.0114}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepFirstHalf}{0.0114}  % BH q-value survivor
+  \newcommand{\BonfAllSurvivepeakSigP}{0.028}  % full-k Bonferroni survivor
+  \newcommand{\FDRqSurvivepeakSigP}{0.007}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepReligUnion}{0.0317}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepChrist}{0.0336}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepNeffQuarter}{0.0339}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepNeffHalf}{0.0271}  % BH q-value survivor
+  \newcommand{\FDRqSurviveblockBootZP}{0.0271}  % BH q-value survivor
+  \newcommand{\FDRqSurvivesimKDEP}{0.0114}  % BH q-value survivor
+  \newcommand{\BonfAllSurvivepEvoApp}{0.0359}  % full-k Bonferroni survivor
+  \newcommand{\FDRqSurvivepEvoApp}{0.0072}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepEvoAp}{0.015}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepEvoStupa}{0.0491}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepHinCminus}{0.0271}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepHinApCminus}{0.0114}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepBudJoint}{0.0271}  % BH q-value survivor
 
 % --- analysis/unesco/bonferroni_correction.py
   \newcommand{\BonfK}{3}  % k = confirmatory tests (Tests 1, 2, 3)
@@ -1368,6 +1384,7 @@
   \newcommand{\pBlockFiveSig}{**}  % auto sig label
   \newcommand{\pBlockOneSig}{ns}  % auto sig label
   \newcommand{\pBlockThreeSig}{*}  % auto sig label
+  \newcommand{\pBudExclJointSig}{*}  % auto sig label
   \newcommand{\pBudFisherSig}{ns}  % auto sig label
   \newcommand{\pBudJointSig}{*}  % auto sig label
   \newcommand{\pBudReligSig}{ns}  % auto sig label
@@ -1381,14 +1398,17 @@
   \newcommand{\pChristSig}{*}  % auto sig label
   \newcommand{\pCircAFisherSig}{*}  % auto sig label
   \newcommand{\pCircASig}{**}  % auto sig label
+  \newcommand{\pCircAValidatedFisherSig}{*}  % auto sig label
   \newcommand{\pCircAValidatedSig}{**}  % auto sig label
   \newcommand{\pCircApFisherSig}{*}  % auto sig label
   \newcommand{\pCircApSig}{**}  % auto sig label
+  \newcommand{\pCircApValidatedFisherSig}{$^\dagger$}  % auto sig label
   \newcommand{\pCircApValidatedSig}{*}  % auto sig label
   \newcommand{\pCircAppBootSig}{**}  % auto sig label
   \newcommand{\pCircAppFisherSig}{**}  % auto sig label
   \newcommand{\pCircAppPermSig}{**}  % auto sig label
   \newcommand{\pCircAppSig}{***}  % auto sig label
+  \newcommand{\pCircAppValidatedFisherSig}{**}  % auto sig label
   \newcommand{\pCircChiSig}{$^\dagger$}  % auto sig label
   \newcommand{\pCochranAppFiveSig}{$^\dagger$}  % auto sig label
   \newcommand{\pCochranAppThreeSig}{*}  % auto sig label
@@ -1399,12 +1419,15 @@
   \newcommand{\pEighteenBinomBSig}{***}  % auto sig label
   \newcommand{\pEvoAFisherSig}{*}  % auto sig label
   \newcommand{\pEvoASig}{**}  % auto sig label
+  \newcommand{\pEvoAValidatedFisherSig}{*}  % auto sig label
   \newcommand{\pEvoAValidatedSig}{*}  % auto sig label
   \newcommand{\pEvoApFisherSig}{*}  % auto sig label
   \newcommand{\pEvoApSig}{**}  % auto sig label
+  \newcommand{\pEvoApValidatedFisherSig}{$^\dagger$}  % auto sig label
   \newcommand{\pEvoApValidatedSig}{*}  % auto sig label
   \newcommand{\pEvoAppFisherSig}{**}  % auto sig label
   \newcommand{\pEvoAppSig}{***}  % auto sig label
+  \newcommand{\pEvoAppValidatedFisherSig}{**}  % auto sig label
   \newcommand{\pEvoDomeAFisherSig}{$^\dagger$}  % auto sig label
   \newcommand{\pEvoDomeAppFisherSig}{*}  % auto sig label
   \newcommand{\pEvoDomeFisherSig}{ns}  % auto sig label
@@ -1426,9 +1449,8 @@
   \newcommand{\pHalfFisherSig}{ns}  % auto sig label
   \newcommand{\pHinApCminusSig}{**}  % auto sig label
   \newcommand{\pHinCminusSig}{*}  % auto sig label
-  \newcommand{\pHinJointSig}{**}  % auto sig label
-  \newcommand{\pBudExclJointSig}{*}  % auto sig label
   \newcommand{\pHinExclJointSig}{**}  % auto sig label
+  \newcommand{\pHinJointSig}{**}  % auto sig label
   \newcommand{\pIslamFisherSig}{ns}  % auto sig label
   \newcommand{\pJerusalemApSig}{**}  % auto sig label
   \newcommand{\pJudATierFisherSig}{ns}  % auto sig label
@@ -1456,8 +1478,8 @@
   \newcommand{\pOwtradMidAppPermSig}{$^\dagger$}  % auto sig label
   \newcommand{\pOwtradMidAppPhaseSig}{$^\dagger$}  % auto sig label
   \newcommand{\pOwtradMidAppSig}{$^\dagger$}  % auto sig label
-  \newcommand{\pOwtradVertexApPhaseSig}{ns}  % auto sig label
   \newcommand{\pOwtradVertexASig}{*}  % auto sig label
+  \newcommand{\pOwtradVertexApPhaseSig}{ns}  % auto sig label
   \newcommand{\pOwtradVertexApSig}{ns}  % auto sig label
   \newcommand{\pOwtradVertexAppPhaseSig}{*}  % auto sig label
   \newcommand{\pOwtradVertexAppSig}{**}  % auto sig label
