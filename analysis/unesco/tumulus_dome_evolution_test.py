@@ -53,8 +53,8 @@ from scipy.stats import binomtest, fisher_exact, chisquare
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus
 from lib.beru import (
-    GERIZIM, BERU, TIER_APLUS, TIER_A_MAX,
-    P_NULL_AP, P_NULL_A,
+    GERIZIM, BERU, TIER_APP, TIER_APLUS, TIER_A_MAX,
+    P_NULL_APP, P_NULL_AP, P_NULL_A,
     TIER_APLUS_LABEL, TIER_A_LABEL, TIER_B_LABEL, TIER_C_LABEL,
     deviation as _beru_dev, tier_label, is_aplus, is_a_or_better,
 )
@@ -286,15 +286,53 @@ overlap    = [e for e in selected if "mound" in e["stages"]
 
 # ── Stats ─────────────────────────────────────────────────────────────────────
 N    = len(selected)
+n_app = sum(1 for e in selected if e["dev"] <= TIER_APP)
 n_ap = sum(1 for e in selected if e["ap"])
 n_a  = sum(1 for e in selected if is_a_or_better(e["tier"]))
 n_b  = sum(1 for e in selected if e["tier"] == "B")
 n_c  = sum(1 for e in selected if e["tier"] == "C")
 
+bt_app = binomtest(n_app, N, P_NULL_APP, alternative="greater")
 bt_ap = binomtest(n_ap, N, P_NULL_AP, alternative="greater")
 bt_a  = binomtest(n_a,  N, P_NULL_A,  alternative="greater")
+enr_app = (n_app / N) / P_NULL_APP if N else 0
 enr_ap = (n_ap / N) / P_NULL_AP if N else 0
 enr_a  = (n_a  / N) / P_NULL_A  if N else 0
+
+# ── Fisher exact vs full corpus ───────────────────────────────────────────────
+_full_corpus  = load_corpus()
+N_corpus      = len(_full_corpus)
+
+def _corpus_tier_count_evo(corpus, threshold):
+    count = 0
+    for s in corpus:
+        if s.longitude is None:
+            continue
+        arc = abs(s.longitude - GERIZIM)
+        bv  = arc / BERU
+        dev = abs(bv - round(bv * 10) / 10)
+        if dev <= threshold:
+            count += 1
+    return count
+
+N_corpus_App = _corpus_tier_count_evo(_full_corpus, TIER_APP)
+N_corpus_Ap  = _corpus_tier_count_evo(_full_corpus, TIER_APLUS)
+N_corpus_A   = _corpus_tier_count_evo(_full_corpus, TIER_A_MAX)
+
+def _fisher_vs_corpus_evo(n_evo_in, N_evo, n_corpus_in, N_corpus_total):
+    table = [
+        [n_evo_in,                     N_evo         - n_evo_in],
+        [n_corpus_in - n_evo_in,       N_corpus_total - N_evo - (n_corpus_in - n_evo_in)],
+    ]
+    _, p = fisher_exact(table, alternative="greater")
+    or_ = (n_evo_in * (N_corpus_total - N_evo - (n_corpus_in - n_evo_in))) / max(
+        (N_evo - n_evo_in) * (n_corpus_in - n_evo_in), 1e-9
+    )
+    return p, or_
+
+evo_fisher_p_App, evo_fisher_or_App = _fisher_vs_corpus_evo(n_app, N, N_corpus_App, N_corpus)
+evo_fisher_p_Ap,  evo_fisher_or_Ap  = _fisher_vs_corpus_evo(n_ap,  N, N_corpus_Ap,  N_corpus)
+evo_fisher_p_A,   evo_fisher_or_A   = _fisher_vs_corpus_evo(n_a,   N, N_corpus_A,   N_corpus)
 
 obs_bins = [0] * 5
 for e in selected:
@@ -449,12 +487,20 @@ print("  LATEX MACROS  (context-validated — Exploratory)")
 print(SEP)
 print()
 print(f"  \\newcommand{{\\NevoValidTotal}}{{{N}}}              % total dome-evolution corpus (context-validated)")
+print(f"  \\newcommand{{\\NevoValidApp}}{{{n_app}}}               % A++ sites (context-validated)")
 print(f"  \\newcommand{{\\NevoValidAp}}{{{n_ap}}}               % A+ sites (context-validated)")
+print(f"  \\newcommand{{\\NevoValidA}}{{{n_a}}}               % A sites (context-validated)")
 print(f"  \\newcommand{{\\evoValidApRate}}{{{100*n_ap/N:.1f}}}             % A+ rate, context-validated (%)")
 print(f"  \\newcommand{{\\evoValidEnrichAp}}{{{enr_ap:.2f}}}            % enrichment ratio A+ (context-validated)")
 print(f"  \\newcommand{{\\pEvoApValidated}}{{{bt_ap.pvalue:.4f}}}          % p-value A+ binomial, context-validated (Exploratory)")
 print(f"  \\newcommand{{\\pEvoAValidated}}{{{bt_a.pvalue:.4f}}}           % p-value A  binomial, context-validated (Exploratory)")
 print(f"  \\newcommand{{\\NevoValidRejected}}{{{len(raw_rejected)}}}           % sites rejected by context validation")
+print(f"  \\newcommand{{\\pEvoAppValidatedFisher}}{{{evo_fisher_p_App:.4f}}}  % p-value A++ Fisher exact evo-validated vs corpus")
+print(f"  \\newcommand{{\\pEvoApValidatedFisher}}{{{evo_fisher_p_Ap:.4f}}}   % p-value A+ Fisher exact evo-validated vs corpus")
+print(f"  \\newcommand{{\\pEvoAValidatedFisher}}{{{evo_fisher_p_A:.4f}}}    % p-value A  Fisher exact evo-validated vs corpus")
+print(f"  \\newcommand{{\\evoAppValidatedFisherOR}}{{{evo_fisher_or_App:.2f}}}  % OR A++ Fisher exact evo-validated vs corpus")
+print(f"  \\newcommand{{\\evoApValidatedFisherOR}}{{{evo_fisher_or_Ap:.2f}}}   % OR A+ Fisher exact evo-validated vs corpus")
+print(f"  \\newcommand{{\\evoAValidatedFisherOR}}{{{evo_fisher_or_A:.2f}}}    % OR A  Fisher exact evo-validated vs corpus")
 
 # NOTE: Stage-level evo* macros (evoDomeApRate, pEvoDome, etc.) are emitted by
 # tumulus_dome_evolution_raw_sweep.py (authoritative). Do not emit them here.
@@ -462,16 +508,23 @@ print()
 
 # ── Write to results store ────────────────────────────────────────────────────
 ResultsStore().write_many({
-    "pEvoAp_validated": bt_ap.pvalue,     # binomial p, A+ (evolution, context-validated) — Exploratory 2bx
-    "pEvoA_validated":  bt_a.pvalue,      # binomial p, A  (evolution, context-validated)
-    "NevoValidTotal":   N,                # corpus size, context-validated
-    "NevoValidAp":      n_ap,             # A+ hits, context-validated
-    "NevoValidRejected": len(raw_rejected), # sites removed by context filter
-    # camelCase mirrors used by tumulus_dome_evolution_raw_sweep.py comparison table
+    "pEvoAp_validated": bt_ap.pvalue,
+    "pEvoA_validated":  bt_a.pvalue,
+    "NevoValidTotal":   N,
+    "NevoValidApp":     n_app,
+    "NevoValidAp":      n_ap,
+    "NevoValidA":       n_a,
+    "NevoValidRejected": len(raw_rejected),
     "pEvoApValidated":      bt_ap.pvalue,
     "pEvoAValidated":       bt_a.pvalue,
     "evoApValidatedRate":   round(100.0 * n_ap / N, 1) if N else 0.0,
     "evoEnrichApValidated": round(((n_ap / N) / P_NULL_AP) if N else 0.0, 4),
+    "pEvoAppValidatedFisher": evo_fisher_p_App,
+    "pEvoApValidatedFisher":  evo_fisher_p_Ap,
+    "pEvoAValidatedFisher":   evo_fisher_p_A,
+    "evoAppValidatedFisherOR": round(evo_fisher_or_App, 2),
+    "evoApValidatedFisherOR":  round(evo_fisher_or_Ap,  2),
+    "evoAValidatedFisherOR":   round(evo_fisher_or_A,   2),
     **{f"evo{sfx}ApRate": round(100 * stage_stat_results[k]["rate"], 1)
        for k, sfx in [("dome","Dome"),("mound","Mound"),("stupa","Stupa")]
        if k in stage_stat_results},

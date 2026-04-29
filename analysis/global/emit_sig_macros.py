@@ -57,12 +57,18 @@ EXPLICIT_P_KEYS = {
     "clusterApBinom", "clusterMWp", "clusterPermP", "clusterHarmonicMWp",
     # Dome / spherical raw sweep
     "pCircAp", "pCircA", "pCircApFisher", "pCircAFisher", "pCircChi",
+    "pCircApp",
+    # Dome / spherical context-validated Fisher exact vs corpus
+    "pCircAppValidatedFisher", "pCircApValidatedFisher", "pCircAValidatedFisher",
+    "pCircApValidated", "pCircAValidated",
     # Evolution — Fisher and binomial
     "pEvoAp", "pEvoApFisher",
     "pEvoStupaIndonesiaP",
     "pEvoMoundFisher", "pEvoStupaFisher", "pEvoDomeFisher",
     "pEvoAFisher", "pEvoStupaAFisher", "pEvoDomeAFisher", "pEvoMoundAFisher",
     "pEvoApValidated",
+    # Evolution — context-validated Fisher exact vs corpus (2bx)
+    "pEvoAppValidatedFisher", "pEvoApValidatedFisher", "pEvoAValidatedFisher",
     "pEvoMoundAppFisher", "pEvoStupaAppFisher", "pEvoDomeAppFisher",
     # Religion
     "pReligUnion", "pReligChiSq", "pBudJoint", "pHinJoint",

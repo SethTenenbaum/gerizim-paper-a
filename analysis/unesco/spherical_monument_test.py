@@ -2,14 +2,14 @@ import re
 import sys
 import numpy as np
 from pathlib import Path
-from scipy.stats import binomtest, chisquare
+from scipy.stats import binomtest, chisquare, fisher_exact
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus
 from lib.results_store import ResultsStore
 from lib.beru import (
-    GERIZIM, BERU, TIER_APLUS, TIER_A_MAX, TIER_B_MAX,
-    P_NULL_AP, P_NULL_A,
+    GERIZIM, BERU, TIER_APP, TIER_APLUS, TIER_A_MAX, TIER_B_MAX,
+    P_NULL_APP, P_NULL_AP, P_NULL_A,
     TIER_APLUS_LABEL, TIER_A_LABEL, TIER_B_LABEL, TIER_C_LABEL,
     deviation as _beru_dev, tier_label, is_aplus, is_a_or_better,
 )
@@ -251,12 +251,14 @@ for s in sorted(sites, key=lambda x: x["dev"]):
 
 # ── Statistical tests ─────────────────────────────────────────────────────────
 N        = len(sites)
+n_App    = sum(1 for s in sites if s["dev"] <= TIER_APP)
 n_Ap     = sum(1 for s in sites if is_aplus(s["tier"]))
 n_A      = sum(1 for s in sites if is_a_or_better(s["tier"]))
 n_B      = sum(1 for s in sites if s["tier"] == "B")
 n_C      = sum(1 for s in sites if s["tier"] == "C")
 mean_dev = sum(s["dev"] for s in sites) / N if N else 0
 
+bt_App = binomtest(n_App, N, P_NULL_APP, alternative="greater")
 bt_Ap = binomtest(n_Ap, N, P_NULL_AP, alternative="greater")
 bt_A  = binomtest(n_A,  N, P_NULL_A,  alternative="greater")
 
@@ -275,6 +277,9 @@ print("=" * 100)
 print()
 print(f"  {'Metric':<45s}  {'Obs':>5}  {'Exp(H₀)':>9}  {'Ratio':>7}  {'p':>8}  Sig")
 print(f"  {'-'*90}")
+print(f"  {f'Tier-A++ ({TIER_APP:.4f} beru)':<45s}  {n_App:>5d}  "
+      f"{N*P_NULL_APP:>9.2f}  {n_App/max(N*P_NULL_APP,0.001):>6.2f}×  "
+      f"{bt_App.pvalue:>8.4f}  {sig(bt_App.pvalue)}")
 print(f"  {f'Tier-A+ ({TIER_APLUS_LABEL})':<45s}  {n_Ap:>5d}  "
       f"{N*P_NULL_AP:>9.2f}  {n_Ap/max(N*P_NULL_AP,0.001):>6.2f}×  "
       f"{bt_Ap.pvalue:>8.4f}  {sig(bt_Ap.pvalue)}")
@@ -286,6 +291,59 @@ print(f"  {f'Tier-C  ({TIER_C_LABEL})':<45s}  {n_C:>5d}")
 print(f"  {'Mean deviation':<45s}  {mean_dev:>5.4f} beru  ({mean_dev*BERU*111:.1f} km)")
 print(f"  {'χ²-uniform (5 bins, 0–0.05 beru, df=4)':<45s}  "
       f"{'':>5}  {'':>9}  {'':>7}  {chi_p:>8.4f}  {sig(chi_p)}")
+
+# ── Fisher exact: dome (validated) vs full corpus ─────────────────────────────
+# Load full corpus counts for the Fisher table
+from data.unesco_corpus import load_corpus as _load_corpus
+_full = [s for s in _load_corpus() if s.category != "Natural" and s.has_coords]
+N_corpus = len(_full)
+
+def _corpus_tier_count(corpus, threshold):
+    count = 0
+    for s in corpus:
+        arc = abs(s.longitude - GERIZIM)
+        bv  = arc / BERU
+        dev = abs(bv - round(bv * 10) / 10)
+        if dev <= threshold:
+            count += 1
+    return count
+
+N_corpus_App = _corpus_tier_count(_full, TIER_APP)
+N_corpus_Ap  = _corpus_tier_count(_full, TIER_APLUS)
+N_corpus_A   = _corpus_tier_count(_full, TIER_A_MAX)
+
+# Fisher contingency: [[dome_in, dome_not], [corpus_in, corpus_not]]
+def _fisher_vs_corpus(n_dome_in, N_dome, n_corpus_in, N_corpus):
+    table = [
+        [n_dome_in,          N_dome   - n_dome_in],
+        [n_corpus_in - n_dome_in, N_corpus - N_dome - (n_corpus_in - n_dome_in)],
+    ]
+    _, p = fisher_exact(table, alternative="greater")
+    or_ = (n_dome_in * (N_corpus - N_dome - (n_corpus_in - n_dome_in))) / max(
+        (N_dome - n_dome_in) * (n_corpus_in - n_dome_in), 1e-9
+    )
+    return p, or_
+
+fisher_p_App, fisher_or_App = _fisher_vs_corpus(n_App, N, N_corpus_App, N_corpus)
+fisher_p_Ap,  fisher_or_Ap  = _fisher_vs_corpus(n_Ap,  N, N_corpus_Ap,  N_corpus)
+fisher_p_A,   fisher_or_A   = _fisher_vs_corpus(n_A,   N, N_corpus_A,   N_corpus)
+
+print()
+print("=" * 100)
+print(f"  FISHER EXACT: dome (context-validated, N={N}) vs full corpus (N={N_corpus})")
+print(f"  H₁: dome tier rate > corpus tier rate  (one-tailed, greater)")
+print("=" * 100)
+print()
+print(f"  {'Tier':<12}  {'Dome in':>8}  {'Dome N':>7}  {'Corp in':>8}  {'Corp N':>7}  {'OR':>6}  {'p':>10}  Sig")
+print(f"  {'-'*80}")
+for tier_lbl, n_in, n_corp_in in [
+    ("A++", n_App, N_corpus_App),
+    ("A+",  n_Ap,  N_corpus_Ap),
+    ("A",   n_A,   N_corpus_A),
+]:
+    p_, or_ = _fisher_vs_corpus(n_in, N, n_corp_in, N_corpus)
+    print(f"  {tier_lbl:<12}  {n_in:>8}  {N:>7}  {n_corp_in:>8}  {N_corpus:>7}  "
+          f"{or_:>6.2f}  {p_:>10.4f}  {sig(p_)}")
 
 # Histogram
 print()
@@ -428,17 +486,35 @@ print(f"  \\newcommand{{\\pCircAValidated}}{{{bt_A.pvalue:.4f}}}   % p-value, A 
 print(f"  \\newcommand{{\\circEnrichApValidated}}{{{enr_Ap:.2f}}}  % enrichment ratio, A+ (context-validated dome corpus)")
 print(f"  \\newcommand{{\\NdomeGateNeg}}{{{len(NEGATIVE_CONTEXT)}}}  % number of negative-context gate patterns (Gate 1)")
 print(f"  \\newcommand{{\\NdomeGatePos}}{{{len(POSITIVE_CONTEXT)}}}  % number of positive-context gate patterns (Gate 2)")
+print(f"  \\newcommand{{\\pCircAppValidatedFisher}}{{{fisher_p_App:.4f}}}  % p-value, A++ Fisher exact dome-validated vs corpus")
+print(f"  \\newcommand{{\\pCircApValidatedFisher}}{{{fisher_p_Ap:.4f}}}   % p-value, A+ Fisher exact dome-validated vs corpus")
+print(f"  \\newcommand{{\\pCircAValidatedFisher}}{{{fisher_p_A:.4f}}}    % p-value, A Fisher exact dome-validated vs corpus")
+print(f"  \\newcommand{{\\circAppValidatedFisherOR}}{{{fisher_or_App:.2f}}}  % OR, A++ Fisher exact dome-validated vs corpus")
+print(f"  \\newcommand{{\\circApValidatedFisherOR}}{{{fisher_or_Ap:.2f}}}   % OR, A+ Fisher exact dome-validated vs corpus")
+print(f"  \\newcommand{{\\circAValidatedFisherOR}}{{{fisher_or_A:.2f}}}    % OR, A Fisher exact dome-validated vs corpus")
+print(f"  \\newcommand{{\\NcircValidatedApp}}{{{n_App}}}  % Tier-A++ hits (context-validated dome corpus)")
+print(f"  \\newcommand{{\\NcircValidatedAp}}{{{n_Ap}}}   % Tier-A+ hits (context-validated dome corpus)")
+print(f"  \\newcommand{{\\NcircValidatedA}}{{{n_A}}}    % Tier-A hits (context-validated dome corpus)")
 print()
 
 # ── Write to results store ────────────────────────────────────────────────────
 ResultsStore().write_many({
-    "pCircAp_validated": bt_Ap.pvalue,   # binomial p, A+ (context-validated dome corpus) — Exploratory 2x
-    "pCircA_validated":  bt_A.pvalue,    # binomial p, A  (context-validated dome corpus)
+    "pCircAp_validated": bt_Ap.pvalue,
+    "pCircA_validated":  bt_A.pvalue,
     # camelCase mirrors (used by raw-sweep comparison table and emit_sig_macros)
     "pCircApValidated":      bt_Ap.pvalue,
     "pCircAValidated":       bt_A.pvalue,
     "circEnrichApValidated": round(float(enr_Ap), 4),
     "NcircValidated":        N,
     "NcircValidatedAp":      n_Ap,
+    "NcircValidatedApp":     n_App,
+    "NcircValidatedA":       n_A,
     "NcircValidatedApRate":  round(100.0 * n_Ap / N, 1) if N else 0.0,
+    # Fisher exact: dome-validated vs full corpus
+    "pCircAppValidatedFisher":   fisher_p_App,
+    "pCircApValidatedFisher":    fisher_p_Ap,
+    "pCircAValidatedFisher":     fisher_p_A,
+    "circAppValidatedFisherOR":  round(fisher_or_App, 2),
+    "circApValidatedFisherOR":   round(fisher_or_Ap, 2),
+    "circAValidatedFisherOR":    round(fisher_or_A, 2),
 })
