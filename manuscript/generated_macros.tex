@@ -1,4 +1,4 @@
-% Generated macros — 2026-05-01T00:24:41Z
+% Generated macros — 2026-05-01T13:03:08Z
 % Source: bash manuscript/reproduce_all_macros.sh
 % IMPORTANT: values are computed fresh each run — do NOT hardcode
 
@@ -31,16 +31,16 @@
   \newcommand{\ATierThreshKm}{21}  % A-tier threshold (km, equatorial)
   \newcommand{\BTierThreshDeg}{1.5}  % B-tier threshold (degrees)
   \newcommand{\BTierThreshKm}{166}  % B-tier threshold (km, equatorial)
-  \newcommand{\ApThreshBeru}{0.00321}  % A+ threshold (beru) — appendix use
+  \newcommand{\ApThreshBeru}{0.0032099999999999997}  % A+ threshold (beru) — appendix use
   \newcommand{\AppThreshBeru}{0.0016}  % A++ threshold (beru) — appendix use
-  \newcommand{\ATierThreshBeru}{0.00642}  % A-tier threshold (beru) — appendix use
+  \newcommand{\ATierThreshBeru}{0.0064199999999999995}  % A-tier threshold (beru) — appendix use
   \newcommand{\BTierThreshBeru}{0.05}  % B-tier threshold (beru) — appendix use
   \newcommand{\CMinusThreshDeg}{0.0963}  % C− threshold (degrees)
   \newcommand{\CMinusThreshKm}{10.7}  % C− threshold (km)
   \newcommand{\CTierThreshDeg}{0.1926}  % C-tier threshold (degrees)
   \newcommand{\CMinusTwoThreshDeg}{0.048}  % C−− threshold (degrees)
-  \newcommand{\CMinusThreshBeru}{0.00321}  % C− threshold (beru) — appendix use
-  \newcommand{\CTierThreshBeru}{0.00642}  % C-tier threshold (beru) — appendix use
+  \newcommand{\CMinusThreshBeru}{0.0032099999999999997}  % C− threshold (beru) — appendix use
+  \newcommand{\CTierThreshBeru}{0.0064199999999999995}  % C-tier threshold (beru) — appendix use
   \newcommand{\CMinusTwoThreshBeru}{0.0016}  % C−− threshold (beru) — appendix use
   \newcommand{\NullRateApPct}{6.42}  % A+ null rate as plain number (no %)
   \newcommand{\NullRateApFormula}{$2 \times 0.0963^\circ / 1.5^\circ$}  % null rate formula in degrees
@@ -75,10 +75,10 @@
 
 % --- analysis/global/geodesic_sensitivity.py
   \newcommand{\GeodesicApCurrent}{88}  % A+ count under angular criterion
-  \newcommand{\GeodesicApPhysical}{109}  % A+ count under 10.689300000000001-km geodesic threshold
-  \newcommand{\GeodesicDropOut}{0}  % angular A+ sites that exceed 10.689300000000001 km physically
-  \newcommand{\GeodesicGainIn}{21}  % non-A+ sites within 10.689300000000001 km physically
-  \newcommand{\GeodesicThresholdKm}{10.689300000000001}  % physical km threshold used in geodesic check
+  \newcommand{\GeodesicApPhysical}{109}  % A+ count under 10.6893-km geodesic threshold
+  \newcommand{\GeodesicDropOut}{0}  % angular A+ sites that exceed 10.6893 km physically
+  \newcommand{\GeodesicGainIn}{21}  % non-A+ sites within 10.6893 km physically
+  \newcommand{\GeodesicThresholdKm}{10.6893}  % physical km threshold used in geodesic check
   \newcommand{\GeodesicKmPerDegAtSixty}{55.7}  % east-west km per degree at 60.0°N
 
 % --- analysis/global/owtrad_route_alignment.py
@@ -362,6 +362,64 @@
   \newcommand{\NmetaKeywords}{1741}          % total keyword permutations tested
   \newcommand{\NmetaBeatingChi}{703}           % keywords beating Gerizim chi-sq
   \newcommand{\metaBeatingChiPct}{40.4}         % % of keywords beating Gerizim chi-sq
+
+% --- analysis/unesco/keyword_sensitivity_stupa.py
+\newcommand{\kwSensCombinedAN}{20}
+\newcommand{\kwSensCombinedAOR}{2.15}
+\newcommand{\kwSensCombinedAP}{0.0056}
+\newcommand{\kwSensCombinedARate}{24.1}
+\newcommand{\kwSensCombinedApN}{11}
+\newcommand{\kwSensCombinedApOR}{2.22}
+\newcommand{\kwSensCombinedApP}{0.0234}
+\newcommand{\kwSensCombinedApRate}{13.3}
+\newcommand{\kwSensCombinedAppN}{10}
+\newcommand{\kwSensCombinedAppOR}{4.19}
+\newcommand{\kwSensCombinedAppP}{< 0.001}
+\newcommand{\kwSensCombinedAppRate}{12.0}
+\newcommand{\kwSensCombinedN}{83}
+\newcommand{\kwSensDomeAN}{14}
+\newcommand{\kwSensDomeAOR}{1.86}
+\newcommand{\kwSensDomeAP}{0.0414}
+\newcommand{\kwSensDomeARate}{21.5}
+\newcommand{\kwSensDomeApN}{7}
+\newcommand{\kwSensDomeApOR}{1.76}
+\newcommand{\kwSensDomeApP}{0.1365}
+\newcommand{\kwSensDomeApRate}{10.8}
+\newcommand{\kwSensDomeAppN}{6}
+\newcommand{\kwSensDomeAppOR}{3.11}
+\newcommand{\kwSensDomeAppP}{0.0230}
+\newcommand{\kwSensDomeAppRate}{9.2}
+\newcommand{\kwSensDomeN}{65}
+\newcommand{\kwSensMoundAN}{0}
+\newcommand{\kwSensMoundApN}{0}
+\newcommand{\kwSensMoundAppN}{0}
+\newcommand{\kwSensMoundN}{0}
+\newcommand{\kwSensNoStupaAN}{14}
+\newcommand{\kwSensNoStupaAOR}{1.86}
+\newcommand{\kwSensNoStupaAP}{0.0414}
+\newcommand{\kwSensNoStupaARate}{21.5}
+\newcommand{\kwSensNoStupaApN}{7}
+\newcommand{\kwSensNoStupaApOR}{1.76}
+\newcommand{\kwSensNoStupaApP}{0.1365}
+\newcommand{\kwSensNoStupaApRate}{10.8}
+\newcommand{\kwSensNoStupaAppN}{6}
+\newcommand{\kwSensNoStupaAppOR}{3.11}
+\newcommand{\kwSensNoStupaAppP}{0.0230}
+\newcommand{\kwSensNoStupaAppRate}{9.2}
+\newcommand{\kwSensNoStupaN}{65}
+\newcommand{\kwSensStupaAN}{6}
+\newcommand{\kwSensStupaAOR}{3.39}
+\newcommand{\kwSensStupaAP}{0.0229}
+\newcommand{\kwSensStupaARate}{33.3}
+\newcommand{\kwSensStupaApN}{4}
+\newcommand{\kwSensStupaApOR}{4.16}
+\newcommand{\kwSensStupaApP}{0.0277}
+\newcommand{\kwSensStupaApRate}{22.2}
+\newcommand{\kwSensStupaAppN}{4}
+\newcommand{\kwSensStupaAppOR}{8.74}
+\newcommand{\kwSensStupaAppP}{0.0027}
+\newcommand{\kwSensStupaAppRate}{22.2}
+\newcommand{\kwSensStupaN}{18}
 
 % --- analysis/unesco/temporal_gradient_test.py
   \newcommand{\ZcochranThree}{-1.001}       % Cochran-Armitage Z, A+, 3-bin
@@ -881,6 +939,31 @@
 \newcommand{\anchorMaxPermBootZ}{-0.80}
 \newcommand{\anchorMaxPermBootP}{0.8027}
 
+% --- analysis/global/phase_envelope_analysis.py
+  \newcommand{\phaseFullMin}{51}
+  \newcommand{\phaseFullMedian}{64.0}
+  \newcommand{\phaseFullMax}{91}
+  \newcommand{\phaseFullPhiMax}{2.21}
+  \newcommand{\phaseFullFracSig}{6.3}
+  \newcommand{\phaseFullFracSigStrict}{0.3}
+  \newcommand{\phaseFullWorstP}{0.9712}
+  \newcommand{\phaseFullMedianP}{0.5645}
+  \newcommand{\phaseFullGerCount}{88}
+  \newcommand{\phaseFullGerPctile}{99.3}
+  \newcommand{\phaseDomeMin}{2}
+  \newcommand{\phaseDomeMedian}{5.0}
+  \newcommand{\phaseDomeMax}{16}
+  \newcommand{\phaseDomePhiMax}{2.20}
+  \newcommand{\phaseDomeFracSig}{7.0}
+  \newcommand{\phaseDomeFracSigStrict}{1.3}
+  \newcommand{\phaseDomeWorstP}{0.9817}
+  \newcommand{\phaseDomeMedianP}{0.6926}
+  \newcommand{\phaseDomeGerCount}{13}
+  \newcommand{\phaseDomeGerPctile}{97.3}
+  \newcommand{\phaseGerizimPhase}{2.2690}
+  \newcommand{\phaseNphases}{300}
+  \newcommand{\phaseStep}{0.01}
+
 % --- analysis/unesco/dome_footprint_window_sensitivity.py
   \newcommand{\geoNullDomeTwoDegN}{761}
   \newcommand{\geoNullDomeTwoDegMean}{7.2}
@@ -1024,7 +1107,7 @@
   \newcommand{\sweepZeroElevenDomeP}{0.1112}   % p(Dome), 0.11-beru
   \newcommand{\sweepZeroElevenFullHits}{64}   % full hits, 0.11-beru
   \newcommand{\sweepZeroElevenFullP}{0.2691}   % p(Full), 0.11-beru
-  \newcommand{\sweepZeroTwelveNull}{5.4\%}   % null rate, 0.12-beru
+  \newcommand{\sweepZeroTwelveNull}{5.3\%}   % null rate, 0.12-beru
   \newcommand{\sweepZeroTwelveDomeHits}{5}   % dome hits, 0.12-beru
   \newcommand{\sweepZeroTwelveDomeP}{0.4589}   % p(Dome), 0.12-beru
   \newcommand{\sweepZeroTwelveFullHits}{55}   % full hits, 0.12-beru
@@ -1388,6 +1471,17 @@
   \newcommand{\geoNullDomeRestrictedPSig}{*}  % auto sig label
   \newcommand{\geoNullDomeRestrictedPtenSig}{*}  % auto sig label
   \newcommand{\geoNullDomeRestrictedPtwoSig}{*}  % auto sig label
+  \newcommand{\kwSensCombinedAPSig}{**}  % auto sig label
+  \newcommand{\kwSensCombinedApPSig}{*}  % auto sig label
+  \newcommand{\kwSensDomeAPSig}{*}  % auto sig label
+  \newcommand{\kwSensDomeApPSig}{ns}  % auto sig label
+  \newcommand{\kwSensDomeAppPSig}{*}  % auto sig label
+  \newcommand{\kwSensNoStupaAPSig}{*}  % auto sig label
+  \newcommand{\kwSensNoStupaApPSig}{ns}  % auto sig label
+  \newcommand{\kwSensNoStupaAppPSig}{*}  % auto sig label
+  \newcommand{\kwSensStupaAPSig}{*}  % auto sig label
+  \newcommand{\kwSensStupaApPSig}{*}  % auto sig label
+  \newcommand{\kwSensStupaAppPSig}{**}  % auto sig label
   \newcommand{\pAdjTestOneSig}{**}  % auto sig label
   \newcommand{\pAdjTestThreeSig}{***}  % auto sig label
   \newcommand{\pAdjTestTwoSig}{*}  % auto sig label
@@ -1529,93 +1623,3 @@
   \newcommand{\wikiNonHeartlandCbandPSig}{ns}  % auto sig label
   \newcommand{\wikiStupaATierBinomPSig}{*}  % auto sig label
 
-  \newcommand{\phaseFullMin}{51}
-  \newcommand{\phaseFullMedian}{64.0}
-  \newcommand{\phaseFullMax}{91}
-  \newcommand{\phaseFullPhiMax}{2.21}
-  \newcommand{\phaseFullFracSig}{6.3}
-  \newcommand{\phaseFullFracSigStrict}{0.3}
-  \newcommand{\phaseFullWorstP}{0.9712}
-  \newcommand{\phaseFullMedianP}{0.5645}
-  \newcommand{\phaseFullGerCount}{88}
-  \newcommand{\phaseFullGerPctile}{99.3}
-  \newcommand{\phaseDomeMin}{2}
-  \newcommand{\phaseDomeMedian}{5.0}
-  \newcommand{\phaseDomeMax}{16}
-  \newcommand{\phaseDomePhiMax}{2.20}
-  \newcommand{\phaseDomeFracSig}{7.0}
-  \newcommand{\phaseDomeFracSigStrict}{1.3}
-  \newcommand{\phaseDomeWorstP}{0.9817}
-  \newcommand{\phaseDomeMedianP}{0.6926}
-  \newcommand{\phaseDomeGerCount}{13}
-  \newcommand{\phaseDomeGerPctile}{97.3}
-  \newcommand{\phaseGerizimPhase}{2.2690}
-  \newcommand{\phaseNphases}{300}
-  \newcommand{\phaseStep}{0.01}
-\newcommand{\kwSensCombinedAN}{20}
-\newcommand{\kwSensCombinedAOR}{2.15}
-\newcommand{\kwSensCombinedAP}{0.0056}
-\newcommand{\kwSensCombinedARate}{24.1}
-\newcommand{\kwSensCombinedApN}{11}
-\newcommand{\kwSensCombinedApOR}{2.22}
-\newcommand{\kwSensCombinedApP}{0.0234}
-\newcommand{\kwSensCombinedApRate}{13.3}
-\newcommand{\kwSensCombinedAppN}{10}
-\newcommand{\kwSensCombinedAppOR}{4.19}
-\newcommand{\kwSensCombinedAppP}{< 0.001}
-\newcommand{\kwSensCombinedAppRate}{12.0}
-\newcommand{\kwSensCombinedN}{83}
-\newcommand{\kwSensDomeAN}{14}
-\newcommand{\kwSensDomeAOR}{1.86}
-\newcommand{\kwSensDomeAP}{0.0414}
-\newcommand{\kwSensDomeARate}{21.5}
-\newcommand{\kwSensDomeApN}{7}
-\newcommand{\kwSensDomeApOR}{1.76}
-\newcommand{\kwSensDomeApP}{0.1365}
-\newcommand{\kwSensDomeApRate}{10.8}
-\newcommand{\kwSensDomeAppN}{6}
-\newcommand{\kwSensDomeAppOR}{3.11}
-\newcommand{\kwSensDomeAppP}{0.0230}
-\newcommand{\kwSensDomeAppRate}{9.2}
-\newcommand{\kwSensDomeN}{65}
-\newcommand{\kwSensMoundAN}{0}
-\newcommand{\kwSensMoundApN}{0}
-\newcommand{\kwSensMoundAppN}{0}
-\newcommand{\kwSensMoundN}{0}
-\newcommand{\kwSensNoStupaAN}{14}
-\newcommand{\kwSensNoStupaAOR}{1.86}
-\newcommand{\kwSensNoStupaAP}{0.0414}
-\newcommand{\kwSensNoStupaARate}{21.5}
-\newcommand{\kwSensNoStupaApN}{7}
-\newcommand{\kwSensNoStupaApOR}{1.76}
-\newcommand{\kwSensNoStupaApP}{0.1365}
-\newcommand{\kwSensNoStupaApRate}{10.8}
-\newcommand{\kwSensNoStupaAppN}{6}
-\newcommand{\kwSensNoStupaAppOR}{3.11}
-\newcommand{\kwSensNoStupaAppP}{0.0230}
-\newcommand{\kwSensNoStupaAppRate}{9.2}
-\newcommand{\kwSensNoStupaN}{65}
-\newcommand{\kwSensStupaAN}{6}
-\newcommand{\kwSensStupaAOR}{3.39}
-\newcommand{\kwSensStupaAP}{0.0229}
-\newcommand{\kwSensStupaARate}{33.3}
-\newcommand{\kwSensStupaApN}{4}
-\newcommand{\kwSensStupaApOR}{4.16}
-\newcommand{\kwSensStupaApP}{0.0277}
-\newcommand{\kwSensStupaApRate}{22.2}
-\newcommand{\kwSensStupaAppN}{4}
-\newcommand{\kwSensStupaAppOR}{8.74}
-\newcommand{\kwSensStupaAppP}{0.0027}
-\newcommand{\kwSensStupaAppRate}{22.2}
-\newcommand{\kwSensStupaN}{18}
-  \newcommand{\kwSensCombinedAPSig}{**}  % auto sig label
-  \newcommand{\kwSensCombinedApPSig}{*}  % auto sig label
-  \newcommand{\kwSensDomeAPSig}{*}  % auto sig label
-  \newcommand{\kwSensDomeApPSig}{ns}  % auto sig label
-  \newcommand{\kwSensDomeAppPSig}{*}  % auto sig label
-  \newcommand{\kwSensNoStupaAPSig}{*}  % auto sig label
-  \newcommand{\kwSensNoStupaApPSig}{ns}  % auto sig label
-  \newcommand{\kwSensNoStupaAppPSig}{*}  % auto sig label
-  \newcommand{\kwSensStupaAPSig}{*}  % auto sig label
-  \newcommand{\kwSensStupaApPSig}{*}  % auto sig label
-  \newcommand{\kwSensStupaAppPSig}{**}  % auto sig label

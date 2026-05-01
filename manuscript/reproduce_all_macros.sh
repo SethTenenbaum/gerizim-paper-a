@@ -82,6 +82,7 @@ if [ "${1:-}" != "--full" ]; then
         analysis/unesco/founding_sites_analysis.py           # → pFoundKwFisher
         analysis/unesco/sacred_origin_test.py
         analysis/unesco/meta_keyword_test.py
+        analysis/unesco/keyword_sensitivity_stupa.py         # → kwSensStupa/Mound/NoStupa N/App/Ap counts+p
         analysis/unesco/temporal_gradient_test.py            # → pCochranThree, pCochranFive
         analysis/unesco/deep_temporal_analysis.py            # → peakSigP, pFoundDateSpearman
         analysis/global/anchor_uniqueness_audit.py

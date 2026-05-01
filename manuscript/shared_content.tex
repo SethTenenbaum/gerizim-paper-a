@@ -7,9 +7,9 @@
 
 This study reports a statistically significant 3\textdegree{} longitudinal
 periodicity in the externally curated UNESCO Cultural and Mixed World Heritage
-corpus ($N = \NclusterTotal$). All deviations are computed from Mount Gerizim
-(\GerizimLon\textdegree{}E), a historically documented meridian reference
-(\S\ref{sec:anchor}). Sites within $\leq\ApThreshKm{}$~km of a
+corpus ($N = \NclusterTotal$). Deviations are computed from a 3\textdegree{} grid
+whose phase is referenced to Mount Gerizim (\GerizimLon\textdegree{}E), a
+historically documented candidate meridian (\S\ref{sec:anchor}). Sites within $\leq\ApThreshKm{}$~km of a
 3\textdegree{}-grid node are designated Tier-A+ ($P_0 = \NullRateAp{}$);
 the full corpus yields \NclusterAp{} A+ sites against \NclusterExpAp{} expected,
 a significant excess concentrated in domed monuments (Test~2) and in harmonics
@@ -55,24 +55,49 @@ The ICOMOS-IAU thematic study \citep{ruggles2010icomos} provides
 institutional context for archaeoastronomical analysis of World Heritage
 properties.
 
-\subsection{The Anchor: Mount Gerizim}
+\subsection{Reference Phase and Candidate Anchors}
 \label{sec:anchor}
 
-All harmonic deviations in this study are computed from Mount Gerizim
-(\GerizimLon\textdegree{}E). Gerizim is chosen because of its independently
-documented \textit{tabbur ha-aretz} (``navel of the earth'') cosmographic role
-in Samaritan tradition \citep{purvis1968,macdonald1964,crown1989}; at 881~m in
-the central highlands it would have served as a natural survey reference. This
-justification predates the analysis entirely.
+The harmonic deviations in this study are computed from Mount Gerizim
+(\GerizimLon\textdegree{}E) as the \textit{a priori} reference phase.
+Gerizim is chosen because of its independently documented
+\textit{tabbur ha-aretz} (``navel of the earth'') cosmographic role in
+Samaritan tradition \citep{purvis1968,macdonald1964,crown1989}, a
+justification that predates the analysis entirely.
+
+\textbf{Caveat on anchor identification.}
+The data do not uniquely identify an origin meridian.
+The von~Mises mixture model (\S\ref{sec:tier_derivation}) recovers a phase
+offset relative to any fixed reference frame, but the fitted phase is an
+estimate subject to sampling uncertainty and cannot resolve which physical
+location defined the grid historically, or whether any single location did.
+Any UNESCO site that lies within the A+ tier of the Gerizim grid is, by
+construction, also a plausible reference point that would reconstruct
+nearly the same grid, because its fitted phase differs from Gerizim's by less than
+one tier width ($\lesssim$\ApThreshKm{}~km).
+A site-as-anchor ranking audit (Supplementary Audit S6) confirms this.
+The top-ranked competing anchors, including the Silk Roads: Zarafshan-Karakum
+Corridor (62.21\textdegree{}E, deviation 0.061\textdegree{} from Gerizim harmonic
+$n=9$), the Birthplace of Jesus (35.21\textdegree{}E), and Old City of
+Sana'a (44.21\textdegree{}E), all lie within the A+ tier of the
+Gerizim grid and therefore reconstruct an essentially identical periodicity.
+These are co-grid points, not independent alternatives.
+
+The primary finding of this paper is therefore the existence of the periodicity
+itself; Mount Gerizim is presented as the historically motivated candidate for
+its phase origin, not as a conclusion the statistical analysis can establish
+independently.
 
 A global anchor sweep (\S\ref{sec:sensitivity_global}) confirms the result is
 not sensitive to the exact coordinate: every longitude in the
 \xbandLabel\textdegree{}E band produces the same enrichment, and both Gerizim
-and Jerusalem (\JerusalemLon\textdegree{}E, $\approx$\GerizimJerusalemKm~km east)
+and Jerusalem (\JerusalemLon\textdegree{}E, $\approx$\GerizimJerusalemKm~km south)
 place the corridor in the global top \anchorSweepTopPct\% of \anchorSweepNanchors{}
 trial anchors. Mecca ($p \approx \pMeccaAnchor$, \pMeccaAnchorSig{}),
 Mt.\ Meru ($p \approx \pMeruAnchor$, \pMeruAnchorSig{}), and
-Mt.\ Kailash ($p \approx \pKailashAnchor$, \pKailashAnchorSig{}) are not significant.
+Mt.\ Kailash ($p \approx \pKailashAnchor$, \pKailashAnchorSig{}) yield
+no significant enrichment, confirming the periodicity is phase-specific,
+even if the phase origin cannot be uniquely attributed.
 
 Gerizim's coordinate is from the UNESCO tentative list (ref.~5706, DMS
 \GerizimLonDMS{}, State of Palestine, 2012;
