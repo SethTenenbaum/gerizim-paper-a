@@ -319,6 +319,7 @@ cluster $p_\mathrm{adj} = \pAdjTestThree$~\pAdjTestThreeSig{}).
 A region-specific empirical null (Fisher combination of per-region binomials)
 yields $p = \pRegionEmpAll$ (\pRegionEmpAllSig{}); the pre-2000 cohort remains significant
 against the geometric null ($p = \pPreTwoK$~\pPreTwoKSig{}; \S\ref{sec:resultstemporal}).
+Both results are included in the FDR audit (Table~\ref{tab:bonferroni_both}).
 
 \subsubsection*{World religion sites}
 \label{sec:resultsrelig}
@@ -605,12 +606,11 @@ confirms no spurious global 3\textdegree{} periodicity is present in the
 raw longitude file. The signal is concentrated in A+ sites, not a
 global artifact.
 
-\textbf{Test~B (A+-only Rayleigh, structural).}
-Among the \Nap{} Tier-A+ sites, $R = \rayleighR$
-(\rayleighRPctPhrasing{} A+ sites share the same phase modulo
-3\textdegree{}; $Z = \rayleighZ$, $p_\mathrm{perm} < \rayleighPermP$).
-This confirms self-consistency of the A+ classification but is not
-independent evidence, as A+ membership is defined by harmonic proximity
+\textbf{Test~B (A+-only Rayleigh, structural consistency check).}
+Among the \Nap{} Tier-A+ sites, $R = \rayleighR$ (\rayleighRPctPhrasing{} sites
+share the same phase modulo 3\textdegree{}; $Z = \rayleighZ$).
+This is a structural consequence of the A+ classification criterion, not
+independent evidence; it is reported for completeness only
 (\S\ref{sec:circularity}).
 
 \textbf{Test~C (circular-shift anchor sensitivity).}
@@ -637,8 +637,11 @@ Tests~B--D together confirm that the 3\textdegree{} periodicity is anchor-specif
 
 \textbf{Test~E (anchor discovery correction).}
 A global sweep of \anchorSweepNanchors{} trial anchors asks whether the
-Levantine corridor ranks unusually among all possible anchors.
-The result is marginal ($p = \anchorMaxPermP$, \anchorMaxPermPSig{}).
+Levantine corridor ranks unusually among all possible anchors
+($p = \anchorMaxPermP$, \anchorMaxPermPSig{}).
+This is a conservative upper bound on the anchor-selection penalty;
+primary evidence rests on Tests~2 and~3, which do not depend on the anchor choice
+(\S\ref{sec:limitations_circularity}).
 
 \subsection{Temporal Gradient (Test~4, Descriptive)}
 \label{sec:resultstemporal}
@@ -964,11 +967,11 @@ supporting 3\textdegree{} as the period to which domed monuments are preferentia
 
 \subsection{Americas Negative Control}
 \label{sec:americas_negative_control}
-The UNESCO Americas sub-corpus ($N = \AmericasN$) shows a 
-modestly lower A+ rate (\AmericasApRate\%) than the
-\NullRateAp{} null. The one-sided binomial depletion test 
-gives $p = \AmericasOneSidedP$~\AmericasOneSidedStar{}, but 
-the result is suggestive rather than definitive.
+The UNESCO Americas sub-corpus ($N = \AmericasN$) shows an A+ rate of
+\AmericasApRate\%, below the \NullRateAp{} null
+(one-sided depletion: $p = \AmericasOneSidedP$~\AmericasOneSidedStar{}).
+The sample is too small to treat this as strong confirmatory depletion,
+but it does not contradict the primary result.
 
 \subsection{Other Limitations}
 
@@ -1347,7 +1350,7 @@ of structural orientations in skyscape archaeology.
 
 \bibitem[Tenenbaum(2026)]{tenenbaum2026audit}
 Tenenbaum, S. (2026).
-\textit{Longitude Quantization in the UNESCO World Heritage Corpus: Domes, Stupas, and 3\textdegree{} Harmonics --- Code and Data} (v1.3.0).
+\textit{Longitude Quantization in the UNESCO World Heritage Corpus: Domes, Stupas, and 3\textdegree{} Harmonics --- Code and Data} (v1.6.0).
 Zenodo. \url{https://doi.org/10.5281/zenodo.19868418}
 
 \bibitem[Tomber(2008)]{tomber2008rome}
@@ -1391,7 +1394,7 @@ World's Work.
 
 \section*{Data Availability Statement}
 \label{sec:data_code}
-All data and code are openly available; a permanent snapshot (v1.5.0) is
+All data and code are openly available; a permanent snapshot (v1.6.0) is
 deposited at Zenodo (\citealt{tenenbaum2026audit};
 \url{https://doi.org/10.5281/zenodo.19868418}); UNESCO XML: \citealt{unescowhc2024xml}.
 Scripts, audit files, and maps are indexed in
@@ -1408,8 +1411,11 @@ dataset on which this study depends. This research was conducted independently a
 The author declares no conflict of interest.
 
 \section*{Software and AI Disclosure}
-All analyses were performed in Python~3 with NumPy, SciPy, and pandas.
-Claude (Anthropic) assisted with manuscript drafting and prose editing.
+All statistical analyses were performed in Python~3 using NumPy, SciPy, and pandas.
+Large-language-model tools were used during preparation of this manuscript:
+Claude (Anthropic) assisted with prose drafting and editing;
 GitHub Copilot (Microsoft) assisted with code autocompletion.
-All scientific conclusions, hypothesis design, keyword-list decisions,
-and analytical choices are solely the author's.
+These tools were used solely as writing and coding aids.
+All scientific hypotheses, analytical choices, keyword-list decisions,
+interpretation of results, and conclusions are solely the responsibility of the author.
+No AI tool was used to generate, fabricate, or substitute for primary data or statistical analysis.

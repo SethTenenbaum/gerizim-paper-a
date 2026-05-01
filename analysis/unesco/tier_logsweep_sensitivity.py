@@ -428,13 +428,13 @@ print(f"    rows with p < 0.05: {n_sig_in_region}/{len(a_plus_region)}")
 print()
 
 # ── CSV output ─────────────────────────────────────────────────────────────────
-csv_path = Path(__file__).parent / "tier_logsweep_sensitivity.csv"
+store_csv_path = Path(__file__).parents[2] / "data" / "store" / "unesco" / "tier_logsweep_sensitivity.csv"
 fieldnames = list(rows[0].keys())
-with open(csv_path, "w", newline="") as fh:
+with open(store_csv_path, "w", newline="") as fh:
     writer = csv.DictWriter(fh, fieldnames=fieldnames)
     writer.writeheader()
     writer.writerows(rows)
-print(f"  CSV written to: {csv_path}")
+print(f"  CSV written to: {store_csv_path}")
 
 # ── LaTeX macros ───────────────────────────────────────────────────────────────
 n_taus_tested  = len(taus)

@@ -1,6 +1,6 @@
 # Domed Monuments Cluster at Babylonian Bēru Harmonics: A Longitude Enrichment Test on the UNESCO World Heritage List
 
-**Paper A — Primary UNESCO Analysis** · `v1.5.0`
+**Paper A — Primary UNESCO Analysis** · `v1.6.0`
 
 Seth Tenenbaum · Independent Scholar
 ORCID: [0009-0008-5797-2498](https://orcid.org/0009-0008-5797-2498)
@@ -74,29 +74,36 @@ gerizim-paper-a/
 │   │   ├── dome_founding_stratification.py        # Dome × founding stratification
 │   │   ├── sacred_origin_test.py                  # Sacred origin keyword test
 │   │   ├── meta_keyword_test.py                   # Meta-keyword cross-check
+│   │   ├── meta_keyword_audit.py                  # Meta-keyword audit output
 │   │   ├── harmonic_density_attractor_test.py     # Harmonic density attractor
 │   │   ├── unesco_buddhist_heritage_test.py       # Buddhist heritage keyword test
 │   │   ├── tumulus_dome_evolution_raw_sweep.py    # Mound→dome morphological test
 │   │   ├── tumulus_dome_evolution_test.py         # Mound→dome evolution (validated)
 │   │   ├── unit_sweep_fill.py                     # Unit sensitivity sweep
+│   │   ├── unit_sweep_montecarlo.py               # Monte Carlo unit sweep (geographic null)
+│   │   ├── tier_logsweep_sensitivity.py           # Log-scale threshold sweep (§5.2)
 │   │   ├── bonferroni_correction.py               # Bonferroni family correction
 │   │   ├── simulation_null_model.py               # Permutation/bootstrap null models
 │   │   ├── spatial_independence_test.py           # Spatial independence correction
 │   │   ├── regional_temporal_gradient.py          # Regional temporal gradient
 │   │   ├── region_conditioned_permutation.py      # Region-conditioned permutation test
 │   │   ├── fdr_multiple_comparisons.py            # FDR multiple comparisons
+│   │   ├── fine_sweep_audit.py                    # Fine unit sweep audit
+│   │   ├── corpus_exclusion_audit.py              # Corpus exclusion audit
 │   │   ├── leave_one_out_sensitivity.py           # Leave-one-out sensitivity
 │   │   ├── dome_leave_k_out.py                    # Dome leave-k-out robustness
+│   │   ├── evo_leave_k_out.py                     # Evolution corpus leave-k-out robustness
 │   │   ├── dome_footprint_window_sensitivity.py   # Footprint window sensitivity
 │   │   ├── dome_geographic_concentration_test.py  # Geographic concentration test
 │   │   ├── stupa_coordinate_perturbation.py       # Stupa coordinate perturbation
 │   │   ├── stupa_geographic_concentration_test.py # Stupa geographic concentration
+│   │   ├── keyword_sensitivity_stupa.py           # Keyword-stratified sensitivity (leave-stupa-out)
 │   │   ├── sensitivity_slope_permutation_test.py  # Sensitivity slope permutation
 │   │   ├── sensitivity_slope_specificity_test.py  # Sensitivity slope specificity
 │   │   ├── americas_directional_test.py           # Americas directional control
 │   │   ├── mound_keyword_context_audit.py         # Mound keyword context audit
-│   │   ├── wikidata_q180987_stupa_audit.py        # Wikidata Q180987 stupa corpus audit (Test 6)
-│   │   └── verify_x18_periodicity.py              # x.18°E artifact check
+│   │   ├── verify_phase_peak_periodicity.py       # Phase-peak periodicity formal tests (Tests C/D/E)
+│   │   └── wikidata_q180987_stupa_audit.py        # Wikidata Q180987 stupa corpus audit
 │   │
 │   ├── global/                       # Global robustness checks
 │   │   ├── anchor_uniqueness_audit.py             # Global anchor sweep
