@@ -1,5 +1,26 @@
 # Changelog
 
+### v1.6.0 — 2026-05-01
+
+#### Manuscript revisions
+- **Statistical reporting tightened:** removed tautological p-value statement in Test B; clarified anchor-correction language in Test E.
+- **Region-stratified robustness:** noted FDR audit inclusion in the robustness discussion.
+- **Americas negative control:** quantified and made less hedgy — now states the observed counts and confirms the null is not rejected.
+- **AI disclosure** updated to be compliant with current journal policies (Archaeometry / JAS format).
+- **Zenodo bibitem** updated to v1.6.0 DOI in all manuscript wrappers.
+- **Version references** updated throughout manuscript wrappers (`paper_a_primary_unesco.tex`, `paper_a_archaeometry.tex`) and `shared_content.tex`.
+
+#### Code & data hygiene
+- **`analysis/unesco/tier_logsweep_sensitivity.py`** now writes its CSV output exclusively to `data/store/unesco/tier_logsweep_sensitivity.csv`; the stale copy in `analysis/unesco/` has been removed.
+- Confirmed no other scripts reference the old CSV path; the data-store location is the single authoritative output.
+
+#### Documentation
+- **README.md** expanded: all analysis scripts listed, key data-store outputs documented, new sections for supplementary/audit files and figures.
+- **CITATION.cff** version and release-date updated to v1.6.0 / 2026-05-01.
+- **Version strings** bumped to `v1.6.0` across README, CITATION.cff, and manuscript files.
+
+---
+
 ### v1.5.0 — 2026-04-28
 
 #### Manuscript corrections
