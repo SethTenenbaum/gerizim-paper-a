@@ -95,36 +95,43 @@
   "tiers": {
     "A++": {
       "max_deviation_beru": 0.0016,
+      "max_deviation_deg": 0.048,
       "approx_km": 5.346,
       "note": "Extremely close to a harmonic"
     },
     "A+": {
       "max_deviation_beru": 0.00321,
+      "max_deviation_deg": 0.0963,
       "approx_km": 10.692,
       "note": "Primary threshold for significance testing"
     },
     "A": {
       "max_deviation_beru": 0.00642,
+      "max_deviation_deg": 0.1926,
       "approx_km": 21.384,
-      "note": "One barid = 2 distance-beru = 2 x 0.00321 beru"
+      "note": "Boundary of main A-tier window"
     },
     "B": {
       "max_deviation_beru": 0.05,
+      "max_deviation_deg": 1.5,
       "approx_km": 167,
       "note": "Middle zone \u2014 neither near a harmonic nor near a midpoint"
     },
     "C": {
       "max_dist_from_midpoint_beru": 0.00642,
+      "max_dist_from_midpoint_deg": 0.1926,
       "approx_km": 21.384,
       "note": "Mirror of A: within 21 km of inter-harmonic midpoint (dev >= 0.04358)"
     },
     "C-": {
       "max_dist_from_midpoint_beru": 0.00321,
+      "max_dist_from_midpoint_deg": 0.0963,
       "approx_km": 10.692,
       "note": "Mirror of A+: within 6.7 km of inter-harmonic midpoint (dev >= 0.048)"
     },
     "C--": {
       "max_dist_from_midpoint_beru": 0.0016,
+      "max_dist_from_midpoint_deg": 0.048,
       "approx_km": 5.346,
       "note": "Mirror of A++: within 0.67 km of inter-harmonic midpoint (dev >= 0.0498)"
     }
@@ -484,6 +491,11 @@
         {
           "label": "Hinduism A+/C- joint (multivariate hyper.)",
           "p_key": "pHinApCminus",
+          "cat": "E"
+        },
+        {
+          "label": "Hinduism A/C joint (multivariate hyper.)",
+          "p_key": "pHinJoint",
           "cat": "E"
         },
         {

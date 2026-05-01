@@ -12,11 +12,11 @@ ORCID: [0009-0008-5797-2498](https://orcid.org/0009-0008-5797-2498)
 ## Abstract
 
 This repository contains the manuscript, analysis code, and data for
-"Domed Monuments Cluster at Babylonian Bēru Harmonics: A Longitude
+"Domed Monuments Cluster at 3° Longitude Harmonics: A Longitude
 Enrichment Test on the UNESCO World Heritage List" — a statistical study testing whether domed and
 spherical monumental heritage sites in the UNESCO World Heritage List are
-non-randomly concentrated near integer-multiple longitudes of the Babylonian
-*beru* (30° of arc) measured from Mount Gerizim (35.269°E).
+non-randomly concentrated near integer-multiple longitudes of a 3° grid
+measured from Mount Gerizim (35.269°E).
 
 All three primary tests pass Bonferroni correction (*k* = 3):
 full-corpus enrichment (*p*adj = 0.008),
@@ -55,7 +55,7 @@ gerizim-paper-a/
 │   ├── reproduce_all_macros.sh       # Shell script to regenerate all macros + figures
 │   ├── generate_figures.py           # Generates all 3 manuscript figures
 │   └── figures/
-│       ├── fig_devhist.{pdf,png}          # Figure 1: Beru deviation histogram
+│       ├── fig_devhist.{pdf,png}          # Figure 1: Harmonic deviation histogram
 │       ├── fig_temporal.{pdf,png}         # Figure 2: Temporal gradient
 │       ├── fig_unitsweep.{pdf,png}        # Figure 3: Unit sensitivity sweep
 │       ├── fig_null_c.{pdf,png}           # Figure 4: Null C bootstrap distributions
@@ -103,13 +103,8 @@ gerizim-paper-a/
 │   │   ├── anchor_site_comparison.py              # Anchor site comparison
 │   │   ├── peak_geography_audit.py                # Peak geography audit
 │   │   ├── dome_periodicity_audit.py              # Dome periodicity / x.18° artifact test
-│   │   ├── global_corridor_comparison.py          # Corridor comparison
-│   │   ├── corridor_precision_test.py             # Corridor precision test
 │   │   ├── geodesic_sensitivity.py                # Geodesic vs. planar sensitivity
 │   │   ├── landmark_anchor_ranking.py             # Gerizim vs. other anchors
-│   │   ├── x18_periodicity_formal_test.py         # x.18°E formal periodicity test
-│   │   ├── x18_max_permutation_test.py            # x.18°E max permutation test
-│   │   ├── x18_optimal_band_significance.py       # x.18°E optimal band significance
 │   │   ├── emit_constants.py                      # Emit pure constants as LaTeX macros
 │   │   └── owtrad_route_alignment.py              # OWTRAD vertex tier + cluster asymmetry tests
 │   │

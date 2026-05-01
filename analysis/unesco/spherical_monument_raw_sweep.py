@@ -255,6 +255,7 @@ print()
 # ── LaTeX macros (GROUP 1) ────────────────────────────────────────────────────
 enr_A = (nA / N_raw) / P_NULL_A if N_raw else 0
 mean_dev = float(np.mean([s["dev"] for s in raw_sites])) if raw_sites else 0
+mean_dev_deg = mean_dev * 30.0  # convert beru → degrees for reporting
 # Validated population size pulled from ResultsStore (written by Test 2 / 2x).
 # If unavailable, omit the dependent macros rather than emit a stale literal.
 N_validated = _v_N if _v_N is not None else 0
@@ -287,7 +288,7 @@ print(f"  \\newcommand{{\\GerizimPctileAp}}{{{pctile:.0f}}}            % anchor-
 print(f"  \\newcommand{{\\GerizimPctileA}}{{{pctile:.0f}}}            % anchor-sweep percentile, A  (raw sweep)")
 print(f"  \\newcommand{{\\circEnrichAp}}{{{enr_Ap:.2f}}}           % enrichment ratio, A+")
 print(f"  \\newcommand{{\\circEnrichA}}{{{enr_A:.2f}}}           % enrichment ratio, A")
-print(f"  \\newcommand{{\\circMeanDev}}{{{mean_dev:.4f}}}        % mean beru deviation (raw sweep)")
+print(f"  \\newcommand{{\\circMeanDev}}{{{mean_dev_deg:.4f}}}        % mean deviation in degrees (raw sweep)")
 print(f"  \\newcommand{{\\circEnrichApp}}{{{enr_App:.2f}}}           % enrichment ratio, A++")
 
 # ── Expected counts and Clopper-Pearson CIs ───────────────────────────────────

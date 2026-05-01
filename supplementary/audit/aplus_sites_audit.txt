@@ -1,5 +1,5 @@
 UNESCO A-TIER SITES: GERIZIM vs JERUSALEM ANCHOR COMPARISON
-Generated : Mon Apr 27 18:34:02 UTC 2026
+Generated : Thu Apr 30 16:49:44 UTC 2026
 Script    : tools/generate_audit_aplus_sites.py
 Corpus    : 1011 inscribed Cultural/Mixed UNESCO sites with coordinates
            + 1 synthetic Gerizim entry = 1012 extended corpus

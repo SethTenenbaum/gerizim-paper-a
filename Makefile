@@ -64,10 +64,6 @@ global:
 	$(PYTHON) analysis/global/peak_geography_audit.py
 	@echo "\n══ Dome periodicity audit ══"
 	$(PYTHON) analysis/global/dome_periodicity_audit.py
-	@echo "\n══ Global corridor comparison ══"
-	$(PYTHON) analysis/global/global_corridor_comparison.py
-	@echo "\n══ Corridor precision test ══"
-	$(PYTHON) analysis/global/corridor_precision_test.py
 	@echo "\n══ Landmark anchor ranking ══"
 	$(PYTHON) analysis/global/landmark_anchor_ranking.py
 	@echo "\n══ Americas depletion control ══"

@@ -1,5 +1,5 @@
 UNESCO DOME / SPHERICAL MONUMENT KEYWORD AUDIT
-Generated : Mon Apr 27 18:31:03 UTC 2026
+Generated : Thu Apr 30 16:46:47 UTC 2026
 Script    : tools/generate_audit_dome.py
 Keywords  : ['dome', 'domed', 'domes', 'spherical', 'stupa', 'stupas', 'tholos']
 Unambiguous (always included): ['stupa', 'stupas', 'tholos']

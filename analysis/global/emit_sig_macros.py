@@ -112,6 +112,12 @@ EXPLICIT_P_KEYS = {
     # Unit sweep / slope tests
     "sweepEightDomeP", "sweepEightFullP",
     "permSlopeCanonBestJoint", "permSlopeCanonRank",
+    # Keyword sensitivity / leave-stupa-out
+    "kwSensStupaAppP", "kwSensStupaApP", "kwSensStupaAP",
+    "kwSensDomeAppP",  "kwSensDomeApP",  "kwSensDomeAP",
+    "kwSensMoundAppP", "kwSensMoundApP", "kwSensMoundAP",
+    "kwSensCombinedAppP", "kwSensCombinedApP", "kwSensCombinedAP",
+    "kwSensNoStupaAppP", "kwSensNoStupaApP", "kwSensNoStupaAP",
     # Cluster harmonic string (has embedded p-value name)
     "clusterHarmonicMWpStr",
     # OWTRAD route alignment

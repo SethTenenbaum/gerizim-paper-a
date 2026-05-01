@@ -1,4 +1,4 @@
-% Generated macros — 2026-04-29T05:07:09Z
+% Generated macros — 2026-05-01T00:24:41Z
 % Source: bash manuscript/reproduce_all_macros.sh
 % IMPORTANT: values are computed fresh each run — do NOT hardcode
 
@@ -23,20 +23,27 @@
   \newcommand{\NullRateC}{12.84\%}  % geometric null rate for Tier-C (= A, symmetric)
   \newcommand{\NullRateCMinus}{6.42\%}  % geometric null rate for Tier-C− (= A+, symmetric)
   \newcommand{\NullRateCMinusTwo}{3.2\%}  % geometric null rate for Tier-C−− (= A++, symmetric)
-  \newcommand{\ApThreshBeru}{0.00321}  % A+ threshold (beru)
+  \newcommand{\ApThreshDeg}{0.0963}  % A+ threshold (degrees)
   \newcommand{\ApThreshKm}{10.7}  % A+ threshold (km, equatorial)
-  \newcommand{\AppThreshBeru}{0.0016}  % A++ threshold (beru)
+  \newcommand{\AppThreshDeg}{0.048}  % A++ threshold (degrees)
   \newcommand{\AppThreshKm}{5.33}  % A++ threshold (km, equatorial)
-  \newcommand{\ATierThreshBeru}{0.00642}  % A-tier threshold (beru)
+  \newcommand{\ATierThreshDeg}{0.1926}  % A-tier threshold (degrees)
   \newcommand{\ATierThreshKm}{21}  % A-tier threshold (km, equatorial)
-  \newcommand{\BTierThreshBeru}{0.05}  % B-tier threshold (beru)
+  \newcommand{\BTierThreshDeg}{1.5}  % B-tier threshold (degrees)
   \newcommand{\BTierThreshKm}{166}  % B-tier threshold (km, equatorial)
-  \newcommand{\CMinusThreshBeru}{0.00321}  % C− threshold (beru, = A+ mirror)
+  \newcommand{\ApThreshBeru}{0.00321}  % A+ threshold (beru) — appendix use
+  \newcommand{\AppThreshBeru}{0.0016}  % A++ threshold (beru) — appendix use
+  \newcommand{\ATierThreshBeru}{0.00642}  % A-tier threshold (beru) — appendix use
+  \newcommand{\BTierThreshBeru}{0.05}  % B-tier threshold (beru) — appendix use
+  \newcommand{\CMinusThreshDeg}{0.0963}  % C− threshold (degrees)
   \newcommand{\CMinusThreshKm}{10.7}  % C− threshold (km)
-  \newcommand{\CTierThreshBeru}{0.00642}  % C-tier threshold (beru, = A mirror)
-  \newcommand{\CMinusTwoThreshBeru}{0.0016}  % C−− threshold (beru, = A++ mirror)
+  \newcommand{\CTierThreshDeg}{0.1926}  % C-tier threshold (degrees)
+  \newcommand{\CMinusTwoThreshDeg}{0.048}  % C−− threshold (degrees)
+  \newcommand{\CMinusThreshBeru}{0.00321}  % C− threshold (beru) — appendix use
+  \newcommand{\CTierThreshBeru}{0.00642}  % C-tier threshold (beru) — appendix use
+  \newcommand{\CMinusTwoThreshBeru}{0.0016}  % C−− threshold (beru) — appendix use
   \newcommand{\NullRateApPct}{6.42}  % A+ null rate as plain number (no %)
-  \newcommand{\NullRateApFormula}{$2 \times \ApThreshBeru{} / 0.1$}  % null rate formula
+  \newcommand{\NullRateApFormula}{$2 \times 0.0963^\circ / 1.5^\circ$}  % null rate formula in degrees
   \newcommand{\threeStar}{***}  % *** significance shorthand for p<0.001 literal comparisons
   \newcommand{\twoStar}{**}    % ** significance shorthand
   \newcommand{\oneStar}{*}     % * significance shorthand
@@ -46,6 +53,25 @@
   \newcommand{\CorpusPctLatAm}{11}  % pct Latin America & Caribbean in analysis corpus
   \newcommand{\CorpusPctArabStates}{9}  % pct Arab States in analysis corpus
   \newcommand{\CorpusPctAfrica}{7}  % pct Africa in analysis corpus
+
+% --- analysis/global/vonmises_threshold_validation.py
+  \newcommand{\vmKappaOwtrad}{9.58}  % von Mises kappa, OWTRAD corpus
+  \newcommand{\vmKappaStupa}{6.17}   % von Mises kappa, Q180987 stupa corpus
+  \newcommand{\vmKappaRatio}{1.6}  % ratio max/min kappa across corpora
+  \newcommand{\vmNOwtrad}{1674}     % N, OWTRAD corpus
+  \newcommand{\vmNStupa}{229}      % N, Q180987 stupa corpus
+  \newcommand{\vmSigmaBeruOwtrad}{0.00514}   % sigma (beru), OWTRAD — appendix use
+  \newcommand{\vmSigmaBeruStupa}{0.00641}    % sigma (beru), stupa — appendix use
+  \newcommand{\vmSigmaBeruPooled}{0.00529}  % N-weighted pooled sigma (beru) — appendix use
+  \newcommand{\vmSigmaDegOwtrad}{0.1543}   % sigma (degrees), OWTRAD
+  \newcommand{\vmSigmaDegStupa}{0.1922}    % sigma (degrees), stupa
+  \newcommand{\vmSigmaDegPooled}{0.1588}  % N-weighted pooled sigma (degrees)
+  \newcommand{\vmHalfSigmaStupa}{0.0016}  % 0.25*sigma_stupa (beru) — A++ proxy — appendix use
+  \newcommand{\vmOneSigmaStupa}{0.0032}   % 0.50*sigma_stupa (beru) — A+  proxy — appendix use
+  \newcommand{\vmTwoSigmaStupa}{0.00641}   % 1.00*sigma_stupa (beru) — A   proxy — appendix use
+  \newcommand{\vmHalfSigmaDegStupa}{0.048}  % 0.25*sigma_stupa (degrees) — A++ proxy
+  \newcommand{\vmOneSigmaDegStupa}{0.096}   % 0.50*sigma_stupa (degrees) — A+ proxy
+  \newcommand{\vmTwoSigmaDegStupa}{0.1923}   % 1.00*sigma_stupa (degrees) — A proxy
 
 % --- analysis/global/geodesic_sensitivity.py
   \newcommand{\GeodesicApCurrent}{88}  % A+ count under angular criterion
@@ -148,7 +174,7 @@
   \newcommand{\GerizimPctileA}{98}            % anchor-sweep percentile, A  (raw sweep)
   \newcommand{\circEnrichAp}{2.25}           % enrichment ratio, A+
   \newcommand{\circEnrichA}{1.90}           % enrichment ratio, A
-  \newcommand{\circMeanDev}{0.0220}        % mean beru deviation (raw sweep)
+  \newcommand{\circMeanDev}{0.6586}        % mean deviation in degrees (raw sweep)
   \newcommand{\circEnrichApp}{3.47}           % enrichment ratio, A++
   \newcommand{\circExpAp}{5.78}         % expected A+ count under H0 (= N × 4%)
   \newcommand{\circExpA}{11.56}          % expected A count under H0 (= N × 20%)
@@ -480,14 +506,6 @@
 % --- analysis/global/landmark_anchor_ranking.py
   \newcommand{\GerizimTempleAp}{88}          % A+ count at Gerizim Temple anchor
   \newcommand{\GerizimTempleRank}{26}          % rank of Gerizim Temple among all landmarks
-
-% --- analysis/global/global_corridor_comparison.py
-  \newcommand{\corridorJeruN}{31}              % Levantine corridor matches (Jerusalem anchor)
-  \newcommand{\corridorJeruSum}{2099}           % sum of Levantine corridor A+ hits
-  \newcommand{\corridorJeruLevantine}{21}        % Levantine-region corridor sites
-  \newcommand{\corridorRivalLon}{11}          % longitude of best rival corridor
-  \newcommand{\corridorRivalN}{46}              % best rival corridor match count
-  \newcommand{\corridorRivalSum}{3134}           % sum of best rival corridor A+ hits
 
 % --- analysis/global/anchor_site_comparison.py
   \newcommand{\LumbiniDevKm}{0.79}          % Lumbini deviation from Gerizim (km)
@@ -862,15 +880,6 @@
 \newcommand{\anchorMaxPermBootSD}{6.67}
 \newcommand{\anchorMaxPermBootZ}{-0.80}
 \newcommand{\anchorMaxPermBootP}{0.8027}
-
-% --- analysis/global/phase_peak_optimal_band_significance.py
-\newcommand{\xOptBandApCount}{92}
-\newcommand{\xOptBandApCountB}{92}
-\newcommand{\xOptBandN}{1011}
-\newcommand{\xOptBandBinomP}{0.0006}
-\newcommand{\xOptBandBinomPB}{0.0006}
-\newcommand{\xOptBandEnrich}{1.42}
-\newcommand{\xOptBandEnrichB}{1.42}
 
 % --- analysis/unesco/dome_footprint_window_sensitivity.py
   \newcommand{\geoNullDomeTwoDegN}{761}
@@ -1307,39 +1316,40 @@
 \newcommand{\logSweepOptRatio}{1.87}      % optimal geometric step ratio
 
 % --- analysis/unesco/fdr_multiple_comparisons.py
-  \newcommand{\NtotalTests}{43}           % total tests in FDR analysis
+  \newcommand{\NtotalTests}{44}           % total tests in FDR analysis
   \newcommand{\NconfTests}{34}           % confirmatory tests
-  \newcommand{\NexplTests}{9}           % exploratory tests
-  \newcommand{\NsurviveFDR}{22}           % tests surviving BH FDR (q<0.05)
+  \newcommand{\NexplTests}{10}           % exploratory tests
+  \newcommand{\NsurviveFDR}{23}           % tests surviving BH FDR (q<0.05)
   \newcommand{\NsurviveBonfAll}{5}           % tests surviving Bonferroni (all tests)
-  \newcommand{\NtotalTestsP}{0.0012}  % Bonferroni threshold = 0.05/43 (used in FDR table header)
-  \newcommand{\BonfAllSurvivepCircApp}{0.0268}  % full-k Bonferroni survivor
-  \newcommand{\FDRqSurvivepCircApp}{0.007}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepCircAp}{0.015}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepCircA}{0.0114}  % BH q-value survivor
-  \newcommand{\FDRqSurviveclusterApBinom}{0.0114}  % BH q-value survivor
-  \newcommand{\FDRqSurviveclusterMWp}{0.015}  % BH q-value survivor
-  \newcommand{\BonfAllSurviveclusterPermP}{0.0086}  % full-k Bonferroni survivor
-  \newcommand{\FDRqSurviveclusterPermP}{0.0043}  % BH q-value survivor
+  \newcommand{\NtotalTestsP}{0.0011}  % Bonferroni threshold = 0.05/44 (used in FDR table header)
+  \newcommand{\BonfAllSurvivepCircApp}{0.0274}  % full-k Bonferroni survivor
+  \newcommand{\FDRqSurvivepCircApp}{0.0072}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepCircAp}{0.0144}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepCircA}{0.0107}  % BH q-value survivor
+  \newcommand{\FDRqSurviveclusterApBinom}{0.0107}  % BH q-value survivor
+  \newcommand{\FDRqSurviveclusterMWp}{0.0144}  % BH q-value survivor
+  \newcommand{\BonfAllSurviveclusterPermP}{0.0088}  % full-k Bonferroni survivor
+  \newcommand{\FDRqSurviveclusterPermP}{0.0044}  % BH q-value survivor
   \newcommand{\BonfAllSurviveclusterHarmonicMWp}{0.0004}  % full-k Bonferroni survivor
   \newcommand{\FDRqSurviveclusterHarmonicMWp}{0.0004}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepPreTwoK}{0.0114}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepFirstHalf}{0.0114}  % BH q-value survivor
-  \newcommand{\BonfAllSurvivepeakSigP}{0.028}  % full-k Bonferroni survivor
-  \newcommand{\FDRqSurvivepeakSigP}{0.007}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepReligUnion}{0.0317}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepChrist}{0.0336}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepNeffQuarter}{0.0339}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepNeffHalf}{0.0271}  % BH q-value survivor
-  \newcommand{\FDRqSurviveblockBootZP}{0.0271}  % BH q-value survivor
-  \newcommand{\FDRqSurvivesimKDEP}{0.0114}  % BH q-value survivor
-  \newcommand{\BonfAllSurvivepEvoApp}{0.0359}  % full-k Bonferroni survivor
-  \newcommand{\FDRqSurvivepEvoApp}{0.0072}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepEvoAp}{0.015}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepEvoStupa}{0.0491}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepHinCminus}{0.0271}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepHinApCminus}{0.0114}  % BH q-value survivor
-  \newcommand{\FDRqSurvivepBudJoint}{0.0271}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepPreTwoK}{0.0107}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepFirstHalf}{0.0107}  % BH q-value survivor
+  \newcommand{\BonfAllSurvivepeakSigP}{0.0286}  % full-k Bonferroni survivor
+  \newcommand{\FDRqSurvivepeakSigP}{0.0072}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepReligUnion}{0.0309}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepChrist}{0.0327}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepNeffQuarter}{0.0331}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepNeffHalf}{0.0262}  % BH q-value survivor
+  \newcommand{\FDRqSurviveblockBootZP}{0.0262}  % BH q-value survivor
+  \newcommand{\FDRqSurvivesimKDEP}{0.0107}  % BH q-value survivor
+  \newcommand{\BonfAllSurvivepEvoApp}{0.0367}  % full-k Bonferroni survivor
+  \newcommand{\FDRqSurvivepEvoApp}{0.0073}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepEvoAp}{0.0144}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepEvoStupa}{0.0481}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepHinCminus}{0.0262}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepHinApCminus}{0.0107}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepHinJoint}{0.0107}  % BH q-value survivor
+  \newcommand{\FDRqSurvivepBudJoint}{0.0262}  % BH q-value survivor
 
 % --- analysis/unesco/bonferroni_correction.py
   \newcommand{\BonfK}{3}  % k = confirmatory tests (Tests 1, 2, 3)
@@ -1519,3 +1529,93 @@
   \newcommand{\wikiNonHeartlandCbandPSig}{ns}  % auto sig label
   \newcommand{\wikiStupaATierBinomPSig}{*}  % auto sig label
 
+  \newcommand{\phaseFullMin}{51}
+  \newcommand{\phaseFullMedian}{64.0}
+  \newcommand{\phaseFullMax}{91}
+  \newcommand{\phaseFullPhiMax}{2.21}
+  \newcommand{\phaseFullFracSig}{6.3}
+  \newcommand{\phaseFullFracSigStrict}{0.3}
+  \newcommand{\phaseFullWorstP}{0.9712}
+  \newcommand{\phaseFullMedianP}{0.5645}
+  \newcommand{\phaseFullGerCount}{88}
+  \newcommand{\phaseFullGerPctile}{99.3}
+  \newcommand{\phaseDomeMin}{2}
+  \newcommand{\phaseDomeMedian}{5.0}
+  \newcommand{\phaseDomeMax}{16}
+  \newcommand{\phaseDomePhiMax}{2.20}
+  \newcommand{\phaseDomeFracSig}{7.0}
+  \newcommand{\phaseDomeFracSigStrict}{1.3}
+  \newcommand{\phaseDomeWorstP}{0.9817}
+  \newcommand{\phaseDomeMedianP}{0.6926}
+  \newcommand{\phaseDomeGerCount}{13}
+  \newcommand{\phaseDomeGerPctile}{97.3}
+  \newcommand{\phaseGerizimPhase}{2.2690}
+  \newcommand{\phaseNphases}{300}
+  \newcommand{\phaseStep}{0.01}
+\newcommand{\kwSensCombinedAN}{20}
+\newcommand{\kwSensCombinedAOR}{2.15}
+\newcommand{\kwSensCombinedAP}{0.0056}
+\newcommand{\kwSensCombinedARate}{24.1}
+\newcommand{\kwSensCombinedApN}{11}
+\newcommand{\kwSensCombinedApOR}{2.22}
+\newcommand{\kwSensCombinedApP}{0.0234}
+\newcommand{\kwSensCombinedApRate}{13.3}
+\newcommand{\kwSensCombinedAppN}{10}
+\newcommand{\kwSensCombinedAppOR}{4.19}
+\newcommand{\kwSensCombinedAppP}{< 0.001}
+\newcommand{\kwSensCombinedAppRate}{12.0}
+\newcommand{\kwSensCombinedN}{83}
+\newcommand{\kwSensDomeAN}{14}
+\newcommand{\kwSensDomeAOR}{1.86}
+\newcommand{\kwSensDomeAP}{0.0414}
+\newcommand{\kwSensDomeARate}{21.5}
+\newcommand{\kwSensDomeApN}{7}
+\newcommand{\kwSensDomeApOR}{1.76}
+\newcommand{\kwSensDomeApP}{0.1365}
+\newcommand{\kwSensDomeApRate}{10.8}
+\newcommand{\kwSensDomeAppN}{6}
+\newcommand{\kwSensDomeAppOR}{3.11}
+\newcommand{\kwSensDomeAppP}{0.0230}
+\newcommand{\kwSensDomeAppRate}{9.2}
+\newcommand{\kwSensDomeN}{65}
+\newcommand{\kwSensMoundAN}{0}
+\newcommand{\kwSensMoundApN}{0}
+\newcommand{\kwSensMoundAppN}{0}
+\newcommand{\kwSensMoundN}{0}
+\newcommand{\kwSensNoStupaAN}{14}
+\newcommand{\kwSensNoStupaAOR}{1.86}
+\newcommand{\kwSensNoStupaAP}{0.0414}
+\newcommand{\kwSensNoStupaARate}{21.5}
+\newcommand{\kwSensNoStupaApN}{7}
+\newcommand{\kwSensNoStupaApOR}{1.76}
+\newcommand{\kwSensNoStupaApP}{0.1365}
+\newcommand{\kwSensNoStupaApRate}{10.8}
+\newcommand{\kwSensNoStupaAppN}{6}
+\newcommand{\kwSensNoStupaAppOR}{3.11}
+\newcommand{\kwSensNoStupaAppP}{0.0230}
+\newcommand{\kwSensNoStupaAppRate}{9.2}
+\newcommand{\kwSensNoStupaN}{65}
+\newcommand{\kwSensStupaAN}{6}
+\newcommand{\kwSensStupaAOR}{3.39}
+\newcommand{\kwSensStupaAP}{0.0229}
+\newcommand{\kwSensStupaARate}{33.3}
+\newcommand{\kwSensStupaApN}{4}
+\newcommand{\kwSensStupaApOR}{4.16}
+\newcommand{\kwSensStupaApP}{0.0277}
+\newcommand{\kwSensStupaApRate}{22.2}
+\newcommand{\kwSensStupaAppN}{4}
+\newcommand{\kwSensStupaAppOR}{8.74}
+\newcommand{\kwSensStupaAppP}{0.0027}
+\newcommand{\kwSensStupaAppRate}{22.2}
+\newcommand{\kwSensStupaN}{18}
+  \newcommand{\kwSensCombinedAPSig}{**}  % auto sig label
+  \newcommand{\kwSensCombinedApPSig}{*}  % auto sig label
+  \newcommand{\kwSensDomeAPSig}{*}  % auto sig label
+  \newcommand{\kwSensDomeApPSig}{ns}  % auto sig label
+  \newcommand{\kwSensDomeAppPSig}{*}  % auto sig label
+  \newcommand{\kwSensNoStupaAPSig}{*}  % auto sig label
+  \newcommand{\kwSensNoStupaApPSig}{ns}  % auto sig label
+  \newcommand{\kwSensNoStupaAppPSig}{*}  % auto sig label
+  \newcommand{\kwSensStupaAPSig}{*}  % auto sig label
+  \newcommand{\kwSensStupaApPSig}{*}  % auto sig label
+  \newcommand{\kwSensStupaAppPSig}{**}  % auto sig label
