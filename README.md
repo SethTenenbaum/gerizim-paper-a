@@ -1,4 +1,4 @@
-# Domed Monuments Cluster at Babylonian Bēru Harmonics: A Longitude Enrichment Test on the UNESCO World Heritage List
+# Domed Monuments Cluster at 3° Longitude Harmonics: A Longitude Enrichment Test on the UNESCO Cultural and Mixed Heritage Corpus
 
 **Paper A — Primary UNESCO Analysis** · `v1.6.0`
 
@@ -13,7 +13,7 @@ ORCID: [0009-0008-5797-2498](https://orcid.org/0009-0008-5797-2498)
 
 This repository contains the manuscript, analysis code, and data for
 "Domed Monuments Cluster at 3° Longitude Harmonics: A Longitude
-Enrichment Test on the UNESCO World Heritage List" — a statistical study testing whether domed and
+Enrichment Test on the UNESCO Cultural and Mixed Heritage Corpus" — a statistical study testing whether domed and
 spherical monumental heritage sites in the UNESCO World Heritage List are
 non-randomly concentrated near integer-multiple longitudes of a 3° grid
 measured from Mount Gerizim (35.269°E).
@@ -357,7 +357,7 @@ See `LICENSE_NOTES.md` for the full per-file breakdown.
 
 If you use this code or data, please cite:
 
-> Tenenbaum, S. (2026). Domed Monuments Cluster at Babylonian Bēru Harmonics:
+> Tenenbaum, S. (2026). Domed Monuments Cluster at 3° Longitude Harmonics:
 > A Longitude Enrichment Test on the UNESCO Cultural and Mixed Heritage Corpus.
 > https://doi.org/10.5281/zenodo.19938283
 
