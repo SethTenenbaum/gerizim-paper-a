@@ -35,45 +35,48 @@ BERU = CONFIG["units"]["beru"]["degrees"]            # 30.0
 HARMONIC_STEP = CONFIG["units"]["harmonic_step"]      # 0.1
 KM_PER_DEGREE = CONFIG["units"]["km_per_degree"]      # 111.0
 
-# Tier thresholds (beru deviation from harmonic)
-TIER_APP   = CONFIG["tiers"]["A++"]["max_deviation_beru"]   # from config (e.g. 0.0002)
-TIER_APLUS = CONFIG["tiers"]["A+"]["max_deviation_beru"]    # from config (e.g. 0.00321)
-TIER_A_MAX = CONFIG["tiers"]["A"]["max_deviation_beru"]     # from config (e.g. 0.010)
-TIER_B_MAX = CONFIG["tiers"]["B"]["max_deviation_beru"]     # from config (e.g. 0.050)
-
-# Tier thresholds in degrees (primary reporting unit)
+# Tier thresholds in degrees (primary unit — read directly from config).
 TIER_APP_DEG   = CONFIG["tiers"]["A++"]["max_deviation_deg"]   # 0.048°
 TIER_APLUS_DEG = CONFIG["tiers"]["A+"]["max_deviation_deg"]    # 0.0963°
 TIER_A_DEG     = CONFIG["tiers"]["A"]["max_deviation_deg"]     # 0.1926°
 TIER_B_DEG     = CONFIG["tiers"]["B"]["max_deviation_deg"]     # 1.5°
 
+# Tier thresholds in bēru (derived from degrees; kept for null-rate math below).
+TIER_APP   = TIER_APP_DEG   / BERU   # 0.048 / 30 = 0.0016
+TIER_APLUS = TIER_APLUS_DEG / BERU   # 0.0963 / 30 = 0.00321
+TIER_A_MAX = TIER_A_DEG     / BERU   # 0.1926 / 30 = 0.00642
+TIER_B_MAX = TIER_B_DEG     / BERU   # 1.5 / 30 = 0.05
+
 # Midpoint = 0.5 × harmonic spacing (0.1 beru); maximum possible deviation
 MIDPOINT   = 0.05   # beru — perfect inter-harmonic midpoint
 
-# C-tier thresholds (distance from the inter-harmonic midpoint)
-# Mirrors: TIER_C_MAX mirrors TIER_A_MAX, TIER_CMINUS mirrors TIER_APLUS, etc.
-TIER_C_MAX    = CONFIG["tiers"]["C"]["max_dist_from_midpoint_beru"]    # from config (e.g. 0.010)
-TIER_CMINUS   = CONFIG["tiers"]["C-"]["max_dist_from_midpoint_beru"]   # from config (e.g. 0.00321)
-TIER_CMINUS2  = CONFIG["tiers"]["C--"]["max_dist_from_midpoint_beru"]  # from config (e.g. 0.0002)
+# C-tier thresholds in degrees (primary unit — read directly from config).
+TIER_C_DEG     = CONFIG["tiers"]["C"]["max_dist_from_midpoint_deg"]     # 0.1926°
+TIER_CMINUS_DEG  = CONFIG["tiers"]["C-"]["max_dist_from_midpoint_deg"]  # 0.0963°
+TIER_CMINUS2_DEG = CONFIG["tiers"]["C--"]["max_dist_from_midpoint_deg"] # 0.048°
+
+# C-tier thresholds in bēru (derived).
+TIER_C_MAX    = TIER_C_DEG     / BERU
+TIER_CMINUS   = TIER_CMINUS_DEG  / BERU
+TIER_CMINUS2  = TIER_CMINUS2_DEG / BERU
 
 # Geometric null rates — derived from tier thresholds and harmonic step.
-# Formula: 2 × max_deviation / harmonic_step  (window spans ±threshold on
-# each side of the harmonic line, over a half-cell of HARMONIC_STEP/2).
-P_NULL_APP    = 2 * TIER_APP   / HARMONIC_STEP  # = 2 × TIER_APP / 0.1
-P_NULL_AP     = 2 * TIER_APLUS / HARMONIC_STEP  # = 2 × TIER_APLUS / 0.1
-P_NULL_A      = 2 * TIER_A_MAX / HARMONIC_STEP  # = 2 × TIER_A_MAX / 0.1
-P_NULL_B      = 2 * TIER_B_MAX / HARMONIC_STEP  # = 2 × TIER_B_MAX / 0.1  (= 1.0; full half-step)
-P_NULL_C      = P_NULL_A                          # symmetric with A
-P_NULL_CMINUS = P_NULL_AP                         # symmetric with A+
-P_NULL_CMINUS2= P_NULL_APP                        # symmetric with A++
+# Formula: 2 × max_deviation_deg / harmonic_step_deg
+# harmonic_step_deg = HARMONIC_STEP × BERU = 0.1 × 30 = 3°
+_HARMONIC_STEP_DEG = HARMONIC_STEP * BERU   # 3.0°
+P_NULL_APP    = 2 * TIER_APP_DEG   / _HARMONIC_STEP_DEG  # 0.032
+P_NULL_AP     = 2 * TIER_APLUS_DEG / _HARMONIC_STEP_DEG  # 0.0642
+P_NULL_A      = 2 * TIER_A_DEG     / _HARMONIC_STEP_DEG  # 0.1284
+P_NULL_B      = 2 * TIER_B_DEG     / _HARMONIC_STEP_DEG  # 1.0
+P_NULL_C      = P_NULL_A                                   # symmetric with A
+P_NULL_CMINUS = P_NULL_AP                                  # symmetric with A+
+P_NULL_CMINUS2= P_NULL_APP                                 # symmetric with A++
 
 # Pre-formatted tier label strings for print/audit output.
-# Import these instead of hardcoding "≤0.002 beru, ≤6.7 km" in scripts.
-_KM_PER_BERU   = BERU * KM_PER_DEGREE
-TIER_APP_KM    = TIER_APP   * _KM_PER_BERU   # km (from config)
-TIER_APLUS_KM  = TIER_APLUS * _KM_PER_BERU   # km (from config)
-TIER_A_KM      = TIER_A_MAX * _KM_PER_BERU   # km (from config)
-TIER_B_KM      = TIER_B_MAX * _KM_PER_BERU   # km (from config)
+TIER_APP_KM    = TIER_APP_DEG   * KM_PER_DEGREE   # km
+TIER_APLUS_KM  = TIER_APLUS_DEG * KM_PER_DEGREE   # km
+TIER_A_KM      = TIER_A_DEG     * KM_PER_DEGREE   # km
+TIER_B_KM      = TIER_B_DEG     * KM_PER_DEGREE   # km
 TIER_APP_LABEL   = f"≤{TIER_APP_DEG}°, ≤{TIER_APP_KM:.2f} km"
 TIER_APLUS_LABEL = f"≤{TIER_APLUS_DEG}°, ≤{TIER_APLUS_KM:.1f} km"
 TIER_A_LABEL     = f"≤{TIER_A_DEG}°, ≤{TIER_A_KM:.0f} km"

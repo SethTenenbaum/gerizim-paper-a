@@ -94,46 +94,45 @@
   },
   "tiers": {
     "A++": {
-      "max_deviation_beru": 0.0016,
       "max_deviation_deg": 0.048,
       "approx_km": 5.346,
-      "note": "Extremely close to a harmonic"
+      "null_rate": 0.032,
+      "note": "Extremely close to a harmonic. Metrological equivalent: 0.0016 bēru sub-units."
     },
     "A+": {
-      "max_deviation_beru": 0.00321,
       "max_deviation_deg": 0.0963,
       "approx_km": 10.692,
-      "note": "Primary threshold for significance testing"
+      "null_rate": 0.0642,
+      "note": "Primary threshold for significance testing. Metrological equivalent: 0.00321 bēru sub-units."
     },
     "A": {
-      "max_deviation_beru": 0.00642,
       "max_deviation_deg": 0.1926,
       "approx_km": 21.384,
-      "note": "Boundary of main A-tier window"
+      "null_rate": 0.1284,
+      "note": "Boundary of main A-tier window. Metrological equivalent: 0.00642 bēru sub-units."
     },
     "B": {
-      "max_deviation_beru": 0.05,
       "max_deviation_deg": 1.5,
       "approx_km": 167,
-      "note": "Middle zone \u2014 neither near a harmonic nor near a midpoint"
+      "note": "Middle zone — neither near a harmonic nor near a midpoint. Metrological equivalent: 0.05 bēru sub-units."
     },
     "C": {
-      "max_dist_from_midpoint_beru": 0.00642,
       "max_dist_from_midpoint_deg": 0.1926,
       "approx_km": 21.384,
-      "note": "Mirror of A: within 21 km of inter-harmonic midpoint (dev >= 0.04358)"
+      "null_rate": 0.1284,
+      "note": "Mirror of A: within 21 km of inter-harmonic midpoint (deviation >= 1.3074°). Metrological equivalent: 0.00642 bēru sub-units."
     },
     "C-": {
-      "max_dist_from_midpoint_beru": 0.00321,
       "max_dist_from_midpoint_deg": 0.0963,
       "approx_km": 10.692,
-      "note": "Mirror of A+: within 6.7 km of inter-harmonic midpoint (dev >= 0.048)"
+      "null_rate": 0.0642,
+      "note": "Mirror of A+: within 10.7 km of inter-harmonic midpoint (deviation >= 1.4037°). Metrological equivalent: 0.00321 bēru sub-units."
     },
     "C--": {
-      "max_dist_from_midpoint_beru": 0.0016,
       "max_dist_from_midpoint_deg": 0.048,
       "approx_km": 5.346,
-      "note": "Mirror of A++: within 0.67 km of inter-harmonic midpoint (dev >= 0.0498)"
+      "null_rate": 0.032,
+      "note": "Mirror of A++: within 5.3 km of inter-harmonic midpoint (deviation >= 1.452°). Metrological equivalent: 0.0016 bēru sub-units."
     }
   },
   "arc_test": {

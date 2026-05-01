@@ -33,34 +33,29 @@ class TestConfigIntegrity:
         assert config["units"]["harmonic_step"] == 0.1
 
     def test_tiers_ordered(self, config):
-        app = config["tiers"]["A++"]["max_deviation_beru"]
-        ap = config["tiers"]["A+"]["max_deviation_beru"]
-        a = config["tiers"]["A"]["max_deviation_beru"]
-        b = config["tiers"]["B"]["max_deviation_beru"]
+        app = config["tiers"]["A++"]["max_deviation_deg"]
+        ap = config["tiers"]["A+"]["max_deviation_deg"]
+        a = config["tiers"]["A"]["max_deviation_deg"]
+        b = config["tiers"]["B"]["max_deviation_deg"]
         assert app < ap < a < b
 
     def test_null_rates_consistent(self, config):
-        """Null rates derived in lib.beru should equal 2 × threshold / step.
-
-        config.json itself does not store null_rates (they are derived
-        constants in lib.beru); we test the derivation against the
-        live config thresholds and harmonic step.
-        """
+        """Null rates derived in lib.beru should equal 2 × threshold_deg / harmonic_step_deg."""
         from lib.beru import P_NULL_AP, P_NULL_A
-        ap_threshold = config["tiers"]["A+"]["max_deviation_beru"]
-        a_threshold  = config["tiers"]["A"]["max_deviation_beru"]
-        step         = config["units"]["harmonic_step"]
-        assert P_NULL_AP == pytest.approx(2 * ap_threshold / step, abs=1e-12)
-        assert P_NULL_A  == pytest.approx(2 * a_threshold  / step, abs=1e-12)
+        ap_threshold = config["tiers"]["A+"]["max_deviation_deg"]
+        a_threshold  = config["tiers"]["A"]["max_deviation_deg"]
+        step_deg     = config["units"]["harmonic_step"] * config["units"]["beru"]["degrees"]
+        assert P_NULL_AP == pytest.approx(2 * ap_threshold / step_deg, abs=1e-12)
+        assert P_NULL_A  == pytest.approx(2 * a_threshold  / step_deg, abs=1e-12)
 
     def test_lib_beru_matches_config(self, config):
         """lib.beru constants should match config.json values."""
-        from lib.beru import GERIZIM, BERU, TIER_APLUS, TIER_A_MAX, TIER_B_MAX
+        from lib.beru import GERIZIM, BERU, TIER_APLUS_DEG, TIER_A_DEG, TIER_B_DEG
         assert GERIZIM == config["anchors"]["gerizim"]["longitude"]
         assert BERU == config["units"]["beru"]["degrees"]
-        assert TIER_APLUS == config["tiers"]["A+"]["max_deviation_beru"]
-        assert TIER_A_MAX == config["tiers"]["A"]["max_deviation_beru"]
-        assert TIER_B_MAX == config["tiers"]["B"]["max_deviation_beru"]
+        assert TIER_APLUS_DEG == config["tiers"]["A+"]["max_deviation_deg"]
+        assert TIER_A_DEG     == config["tiers"]["A"]["max_deviation_deg"]
+        assert TIER_B_DEG     == config["tiers"]["B"]["max_deviation_deg"]
 
     def test_sweep_configs_present(self, config):
         assert "levant" in config["anchor_sweep"]
