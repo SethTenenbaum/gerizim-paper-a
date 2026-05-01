@@ -27,6 +27,7 @@ from data.unesco_corpus import load_corpus
 from lib.beru import (
     BERU as BERU_DEG, HARMONIC_STEP,
     TIER_APP, TIER_APLUS, TIER_A_MAX, TIER_B_MAX,
+    TIER_APP_DEG, TIER_APLUS_DEG, TIER_A_DEG, TIER_B_DEG,
     TIER_APP_KM, TIER_APLUS_KM, TIER_A_KM, TIER_B_KM,
     TIER_C_MAX, TIER_CMINUS, TIER_CMINUS2,
     P_NULL_APP, P_NULL_AP, P_NULL_A, P_NULL_B,
@@ -103,20 +104,29 @@ print(f"  \\newcommand{{\\NullRateC}}{{{NULL_RATE_C*100:.4g}\\%}}  % geometric n
 print(f"  \\newcommand{{\\NullRateCMinus}}{{{NULL_RATE_CMINUS*100:.4g}\\%}}  % geometric null rate for Tier-C− (= A+, symmetric)")
 print(f"  \\newcommand{{\\NullRateCMinusTwo}}{{{NULL_RATE_CMINUS2*100:.4g}\\%}}  % geometric null rate for Tier-C−− (= A++, symmetric)")
 # ── Tier threshold macros ────────────────────────────────────────────────────
-print(f"  \\newcommand{{\\ApThreshBeru}}{{{TIER_APLUS}}}  % A+ threshold (beru)")
+# Primary reporting unit: degrees.  Beru values retained for internal use / appendix.
+print(f"  \\newcommand{{\\ApThreshDeg}}{{{TIER_APLUS_DEG}}}  % A+ threshold (degrees)")
 print(f"  \\newcommand{{\\ApThreshKm}}{{{TIER_APLUS_KM:.1f}}}  % A+ threshold (km, equatorial)")
-print(f"  \\newcommand{{\\AppThreshBeru}}{{{TIER_APP}}}  % A++ threshold (beru)")
+print(f"  \\newcommand{{\\AppThreshDeg}}{{{TIER_APP_DEG}}}  % A++ threshold (degrees)")
 print(f"  \\newcommand{{\\AppThreshKm}}{{{TIER_APP_KM:.2f}}}  % A++ threshold (km, equatorial)")
-print(f"  \\newcommand{{\\ATierThreshBeru}}{{{TIER_A_MAX}}}  % A-tier threshold (beru)")
+print(f"  \\newcommand{{\\ATierThreshDeg}}{{{TIER_A_DEG}}}  % A-tier threshold (degrees)")
 print(f"  \\newcommand{{\\ATierThreshKm}}{{{TIER_A_KM:.0f}}}  % A-tier threshold (km, equatorial)")
-print(f"  \\newcommand{{\\BTierThreshBeru}}{{{TIER_B_MAX}}}  % B-tier threshold (beru)")
+print(f"  \\newcommand{{\\BTierThreshDeg}}{{{TIER_B_DEG}}}  % B-tier threshold (degrees)")
 print(f"  \\newcommand{{\\BTierThreshKm}}{{{TIER_B_KM:.0f}}}  % B-tier threshold (km, equatorial)")
-print(f"  \\newcommand{{\\CMinusThreshBeru}}{{{TIER_CMINUS}}}  % C− threshold (beru, = A+ mirror)")
+# Beru aliases kept for appendix / backward compat
+print(f"  \\newcommand{{\\ApThreshBeru}}{{{TIER_APLUS}}}  % A+ threshold (beru) — appendix use")
+print(f"  \\newcommand{{\\AppThreshBeru}}{{{TIER_APP}}}  % A++ threshold (beru) — appendix use")
+print(f"  \\newcommand{{\\ATierThreshBeru}}{{{TIER_A_MAX}}}  % A-tier threshold (beru) — appendix use")
+print(f"  \\newcommand{{\\BTierThreshBeru}}{{{TIER_B_MAX}}}  % B-tier threshold (beru) — appendix use")
+print(f"  \\newcommand{{\\CMinusThreshDeg}}{{{round(TIER_CMINUS * BERU_DEG, 4)}}}  % C− threshold (degrees)")
 print(f"  \\newcommand{{\\CMinusThreshKm}}{{{TIER_CMINUS * BERU_DEG * 111.0:.1f}}}  % C− threshold (km)")
-print(f"  \\newcommand{{\\CTierThreshBeru}}{{{TIER_C_MAX}}}  % C-tier threshold (beru, = A mirror)")
-print(f"  \\newcommand{{\\CMinusTwoThreshBeru}}{{{TIER_CMINUS2}}}  % C−− threshold (beru, = A++ mirror)")
+print(f"  \\newcommand{{\\CTierThreshDeg}}{{{round(TIER_C_MAX * BERU_DEG, 4)}}}  % C-tier threshold (degrees)")
+print(f"  \\newcommand{{\\CMinusTwoThreshDeg}}{{{round(TIER_CMINUS2 * BERU_DEG, 4)}}}  % C−− threshold (degrees)")
+print(f"  \\newcommand{{\\CMinusThreshBeru}}{{{TIER_CMINUS}}}  % C− threshold (beru) — appendix use")
+print(f"  \\newcommand{{\\CTierThreshBeru}}{{{TIER_C_MAX}}}  % C-tier threshold (beru) — appendix use")
+print(f"  \\newcommand{{\\CMinusTwoThreshBeru}}{{{TIER_CMINUS2}}}  % C−− threshold (beru) — appendix use")
 print(f"  \\newcommand{{\\NullRateApPct}}{{{NULL_RATE_AP*100:.4g}}}  % A+ null rate as plain number (no %)")
-print(f"  \\newcommand{{\\NullRateApFormula}}{{$2 \\times \\ApThreshBeru{{}} / 0.1$}}  % null rate formula")
+print(f"  \\newcommand{{\\NullRateApFormula}}{{$2 \\times {TIER_APLUS_DEG}^\\circ / {TIER_B_DEG}^\\circ$}}  % null rate formula in degrees")
 # ── Static convenience macros ─────────────────────────────────────────────────
 print(f"  \\newcommand{{\\threeStar}}{{***}}  % *** significance shorthand for p<0.001 literal comparisons")
 print(f"  \\newcommand{{\\twoStar}}{{**}}    % ** significance shorthand")
@@ -137,12 +147,16 @@ print("  ✓ All GROUP 0 constants emitted.")
 from lib.results_store import ResultsStore
 ResultsStore().write_many({
     "ApThreshBeru":    TIER_APLUS,
+    "ApThreshDeg":     TIER_APLUS_DEG,
     "ApThreshKm":      round(TIER_APLUS_KM, 1),
     "AppThreshBeru":   TIER_APP,
+    "AppThreshDeg":    TIER_APP_DEG,
     "AppThreshKm":     round(TIER_APP_KM, 2),
     "ATierThreshBeru": TIER_A_MAX,
+    "ATierThreshDeg":  TIER_A_DEG,
     "ATierThreshKm":   round(TIER_A_KM, 0),
     "BTierThreshBeru": TIER_B_MAX,
+    "BTierThreshDeg":  TIER_B_DEG,
     "BTierThreshKm":   round(TIER_B_KM, 0),
     "CMinusThreshBeru":   TIER_CMINUS,
     "CTierThreshBeru":    TIER_C_MAX,

@@ -1,70 +1,71 @@
 ==============================================================================================================
   MULTIPLE COMPARISONS: FDR AND FAMILY-WISE CORRECTIONS
   P-values sourced from   : data/store/results.json
-  Total tests present     : 43  |  Confirmatory: 34  |  Exploratory: 9
+  Total tests present     : 44  |  Confirmatory: 34  |  Exploratory: 10
 ==============================================================================================================
 
   Test                                          Cat     p_raw      Bonf      Holm      BH q   Sig
   --------------------------------------------- --- --------- --------- --------- --------- -----
-  Test 1: Dome/spherical A++ (binomial)           C    0.0006    0.0268    0.0256    0.0070    **
-  Test 1: Dome/spherical A+ (binomial)            C    0.0049    0.2107    0.1503    0.0150     *
-  Test 1: Dome/spherical A (binomial)             C    0.0020    0.0844    0.0746    0.0114     *
-  Test 1: Dome chi-sq uniform                     C    0.0732    1.0000    1.0000    0.1312    ns
-  Test 2/4: Full corpus A+ (binomial)             C    0.0027    0.1171    0.0953    0.0114     *
-  Test 2: Cluster MWU (one-tailed)                C    0.0048    0.2084    0.1503    0.0150     *
-  Test 2: Cluster permutation                     C    0.0002    0.0086    0.0084    0.0043    **
+  Test 1: Dome/spherical A++ (binomial)           C    0.0006    0.0274    0.0262    0.0072    **
+  Test 1: Dome/spherical A+ (binomial)            C    0.0049    0.2156    0.1503    0.0144     *
+  Test 1: Dome/spherical A (binomial)             C    0.0020    0.0864    0.0766    0.0107     *
+  Test 1: Dome chi-sq uniform                     C    0.0732    1.0000    1.0000    0.1289    ns
+  Test 2/4: Full corpus A+ (binomial)             C    0.0027    0.1198    0.0980    0.0107     *
+  Test 2: Cluster MWU (one-tailed)                C    0.0048    0.2133    0.1503    0.0144     *
+  Test 2: Cluster permutation                     C    0.0002    0.0088    0.0086    0.0044    **
   Test 2: Harmonic-level MWU                      C    0.0000    0.0004    0.0004    0.0004   ***
-  Cochran-Armitage 3-cohort                       C    0.1584    1.0000    1.0000    0.2003    ns
-  Cochran-Armitage 5-cohort                       C    0.2570    1.0000    1.0000    0.2987    ns
-  Canon (1978-84) A+ binomial                     C    0.1070    1.0000    1.0000    0.1586    ns
-  Pre-2000 A+ binomial                            C    0.0025    0.1075    0.0900    0.0114     *
-  Modern (2000+) A+ binomial                      C    0.1493    1.0000    1.0000    0.2003    ns
-  Fisher canon vs modern                          C    0.3000    1.0000    1.0000    0.3395    ns
-  First-half A+ binomial                          C    0.0029    0.1257    0.0969    0.0114     *
-  Second-half A+ binomial                         C    0.1384    1.0000    1.0000    0.1920    ns
-  Fisher first-half vs second-half                C    0.1553    1.0000    1.0000    0.2003    ns
-  Sequential peak                                 E    0.0007    0.0280    0.0260    0.0070    **
-  Any-religion A+ binomial                        C    0.0140    0.6032    0.3507    0.0317     *
-  Christian A+ binomial                           E    0.0156    0.6717    0.3749    0.0336     *
-  Pre-CE A+ binomial                              E    0.0912    1.0000    1.0000    0.1569    ns
-  Deep temporal: Spearman (founding date vs A+)   E    0.4856    1.0000    1.0000    0.4972    ns
-  Deep temporal: Fisher (pre-CE vs post-CE rate)   E    0.4214    1.0000    1.0000    0.4530    ns
-  Founding keyword Fisher exact                   C    0.2094    1.0000    1.0000    0.2501    ns
-  Spatial: DEFF-corrected binomial (0.25° band)   C    0.0165    0.7116    0.3806    0.0339     *
-  Spatial: DEFF-corrected binomial (0.50° band)   C    0.0113    0.4873    0.3139    0.0271     *
-  Spatial: block-bootstrap Z-test                 C    0.0106    0.4550    0.3069    0.0271     *
-  CMH stratified test (early vs late, by region)   C    0.1771    1.0000    1.0000    0.2175    ns
-  Sim: Dome permutation                           C    0.0954    1.0000    1.0000    0.1578    ns
-  Sim: Dome bootstrap                             C    0.1056    1.0000    1.0000    0.1586    ns
-  Sim: KDE full corpus                            C    0.0029    0.1226    0.0969    0.0114     *
-  Sim: Canon permutation                          C    0.4194    1.0000    1.0000    0.4530    ns
-  Sim: Pre-2000 permutation                       C    0.1360    1.0000    1.0000    0.1920    ns
+  Cochran-Armitage 3-cohort                       C    0.1584    1.0000    1.0000    0.1991    ns
+  Cochran-Armitage 5-cohort                       C    0.2570    1.0000    1.0000    0.2976    ns
+  Canon (1978-84) A+ binomial                     C    0.1070    1.0000    1.0000    0.1569    ns
+  Pre-2000 A+ binomial                            C    0.0025    0.1100    0.0925    0.0107     *
+  Modern (2000+) A+ binomial                      C    0.1493    1.0000    1.0000    0.1991    ns
+  Fisher canon vs modern                          C    0.3000    1.0000    1.0000    0.3385    ns
+  First-half A+ binomial                          C    0.0029    0.1287    0.0980    0.0107     *
+  Second-half A+ binomial                         C    0.1384    1.0000    1.0000    0.1904    ns
+  Fisher first-half vs second-half                C    0.1553    1.0000    1.0000    0.1991    ns
+  Sequential peak                                 E    0.0007    0.0286    0.0267    0.0072    **
+  Any-religion A+ binomial                        C    0.0140    0.6172    0.3507    0.0309     *
+  Christian A+ binomial                           E    0.0156    0.6873    0.3749    0.0327     *
+  Pre-CE A+ binomial                              E    0.0912    1.0000    1.0000    0.1544    ns
+  Deep temporal: Spearman (founding date vs A+)   E    0.4856    1.0000    1.0000    0.4969    ns
+  Deep temporal: Fisher (pre-CE vs post-CE rate)   E    0.4214    1.0000    1.0000    0.4522    ns
+  Founding keyword Fisher exact                   C    0.2094    1.0000    1.0000    0.2490    ns
+  Spatial: DEFF-corrected binomial (0.25° band)   C    0.0165    0.7281    0.3806    0.0331     *
+  Spatial: DEFF-corrected binomial (0.50° band)   C    0.0113    0.4987    0.3139    0.0262     *
+  Spatial: block-bootstrap Z-test                 C    0.0106    0.4656    0.3069    0.0262     *
+  CMH stratified test (early vs late, by region)   C    0.1771    1.0000    1.0000    0.2164    ns
+  Sim: Dome permutation                           C    0.0954    1.0000    1.0000    0.1555    ns
+  Sim: Dome bootstrap                             C    0.1056    1.0000    1.0000    0.1569    ns
+  Sim: KDE full corpus                            C    0.0029    0.1254    0.0980    0.0107     *
+  Sim: Canon permutation                          C    0.4194    1.0000    1.0000    0.4522    ns
+  Sim: Pre-2000 permutation                       C    0.1360    1.0000    1.0000    0.1904    ns
   Sim: Post-2000 permutation                      C    0.9067    1.0000    1.0000    0.9067    ns
-  Test 5: Evolution combined A++ (binomial)       C    0.0008    0.0359    0.0326    0.0072    **
-  Test 5: Evolution combined A+ (binomial)        C    0.0046    0.1971    0.1467    0.0150     *
-  Test 5: Stupa stage A+ (binomial)               C    0.0251    1.0000    0.5530    0.0491     *
-  Test 5: Dome stage A+ (binomial)                C    0.0693    1.0000    1.0000    0.1295    ns
-  Test 5: Mound stage A+ (binomial)               C    0.4616    1.0000    1.0000    0.4842    ns
-  Judaism A+ rate                                 E    0.0997    1.0000    1.0000    0.1586    ns
-  Hinduism C- binomial                            E    0.0112    0.4821    0.3139    0.0271     *
-  Hinduism A+/C- joint (multivariate hyper.)      E    0.0023    0.0971    0.0836    0.0114     *
-  Buddhism A/C-band joint (multivariate hyper.)   E    0.0113    0.4856    0.3139    0.0271     *
+  Test 5: Evolution combined A++ (binomial)       C    0.0008    0.0367    0.0334    0.0073    **
+  Test 5: Evolution combined A+ (binomial)        C    0.0046    0.2017    0.1467    0.0144     *
+  Test 5: Stupa stage A+ (binomial)               C    0.0251    1.0000    0.5530    0.0481     *
+  Test 5: Dome stage A+ (binomial)                C    0.0693    1.0000    1.0000    0.1270    ns
+  Test 5: Mound stage A+ (binomial)               C    0.4616    1.0000    1.0000    0.4836    ns
+  Judaism A+ rate                                 E    0.0997    1.0000    1.0000    0.1566    ns
+  Hinduism C- binomial                            E    0.0112    0.4933    0.3139    0.0262     *
+  Hinduism A+/C- joint (multivariate hyper.)      E    0.0023    0.0994    0.0858    0.0107     *
+  Hinduism A/C joint (multivariate hyper.)        E    0.0028    0.1232    0.0980    0.0107     *
+  Buddhism A/C-band joint (multivariate hyper.)   E    0.0113    0.4969    0.3139    0.0262     *
 
 ──────────────────────────────────────────────────────────────────────────────────────────────────────────────
   SUMMARY: How many tests survive each correction at α = 0.05?
-  Correction                           Significant   of 43
+  Correction                           Significant   of 44
   ----------------------------------- ------------ ----
-  Raw (uncorrected)                             22
-  Bonferroni (k=43)                              5
-  Holm step-down (k=43)                          5
-  Benjamini-Hochberg FDR (k=43)                 22
+  Raw (uncorrected)                             23
+  Bonferroni (k=44)                              5
+  Holm step-down (k=44)                          5
+  Benjamini-Hochberg FDR (k=44)                 23
 
-  Key results surviving full Bonferroni correction (k=43, α=0.05):
-    • Test 1: Dome/spherical A++ (binomial)          p = 0.0006  p_adj = 0.0268
-    • Test 2: Cluster permutation                    p = 0.0002  p_adj = 0.0086
+  Key results surviving full Bonferroni correction (k=44, α=0.05):
+    • Test 1: Dome/spherical A++ (binomial)          p = 0.0006  p_adj = 0.0274
+    • Test 2: Cluster permutation                    p = 0.0002  p_adj = 0.0088
     • Test 2: Harmonic-level MWU                     p = 0.0000  p_adj = 0.0004
-    • Sequential peak                                p = 0.0007  p_adj = 0.0280
-    • Test 5: Evolution combined A++ (binomial)      p = 0.0008  p_adj = 0.0359
+    • Sequential peak                                p = 0.0007  p_adj = 0.0286
+    • Test 5: Evolution combined A++ (binomial)      p = 0.0008  p_adj = 0.0367
 
 ──────────────────────────────────────────────────────────────────────────────────────────────────────────────
   CONFIRMATORY TESTS ONLY (pre-specified, N=34)
@@ -83,34 +84,35 @@
 
 ==============================================================================================================
 
-  22 tests are significant at α = 0.05 (uncorrected).
-  22 survive Benjamini-Hochberg FDR correction across all 43 tests.
+  23 tests are significant at α = 0.05 (uncorrected).
+  23 survive Benjamini-Hochberg FDR correction across all 44 tests.
 
   Key results surviving full FDR correction (q < 0.05):
-    • Test 1: Dome/spherical A++ (binomial)          p = 0.0006  q = 0.0070
-    • Test 1: Dome/spherical A+ (binomial)           p = 0.0049  q = 0.0150
-    • Test 1: Dome/spherical A (binomial)            p = 0.0020  q = 0.0114
-    • Test 2/4: Full corpus A+ (binomial)            p = 0.0027  q = 0.0114
-    • Test 2: Cluster MWU (one-tailed)               p = 0.0048  q = 0.0150
-    • Test 2: Cluster permutation                    p = 0.0002  q = 0.0043
+    • Test 1: Dome/spherical A++ (binomial)          p = 0.0006  q = 0.0072
+    • Test 1: Dome/spherical A+ (binomial)           p = 0.0049  q = 0.0144
+    • Test 1: Dome/spherical A (binomial)            p = 0.0020  q = 0.0107
+    • Test 2/4: Full corpus A+ (binomial)            p = 0.0027  q = 0.0107
+    • Test 2: Cluster MWU (one-tailed)               p = 0.0048  q = 0.0144
+    • Test 2: Cluster permutation                    p = 0.0002  q = 0.0044
     • Test 2: Harmonic-level MWU                     p = 0.0000  q = 0.0004
-    • Pre-2000 A+ binomial                           p = 0.0025  q = 0.0114
-    • First-half A+ binomial                         p = 0.0029  q = 0.0114
-    • Sequential peak                                p = 0.0007  q = 0.0070
-    • Any-religion A+ binomial                       p = 0.0140  q = 0.0317
-    • Christian A+ binomial                          p = 0.0156  q = 0.0336
-    • Spatial: DEFF-corrected binomial (0.25° band)  p = 0.0165  q = 0.0339
-    • Spatial: DEFF-corrected binomial (0.50° band)  p = 0.0113  q = 0.0271
-    • Spatial: block-bootstrap Z-test                p = 0.0106  q = 0.0271
-    • Sim: KDE full corpus                           p = 0.0029  q = 0.0114
-    • Test 5: Evolution combined A++ (binomial)      p = 0.0008  q = 0.0072
-    • Test 5: Evolution combined A+ (binomial)       p = 0.0046  q = 0.0150
-    • Test 5: Stupa stage A+ (binomial)              p = 0.0251  q = 0.0491
-    • Hinduism C- binomial                           p = 0.0112  q = 0.0271
-    • Hinduism A+/C- joint (multivariate hyper.)     p = 0.0023  q = 0.0114
-    • Buddhism A/C-band joint (multivariate hyper.)  p = 0.0113  q = 0.0271
+    • Pre-2000 A+ binomial                           p = 0.0025  q = 0.0107
+    • First-half A+ binomial                         p = 0.0029  q = 0.0107
+    • Sequential peak                                p = 0.0007  q = 0.0072
+    • Any-religion A+ binomial                       p = 0.0140  q = 0.0309
+    • Christian A+ binomial                          p = 0.0156  q = 0.0327
+    • Spatial: DEFF-corrected binomial (0.25° band)  p = 0.0165  q = 0.0331
+    • Spatial: DEFF-corrected binomial (0.50° band)  p = 0.0113  q = 0.0262
+    • Spatial: block-bootstrap Z-test                p = 0.0106  q = 0.0262
+    • Sim: KDE full corpus                           p = 0.0029  q = 0.0107
+    • Test 5: Evolution combined A++ (binomial)      p = 0.0008  q = 0.0073
+    • Test 5: Evolution combined A+ (binomial)       p = 0.0046  q = 0.0144
+    • Test 5: Stupa stage A+ (binomial)              p = 0.0251  q = 0.0481
+    • Hinduism C- binomial                           p = 0.0112  q = 0.0262
+    • Hinduism A+/C- joint (multivariate hyper.)     p = 0.0023  q = 0.0107
+    • Hinduism A/C joint (multivariate hyper.)       p = 0.0028  q = 0.0107
+    • Buddhism A/C-band joint (multivariate hyper.)  p = 0.0113  q = 0.0262
 
 ──────────────────────────────────────────────────────────────────────────────────────────────────────────────
-Generated : Mon Apr 27 18:34:02 UTC 2026
+Generated : Thu Apr 30 16:49:45 UTC 2026
 Script    : tools/generate_audit_fdr.py
 LaTeX macros for this analysis are in manuscript/generated_macros.tex

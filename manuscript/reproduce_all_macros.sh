@@ -69,6 +69,7 @@ if [ "${1:-}" != "--full" ]; then
     SCRIPTS=(
         # ── Constants (config.json + corpus size) — no corpus analysis needed ──
         analysis/global/emit_constants.py                    # → GerizimLon, NwhcTotal, etc.
+        analysis/global/vonmises_threshold_validation.py     # → vmKappaOwtrad, vmKappaStupa, vmSigmaBeruStupa, etc.
         analysis/global/geodesic_sensitivity.py              # → GeodesicApCurrent, GeodesicDropOut, GeodesicGainIn, etc.
         analysis/global/owtrad_route_alignment.py            # → pOwtradMidApp/Ap, NOwtradEdges/Vertices, etc.
         # ── Primary analysis (write to store) ─────────────────────────────
@@ -87,7 +88,6 @@ if [ "${1:-}" != "--full" ]; then
         analysis/unesco/verify_phase_peak_periodicity.py
         analysis/global/peak_geography_audit.py
         analysis/global/landmark_anchor_ranking.py
-        analysis/global/global_corridor_comparison.py
         analysis/global/anchor_site_comparison.py            # → NjerSelfExclCorpus, NgerizimSweepCorpus
         analysis/unesco/spatial_independence_test.py         # → pNeffQuarter, pNeffHalf
         analysis/unesco/regional_temporal_gradient.py        # → pCMH
@@ -100,7 +100,7 @@ if [ "${1:-}" != "--full" ]; then
         analysis/global/dome_periodicity_audit.py
         analysis/global/phase_peak_periodicity_formal_test.py       # → rayleighR/Z/PermP, fullRayleighR/Z/PermP, maxApCount/Z/PermP (GROUP 11b)
         analysis/global/phase_peak_max_permutation_test.py          # → anchorMaxPermObsMax/NullMu/NullSD/Z/P/Nperms/BootMu/BootSD/BootZ/BootP (GROUP 11c)
-        analysis/global/phase_peak_optimal_band_significance.py     # → phasePeakOptApCount/B/N/BinomP/B/Enrich/B  (GROUP 11d)
+        analysis/global/phase_envelope_analysis.py                  # → phaseFull*/phaseDome*/phaseGerizimPhase (phase-marginalised robustness)
         # ── Reviewer robustness checks ────────────────────────────────────
         analysis/unesco/dome_footprint_window_sensitivity.py   # → geoNullDomeTwoDeg*, geoNullDomeTenDeg*
         analysis/unesco/stupa_coordinate_perturbation.py       # → stupaCoordPerturb*
@@ -229,6 +229,9 @@ run_script() {
 run_script "GROUP 0: Constants (config.json + corpus size)"        \
            analysis/global/emit_constants.py
 
+run_script "GROUP 0c: Von Mises threshold validation (§3.4)"       \
+           analysis/global/vonmises_threshold_validation.py
+
 run_script "GROUP 0b: Geodesic latitude-sensitivity check (§3.1)"  \
            analysis/global/geodesic_sensitivity.py
 
@@ -256,6 +259,9 @@ run_script "GROUP 7: Sacred Origin Test"                           \
 run_script "GROUP 8: Meta-Keyword Test"                            \
            analysis/unesco/meta_keyword_test.py
 
+run_script "GROUP 8b: Keyword Sensitivity / Leave-Stupa-Out"       \
+           analysis/unesco/keyword_sensitivity_stupa.py
+
 run_script "GROUP 9: Temporal Gradient (Test 4)"                   \
            analysis/unesco/temporal_gradient_test.py
 
@@ -273,9 +279,6 @@ run_script "GROUP 12b: Peak Geography Audit"                       \
 
 run_script "GROUP 13: Landmark Anchor Ranking"                     \
            analysis/global/landmark_anchor_ranking.py
-
-run_script "GROUP 14: Global Corridor Comparison"                  \
-           analysis/global/global_corridor_comparison.py
 
 run_script "GROUP 16 + 22: Anchor Site Comparison"                 \
            analysis/global/anchor_site_comparison.py
@@ -313,9 +316,9 @@ echo "─── GROUP 24c: phase-peak° Discovery-Corrected Max-Permutation Test
 python3 analysis/global/phase_peak_max_permutation_test.py 2>&1 | tail -40
 echo ""
 
-run_script "GROUP 24d: phase-peak° Optimal Band Binomial Significance (reads store)" \
-           analysis/global/phase_peak_optimal_band_significance.py
-
+echo "─── GROUP 24d: Phase-Envelope Analysis (anchor-free robustness) ───"
+python3 analysis/global/phase_envelope_analysis.py 2>&1 | tail -30
+echo ""
 echo "─── GROUP 25: Simulation Null Model (may take several minutes) ───"
 python3 analysis/unesco/simulation_null_model.py 2>&1 | tail -40
 echo ""

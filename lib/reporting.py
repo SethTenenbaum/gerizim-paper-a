@@ -61,11 +61,12 @@ def print_config_summary(anchor_name: str = "gerizim"):
     anchor = CONFIG["anchors"][anchor_name]
     tiers = CONFIG["tiers"]
     print(f"Anchor: {anchor['label']} ({anchor['longitude']}°E)")
-    print(f"Beru unit: {CONFIG['units']['beru']['degrees']}° of arc")
+    print(f"Harmonic grid: 3° spacing (harmonic_step = {CONFIG['units']['harmonic_step']} × 30°/beru)")
     print(f"Tier thresholds:")
     for name, tier in tiers.items():
-        print(f"  {name}: ≤ {tier['max_deviation_beru']} beru "
-              f"(~{tier['approx_km']} km)")
+        if "max_deviation_deg" in tier:
+            print(f"  {name}: ≤ {tier['max_deviation_deg']}° "
+                  f"(~{tier['approx_km']} km)")
 
 
 # ---------------------------------------------------------------------------

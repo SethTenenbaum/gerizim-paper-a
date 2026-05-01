@@ -41,6 +41,12 @@ TIER_APLUS = CONFIG["tiers"]["A+"]["max_deviation_beru"]    # from config (e.g. 
 TIER_A_MAX = CONFIG["tiers"]["A"]["max_deviation_beru"]     # from config (e.g. 0.010)
 TIER_B_MAX = CONFIG["tiers"]["B"]["max_deviation_beru"]     # from config (e.g. 0.050)
 
+# Tier thresholds in degrees (primary reporting unit)
+TIER_APP_DEG   = CONFIG["tiers"]["A++"]["max_deviation_deg"]   # 0.048°
+TIER_APLUS_DEG = CONFIG["tiers"]["A+"]["max_deviation_deg"]    # 0.0963°
+TIER_A_DEG     = CONFIG["tiers"]["A"]["max_deviation_deg"]     # 0.1926°
+TIER_B_DEG     = CONFIG["tiers"]["B"]["max_deviation_deg"]     # 1.5°
+
 # Midpoint = 0.5 × harmonic spacing (0.1 beru); maximum possible deviation
 MIDPOINT   = 0.05   # beru — perfect inter-harmonic midpoint
 
@@ -68,11 +74,11 @@ TIER_APP_KM    = TIER_APP   * _KM_PER_BERU   # km (from config)
 TIER_APLUS_KM  = TIER_APLUS * _KM_PER_BERU   # km (from config)
 TIER_A_KM      = TIER_A_MAX * _KM_PER_BERU   # km (from config)
 TIER_B_KM      = TIER_B_MAX * _KM_PER_BERU   # km (from config)
-TIER_APP_LABEL   = f"≤{TIER_APP} beru, ≤{TIER_APP_KM:.2f} km"
-TIER_APLUS_LABEL = f"≤{TIER_APLUS} beru, ≤{TIER_APLUS_KM:.1f} km"
-TIER_A_LABEL     = f"≤{TIER_A_MAX} beru, ≤{TIER_A_KM:.0f} km"
-TIER_B_LABEL     = f"≤{TIER_B_MAX} beru, ≤{TIER_B_KM:.0f} km"
-TIER_C_LABEL     = f">{TIER_B_MAX} beru, >{TIER_B_KM:.0f} km"
+TIER_APP_LABEL   = f"≤{TIER_APP_DEG}°, ≤{TIER_APP_KM:.2f} km"
+TIER_APLUS_LABEL = f"≤{TIER_APLUS_DEG}°, ≤{TIER_APLUS_KM:.1f} km"
+TIER_A_LABEL     = f"≤{TIER_A_DEG}°, ≤{TIER_A_KM:.0f} km"
+TIER_B_LABEL     = f"≤{TIER_B_DEG}°, ≤{TIER_B_KM:.0f} km"
+TIER_C_LABEL     = f">{TIER_B_DEG}°, >{TIER_B_KM:.0f} km"
 
 # Inverse of harmonic step — used in rounding to nearest harmonic line.
 # Prefer  round(beru_val / HARMONIC_STEP) * HARMONIC_STEP  over * 10 / 10.

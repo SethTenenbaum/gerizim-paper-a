@@ -3,7 +3,7 @@
 generate_figures.py — Generate all three manuscript figures for Paper A.
 
 Figures produced:
-    1. fig_devhist.pdf      — Histogram of beru deviations (δ) for all UNESCO sites
+    1. fig_devhist.pdf      — Histogram of harmonic deviations (δ) for all UNESCO sites
     2. fig_temporal.pdf      — Temporal gradient: A+ rate by inscription-year cohort
     3. fig_unitsweep.pdf     — Unit sensitivity: −log₁₀(p) vs harmonic spacing
 
@@ -173,63 +173,56 @@ print()
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-#  FIGURE 1: Beru deviation histogram  (fig:devhist)
+#  FIGURE 1: Harmonic deviation histogram  (fig:devhist)
 # ══════════════════════════════════════════════════════════════════════════════
 def make_devhist():
-    """Histogram of beru deviations with A+ window shaded."""
+    """Histogram of harmonic deviations (degrees) with A+ window shaded."""
     fig, ax = plt.subplots(figsize=(7, 4.2))
 
-    bin_width = 0.005
-    max_dev = 0.05
-    bins = np.arange(0, max_dev + bin_width, bin_width)
+    # Convert deviations from beru to degrees for display (1 beru = 30°)
+    devs_deg      = deviations * 30.0
+    TIER_APLUS_DEG = TIER_APLUS * 30.0   # ≈ 0.0963°
+    max_dev_deg   = 0.05 * 30.0           # 1.5°
+    bin_width_deg = 0.005 * 30.0          # 0.15°
+    bins   = np.arange(0, max_dev_deg + bin_width_deg, bin_width_deg)
     n_bins = len(bins) - 1
 
     counts, edges, patches = ax.hist(
-        deviations, bins=bins,
+        devs_deg, bins=bins,
         color=C_PRIMARY, edgecolor="white", linewidth=0.6,
         alpha=0.85, zorder=3,
     )
 
-    # Shade exactly the A+ window (δ ≤ 0.002 = TIER_APLUS).
-    # Note: the histogram bin width is 0.005, so the first bar extends to 0.005
-    # and will always be taller than the A+ count (56). The annotation uses
-    # a direct count of sites with δ ≤ TIER_APLUS, not counts[0].
-    ax.axvspan(0, TIER_APLUS, color=C_HIGHLIGHT, alpha=0.12, zorder=1,
-               label=f"Tier-A+ window (δ ≤ {TIER_APLUS})")
+    ax.axvspan(0, TIER_APLUS_DEG, color=C_HIGHLIGHT, alpha=0.12, zorder=1,
+               label=f"Tier-A+ window (δ ≤ {TIER_APLUS_DEG:.4g}°)")
 
-    # Uniform null expectation line
     expected_per_bin = N_total / n_bins
     ax.axhline(expected_per_bin, color=C_NULL, linewidth=1.5,
                linestyle="--", zorder=4, label=f"Uniform null ({expected_per_bin:.1f}/bin)")
 
-    # Annotate the A+ window count (δ ≤ TIER_APLUS = 0.002), not the full
-    # first bin (δ ≤ 0.005).  The first bin is 2.5× wider than the A+ window
-    # so counts[0] always overstates the signal.
     n_aplus = int(sum(1 for d in deviations if d <= TIER_APLUS))
     y_max_data = counts.max()
     ax.annotate(
-        f"{n_aplus} A+ sites\n(δ ≤ {TIER_APLUS})",
-        xy=(TIER_APLUS, n_aplus),
-        xytext=(0.018, n_aplus + 8),
+        f"{n_aplus} A+ sites\n(δ ≤ {TIER_APLUS_DEG:.4g}°)",
+        xy=(TIER_APLUS_DEG, n_aplus),
+        xytext=(TIER_APLUS_DEG * 6, n_aplus + 8),
         fontsize=9, fontweight="bold", color=C_HIGHLIGHT,
         arrowprops=dict(arrowstyle="->", color=C_HIGHLIGHT, lw=1.2),
         zorder=5,
         annotation_clip=False,
     )
 
-    # A+ threshold line — label placed low so it never reaches the title
-    ax.axvline(TIER_APLUS, color=C_HIGHLIGHT, linewidth=1.0,
+    ax.axvline(TIER_APLUS_DEG, color=C_HIGHLIGHT, linewidth=1.0,
                linestyle=":", alpha=0.7, zorder=4)
-    ax.text(TIER_APLUS + 0.0005, y_max_data * 0.45,
-            f"δ = {TIER_APLUS}", fontsize=8, color=C_HIGHLIGHT,
+    ax.text(TIER_APLUS_DEG + 0.005, y_max_data * 0.45,
+            f"δ = {TIER_APLUS_DEG:.4g}°", fontsize=8, color=C_HIGHLIGHT,
             rotation=90, va="center")
 
-    ax.set_xlabel("Beru deviation (δ) from nearest 0.1-beru harmonic")
+    ax.set_xlabel("Deviation from nearest 3° harmonic (degrees)")
     ax.set_ylabel("Number of sites")
-    ax.set_title(f"Distribution of beru deviations — UNESCO Cultural/Mixed (N = {N_total})")
+    ax.set_title(f"Distribution of harmonic deviations — UNESCO Cultural/Mixed (N = {N_total})")
     ax.legend(loc="upper right", framealpha=0.9)
-    ax.set_xlim(0, max_dev)
-    # Add 20 % headroom above tallest bar so annotations never clip into the title
+    ax.set_xlim(0, max_dev_deg)
     ax.set_ylim(0, y_max_data * 1.20)
 
     fig.tight_layout()
@@ -379,8 +372,9 @@ def make_unitsweep():
     """−log₁₀(p) vs harmonic spacing for dome and full corpus populations."""
     fig, ax = plt.subplots(figsize=(7, 4.5))
 
-    # Spacings to test
-    coarse = [0.05, 0.06, 0.07, 0.08, 0.09, 0.10, 0.11, 0.12, 0.15, 0.20]
+    # Spacings to test (in beru internally; displayed in degrees)
+    coarse      = [0.05, 0.06, 0.07, 0.08, 0.09, 0.10, 0.11, 0.12, 0.15, 0.20]
+    coarse_deg  = [s * 30.0 for s in coarse]   # degrees for x-axis display
 
     all_lons = np.array([s["lon"] for s in sites])
     dome_lons = np.array([s["lon"] for s in sites if s["is_dome"]])
@@ -413,11 +407,11 @@ def make_unitsweep():
         sp_full_pval.append(f_p)
         sp_full_logp.append(-np.log10(max(f_p, 1e-15)))
 
-    # Plot both series
-    ax.plot(coarse, sp_dome_logp, "o-",
+    # Plot both series (x-axis in degrees)
+    ax.plot(coarse_deg, sp_dome_logp, "o-",
             color=C_DOME, linewidth=2, markersize=7,
             label=f"Dome/spherical (N = {N_dome})", zorder=4)
-    ax.plot(coarse, sp_full_logp, "s-",
+    ax.plot(coarse_deg, sp_full_logp, "s-",
             color=C_FULL, linewidth=2, markersize=6,
             label=f"Full corpus (N = {N_all})", zorder=4)
 
@@ -441,47 +435,44 @@ def make_unitsweep():
             fontsize=7.5, color=C_NULL, ha="left", va="center",
             transform=ax.get_yaxis_transform())
 
-    # Highlight the 0.10 peak — label placed *below* the dome series peak
-    # so it never collides with the title
-    ax.axvline(0.10, color="#cccccc", linewidth=12, alpha=0.3, zorder=1)
+    # Highlight the 3° (0.10 beru) peak
+    canon_deg = 0.10 * 30.0   # 3.0°
+    ax.axvline(canon_deg, color="#cccccc", linewidth=12, alpha=0.3, zorder=1)
     idx_010 = coarse.index(0.10)
     dome_peak_p = sp_dome_pval[idx_010]
     full_peak_p = sp_full_pval[idx_010]
     dome_lp = sp_dome_logp[idx_010]
     full_lp = sp_full_logp[idx_010]
 
-    # "0.10 beru" badge sits just below the dome peak, never above it
-    ax.text(0.10, dome_lp * 0.60,
-            "0.10 beru\n(canonical)",
+    ax.text(canon_deg, dome_lp * 0.60,
+            "3°\n(canonical)",
             fontsize=8.5, fontweight="bold", ha="center", va="top",
             color="#444444",
             bbox=dict(boxstyle="round,pad=0.25", facecolor="white",
                       edgecolor="#cccccc", alpha=0.85),
             zorder=6)
 
-    # p-value annotations with arrows coming from below the data points
     ax.annotate(f"p = {dome_peak_p:.4f}",
-                xy=(0.10, dome_lp),
-                xytext=(0.128, dome_lp - 0.35),
+                xy=(canon_deg, dome_lp),
+                xytext=(canon_deg + 0.54, dome_lp - 0.35),
                 fontsize=8, color=C_DOME,
                 arrowprops=dict(arrowstyle="->", color=C_DOME, lw=0.9),
                 zorder=5)
     ax.annotate(f"p = {full_peak_p:.4f}",
-                xy=(0.10, full_lp),
-                xytext=(0.128, full_lp + 0.30),
+                xy=(canon_deg, full_lp),
+                xytext=(canon_deg + 0.54, full_lp + 0.30),
                 fontsize=8, color=C_FULL,
                 arrowprops=dict(arrowstyle="->", color=C_FULL, lw=0.9),
                 zorder=5)
 
-    ax.set_xlabel("Harmonic spacing (beru)")
+    ax.set_xlabel("Harmonic spacing (degrees)")
     ax.set_ylabel("$-\\log_{10}(p)$")
-    ax.set_title("Unit sensitivity — signal is confined to the canonical 0.1-beru spacing")
+    ax.set_title("Unit sensitivity — signal is confined to the canonical 3° spacing")
     ax.legend(loc="upper left", framealpha=0.9)
-    ax.set_xlim(0.04, 0.21)
-    # Explicit y ceiling: 15 % above dome peak so title stays clear
+    ax.set_xlim(0.04 * 30, 0.21 * 30)
     ax.set_ylim(0, y_max_data * 1.15)
-    ax.set_xticks(coarse)
-    ax.set_xticklabels([f"{s:.2f}" for s in coarse], fontsize=8, rotation=45)
+    ax.set_xticks(coarse_deg)
+    ax.set_xticklabels([f"{s:.1f}°" for s in coarse_deg], fontsize=8, rotation=45)
 
     fig.tight_layout()
     outpath = OUTDIR / "fig_unitsweep.pdf"
@@ -691,8 +682,8 @@ def make_geo_trail():
         hlon = GERIZIM + k * 3.0
         if -5 <= hlon <= 145:
             ax.plot([hlon, hlon], [-14, 60], transform=ccrs.PlateCarree(),
-                    color="#dddddd", linewidth=0.5, linestyle="--",
-                    alpha=0.6, zorder=2)
+                    color="#aaaaaa", linewidth=0.9, linestyle="--",
+                    alpha=0.85, zorder=2)
 
     # Highlighted harmonic lines: Gerizim anchor and Java node
     java_lon = GERIZIM + 25 * 3.0   # 2.5-beru = harmonic #25
@@ -712,15 +703,15 @@ def make_geo_trail():
         _owtrad_first = False
 
     # Overland trunk overlay — main corridor legible above OWTRAD density
-    _trunk_first = True
-    for _trunk_poly in _overland_trunk_routes():
-        _tlons = [p[0] for p in _trunk_poly]
-        _tlats = [p[1] for p in _trunk_poly]
-        ax.plot(_tlons, _tlats, transform=ccrs.PlateCarree(),
-                color="#4a235a", linewidth=2.0, linestyle="-",
-                alpha=0.80, zorder=4,
-                label="Overland trunk (north/south)" if _trunk_first else "_nolegend_")
-        _trunk_first = False
+    # _trunk_first = True
+    # for _trunk_poly in _overland_trunk_routes():
+    #     _tlons = [p[0] for p in _trunk_poly]
+    #     _tlats = [p[1] for p in _trunk_poly]
+    #     ax.plot(_tlons, _tlats, transform=ccrs.PlateCarree(),
+    #             color="#4a235a", linewidth=2.0, linestyle="-",
+    #             alpha=0.80, zorder=4,
+    #             label="Overland trunk (north/south)" if _trunk_first else "_nolegend_")
+    #     _trunk_first = False
 
     # Maritime routes — coast-following polylines
     def _plot_route(pts, color, lw, ls, label, zorder=3):
@@ -749,16 +740,16 @@ def make_geo_trail():
                            linewidths=0.5, zorder=5 if t in ("A++","A+") else 4)
 
     # Annotate key A+ sites
+    # Each entry: (lon, lat, label, ha, dx, dy)
     _annotations = [
-        (GERIZIM,  32.2,  "Mt. Gerizim\n(anchor)",  "left",   1.5),
-        (44.32,    40.16, "Echmiatsin",              "right",  1.0),
-        (107.3,    34.3,  "Silk Roads\n(Chang'an)",  "left",   1.0),
-        (110.2,    -7.55, "Borobudur\n(Java node, 110.3°E)", "left", 1.0),
-        (83.276,   27.47, "Lumbini",                 "right",  3.5),
+        (GERIZIM,  32.2,  "Mt. Gerizim\n(anchor)",             "left",   2.0,  1.5),
+        (107.3,    34.3,  "Silk Roads\n(Chang\u2019an)",        "center", 0.0,  2.5),
+        (110.2,    -7.55, "Borobudur\n(Java node, 110.3°E)",   "left",   2.0,  1.0),
+        (83.276,   27.47, "Lumbini",                           "center", 0.0,  2.5),
     ]
-    for lon, lat, label, ha, dy in _annotations:
+    for lon, lat, label, ha, dx, dy in _annotations:
         ax.annotate(label,
-                    xy=(lon, lat), xytext=(lon + (2 if ha == "left" else -2), lat + dy),
+                    xy=(lon, lat), xytext=(lon + dx, lat + dy),
                     transform=ccrs.PlateCarree(),
                     fontsize=7, color="#333333", ha=ha,
                     arrowprops=dict(arrowstyle="-", color="#888888", lw=0.7),
@@ -780,7 +771,7 @@ def make_geo_trail():
         Line2D([0],[0], marker="^", color="w", markerfacecolor="#555555",
                markersize=6, label="△ Wikidata Q180987 stupa"),
         Line2D([0],[0], color="#8e44ad", linewidth=1.0, alpha=0.5, label="Overland network (OWTRAD)"),
-        Line2D([0],[0], color="#4a235a", linewidth=2.0, label="Overland trunk route"),
+        # Line2D([0],[0], color="#4a235a", linewidth=2.0, label="Overland trunk route"),
         Line2D([0],[0], color="#16a085", linewidth=1.4, linestyle="--",
                label="Maritime Silk Road"),
     ]
@@ -792,7 +783,7 @@ def make_geo_trail():
     ax.set_title(
         "Silk Roads corridor — UNESCO dome/stupa and Wikidata Q180987 stupa tier distribution\n"
         "Circles = UNESCO ($N=90$); triangles = Wikidata ($N=229$).  "
-        "Dashed grid: 0.1-beru harmonics.  Crimson = A$^{+}$, orange = A-tier.",
+        "Dashed grid: 3° harmonics.  Crimson = A$^{+}$, orange = A-tier.",
         fontsize=8.5, pad=5,
     )
 
@@ -1033,7 +1024,7 @@ def make_supp_global_tiers():
         "UNESCO cultural sites and Wikidata Q180987 stupas\n"
         f"UNESCO A-tiers: $N={n_un_a}$;  C-tiers: $N={n_un_c}$.  "
         f"Wikidata A-tiers: $N={n_wiki_a}$;  C-tiers: $N={n_wiki_c}$.  "
-        "Dashed grid: 0.1-bēru (3°) harmonics from Gerizim anchor.",
+        "Dashed grid: 3° harmonics from Gerizim anchor.",
         fontsize=8.5, pad=6,
     )
 
@@ -1294,7 +1285,7 @@ def _removed_make_supp_silkroad_ac_tiers():
         f"UNESCO A-tiers: $N={n_un_a}$;  C-tiers: $N={n_un_c}$.  "
         f"Wikidata A-tiers: $N={n_wiki_a}$;  C-tiers: $N={n_wiki_c}$.  "
         "Circles = dome/stupa; squares = other cultural.  "
-        "Dashed grid: 0.1-bēru (3°) harmonics.",
+        "Dashed grid: 3° harmonics.",
         fontsize=8.5, pad=5,
     )
 
