@@ -1,6 +1,7 @@
 # Changelog
 
 ### v1.6.0 — 2026-05-01
+**DOI:** [10.5281/zenodo.19938283](https://doi.org/10.5281/zenodo.19938283)
 
 #### Manuscript revisions
 - **Statistical reporting tightened:** removed tautological p-value statement in Test B; clarified anchor-correction language in Test E.
@@ -61,7 +62,7 @@
 ---
 
 ### v1.4.0 — 2026-04-27
-**DOI:** [10.5281/zenodo.19868418](https://doi.org/10.5281/zenodo.19868418)
+**DOI:** [10.5281/zenodo.19938283](https://doi.org/10.5281/zenodo.19938283)
 
 #### OWTRAD Silk Road analysis
 - **Expanded OWTRAD network** from 842 to 1,946 route edges and 1,674 unique
