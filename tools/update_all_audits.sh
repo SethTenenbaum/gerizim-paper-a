@@ -72,8 +72,11 @@ python3 tools/generate_audit_fine_sweep.py
 echo "  [11/12] Stupa geo audit..."
 python3 tools/generate_audit_stupa_geo.py
 
-echo "  [12/12] Stupa q180987 audit..."
+echo "  [12/13] Stupa q180987 audit..."
 python3 tools/generate_audit_stupa_q180987_geo.py
+
+echo "  [13/13] Tier-threshold sensitivity audit..."
+python3 tools/generate_audit_tier_sensitivity.py
 
 echo ""
 echo "  Done.  Files written to supplementary/audit/"

@@ -126,6 +126,9 @@ hand.  Regenerate them with `bash tools/update_all_audits.sh`.
 | `site_as_anchor_audit.txt` | Every UNESCO site scored as a hypothetical anchor; Gerizim rank vs. all alternatives | §5.3 Global Anchor Sweep |
 | `stupa_geo_audit.txt` | Geographic distribution summary for the UNESCO stupa sub-corpus | §5.6 Pipeline Portability: Wikidata Q180987 Stupa Corpus |
 | `stupa_q180987_geo_audit.txt` | Geographic distribution summary for the Wikidata Q180987 stupa corpus | §5.6 Pipeline Portability: Wikidata Q180987 Stupa Corpus |
+| `tier_sensitivity_audit.txt` | Tier-threshold sensitivity audit: 8 subsets × 6 tier levels × null-rate sweep 1%–10% | Appendix: Tier-Threshold Sensitivity Audit |
+| `tier_sensitivity_part1.csv` | Machine-readable Part 1: primary null rates, all subsets × all tiers | Appendix: Tier-Threshold Sensitivity Audit |
+| `tier_sensitivity_part2.csv` | Machine-readable Part 2: A+ null-rate sweep, all subsets | Appendix: Tier-Threshold Sensitivity Audit |
 
 ---
 
@@ -150,6 +153,7 @@ Run `bash tools/update_all_audits.sh` to regenerate all of them.
 | `generate_audit_site_as_anchor.py` | Site-as-anchor scoring audit | §5.3 Global Anchor Sweep |
 | `generate_audit_stupa_geo.py` | Stupa geographic distribution audit | §5.6 Pipeline Portability: Wikidata Q180987 Stupa Corpus |
 | `generate_audit_stupa_q180987_geo.py` | Q180987 stupa geographic audit | §5.6 Pipeline Portability: Wikidata Q180987 Stupa Corpus |
+| `generate_audit_tier_sensitivity.py` | Tier-threshold sensitivity audit (all subsets × tiers × null-rate sweep) | Appendix: Tier-Threshold Sensitivity Audit |
 | `generate_interactive_map.py` | Interactive HTML map (`supplementary/interactive_map/`) | §7.2 / Figure 5 |
 | `owtrad_tier_analysis.py` | OWTRad tier-level analysis | §7.2 Architectural Stratification and Route-Segment Alignment |
 | `expand_and_convert.py` | Utility: expand Markdown and convert to PDF | — |

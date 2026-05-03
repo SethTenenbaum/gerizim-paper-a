@@ -59,7 +59,7 @@ from pathlib import Path
 from collections import Counter, defaultdict
 
 import numpy as np
-from scipy.stats import mannwhitneyu, binomtest, kstest
+from scipy.stats import mannwhitneyu, binomtest, kstest, rankdata
 
 # ── Use common corpus library ──────────────────────────────────────────────
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
@@ -75,7 +75,8 @@ from lib.results_store import ResultsStore
 import json as _json
 _ROOT = Path(__file__).parent.parent.parent
 _CFG  = _json.loads((_ROOT / "config.json").read_text())
-N_PERM_CLUSTER = _CFG["simulation"]["n_permutations_cluster"]  # 10,000
+N_PERM_CLUSTER  = _CFG["simulation"]["n_permutations_cluster"]  # 10,000
+N_PERM_MAIN     = _CFG["simulation"]["n_permutations"]          # 100,000 — threshold-free tests
 
 # Cluster radius: defined by the Tier-A beru threshold, matching the
 # metrological framework of the stupa cluster enrichment test.
@@ -570,12 +571,118 @@ print(f"  \\newcommand{{\\clusterNodeVsAntiAllMWp}}{{{p_nall_vs_aall:.4f}}}     
 
 # ── Write to results store ────────────────────────────────────────────────────
 ResultsStore().write_many({
-    "clusterApBinom":     bt_Ap.pvalue,      # binomial p, full corpus A+ — Test 1
-    "clusterPermP":       perm_p,            # permutation p, cluster asymmetry — Test 3
+    "clusterApBinom":     bt_Ap.pvalue,      # binomial p, full corpus A+ — secondary (Test 1)
+    "clusterPermP":       perm_p,            # permutation p, cluster asymmetry — secondary (Test 3)
     "clusterMWp":         mw_p,              # Mann-Whitney p (site-level)
     "clusterHarmonicMWp": mw2_p,             # Mann-Whitney p (harmonic-level)
     "clusterPermZ":       round(perm_z, 4),  # permutation Z-score
     "NpermCluster":       int(N_PERM_CLUSTER),  # permutation draws, cluster asymmetry test
+})
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# PRIMARY TEST 1 (threshold-free)
+# Phase-rotation permutation on mean harmonic deviation — full corpus
+#
+# T_obs = mean(δᵢ) for all N sites, δᵢ ∈ [0, 0.05] beru
+# Null:  rotate the 3° harmonic grid by random Δ ∈ [0°, 3°),
+#        recompute all δᵢ, measure mean; repeat N_PERM_MAIN times.
+# p    = fraction of rotated means ≤ T_obs  (lower mean = closer to harmonics)
+#
+# Relationship to Test C (anchor-shift sensitivity):
+#   Test C uses the same phase-rotation null but counts A+ sites (threshold).
+#   This test measures MEAN DEVIATION (continuous), making no threshold choice.
+# ══════════════════════════════════════════════════════════════════════════════
+
+HARMONIC_STEP_DEG = 3.0  # one full grid period
+
+all_lons_arr  = np.array([s["lon"] for s in sites])
+all_devs_beru = np.array([s["dev"] for s in sites])   # beru units, ∈ [0, 0.05]
+T_obs_beru    = float(np.mean(all_devs_beru))
+T_obs_deg     = T_obs_beru * BERU
+
+rng_md = np.random.default_rng(42)
+perm_mean_devs = np.empty(N_PERM_MAIN)
+
+for i in range(N_PERM_MAIN):
+    delta        = rng_md.uniform(0.0, HARMONIC_STEP_DEG)
+    shifted_arc  = np.abs(all_lons_arr - (GERIZIM + delta))
+    shifted_arc  = np.minimum(shifted_arc, 360.0 - shifted_arc)
+    bv           = shifted_arc / BERU
+    nearest      = np.round(bv / 0.1) * 0.1
+    perm_mean_devs[i] = np.abs(bv - nearest).mean()
+
+full_mean_dev_perm_p   = float(np.mean(perm_mean_devs <= T_obs_beru))
+full_mean_dev_null_deg = float(np.mean(perm_mean_devs)) * BERU
+full_mean_dev_null_std = float(np.std(perm_mean_devs))  * BERU
+full_mean_dev_z        = (T_obs_deg - full_mean_dev_null_deg) / max(full_mean_dev_null_std, 1e-9)
+
+print()
+print("=" * 95)
+print("  PRIMARY TEST 1 (threshold-free): phase-rotation permutation on mean harmonic deviation")
+print(f"  N = {N}  |  {N_PERM_MAIN:,} grid rotations  |  H₁: mean(δ) < expected under random phase")
+print("=" * 95)
+print(f"""
+  Observed mean deviation : {T_obs_deg:.4f}°  ({T_obs_beru:.6f} beru)
+  Null mean               : {full_mean_dev_null_deg:.4f}°
+  Null std                : {full_mean_dev_null_std:.4f}°
+  Z-score                 : {full_mean_dev_z:.3f}
+  p (fraction ≤ T_obs)   : {full_mean_dev_perm_p:.5f}  {sig(full_mean_dev_perm_p)}
+
+  UNESCO sites lie {T_obs_deg:.4f}° from their nearest 3° harmonic on average,
+  versus {full_mean_dev_null_deg:.4f}° expected under a random grid phase ({full_mean_dev_perm_p:.5f}).
+""")
+print(f"  \\newcommand{{\\fullMeanDevDeg}}{{{T_obs_deg:.4f}}}      % mean deviation, full corpus (degrees)")
+print(f"  \\newcommand{{\\fullMeanDevPermP}}{{{full_mean_dev_perm_p:.5f}}}   % p, phase-rotation permutation (Test 1 primary)")
+print(f"  \\newcommand{{\\fullMeanDevZ}}{{{full_mean_dev_z:.3f}}}       % Z-score, phase-rotation (Test 1)")
+print(f"  \\newcommand{{\\fullMeanDevNullDeg}}{{{full_mean_dev_null_deg:.4f}}}  % null mean deviation (degrees)")
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# PRIMARY TEST 3 (threshold-free)
+# Spearman correlation: harmonic deviation vs longitude-corridor cluster size
+#
+# H₁: sites closer to harmonics (lower δ) sit in denser corridors (ρ < 0)
+# Null: permute deviations; count |ρ_perm| ≥ |ρ_obs| (two-sided)
+#
+# Uses rank-based shortcut (precomputed ranks) so 100k iterations are fast.
+# ══════════════════════════════════════════════════════════════════════════════
+
+cluster_sizes_arr  = np.array([s["cluster_size"] for s in sites])
+rank_dev           = rankdata(all_devs_beru)
+rank_cluster       = rankdata(cluster_sizes_arr)
+rho_obs            = float(np.corrcoef(rank_dev, rank_cluster)[0, 1])
+
+rng_sp   = np.random.default_rng(42)
+perm_rhos = np.empty(N_PERM_MAIN)
+for i in range(N_PERM_MAIN):
+    perm_rhos[i] = float(np.corrcoef(rng_sp.permutation(rank_dev), rank_cluster)[0, 1])
+
+spearman_dev_cluster_p = float(np.mean(np.abs(perm_rhos) >= abs(rho_obs)))
+
+print()
+print("=" * 95)
+print("  PRIMARY TEST 3 (threshold-free): Spearman ρ — harmonic deviation vs cluster size")
+print(f"  N = {N}  |  {N_PERM_MAIN:,} permutations (two-sided)  |  H₁: ρ < 0")
+print("=" * 95)
+print(f"""
+  Spearman ρ (deviation vs cluster size) : {rho_obs:.4f}
+  Permutation p (|ρ_perm| ≥ |ρ_obs|)    : {spearman_dev_cluster_p:.5f}  {sig(spearman_dev_cluster_p)}
+
+  Sites with lower harmonic deviation sit in {'denser' if rho_obs < 0 else 'sparser'} longitude corridors.
+  {spearman_dev_cluster_p*100:.2f}% of deviation-shuffles produce |ρ| ≥ {abs(rho_obs):.4f}.
+""")
+print(f"  \\newcommand{{\\spearmanDevClusterRho}}{{{rho_obs:.4f}}}   % Spearman ρ, deviation vs cluster size")
+print(f"  \\newcommand{{\\spearmanDevClusterP}}{{{spearman_dev_cluster_p:.5f}}}  % p, Spearman permutation (Test 3 primary)")
+
+ResultsStore().write_many({
+    "fullMeanDevPermP":      full_mean_dev_perm_p,
+    "fullMeanDevDeg":        round(T_obs_deg, 5),
+    "fullMeanDevZ":          round(full_mean_dev_z, 4),
+    "fullMeanDevNullDeg":    round(full_mean_dev_null_deg, 5),
+    "NpermMeanDev":          int(N_PERM_MAIN),
+    "spearmanDevClusterRho": round(rho_obs, 5),
+    "spearmanDevClusterP":   spearman_dev_cluster_p,
 })
 
 

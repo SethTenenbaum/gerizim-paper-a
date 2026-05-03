@@ -36,24 +36,24 @@ HARMONIC_STEP = CONFIG["units"]["harmonic_step"]      # 0.1
 KM_PER_DEGREE = CONFIG["units"]["km_per_degree"]      # 111.0
 
 # Tier thresholds in degrees (primary unit — read directly from config).
-TIER_APP_DEG   = CONFIG["tiers"]["A++"]["max_deviation_deg"]   # 0.048°
-TIER_APLUS_DEG = CONFIG["tiers"]["A+"]["max_deviation_deg"]    # 0.0963°
-TIER_A_DEG     = CONFIG["tiers"]["A"]["max_deviation_deg"]     # 0.1926°
+TIER_APP_DEG   = CONFIG["tiers"]["A++"]["max_deviation_deg"]   # 0.060°
+TIER_APLUS_DEG = CONFIG["tiers"]["A+"]["max_deviation_deg"]    # 0.150°
+TIER_A_DEG     = CONFIG["tiers"]["A"]["max_deviation_deg"]     # 0.300°
 TIER_B_DEG     = CONFIG["tiers"]["B"]["max_deviation_deg"]     # 1.5°
 
 # Tier thresholds in bēru (derived from degrees; kept for null-rate math below).
-TIER_APP   = TIER_APP_DEG   / BERU   # 0.048 / 30 = 0.0016
-TIER_APLUS = TIER_APLUS_DEG / BERU   # 0.0963 / 30 = 0.00321
-TIER_A_MAX = TIER_A_DEG     / BERU   # 0.1926 / 30 = 0.00642
+TIER_APP   = TIER_APP_DEG   / BERU   # 0.060 / 30 = 0.002
+TIER_APLUS = TIER_APLUS_DEG / BERU   # 0.150 / 30 = 0.005
+TIER_A_MAX = TIER_A_DEG     / BERU   # 0.300 / 30 = 0.010
 TIER_B_MAX = TIER_B_DEG     / BERU   # 1.5 / 30 = 0.05
 
 # Midpoint = 0.5 × harmonic spacing (0.1 beru); maximum possible deviation
 MIDPOINT   = 0.05   # beru — perfect inter-harmonic midpoint
 
 # C-tier thresholds in degrees (primary unit — read directly from config).
-TIER_C_DEG     = CONFIG["tiers"]["C"]["max_dist_from_midpoint_deg"]     # 0.1926°
-TIER_CMINUS_DEG  = CONFIG["tiers"]["C-"]["max_dist_from_midpoint_deg"]  # 0.0963°
-TIER_CMINUS2_DEG = CONFIG["tiers"]["C--"]["max_dist_from_midpoint_deg"] # 0.048°
+TIER_C_DEG     = CONFIG["tiers"]["C"]["max_dist_from_midpoint_deg"]     # 0.300°
+TIER_CMINUS_DEG  = CONFIG["tiers"]["C-"]["max_dist_from_midpoint_deg"]  # 0.150°
+TIER_CMINUS2_DEG = CONFIG["tiers"]["C--"]["max_dist_from_midpoint_deg"] # 0.060°
 
 # C-tier thresholds in bēru (derived).
 TIER_C_MAX    = TIER_C_DEG     / BERU
@@ -64,9 +64,9 @@ TIER_CMINUS2  = TIER_CMINUS2_DEG / BERU
 # Formula: 2 × max_deviation_deg / harmonic_step_deg
 # harmonic_step_deg = HARMONIC_STEP × BERU = 0.1 × 30 = 3°
 _HARMONIC_STEP_DEG = HARMONIC_STEP * BERU   # 3.0°
-P_NULL_APP    = 2 * TIER_APP_DEG   / _HARMONIC_STEP_DEG  # 0.032
-P_NULL_AP     = 2 * TIER_APLUS_DEG / _HARMONIC_STEP_DEG  # 0.0642
-P_NULL_A      = 2 * TIER_A_DEG     / _HARMONIC_STEP_DEG  # 0.1284
+P_NULL_APP    = 2 * TIER_APP_DEG   / _HARMONIC_STEP_DEG  # 0.040
+P_NULL_AP     = 2 * TIER_APLUS_DEG / _HARMONIC_STEP_DEG  # 0.100
+P_NULL_A      = 2 * TIER_A_DEG     / _HARMONIC_STEP_DEG  # 0.200
 P_NULL_B      = 2 * TIER_B_DEG     / _HARMONIC_STEP_DEG  # 1.0
 P_NULL_C      = P_NULL_A                                   # symmetric with A
 P_NULL_CMINUS = P_NULL_AP                                  # symmetric with A+
@@ -200,17 +200,17 @@ def tier_label(dev: float) -> str:
     C-tiers mirror the A-tiers, measuring closeness to the inter-harmonic midpoint.
 
     Tiers (harmonic side, closest first):
-        A++  deviation ≤ 0.0002 beru  (~0.67 km from harmonic)
-        A+   deviation ≤ 0.002  beru  (~6.7 km from harmonic)
-        A    deviation ≤ 0.010  beru  (~33 km from harmonic)
+        A++  deviation ≤ 0.002 beru  (~6.7 km from harmonic)
+        A+   deviation ≤ 0.005 beru  (~16.7 km from harmonic)
+        A    deviation ≤ 0.010 beru  (~33 km from harmonic)
 
     Middle zone:
         B    all other sites
 
     Tiers (midpoint side, closest first):
-        C--  distance from midpoint ≤ 0.0002 beru  (~0.67 km from midpoint)
-        C-   distance from midpoint ≤ 0.002  beru  (~6.7 km from midpoint)
-        C    distance from midpoint ≤ 0.010  beru  (~33 km from midpoint)
+        C--  distance from midpoint ≤ 0.002 beru  (~6.7 km from midpoint)
+        C-   distance from midpoint ≤ 0.005 beru  (~16.7 km from midpoint)
+        C    distance from midpoint ≤ 0.010 beru  (~33 km from midpoint)
     """
     if dev <= TIER_APP:
         return "A++"

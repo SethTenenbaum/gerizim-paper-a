@@ -53,6 +53,8 @@ EXPLICIT_P_KEYS = {
     # Bonferroni-adjusted
     "pAdjTestOne", "pAdjTestTwo", "pAdjTestThree", "pAdjTestTwoB",
     "pAdjTestFour",  # in case Test 4 macro is added
+    # Holm step-down adjusted
+    "pHolmTestOne", "pHolmTestTwo", "pHolmTestThree", "pHolmTestTwoB",
     # Cluster asymmetry
     "clusterApBinom", "clusterMWp", "clusterPermP", "clusterHarmonicMWp",
     # Dome / spherical raw sweep
@@ -105,6 +107,17 @@ EXPLICIT_P_KEYS = {
     "wikiStupaATierBinomP", "wikiHeartlandATierP", "wikiHeartlandCbandP", "wikiMyanmarCbandP",
     "wikiJavaNodeATierP", "wikiJavaTightATierP",
     "wikiNonHeartlandATierP", "wikiNonHeartlandApP", "wikiNonHeartlandCbandP",
+    # Threshold-free primary tests (Tests 1, 2, 3)
+    "fullMeanDevPermP", "domeMeanDevBootP", "spearmanDevClusterP",
+    # Periodogram + dome VM mixture (tier-free, anchor-free)
+    "periodogramPermP", "targetedPdome",
+    # Multi-scale combined enrichment (variable-tier Fisher combination)
+    "multiscaleCombinedP", "multiscaleHMPperm",
+    "multiscaleDomeCombinedP", "multiscaleDomeHMP",
+    "multiscaleFullCombinedP", "multiscaleFullHMP",
+    "multiscaleWikiCombinedP", "multiscaleWikiHMP",
+    "multiscaleOwtradCombinedP", "multiscaleOwtradHMP",
+    "multiscaleJointMaxP", "multiscaleAllNearNodeP", "multiscaleConvergenceP",
     # Americas
     "AmericasOneSidedP", "AmericasTwoSidedP",
     # FDR q-values for the BH test family

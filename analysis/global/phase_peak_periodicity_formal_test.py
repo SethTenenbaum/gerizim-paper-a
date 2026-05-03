@@ -38,6 +38,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus, cultural_sites_with_coords
 from lib.beru import GERIZIM, BERU, TIER_APLUS
+from lib.dome_filter import FORM_KEYWORDS, FORM_KEYWORD_RES
 from lib.results_store import ResultsStore
 from scipy.special import i0e, logsumexp
 
@@ -49,6 +50,13 @@ corpus   = load_corpus()
 cultural = cultural_sites_with_coords(corpus)
 lons     = np.array([s.longitude for s in cultural])
 N        = len(lons)
+
+# Dome subset — same keyword sweep as spherical_monument_raw_sweep.py
+lons_dome = np.array([
+    s.longitude for s in cultural
+    if any(FORM_KEYWORD_RES[kw].search(s.full_text) for kw in FORM_KEYWORDS)
+])
+N_dome = len(lons_dome)
 
 def _beru_dev(lon):
     arc = min(abs(lon - GERIZIM), 360.0 - abs(lon - GERIZIM))
@@ -86,6 +94,38 @@ obs_full_R    = rayleigh_R(lons)
 obs_ap_R      = rayleigh_R(ap_lons)
 obs_ap_count  = ap_count_at_anchor(GERIZIM)    # = N_ap by construction
 
+# ── V-test (Rayleigh against a specified mean direction = Gerizim phase) ──
+# Standard test from Mardia & Jupp (2000) §7.2; tests H0: uniform vs
+# H1: concentration around a pre-specified mean direction mu0.
+# V = sqrt(2N) * R * cos(theta_bar - mu0); under H0, V ~ N(0,1) for large N.
+from scipy.stats import norm as _norm
+
+def v_test(lon_array, mu0_rad):
+    """Returns (V, p_one_sided, R, theta_bar) for a V-test against mu0."""
+    angles = 2.0 * np.pi * (lon_array % HARMONIC_STEP_DEG) / HARMONIC_STEP_DEG
+    z      = np.mean(np.exp(1j * angles))
+    R      = float(abs(z))
+    tbar   = float(np.angle(z))
+    n      = len(angles)
+    V      = np.sqrt(2.0 * n) * R * np.cos(tbar - mu0_rad)
+    p      = float(1.0 - _norm.cdf(V))
+    return float(V), p, R, tbar
+
+def _fmt_p(p):
+    """Format a p-value for LaTeX math-mode insertion (canonical $<10^{-X}$ form)."""
+    if p <= 0.0:
+        return "{<}10^{-300}"
+    if p < 1e-4:
+        # split into mantissa × 10^exp for math-mode rendering
+        exp = int(np.floor(np.log10(p)))
+        mant = p / (10 ** exp)
+        return f"{mant:.2f}\\times 10^{{{exp}}}"
+    return f"{p:.4f}"
+
+mu0_gerizim = 2.0 * np.pi * ((GERIZIM % HARMONIC_STEP_DEG) / HARMONIC_STEP_DEG)
+v_full, p_v_full, _, _ = v_test(lons,    mu0_gerizim)
+v_ap,   p_v_ap,   _, _ = v_test(ap_lons, mu0_gerizim)
+
 print("=" * 80)
 print("  x.18-DEGREE PERIODICITY -- FORMAL STATISTICAL TESTS")
 print(f"  N={N}  N_ap={N_ap}  Harmonic step={HARMONIC_STEP_DEG}-deg  Anchor=Gerizim {GERIZIM}E")
@@ -93,6 +133,8 @@ print("=" * 80)
 print(f"  Obs A  full-corpus Rayleigh R (mod {HARMONIC_STEP_DEG}): {obs_full_R:.4f}")
 print(f"  Obs B  A+-only Rayleigh R     (mod {HARMONIC_STEP_DEG}): {obs_ap_R:.4f}")
 print(f"  Obs C  A+ count at Gerizim anchor (circular-shift null):  {obs_ap_count}")
+print(f"  V-test (full corpus, mu0=Gerizim phase):  V={v_full:.3f}  p={p_v_full:.4g}")
+print(f"  V-test (A+ subset,   mu0=Gerizim phase):  V={v_ap:.3f}  p={p_v_ap:.4g}")
 print(f"\n  Running {N_PERMS:,} permutations ...")
 
 # Test A & B: permute longitudes, recompute Rayleigh R
@@ -165,6 +207,10 @@ macro_pairs = [
     ("rayleighR",          f"{obs_ap_R:.4f}"),
     ("rayleighZ",          f"{z_ap_R:.2f}"),
     ("rayleighPermP",      f"{p_ap_R:.4f}"),
+    ("vTestFull",          f"{v_full:.3f}"),
+    ("vTestFullP",         _fmt_p(p_v_full)),
+    ("vTestAp",            f"{v_ap:.3f}"),
+    ("vTestApP",           _fmt_p(p_v_ap)),
     ("anchorShiftApCount", f"{obs_ap_count}"),
     ("anchorShiftNullMu",  f"{perm_shift_ap.mean():.2f}"),
     ("anchorShiftZ",       f"{z_shift_ap:.2f}"),
@@ -208,6 +254,10 @@ ResultsStore().write_many({
     "rayleighR":            float(obs_ap_R),
     "rayleighZ":            float(z_ap_R),
     "rayleighPermP":        float(p_ap_R),
+    "vTestFull":            float(v_full),
+    "vTestFullP":           float(p_v_full),
+    "vTestAp":              float(v_ap),
+    "vTestApP":             float(p_v_ap),
     "anchorShiftApCount":   int(obs_ap_count),
     "anchorShiftNullMu":    float(perm_shift_ap.mean()),
     "anchorShiftZ":         float(z_shift_ap),
@@ -217,8 +267,6 @@ ResultsStore().write_many({
     "NpermRayleigh":        int(N_PERMS),
 })
 print("Results written to data/store/results.json")
-
-# --- Test D: Targeted von Mises at Gerizim phase (mu fixed) -----------------
 from scipy.special import i0
 
 def _invert_R_to_kappa(R):
@@ -390,6 +438,10 @@ ResultsStore().write_many({
     "rayleighR":            float(obs_ap_R),
     "rayleighZ":            float(z_ap_R),
     "rayleighPermP":        float(p_ap_R),
+    "vTestFull":            float(v_full),
+    "vTestFullP":           float(p_v_full),
+    "vTestAp":              float(v_ap),
+    "vTestApP":             float(p_v_ap),
     "anchorShiftApCount":   int(obs_ap_count),
     "anchorShiftNullMu":    float(perm_shift_ap.mean()),
     "anchorShiftZ":         float(z_shift_ap),
@@ -412,3 +464,70 @@ ResultsStore().write_many({
     "targetedB":            int(B_t),
 })
 print("Results written to data/store/results.json")
+
+# ── Test D (dome): VM mixture on dome subset — tier-free, anchor-free primary test
+# Dome subset is defined by FORM_KEYWORDS (structural dome/stupa/mound keywords),
+# identical to spherical_monument_raw_sweep.py.  The phase mu is fixed at the
+# Gerizim phase on the 3° circle (as in the A+ test above) but the subset
+# is defined without any tier threshold — keyword membership only.
+# Null: parametric bootstrap drawing N_dome uniform angles on [0, 2π).
+# B=10,000 gives reliable p to ±0.001.
+
+angles_dome = 2.0 * np.pi * (lons_dome % HARMONIC_STEP_DEG) / HARMONIC_STEP_DEG
+fit_t_dome  = fit_targeted_vm(angles_dome, mu_ger, w_init=0.1, kappa_init=20.0)
+
+null_loglik_dome = N_dome * (-np.log(2.0 * np.pi))
+D_t_dome = max(0.0, 2.0 * (fit_t_dome['loglik'] - null_loglik_dome))
+
+sd_t_dome_deg = (float('nan') if fit_t_dome['kappa'] <= 1e-8
+                 else np.sqrt(1.0 / fit_t_dome['kappa']) * HARMONIC_STEP_DEG / (2.0 * np.pi))
+
+print(f"\n  Test D (dome): VM mixture on dome subset  N_dome={N_dome}")
+print(f"    Obs: D={D_t_dome:.4f}, w={fit_t_dome['w']:.4f}, kappa={fit_t_dome['kappa']:.2f}")
+print(f"    Running 10,000 parametric bootstrap draws ...", flush=True)
+
+B_t_dome = 10_000
+rng_dome  = np.random.default_rng(1234)
+D_t_dome_sim = np.zeros(B_t_dome)
+for b in range(B_t_dome):
+    sim_dome = rng_dome.uniform(0.0, 2.0 * np.pi, size=N_dome)
+    try:
+        fit_sim_dome = fit_targeted_vm(sim_dome, mu_ger, w_init=0.05, kappa_init=5.0)
+        D_t_dome_sim[b] = max(0.0, 2.0 * (fit_sim_dome['loglik'] - N_dome * (-np.log(2.0 * np.pi))))
+    except Exception:
+        D_t_dome_sim[b] = 0.0
+    if (b + 1) % 2_000 == 0:
+        print(f"    ... dome {b+1}/{B_t_dome} bootstraps", end='\r', flush=True)
+print()
+
+p_t_dome = float((np.sum(D_t_dome_sim >= D_t_dome) + 1) / (B_t_dome + 1))
+
+print(f"  Dome VM result: D={D_t_dome:.4f}, w={fit_t_dome['w']:.4f}, "
+      f"kappa={fit_t_dome['kappa']:.2f}, sd_deg={sd_t_dome_deg:.4f}, "
+      f"p_emp={p_t_dome:.5f}  (B={B_t_dome:,})")
+
+print()
+print("  Test D (dome) LaTeX macros:")
+for name, val in [
+    ("targetedDdome",     f"{D_t_dome:.4f}"),
+    ("targetedPdome",     f"{p_t_dome:.5f}"),
+    ("targetedWdome",     f"{fit_t_dome['w']:.4f}"),
+    ("targetedWdomePct",  f"{fit_t_dome['w']*100:.1f}"),
+    ("targetedKdome",     f"{fit_t_dome['kappa']:.2f}"),
+    ("targetedSdDomeDeg", f"{sd_t_dome_deg:.4f}"),
+    ("targetedBdome",     f"{B_t_dome:,}"),
+    ("targetedNdome",     f"{N_dome}"),
+]:
+    print(f"\\newcommand{{\\{name}}}{{{val}}}")
+
+ResultsStore().write_many({
+    "targetedDdome":     float(D_t_dome),
+    "targetedPdome":     float(p_t_dome),
+    "targetedWdome":     float(fit_t_dome['w']),
+    "targetedWdomePct":  float(fit_t_dome['w'] * 100),
+    "targetedKdome":     float(fit_t_dome['kappa']),
+    "targetedSdDomeDeg": float(sd_t_dome_deg),
+    "targetedBdome":     int(B_t_dome),
+    "targetedNdome":     int(N_dome),
+})
+print("Dome VM results written to data/store/results.json")

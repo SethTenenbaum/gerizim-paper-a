@@ -6,47 +6,47 @@
       "lon_dms": "E35~16~08",
       "lat_dms": "N32~12~44",
       "label": "Mount Gerizim",
-      "note": "UNESCO tentative list (ref. 5706), DMS E35 16 08 = 35.2689\u00b0E, rounded to 35.269\u00b0E"
+      "note": "UNESCO tentative list (ref. 5706), DMS E35 16 08 = 35.2689°E, rounded to 35.269°E"
     },
     "jerusalem": {
       "longitude": 35.2317,
       "label": "Jerusalem (Old City)",
-      "note": "UNESCO XML coordinate \u2014 Temple Mount, 35.2317\u00b0E"
+      "note": "UNESCO XML coordinate — Temple Mount, 35.2317°E"
     },
     "megiddo": {
       "longitude": 35.184,
       "label": "Tel Megiddo",
-      "note": "Bronze Age Canaanite city, 35.184\u00b0E"
+      "note": "Bronze Age Canaanite city, 35.184°E"
     },
     "meru": {
       "longitude": 36.75,
       "label": "Mount Meru",
-      "note": "Axis mundi of Hindu-Buddhist cosmography; Mt Meru, Tanzania, 36.75\u00b0E. Grid spacing 3\u00b0 = 0.1 beru, same as Gerizim grid."
+      "note": "Axis mundi of Hindu-Buddhist cosmography; Mt Meru, Tanzania, 36.75°E. Grid spacing 3° = 0.1 beru, same as Gerizim grid."
     }
   },
   "notable_anchors": {
     "note": "Historical/archaeological anchors used in global comparison tables. All coordinates in decimal degrees East.",
-    "Lumbini (83.2761\u00b0E)": 83.2761,
-    "Bethel (35.225\u00b0E)": 35.225,
-    "Gerizim (35.269\u00b0E)": 35.269,
-    "Jerusalem (35.2317\u00b0E)": 35.2317,
-    "Mecca (39.826\u00b0E)": 39.826,
-    "Giza (31.134\u00b0E)": 31.134,
-    "Babylon (44.421\u00b0E)": 44.421,
-    "Persepolis (52.890\u00b0E)": 52.89,
-    "Greenwich (0.000\u00b0E)": 0.0,
-    "Ujjain (75.784\u00b0E)": 75.784,
-    "Baghdad (44.366\u00b0E)": 44.366,
-    "Damascus (36.335\u00b0E)": 36.335,
-    "Rome (12.453\u00b0E)": 12.453,
-    "Athens (23.726\u00b0E)": 23.726,
-    "Alexandria (29.918\u00b0E)": 29.918,
-    "Angkor Wat (103.867\u00b0E)": 103.867,
-    "Beijing (116.397\u00b0E)": 116.397,
-    "Varanasi (82.997\u00b0E)": 82.997
+    "Lumbini (83.2761°E)": 83.2761,
+    "Bethel (35.225°E)": 35.225,
+    "Gerizim (35.269°E)": 35.269,
+    "Jerusalem (35.2317°E)": 35.2317,
+    "Mecca (39.826°E)": 39.826,
+    "Giza (31.134°E)": 31.134,
+    "Babylon (44.421°E)": 44.421,
+    "Persepolis (52.890°E)": 52.89,
+    "Greenwich (0.000°E)": 0.0,
+    "Ujjain (75.784°E)": 75.784,
+    "Baghdad (44.366°E)": 44.366,
+    "Damascus (36.335°E)": 36.335,
+    "Rome (12.453°E)": 12.453,
+    "Athens (23.726°E)": 23.726,
+    "Alexandria (29.918°E)": 29.918,
+    "Angkor Wat (103.867°E)": 103.867,
+    "Beijing (116.397°E)": 116.397,
+    "Varanasi (82.997°E)": 82.997
   },
   "levant_landmarks": {
-    "note": "Key Levant sites used in local anchor-sweep comparison (34\u201337\u00b0E corridor).",
+    "note": "Key Levant sites used in local anchor-sweep comparison (34–37°E corridor).",
     "Gerizim": 35.269,
     "Jerusalem": 35.2317,
     "Tel Megiddo": 35.184,
@@ -63,21 +63,21 @@
     "beru": {
       "degrees": 30.0,
       "metres": 10692.0,
-      "note": "1 beru = 30\u00b0 of arc, attested in MUL.APIN (c. 1000 BCE). Linear value from Powell (1990) RlA Vol.7."
+      "note": "1 beru = 30° of arc, attested in MUL.APIN (c. 1000 BCE). Linear value from Powell (1990) RlA Vol.7."
     },
     "nindanu": {
       "metres": 5.94,
       "per_beru": 1800,
-      "note": "1 nind\u0101nu = 1/1800 beru = 5.94 m. Powell (1990)."
+      "note": "1 nindānu = 1/1800 beru = 5.94 m. Powell (1990)."
     },
     "geodetic_dhanus": {
       "metres": 46.2494,
-      "derivation": "Gerizim\u2013Lumbini great-circle arc / 99950 = 46.2494 m",
+      "derivation": "Gerizim–Lumbini great-circle arc / 99950 = 46.2494 m",
       "thom_megalithic_yard_multiple": 56,
       "thom_my_metres": 0.8296,
       "thom_my_56x_metres": 46.4576,
       "thom_my_deviation_pct": 0.45,
-      "note": "56 \u00d7 Thom Megalithic Yard = 46.4576 m; Geodetic Dhanus = 46.2494 m; deviation 0.45%"
+      "note": "56 × Thom Megalithic Yard = 46.4576 m; Geodetic Dhanus = 46.2494 m; deviation 0.45%"
     },
     "megalithic_yard": {
       "metres": 0.8296,
@@ -94,45 +94,45 @@
   },
   "tiers": {
     "A++": {
-      "max_deviation_deg": 0.048,
-      "approx_km": 5.346,
-      "null_rate": 0.032,
-      "note": "Extremely close to a harmonic. Metrological equivalent: 0.0016 bēru sub-units."
+      "max_deviation_deg": 0.06,
+      "approx_km": 6.66,
+      "null_rate": 0.04,
+      "note": "Nearest 4% of uniform distribution to any harmonic node. Threshold = 0.04 × 1.5° = 0.060°. Brackets the OWTRAD Silk Road (2.6%) and UNESCO dome (3.6%) natural proximity scales."
     },
     "A+": {
-      "max_deviation_deg": 0.0963,
-      "approx_km": 10.692,
-      "null_rate": 0.0642,
-      "note": "Primary threshold for significance testing. Metrological equivalent: 0.00321 bēru sub-units."
+      "max_deviation_deg": 0.15,
+      "approx_km": 16.65,
+      "null_rate": 0.10,
+      "note": "Nearest 10% of uniform distribution. Threshold = 0.10 × 1.5° = 0.150°. Brackets the full UNESCO cultural corpus natural proximity scale (10.2%)."
     },
     "A": {
-      "max_deviation_deg": 0.1926,
-      "approx_km": 21.384,
-      "null_rate": 0.1284,
-      "note": "Boundary of main A-tier window. Metrological equivalent: 0.00642 bēru sub-units."
+      "max_deviation_deg": 0.30,
+      "approx_km": 33.3,
+      "null_rate": 0.20,
+      "note": "Broad on-harmonic window. Nearest 20% of uniform distribution. Threshold = 0.20 × 1.5° = 0.300°. Brackets the Wikidata Q180987 stupa corpus natural proximity scale (20.2%)."
     },
     "B": {
       "max_deviation_deg": 1.5,
       "approx_km": 167,
-      "note": "Middle zone — neither near a harmonic nor near a midpoint. Metrological equivalent: 0.05 bēru sub-units."
+      "note": "Middle zone — neither near a harmonic nor near a midpoint."
     },
     "C": {
-      "max_dist_from_midpoint_deg": 0.1926,
-      "approx_km": 21.384,
-      "null_rate": 0.1284,
-      "note": "Mirror of A: within 21 km of inter-harmonic midpoint (deviation >= 1.3074°). Metrological equivalent: 0.00642 bēru sub-units."
+      "max_dist_from_midpoint_deg": 0.30,
+      "approx_km": 33.3,
+      "null_rate": 0.20,
+      "note": "Mirror of A: nearest 20% to inter-harmonic midpoint (deviation >= 1.200°)."
     },
     "C-": {
-      "max_dist_from_midpoint_deg": 0.0963,
-      "approx_km": 10.692,
-      "null_rate": 0.0642,
-      "note": "Mirror of A+: within 10.7 km of inter-harmonic midpoint (deviation >= 1.4037°). Metrological equivalent: 0.00321 bēru sub-units."
+      "max_dist_from_midpoint_deg": 0.15,
+      "approx_km": 16.65,
+      "null_rate": 0.10,
+      "note": "Mirror of A+: nearest 10% to inter-harmonic midpoint (deviation >= 1.350°)."
     },
     "C--": {
-      "max_dist_from_midpoint_deg": 0.048,
-      "approx_km": 5.346,
-      "null_rate": 0.032,
-      "note": "Mirror of A++: within 5.3 km of inter-harmonic midpoint (deviation >= 1.452°). Metrological equivalent: 0.0016 bēru sub-units."
+      "max_dist_from_midpoint_deg": 0.06,
+      "approx_km": 6.66,
+      "null_rate": 0.04,
+      "note": "Mirror of A++: nearest 4% to inter-harmonic midpoint (deviation >= 1.440°)."
     }
   },
   "arc_test": {
@@ -144,7 +144,7 @@
     "null_rate_standard": 0.02,
     "null_rate_ultra": 0.004,
     "min_distance_km": 200,
-    "note_tolerance": "\u00b10.01 beru absolute = \u00b1107 m arc window (P\u2080=0.02). Derived from Powell rod \u00b10.3% mfg tolerance."
+    "note_tolerance": "±0.01 beru absolute = ±107 m arc window (P₀=0.02). Derived from Powell rod ±0.3% mfg tolerance."
   },
   "quantum_unit_test": {
     "note": "Parameters for Framework 3 Thom-style quantum unit test.",
@@ -179,7 +179,7 @@
     "note": "Parameters for permutation / bootstrap / KDE null models"
   },
   "corridor": {
-    "note": "Gerizim\u2192Lumbini corridor definition for corridor_precision_test.py.",
+    "note": "Gerizim→Lumbini corridor definition for corridor_precision_test.py.",
     "lumbini_lon": 83.2761,
     "lumbini_beru_label": "1.6001",
     "corridor_max_beru": 1.6,
@@ -195,42 +195,45 @@
       {
         "label": "Jerusalem",
         "lon": 35.2317,
-        "note": "35.232\u00b0E"
+        "note": "35.232°E"
       },
       {
         "label": "Megiddo",
         "lon": 35.184,
-        "note": "35.183\u00b0E, Tel Megiddo"
+        "note": "35.183°E, Tel Megiddo"
       },
       {
         "label": "Bethel",
         "lon": 35.225,
-        "note": "35.225\u00b0E"
+        "note": "35.225°E"
       }
     ]
   },
   "tests": {
-    "note": "Registry of all hypothesis tests. Scripts write results to the store under 'p_key'. bonferroni_correction.py and fdr_multiple_comparisons.py read from the store \u2014 no hardcoded p-values.",
+    "note": "Registry of all hypothesis tests. Scripts write results to the store under 'p_key'. bonferroni_correction.py and fdr_multiple_comparisons.py read from the store — no hardcoded p-values.",
     "family_alpha": 0.05,
     "confirmatory": [
       {
         "id": "1",
-        "label": "Global enrichment \u2014 full corpus A+ (binomial)",
-        "p_key": "clusterApBinom",
+        "label": "Dome von Mises mixture at Gerizim phase — parametric bootstrap (dome subset)",
+        "p_key": "targetedPdome",
+        "p_key_secondary": "pCircAp",
         "macro": "One",
-        "script": "analysis/unesco/cluster_asymmetry_test.py"
+        "script": "analysis/global/phase_peak_periodicity_formal_test.py"
       },
       {
         "id": "2",
-        "label": "Domed/spherical A+ \u2014 RAW sweep (binomial)",
-        "p_key": "pCircAp",
+        "label": "Deviation vs cluster size — Spearman permutation (full corpus)",
+        "p_key": "spearmanDevClusterP",
+        "p_key_secondary": "clusterPermP",
         "macro": "Two",
-        "script": "analysis/unesco/spherical_monument_raw_sweep.py"
+        "script": "analysis/unesco/cluster_asymmetry_test.py"
       },
       {
         "id": "3",
-        "label": "Cluster asymmetry \u2014 permutation p",
-        "p_key": "clusterPermP",
+        "label": "Global mean deviation — phase-rotation permutation (full corpus)",
+        "p_key": "fullMeanDevPermP",
+        "p_key_secondary": "clusterApBinom",
         "macro": "Three",
         "script": "analysis/unesco/cluster_asymmetry_test.py"
       }
@@ -238,7 +241,7 @@
     "sensitivity": [
       {
         "id": "2b",
-        "label": "Hemispherical mound evolution A+ \u2014 RAW sweep (binomial)",
+        "label": "Hemispherical mound evolution A+ — RAW sweep (binomial)",
         "p_key": "pEvoAp",
         "macro": "TwoB",
         "note": "Sensitivity variant of Test 2; shares dome population. Reported but excluded from Bonferroni family.",
@@ -403,12 +406,12 @@
           "cat": "C"
         },
         {
-          "label": "Spatial: DEFF-corrected binomial (0.25\u00b0 band)",
+          "label": "Spatial: DEFF-corrected binomial (0.25° band)",
           "p_key": "pNeffQuarter",
           "cat": "C"
         },
         {
-          "label": "Spatial: DEFF-corrected binomial (0.50\u00b0 band)",
+          "label": "Spatial: DEFF-corrected binomial (0.50° band)",
           "p_key": "pNeffHalf",
           "cat": "C"
         },
@@ -520,5 +523,5 @@
     ],
     "note": "Inscription-year cohort boundaries"
   },
-  "_keywords_moved": "All keyword lists live in keywords.json \u2014 the single source of truth for all keyword content. Load via lib/beru.py:load_keywords() or lib/beru.py:load_religion_sets(). Do NOT add keyword content here."
+  "_keywords_moved": "All keyword lists live in keywords.json — the single source of truth for all keyword content. Load via lib/beru.py:load_keywords() or lib/beru.py:load_religion_sets(). Do NOT add keyword content here."
 }

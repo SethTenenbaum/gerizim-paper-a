@@ -58,9 +58,9 @@ echo ""
 # ── default (no --full): run all scripts, collect only \newcommand lines ─────
 if [ "${1:-}" != "--full" ]; then
     OUT_FILE="manuscript/generated_macros.tex"
-    echo "% Generated macros — $(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$OUT_FILE"
+    echo "% Generated macros -- $(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$OUT_FILE"
     echo "% Source: bash manuscript/reproduce_all_macros.sh" >> "$OUT_FILE"
-    echo "% IMPORTANT: values are computed fresh each run — do NOT hardcode" >> "$OUT_FILE"
+    echo "% IMPORTANT: values are computed fresh each run -- do NOT hardcode" >> "$OUT_FILE"
     echo "" >> "$OUT_FILE"
 
     # DEPENDENCY ORDER:
@@ -99,7 +99,8 @@ if [ "${1:-}" != "--full" ]; then
         analysis/unesco/dome_leave_k_out.py                  # → LKOsiteOne/Two/ThreeName/DevKm, LKOtwo*/three*/worstTwo/ThreeP
         analysis/unesco/evo_leave_k_out.py                   # → EvoLKOnCombosTwo, EvoLKOnCombosThree
         analysis/global/dome_periodicity_audit.py
-        analysis/global/phase_peak_periodicity_formal_test.py       # → rayleighR/Z/PermP, fullRayleighR/Z/PermP, maxApCount/Z/PermP (GROUP 11b)
+        analysis/global/phase_peak_periodicity_formal_test.py       # → rayleighR/Z/PermP, fullRayleighR/Z/PermP, targetedPdome/Wdome/Kdome (GROUP 11b)
+        analysis/unesco/periodogram_test.py                          # → periodogramPermP, periodogramPeakTDome, periodogramRank3Dome, etc.
         analysis/global/phase_peak_max_permutation_test.py          # → anchorMaxPermObsMax/NullMu/NullSD/Z/P/Nperms/BootMu/BootSD/BootZ/BootP (GROUP 11c)
         analysis/global/phase_envelope_analysis.py                  # → phaseFull*/phaseDome*/phaseGerizimPhase (phase-marginalised robustness)
         # ── Reviewer robustness checks ────────────────────────────────────
@@ -107,6 +108,7 @@ if [ "${1:-}" != "--full" ]; then
         analysis/unesco/stupa_coordinate_perturbation.py       # → stupaCoordPerturb*
         analysis/unesco/americas_directional_test.py           # → AmericasN, AmericasApCount, AmericasOneSidedP, AmericasDirectional
         analysis/unesco/wikidata_q180987_stupa_audit.py        # → wikiStupaTotal, wikiStupaATierCount/Rate/Enrich/BinomP, wikiStupaPermZ/P, wikiStupaAp*, wikiStupaJava*, wikiStupaCluster*, named-site dev_km
+        analysis/unesco/multiscale_combined_p.py               # → multiscaleDomeCombinedP, multiscaleJointMaxP, multiscaleNaturalKm, etc.
         # ── Simulation (slow — writes simDomePermP etc.) ──────────────────
         analysis/unesco/simulation_null_model.py
         # ── Cluster asymmetry + conditional sensitivity subtest ───────────
@@ -157,31 +159,63 @@ if [ "${1:-}" != "--full" ]; then
     python3 - "$OUT_FILE" <<'PYEOF'
 import sys, re
 from pathlib import Path
-
 path = Path(sys.argv[1])
 lines = path.read_text().splitlines(keepends=True)
-
-# Regex to extract the macro name from a \newcommand line
 _RE = re.compile(r'\\newcommand\{(\\[A-Za-z@]+)\}')
-
 seen = set()
 kept = []
-# Scan in reverse so we always keep the LAST definition
 for line in reversed(lines):
     m = _RE.search(line)
     if m:
         name = m.group(1)
         if name in seen:
-            continue          # drop earlier (duplicate) definition
+            continue
         seen.add(name)
     kept.append(line)
-
-# Restore original order
 kept.reverse()
 path.write_text("".join(kept))
-print(f"  ✓ Deduplicated: kept {len(seen)} unique macros "
-      f"(removed {len(lines)-len(kept)} duplicate lines)")
+print(f"  Deduplicated: kept {len(seen)} unique macros (removed {len(lines)-len(kept)} duplicate lines)")
 PYEOF
+
+    # ── Strip non-ASCII from comment portions of generated_macros.tex ─────────
+    # LaTeX reports "Missing character" warnings for Unicode in % comments even
+    # when inputenc is loaded.  Sanitise by replacing non-ASCII chars in comment
+    # tails (after the first %) with their closest ASCII equivalents.
+    python3 - "$OUT_FILE" <<'PYEOF2'
+import sys, re
+from pathlib import Path
+
+REPLACEMENTS = {
+    '\u2014': '--',   # em dash
+    '\u2013': '-',    # en dash
+    '\u2212': '-',    # minus sign
+    '\u00B0': 'deg',  # degree sign
+    '\u00D7': 'x',    # multiplication sign
+    '\u2265': '>=',   # greater-or-equal
+    '\u2264': '<=',   # less-or-equal
+    '\u00E9': 'e',    # e acute
+    '\u0113': 'e',    # e macron
+    '\u00A7': 'S',    # section sign
+}
+
+path = Path(sys.argv[1])
+lines = path.read_text(encoding='utf-8').splitlines(keepends=True)
+out = []
+for line in lines:
+    # Find the first % that starts a comment (not inside {})
+    pct = line.find('%')
+    if pct != -1:
+        before = line[:pct]
+        comment = line[pct:]
+        for ch, asc in REPLACEMENTS.items():
+            comment = comment.replace(ch, asc)
+        # Drop any remaining non-ASCII in comments
+        comment = comment.encode('ascii', 'replace').decode('ascii')
+        line = before + comment
+    out.append(line)
+path.write_text(''.join(out), encoding='utf-8')
+print(f"  Sanitised non-ASCII from comment lines in {path.name}")
+PYEOF2
 
     n_macros=$(grep -c '\\newcommand' "$OUT_FILE" || true)
     echo ""
@@ -335,6 +369,9 @@ run_script "GROUP 26d: Americas UNESCO directional test"               \
 
 run_script "GROUP 26e: Wikidata Q180987 stupa corpus portability audit" \
            analysis/unesco/wikidata_q180987_stupa_audit.py
+
+run_script "GROUP 26f: Multi-scale combined enrichment (4-corpus joint)" \
+           analysis/unesco/multiscale_combined_p.py
 
 run_script "GROUP 27: Unit Sweep (spacing sensitivity)"            \
            analysis/unesco/unit_sweep_fill.py

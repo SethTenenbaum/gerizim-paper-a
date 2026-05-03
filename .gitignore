@@ -30,3 +30,4 @@ env/
 *.egg-info/
 dist/
 build/
+results/

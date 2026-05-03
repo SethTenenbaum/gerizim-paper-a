@@ -317,8 +317,8 @@ print(f"  \\newcommand{{\\NcircValidatedApRate}}{{{(100*nAp/N_validated if N_val
 
 # ── Write to results store ────────────────────────────────────────────────────
 ResultsStore().write_many({
-    "pCircApp":     bt_App.pvalue,  # binomial p, A++ (raw sweep)
-    "pCircAp":      bt_Ap.pvalue,   # binomial p, A+ (raw sweep) — Test 2
+    "pCircApp":     bt_App.pvalue,  # binomial p, A++ (raw sweep) — secondary
+    "pCircAp":      bt_Ap.pvalue,   # binomial p, A+ (raw sweep) — secondary (Test 2)
     "pCircA":       bt_A.pvalue,    # binomial p, A  (raw sweep)
     "pCircApFisher": fisher_p_Ap,   # Fisher p, A+ vs rest (raw sweep)
     "circAppFisherOR": fisher_or_Ap, # Fisher OR, A+ vs rest
@@ -333,4 +333,74 @@ ResultsStore().write_many({
     "NcircAppRate": round(100 * nApp / N_raw, 1),
     "circEnrichApp": enr_App,
     "pCircAppFisher": fisher_p_App,
+})
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# PRIMARY TEST 2 (threshold-free)
+# Bootstrap mean deviation: dome corpus vs full corpus
+#
+# T_obs = mean(δᵢ | dome/spherical sites)
+# Null:  draw N_dome sites from the full Cultural/Mixed corpus (w/o replacement),
+#        compute their mean deviation; repeat 100,000 times.
+# p     = fraction of bootstrap means ≤ T_obs (lower = closer to harmonics)
+# Effect size: how many km closer are dome sites on average?
+#
+# Note: _full is already loaded above (line ~133); no second corpus load needed.
+# ══════════════════════════════════════════════════════════════════════════════
+
+import json as _json_sw
+_ROOT_SW    = Path(__file__).parent.parent.parent
+_CFG_SW     = _json_sw.loads((_ROOT_SW / "config.json").read_text())
+N_PERM_BOOT = _CFG_SW["simulation"]["n_permutations"]  # 100,000
+
+KM_PER_DEG = 111.0
+
+# Full-corpus deviations (beru) — reuse _full loaded above
+full_devs_beru = np.array([_beru_dev(s.longitude) for s in _full])
+
+# Dome deviations
+dome_devs_beru = np.array([s["dev"] for s in raw_sites])
+N_dome         = len(dome_devs_beru)
+
+T_obs_dome_beru  = float(np.mean(dome_devs_beru))
+T_obs_dome_deg   = T_obs_dome_beru * BERU
+full_mean_beru   = float(np.mean(full_devs_beru))
+full_mean_deg    = full_mean_beru * BERU
+dome_diff_km     = (full_mean_beru - T_obs_dome_beru) * BERU * KM_PER_DEG
+
+rng_boot   = np.random.default_rng(42)
+boot_means = np.empty(N_PERM_BOOT)
+n_full     = len(full_devs_beru)
+for i in range(N_PERM_BOOT):
+    idx = rng_boot.choice(n_full, size=N_dome, replace=False)
+    boot_means[i] = full_devs_beru[idx].mean()
+
+dome_mean_dev_boot_p = float(np.mean(boot_means <= T_obs_dome_beru))
+
+print()
+print("=" * 100)
+print("  PRIMARY TEST 2 (threshold-free): bootstrap mean deviation — dome vs full corpus")
+print(f"  N_dome = {N_dome}  |  N_corpus = {n_full}  |  {N_PERM_BOOT:,} bootstrap draws")
+print("=" * 100)
+print(f"""
+  Dome mean deviation        : {T_obs_dome_deg:.4f}°  ({T_obs_dome_beru:.6f} beru)
+  Full corpus mean deviation : {full_mean_deg:.4f}°
+  Effect size                : {dome_diff_km:.2f} km closer to harmonics
+  Bootstrap null mean        : {np.mean(boot_means) * BERU:.4f}°
+  p (T_null ≤ T_obs)        : {dome_mean_dev_boot_p:.5f}  {sig(dome_mean_dev_boot_p)}
+
+  Dome/spherical sites lie {dome_diff_km:.2f} km closer to a 3° harmonic than
+  a random same-size draw from the full UNESCO corpus.
+""")
+print(f"  \\newcommand{{\\domeMeanDevDeg}}{{{T_obs_dome_deg:.4f}}}     % mean deviation, dome sites (degrees)")
+print(f"  \\newcommand{{\\domeMeanDevBootP}}{{{dome_mean_dev_boot_p:.5f}}}  % p, bootstrap (Test 2 primary)")
+print(f"  \\newcommand{{\\domeMeanDevDiffKm}}{{{dome_diff_km:.2f}}}    % effect size: dome closer by X km")
+print(f"  \\newcommand{{\\fullCorpusMeanDevDeg}}{{{full_mean_deg:.4f}}}  % mean deviation, full corpus (degrees)")
+
+ResultsStore().write_many({
+    "domeMeanDevBootP":      dome_mean_dev_boot_p,
+    "domeMeanDevDeg":        round(T_obs_dome_deg, 5),
+    "domeMeanDevDiffKm":     round(dome_diff_km, 3),
+    "fullCorpusMeanDevDeg":  round(full_mean_deg, 5),
 })

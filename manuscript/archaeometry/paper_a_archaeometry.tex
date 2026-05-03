@@ -19,6 +19,8 @@
 \documentclass[HARVARD,twocolumn]{USG}
 
 % ── Packages ──────────────────────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage{amsmath,amssymb}
 \usepackage{booktabs}
 \usepackage{graphicx}
@@ -48,8 +50,8 @@
 
 \begin{document}
 
-\title{Domed Monuments Cluster at 3\textdegree{} Longitude Harmonics:
-A Longitude Enrichment Test on the UNESCO Cultural and Mixed Heritage Corpus}
+\title{3\textdegree{} Longitudinal Periodicity in the UNESCO World Heritage Corpus:
+Enrichment in Domed Monuments and Harmonic Cluster Asymmetry}
 
 \author[1]{Seth Tenenbaum}[https://orcid.org/0009-0008-5797-2498]
 
@@ -66,22 +68,23 @@ A Longitude Enrichment Test on the UNESCO Cultural and Mixed Heritage Corpus}
 \keywords{
 longitude periodicity | spatial statistics | Levant | UNESCO World Heritage |
 3-degree harmonics | domed architecture | archaeoastronomy |
-monument distribution | von Mises mixture | Mount Gerizim
+monument distribution | Mount Gerizim
 }
 
 \abstract[ABSTRACT]{
-Among UNESCO domed monuments ($N=\NcircTotal$), \NcircTierApp{} sites
-(\NcircAppRate\%) fall within $\AppThreshDeg{}\textdegree{}$
-(${\lesssim}\AppThreshKm{}$~km) of a 3\textdegree{} longitude harmonic
-referenced to Mount Gerizim—$\circEnrichApp\times$ the uniform null—surviving
-full Bonferroni correction at $k=\NtotalTests$
-($p=\pCircAppFisher$~\pCircAppFisherSig{}).
-The full corpus ($N=\NclusterTotal$) independently confirms the period
-(Bonferroni $p_{\mathrm{adj}}=\pAdjTestOne$, $k=\BonfK$); cluster asymmetry
-is also significant ($p_{\mathrm{adj}}=\pAdjTestThree$).
-The 3\textdegree{} period is recovered without specifying an anchor in
-advance (Rayleigh permutation $p=\rayleighPermP$). The pipeline is fully
-reproducible.
+Domed and spherical UNESCO Cultural and Mixed World Heritage monuments
+($N=\NcircTotal$ of $N=\NclusterTotal$ cultural sites) are significantly
+enriched within $\pm$0.15\textdegree{} of a pre-specified 3\textdegree{}
+longitudinal grid anchored to Mount Gerizim (35.269\textdegree{}E).
+Three enrichment tests survive Bonferroni correction at $k=\BonfK$:
+full corpus ($p_{\mathrm{adj}}=\pAdjTestOne$), domed monuments
+($p_{\mathrm{adj}}=\pAdjTestTwo$), and harmonic cluster asymmetry
+($p_{\mathrm{adj}}=\pAdjTestThree$); all are cross-checked by permutation
+null models. The period and anchor are stated hypotheses from historical and
+metrological sources; unit-sweep sensitivity analysis confirms 3\textdegree{}
+as the dominant spacing \emph{given} the pre-specified anchor. The Wikidata
+Q180987 stupa corpus and OWTRAD route network independently reproduce the
+pattern. The pipeline is fully reproducible.
 }
 
 \maketitle

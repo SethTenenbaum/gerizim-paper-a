@@ -1,19 +1,22 @@
 """
 vonmises_threshold_validation.py
 =================================
-Fits a von Mises mixture model to the harmonic phase distributions of two
-external corpora (OWTRAD Silk Road nodes and Wikidata Q180987 stupas) and
-compares the inferred angular dispersion σ = κ^{-1/2} to the metrologically
-derived tier thresholds.
+Descriptive von Mises mixture characterisation of two external corpora
+(OWTRAD Silk Road nodes and Wikidata Q180987 stupas).
 
 The model:
     f(θ | μ, κ) = w · VM(μ=0, κ) + (1-w) · Uniform(0, 2π)
 
 where θ is the harmonic phase angle, 0 = on harmonic, π = midpoint.
 
-Results are written back to data/store/results.json under the keys:
-    kappaOwtrad, kappaStupa, sigmaBeruOwtrad, sigmaBeruStupa,
-    sigmaBeruPooled, vmMixtureWeightOwtrad, vmMixtureWeightStupa
+Outputs are *descriptive* statistics only (κ̂, σ̂, ŵ, N) used to characterise
+external corpora. The primary statistical claims of the paper rest on standard
+circular statistics (Rayleigh, V-test) computed in
+phase_peak_periodicity_formal_test.py. Tier boundaries are read from config.json
+and are used only as a visualisation aid, not as inferential thresholds.
+
+Constants are read from config.json so this script never drifts from the
+project-wide source of truth.
 
 Run from repo root:
     python3 analysis/global/vonmises_threshold_validation.py
@@ -38,10 +41,13 @@ sys.path.insert(0, str(_ROOT))
 OWTRAD_CSV  = _ROOT / "data/store/silk_road/owtrad_nodes.csv"
 STUPA_CSV   = _ROOT / "data/store/unesco/wikidata_stupas_q180987.csv"
 
-# ── Constants (must match config.json / lib/beru.py) ─────────────────────────
-ANCHOR  = 35.269   # degrees E
-BERU    = 30.0     # degrees per beru
-SPACING = 0.1      # beru per harmonic interval
+# ── Constants (sourced from config.json — single source of truth) ────────────
+with open(_ROOT / "config.json") as _f:
+    _CFG = json.load(_f)
+
+ANCHOR  = _CFG["anchors"]["gerizim"]["longitude"]   # degrees E
+BERU    = _CFG["units"]["beru"]["degrees"]           # degrees per bēru
+SPACING = _CFG["units"]["harmonic_step"]             # bēru per harmonic interval
 
 
 # ── Angular mapping ───────────────────────────────────────────────────────────
@@ -114,11 +120,13 @@ def fit_mixture(lons: np.ndarray) -> tuple[float, float]:
 
 
 # ── Threshold comparison ──────────────────────────────────────────────────────
-
-METROLOGICAL = {
-    "A++": 0.00160,
-    "A+":  0.00321,
-    "A":   0.00642,
+# Tier thresholds (degrees) are read from config.json for descriptive context
+# only. They are *not* derived from the von Mises fit; the fit is descriptive.
+_TIERS = _CFG["tiers"]
+TIER_DEG = {
+    "A++": _TIERS["A++"]["max_deviation_deg"],
+    "A+":  _TIERS["A+"]["max_deviation_deg"],
+    "A":   _TIERS["A"]["max_deviation_deg"],
 }
 
 
@@ -138,15 +146,12 @@ def report(label: str, lons: np.ndarray) -> dict:
     print(f"  κ̂ = {kappa:.4f}   ŵ = {w:.4f}  ({100*w:.1f}% of mass in VM component)")
     print(f"  σ̂ = κ̂^{{-1/2}} = {sig:.5f} beru  ({sig*BERU:.4f}°)")
     print()
-    print(f"  Implied thresholds (σ multiples):")
-    for mult, name in [(0.5, "0.5σ"), (1.0, "1.0σ"), (2.0, "2.0σ")]:
-        t = mult * sig
-        print(f"    {name}  = {t:.5f} beru  ({t*BERU:.4f}°  ≈ {t*BERU*111:.1f} km)")
-    print()
-    print(f"  Metrological tiers for comparison:")
-    for tier, t in METROLOGICAL.items():
-        diff = abs(0.5 * sig - t) / t * 100
-        print(f"    {tier}  = {t:.5f} beru   |  |0.5σ − {tier}| / {tier} = {diff:.1f}%")
+    print(f"  Descriptive context — config tier thresholds (degrees):")
+    for tier, t_deg in TIER_DEG.items():
+        print(f"    {tier}  = {t_deg:.4f}°  (≈ {t_deg*111:.1f} km)")
+    print(f"  (Tier boundaries are read from config.json; they are NOT derived")
+    print(f"   from the von Mises fit. Primary inferential tests use Rayleigh /")
+    print(f"   V-test statistics — see phase_peak_periodicity_formal_test.py.)")
 
     return {"kappa": kappa, "w": w, "sigma_beru": sig, "n": n}
 
@@ -182,17 +187,25 @@ def main() -> None:
     print(f"  N-weighted pooled σ̂ = {pooled:.5f} beru  ({pooled*BERU:.4f}°)")
     print()
 
-    # ── Derived threshold values from stupa κ (primary reference corpus) ──────
-    # Naming: half-sigma → A++ proxy, 1-sigma → A+ proxy, 2-sigma → A proxy
+    # ── Descriptive σ multiples (for visualisation/appendix only) ───────────
+    # NOTE: These numbers describe the dispersion of the external corpora.
+    # They are NOT used to derive or justify the tier thresholds; tier
+    # thresholds are read from config.json (see lib/beru.py). The σ multiples
+    # are emitted purely so the appendix figure can show how the descriptive
+    # dispersion compares with the visual tier bands.
     sig_s      = r_s["sigma_beru"]
     sig_o      = r_o["sigma_beru"]
     kappa_s    = r_s["kappa"]
     kappa_o    = r_o["kappa"]
     kappa_ratio = max(kappa_o, kappa_s) / min(kappa_o, kappa_s)
 
-    vm_app  = round(0.25 * sig_s, 5)  # 0.25σ stupa (≈ A++)
-    vm_ap   = round(0.50 * sig_s, 5)  # 0.50σ stupa (≈ A+)
-    vm_a    = round(1.00 * sig_s, 5)  # 1.00σ stupa (≈ A)
+    vm_quarter = round(0.25 * sig_s, 5)  # 0.25σ stupa (descriptive only)
+    vm_half    = round(0.50 * sig_s, 5)  # 0.50σ stupa (descriptive only)
+    vm_one     = round(1.00 * sig_s, 5)  # 1.00σ stupa (descriptive only)
+    # Backwards-compatible aliases for downstream macro names
+    vm_app = vm_quarter
+    vm_ap  = vm_half
+    vm_a   = vm_one
 
     # ── Write to results.json ─────────────────────────────────────────────────
     from lib.results_store import ResultsStore
@@ -227,6 +240,8 @@ def main() -> None:
     print(f"  \\newcommand{{\\vmKappaRatio}}{{{round(kappa_ratio, 1)}}}  % ratio max/min kappa across corpora")
     print(f"  \\newcommand{{\\vmNOwtrad}}{{{r_o['n']}}}     % N, OWTRAD corpus")
     print(f"  \\newcommand{{\\vmNStupa}}{{{r_s['n']}}}      % N, Q180987 stupa corpus")
+    print(f"  \\newcommand{{\\vmMixtureWeightOwtrad}}{{{round(r_o['w'], 4)}}}  % VM mixture weight, OWTRAD corpus")
+    print(f"  \\newcommand{{\\vmMixtureWeightStupa}}{{{round(r_s['w'], 4)}}}   % VM mixture weight, stupa corpus")
     print(f"  \\newcommand{{\\vmSigmaBeruOwtrad}}{{{round(sig_o, 5)}}}   % sigma (beru), OWTRAD — appendix use")
     print(f"  \\newcommand{{\\vmSigmaBeruStupa}}{{{round(sig_s, 5)}}}    % sigma (beru), stupa — appendix use")
     print(f"  \\newcommand{{\\vmSigmaBeruPooled}}{{{round(pooled, 5)}}}  % N-weighted pooled sigma (beru) — appendix use")
