@@ -72,6 +72,7 @@ if [ "${1:-}" != "--full" ]; then
         analysis/global/vonmises_threshold_validation.py     # → vmKappaOwtrad, vmKappaStupa, vmSigmaBeruStupa, etc.
         analysis/global/geodesic_sensitivity.py              # → GeodesicApCurrent, GeodesicDropOut, GeodesicGainIn, etc.
         analysis/global/owtrad_route_alignment.py            # → pOwtradMidApp/Ap, NOwtradEdges/Vertices, etc.
+        analysis/global/clustered_control_sweep.py           # → clusterCtrlPermP, clusterCtrlNsim, clusterCtrlTobs, etc.
         # ── Primary analysis (write to store) ─────────────────────────────
         analysis/unesco/spherical_monument_test.py            # → pCircApValidated, NcircValidated (context-validated, Exploratory 2x) — runs FIRST so raw_sweep can read it
         analysis/unesco/spherical_monument_raw_sweep.py      # → pCircAp, pCircA, pCircChi (reads validated counts from store for comparison table)

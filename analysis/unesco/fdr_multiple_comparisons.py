@@ -232,15 +232,22 @@ def main():
         parts = key.split("_")
         return parts[0] + "".join(p.capitalize() for p in parts[1:])
 
+    def _fmt_p(p: float) -> str:
+        """Format a p-value for LaTeX: use < 0.0001 rather than 0.0 for very small values."""
+        r = round(float(p), 4)
+        if r == 0.0:
+            return "< 0.0001"
+        return str(r)
+
     for i, key in enumerate(keys):
         macro_name = _sanitize_macro_name(key)
         if bonf[i] < 0.05:
             k = f"BonfAllSurvive{macro_name}"
-            survivor_macros[k] = round(float(bonf[i]), 4)
+            survivor_macros[k] = _fmt_p(bonf[i])
             print(f"  \\newcommand{{\\{k}}}{{{survivor_macros[k]}}}  % full-k Bonferroni survivor")
         if bh_q[i] < 0.05:
             k = f"FDRqSurvive{macro_name}"
-            survivor_macros[k] = round(float(bh_q[i]), 4)
+            survivor_macros[k] = _fmt_p(bh_q[i])
             print(f"  \\newcommand{{\\{k}}}{{{survivor_macros[k]}}}  % BH q-value survivor")
 
     # ── Write summary counts to store ─────────────────────────────────────────

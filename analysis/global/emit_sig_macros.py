@@ -57,6 +57,8 @@ EXPLICIT_P_KEYS = {
     "pHolmTestOne", "pHolmTestTwo", "pHolmTestThree", "pHolmTestTwoB",
     # Cluster asymmetry
     "clusterApBinom", "clusterMWp", "clusterPermP", "clusterHarmonicMWp",
+    # Clustered control sweep
+    "clusterCtrlPermP",
     # Dome / spherical raw sweep
     "pCircAp", "pCircA", "pCircApFisher", "pCircAFisher", "pCircChi",
     "pCircApp",

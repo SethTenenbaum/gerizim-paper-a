@@ -133,24 +133,10 @@ def run():
     obs_v_a   = int((v_devs   <= TIER_A_MAX).sum())
 
     # ── Degree-weighted vertices ───────────────────────────────────────────────
-    from collections import Counter as _Counter
-    import csv as _csv
-    _degree: dict = _Counter()
-    with open(SILK_ROAD_DIR / "owtrad_routes.csv", newline="", encoding="utf-8") as _fh:
-        for _row in _csv.DictReader(r for r in _fh if not r.startswith("#")):
-            _degree[_row.get("node1", "")] += 1
-            _degree[_row.get("node2", "")] += 1
-    _node_name_lons: dict = {}
-    with open(SILK_ROAD_DIR / "owtrad_nodes.csv", newline="", encoding="utf-8") as _fh:
-        for _row in _csv.DictReader(r for r in _fh if not r.startswith("#")):
-            try:
-                _node_name_lons[_row.get("name", "")] = float(_row["lon"])
-            except (ValueError, KeyError):
-                pass
-    dw_lons = np.array([
-        lon for name, lon in _node_name_lons.items()
-        for _ in range(max(_degree.get(name, 0), 1))
-    ])
+    # Count route endpoint positions directly. This is equivalent to sampling an
+    # OWTRAD route segment uniformly and then sampling one of its two endpoints.
+    # It avoids ambiguous name matching across OWTRAD sub-datasets.
+    dw_lons = np.array([lon for _n1, lon1, _n2, lon2 in edges_raw for lon in (lon1, lon2)])
     n_dw = len(dw_lons)
     dw_devs    = _beru_devs_np(dw_lons)
     obs_dw_app = int((dw_devs <= TIER_APP).sum())
@@ -158,8 +144,19 @@ def run():
     obs_dw_a   = int((dw_devs <= TIER_A_MAX).sum())
 
     # ── Cluster asymmetry: A++-bearing harmonics vs non-A++ harmonics ──────────
-    from collections import defaultdict as _dd
+    from collections import Counter as _Counter, defaultdict as _dd
     from scipy.stats import mannwhitneyu as _mwu
+    _degree: dict = _Counter()
+    for _n1, _lon1, _n2, _lon2 in edges_raw:
+        _degree[_n1] += 1
+        _degree[_n2] += 1
+    _node_name_lons: dict = {}
+    with open(SILK_ROAD_DIR / "owtrad_nodes.csv", newline="", encoding="utf-8") as _fh:
+        for _row in csv.DictReader(r for r in _fh if not r.startswith("#")):
+            try:
+                _node_name_lons[_row.get("name", "")] = float(_row["lon"])
+            except (ValueError, KeyError):
+                pass
     _harm_deg   = _dd(list)
     _harm_app   = _dd(bool)
     for _name, _lon in _node_name_lons.items():

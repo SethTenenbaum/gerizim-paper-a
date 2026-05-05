@@ -1,4 +1,4 @@
-% Generated macros -- 2026-05-03T22:04:50Z
+% Generated macros -- 2026-05-04T23:16:27Z
 % Source: bash manuscript/reproduce_all_macros.sh
 % IMPORTANT: values are computed fresh each run -- do NOT hardcode
 
@@ -93,21 +93,21 @@
 \newcommand{\NOwtradVertexAp}{190}
 \newcommand{\NOwtradVertexA}{362}
 \newcommand{\NOwtradPerms}{100000}
-\newcommand{\NOwtradDegW}{3498}
-\newcommand{\NOwtradDegWApp}{193}
-\newcommand{\NOwtradDegWAp}{420}
-\newcommand{\NOwtradDegWA}{791}
+\newcommand{\NOwtradDegW}{3892}
+\newcommand{\NOwtradDegWApp}{211}
+\newcommand{\NOwtradDegWAp}{457}
+\newcommand{\NOwtradDegWA}{886}
 \newcommand{\owtradVertexAppEnrich}{1.25}
 \newcommand{\owtradVertexAEnrich}{1.08}
-\newcommand{\owtradDegWAppEnrich}{1.38}
-\newcommand{\owtradDegWAEnrich}{1.13}
+\newcommand{\owtradDegWAppEnrich}{1.36}
+\newcommand{\owtradDegWAEnrich}{1.14}
 \newcommand{\owtradMidAppEnrich}{1.16}
 \newcommand{\owtradMidApEnrich}{1.10}
 \newcommand{\owtradMidAEnrich}{1.08}
 \newcommand{\zOwtradVertexApp}{2.13}
 \newcommand{\zOwtradVertexA}{1.66}
-\newcommand{\zOwtradDegWApp}{4.58}
-\newcommand{\zOwtradDegWA}{3.86}
+\newcommand{\zOwtradDegWApp}{4.53}
+\newcommand{\zOwtradDegWA}{4.31}
 \newcommand{\zOwtradMidApp}{1.41}
 \newcommand{\zOwtradMidAp}{1.54}
 \newcommand{\zOwtradMidA}{1.75}
@@ -115,7 +115,7 @@
 \newcommand{\pOwtradVertexAp}{0.0377}
 \newcommand{\pOwtradVertexA}{0.0524}
 \newcommand{\pOwtradDegWApp}{< 0.0001}
-\newcommand{\pOwtradDegWAp}{< 0.0001}
+\newcommand{\pOwtradDegWAp}{0.0002}
 \newcommand{\pOwtradDegWA}{< 0.0001}
 \newcommand{\pOwtradMidApp}{0.0908}
 \newcommand{\pOwtradMidAp}{0.0679}
@@ -132,6 +132,18 @@
 \newcommand{\owtradClustDegRatio}{2.70}
 \newcommand{\pOwtradClustDeg}{0.0007}
 \newcommand{\pOwtradClustCount}{0.0003}
+
+% --- analysis/global/clustered_control_sweep.py
+  \newcommand{\clusterCtrlPermP}{0.522}        % permutation p-value (clustered control sweep)
+  \newcommand{\clusterCtrlNsim}{2000}         % number of simulations (clustered control sweep)
+  \newcommand{\clusterCtrlTobs}{4.0741}        % observed maximum enrichment ratio
+  \newcommand{\clusterCtrlTsimMean}{4.1433}        % mean T_sim across simulations
+  \newcommand{\clusterCtrlTsimPctNF}{5.0}        % 95th percentile of T_sim
+  \newcommand{\clusterCtrlOmegaMatchPct}{0.0}        % pct of sims where best omega is near 3 deg
+  \newcommand{\clusterCtrlPhaseMatchPct}{2.1}        % pct of sims where best phi is near 35 E
+  \newcommand{\clusterCtrlObsOmega}{13.75}        % observed best-fit period (deg)
+  \newcommand{\clusterCtrlObsPhase}{233.0}        % observed best-fit anchor longitude (deg)
+  \newcommand{\clusterCtrlSatTarget}{1.4444}        % saturation target S
 
 % --- analysis/unesco/spherical_monument_test.py
   \newcommand{\pCircApValidated}{0.0076}  % p-value, A+ binomial (context-validated dome corpus)
@@ -1473,8 +1485,8 @@
   \newcommand{\BonfAllSurviveclusterApBinom}{0.0465}  % full-k Bonferroni survivor
   \newcommand{\FDRqSurviveclusterApBinom}{0.0077}  % BH q-value survivor
   \newcommand{\FDRqSurviveclusterMWp}{0.0124}  % BH q-value survivor
-  \newcommand{\BonfAllSurviveclusterPermP}{0.0}  % full-k Bonferroni survivor
-  \newcommand{\FDRqSurviveclusterPermP}{0.0}  % BH q-value survivor
+  \newcommand{\BonfAllSurviveclusterPermP}{< 0.0001}  % full-k Bonferroni survivor
+  \newcommand{\FDRqSurviveclusterPermP}{< 0.0001}  % BH q-value survivor
   \newcommand{\BonfAllSurviveclusterHarmonicMWp}{0.0012}  % full-k Bonferroni survivor
   \newcommand{\FDRqSurviveclusterHarmonicMWp}{0.0006}  % BH q-value survivor
   \newcommand{\FDRqSurvivepPreTwoK}{0.0306}  % BH q-value survivor
@@ -1524,6 +1536,7 @@
   \newcommand{\anchorShiftPermPSig}{**}  % auto sig label
   \newcommand{\blockBootZPSig}{**}  % auto sig label
   \newcommand{\clusterApBinomSig}{**}  % auto sig label
+  \newcommand{\clusterCtrlPermPSig}{ns}  % auto sig label
   \newcommand{\clusterHarmonicMWpSig}{***}  % auto sig label
   \newcommand{\clusterMWpSig}{**}  % auto sig label
   \newcommand{\clusterPermPSig}{***}  % auto sig label

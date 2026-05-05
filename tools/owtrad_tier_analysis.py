@@ -41,6 +41,7 @@ from scipy.stats import binomtest
 from lib.beru import (
     GERIZIM, BERU, HARMONIC_STEP,
     TIER_APP, TIER_APLUS, TIER_A_MAX,
+    TIER_APP_DEG, TIER_APLUS_DEG, TIER_A_DEG,
     P_NULL_APP, P_NULL_AP, P_NULL_A,
     TIER_APP_KM, TIER_APLUS_KM, TIER_A_KM,
     deviation as beru_dev, tier_label as tier_label,
@@ -174,21 +175,21 @@ def make_figure(vertex_stats, midpoint_stats, all_node_lons, all_mid_lons):
     fig, axes = plt.subplots(1, 2, figsize=(12, 4.5))
 
     def _panel(ax, s, lons, title):
-        devs = np.array(s["devs"])
-        bin_width = 0.005
-        max_dev = 0.05
+        devs_deg = np.array(s["devs"]) * BERU   # convert beru → degrees
+        bin_width = 0.15                          # degrees (= 0.005 beru × 30)
+        max_dev   = 1.5                           # degrees (= 0.05 beru × 30)
         bins = np.arange(0, max_dev + bin_width, bin_width)
         n_bins = len(bins) - 1
 
         counts, edges, patches = ax.hist(
-            devs, bins=bins,
+            devs_deg, bins=bins,
             color=C_PRIMARY, edgecolor="white", linewidth=0.6,
             alpha=0.85, zorder=3,
         )
 
-        ax.axvspan(0, TIER_APP,   color=C_APP, alpha=0.10, zorder=1)
-        ax.axvspan(0, TIER_APLUS, color=C_AP,  alpha=0.08, zorder=1)
-        ax.axvspan(0, TIER_A_MAX, color=C_A,   alpha=0.05, zorder=1)
+        ax.axvspan(0, TIER_APP_DEG,   color=C_APP, alpha=0.10, zorder=1)
+        ax.axvspan(0, TIER_APLUS_DEG, color=C_AP,  alpha=0.08, zorder=1)
+        ax.axvspan(0, TIER_A_DEG,     color=C_A,   alpha=0.05, zorder=1)
 
         expected = s["n"] / n_bins
         ax.axhline(expected, color=C_NULL, linewidth=1.5, linestyle="--", zorder=4)
@@ -196,9 +197,9 @@ def make_figure(vertex_stats, midpoint_stats, all_node_lons, all_mid_lons):
                 f"null ({expected:.1f}/bin)",
                 color=C_NULL, fontsize=7.5, ha="right", va="bottom", zorder=5)
 
-        ax.axvline(TIER_APP,   color=C_APP, linewidth=0.8, linestyle=":", alpha=0.7, zorder=4)
-        ax.axvline(TIER_APLUS, color=C_AP,  linewidth=0.8, linestyle=":", alpha=0.7, zorder=4)
-        ax.axvline(TIER_A_MAX, color=C_A,   linewidth=0.8, linestyle=":", alpha=0.7, zorder=4)
+        ax.axvline(TIER_APP_DEG,   color=C_APP, linewidth=0.8, linestyle=":", alpha=0.7, zorder=4)
+        ax.axvline(TIER_APLUS_DEG, color=C_AP,  linewidth=0.8, linestyle=":", alpha=0.7, zorder=4)
+        ax.axvline(TIER_A_DEG,     color=C_A,   linewidth=0.8, linestyle=":", alpha=0.7, zorder=4)
 
         y_max = counts.max()
         stats_txt = (
@@ -212,7 +213,7 @@ def make_figure(vertex_stats, midpoint_stats, all_node_lons, all_mid_lons):
                 bbox=dict(boxstyle="round,pad=0.4", facecolor="#f0f0f0",
                           edgecolor="#cccccc", alpha=0.9))
 
-        ax.set_xlabel("Beru deviation (δ) from nearest 0.1-beru harmonic")
+        ax.set_xlabel("Deviation from nearest 3° harmonic (degrees)")
         ax.set_ylabel("Count")
         ax.set_title(title)
         ax.set_xlim(0, max_dev)
@@ -221,10 +222,10 @@ def make_figure(vertex_stats, midpoint_stats, all_node_lons, all_mid_lons):
     _panel(axes[0], vertex_stats,   all_node_lons,
            f"OWTRAD vertices (N = {vertex_stats['n']}, deduplicated)")
     _panel(axes[1], midpoint_stats, all_mid_lons,
-           f"OWTRAD vertices degree-weighted (Σdeg = {midpoint_stats['n']})")
+           f"OWTRAD route endpoints (N = {midpoint_stats['n']}, degree-weighted)")
 
     fig.suptitle(
-        "OWTRAD Silk Road network — beru deviation distribution\n"
+        "OWTRAD Silk Road network — harmonic deviation distribution (degrees)\n"
         "Left: each city once.  Right: each city weighted by its route-count.\n"
         "Shaded: A++ / A+ / A windows.  Dashed: uniform null expectation.",
         fontsize=10, y=1.02,
@@ -287,12 +288,11 @@ if __name__ == "__main__":
     for n in nodes:
         n["degree"] = degree.get(n["name"], 0)
 
-    # Degree-weighted: count each vertex proportional to its network degree
-    # (equivalent to sampling edges uniformly and picking an endpoint at random)
-    weighted_lons = []
-    for n in nodes:
-        weighted_lons.extend([n["lon"]] * n["degree"])
-    wstats = tier_stats(weighted_lons, f"Vertices degree-weighted (Σdeg = {len(weighted_lons)})")
+    # Degree-weighted: count route endpoint positions directly.
+    # This is equivalent to sampling edges uniformly and picking an endpoint at random,
+    # without relying on potentially ambiguous node-name matching.
+    weighted_lons = [lon for e in edges for lon in (e["lon1"], e["lon2"])]
+    wstats = tier_stats(weighted_lons, f"Route endpoints, degree-weighted (N = {len(weighted_lons)})")
 
     # Hub vs. non-hub split (degree ≥ 3 = junction city)
     hub_threshold = 3
@@ -355,7 +355,7 @@ if __name__ == "__main__":
         print(f"  {e['tier']:<4}  δ={e['dev']:.4f}  mid={e['mid_lon']:>9.3f}°E"
               f"  {e['node1']} → {e['node2']}")
 
-    # Figure: vertices (raw) vs degree-weighted vertices
+    # Figure: vertices (raw) vs degree-weighted endpoint positions
     make_figure(vstats, wstats, node_lons, weighted_lons)
 
     print()
