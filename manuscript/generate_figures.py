@@ -51,12 +51,21 @@ plt.rcParams.update({
     "ytick.labelsize": 9,
     "legend.fontsize": 9,
     "figure.dpi": 300,
-    "savefig.dpi": 300,
-    "savefig.bbox": "tight",
-    "savefig.pad_inches": 0.08,
+    # savefig.bbox is intentionally NOT set here — we pass it explicitly in
+    # save_fig() so that PDF and PNG use identical parameters and render
+    # identically (the rcParam approach lets each backend measure bounding
+    # boxes independently, which causes layout differences).
     "axes.spines.top": False,
     "axes.spines.right": False,
 })
+
+_SAVE_KW = dict(dpi=300, bbox_inches="tight", pad_inches=0.08)
+
+def save_fig(fig, outpath: Path) -> None:
+    """Save *fig* to both PDF and PNG with identical parameters."""
+    fig.savefig(outpath, **_SAVE_KW)
+    fig.savefig(outpath.with_suffix(".png"), **_SAVE_KW)
+    plt.close(fig)
 
 OUTDIR = Path(__file__).resolve().parent / "figures"
 OUTDIR.mkdir(exist_ok=True)
@@ -202,14 +211,21 @@ def make_devhist():
 
     n_aplus = int(sum(1 for d in deviations if d <= TIER_APLUS))
     y_max_data = counts.max()
+
+    # Annotation: place text on the RIGHT side of the plot (x ~ 65% across),
+    # well away from the first bar and the legend which sits upper-left.
+    # Arrow tip points to the top edge of the first (A+) bar.
+    ann_x = max_dev_deg * 0.35
     ax.annotate(
         f"{n_aplus} A+ sites\n(δ ≤ {TIER_APLUS_DEG:.4g}°)",
-        xy=(TIER_APLUS_DEG, n_aplus),
-        xytext=(TIER_APLUS_DEG * 6, n_aplus + 8),
+        xy=(TIER_APLUS_DEG / 2, n_aplus),
+        xytext=(ann_x, y_max_data * 0.95),
         fontsize=9, fontweight="bold", color=C_HIGHLIGHT,
         arrowprops=dict(arrowstyle="->", color=C_HIGHLIGHT, lw=1.2),
-        zorder=5,
+        zorder=6,
         annotation_clip=False,
+        bbox=dict(boxstyle="round,pad=0.3", fc="white", ec=C_HIGHLIGHT,
+                  lw=0.8, alpha=0.95, zorder=6),
     )
 
     ax.axvline(TIER_APLUS_DEG, color=C_HIGHLIGHT, linewidth=1.0,
@@ -221,15 +237,15 @@ def make_devhist():
     ax.set_xlabel("Deviation from nearest 3° harmonic (degrees)")
     ax.set_ylabel("Number of sites")
     ax.set_title(f"Distribution of harmonic deviations — UNESCO Cultural/Mixed (N = {N_total})")
-    ax.legend(loc="upper right", framealpha=0.9)
+    # Legend goes upper-LEFT so it never competes with the annotation text.
+    legend = ax.legend(loc="upper right", framealpha=0.95)
+    legend.set_zorder(7)
     ax.set_xlim(0, max_dev_deg)
     ax.set_ylim(0, y_max_data * 1.20)
 
     fig.tight_layout()
     outpath = OUTDIR / "fig_devhist.pdf"
-    fig.savefig(outpath)
-    fig.savefig(outpath.with_suffix(".png"))
-    plt.close(fig)
+    save_fig(fig, outpath)
     print(f"  ✓ {outpath.name} ({outpath.with_suffix('.png').name})")
     return outpath
 
@@ -358,9 +374,7 @@ def make_temporal():
 
     fig.tight_layout()
     outpath = OUTDIR / "fig_temporal.pdf"
-    fig.savefig(outpath)
-    fig.savefig(outpath.with_suffix(".png"))
-    plt.close(fig)
+    save_fig(fig, outpath)
     print(f"  ✓ {outpath.name} ({outpath.with_suffix('.png').name})")
     return outpath
 
@@ -476,9 +490,7 @@ def make_unitsweep():
 
     fig.tight_layout()
     outpath = OUTDIR / "fig_unitsweep.pdf"
-    fig.savefig(outpath)
-    fig.savefig(outpath.with_suffix(".png"))
-    plt.close(fig)
+    save_fig(fig, outpath)
     print(f"  ✓ {outpath.name} ({outpath.with_suffix('.png').name})")
     return outpath
 
@@ -578,9 +590,7 @@ def make_null_c():
 
     fig.tight_layout()
     outpath = OUTDIR / "fig_null_c.pdf"
-    fig.savefig(outpath)
-    fig.savefig(outpath.with_suffix(".png"))
-    plt.close(fig)
+    save_fig(fig, outpath)
     print(f"  ✓ {outpath.name} ({outpath.with_suffix('.png').name})")
     return outpath
 
@@ -790,9 +800,7 @@ def make_geo_trail():
     # tight_layout is incompatible with Cartopy GeoAxes (axes were manually
     # positioned above, so no adjustment needed — just suppress the warning).
     outpath = OUTDIR / "fig_geo_trail.pdf"
-    fig.savefig(outpath)
-    fig.savefig(outpath.with_suffix(".png"))
-    plt.close(fig)
+    save_fig(fig, outpath)
     print(f"  ✓ {outpath.name} ({outpath.with_suffix('.png').name})")
     return outpath
 
@@ -1030,9 +1038,7 @@ def make_supp_global_tiers():
 
     fig.tight_layout(pad=0.3)
     outpath = OUTDIR / "fig_supp_global_tiers.pdf"
-    fig.savefig(outpath)
-    fig.savefig(outpath.with_suffix(".png"))
-    plt.close(fig)
+    save_fig(fig, outpath)
     print(f"  ✓ {outpath.name} ({outpath.with_suffix('.png').name})")
     return outpath
 
@@ -1291,9 +1297,7 @@ def _removed_make_supp_silkroad_ac_tiers():
 
     fig.tight_layout(pad=0.3)
     outpath = OUTDIR / "fig_supp_silkroad_ac.pdf"
-    fig.savefig(outpath)
-    fig.savefig(outpath.with_suffix(".png"))
-    plt.close(fig)
+    save_fig(fig, outpath)
     print(f"  ✓ {outpath.name} ({outpath.with_suffix('.png').name})")
     return outpath
 
