@@ -102,6 +102,7 @@ if [ "${1:-}" != "--full" ]; then
         analysis/global/dome_periodicity_audit.py
         analysis/global/phase_peak_periodicity_formal_test.py       # → rayleighR/Z/PermP, fullRayleighR/Z/PermP, targetedPdome/Wdome/Kdome (GROUP 11b)
         analysis/unesco/periodogram_test.py                          # → periodogramPermP, periodogramPeakTDome, periodogramRank3Dome, etc.
+        analysis/unesco/joint_periodogram_test.py                    # → npcMonK, npcMonPermP, npcMonGridDeltaE, npcOwR, npcOwRayleighP, etc.
         analysis/global/phase_peak_max_permutation_test.py          # → anchorMaxPermObsMax/NullMu/NullSD/Z/P/Nperms/BootMu/BootSD/BootZ/BootP (GROUP 11c)
         analysis/global/phase_envelope_analysis.py                  # → phaseFull*/phaseDome*/phaseGerizimPhase (phase-marginalised robustness)
         # ── Reviewer robustness checks ────────────────────────────────────

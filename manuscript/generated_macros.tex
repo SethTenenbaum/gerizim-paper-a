@@ -1,4 +1,4 @@
-% Generated macros -- 2026-05-04T23:16:27Z
+% Generated macros -- 2026-05-06T02:28:35Z
 % Source: bash manuscript/reproduce_all_macros.sh
 % IMPORTANT: values are computed fresh each run -- do NOT hardcode
 
@@ -975,6 +975,41 @@
   \newcommand{\periodogramPermP}{0.17409}   % permutation p, S_dome(3 deg)
   \newcommand{\periodogramNPerm}{100,000}       % permutation draws
   \newcommand{\periodogramNullPeakAtThreeFrac}{0.0046} % fraction null draws with 3 deg as peak
+  \newcommand{\periodogramPeakTDomeConstrained}{4.60}  % dome peak period constrained <10.0deg
+  \newcommand{\periodogramPeakTFullConstrained}{6.80}  % full-corpus peak period constrained <10.0deg
+  \newcommand{\periodogramRPeakDomeConstrained}{0.2441} % R at dome constrained peak
+  \newcommand{\periodogramRPeakFullConstrained}{0.0850} % R at full-corpus constrained peak
+  \newcommand{\periodogramRThreeDomeCompare}{0.1365}  % R at T=3deg dome (for direct comparison)
+  \newcommand{\periodogramRankThreeDomeConstrained}{43}      % rank of 3deg among <10.0deg periods (dome)
+  \newcommand{\periodogramRankThreeFullConstrained}{141}      % rank of 3deg among <10.0deg periods (full)
+  \newcommand{\periodogramNConstrained}{190}      % number of periods in constrained grid
+  \newcommand{\periodogramDomeOverlapTopTwentyFive}{7}   % 3deg-A+ sites in top-25 phasor at dome constrained peak
+  \newcommand{\periodogramFullOverlapTopTwentyFive}{1}   % 3deg-A+ sites in top-25 phasor at full constrained peak
+  \newcommand{\periodogramDomeOverlapExpected}{5.0}  % expected overlap by chance (dome)
+  \newcommand{\periodogramFullOverlapExpected}{3.3}  % expected overlap by chance (full)
+
+% --- analysis/unesco/joint_periodogram_test.py
+  \newcommand{\npcNUnesco}{1011}
+  \newcommand{\npcNDome}{83}
+  \newcommand{\npcNStupa}{229}
+  \newcommand{\npcNOwtrad}{1674}
+  \newcommand{\npcNPerm}{100000}
+  \newcommand{\npcMonK}{0.9857}
+  \newcommand{\npcMonAnchor}{1.982}
+  \newcommand{\npcMonGridLineNearE}{34.982}
+  \newcommand{\npcMonGridDeltaE}{0.018}
+  \newcommand{\npcMonPermP}{0.0119}
+  \newcommand{\npcOwR}{0.0308}
+  \newcommand{\npcOwAnchor}{2.75}
+  \newcommand{\npcOwAnchorDelta}{0.768}
+  \newcommand{\npcOwRayleighP}{0.205}
+  \newcommand{\npcAllK}{0.7713}
+  \newcommand{\npcAllAnchor}{2.139}
+  \newcommand{\npcAllPermP}{0.09182}
+  \newcommand{\npcAllPermPGlobalmax}{0.14754}
+  \newcommand{\npcPairDomeStupa}{0.159}
+  \newcommand{\npcPairUnescoStupa}{0.182}
+  \newcommand{\npcPairUnescoOwtrad}{0.7}
 
 % --- analysis/global/phase_peak_max_permutation_test.py
 \newcommand{\anchorMaxPermObsMax}{132}

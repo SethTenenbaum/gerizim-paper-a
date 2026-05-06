@@ -108,6 +108,61 @@ peak_idx_full = int(np.argmax(power_full))
 peak_T_dome   = float(periods[peak_idx_dome])
 peak_T_full   = float(periods[peak_idx_full])
 
+# ── Constrained sweep: peak period below 10° ─────────────────────────────────
+CONSTRAINED_MAX = 10.0
+constrained_mask = periods < CONSTRAINED_MAX
+power_dome_c = np.where(constrained_mask, power_dome, -np.inf)
+power_full_c = np.where(constrained_mask, power_full, -np.inf)
+peak_idx_dome_c = int(np.argmax(power_dome_c))
+peak_idx_full_c = int(np.argmax(power_full_c))
+peak_T_dome_c   = float(periods[peak_idx_dome_c])
+peak_T_full_c   = float(periods[peak_idx_full_c])
+S_peak_dome_c   = float(power_dome[peak_idx_dome_c])
+S_peak_full_c   = float(power_full[peak_idx_full_c])
+R_peak_dome_c   = float(np.sqrt(S_peak_dome_c / N_dome))
+R_peak_full_c   = float(np.sqrt(S_peak_full_c / N_full))
+R3_dome_compare = float(np.sqrt(S3_dome / N_dome))  # R at T=3 for dome
+# Rank of 3° among constrained periods
+rank_3_dome_c = int(np.sum(power_dome_c[constrained_mask] > S3_dome)) + 1
+rank_3_full_c = int(np.sum(power_full_c[constrained_mask] > S3_full)) + 1
+n_constrained  = int(np.sum(constrained_mask))
+
+# ── Phasor-overlap analysis: do the constrained-peak sites overlap with 3° A+? ──
+# For each corpus, compute phasor projection of each site onto the dominant
+# direction at the constrained peak period.  Then count how many of the top-25
+# phasor contributors are also 3°-A+ sites.
+AP_THRESH_DEG = 0.15  # Tier-A+ threshold
+
+def dev3_gerizim(lon):
+    from lib.dome_filter import FORM_KEYWORDS  # already imported; just needs config
+    import json
+    cfg = json.loads((_ROOT / "config.json").read_text())
+    anchor = cfg["anchors"]["gerizim"]["longitude"]
+    d = (lon - anchor) % 3.0
+    return min(d, 3.0 - d)
+
+# Load anchor from config once
+import json as _json
+_anchor = _json.loads((_ROOT / "config.json").read_text())["anchors"]["gerizim"]["longitude"]
+
+def dev3(lon):
+    d = (lon - _anchor) % 3.0
+    return min(d, 3.0 - d)
+
+def phasor_overlap(lons, T, top_n=25):
+    """Return count of top_n phasor contributors that are also 3°-A+ sites."""
+    angles = 2*np.pi * lons / T
+    C = np.mean(np.exp(1j*angles))
+    proj = np.cos(angles - np.angle(C))
+    top_idx = np.argsort(proj)[::-1][:top_n]
+    ap3 = np.array([dev3(float(lon)) <= AP_THRESH_DEG for lon in lons])
+    overlap = int(np.sum(ap3[top_idx]))
+    expected = top_n * float(np.mean(ap3))
+    return overlap, round(expected, 1)
+
+dome_overlap_c, dome_overlap_exp = phasor_overlap(lons_dome, peak_T_dome_c)
+full_overlap_c, full_overlap_exp = phasor_overlap(lons_full, peak_T_full_c)
+
 # Rank of 3° among all candidate periods (1 = highest power)
 rank_3_dome = int(np.sum(power_dome > S3_dome)) + 1   # 1-indexed
 rank_3_full = int(np.sum(power_full > S3_full)) + 1
@@ -266,6 +321,20 @@ print(f"  \\newcommand{{\\periodogramPctileThreeDome}}{{{pctile_3_dome:.1f}}}   
 print(f"  \\newcommand{{\\periodogramPermP}}{{{perm_p_dome:.5f}}}   % permutation p, S_dome(3 deg)")
 print(f"  \\newcommand{{\\periodogramNPerm}}{{{N_PERM:,}}}       % permutation draws")
 print(f"  \\newcommand{{\\periodogramNullPeakAtThreeFrac}}{{{null_peak_at_3_frac:.4f}}} % fraction null draws with 3 deg as peak")
+# ── New: constrained-range and cross-corpus disagreement macros ───────────────
+print(f"  % -- Constrained periodogram (<{CONSTRAINED_MAX}°) macros --")
+print(f"  \\newcommand{{\\periodogramPeakTDomeConstrained}}{{{peak_T_dome_c:.2f}}}  % dome peak period constrained <{CONSTRAINED_MAX}°")
+print(f"  \\newcommand{{\\periodogramPeakTFullConstrained}}{{{peak_T_full_c:.2f}}}  % full-corpus peak period constrained <{CONSTRAINED_MAX}°")
+print(f"  \\newcommand{{\\periodogramRPeakDomeConstrained}}{{{R_peak_dome_c:.4f}}} % R at dome constrained peak")
+print(f"  \\newcommand{{\\periodogramRPeakFullConstrained}}{{{R_peak_full_c:.4f}}} % R at full-corpus constrained peak")
+print(f"  \\newcommand{{\\periodogramRThreeDomeCompare}}{{{R3_dome_compare:.4f}}}  % R at T=3° dome (for direct comparison)")
+print(f"  \\newcommand{{\\periodogramRankThreeDomeConstrained}}{{{rank_3_dome_c}}}      % rank of 3° among <{CONSTRAINED_MAX}° periods (dome)")
+print(f"  \\newcommand{{\\periodogramRankThreeFullConstrained}}{{{rank_3_full_c}}}      % rank of 3° among <{CONSTRAINED_MAX}° periods (full)")
+print(f"  \\newcommand{{\\periodogramNConstrained}}{{{n_constrained}}}      % number of periods in constrained grid")
+print(f"  \\newcommand{{\\periodogramDomeOverlapTopTwentyFive}}{{{dome_overlap_c}}}   % 3°-A+ sites in top-25 phasor at dome constrained peak")
+print(f"  \\newcommand{{\\periodogramFullOverlapTopTwentyFive}}{{{full_overlap_c}}}   % 3°-A+ sites in top-25 phasor at full constrained peak")
+print(f"  \\newcommand{{\\periodogramDomeOverlapExpected}}{{{dome_overlap_exp}}}  % expected overlap by chance (dome)")
+print(f"  \\newcommand{{\\periodogramFullOverlapExpected}}{{{full_overlap_exp}}}  % expected overlap by chance (full)")
 
 # ── Write to results store ────────────────────────────────────────────────────
 ResultsStore().write_many({
@@ -277,4 +346,17 @@ ResultsStore().write_many({
     "periodogramPctileThreeDome": round(pctile_3_dome, 1),
     "periodogramRThreeDome":      round(R3_dome, 5),
     "periodogramNullPeakAtThreeFrac": round(null_peak_at_3_frac, 4),
+    # Constrained-range and cross-corpus disagreement
+    "periodogramPeakTDomeConstrained":       round(peak_T_dome_c, 2),
+    "periodogramPeakTFullConstrained":       round(peak_T_full_c, 2),
+    "periodogramRPeakDomeConstrained":       round(R_peak_dome_c, 4),
+    "periodogramRPeakFullConstrained":       round(R_peak_full_c, 4),
+    "periodogramRThreeDomeCompare":          round(R3_dome_compare, 4),
+    "periodogramRankThreeDomeConstrained":   rank_3_dome_c,
+    "periodogramRankThreeFullConstrained":   rank_3_full_c,
+    "periodogramNConstrained":               n_constrained,
+    "periodogramDomeOverlapTopTwentyFive":   dome_overlap_c,
+    "periodogramFullOverlapTopTwentyFive":   full_overlap_c,
+    "periodogramDomeOverlapExpected":        dome_overlap_exp,
+    "periodogramFullOverlapExpected":        full_overlap_exp,
 })
