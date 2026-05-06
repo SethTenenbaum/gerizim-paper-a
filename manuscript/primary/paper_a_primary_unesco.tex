@@ -51,8 +51,7 @@
 
 \begin{document}
 
-\title{Representation-Dependent Harmonic Alignment in the UNESCO World Heritage Corpus:\\
-Domed Monuments, Cluster Asymmetry, and Coordinate Choice}
+\title{Sparse 3\textdegree{} Node Enrichment in Eurasian Monument Corpora}
 
 \author{Seth Tenenbaum\thanks{ORCID: \href{https://orcid.org/0009-0008-5797-2498}{0009-0008-5797-2498}.
 Correspondence: seth@fourthtemple.com}\\
@@ -61,36 +60,40 @@ Independent Scholar, USA}
 \maketitle
 
 \abstract{
-We analyze UNESCO Cultural and Mixed World Heritage sites
-($N=\NclusterTotal$) with a harmonic-alignment scoring framework. A global
-sweep over frequency and phase selects a frame near 3\textdegree{} spacing
-and the $\sim$35\textdegree{}E corridor. Subsequent analyses describe
-longitude deviations within that selected frame. Weak but reproducible
-structure appears across architectural subsets and related Eurasian
-datasets. A Normalized Phasor Consensus (NPC) test shows that three
-independently assembled monument corpora---UNESCO Cultural/Mixed, the UNESCO
-domed-monument subset, and the Wikidata Q180987 stupa corpus---spontaneously
-recover the same 3\textdegree{} anchor ($K=\npcMonK{}$, $p=\npcMonPermP{}$),
-placing a consensus grid line within \npcMonGridDeltaE\textdegree{} of
-35\textdegree{}E. A fourth corpus (OWTRAD Silk Road trade-route nodes) does
-not share the anchor, confirming the convergence is specific to monument
-corpora. The full-corpus Rayleigh periodogram is null
-($p=\fullRayleighPermP$), correctly indicating the absence of a universal
-global periodicity; this is compatible with the NPC result because Rayleigh
-tests smooth sinusoidal density across the global distribution, diluted by
-sites outside the Eurasian corridor, while NPC tests anchor recoverability
-across independently assembled databases. The 3\textdegree{}/35\textdegree{}E
-anchor is therefore a cross-corpus reproducible feature of Eurasian
-monumental geography, not a universal spatial periodicity. The pipeline is
-fully reproducible.
+We report a two-stage observational study of Eurasian monument
+geography. In the exploratory stage, domed and stupa-related sites
+within the UNESCO Cultural and Mixed World Heritage corpus
+($N=\NclusterTotal$) showed elevated node-neighborhood clustering
+conditional on a specified 3\textdegree{} / $\sim$35\textdegree{}E
+longitude frame: modest full-corpus Tier-A+ enrichment with stronger
+dome/stupa behavior, and the dome/stupa signal locates in the subset's
+own longitude distribution (Null~A, $p=\geoNullDomeBootP$). In the
+validation stage, the same frame was applied without modification to
+the externally curated Wikidata Q180987 stupa corpus ($N=\vmNStupa{}$),
+assembled independently of the UNESCO analysis. A Normalized Phasor
+Consensus (NPC) test finds that UNESCO Cultural/Mixed, the nested
+UNESCO dome subset, and the Wikidata stupa corpus recover concordant
+3\textdegree{} anchors ($K=\npcMonK{}$, perm-$p=\npcMonPermP{}$),
+with a consensus grid line within \npcMonGridDeltaE\textdegree{} of
+35\textdegree{}E; OWTRAD Silk Road route nodes do not share this
+anchor. The finding is sparse node-neighborhood enrichment, not
+whole-corpus alignment: most sites do not fall near harmonic nodes and
+the full-corpus Rayleigh periodogram is null ($p=\fullRayleighPermP$).
+Because the UNESCO keyword filter was constructed with knowledge of the
+data, its conditional enrichment results are treated as exploratory;
+the Wikidata cross-corpus NPC concordance is the primary
+external-validation evidence. The result is bounded by the null global
+periodogram, marginal anchor-discovery correction, geographic
+dependence, and the absence of evidence for universal periodicity,
+historical intentionality, metrology, or a unique Gerizim origin.
 }
 
 \bigskip
 
 \noindent\textbf{Keywords:}
 template alignment, spatial statistics, Levant, UNESCO World Heritage,
-3-degree harmonics, representation dependence, circular statistics,
-monument distribution, Mount Gerizim
+3-degree harmonics, selected-frame analysis, circular statistics,
+monument distribution, anchor consensus
 
 \bigskip
 

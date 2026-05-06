@@ -37,7 +37,7 @@ from lib.beru import (
 from lib.stats import (
     significance_label as sig, cochran_armitage, null_rate_at_spacing,
 )
-from lib.dome_filter import is_dome_site
+from lib.dome_filter import is_dome_site, is_dome_site_raw
 
 _N_PERMS_NULL_C = 100_000
 
@@ -504,16 +504,18 @@ def make_null_c():
     Null C asks: do dome sites outperform OTHER monuments at the same longitudes?
     For each window W, pool every full-corpus site within ±W° of any dome site,
     then bootstrap N_dome draws to build the expected A+ distribution.
-    All three windows give p < 0.05, demonstrating the result is window-independent.
+    This figure uses the raw Test 2 dome/stupa population (N=90), matching the
+    primary Null C prose and macros. Context-validated robustness is reported
+    separately in the text.
     """
     from scipy.stats import binomtest as _binomtest
 
     rng = np.random.default_rng(42)
 
-    dome_sites = [s for s in sites if s["is_dome"]]
-    dome_lons  = np.array([s["lon"] for s in dome_sites])
+    dome_sites = [s for s in cultural if is_dome_site_raw(s)]
+    dome_lons  = np.array([s.longitude for s in dome_sites])
     N_dome     = len(dome_lons)
-    obs_ap     = sum(1 for s in dome_sites if s["is_ap"])
+    obs_ap     = sum(beru_dev(s.longitude) <= TIER_APLUS for s in dome_sites)
 
     all_lons_arr = np.array([s["lon"] for s in sites])
 

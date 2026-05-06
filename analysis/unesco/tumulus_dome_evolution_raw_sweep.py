@@ -467,7 +467,7 @@ print(f"  \\newcommand{{\\NevoApp}}{{{n_app}}}            % A++ sites in dome-ev
 print(f"  \\newcommand{{\\evoAppRate}}{{{100*n_app/N:.1f}}}          % A++ rate, dome-evolution corpus (%)")
 print(f"  \\newcommand{{\\evoEnrichApp}}{{{enr_app:.2f}}}         % enrichment ratio, A++ in dome corpus")
 print(f"  \\newcommand{{\\pEvoApp}}{{{bt_app.pvalue:.4f}}}         % p-value, A++ binomial (dome corpus)")
-print(f"  \\newcommand{{\\pEvoAppFisher}}{{{fp_all_ap:.4f}}}     % p-value, A++ Fisher exact (dome corpus)")
+print(f"  \\newcommand{{\\pEvoAppFisher}}{{{fp_all_app:.4f}}}     % p-value, A++ Fisher exact (dome corpus)")
 print(f"  \\newcommand{{\\evoAppFisherOR}}{{{_evo_or_app:.2f}}}      % OR, A++ Fisher exact (dome corpus)")
 print(f"  \\newcommand{{\\NevoAp}}{{{n_ap}}}             % A+ sites in dome-evolution corpus")
 print(f"  \\newcommand{{\\evoApRate}}{{{100*n_ap/N:.1f}}}           % A+ rate, dome-evolution corpus (%)")
