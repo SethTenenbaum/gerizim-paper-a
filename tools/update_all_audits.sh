@@ -75,8 +75,11 @@ python3 tools/generate_audit_stupa_geo.py
 echo "  [12/13] Stupa q180987 audit..."
 python3 tools/generate_audit_stupa_q180987_geo.py
 
-echo "  [13/13] Tier-threshold sensitivity audit..."
+echo "  [13/14] Tier-threshold sensitivity audit..."
 python3 tools/generate_audit_tier_sensitivity.py
+
+echo "  [14/14] OSM stupa corpus audit (building/historic/ruins=stupa, man_made excluded)..."
+python3 tools/generate_audit_osm_stupa.py
 
 echo ""
 echo "  Done.  Files written to supplementary/audit/"

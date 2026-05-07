@@ -103,6 +103,7 @@ if [ "${1:-}" != "--full" ]; then
         analysis/global/phase_peak_periodicity_formal_test.py       # → rayleighR/Z/PermP, fullRayleighR/Z/PermP, targetedPdome/Wdome/Kdome (GROUP 11b)
         analysis/unesco/periodogram_test.py                          # → periodogramPermP, periodogramPeakTDome, periodogramRank3Dome, etc.
         analysis/unesco/joint_periodogram_test.py                    # → npcMonK, npcMonPermP, npcMonGridDeltaE, npcOwR, npcOwRayleighP, etc.
+        analysis/unesco/circular_two_sample_tests.py                 # → circConcStupaR/P, circConcUnescoR/P, circWatsonPUnescoStupa, circKuiperPUnescoStupa, etc.
         analysis/global/phase_peak_max_permutation_test.py          # → anchorMaxPermObsMax/NullMu/NullSD/Z/P/Nperms/BootMu/BootSD/BootZ/BootP (GROUP 11c)
         analysis/global/phase_envelope_analysis.py                  # → phaseFull*/phaseDome*/phaseGerizimPhase (phase-marginalised robustness)
         # ── Reviewer robustness checks ────────────────────────────────────
@@ -123,6 +124,8 @@ if [ "${1:-}" != "--full" ]; then
         analysis/unesco/sensitivity_slope_specificity_test.py  # → permSlopeCanonBestJoint{APP,AP,A}, permSlopeCanonRankObs{APP,AP,A}, permSlopeCanonCondFraction{APP,AP,A}
         analysis/unesco/dome_geographic_concentration_test.py  # → geoNullDomeBootP/Z/Mean, geoNullDomeRestrictedP/Z/Mean/N, domeEurasianFraction
         analysis/unesco/stupa_geographic_concentration_test.py # → stupaGeoBootP/Z/Mean, stupaRegionP/Z/N, stupaGeoRestrictedP/Z/N (GROUP 29b)
+        analysis/unesco/osm_stupa_audit.py                    # → osmStupaTotal, osmStupaRayleighR/P, osmStupaATierCount, etc. (GROUP 29d)
+        analysis/unesco/cross_corpus_geometric_test.py        # → geoDome/Wiki/OsmApp/Ap/A N/Hits/Exp/Enr/P/Sig, geoFisherApp/Ap/A Chi/P/Sig (PRIMARY)
         analysis/unesco/dome_founding_stratification.py        # → domeStratNfs, domeStratNnfs, domeStratF/NfsAp/Rate/Enrich/P, domeStratFisherOR/P
         # ── Geographic concentration robustness ───────────────────────────
         analysis/unesco/region_conditioned_permutation.py    # → regionCondPermP/Z/Obs/Mean/Std/Nregions/Nperms (GROUP 35)
@@ -372,7 +375,10 @@ run_script "GROUP 26d: Americas UNESCO directional test"               \
 run_script "GROUP 26e: Wikidata Q180987 stupa corpus portability audit" \
            analysis/unesco/wikidata_q180987_stupa_audit.py
 
-run_script "GROUP 26f: Multi-scale combined enrichment (4-corpus joint)" \
+run_script "GROUP 26f: Circular two-sample tests (Dome/Stupa + UNESCO/Stupa)" \
+           analysis/unesco/circular_two_sample_tests.py
+
+run_script "GROUP 26g: Multi-scale combined enrichment (4-corpus joint)" \
            analysis/unesco/multiscale_combined_p.py
 
 run_script "GROUP 27: Unit Sweep (spacing sensitivity)"            \
@@ -396,6 +402,12 @@ echo ""
 
 run_script "GROUP 29c: Dome × Founding-Category Stratification"   \
            analysis/unesco/dome_founding_stratification.py
+
+run_script "GROUP 29d: OSM Stupa Audit" \
+           analysis/unesco/osm_stupa_audit.py
+
+run_script "GROUP 29e: Cross-Corpus Geometric Null Test (PRIMARY)" \
+           analysis/unesco/cross_corpus_geometric_test.py
 
 # ════════════════════════════════════════════════════════════════════════════
 # SUMMARY SCRIPTS — run AFTER all data-producing scripts have written the store

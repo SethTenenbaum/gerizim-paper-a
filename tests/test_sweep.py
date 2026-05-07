@@ -29,12 +29,15 @@ class TestCountHits:
         assert count == 0
 
     def test_different_thresholds(self):
-        """A+ threshold is stricter than A threshold."""
-        lons = [35.272 + 0.15]  # 0.15° = 0.005 beru → A but not A+
-        count_ap = count_hits(35.272, lons, TIER_APLUS)
-        count_a = count_hits(35.272, lons, TIER_A_MAX)
-        assert count_ap == 0  # dev=0.005, threshold=0.002
-        assert count_a == 1   # dev=0.005, threshold=0.010
+        """A++ threshold (0.002 beru) is stricter than A+ threshold (0.005 beru)."""
+        from lib.beru import TIER_APP
+        lons = [35.272 + 0.15]  # 0.15° = 0.005 beru → A+ but not A++
+        count_app = count_hits(35.272, lons, TIER_APP)    # threshold = 0.002 beru
+        count_ap  = count_hits(35.272, lons, TIER_APLUS)  # threshold = 0.005 beru
+        count_a   = count_hits(35.272, lons, TIER_A_MAX)  # threshold = 0.010 beru
+        assert count_app == 0  # dev=0.005 > 0.002 → not A++
+        assert count_ap  == 1  # dev=0.005 = 0.005 → exactly A+
+        assert count_a   == 1  # dev=0.005 < 0.010 → A
 
 
 class TestRunSweep:

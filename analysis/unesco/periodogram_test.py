@@ -53,11 +53,34 @@ lons_full = np.array([s.longitude for s in cultural])
 N_full    = len(lons_full)
 
 # Dome subset: same raw keyword sweep as spherical_monument_raw_sweep.py
-lons_dome = np.array([
-    s.longitude for s in cultural
+dome_sites = [
+    s for s in cultural
     if any(FORM_KEYWORD_RES[kw].search(s.full_text) for kw in FORM_KEYWORDS)
-])
+]
+lons_dome = np.array([s.longitude for s in dome_sites])
 N_dome = len(lons_dome)
+
+# ── Eurasian sub-corpora (longitude -10° to 180°E) ───────────────────────────
+# The 3°-harmonic alignment hypothesis is grounded in ancient Eurasian
+# astronomical traditions.  Restricting the periodogram to Eurasia removes
+# the six non-Eurasian domes (all in the Americas / Oceania) that are
+# irrelevant to the hypothesis and sharpens the test.
+EURASIA_LON_MIN = -10.0
+EURASIA_LON_MAX = 180.0
+
+eurasia_dome_sites = [
+    s for s in dome_sites
+    if EURASIA_LON_MIN <= s.longitude <= EURASIA_LON_MAX
+]
+lons_dome_eu = np.array([s.longitude for s in eurasia_dome_sites])
+N_dome_eu    = len(lons_dome_eu)
+
+eurasia_full_sites = [
+    s for s in cultural
+    if EURASIA_LON_MIN <= s.longitude <= EURASIA_LON_MAX
+]
+lons_full_eu = np.array([s.longitude for s in eurasia_full_sites])
+N_full_eu    = len(lons_full_eu)
 
 # ── Core statistic ────────────────────────────────────────────────────────────
 def rayleigh_power(lons: np.ndarray, period: float) -> float:
@@ -359,4 +382,96 @@ ResultsStore().write_many({
     "periodogramFullOverlapTopTwentyFive":   full_overlap_c,
     "periodogramDomeOverlapExpected":        dome_overlap_exp,
     "periodogramFullOverlapExpected":        full_overlap_exp,
+})
+
+# ── Eurasian-restricted periodogram ──────────────────────────────────────────
+# Same analysis restricted to sites with longitude in [-10°, 180°E].
+# Rationale: the 3°/Gerizim grid is an ancient Eurasian surveying convention;
+# domes in the Americas and Oceania are architecturally unrelated and would
+# only dilute the signal.  This sub-analysis tests the hypothesis in its
+# naturally scoped geographic domain.
+
+power_dome_eu = periodogram_vectorized(lons_dome_eu, periods)
+power_full_eu = periodogram_vectorized(lons_full_eu, periods)
+
+S3_dome_eu = float(power_dome_eu[idx_3])
+S3_full_eu = float(power_full_eu[idx_3])
+R3_dome_eu = float(np.sqrt(S3_dome_eu / N_dome_eu))
+R3_full_eu = float(np.sqrt(S3_full_eu / N_full_eu))
+
+peak_idx_dome_eu = int(np.argmax(power_dome_eu))
+peak_idx_full_eu = int(np.argmax(power_full_eu))
+peak_T_dome_eu   = float(periods[peak_idx_dome_eu])
+peak_T_full_eu   = float(periods[peak_idx_full_eu])
+
+rank_3_dome_eu = int(np.sum(power_dome_eu > S3_dome_eu)) + 1
+rank_3_full_eu = int(np.sum(power_full_eu > S3_full_eu)) + 1
+pctile_3_dome_eu = float(np.mean(power_dome_eu <= S3_dome_eu)) * 100
+
+# Permutation null for Eurasian dome subset (draw from Eurasian full corpus)
+perm_indices_eu = np.array([rng.choice(N_full_eu, size=N_dome_eu, replace=False)
+                              for _ in range(N_PERM)])
+perm_lons_eu    = lons_full_eu[perm_indices_eu]
+angles_3_eu     = 2.0 * np.pi * perm_lons_eu / TARGET_T
+C3_eu           = np.mean(np.exp(1j * angles_3_eu), axis=1)
+S3_perm_eu      = N_dome_eu * (C3_eu.real ** 2 + C3_eu.imag ** 2)
+perm_p_dome_eu  = float(np.mean(S3_perm_eu >= S3_dome_eu))
+
+# Constrained (<10°) for Eurasian corpora
+power_dome_eu_c = np.where(constrained_mask, power_dome_eu, -np.inf)
+power_full_eu_c = np.where(constrained_mask, power_full_eu, -np.inf)
+peak_T_dome_eu_c = float(periods[int(np.argmax(power_dome_eu_c))])
+peak_T_full_eu_c = float(periods[int(np.argmax(power_full_eu_c))])
+rank_3_dome_eu_c = int(np.sum(power_dome_eu_c[constrained_mask] > S3_dome_eu)) + 1
+
+print()
+print(SEP)
+print("  EURASIAN-RESTRICTED PERIODOGRAM  (lon −10° to 180°E)")
+print(f"  Eurasian dome subset: N = {N_dome_eu}  |  Eurasian full corpus: N = {N_full_eu}")
+print(SEP)
+print(f"""
+  EURASIAN DOME SUBSET (N = {N_dome_eu}):
+  ─────────────────────────────────────────────────────
+  Peak period         : {peak_T_dome_eu:.2f}°  (rank 1 of {N_periods} candidates)
+  3° power S(3°)      : {S3_dome_eu:.4f}  (R = {R3_dome_eu:.4f})
+  Rank of 3° period   : {rank_3_dome_eu} of {N_periods}  ({pctile_3_dome_eu:.1f}th percentile)
+  Permutation p (draw from Eurasian pool): {perm_p_dome_eu:.5f}  {sig(perm_p_dome_eu)}
+  Constrained (<{CONSTRAINED_MAX}°) peak : {peak_T_dome_eu_c:.2f}°  (rank of 3° = {rank_3_dome_eu_c})
+
+  EURASIAN FULL CORPUS (N = {N_full_eu}):
+  ─────────────────────────────────────────────────────
+  Peak period (global): {peak_T_full_eu:.2f}°
+  Constrained peak    : {peak_T_full_eu_c:.2f}°
+  3° power S(3°)      : {S3_full_eu:.4f}  (R = {R3_full_eu:.4f})
+  Rank of 3° period   : {rank_3_full_eu} of {N_periods}
+""")
+
+# LaTeX macros — Eurasian
+print(SEP)
+print("  LATEX MACROS (Eurasian-restricted)")
+print(SEP)
+print()
+print(f"  \\newcommand{{\\periodogramNDomeEurasia}}{{{N_dome_eu}}}            % Eurasian dome N")
+print(f"  \\newcommand{{\\periodogramNFullEurasia}}{{{N_full_eu}}}           % Eurasian full-corpus N")
+print(f"  \\newcommand{{\\periodogramSThreeDomeEurasia}}{{{S3_dome_eu:.4f}}}   % Rayleigh S(3°), Eurasian domes")
+print(f"  \\newcommand{{\\periodogramRThreeDomeEurasia}}{{{R3_dome_eu:.4f}}}   % R at 3°, Eurasian domes")
+print(f"  \\newcommand{{\\periodogramRankThreeDomeEurasia}}{{{rank_3_dome_eu}}}         % rank of 3°, Eurasian domes")
+print(f"  \\newcommand{{\\periodogramPctileThreeDomeEurasia}}{{{pctile_3_dome_eu:.1f}}}  % percentile of 3°, Eurasian domes")
+print(f"  \\newcommand{{\\periodogramPermPEurasia}}{{{perm_p_dome_eu:.5f}}}  % perm p, Eurasian domes")
+print(f"  \\newcommand{{\\periodogramPeakTDomeEurasia}}{{{peak_T_dome_eu:.2f}}}    % peak period, Eurasian domes")
+print(f"  \\newcommand{{\\periodogramPeakTDomeEurasiaConstrained}}{{{peak_T_dome_eu_c:.2f}}}  % constrained peak, Eurasian domes")
+print(f"  \\newcommand{{\\periodogramRankThreeDomeEurasiaConstrained}}{{{rank_3_dome_eu_c}}}  % rank of 3° constrained, Eurasian domes")
+
+# Write Eurasian macros to results store
+ResultsStore().write_many({
+    "periodogramNDomeEurasia":                   N_dome_eu,
+    "periodogramNFullEurasia":                   N_full_eu,
+    "periodogramSThreeDomeEurasia":              round(S3_dome_eu, 4),
+    "periodogramRThreeDomeEurasia":              round(R3_dome_eu, 4),
+    "periodogramRankThreeDomeEurasia":           rank_3_dome_eu,
+    "periodogramPctileThreeDomeEurasia":         round(pctile_3_dome_eu, 1),
+    "periodogramPermPEurasia":                   round(perm_p_dome_eu, 5),
+    "periodogramPeakTDomeEurasia":               round(peak_T_dome_eu, 2),
+    "periodogramPeakTDomeEurasiaConstrained":    round(peak_T_dome_eu_c, 2),
+    "periodogramRankThreeDomeEurasiaConstrained": rank_3_dome_eu_c,
 })

@@ -259,6 +259,52 @@ def main() -> None:
     rate_a_nonhl  = round(100 * na_nonhl  / n_nonhl, 1) if n_nonhl else 0.0
     rate_ap_nonhl = round(100 * nap_nonhl / n_nonhl, 1) if n_nonhl else 0.0
 
+    # ── Leave-Cluster-Out (LCO) Rayleigh permutation tests ───────────────────
+    def _rayleigh_perm(sub_lons):
+        """Circular-shift permutation Rayleigh test on a longitude sub-list.
+
+        Uses circular shift (uniform random offset applied to all longitudes)
+        rather than per-site phase randomisation.  The two methods differ in
+        what they hold fixed:
+          • Phase randomisation (used for the primary circConcStupaP result)
+            randomises each site independently — it tests whether the mean
+            resultant length R exceeds what is expected under a uniform phase
+            distribution for a corpus of *this size*.
+          • Circular shift (used here for LCO) preserves the *internal
+            pairwise geometry* of the sub-corpus (relative spacings between
+            sites) and asks only whether the observed phase alignment with the
+            3° grid is unusual given that same geometry shifted to a random
+            position.  This is more conservative for the LCO question: we want
+            to know whether the *remaining* sites are phase-aligned beyond what
+            their own longitude distribution (with its clusters intact) would
+            produce by chance.
+        The two methods are not directly comparable numerically; p-values from
+        each should be interpreted within their own null framework.
+        """
+        n = len(sub_lons)
+        if n == 0:
+            return float("nan"), float("nan"), float("nan")
+        phases = np.array([(lon / BERU) * 2 * np.pi for lon in sub_lons])
+        R_obs  = float(np.abs(np.mean(np.exp(1j * phases))))
+        rng2   = np.random.default_rng(42)
+        shifts = rng2.uniform(0.0, HARMONIC_PERIOD_DEG, N_PERMS)
+        shift_rad = (shifts / BERU) * 2 * np.pi
+        R_null = np.abs(np.mean(np.exp(1j * (phases[None, :] + shift_rad[:, None])), axis=1))
+        p_val  = float((R_null >= R_obs).mean())
+        return round(R_obs, 4), round(p_val, 4), n
+
+    # LCO: remove broad Java/Sumatra node 105–115°E
+    lco_java_lons  = [s["lon"] for s in sites if not (105.0 <= s["lon"] <= 115.0)]
+    lco_java_R, lco_java_p, lco_java_n = _rayleigh_perm(lco_java_lons)
+
+    # LCO: remove tight Java node 107–112°E
+    lco_tight_lons = [s["lon"] for s in sites if not (107.0 <= s["lon"] <= 112.0)]
+    lco_tight_R, lco_tight_p, lco_tight_n = _rayleigh_perm(lco_tight_lons)
+
+    # Non-heartland only (outside 70–110°E) Rayleigh
+    nh_only_lons   = [s["lon"] for s in non_heartland]
+    nh_only_R, nh_only_p, nh_only_n = _rayleigh_perm(nh_only_lons)
+
     # ── Cluster asymmetry ────────────────────────────────────────────────────
     # Group sites by nearest harmonic node (0.1-beru step)
     node_sites: dict[float, list] = defaultdict(list)
@@ -444,6 +490,16 @@ def main() -> None:
         ("wikiNonHeartlandApP",      fmt_p(p_ap_nonhl)),
         ("wikiNonHeartlandCbandOR",  f"{or_c_nonhl:.2f}"),
         ("wikiNonHeartlandCbandP",   fmt_p(p_c_nonhl)),
+        # Leave-Cluster-Out (LCO) Rayleigh tests
+        ("wikiLCOJavaN",             str(len(sites) - lco_java_n)),
+        ("wikiLCOJavaR",             f"{lco_java_R:.4f}"),
+        ("wikiLCOJavaP",             fmt_p(lco_java_p)),
+        ("wikiLCOJavaTightN",        str(len(sites) - lco_tight_n)),
+        ("wikiLCOJavaTightR",        f"{lco_tight_R:.4f}"),
+        ("wikiLCOJavaTightP",        fmt_p(lco_tight_p)),
+        ("wikiNonHeartlandOnlyN",    str(nh_only_n)),
+        ("wikiNonHeartlandOnlyR",    f"{nh_only_R:.4f}"),
+        ("wikiNonHeartlandOnlyP",    fmt_p(nh_only_p)),
     ]
 
     for name, val in macros:
@@ -511,6 +567,16 @@ def main() -> None:
         ("wikiNonHeartlandApP",      float(p_ap_nonhl)),
         ("wikiNonHeartlandCbandOR",  float(or_c_nonhl)),
         ("wikiNonHeartlandCbandP",   float(p_c_nonhl)),
+        # LCO Rayleigh
+        ("wikiLCOJavaN",             float(len(sites) - lco_java_n)),
+        ("wikiLCOJavaR",             lco_java_R),
+        ("wikiLCOJavaP",             lco_java_p),
+        ("wikiLCOJavaTightN",        float(len(sites) - lco_tight_n)),
+        ("wikiLCOJavaTightR",        lco_tight_R),
+        ("wikiLCOJavaTightP",        lco_tight_p),
+        ("wikiNonHeartlandOnlyN",    float(nh_only_n)),
+        ("wikiNonHeartlandOnlyR",    nh_only_R),
+        ("wikiNonHeartlandOnlyP",    nh_only_p),
     ]}
     ResultsStore().write_many(store_data)
     print()

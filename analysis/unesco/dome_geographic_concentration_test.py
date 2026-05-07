@@ -17,48 +17,22 @@ happen to be dome sites.  This correctly tests whether dome sites are special
 That question asks whether the dome enrichment can be explained purely by the
 geographic concentration of domed monuments in the Eurasian corridor.
 
-TWO NULL MODELS
----------------
+TWO NULL MODELS — each tested at three tier thresholds (A, A+, A++)
+----------------------------------------------------------------------
 Null A — Within-dome bootstrap (resampling):
     Draw N_dome longitudes with replacement from the observed dome site
-    longitude list.  Ask: how often does a sample of this size, drawn from
-    the dome sites' OWN empirical distribution, meet or exceed obs_dome_ap?
-
-    Key interpretation:
-      - p >= 0.05: the dome sites' own longitudes already encode the enrichment.
-        Resampling from their exact positions yields ~obs A+ on average.
-        Geographic concentration of dome sites IN THOSE LONGITUDE POSITIONS
-        accounts for the within-dome A+ rate.  This is the maximum-strength
-        version of the geographic-concentration alternative for this sub-corpus.
-        
-      - p < 0.05: the dome sites are more enriched than their own geographic
-        spread predicts, which would require a finer mechanism than simple
-        geographic concentration.
+    longitude list.  Tested at all three tiers.
 
 Null C — Restricted geographic draw (most conservative):
     Build a longitude pool from ALL full-corpus sites whose longitude falls
-    within +-5° of any dome site longitude.  Draw N_dome from this pool.
-    Ask: would any monument at roughly the same longitudes as dome sites show
-    the same enrichment?
-
-    Key interpretation:
-      - p < 0.05: dome sites are MORE enriched than other monuments from the
-        same geographic footprint.  Morphological identity (domed/stupa form)
-        predicts alignment beyond what location alone predicts.
-
-NOTE ON KDE NULL
-----------------
-A Gaussian KDE applied to dome longitudes spanning ~250° (range -103 to +145°E)
-produces effective bandwidth ~18° (Scott's rule) which smooths density so
-heavily that most resampled points fall outside harmonic windows, yielding
-mean A+ ~ 3.3 (below even the geometric null of 3.3).  This null is
-uninformative for data this dispersed and is therefore not reported.
+    within ±W° of any dome site longitude.  Draw N_dome from this pool.
+    Tested at all three tiers and three window widths (±2°, ±5°, ±10°).
 
 USAGE
 -----
     python3 analysis/unesco/dome_geographic_concentration_test.py
 
-IMPORTANT: ~2 minutes at N_PERMS=100_000.  Writes to disc.
+IMPORTANT: ~2–3 minutes at N_PERMS=100_000.  Writes to disc.
 """
 
 import sys
@@ -70,12 +44,22 @@ np.random.seed(42)
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus, cultural_sites_with_coords
-from lib.beru import GERIZIM, BERU, TIER_APLUS, P_NULL_AP
+from lib.beru import (GERIZIM, BERU,
+                      TIER_APP, P_NULL_APP,
+                      TIER_APLUS, P_NULL_AP,
+                      TIER_A_MAX, P_NULL_A)
 from lib.beru import deviation as _beru_deviation
 from lib.dome_filter import is_dome_site_raw
 from lib.results_store import ResultsStore
 
 N_PERMS = 100_000
+
+# Tier definitions: label, bēru threshold, geometric null rate
+TIERS = [
+    ("A",   TIER_A_MAX, P_NULL_A),
+    ("A+",  TIER_APLUS, P_NULL_AP),
+    ("A++", TIER_APP,   P_NULL_APP),
+]
 
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
@@ -84,13 +68,26 @@ def beru_dev(lon: float) -> float:
     return _beru_deviation(lon)
 
 
-def count_aplus(lons) -> int:
-    """Count A+ sites. Accepts list or ndarray; always vectorized."""
+def count_tier(lons, threshold) -> int:
+    """Count sites within bēru threshold of a harmonic. Vectorized."""
     arr = lons if isinstance(lons, np.ndarray) else np.asarray(lons)
-    arc = np.abs(arr - GERIZIM)
-    bv  = arc / BERU
-    dev = np.abs(bv - np.round(bv / 0.1) * 0.1)
-    return int(np.sum(dev <= TIER_APLUS))
+    arc = np.abs(arr - GERIZIM) / BERU
+    dev = np.abs(arc - np.round(arc / 0.1) * 0.1)
+    return int(np.sum(dev <= threshold))
+
+
+def boot_counts(mat, threshold):
+    """Given (N_PERMS, N) longitude matrix, return per-draw tier counts."""
+    arc = np.abs(mat - GERIZIM) / BERU
+    dev = np.abs(arc - np.round(arc / 0.1) * 0.1)
+    return (dev <= threshold).sum(axis=1).astype(int)
+
+
+# legacy aliases
+def count_aplusplus(lons): return count_tier(lons, TIER_APP)
+def count_aplus(lons):     return count_tier(lons, TIER_APLUS)
+
+_sig = lambda p: "***" if p < 0.001 else "**" if p < 0.01 else "*" if p < 0.05 else "~" if p < 0.10 else "ns"
 
 
 # ── Load corpus ───────────────────────────────────────────────────────────────
@@ -108,233 +105,159 @@ def load_all():
 def main():
     all_lons, dome_lons = load_all()
     N_dome = len(dome_lons)
-    obs_dome_ap = count_aplus(dome_lons)
-    exp_null = N_dome * P_NULL_AP
-    rate_obs = 100 * obs_dome_ap / N_dome
+    rng = np.random.default_rng(42)
+
+    # Pre-draw a single bootstrap matrix for Null A (shared across tiers)
+    mat_a = rng.choice(dome_lons, size=(N_PERMS, N_dome), replace=True)
 
     print("=" * 80)
-    print("  DOME GEOGRAPHIC-CONCENTRATION NULL TEST")
+    print("  DOME GEOGRAPHIC-CONCENTRATION NULL TEST  (all tiers: A, A+, A++)")
     print(f"  Anchor: {GERIZIM}°E  |  BERU: {BERU}°  |  N_perms: {N_PERMS:,}")
-    print(f"  Corpus: raw-sweep dome/stupa/tholos sites (is_dome_site_raw, Test 2 Bonferroni)")
-    print(f"  N_dome = {N_dome},  observed A+ = {obs_dome_ap} ({rate_obs:.1f}%)")
-    print(f"  Geometric null: {P_NULL_AP:.0%} → expected A+ = {exp_null:.2f}")
+    print(f"  Corpus: raw-sweep dome/stupa/tholos sites (is_dome_site_raw)")
+    print(f"  N_dome = {N_dome}")
     print("=" * 80)
 
     eurasian = float(np.sum((dome_lons >= 20) & (dome_lons <= 120)) / N_dome * 100)
-    full_e = float(np.sum((all_lons >= 20) & (all_lons <= 120)) / len(all_lons) * 100)
+    full_e   = float(np.sum((all_lons  >= 20) & (all_lons  <= 120)) / len(all_lons) * 100)
     print(f"\n  Dome sites in 20°–120°E Eurasian corridor: {eurasian:.0f}%  "
           f"(full corpus: {full_e:.0f}%)")
-    print(f"  → Dome sites are concentrated in the Eurasian corridor at {eurasian/full_e:.1f}× "
-          f"the rate of the full corpus.")
 
-    # ── Null A: within-dome bootstrap ─────────────────────────────────────────
-    print("\n" + "─" * 80)
-    print("  NULL A: WITHIN-DOME BOOTSTRAP")
-    print("  Draw N_dome longitudes with replacement from dome sites' own longitudes.")
-    print("  If p >= 0.05: geographic location of dome sites explains the A+ rate.")
-    print("  If p < 0.05: enrichment exceeds what dome geography alone predicts.")
-    print("─" * 80)
+    # ── Null A: within-dome bootstrap — all tiers ─────────────────────────────
+    print("\n" + "═" * 80)
+    print("  NULL A: WITHIN-DOME BOOTSTRAP  (resample dome longitudes, all tiers)")
+    print("═" * 80)
+    print(f"  {'Tier':<6}  {'Obs':>4}  {'Null%':>6}  {'Exp':>6}  "
+          f"{'Mean':>6}  {'SD':>5}  {'Z':>6}  {'p':>9}  {'Sig':>4}")
+    print("  " + "─" * 68)
 
-    # Fully batched: (N_PERMS, N_dome) matrix, no Python loop
-    rng = np.random.default_rng(42)
-    mat_a = rng.choice(dome_lons, size=(N_PERMS, N_dome), replace=True)
-    arc_a = np.abs(mat_a - GERIZIM) / BERU
-    dev_a = np.abs(arc_a - np.round(arc_a / 0.1) * 0.1)
-    boot_a = (dev_a <= TIER_APLUS).sum(axis=1).astype(int)
+    null_a_results = {}
+    for tlabel, thresh, p_null_rate in TIERS:
+        obs   = count_tier(dome_lons, thresh)
+        exp   = N_dome * p_null_rate
+        boot  = boot_counts(mat_a, thresh)
+        p_val = float(np.mean(boot >= obs))
+        mean  = float(boot.mean())
+        std   = float(boot.std())
+        z     = (obs - mean) / std if std > 0 else float("nan")
+        null_a_results[tlabel] = dict(obs=obs, exp=exp, mean=mean, std=std, z=z, p=p_val)
+        rate  = 100 * obs / N_dome
+        print(f"  {tlabel:<6}  {obs:>4} ({rate:.0f}%)  {100*p_null_rate:.0f}%  "
+              f"{exp:>6.2f}  {mean:>6.2f}  {std:>5.2f}  {z:>6.2f}  {p_val:>9.4f}  {_sig(p_val):>4}")
 
-    p_null_a = float(np.mean(boot_a >= obs_dome_ap))
-    mean_a = float(boot_a.mean())
-    std_a = float(boot_a.std())
-    z_a = (obs_dome_ap - mean_a) / std_a if std_a > 0 else float("nan")
+    # ── Null C: restricted geographic draw — all tiers × all windows ──────────
+    print("\n" + "═" * 80)
+    print("  NULL C: RESTRICTED GEOGRAPHIC DRAW  (all tiers × ±2°, ±5°, ±10°)")
+    print("  Pool: all full-corpus sites within ±W° of any dome site longitude.")
+    print("  Tests: do dome sites outperform other monuments from the same footprint?")
+    print("═" * 80)
 
-    print(f"\n  Null A: within-dome bootstrap (N={N_dome}, {N_PERMS:,} trials)")
-    print(f"    Bootstrap mean A+ = {mean_a:.2f} ± {std_a:.2f}")
-    print(f"    Observed A+       = {obs_dome_ap}")
-    print(f"    Z = {z_a:.2f},  p (>= {obs_dome_ap}) = {p_null_a:.4f}")
+    PRIMARY_W = 5.0
+    null_c_results = {}   # keyed by (tlabel, w)
+    pools = {}            # keyed by w
 
-    if p_null_a >= 0.05:
-        print("\n  INTERPRETATION (Null A NOT significant):")
-        print(f"    Resampling from the dome sites' own longitudes yields ~{mean_a:.1f} A+")
-        print(f"    on average — nearly equal to the observed {obs_dome_ap}.")
-        print(f"    The dome sites' geographic positions are themselves concentrated near")
-        print(f"    harmonic longitudes.  Null A shows that the within-dome A+ rate is")
-        print(f"    consistent with the dome-site longitude distribution itself.")
-        print(f"    Geographic location of domed monuments accounts for their A+ rate")
-        print(f"    WITHIN the dome sub-corpus.  Null C below tests whether dome sites")
-        print(f"    are MORE enriched than other monuments from the SAME locations.")
-    else:
-        print(f"\n  INTERPRETATION (Null A SIGNIFICANT, p = {p_null_a:.4f}):")
-        print(f"    Even resampling from the dome sites' own longitudes cannot")
-        print(f"    reproduce the observed A+ count.  Enrichment exceeds the dome")
-        print(f"    geographic distribution.  This is the strongest possible form of")
-        print(f"    the morphological specificity result.")
-
-    # ── Null C: restricted geographic draw ───────────────────────────────────
-    print("\n" + "─" * 80)
-    print("  NULL C: RESTRICTED GEOGRAPHIC DRAW (morphological specificity test)")
-    print("  Pool: all full-corpus sites within ±5° of any dome site longitude.")
-    print("  Draw N_dome sites from pool. Tests: do dome sites outperform other")
-    print("  monuments from the same longitude footprint?")
-    print("─" * 80)
-
-    # Vectorized pool construction
-    dists = np.abs(all_lons[:, None] - dome_lons[None, :])  # (N_all, N_dome)
-    restricted_pool = all_lons[dists.min(axis=1) <= 5.0]
-    N_pool = len(restricted_pool)
-    pool_aplus_rate = count_aplus(restricted_pool) / N_pool * 100
-    print(f"\n  Restricted pool: N = {N_pool}  "
-          f"(A+ rate in pool = {pool_aplus_rate:.1f}%)")
-
-    mat_c = rng.choice(restricted_pool, size=(N_PERMS, N_dome), replace=True)
-    arc_c = np.abs(mat_c - GERIZIM) / BERU
-    dev_c = np.abs(arc_c - np.round(arc_c / 0.1) * 0.1)
-    boot_c = (dev_c <= TIER_APLUS).sum(axis=1).astype(int)
-
-    p_null_c = float(np.mean(boot_c >= obs_dome_ap))
-    mean_c = float(boot_c.mean())
-    std_c = float(boot_c.std())
-    z_c = (obs_dome_ap - mean_c) / std_c if std_c > 0 else float("nan")
-
-    print(f"\n  Null C: restricted pool (N_pool={N_pool}, {N_PERMS:,} draws of N={N_dome})")
-    print(f"    Pool mean A+ = {mean_c:.2f} ± {std_c:.2f}")
-    print(f"    Observed A+  = {obs_dome_ap}")
-    print(f"    Z = {z_c:.2f},  p (>= {obs_dome_ap}) = {p_null_c:.4f}")
-
-    _sig = lambda p: "***" if p < 0.001 else "**" if p < 0.01 else "*" if p < 0.05 else "~" if p < 0.10 else "ns"
-
-    if p_null_c < 0.05:
-        print(f"\n  INTERPRETATION (Null C SIGNIFICANT, p = {p_null_c:.4f}):")
-        print(f"    Dome sites ({obs_dome_ap}/{N_dome} A+, {rate_obs:.1f}%) are more")
-        print(f"    enriched than other monuments from the same longitude footprint")
-        print(f"    ({mean_c:.1f} expected A+ from pool, {pool_aplus_rate:.1f}% base rate).")
-        print(f"    Morphological identity (domed/stupa form) is a better predictor")
-        print(f"    of harmonic alignment than longitude position alone.")
-    else:
-        print(f"\n  INTERPRETATION (Null C NOT significant, p = {p_null_c:.4f}):")
-        print(f"    Any monument from the dome-longitude footprint shows comparable")
-        print(f"    enrichment. Geographic concentration fully explains the result.")
-
-    # ── Combined interpretation ───────────────────────────────────────────────
-    print("\n" + "=" * 80)
-    print("  COMBINED INTERPRETATION")
-    print("=" * 80)
-    print(f"""
-  Null A result (p = {p_null_a:.4f}, {_sig(p_null_a)}):
-    The dome sites' own longitude distribution yields ~{mean_a:.1f} A+ on average.
-    Resampling from dome longitudes reproduces the observed count, showing that
-    the dome sites' geographic positions are themselves concentrated near harmonic
-    longitudes.  Geographic concentration of domed monuments in the Eurasian
-    corridor is the proximate explanation for the A+ rate within this sub-corpus.
-
-  Null C result (p = {p_null_c:.4f}, {_sig(p_null_c)}):
-    Drawing N_dome={N_dome} sites from the broader longitude footprint (N={N_pool} sites
-    within ±5° of any dome site) yields only ~{mean_c:.1f} A+ on average.
-    Dome sites ({obs_dome_ap} A+) exceed this expectation significantly.
-    This means dome sites are MORE enriched than other monuments from the same
-    longitude positions — morphological identity predicts alignment beyond location.
-
-  RECONCILIATION:
-    Both results are simultaneously correct.  Null A shows the dome sites' own
-    longitude distribution encodes the enrichment (they are geographically
-    concentrated near harmonics).  Null C shows that OTHER monuments at those
-    same longitudes are LESS enriched than dome sites, establishing morphological
-    specificity within the geographic footprint.
-
-    Together they support the following reading:
-      (a) Domed/stupa monuments are geographically concentrated in a longitude
-          band that overlaps with the beru-harmonic structure (Null A: expected
-          from geographic concentration of Eurasian domed architecture).
-      (b) Within that longitude band, domed monuments are DISPROPORTIONATELY
-          at the exact harmonic positions compared with non-domed monuments
-          (Null C significant: morphological specificity within the band).
-
-    The geographic-concentration alternative (explanation 3 in the paper)
-    accounts for Null A but must additionally explain Null C — why do domed
-    forms specifically cluster at the harmonic sub-positions within their
-    longitude band?  That is what the primary permutation null in
-    simulation_null_model.py quantifies (Z = {z_c:.2f} is the within-footprint
-    version of that test).
-""")
-
-    # ── Summary table ─────────────────────────────────────────────────────────
-    print("─" * 80)
-    print("  SUMMARY TABLE")
-    print("─" * 80)
-    print(f"  {'Null':<52}  {'mean A+':>8}  {'Z':>6}  {'p':>9}  {'Sig':>5}")
-    print(f"  {'-'*52}  {'-'*8}  {'-'*6}  {'-'*9}  {'-'*5}")
-    rows = [
-        ("A: within-dome bootstrap (resample dome lons)", mean_a, z_a, p_null_a),
-        (f"C: restricted pool ±5° (N={N_pool})", mean_c, z_c, p_null_c),
-    ]
-    for label, mean, z, p in rows:
-        print(f"  {label:<52}  {mean:>8.2f}  {z:>6.2f}  {p:>9.4f}  {_sig(p):>5}")
-    print(f"\n  Observed: {obs_dome_ap}/{N_dome} A+ = {rate_obs:.1f}%  "
-          f"(geometric null {100*P_NULL_AP:.0f}%,  expected {exp_null:.2f})")
-
-    # ── Null C sensitivity sweep: ±2°, ±5°, ±10° ────────────────────────────
-    print("\n" + "─" * 80)
-    print("  NULL C SENSITIVITY SWEEP: ±2°, ±5°, ±10°")
-    print("─" * 80)
-    sensitivity = {}
     for w in [2.0, 5.0, 10.0]:
-        dists_w = np.abs(all_lons[:, None] - dome_lons[None, :])
-        pool_w  = all_lons[dists_w.min(axis=1) <= w]
-        mat_w   = rng.choice(pool_w, size=(N_PERMS, N_dome), replace=True)
-        arc_w   = np.abs(mat_w - GERIZIM) / BERU
-        dev_w   = np.abs(arc_w - np.round(arc_w / 0.1) * 0.1)
-        boot_w  = (dev_w <= TIER_APLUS).sum(axis=1).astype(int)
-        p_w     = float(np.mean(boot_w >= obs_dome_ap))
-        mean_w  = float(boot_w.mean())
-        std_w   = float(boot_w.std())
-        z_w     = (obs_dome_ap - mean_w) / std_w if std_w > 0 else float("nan")
-        sensitivity[w] = {"n_pool": len(pool_w), "mean": mean_w, "z": z_w, "p": p_w}
-        print(f"  ±{w:.0f}°: N_pool={len(pool_w):,}  mean A+={mean_w:.2f}  "
-              f"Z={z_w:.2f}  p={p_w:.4f}  {_sig(p_w)}")
+        dists = np.abs(all_lons[:, None] - dome_lons[None, :])
+        pool  = all_lons[dists.min(axis=1) <= w]
+        pools[w] = pool
+        mat_w = rng.choice(pool, size=(N_PERMS, N_dome), replace=True)
+
+        print(f"\n  Window ±{w:.0f}°  (pool N = {len(pool)})")
+        print(f"  {'Tier':<6}  {'Obs':>4}  {'Pool%':>6}  {'Mean':>6}  "
+              f"{'SD':>5}  {'Z':>6}  {'p':>9}  {'Sig':>4}")
+        print("  " + "─" * 60)
+
+        for tlabel, thresh, p_null_rate in TIERS:
+            obs        = count_tier(dome_lons, thresh)
+            pool_rate  = count_tier(pool, thresh) / len(pool) * 100
+            boot       = boot_counts(mat_w, thresh)
+            p_val      = float(np.mean(boot >= obs))
+            mean       = float(boot.mean())
+            std        = float(boot.std())
+            z          = (obs - mean) / std if std > 0 else float("nan")
+            null_c_results[(tlabel, w)] = dict(
+                obs=obs, pool_rate=pool_rate, mean=mean, std=std, z=z, p=p_val,
+                n_pool=len(pool)
+            )
+            print(f"  {tlabel:<6}  {obs:>4}        {pool_rate:>5.1f}%  {mean:>6.2f}  "
+                  f"{std:>5.2f}  {z:>6.2f}  {p_val:>9.4f}  {_sig(p_val):>4}")
+
+    # ── Summary table — primary tier A++ ──────────────────────────────────────
+    print("\n" + "═" * 80)
+    print("  SUMMARY  (primary tier A++)")
+    print("═" * 80)
+    ra = null_a_results["A++"]
+    rc = null_c_results[("A++", PRIMARY_W)]
+    print(f"  {'Null':<52}  {'Mean':>6}  {'Z':>6}  {'p':>9}  {'Sig':>4}")
+    print(f"  {'─'*52}  {'─'*6}  {'─'*6}  {'─'*9}  {'─'*4}")
+    print(f"  {'A: within-dome bootstrap':<52}  {ra['mean']:>6.2f}  {ra['z']:>6.2f}  "
+          f"{ra['p']:>9.4f}  {_sig(ra['p']):>4}")
+    c_label = f"C: restricted pool ±{PRIMARY_W:.0f}° (N={rc['n_pool']})"
+    print(f"  {c_label:<52}  {rc['mean']:>6.2f}  {rc['z']:>6.2f}  "
+          f"{rc['p']:>9.4f}  {_sig(rc['p']):>4}")
+    print(f"\n  Observed A++ = {ra['obs']}/{N_dome}  "
+          f"(geometric null {100*P_NULL_APP:.0f}%, expected {N_dome*P_NULL_APP:.2f})")
 
     # ── LaTeX macros (GROUP 26) ───────────────────────────────────────────────
-    print("\n" + "=" * 80)
-    print("  LATEX MACROS (GROUP 26 — geographic-concentration null):")
-    print("=" * 80)
-    print(f"  % Null A: within-dome bootstrap")
-    print(f"  \\newcommand{{\\geoNullDomeBootP}}{{{p_null_a:.4f}}}   % within-dome bootstrap p")
-    print(f"  \\newcommand{{\\geoNullDomeBootZ}}{{{z_a:.2f}}}    % within-dome bootstrap Z")
-    print(f"  \\newcommand{{\\geoNullDomeBootMean}}{{{mean_a:.2f}}}   % within-dome bootstrap mean A+")
-    print(f"  % Null C: primary (±5°)")
-    print(f"  \\newcommand{{\\geoNullDomeRestrictedP}}{{{p_null_c:.4f}}}   % restricted-pool p")
-    print(f"  \\newcommand{{\\geoNullDomeRestrictedZ}}{{{z_c:.2f}}}    % restricted-pool Z")
-    print(f"  \\newcommand{{\\geoNullDomeRestrictedMean}}{{{mean_c:.2f}}}   % restricted-pool mean A+")
-    print(f"  \\newcommand{{\\geoNullDomeRestrictedN}}{{{N_pool}}}   % restricted pool size")
-    print(f"  \\newcommand{{\\geoNullDomeRestrictedRate}}{{{pool_aplus_rate:.1f}}}   % A+ base rate in restricted pool (%)")
-    # Sensitivity sweep macros — letter-based suffixes to avoid LaTeX digit-in-csname issue
+    # Primary macros use A++ (most stringent tier) for Null A and Null C ±5°
+    print("\n" + "═" * 80)
+    print("  LATEX MACROS (GROUP 26 — geographic-concentration null, primary = A++)")
+    print("═" * 80)
+
+    ra_app = null_a_results["A++"]
+    rc_app_5 = null_c_results[("A++", 5.0)]
     _tag_map = {2.0: "two", 5.0: "five", 10.0: "ten"}
-    for w, r in sensitivity.items():
-        tag = _tag_map.get(w, str(int(w)))
-        print(f"  \\newcommand{{\\geoNullDomeRestrictedN{tag}}}{{{r['n_pool']}}}   % Null C ±{w:.0f}° pool size")
-        print(f"  \\newcommand{{\\geoNullDomeRestrictedP{tag}}}{{{r['p']:.4f}}}   % Null C ±{w:.0f}° p-value")
-        print(f"  \\newcommand{{\\geoNullDomeRestrictedMean{tag}}}{{{r['mean']:.2f}}}   % Null C ±{w:.0f}° mean A+")
-    print(f"  % Corridor concentration diagnostic")
-    print(f"  \\newcommand{{\\domeEurasianFraction}}{{{eurasian:.0f}}}   % % dome sites in 20-120E")
-    print(f"  \\newcommand{{\\fullCorpusEurasianFraction}}{{{full_e:.0f}}}   % % full corpus in 20-120E")
+
+    # Null A macros (primary = A++)
+    for k, v in [
+        ("geoNullDomeBootP",    ra_app["p"]),
+        ("geoNullDomeBootZ",    ra_app["z"]),
+        ("geoNullDomeBootMean", ra_app["mean"]),
+    ]:
+        print(f"  \\newcommand{{\\{k}}}{{{v:.4f}}}")
+
+    # Null C primary (±5°, A++)
+    for k, v in [
+        ("geoNullDomeRestrictedP",    rc_app_5["p"]),
+        ("geoNullDomeRestrictedZ",    rc_app_5["z"]),
+        ("geoNullDomeRestrictedMean", rc_app_5["mean"]),
+        ("geoNullDomeRestrictedN",    float(rc_app_5["n_pool"])),
+        ("geoNullDomeRestrictedRate", rc_app_5["pool_rate"]),
+    ]:
+        print(f"  \\newcommand{{\\{k}}}{{{v:.4f}}}")
+
+    # Null C sensitivity sweep macros (A++)
+    for w, r in [(w, null_c_results[("A++", w)]) for w in [2.0, 5.0, 10.0]]:
+        tag = _tag_map[w]
+        print(f"  \\newcommand{{\\geoNullDomeRestrictedN{tag}}}{{{r['n_pool']}}}")
+        print(f"  \\newcommand{{\\geoNullDomeRestrictedP{tag}}}{{{r['p']:.4f}}}")
+        print(f"  \\newcommand{{\\geoNullDomeRestrictedMean{tag}}}{{{r['mean']:.4f}}}")
+
+    # Corridor diagnostic
+    print(f"  \\newcommand{{\\domeEurasianFraction}}{{{eurasian:.0f}}}")
+    print(f"  \\newcommand{{\\fullCorpusEurasianFraction}}{{{full_e:.0f}}}")
 
     # ── Write to results store ────────────────────────────────────────────────
     store_data = {
-        "geoNullDomeBootP":           p_null_a,
-        "geoNullDomeBootZ":           z_a,
-        "geoNullDomeBootMean":        mean_a,
-        "geoNullDomeRestrictedP":     p_null_c,
-        "geoNullDomeRestrictedZ":     z_c,
-        "geoNullDomeRestrictedMean":  mean_c,
-        "geoNullDomeRestrictedN":     float(N_pool),
+        "geoNullDomeBootP":           ra_app["p"],
+        "geoNullDomeBootZ":           ra_app["z"],
+        "geoNullDomeBootMean":        ra_app["mean"],
+        "geoNullDomeRestrictedP":     rc_app_5["p"],
+        "geoNullDomeRestrictedZ":     rc_app_5["z"],
+        "geoNullDomeRestrictedMean":  rc_app_5["mean"],
+        "geoNullDomeRestrictedN":     float(rc_app_5["n_pool"]),
         "domeEurasianFraction":       eurasian,
         "fullCorpusEurasianFraction": full_e,
     }
-    for w, r in sensitivity.items():
-        tag = _tag_map.get(w, str(int(w)))
+    for w in [2.0, 5.0, 10.0]:
+        tag = _tag_map[w]
+        r   = null_c_results[("A++", w)]
         store_data[f"geoNullDomeRestrictedN{tag}"]    = float(r["n_pool"])
         store_data[f"geoNullDomeRestrictedP{tag}"]    = r["p"]
         store_data[f"geoNullDomeRestrictedMean{tag}"] = r["mean"]
     ResultsStore().write_many(store_data)
     print("\nResults written to data/store/results.json")
+
+    return null_a_results, null_c_results, dome_lons, all_lons, N_dome
 
 
 if __name__ == "__main__":

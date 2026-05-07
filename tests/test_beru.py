@@ -119,10 +119,16 @@ class TestFullCalculation:
         assert result["tier"] == "A++"
 
     def test_tier_assignment_aplus(self):
-        """A site with dev=0.001 should be A+."""
-        offset = 0.001 * BERU  # 0.001 beru in degrees
+        """A site with dev=0.003 beru (between A++ and A+ thresholds) should be A+."""
+        offset = 0.003 * BERU  # 0.003 beru in degrees — above A++ (0.002) but below A+ (0.005)
         result = full_calculation(GERIZIM + 30.0 + offset)
         assert result["tier"] == "A+"
+
+    def test_tier_assignment_app_boundary(self):
+        """A site with dev=0.001 beru (below A++ threshold) should be A++."""
+        offset = 0.001 * BERU  # 0.001 beru < 0.002 beru A++ threshold
+        result = full_calculation(GERIZIM + 30.0 + offset)
+        assert result["tier"] == "A++"
 
     def test_dev_km_calculation(self):
         result = full_calculation(GERIZIM + 30.0 + 0.03)  # 0.001 beru offset
@@ -190,10 +196,15 @@ class TestTierLabel:
 
     def test_tier_c_mirror(self):
         """Deviations near the inter-harmonic midpoint fall into C/C-/C--."""
-        from lib.beru import MIDPOINT, TIER_C_MAX
-        # Just inside the C band (dist_mid <= TIER_C_MAX)
+        from lib.beru import MIDPOINT, TIER_C_MAX, TIER_CMINUS, TIER_CMINUS2
+        # At the midpoint itself: dist_mid = 0 → C--
         assert tier_label(MIDPOINT) == "C--"
-        assert tier_label(MIDPOINT - TIER_C_MAX / 2) == "C"
+        # In the C- band: dist_mid between TIER_CMINUS2 and TIER_CMINUS
+        mid_cminus = MIDPOINT - (TIER_CMINUS2 + TIER_CMINUS) / 2
+        assert tier_label(mid_cminus) == "C-"
+        # In the C band: dist_mid between TIER_CMINUS and TIER_C_MAX
+        mid_c = MIDPOINT - (TIER_CMINUS + TIER_C_MAX) / 2
+        assert tier_label(mid_c) == "C"
 
     def test_boundary_aplus_to_a(self):
         """Boundary at exactly TIER_APLUS should be A+."""

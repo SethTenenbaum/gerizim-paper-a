@@ -96,6 +96,7 @@ sys.path.insert(0, str(_ROOT))
 from data.unesco_corpus import load_corpus
 from lib.dome_filter import is_dome_site
 from lib.results_store import ResultsStore
+from analysis.unesco.americas_directional_test import is_americas_site
 
 _CFG   = json.loads((_ROOT / "config.json").read_text())
 N_PERM = _CFG["simulation"]["n_permutations"]   # 100 000
@@ -114,8 +115,19 @@ lons_unesco = np.array([s.longitude for s in _cultural])
 _dome = [s for s in _cultural if is_dome_site(s)]
 lons_dome = np.array([s.longitude for s in _dome])
 
+# (a3) UNESCO Americas sub-corpus — geographic NEGATIVE CONTROL
+# Used in a 2-corpus NPC against UNESCO-non-Americas to ask whether a
+# UNESCO sub-corpus drawn from outside the signal corridor recovers the
+# same anchor.  Parallels the OWTRAD contrast at the sub-corpus level.
+_americas    = [s for s in _cultural if is_americas_site(s)]
+lons_americas = np.array([s.longitude for s in _americas])
+# Eurasian (non-Americas) UNESCO sites — the signal-region complement
+_eurasia     = [s for s in _cultural if not is_americas_site(s)]
+lons_eurasia = np.array([s.longitude for s in _eurasia])
+
 # (b) Wikidata Q180987 stupas
 STUPA_CSV = _ROOT / "data" / "store" / "unesco" / "wikidata_stupas_q180987.csv"
+# NOTE: OSM stupa corpus loaded below as (d)
 _stupa_lons = []
 with open(STUPA_CSV, newline="", encoding="utf-8") as fh:
     lines = [l for l in fh if not l.startswith("#")]
@@ -126,6 +138,19 @@ with open(STUPA_CSV, newline="", encoding="utf-8") as fh:
         except (KeyError, ValueError):
             pass
 lons_stupa = np.array(_stupa_lons)
+
+# (d) OSM stupas — building=stupa / historic=stupa / ruins=stupa
+OSM_STUPA_CSV = _ROOT / "data" / "store" / "unesco" / "osm_stupas.csv"
+_osm_lons = []
+with open(OSM_STUPA_CSV, newline="", encoding="utf-8") as fh:
+    lines = [l for l in fh if not l.startswith("#")]
+    reader = csv.DictReader(lines)
+    for row in reader:
+        try:
+            _osm_lons.append(float(row["lon"]))
+        except (KeyError, ValueError):
+            pass
+lons_osm = np.array(_osm_lons)
 
 # (c) OWTRAD nodes — no deduplication, full dataset
 OWTRAD_NODES = _ROOT / "data" / "store" / "silk_road" / "owtrad_nodes.csv"
@@ -147,6 +172,17 @@ CORPORA = {
     "OWTRAD": lons_owtrad,
 }
 N_CORPORA = len(CORPORA)
+
+# Auxiliary sub-corpora used ONLY for sub-corpus negative-control 2-corpus
+# NPC tests (Americas vs. Eurasia).  They are NOT included in the 4-corpus
+# joint NPC, to preserve the existing primary statistic.
+# OSM stupas are also kept here: they are an auxiliary sensitivity corpus,
+# not included in the primary 4-corpus NPC.
+AUX_CORPORA = {
+    "Americas": lons_americas,
+    "Eurasia":  lons_eurasia,
+    "OSM":      lons_osm,
+}
 
 # ── 2. Phasor helpers ─────────────────────────────────────────────────────────
 
@@ -268,6 +304,140 @@ p3_mon       = float(np.mean(K_null_mon >= K3_mon))
 # nearest grid line to 35°E from the 3-corpus anchor
 gl_mon_35 = phi3_mon + round((35.0 - phi3_mon) / 3.0) * 3.0
 
+# ── 7b. Two-corpus NPC (Dome + Stupa — most theoretically motivated) ──────────
+# The dome subset and Wikidata stupas are the most morphologically comparable
+# corpora. Neither is nested within the other. This is the strongest theoretical
+# prediction: two morphologically similar monument types should share an anchor.
+dome_stupa_names  = ["Dome", "Stupa"]
+dome_stupa_units  = [unit_phasors[n] for n in dome_stupa_names]
+K3_ds, phi3_ds = npc_fixed_T(dome_stupa_units, 3.0)
+
+unit_mat_ds = np.stack([unit_phasors[n][idx_3] for n in dome_stupa_names])
+theta_ds    = rng.uniform(0, 2*np.pi, size=(N_PERM, 2))
+K_null_ds   = np.abs((unit_mat_ds[None,:] * np.exp(1j*theta_ds)).sum(axis=1)) / 2
+p3_ds       = float(np.mean(K_null_ds >= K3_ds))
+gl_ds_35    = phi3_ds + round((35.0 - phi3_ds) / 3.0) * 3.0
+
+# ── 7c. Two-corpus NPC (UNESCO + Stupa, NON-NESTED — primary conservative) ───
+# UNESCO Cultural/Mixed and Wikidata Q180987 stupa corpus are independently
+# curated. The UNESCO dome subset is nested within UNESCO and excluded here.
+two_names    = ["UNESCO", "Stupa"]
+two_units    = [unit_phasors[n] for n in two_names]
+K3_two, phi3_two = npc_fixed_T(two_units, 3.0)
+
+unit_mat_two = np.stack([unit_phasors[n][idx_3] for n in two_names])  # (2,) complex
+theta_two    = rng.uniform(0, 2*np.pi, size=(N_PERM, 2))
+K_null_two   = np.abs((unit_mat_two[None,:] * np.exp(1j*theta_two)).sum(axis=1)) / 2
+p3_two       = float(np.mean(K_null_two >= K3_two))
+
+gl_two_35 = phi3_two + round((35.0 - phi3_two) / 3.0) * 3.0
+
+# ── 7c. Sub-corpus geographic NEGATIVE CONTROL NPCs ───────────────────────────
+# Two 2-corpus NPC tests on UNESCO sub-corpora that should NOT recover the
+# monument anchor:
+#   (i)  UNESCO-Eurasia + UNESCO-Americas  — disjoint geographic split of UNESCO
+#   (ii) UNESCO (full)  + UNESCO-Americas  — parallels OWTRAD as a sub-corpus
+#                                            contrast (note Americas ⊂ UNESCO)
+# These are run identically to the 2-corpus primary test (T=3°, fixed-T
+# permutation null with N_PERM phase-randomization draws).
+
+def mean_unit_phasor_at_T(lons: np.ndarray, T: float) -> complex:
+    Z = mean_phasor_vec(lons, np.array([T]))[0]
+    m = abs(Z)
+    return Z / max(m, 1e-15)
+
+def two_corpus_npc(lons_a: np.ndarray, lons_b: np.ndarray, T: float, rng_local):
+    """Return (K, anchor_deg, perm_p) for a 2-corpus NPC at fixed T."""
+    u_a = mean_unit_phasor_at_T(lons_a, T)
+    u_b = mean_unit_phasor_at_T(lons_b, T)
+    s   = u_a + u_b
+    K   = abs(s) / 2.0
+    phi = (float(np.angle(s)) * T / (2.0 * np.pi)) % T
+    th  = rng_local.uniform(0, 2 * np.pi, size=(N_PERM, 2))
+    pair = np.stack([u_a, u_b])
+    K_null = np.abs((pair[None, :] * np.exp(1j * th)).sum(axis=1)) / 2.0
+    p   = float(np.mean(K_null >= K))
+    return K, phi, p
+
+# (i) UNESCO-Eurasia × UNESCO-Americas — disjoint geographic split
+rng_neg1 = np.random.default_rng(SEED + 1)
+K_eu_am, phi_eu_am, p_eu_am = two_corpus_npc(
+    lons_eurasia, lons_americas, 3.0, rng_neg1
+)
+gl_eu_am_35 = phi_eu_am + round((35.0 - phi_eu_am) / 3.0) * 3.0
+
+# (ii) UNESCO (full) × UNESCO-Americas — parallels OWTRAD contrast
+rng_neg2 = np.random.default_rng(SEED + 2)
+K_un_am, phi_un_am, p_un_am = two_corpus_npc(
+    lons_unesco, lons_americas, 3.0, rng_neg2
+)
+gl_un_am_35 = phi_un_am + round((35.0 - phi_un_am) / 3.0) * 3.0
+
+# (iii) UNESCO (full) × OWTRAD  — 2-corpus version of the existing OWTRAD
+# contrast, computed here so the manuscript NPC table has an apples-to-apples
+# 2-corpus row for every contrast.
+rng_neg3 = np.random.default_rng(SEED + 3)
+K_un_ow, phi_un_ow, p_un_ow = two_corpus_npc(
+    lons_unesco, lons_owtrad, 3.0, rng_neg3
+)
+gl_un_ow_35 = phi_un_ow + round((35.0 - phi_un_ow) / 3.0) * 3.0
+
+# (iv) UNESCO (full) × UNESCO-Americas × Wikidata Stupa — 3-corpus NEGATIVE
+# CONTROL. Mirrors the 3-corpus monument primary (UNESCO + Dome + Stupa),
+# substituting the Americas geographic-control sub-corpus for the dome subset.
+# Tests whether ANY 3-corpus NPC including UNESCO and Wikidata recovers
+# concordance, or whether concordance specifically requires the dome subset.
+rng_neg4 = np.random.default_rng(SEED + 4)
+u_un_neg = mean_unit_phasor_at_T(lons_unesco,   3.0)
+u_am_neg = mean_unit_phasor_at_T(lons_americas, 3.0)
+u_st_neg = mean_unit_phasor_at_T(lons_stupa,    3.0)
+trip_neg = np.stack([u_un_neg, u_am_neg, u_st_neg])
+s_neg    = trip_neg.sum()
+K_neg3   = abs(s_neg) / 3.0
+phi_neg3 = (float(np.angle(s_neg)) * 3.0 / (2.0 * np.pi)) % 3.0
+th_neg3  = rng_neg4.uniform(0, 2 * np.pi, size=(N_PERM, 3))
+K_null_neg3 = np.abs((trip_neg[None, :] * np.exp(1j * th_neg3)).sum(axis=1)) / 3.0
+p_neg3   = float(np.mean(K_null_neg3 >= K_neg3))
+gl_neg3_35 = phi_neg3 + round((35.0 - phi_neg3) / 3.0) * 3.0
+
+# ── 7d. OSM stupa NPC rows (sensitivity check) ───────────────────────────────
+# The OSM corpus (building/historic/ruins=stupa) is assembled by a completely
+# different process than Wikidata Q180987 — crowd-sourced structural tagging
+# with no relationship to Wikidata curation.  We run four 2-corpus NPC tests
+# at T=3° to ask whether the OSM anchor agrees with the monument corpora.
+# OSM is NOT added to the primary 4-corpus NPC to preserve the primary statistic.
+rng_osm1 = np.random.default_rng(SEED + 10)
+K_osm_dome, phi_osm_dome, p_osm_dome = two_corpus_npc(
+    lons_dome, lons_osm, 3.0, rng_osm1
+)
+gl_osm_dome_35 = phi_osm_dome + round((35.0 - phi_osm_dome) / 3.0) * 3.0
+
+rng_osm2 = np.random.default_rng(SEED + 11)
+K_osm_stupa, phi_osm_stupa, p_osm_stupa = two_corpus_npc(
+    lons_stupa, lons_osm, 3.0, rng_osm2
+)
+gl_osm_stupa_35 = phi_osm_stupa + round((35.0 - phi_osm_stupa) / 3.0) * 3.0
+
+rng_osm3 = np.random.default_rng(SEED + 12)
+K_osm_unesco, phi_osm_unesco, p_osm_unesco = two_corpus_npc(
+    lons_unesco, lons_osm, 3.0, rng_osm3
+)
+gl_osm_unesco_35 = phi_osm_unesco + round((35.0 - phi_osm_unesco) / 3.0) * 3.0
+
+# 3-corpus: Dome + Wikidata Stupa + OSM — all three hemispherical monument corpora
+rng_osm4 = np.random.default_rng(SEED + 13)
+u_dome_osm = mean_unit_phasor_at_T(lons_dome,  3.0)
+u_wiki_osm = mean_unit_phasor_at_T(lons_stupa, 3.0)
+u_osm_osm  = mean_unit_phasor_at_T(lons_osm,   3.0)
+trip_osm   = np.stack([u_dome_osm, u_wiki_osm, u_osm_osm])
+s_osm3     = trip_osm.sum()
+K_osm3     = abs(s_osm3) / 3.0
+phi_osm3   = (float(np.angle(s_osm3)) * 3.0 / (2.0 * np.pi)) % 3.0
+th_osm3    = rng_osm4.uniform(0, 2 * np.pi, size=(N_PERM, 3))
+K_null_osm3 = np.abs((trip_osm[None, :] * np.exp(1j * th_osm3)).sum(axis=1)) / 3.0
+p_osm3     = float(np.mean(K_null_osm3 >= K_osm3))
+gl_osm3_35 = phi_osm3 + round((35.0 - phi_osm3) / 3.0) * 3.0
+
 # ── 8. OWTRAD isolated signal at T=3° ────────────────────────────────────────
 R_owtrad_3   = float(np.abs(phasors_obs["OWTRAD"][idx_3]))
 phi_owtrad_3 = corpus_anchor("OWTRAD", 3.0)
@@ -306,6 +476,47 @@ print(f"""
     perm-p (fixed T=3°, {N_PERM:,} draws) = {p3_mon:.5f}  {sig_stars(p3_mon)}
   → All three monument corpora independently recover the same anchor,
     placing a grid line within {abs(35-gl_mon_35):.2f}° of 35°E.
+
+  PRIMARY (non-nested 2-corpus NPC: UNESCO + Wikidata Stupa):
+    K(3°) = {K3_two:.4f}   anchor φ = {phi3_two:+.3f}°
+    nearest grid line to 35°E: {gl_two_35:.3f}°E  (Δ = {35-gl_two_35:+.3f}°)
+    perm-p (fixed T=3°, {N_PERM:,} draws) = {p3_two:.5f}  {sig_stars(p3_two)}
+  → Conservative non-nested concordance between externally curated UNESCO
+    Cultural/Mixed corpus and externally curated Wikidata Q180987 stupas.
+
+  THEORETICALLY MOTIVATED (non-nested 2-corpus NPC: Dome subset + Wikidata Stupa):
+    K(3°) = {K3_ds:.4f}   anchor φ = {phi3_ds:+.3f}°
+    nearest grid line to 35°E: {gl_ds_35:.3f}°E  (Δ = {35-gl_ds_35:+.3f}°)
+    perm-p (fixed T=3°, {N_PERM:,} draws) = {p3_ds:.5f}  {sig_stars(p3_ds)}
+  → Morphologically comparable non-nested corpora: UNESCO domed monuments
+    and Wikidata Q180987 stupas. Neither is nested within the other.
+""")
+
+# ── Part A2: Sub-corpus negative-control NPCs ─────────────────────────────────
+print(f"""PART A2 — SUB-CORPUS NEGATIVE-CONTROL NPCs  (2-corpus, T = 3°)
+  {'Pair':<35} {'N_a':>5} {'N_b':>5}  {'K':>6}  {'Δ35°E':>7}  {'perm-p':>9}  {'sig':>4}
+  {'-'*94}
+  {'UNESCO-Eurasia × UNESCO-Americas':<35} {len(lons_eurasia):>5} {len(lons_americas):>5}  {K_eu_am:>6.4f}  {35-gl_eu_am_35:>+5.2f}°  {p_eu_am:>9.5f}  {sig_stars(p_eu_am):>4}
+  {'UNESCO (full)  × UNESCO-Americas':<35} {len(lons_unesco):>5} {len(lons_americas):>5}  {K_un_am:>6.4f}  {35-gl_un_am_35:>+5.2f}°  {p_un_am:>9.5f}  {sig_stars(p_un_am):>4}
+  {'UNESCO (full)  × OWTRAD nodes   ':<35} {len(lons_unesco):>5} {len(lons_owtrad):>5}  {K_un_ow:>6.4f}  {35-gl_un_ow_35:>+5.2f}°  {p_un_ow:>9.5f}  {sig_stars(p_un_ow):>4}
+  {'UNESCO + Americas + Stupa (3-c) ':<35} {len(lons_unesco):>5} {len(lons_americas)+len(lons_stupa):>5}  {K_neg3:>6.4f}  {35-gl_neg3_35:>+5.2f}°  {p_neg3:>9.5f}  {sig_stars(p_neg3):>4}
+  → Sub-corpus controls outside the monument signal (Americas) and on a
+    different corpus type (OWTRAD trade routes) for comparison with the
+    primary UNESCO + Wikidata Stupa NPC. The 3-corpus negative control
+    substitutes the Americas geographic-control sub-corpus for the dome
+    subset in the 3-corpus monument primary.
+""")
+
+# ── Part A3: OSM stupa NPC sensitivity rows ───────────────────────────────────
+print(f"""PART A3 — OSM STUPA NPC SENSITIVITY (2-corpus and 3-corpus, T = 3°)
+  OSM corpus (building/historic/ruins=stupa, N={len(lons_osm)}) assembled independently
+  of Wikidata curation.  Tests whether OSM anchor agrees with monument corpora.
+  {'Pair':<40} {'K':>6}  {'Δ35°E':>7}  {'perm-p':>9}  {'sig':>4}
+  {'-'*80}
+  {'Dome × OSM':<40} {K_osm_dome:>6.4f}  {35-gl_osm_dome_35:>+5.2f}°  {p_osm_dome:>9.5f}  {sig_stars(p_osm_dome):>4}
+  {'Wikidata Stupa × OSM':<40} {K_osm_stupa:>6.4f}  {35-gl_osm_stupa_35:>+5.2f}°  {p_osm_stupa:>9.5f}  {sig_stars(p_osm_stupa):>4}
+  {'UNESCO × OSM':<40} {K_osm_unesco:>6.4f}  {35-gl_osm_unesco_35:>+5.2f}°  {p_osm_unesco:>9.5f}  {sig_stars(p_osm_unesco):>4}
+  {'Dome + Wikidata Stupa + OSM (3-c)':<40} {K_osm3:>6.4f}  {35-gl_osm3_35:>+5.2f}°  {p_osm3:>9.5f}  {sig_stars(p_osm3):>4}
 """)
 
 # ── Part B: OWTRAD contrast ───────────────────────────────────────────────────
@@ -392,12 +603,69 @@ macros = {
     "npcNStupa":            len(lons_stupa),
     "npcNOwtrad":           len(lons_owtrad),
     "npcNPerm":             N_PERM,
-    # ── Part A: 3-corpus monument result (PRIMARY) ──
+    # ── ROW 1: 2-corpus theoretically motivated (Dome + Stupa, non-nested) ──
+    "npcDomeStupaK":           round(K3_ds, 4),
+    "npcDomeStupaAnchor":      round(phi3_ds, 3),
+    "npcDomeStupaGridLineNearE": round(gl_ds_35, 3),
+    "npcDomeStupaGridDeltaE":  round(abs(35 - gl_ds_35), 3),
+    "npcDomeStupaPermP":       round(p3_ds, 5),
+    # ── ROW 2: 2-corpus primary conservative (UNESCO + Wikidata Stupa) ──
+    "npcTwoK":              round(K3_two, 4),
+    "npcTwoAnchor":         round(phi3_two, 3),
+    "npcTwoGridLineNearE":  round(gl_two_35, 3),
+    "npcTwoGridDeltaE":     round(abs(35 - gl_two_35), 3),
+    "npcTwoPermP":          round(p3_two, 5),
+    # ── ROW 3: 3-corpus (includes nested dome subset) ──
     "npcMonK":              round(K3_mon, 4),
     "npcMonAnchor":         round(phi3_mon, 3),
     "npcMonGridLineNearE":  round(gl_mon_35, 3),
     "npcMonGridDeltaE":     round(abs(35 - gl_mon_35), 3),
     "npcMonPermP":          round(p3_mon, 5),
+    # ── NEGATIVE CONTROLS: 2-corpus sub-corpus NPCs ──
+    "npcNAmericas":         len(lons_americas),
+    "npcNEurasia":          len(lons_eurasia),
+    # (i) UNESCO-Eurasia × UNESCO-Americas — disjoint geographic split
+    "npcNegEuAmK":          round(K_eu_am, 4),
+    "npcNegEuAmAnchor":     round(phi_eu_am, 3),
+    "npcNegEuAmGridLineNearE": round(gl_eu_am_35, 3),
+    "npcNegEuAmGridDeltaE": round(abs(35 - gl_eu_am_35), 3),
+    "npcNegEuAmPermP":      round(p_eu_am, 5),
+    # (ii) UNESCO × UNESCO-Americas — sub-corpus contrast (parallels OWTRAD)
+    "npcNegUnAmK":          round(K_un_am, 4),
+    "npcNegUnAmAnchor":     round(phi_un_am, 3),
+    "npcNegUnAmGridDeltaE": round(abs(35 - gl_un_am_35), 3),
+    "npcNegUnAmPermP":      round(p_un_am, 5),
+    # (iii) UNESCO × OWTRAD  — 2-corpus version of OWTRAD contrast
+    "npcNegUnOwK":          round(K_un_ow, 4),
+    "npcNegUnOwAnchor":     round(phi_un_ow, 3),
+    "npcNegUnOwGridDeltaE": round(abs(35 - gl_un_ow_35), 3),
+    "npcNegUnOwPermP":      round(p_un_ow, 5),
+    # (iv) UNESCO × UNESCO-Americas × Wikidata Stupa — 3-corpus negative
+    # control mirroring the 3-corpus monument primary, with the dome subset
+    # replaced by the Americas geographic-control sub-corpus.
+    "npcNegThreeK":          round(K_neg3, 4),
+    "npcNegThreeAnchor":     round(phi_neg3, 3),
+    "npcNegThreeGridLineNearE": round(gl_neg3_35, 3),
+    "npcNegThreeGridDeltaE": round(abs(35 - gl_neg3_35), 3),
+    "npcNegThreePermP":      round(p_neg3, 5),
+    # ── OSM stupa NPC sensitivity rows ──
+    "npcNOsm":               len(lons_osm),
+    # 2-corpus: Dome × OSM
+    "npcOsmDomeK":           round(K_osm_dome,  4),
+    "npcOsmDomeGridDeltaE":  round(abs(35 - gl_osm_dome_35), 3),
+    "npcOsmDomePermP":       round(p_osm_dome,  5),
+    # 2-corpus: Wikidata Stupa × OSM
+    "npcOsmStupaK":          round(K_osm_stupa, 4),
+    "npcOsmStupaGridDeltaE": round(abs(35 - gl_osm_stupa_35), 3),
+    "npcOsmStupaPermP":      round(p_osm_stupa, 5),
+    # 2-corpus: UNESCO × OSM
+    "npcOsmUnescoK":         round(K_osm_unesco, 4),
+    "npcOsmUnescoGridDeltaE":round(abs(35 - gl_osm_unesco_35), 3),
+    "npcOsmUnescoPermP":     round(p_osm_unesco, 5),
+    # 3-corpus: Dome + Wikidata Stupa + OSM
+    "npcOsmThreeK":          round(K_osm3,  4),
+    "npcOsmThreeGridDeltaE": round(abs(35 - gl_osm3_35), 3),
+    "npcOsmThreePermP":      round(p_osm3,  5),
     # ── Part B: OWTRAD isolated ──
     "npcOwR":               round(R_owtrad_3, 4),
     "npcOwAnchor":          round(phi_owtrad_3, 3),

@@ -13,25 +13,33 @@ domed and stupa-related monument sites showed elevated Tier-A+
 node-neighborhood clustering under that frame. In the validation
 stage, the same frame was applied without modification to the
 externally curated Wikidata Q180987 stupa corpus, assembled
-independently of the UNESCO analysis, to ask whether the same
-candidate period recovers a concordant anchor across a corpus whose
-membership was not under researcher control. It does.
+independently of the UNESCO analysis, to ask whether the candidate
+period recovers statistically significant phase concentration in a
+corpus whose membership was not under researcher control.
 
-This is the standard observation-then-independent-validation sequence
-in empirical science. The exploratory UNESCO keyword-filter result
-motivated the test; the Wikidata corpus provides the external
-validation; and the Normalized Phasor Consensus (NPC) test
-formalizes whether the two recover a coherent anchor at the
-candidate period. The evidentiary claim rests on that concordance,
-not on the UNESCO dome corpus alone.
+It does. The Wikidata Q180987 stupa corpus ($N = \npcNStupa{}$) shows
+independently significant Rayleigh phase concentration at
+$T=3^\circ$ ($R = \circConcStupaR{}$, perm-$p = \circConcStupaP{}$).
+The full UNESCO corpus does not reach significance globally
+($R = \circConcUnescoR{}$, perm-$p = \circConcUnescoP{}$, ns), in
+line with the full-corpus Rayleigh null. Watson's two-sample and
+Kuiper tests confirm that the two corpora have detectably different
+phase distributions at $T=3^\circ$ ($p=\circWatsonPUnescoStupa{}$ and
+$p=\circKuiperPUnescoStupa{}$ respectively). This is the expected
+result for a monument-type-specific signal: the concentration belongs
+to dome and stupa architecture, not to the UNESCO heritage corpus as a
+whole. The evidentiary claim rests on that finding --- that the signal
+is type-specific and the externally curated stupa corpus independently
+recovers the same 3\textdegree{} structure --- rather than on
+whole-corpus concordance.
 
 The candidate frame is not presented as pre-registered or
 parameter-free. The UNESCO keyword filter corpus was assembled with
 knowledge of the data, creating researcher degrees of freedom that
 the Wikidata external corpus is specifically designed to address.
 Conditional p-values for the UNESCO corpus should be read as
-exploratory; the cross-corpus NPC concordance carries the primary
-external-validation weight.
+exploratory; the Wikidata stupa concentration result carries the
+primary external-validation weight.
 
 The conditional audit yields a limited but statistically nontrivial
 pattern. Within the candidate frame, \NclusterAp{} of
@@ -57,17 +65,18 @@ comparable A+ counts; across the tested windows it expects about
 hits rather than the observed \NcircTierAp{}, with marginal
 same-footprint evidence for residual subset structure.
 
-The Normalized Phasor Consensus (NPC) test adds an anchor-concordance
-view at the candidate 3\textdegree{} period. UNESCO Cultural/Mixed
-sites, the nested UNESCO domed-monument subset, and the externally
-curated Wikidata Q180987 stupa corpus yield similar recovered anchors
-($K = \npcMonK{}$, perm-$p = \npcMonPermP{}$), with a consensus grid
-line \npcMonGridDeltaE\textdegree{} from 35\textdegree{}E. These
-datasets are historically and geographically related rather than
-geography-independent, but that is appropriate to the claim: the
-target phenomenon, if real, is a structure within Eurasian monument
-geography itself. OWTRAD Silk Road route nodes provide a negative
-control at the same period and do not share the monument NPC anchor.
+The Normalized Phasor Consensus (NPC) test provides an
+anchor-concordance view at the candidate 3\textdegree{} period.
+Monument corpus pairs recover similar anchors ($K \geq \npcDomeStupaK{}$
+in all monument configurations, consensus grid lines within
+\npcMonGridDeltaE\textdegree{}--\npcTwoGridDeltaE\textdegree{} of
+35\textdegree{}E; Table~\ref{tab:npc_summary}), but the non-nested
+two-corpus NPC tests do not reach $p<0.05$ individually. This is
+consistent with the monument-type-specific framing: NPC measures
+cross-corpus anchor concordance, and the Wikidata stupa
+concentration result is the stronger individual statement. OWTRAD
+Silk Road route nodes provide a negative control at the same period
+and do not share the monument NPC anchor.
 
 \subsection{Evidentiary Hierarchy}
 \label{sec:evidentiary_hierarchy}
@@ -77,14 +86,27 @@ primary claims, boundary conditions, and exploratory material are not
 assigned the same weight.
 
 \textbf{A. Primary external validation.}
-The Wikidata Q180987 stupa corpus ($N = \vmNStupa{}$) is an
+The Wikidata Q180987 stupa corpus ($N = \npcNStupa{}$) is an
 independently curated external database whose membership was not
-under researcher control. Applied without modification to the same
-3\textdegree{} / $\sim$35\textdegree{}E frame, it recovers a
-concordant anchor in the NPC test ($K = \npcMonK{}$,
-perm-$p = \npcMonPermP{}$). This cross-corpus concordance is the
-primary external evidence, because it replicates the exploratory
-UNESCO observation in a corpus the researcher did not assemble.
+under researcher control. It shows statistically significant Rayleigh
+phase concentration at $T=3^\circ$ ($R = \circConcStupaR{}$,
+perm-$p = \circConcStupaP{}$, \circConcStupaPSig{}). This is the
+primary external-validation result. Watson's two-sample and Kuiper
+tests confirm that the Wikidata stupa and UNESCO full-corpus phase
+distributions are detectably different ($p=\circWatsonPUnescoStupa{}$
+and $p=\circKuiperPUnescoStupa{}$ respectively), consistent with a
+monument-type-specific signal: the concentration belongs to dome and
+stupa architecture, not to the UNESCO heritage list as a whole.
+Table~\ref{tab:npc_summary} additionally reports five NPC
+configurations at $T=3^\circ$; all monument corpus pairs recover high
+$K \geq \npcDomeStupaK{}$ with consensus grid lines within
+\npcDomeStupaGridDeltaE\textdegree{}--\npcTwoGridDeltaE\textdegree{}
+of 35\textdegree{}E. The non-nested two-corpus tests (Rows~1--2) do
+not reach $p<0.05$ individually; the three-corpus test including the
+nested dome subset does (Row~3). Replacing the dome subset with the
+Americas geographic control (Row~4) or OWTRAD trade nodes (Row~5)
+collapses concordance. NPC is reported as supplementary evidence; the
+Wikidata concentration result carries the primary evidentiary weight.
 
 \textbf{B. Exploratory discovery corpus.}
 The UNESCO Cultural/Mixed corpus and its nested keyword-filtered
@@ -107,10 +129,13 @@ testing whether same-footprint background expectations are sufficient.
 
 \textbf{D. Boundary conditions.}
 The Rayleigh periodogram tests for global sinusoidal periodicity in
-raw longitudes and is null; the global anchor-discovery correction is
-marginal; and OWTRAD does not share the monument NPC anchor. These
-results prevent an invariant-period, whole-corpus, or generic
-Eurasian-spatial-dataset interpretation.
+raw longitudes and is null for the full UNESCO corpus; the global anchor-discovery correction is
+marginal; and OWTRAD does not share the monument NPC anchor. Watson's
+$U^2$ and Kuiper tests confirm that the UNESCO full and Wikidata stupa
+phase distributions are detectably different at $T=3^\circ$, as
+expected for a type-specific signal. These results prevent an
+invariant-period, whole-corpus, or generic Eurasian-spatial-dataset
+interpretation.
 
 \textbf{E. Exploratory and descriptive material.}
 Religion subgroup analyses, the temporal gradient, mound-evolution
@@ -911,41 +936,121 @@ keyword-independent but still characterizes the selected
 \subsection{NPC Anchor Concordance Across Related Monument Corpora}
 \label{sec:results_npc}
 
-At the candidate 3\textdegree{} period, the UNESCO Cultural/Mixed corpus
-($N=\npcNUnesco{}$), the context-validated UNESCO domed-monument subset
-($N=\npcNDome{}$), and the Wikidata Q180987 stupa corpus
-($N=\npcNStupa{}$) yield similar recovered anchors:
-$\phi = +2.050^\circ$, $+2.027^\circ$, and
-$+1.868^\circ$, respectively. The three-dataset monument NPC is
-$K = \npcMonK{}$ (perm-$p = \npcMonPermP{}$,
-\npcNPerm{} phase-randomization draws), and the consensus grid line
-falls \npcMonGridDeltaE\textdegree{} from 35\textdegree{}E
-(\npcMonGridLineNearE\textdegree{}E).
+Table~\ref{tab:npc_summary} reports five NPC configurations at the
+candidate $T=3^\circ$ period, ranging from the most theoretically
+motivated non-nested pair to negative controls. The pattern is
+consistent: high $K$ only appears when monument corpora anchored to the
+same Eurasian geography are included; substituting the Americas
+sub-corpus or OWTRAD trade-route nodes reduces $K$ substantially.
 
-NPC is not independent replication; it is cross-corpus anchor
-concordance within related Eurasian monument datasets. The statistic
-uses normalized phasor directions rather than tier counts, so it asks
-whether corpora recover similar anchors at the candidate period rather
-than whether they share the same A+/A++ counts. The UNESCO full corpus
-and the dome subset are nested, and Wikidata stupas are culturally and
-geographically related to the monument geography under study. The
-result therefore supports monument-corpus concordance under the NPC
-procedure, not geography-independent replication or a universal
-periodicity claim.
+\begin{table*}[!t]
+\centering
+\caption{NPC test configurations at the candidate $T=3^\circ$ period
+  (\npcNPerm{} phase-randomization draws). $K \in [0,1]$; higher values
+  indicate tighter cross-corpus anchor concordance. Grid $\Delta$ is
+  distance of the consensus anchor from 35\textdegree{}E.
+  $\dagger$ UNESCO dome subset is nested within the UNESCO full corpus;
+  see text.}
+\label{tab:npc_summary}
+\small
+\begin{tabular}{llcccl}
+\toprule
+Row & Corpora & $K$ & Grid $\Delta$ & perm-$p$ & Note \\
+\midrule
+1 & Dome ($N=\npcNDome$) $+$ Stupa ($N=\npcNStupa$)
+  & \npcDomeStupaK & \npcDomeStupaGridDeltaE\textdegree{}
+  & \npcDomeStupaPermP & Theoretically motivated \\
+2 & UNESCO ($N=\npcNUnesco$) $+$ Stupa ($N=\npcNStupa$)
+  & \npcTwoK & \npcTwoGridDeltaE\textdegree{}
+  & \npcTwoPermP & Primary (conservative) \\
+3 & UNESCO $+$ Dome$^\dagger$ $+$ Stupa
+  & \npcMonK & \npcMonGridDeltaE\textdegree{}
+  & \npcMonPermP{} & Supplementary (nesting caveat) \\
+\midrule
+4 & UNESCO $+$ Americas ($N=\npcNAmericas$) $+$ Stupa
+  & \npcNegThreeK & \npcNegThreeGridDeltaE\textdegree{}
+  & \npcNegThreePermP & \textit{Negative control} \\
+5 & UNESCO $+$ OWTRAD ($N=\npcNOwtrad$)
+  & \npcAllK & ---
+  & \npcAllPermP & \textit{Contrast corpus} \\
+\bottomrule
+\end{tabular}
+\end{table*}
 
-OWTRAD Silk Road route nodes provide a contrast at the same candidate
-period. Using \npcNOwtrad{} unique nodes, OWTRAD's own Rayleigh
+\noindent\textbf{Rows 1--2 (primary non-nested tests).}
+Row~1 pairs the UNESCO domed-monument subset directly with the Wikidata
+stupa corpus: neither is nested within the other, and they are
+the most morphologically comparable corpora in the analysis. Their NPC
+at $T=3^\circ$ is $K=\npcDomeStupaK{}$
+(perm-$p=\npcDomeStupaPermP{}$, \npcDomeStupaGridDeltaE\textdegree{}
+from 35\textdegree{}E). Row~2 takes the more conservative approach of
+using the full UNESCO Cultural/Mixed corpus as the anchor, explicitly
+removing the nested dome subset: $K=\npcTwoK{}$
+(perm-$p=\npcTwoPermP{}$, \npcTwoGridDeltaE\textdegree{} from
+35\textdegree{}E). Both tests yield high $K$ values indicating very
+similar recovered anchors, but neither reaches conventional $p<0.05$
+in the permutation test. This is expected: with $C=2$ corpora, the
+phase-randomization null has only two degrees of freedom, and the test
+is sensitive to how much leverage each individual corpus's phasor
+provides.
+
+\noindent\textbf{Row~3 (three-corpus supplementary).}
+Adding the nested dome subset as a third corpus sharpens the permutation
+significance ($K=\npcMonK{}$, perm-$p=\npcMonPermP{}$) because the
+dome subset's stronger individual Rayleigh $R$ at $T=3^\circ$ adds
+leverage to the phasor sum. The drop from Row~3 significance to Rows 1--2
+non-significance is itself informative: it shows the permutation test
+detects the leverage the nested corpus provides. Rows 1--2 are the
+appropriate non-nested tests; Row~3 is retained as context.
+
+\noindent\textbf{Rows 4--5 (negative controls).}
+Row~4 replaces the dome subset with the UNESCO Americas sub-corpus
+(geographically outside the signal region, already used as a negative
+control in \S\ref{sec:americas_negative_control}): $K$ drops to
+$\npcNegThreeK{}$ (perm-$p=\npcNegThreePermP{}$, ns). Row~5 uses
+OWTRAD trade-route nodes in place of a monument corpus:
+$K=\npcAllK{}$ (perm-$p=\npcAllPermP{}$, ns). OWTRAD's own Rayleigh
 statistic at $T=3^\circ$ is not significant
 ($R=\npcOwR{}$, $p=\npcOwRayleighP{}$, ns), and its preferred anchor
-($\phi=\npcOwAnchor{}^\circ$) is
-\npcOwAnchorDelta\textdegree{} from the monument consensus. Including
-OWTRAD in the NPC calculation reduces consensus from
-$K=\npcMonK{}$ to $K=\npcAllK{}$ (perm-$p=\npcAllPermP{}$, ns). The
-contrast is consistent with monument-corpus specificity and does not
-support a generic route-network signal, while still leaving shared
-Eurasian geography as a central feature of the interpretation.
+is \npcOwAnchorDelta\textdegree{} from the monument consensus. The
+negative controls confirm that the high $K$ in Rows~1--3 is not a
+generic property of any Eurasian longitude dataset.
 
-\subsection{Temporal Gradient (Test~4, Descriptive)}
+NPC asks whether corpora recover similar anchors at the candidate
+period, not whether tier counts are elevated. The statistic uses
+normalized phasor directions, so it is independent of the tier-count
+enrichment results and unaffected by the post-hoc corpus construction
+concern that applies to the keyword-filter dome subset.
+
+\noindent\textbf{Distributional tests: UNESCO full vs.\ Wikidata stupa.}
+Using the full UNESCO Cultural/Mixed corpus ($N=\circTwoSampNUnesco{}$)
+and the Wikidata stupa corpus ($N=\circTwoSampNStupa{}$) as the
+highest-powered non-nested pair, five circular tests characterize the
+relationship between the two distributions.
+Watson's $U^2$ two-sample test ($U^2=\circWatsonUSqUnescoStupa{}$,
+perm-$p=\circWatsonPUnescoStupa{}$) and the Kuiper two-sample
+test ($V=\circKuiperVUnescoStupa{}$,
+perm-$p=\circKuiperPUnescoStupa{}$) both reject the null that
+UNESCO full and Wikidata stupa have the same phase distribution at
+$T=3^\circ$. This is the expected and interpretively important result:
+the full UNESCO corpus is a large heterogeneous dataset whose phase
+distribution is dominated by non-dome-monument sites and shows no
+global concentration ($R=\circConcUnescoR{}$, perm-$p=\circConcUnescoP{}$, ns),
+while the Wikidata stupa corpus is morphologically focused and shows
+independently significant phase concentration
+($R=\circConcStupaR{}$, perm-$p=\circConcStupaP{}$, \circConcStupaPSig{}).
+The finding that the two corpora are \emph{different} distributions is
+therefore evidence for monument-type specificity: the 3\textdegree{}
+phase concentration belongs to hemispherical monument architecture,
+not to the heritage list it happens to appear on.
+The Fisher combination of the two per-corpus Rayleigh
+p-values is significant ($\chi^2(4)=\circConcUnescoStupaFisherChi{}$,
+$p=\circConcUnescoStupaFisherP{}$, \circConcUnescoStupaFisherPSig{}),
+driven by the stupa corpus. This combination is reported for
+completeness; the primary result is the Wikidata stupa concentration
+and the confirmed distributional heterogeneity.
+
+
 \label{sec:resultstemporal}
 
 The Tier-A++ rate in the founding canon (1978--1984) is \cohortAppArate\%
@@ -1488,31 +1593,48 @@ anchor-concordance result, and the geographically conditioned tests that
 delimit its interpretation; determining any historical mechanism would
 require independent lines of evidence beyond spatial statistics alone.
 
-\subsection{Cross-Corpus Anchor Concordance and Related-Corpus Checks}
+\subsection{Monument-Type Specificity and Related-Corpus Checks}
 \label{sec:transmission}
 
-\textbf{Rayleigh and NPC answer different questions.}
+\textbf{A type-specific, not corpus-level, result.}
 The full-corpus Rayleigh test ($R = \fullRayleighR$,
-$p = \fullRayleighPermP$, \fullRayleighPermPSig{}) asks whether UNESCO
-longitudes show global smooth sinusoidal periodicity at
-3\textdegree{}. It does not. NPC asks whether several datasets yield
-similar recovered anchors at the candidate period after each corpus
-contributes a normalized phasor direction. The positive monument NPC
-result therefore changes the evidentiary balance, but it does not
-override the Rayleigh null or convert the selected-frame signal into
-an invariant-period claim.
+$p = \fullRayleighPermP$, \fullRayleighPermPSig{}) confirms that UNESCO
+longitudes show no global sinusoidal periodicity at 3\textdegree{}.
+The Wikidata Q180987 stupa corpus ($N=\npcNStupa{}$), by contrast,
+shows independently significant Rayleigh phase concentration at this
+period ($R=\circConcStupaR{}$, perm-$p=\circConcStupaP{}$,
+\circConcStupaPSig{}). Watson's $U^2$ ($U^2=\circWatsonUSqUnescoStupa{}$,
+perm-$p=\circWatsonPUnescoStupa{}$) and Kuiper tests
+($V=\circKuiperVUnescoStupa{}$, perm-$p=\circKuiperPUnescoStupa{}$)
+confirm that the two corpora have detectably different phase
+distributions at $T=3^\circ$. The UNESCO dome and stupa keyword
+subset shows elevated node-neighborhood clustering at the same
+candidate period (\S\ref{sec:resultscircular}). Together these results
+point to the same conclusion: the 3\textdegree{} phase concentration
+belongs to hemispherical monument architecture, not to the UNESCO
+heritage corpus as a whole. The finding is monument-type specific,
+not corpus-level concordance.
 
-\textbf{Monument datasets and geographic confounding.}
-As reported in \S\ref{sec:results_npc}, the exploratory UNESCO
-dome/stupa observation and the externally curated Wikidata Q180987
-stupa corpus recover concordant 3\textdegree{} anchors in the NPC test
-($K=\npcMonK{}$, perm-$p=\npcMonPermP{}$), with a consensus grid line
-\npcMonGridDeltaE\textdegree{} from 35\textdegree{}E.
-This is the standard discovery-then-external-validation sequence:
-the UNESCO keyword corpus motivated the candidate frame; the Wikidata
-corpus --- not assembled by the researchers --- validates it.
-UNESCO and Wikidata are independent in the curatorial sense relevant here: they
-are external databases and were not manually assembled to fit this
+This is a tighter and more defensible claim than whole-corpus
+alignment. It says the signal is carried by the architectural type
+and recovers in an independently curated corpus of the same type,
+while the full heritage list --- which contains roads, landscapes,
+and industrial sites as well as hemispherical structures --- shows
+no global periodicity as expected.
+
+\textbf{NPC anchor concordance.}
+As reported in \S\ref{sec:results_npc}, monument corpus pairs recover
+concordant 3\textdegree{} anchors in the NPC test, with consensus
+grid lines within
+\npcDomeStupaGridDeltaE\textdegree{}--\npcTwoGridDeltaE\textdegree{}
+of 35\textdegree{}E. The non-nested two-corpus tests (Rows~1--2) do
+not reach $p<0.05$ individually, consistent with the type-specific
+framing. The three-corpus test reaches significance (Row~3) but
+includes the nested dome subset. NPC is supplementary evidence for
+anchor coherence; the Wikidata stupa concentration result is the
+stronger individual statement.
+UNESCO and Wikidata are independent in the curatorial sense relevant
+here: externally curated databases not manually assembled to fit this
 candidate frame. They are not geography-independent, and the UNESCO
 dome subset is nested inside the UNESCO corpus. That limits causal or
 universal interpretations, but it does not undercut the stated target:
@@ -1630,22 +1752,48 @@ elevated Tier-A+ node-neighborhood clustering under a
 3\textdegree{} / $\sim$35\textdegree{}E candidate longitude frame.
 The validation stage applied the same frame, unmodified, to the
 externally curated Wikidata Q180987 stupa corpus --- assembled entirely
-outside this study --- and recovered a concordant anchor
-($K=\npcMonK{}$, perm-$p=\npcMonPermP{}$, grid line
-\npcMonGridDeltaE\textdegree{} from 35\textdegree{}E).
-That concordance is the primary result: the candidate frame recovers
-similar structure in a corpus whose membership was not under researcher
-control.
+outside this study.
 
-The UNESCO keyword-filter corpus is the exploratory observation that
-motivated the test. Its conditional enrichment results are real and
-audited, but the keyword filter was constructed with knowledge of the
-data and corpus-definition independence cannot be fully established.
-The Wikidata external corpus addresses that limitation directly.
+The primary finding is monument-type-specific phase concentration. The
+Wikidata Q180987 stupa corpus ($N=\npcNStupa{}$) shows independently
+significant Rayleigh phase concentration at $T=3^\circ$
+($R=\circConcStupaR{}$, perm-$p=\circConcStupaP{}$,
+\circConcStupaPSig{}). The full UNESCO Cultural/Mixed corpus shows no
+global periodicity at this period ($R=\circConcUnescoR{}$,
+perm-$p=\circConcUnescoP{}$, ns), consistent with the full-corpus
+Rayleigh null. Watson's $U^2$ and Kuiper tests confirm that the two
+corpora have detectably different phase distributions
+($p=\circWatsonPUnescoStupa{}$ and $p=\circKuiperPUnescoStupa{}$
+respectively). The UNESCO dome and stupa keyword subset shows elevated
+node-neighborhood clustering at the same candidate period and nodes,
+geographically embedded in the subset's own longitude distribution
+(Null~A, $p=\geoNullDomeBootP$).
+
+Taken together, the full UNESCO corpus shows no global periodicity at
+3\textdegree{}, confirmed by Rayleigh, confirmed by distributional
+difference from the stupa corpus, confirmed by non-significant
+individual concentration. Within that globally non-periodic corpus,
+dome and stupa related sites show elevated node-neighborhood
+clustering. The Wikidata stupa corpus, assembled independently, shows
+genuine phase concentration at the same candidate period and 
+$\sim$35\textdegree{}E anchor. The finding is monument-type specific,
+not corpus-level concordance: the signal belongs to the architectural
+type, not to the heritage list it happens to appear on.
+
+Table~\ref{tab:npc_summary} additionally reports NPC anchor
+concordance across five monument corpus configurations. All monument
+pairs recover high $K \geq \npcDomeStupaK{}$ with consensus grid
+lines within \npcDomeStupaGridDeltaE\textdegree{}--\npcTwoGridDeltaE\textdegree{}
+of 35\textdegree{}E. Non-nested two-corpus tests do not reach $p<0.05$
+individually; the three-corpus test including the nested dome subset
+does ($K=\npcMonK{}$, perm-$p=\npcMonPermP{}$). Negative controls
+confirm specificity: replacing the dome subset with the Americas
+sub-corpus collapses concordance to $K=\npcNegThreeK{}$ (ns), as does
+including OWTRAD ($K=\npcAllK{}$, ns).
+
 The effect is not whole-corpus alignment: most UNESCO sites do not
 fall near candidate harmonic nodes, and the full-corpus Rayleigh
 periodogram is null ($p=\fullRayleighPermP$).
-
 The dome/stupa findings should be read as structure within Eurasian
 monument geography, not as a pattern that must be independent of that
 geography. Null~A ($p=\geoNullDomeBootP$) shows that the dome/stupa
@@ -1657,19 +1805,15 @@ A+ hits across the tested windows rather than the observed
 \NcircTierAp{}, with nominal per-window significance that does not
 survive correction across three windows.
 
-OWTRAD route nodes provide a useful
-negative control because they do not share the monument NPC anchor;
-including OWTRAD reduces consensus to $K=\npcAllK{}$
-(perm-$p=\npcAllPermP{}$, ns), and OWTRAD's own 3\textdegree{}
-Rayleigh statistic is not significant ($p=\npcOwRayleighP{}$, ns).
-
 The result is therefore best read as sparse, structured
 node-neighborhood enrichment within a specified 3\textdegree{} /
-$\sim$35\textdegree{}E monument-corpus frame. It is supported by
-conditional diagnostics and monument-corpus anchor concordance, while
-being bounded by the null global periodogram, marginal
-anchor-discovery correction, geographic dependence, and OWTRAD
-non-portability. It is not evidence of universal periodicity,
+$\sim$35\textdegree{}E monument-corpus frame, with the additional finding
+that the Wikidata stupa corpus independently concentrates at the same
+period. It is supported by conditional diagnostics and monument-type
+phase concentration, while being bounded by the null global
+periodogram, marginal anchor-discovery correction, geographic
+dependence, and OWTRAD non-portability. It is not evidence of
+universal periodicity,
 historical intentionality, whole-corpus alignment, metrology, or a
 unique Gerizim origin. Further work should retain the same standards
 used here: clear specification of the candidate frame, transparent

@@ -1,4 +1,4 @@
-% Generated macros -- 2026-05-06T05:20:10Z
+% Generated macros -- 2026-05-07T00:17:33Z
 % Source: bash manuscript/reproduce_all_macros.sh
 % IMPORTANT: values are computed fresh each run -- do NOT hardcode
 
@@ -994,15 +994,58 @@
   \newcommand{\npcNStupa}{229}
   \newcommand{\npcNOwtrad}{1674}
   \newcommand{\npcNPerm}{100000}
+  \newcommand{\npcDomeStupaK}{0.9862}
+  \newcommand{\npcDomeStupaAnchor}{1.947}
+  \newcommand{\npcDomeStupaGridLineNearE}{34.947}
+  \newcommand{\npcDomeStupaGridDeltaE}{0.053}
+  \newcommand{\npcDomeStupaPermP}{0.10479}
+  \newcommand{\npcTwoK}{0.982}
+  \newcommand{\npcTwoAnchor}{1.959}
+  \newcommand{\npcTwoGridLineNearE}{34.959}
+  \newcommand{\npcTwoGridDeltaE}{0.041}
+  \newcommand{\npcTwoPermP}{0.12243}
   \newcommand{\npcMonK}{0.9857}
   \newcommand{\npcMonAnchor}{1.982}
   \newcommand{\npcMonGridLineNearE}{34.982}
   \newcommand{\npcMonGridDeltaE}{0.018}
   \newcommand{\npcMonPermP}{0.0119}
+  \newcommand{\npcNAmericas}{145}
+  \newcommand{\npcNEurasia}{866}
+  \newcommand{\npcNegEuAmK}{0.4225}
+  \newcommand{\npcNegEuAmAnchor}{1.654}
+  \newcommand{\npcNegEuAmGridLineNearE}{34.654}
+  \newcommand{\npcNegEuAmGridDeltaE}{0.346}
+  \newcommand{\npcNegEuAmPermP}{0.72549}
+  \newcommand{\npcNegUnAmK}{0.5557}
+  \newcommand{\npcNegUnAmAnchor}{1.581}
+  \newcommand{\npcNegUnAmGridDeltaE}{0.419}
+  \newcommand{\npcNegUnAmPermP}{0.6242}
+  \newcommand{\npcNegUnOwK}{0.7429}
+  \newcommand{\npcNegUnOwAnchor}{2.4}
+  \newcommand{\npcNegUnOwGridDeltaE}{0.4}
+  \newcommand{\npcNegUnOwPermP}{0.46532}
+  \newcommand{\npcNegThreeK}{0.6723}
+  \newcommand{\npcNegThreeAnchor}{1.717}
+  \newcommand{\npcNegThreeGridLineNearE}{34.717}
+  \newcommand{\npcNegThreeGridDeltaE}{0.283}
+  \newcommand{\npcNegThreePermP}{0.29819}
+  \newcommand{\npcNOsm}{259}
+  \newcommand{\npcOsmDomeK}{0.9967}
+  \newcommand{\npcOsmDomeGridDeltaE}{0.065}
+  \newcommand{\npcOsmDomePermP}{0.05181}
+  \newcommand{\npcOsmStupaK}{0.9695}
+  \newcommand{\npcOsmStupaGridDeltaE}{0.014}
+  \newcommand{\npcOsmStupaPermP}{0.15884}
+  \newcommand{\npcOsmUnescoK}{0.9984}
+  \newcommand{\npcOsmUnescoGridDeltaE}{0.077}
+  \newcommand{\npcOsmUnescoPermP}{0.03704}
+  \newcommand{\npcOsmThreeK}{0.9789}
+  \newcommand{\npcOsmThreeGridDeltaE}{0.0}
+  \newcommand{\npcOsmThreePermP}{0.01806}
   \newcommand{\npcOwR}{0.0308}
   \newcommand{\npcOwAnchor}{2.75}
   \newcommand{\npcOwAnchorDelta}{0.768}
-  \newcommand{\npcOwRayleighP}{0.205}
+  \newcommand{\npcOwRayleighP}{0.2047}
   \newcommand{\npcAllK}{0.7713}
   \newcommand{\npcAllAnchor}{2.139}
   \newcommand{\npcAllPermP}{0.09182}
@@ -1010,6 +1053,63 @@
   \newcommand{\npcPairDomeStupa}{0.159}
   \newcommand{\npcPairUnescoStupa}{0.182}
   \newcommand{\npcPairUnescoOwtrad}{0.7}
+
+% --- analysis/unesco/circular_two_sample_tests.py
+  \newcommand{\circTwoSampWatsonUSq}{0.07283}
+  \newcommand{\circTwoSampWatsonP}{0.4722}
+  \newcommand{\circTwoSampKuiperV}{0.16462}
+  \newcommand{\circTwoSampKuiperP}{0.3464}
+  \newcommand{\circXcorrPeakShiftDeg}{2.75}
+  \newcommand{\circXcorrPeakVal}{0.05056}
+  \newcommand{\circXcorrP}{1.0}
+  \newcommand{\circWWF}{-0.6347}
+  \newcommand{\circWWp}{1.0}
+  \newcommand{\circConcDomeR}{0.1571}
+  \newcommand{\circConcDomeP}{0.1288}
+  \newcommand{\circConcStupaR}{0.1669}
+  \newcommand{\circConcStupaP}{0.0018}
+  \newcommand{\circConcFisherChi}{16.75}
+  \newcommand{\circConcFisherP}{0.0022}
+  \newcommand{\circTwoSampNDome}{83}
+  \newcommand{\circTwoSampNStupa}{229}
+  \newcommand{\circTwoSampNUnesco}{1011}
+  \newcommand{\circXcorrNBins}{24}
+  \newcommand{\circConcUnescoR}{0.0224}
+  \newcommand{\circConcUnescoP}{0.603}
+  \newcommand{\circConcUnescoStupaFisherChi}{13.663}
+  \newcommand{\circConcUnescoStupaFisherP}{0.0085}
+  \newcommand{\circWatsonUSqUnescoStupa}{0.32039}
+  \newcommand{\circWatsonPUnescoStupa}{0.0036}
+  \newcommand{\circKuiperVUnescoStupa}{0.16385}
+  \newcommand{\circKuiperPUnescoStupa}{0.0013}
+  \newcommand{\sweepHitsTwoFour}{21}
+  \newcommand{\sweepExpectedTwoFour}{16.6}
+  \newcommand{\sweepBinomPTwoFour}{0.1428}
+  \newcommand{\sweepBinomSigTwoFour}{ns}
+  \newcommand{\sweepRayleighRTwoFour}{0.2833}
+  \newcommand{\sweepRayleighPTwoFour}{0.0023}
+  \newcommand{\sweepRayleighSigTwoFour}{**}
+  \newcommand{\sweepHitsThreeZero}{26}
+  \newcommand{\sweepExpectedThreeZero}{16.6}
+  \newcommand{\sweepBinomPThreeZero}{0.0098}
+  \newcommand{\sweepBinomSigThreeZero}{**}
+  \newcommand{\sweepRayleighRThreeZero}{0.1571}
+  \newcommand{\sweepRayleighPThreeZero}{0.1393}
+  \newcommand{\sweepRayleighSigThreeZero}{ns}
+  \newcommand{\sweepHitsThreeFive}{11}
+  \newcommand{\sweepExpectedThreeFive}{16.6}
+  \newcommand{\sweepBinomPThreeFive}{0.9588}
+  \newcommand{\sweepBinomSigThreeFive}{ns}
+  \newcommand{\sweepRayleighRThreeFive}{0.2276}
+  \newcommand{\sweepRayleighPThreeFive}{0.013}
+  \newcommand{\sweepRayleighSigThreeFive}{*}
+  \newcommand{\sweepHitsThreeSix}{15}
+  \newcommand{\sweepExpectedThreeSix}{16.6}
+  \newcommand{\sweepBinomPThreeSix}{0.7113}
+  \newcommand{\sweepBinomSigThreeSix}{ns}
+  \newcommand{\sweepRayleighRThreeSix}{0.2044}
+  \newcommand{\sweepRayleighPThreeSix}{0.03}
+  \newcommand{\sweepRayleighSigThreeSix}{*}
 
 % --- analysis/global/phase_peak_max_permutation_test.py
 \newcommand{\anchorMaxPermObsMax}{132}
@@ -1141,6 +1241,15 @@
 \newcommand{\wikiNonHeartlandApP}{0.014}
 \newcommand{\wikiNonHeartlandCbandOR}{0.19}
 \newcommand{\wikiNonHeartlandCbandP}{1.000}
+\newcommand{\wikiLCOJavaN}{83}
+\newcommand{\wikiLCOJavaR}{0.4086}
+\newcommand{\wikiLCOJavaP}{0.735}
+\newcommand{\wikiLCOJavaTightN}{54}
+\newcommand{\wikiLCOJavaTightR}{0.3201}
+\newcommand{\wikiLCOJavaTightP}{0.779}
+\newcommand{\wikiNonHeartlandOnlyN}{102}
+\newcommand{\wikiNonHeartlandOnlyR}{0.7459}
+\newcommand{\wikiNonHeartlandOnlyP}{0.459}
 
 % --- analysis/unesco/multiscale_combined_p.py
   \newcommand{\multiscaleK}{15}                       % number of log windows
@@ -1412,25 +1521,25 @@
   \newcommand{\permSlopeSharpAtCanonFullA}{0}
 
 % --- analysis/unesco/dome_geographic_concentration_test.py
-  \newcommand{\geoNullDomeBootP}{0.5429}   % within-dome bootstrap p
-  \newcommand{\geoNullDomeBootZ}{-0.00}    % within-dome bootstrap Z
-  \newcommand{\geoNullDomeBootMean}{18.00}   % within-dome bootstrap mean A+
-  \newcommand{\geoNullDomeRestrictedP}{0.0393}   % restricted-pool p
-  \newcommand{\geoNullDomeRestrictedZ}{2.00}    % restricted-pool Z
-  \newcommand{\geoNullDomeRestrictedMean}{11.64}   % restricted-pool mean A+
-  \newcommand{\geoNullDomeRestrictedN}{897}   % restricted pool size
-  \newcommand{\geoNullDomeRestrictedRate}{12.9}   % A+ base rate in restricted pool (%)
-  \newcommand{\geoNullDomeRestrictedNtwo}{776}   % Null C ?2deg pool size
-  \newcommand{\geoNullDomeRestrictedPtwo}{0.0257}   % Null C ?2deg p-value
-  \newcommand{\geoNullDomeRestrictedMeantwo}{11.14}   % Null C ?2deg mean A+
-  \newcommand{\geoNullDomeRestrictedNfive}{897}   % Null C ?5deg pool size
-  \newcommand{\geoNullDomeRestrictedPfive}{0.0382}   % Null C ?5deg p-value
-  \newcommand{\geoNullDomeRestrictedMeanfive}{11.65}   % Null C ?5deg mean A+
-  \newcommand{\geoNullDomeRestrictedNten}{980}   % Null C ?10deg pool size
-  \newcommand{\geoNullDomeRestrictedPten}{0.0442}   % Null C ?10deg p-value
-  \newcommand{\geoNullDomeRestrictedMeanten}{11.84}   % Null C ?10deg mean A+
-  \newcommand{\domeEurasianFraction}{71}   % % dome sites in 20-120E
-  \newcommand{\fullCorpusEurasianFraction}{41}   % % full corpus in 20-120E
+  \newcommand{\geoNullDomeBootP}{0.5493}
+  \newcommand{\geoNullDomeBootZ}{-0.0015}
+  \newcommand{\geoNullDomeBootMean}{11.0045}
+  \newcommand{\geoNullDomeRestrictedP}{0.0129}
+  \newcommand{\geoNullDomeRestrictedZ}{2.6888}
+  \newcommand{\geoNullDomeRestrictedMean}{5.1124}
+  \newcommand{\geoNullDomeRestrictedN}{897.0000}
+  \newcommand{\geoNullDomeRestrictedRate}{5.6856}
+  \newcommand{\geoNullDomeRestrictedNtwo}{776}
+  \newcommand{\geoNullDomeRestrictedPtwo}{0.0180}
+  \newcommand{\geoNullDomeRestrictedMeantwo}{5.3439}
+  \newcommand{\geoNullDomeRestrictedNfive}{897}
+  \newcommand{\geoNullDomeRestrictedPfive}{0.0129}
+  \newcommand{\geoNullDomeRestrictedMeanfive}{5.1124}
+  \newcommand{\geoNullDomeRestrictedNten}{980}
+  \newcommand{\geoNullDomeRestrictedPten}{0.0139}
+  \newcommand{\geoNullDomeRestrictedMeanten}{5.1473}
+  \newcommand{\domeEurasianFraction}{71}
+  \newcommand{\fullCorpusEurasianFraction}{41}
 
 % --- analysis/unesco/stupa_geographic_concentration_test.py
 \newcommand{\stupaGeoBootP}{0.5879}
@@ -1448,6 +1557,97 @@
 \newcommand{\fullCorpusHeartlandFrac}{10}
 \newcommand{\stupaIndiaPakCOR}{2.67}
 \newcommand{\stupaIndiaPakCP}{0.2177}
+
+% --- analysis/unesco/osm_stupa_audit.py
+  \newcommand{\osmStupaTotal}{259}
+  \newcommand{\osmStupaRayleighR}{0.1073}
+  \newcommand{\osmStupaRayleighP}{0.0355}
+  \newcommand{\osmStupaATierCount}{70}
+  \newcommand{\osmStupaATierRate}{27.0}
+  \newcommand{\osmStupaATierBinomP}{0.0039}
+  \newcommand{\osmStupaApCount}{31}
+  \newcommand{\osmStupaApRate}{12.0}
+  \newcommand{\osmStupaApBinomP}{0.1695}
+  \newcommand{\osmStupaAppCount}{10}
+  \newcommand{\osmStupaAppRate}{3.9}
+  \newcommand{\osmStupaAppBinomP}{0.5896}
+  \newcommand{\osmStupaClusterRatio}{-1.00}
+  \newcommand{\osmStupaClusterApMean}{47.00}
+  \newcommand{\osmStupaClusterNonApMean}{0.00}
+  \newcommand{\osmStupaFisherTwoCorpusChi}{19.316}
+  \newcommand{\osmStupaFisherTwoCorpusP}{0.0007}
+  \newcommand{\osmStupaFisherThreeCorpusChi}{20.327}
+  \newcommand{\osmStupaFisherThreeCorpusP}{0.0024}
+  \newcommand{\osmStupaNManMade}{0}
+  \newcommand{\osmStupaNHistoric}{3}
+  \newcommand{\osmStupaNBuilding}{254}
+  \newcommand{\osmStupaNRuins}{2}
+
+% --- analysis/unesco/cross_corpus_geometric_test.py
+  \newcommand{\geoDomeAppN}{83}
+  \newcommand{\geoDomeAppHits}{11}
+  \newcommand{\geoDomeAppExp}{3.3}
+  \newcommand{\geoDomeAppEnr}{3.31}
+  \newcommand{\geoDomeAppP}{0.0005}
+  \newcommand{\geoDomeAppSig}{***}
+  \newcommand{\geoDomeApN}{83}
+  \newcommand{\geoDomeApHits}{16}
+  \newcommand{\geoDomeApExp}{8.3}
+  \newcommand{\geoDomeApEnr}{1.93}
+  \newcommand{\geoDomeApP}{0.0076}
+  \newcommand{\geoDomeApSig}{**}
+  \newcommand{\geoDomeAN}{83}
+  \newcommand{\geoDomeAHits}{26}
+  \newcommand{\geoDomeAExp}{16.6}
+  \newcommand{\geoDomeAEnr}{1.57}
+  \newcommand{\geoDomeAP}{0.0098}
+  \newcommand{\geoDomeASig}{**}
+  \newcommand{\geoWikiAppN}{229}
+  \newcommand{\geoWikiAppHits}{11}
+  \newcommand{\geoWikiAppExp}{9.2}
+  \newcommand{\geoWikiAppEnr}{1.2}
+  \newcommand{\geoWikiAppP}{0.311}
+  \newcommand{\geoWikiAppSig}{ns}
+  \newcommand{\geoWikiApN}{229}
+  \newcommand{\geoWikiApHits}{33}
+  \newcommand{\geoWikiApExp}{22.9}
+  \newcommand{\geoWikiApEnr}{1.44}
+  \newcommand{\geoWikiApP}{0.0212}
+  \newcommand{\geoWikiApSig}{*}
+  \newcommand{\geoWikiAN}{229}
+  \newcommand{\geoWikiAHits}{70}
+  \newcommand{\geoWikiAExp}{45.8}
+  \newcommand{\geoWikiAEnr}{1.53}
+  \newcommand{\geoWikiAP}{0.0001}
+  \newcommand{\geoWikiASig}{***}
+  \newcommand{\geoOsmAppN}{259}
+  \newcommand{\geoOsmAppHits}{12}
+  \newcommand{\geoOsmAppExp}{10.4}
+  \newcommand{\geoOsmAppEnr}{1.16}
+  \newcommand{\geoOsmAppP}{0.3433}
+  \newcommand{\geoOsmAppSig}{ns}
+  \newcommand{\geoOsmApN}{259}
+  \newcommand{\geoOsmApHits}{33}
+  \newcommand{\geoOsmApExp}{25.9}
+  \newcommand{\geoOsmApEnr}{1.27}
+  \newcommand{\geoOsmApP}{0.089}
+  \newcommand{\geoOsmApSig}{~}
+  \newcommand{\geoOsmAN}{259}
+  \newcommand{\geoOsmAHits}{69}
+  \newcommand{\geoOsmAExp}{51.8}
+  \newcommand{\geoOsmAEnr}{1.33}
+  \newcommand{\geoOsmAP}{0.0059}
+  \newcommand{\geoOsmASig}{**}
+  \newcommand{\geoFisherAppChi}{19.785}
+  \newcommand{\geoFisherAppP}{0.00302}
+  \newcommand{\geoFisherAppSig}{**}
+  \newcommand{\geoFisherApChi}{22.295}
+  \newcommand{\geoFisherApP}{0.00107}
+  \newcommand{\geoFisherApSig}{**}
+  \newcommand{\geoFisherAChi}{37.999}
+  \newcommand{\geoFisherAP}{0.0}
+  \newcommand{\geoFisherAPDisp}{{<}0.001}  % display string (p rounds to 0 from N_PERM draws)
+  \newcommand{\geoFisherASig}{***}
 
 % --- analysis/unesco/dome_founding_stratification.py
   \newcommand{\domeStratNfs}{23}                % dome sites that are F/S
@@ -1570,6 +1770,17 @@
   \newcommand{\anchorMaxPermPSig}{$^\dagger$}  % auto sig label
   \newcommand{\anchorShiftPermPSig}{**}  % auto sig label
   \newcommand{\blockBootZPSig}{**}  % auto sig label
+  \newcommand{\circConcDomePSig}{ns}  % auto sig label
+  \newcommand{\circConcFisherPSig}{**}  % auto sig label
+  \newcommand{\circConcStupaPSig}{**}  % auto sig label
+  \newcommand{\circConcUnescoPSig}{ns}  % auto sig label
+  \newcommand{\circConcUnescoStupaFisherPSig}{**}  % auto sig label
+  \newcommand{\circKuiperPUnescoStupaSig}{**}  % auto sig label
+  \newcommand{\circTwoSampKuiperPSig}{ns}  % auto sig label
+  \newcommand{\circTwoSampWatsonPSig}{ns}  % auto sig label
+  \newcommand{\circWWpSig}{ns}  % auto sig label
+  \newcommand{\circWatsonPUnescoStupaSig}{**}  % auto sig label
+  \newcommand{\circXcorrPSig}{ns}  % auto sig label
   \newcommand{\clusterApBinomSig}{**}  % auto sig label
   \newcommand{\clusterCtrlPermPSig}{ns}  % auto sig label
   \newcommand{\clusterHarmonicMWpSig}{***}  % auto sig label

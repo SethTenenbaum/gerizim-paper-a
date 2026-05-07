@@ -80,8 +80,18 @@ np.random.seed(42)
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus, cultural_sites_with_coords
-from lib.beru import GERIZIM, BERU, TIER_APLUS, P_NULL_AP
+from lib.beru import (GERIZIM, BERU,
+                      TIER_APP, P_NULL_APP,
+                      TIER_APLUS, P_NULL_AP,
+                      TIER_A_MAX, P_NULL_A)
 from lib.beru import deviation as _beru_deviation, tier_label
+
+# Tier definitions: label, bēru threshold, geometric null rate
+TIERS = [
+    ("A",   TIER_A_MAX, P_NULL_A),
+    ("A+",  TIER_APLUS, P_NULL_AP),
+    ("A++", TIER_APP,   P_NULL_APP),
+]
 from lib.results_store import ResultsStore
 from scipy.stats import fisher_exact
 
@@ -118,12 +128,26 @@ def beru_dev(lon: float) -> float:
 
 
 def count_aplus(lons) -> int:
-    """Count A+ sites. Accepts list or ndarray; always vectorized."""
+    """Count A+ sites (legacy alias)."""
     arr = lons if isinstance(lons, np.ndarray) else np.asarray(lons)
-    arc = np.abs(arr - GERIZIM)
-    bv  = arc / BERU
-    dev = np.abs(bv - np.round(bv / 0.1) * 0.1)
+    arc = np.abs(arr - GERIZIM) / BERU
+    dev = np.abs(arc - np.round(arc / 0.1) * 0.1)
     return int(np.sum(dev <= TIER_APLUS))
+
+
+def count_tier(lons, threshold) -> int:
+    """Count sites within bēru threshold of a harmonic. Vectorized."""
+    arr = lons if isinstance(lons, np.ndarray) else np.asarray(lons)
+    arc = np.abs(arr - GERIZIM) / BERU
+    dev = np.abs(arc - np.round(arc / 0.1) * 0.1)
+    return int(np.sum(dev <= threshold))
+
+
+def boot_counts(mat, threshold):
+    """Given (N_PERMS, N) longitude matrix, return per-draw tier counts."""
+    arc = np.abs(mat - GERIZIM) / BERU
+    dev = np.abs(arc - np.round(arc / 0.1) * 0.1)
+    return (dev <= threshold).sum(axis=1).astype(int)
 
 
 # ── Load corpus ───────────────────────────────────────────────────────────────
@@ -170,90 +194,109 @@ def main():
     rng = np.random.default_rng(42)
     _sig = lambda p: "***" if p < 0.001 else "**" if p < 0.01 else "*" if p < 0.05 else "~" if p < 0.10 else "ns"
 
-    # ── Null A: within-stupa bootstrap ───────────────────────────────────────
-    print("\n" + "─" * 80)
-    print("  NULL A: WITHIN-STUPA BOOTSTRAP")
-    print(f"  Draw N={N_stupa} from the stupa sites' own longitudes (with replacement).")
-    print("─" * 80)
-
-    # Fully batched: draw (N_PERMS, N_stupa) matrix, compute A+ count per row
+    # Pre-draw Null A matrix (shared across tiers)
     mat_a = rng.choice(stupa_lons, size=(N_PERMS, N_stupa), replace=True)
-    arc_a = np.abs(mat_a - GERIZIM) / BERU
-    dev_a = np.abs(arc_a - np.round(arc_a / 0.1) * 0.1)
-    boot_a = (dev_a <= TIER_APLUS).sum(axis=1).astype(int)
 
-    p_a    = float(np.mean(boot_a >= obs_stupa_ap))
-    mean_a = float(boot_a.mean())
-    std_a  = float(boot_a.std())
-    z_a    = (obs_stupa_ap - mean_a) / std_a if std_a > 0 else float("nan")
-
-    print(f"\n  Null A: within-stupa bootstrap (N={N_stupa}, {N_PERMS:,} trials)")
-    print(f"    Bootstrap mean A+ = {mean_a:.2f} ± {std_a:.2f}")
-    print(f"    Observed A+       = {obs_stupa_ap}")
-    print(f"    Z = {z_a:.2f},  p (>= {obs_stupa_ap}) = {p_a:.4f}  {_sig(p_a)}")
-
-    # ── Null B: South/SE Asia heartland draw ─────────────────────────────────
+    # ── Null A: within-stupa bootstrap — all tiers ───────────────────────────
     print("\n" + "─" * 80)
-    print(f"  NULL B: SOUTH/SE ASIA HEARTLAND DRAW  ({HEARTLAND_LO:.0f}°–{HEARTLAND_HI:.0f}°E)")
+    print("  NULL A: WITHIN-STUPA BOOTSTRAP  (all tiers: A, A+, A++)")
+    print(f"  Draw N={N_stupa} from stupa sites' own longitudes (with replacement).")
+    print("─" * 80)
+    print(f"  {'Tier':<6}  {'Obs':>4}  {'Null%':>6}  {'Exp':>6}  "
+          f"{'Mean':>6}  {'SD':>5}  {'Z':>6}  {'p':>9}  {'Sig':>4}")
+    print("  " + "─" * 68)
+
+    null_a_results = {}
+    for tlabel, thresh, p_null_rate in TIERS:
+        obs   = count_tier(stupa_lons, thresh)
+        exp   = N_stupa * p_null_rate
+        boot  = boot_counts(mat_a, thresh)
+        p_val = float(np.mean(boot >= obs))
+        mean  = float(boot.mean())
+        std   = float(boot.std())
+        z     = (obs - mean) / std if std > 0 else float("nan")
+        rate  = 100 * obs / N_stupa
+        null_a_results[tlabel] = dict(obs=obs, exp=exp, mean=mean, std=std, z=z, p=p_val)
+        print(f"  {tlabel:<6}  {obs:>4} ({rate:.0f}%)  {100*p_null_rate:.0f}%  "
+              f"{exp:>6.2f}  {mean:>6.2f}  {std:>5.2f}  {z:>6.2f}  {p_val:>9.4f}  {_sig(p_val):>4}")
+
+    # Use A+ for backward-compatible scalar obs (Null B/C prose and macros)
+    obs_stupa_ap = null_a_results["A+"]["obs"]
+    p_a    = null_a_results["A+"]["p"]
+    mean_a = null_a_results["A+"]["mean"]
+    std_a  = null_a_results["A+"]["std"]
+    z_a    = null_a_results["A+"]["z"]
+
+    # ── Null B: South/SE Asia heartland draw — all tiers ─────────────────────
+    print("\n" + "─" * 80)
+    print(f"  NULL B: SOUTH/SE ASIA HEARTLAND DRAW  ({HEARTLAND_LO:.0f}°–{HEARTLAND_HI:.0f}°E, all tiers)")
     print(f"  Pool: all full-corpus sites in the stupa heartland band.")
-    print("  Tests whether stupa sites are more enriched than OTHER monuments")
-    print("  from the same regional heartland.")
     print("─" * 80)
 
-    heartland_pool = all_lons[
-        (all_lons >= HEARTLAND_LO) & (all_lons <= HEARTLAND_HI)
-    ]
-    N_pool_b      = len(heartland_pool)
-    pool_b_ap_rate = count_aplus(heartland_pool) / N_pool_b * 100
-
-    print(f"\n  Heartland pool: N = {N_pool_b}  (A+ rate in pool = {pool_b_ap_rate:.1f}%)")
-
+    heartland_pool = all_lons[(all_lons >= HEARTLAND_LO) & (all_lons <= HEARTLAND_HI)]
+    N_pool_b = len(heartland_pool)
     mat_b = rng.choice(heartland_pool, size=(N_PERMS, N_stupa), replace=True)
-    arc_b = np.abs(mat_b - GERIZIM) / BERU
-    dev_b = np.abs(arc_b - np.round(arc_b / 0.1) * 0.1)
-    boot_b = (dev_b <= TIER_APLUS).sum(axis=1).astype(int)
 
-    p_b    = float(np.mean(boot_b >= obs_stupa_ap))
-    mean_b = float(boot_b.mean())
-    std_b  = float(boot_b.std())
-    z_b    = (obs_stupa_ap - mean_b) / std_b if std_b > 0 else float("nan")
+    print(f"  Pool N = {N_pool_b}")
+    print(f"  {'Tier':<6}  {'Obs':>4}  {'Pool%':>6}  {'Mean':>6}  "
+          f"{'SD':>5}  {'Z':>6}  {'p':>9}  {'Sig':>4}")
+    print("  " + "─" * 60)
 
-    print(f"\n  Null B: heartland pool (N_pool={N_pool_b}, {N_PERMS:,} draws of N={N_stupa})")
-    print(f"    Pool mean A+ = {mean_b:.2f} ± {std_b:.2f}")
-    print(f"    Observed A+  = {obs_stupa_ap}")
-    print(f"    Z = {z_b:.2f},  p (>= {obs_stupa_ap}) = {p_b:.4f}  {_sig(p_b)}")
+    null_b_results = {}
+    for tlabel, thresh, p_null_rate in TIERS:
+        obs        = count_tier(stupa_lons, thresh)
+        pool_rate  = count_tier(heartland_pool, thresh) / N_pool_b * 100
+        boot       = boot_counts(mat_b, thresh)
+        p_val      = float(np.mean(boot >= obs))
+        mean       = float(boot.mean())
+        std        = float(boot.std())
+        z          = (obs - mean) / std if std > 0 else float("nan")
+        null_b_results[tlabel] = dict(obs=obs, pool_rate=pool_rate, mean=mean, std=std, z=z, p=p_val)
+        print(f"  {tlabel:<6}  {obs:>4}        {pool_rate:>5.1f}%  {mean:>6.2f}  "
+              f"{std:>5.2f}  {z:>6.2f}  {p_val:>9.4f}  {_sig(p_val):>4}")
 
-    # ── Null C: restricted geographic draw (±5° footprint) ───────────────────
+    # backward-compat scalars for A+
+    pool_b_ap_rate = null_b_results["A+"]["pool_rate"]
+    p_b    = null_b_results["A+"]["p"]
+    mean_b = null_b_results["A+"]["mean"]
+    std_b  = null_b_results["A+"]["std"]
+    z_b    = null_b_results["A+"]["z"]
+
+    # ── Null C: restricted geographic draw — all tiers × ±5° ─────────────────
     print("\n" + "─" * 80)
-    print("  NULL C: RESTRICTED GEOGRAPHIC DRAW  (±5° of any stupa site)")
+    print("  NULL C: RESTRICTED GEOGRAPHIC DRAW  (±5° of any stupa site, all tiers)")
     print("  Pool: all full-corpus sites within ±5° of any stupa site longitude.")
-    print("  Tests whether stupa sites outperform OTHER monuments from the same")
-    print("  broad longitude footprint.")
     print("─" * 80)
 
-    # Vectorized pool construction: broadcast (N_all,) vs (N_stupa,) → (N_all, N_stupa)
-    dists = np.abs(all_lons[:, None] - stupa_lons[None, :])  # (N_all, N_stupa)
-    in_pool = dists.min(axis=1) <= 5.0                        # (N_all,)
-    restricted_pool = all_lons[in_pool]
-    N_pool_c      = len(restricted_pool)
-    pool_c_ap_rate = count_aplus(restricted_pool) / N_pool_c * 100
-
-    print(f"\n  Restricted pool: N = {N_pool_c}  (A+ rate in pool = {pool_c_ap_rate:.1f}%)")
-
+    dists = np.abs(all_lons[:, None] - stupa_lons[None, :])
+    restricted_pool = all_lons[dists.min(axis=1) <= 5.0]
+    N_pool_c = len(restricted_pool)
     mat_c = rng.choice(restricted_pool, size=(N_PERMS, N_stupa), replace=True)
-    arc_c = np.abs(mat_c - GERIZIM) / BERU
-    dev_c = np.abs(arc_c - np.round(arc_c / 0.1) * 0.1)
-    boot_c = (dev_c <= TIER_APLUS).sum(axis=1).astype(int)
 
-    p_c    = float(np.mean(boot_c >= obs_stupa_ap))
-    mean_c = float(boot_c.mean())
-    std_c  = float(boot_c.std())
-    z_c    = (obs_stupa_ap - mean_c) / std_c if std_c > 0 else float("nan")
+    print(f"  Pool N = {N_pool_c}")
+    print(f"  {'Tier':<6}  {'Obs':>4}  {'Pool%':>6}  {'Mean':>6}  "
+          f"{'SD':>5}  {'Z':>6}  {'p':>9}  {'Sig':>4}")
+    print("  " + "─" * 60)
 
-    print(f"\n  Null C: restricted pool (N_pool={N_pool_c}, {N_PERMS:,} draws of N={N_stupa})")
-    print(f"    Pool mean A+ = {mean_c:.2f} ± {std_c:.2f}")
-    print(f"    Observed A+  = {obs_stupa_ap}")
-    print(f"    Z = {z_c:.2f},  p (>= {obs_stupa_ap}) = {p_c:.4f}  {_sig(p_c)}")
+    null_c_results = {}
+    for tlabel, thresh, p_null_rate in TIERS:
+        obs        = count_tier(stupa_lons, thresh)
+        pool_rate  = count_tier(restricted_pool, thresh) / N_pool_c * 100
+        boot       = boot_counts(mat_c, thresh)
+        p_val      = float(np.mean(boot >= obs))
+        mean       = float(boot.mean())
+        std        = float(boot.std())
+        z          = (obs - mean) / std if std > 0 else float("nan")
+        null_c_results[tlabel] = dict(obs=obs, pool_rate=pool_rate, mean=mean, std=std, z=z, p=p_val)
+        print(f"  {tlabel:<6}  {obs:>4}        {pool_rate:>5.1f}%  {mean:>6.2f}  "
+              f"{std:>5.2f}  {z:>6.2f}  {p_val:>9.4f}  {_sig(p_val):>4}")
+
+    # backward-compat scalars for A+
+    pool_c_ap_rate = null_c_results["A+"]["pool_rate"]
+    p_c    = null_c_results["A+"]["p"]
+    mean_c = null_c_results["A+"]["mean"]
+    std_c  = null_c_results["A+"]["std"]
+    z_c    = null_c_results["A+"]["z"]
 
     # ── Combined interpretation ───────────────────────────────────────────────
     print("\n" + "=" * 80)

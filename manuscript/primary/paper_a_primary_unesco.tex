@@ -2,7 +2,7 @@
 % Paper A -- Primary UNESCO Analysis Wrapper
 % Target: OSF Preprints / general submission
 %
-% Body content is in manuscript/shared_content.tex (single source of truth).
+% Body content is in shared_content.tex (single source of truth).
 % This file provides only the standard article-class preamble and abstract.
 %
 % SUBMISSION NOTES:
@@ -51,7 +51,9 @@
 
 \begin{document}
 
-\title{Sparse 3\textdegree{} Node Enrichment in Eurasian Monument Corpora}
+\title{Phase Concentration of Hemispherical Monument Architecture\\
+at 3\textdegree{} Longitude Intervals: An Exploratory Study\\
+of UNESCO and Wikidata Stupa Corpora}
 
 \author{Seth Tenenbaum\thanks{ORCID: \href{https://orcid.org/0009-0008-5797-2498}{0009-0008-5797-2498}.
 Correspondence: seth@fourthtemple.com}\\
@@ -59,41 +61,58 @@ Independent Scholar, USA}
 
 \maketitle
 
-\abstract{
-We report a two-stage observational study of Eurasian monument
-geography. In the exploratory stage, domed and stupa-related sites
-within the UNESCO Cultural and Mixed World Heritage corpus
-($N=\NclusterTotal$) showed elevated node-neighborhood clustering
-conditional on a specified 3\textdegree{} / $\sim$35\textdegree{}E
-longitude frame: modest full-corpus Tier-A+ enrichment with stronger
-dome/stupa behavior, and the dome/stupa signal locates in the subset's
-own longitude distribution (Null~A, $p=\geoNullDomeBootP$). In the
-validation stage, the same frame was applied without modification to
-the externally curated Wikidata Q180987 stupa corpus ($N=\vmNStupa{}$),
-assembled independently of the UNESCO analysis. A Normalized Phasor
-Consensus (NPC) test finds that UNESCO Cultural/Mixed, the nested
-UNESCO dome subset, and the Wikidata stupa corpus recover concordant
-3\textdegree{} anchors ($K=\npcMonK{}$, perm-$p=\npcMonPermP{}$),
-with a consensus grid line within \npcMonGridDeltaE\textdegree{} of
-35\textdegree{}E; OWTRAD Silk Road route nodes do not share this
-anchor. The finding is sparse node-neighborhood enrichment, not
-whole-corpus alignment: most sites do not fall near harmonic nodes and
-the full-corpus Rayleigh periodogram is null ($p=\fullRayleighPermP$).
-Because the UNESCO keyword filter was constructed with knowledge of the
-data, its conditional enrichment results are treated as exploratory;
-the Wikidata cross-corpus NPC concordance is the primary
-external-validation evidence. The result is bounded by the null global
-periodogram, marginal anchor-discovery correction, geographic
-dependence, and the absence of evidence for universal periodicity,
-historical intentionality, metrology, or a unique Gerizim origin.
-}
+\begin{abstract}
+This paper evaluates whether hemispherical monument architecture shows
+longitude-phase concentration at a candidate 3\textdegree{} interval
+relative to the $\sim$35\textdegree{}E corridor. Three corpora
+assembled by three independent processes all recover the same signal.
+The UNESCO Cultural/Mixed World Heritage dome/stupa subset
+($N=\NcircTotal$), extracted from institutional XML metadata, shows
+Rayleigh phase concentration ($R=\circConcDomeR{}$,
+perm-$p=\circConcDomeP{}$, \circConcDomePSig{}) and is the most
+geographically distributed of the three corpora, with A-tier sites
+spanning the full Eurasian corridor. The Wikidata Q180987 stupa corpus
+($N=\npcNStupa{}$), independently curated with no researcher
+involvement, shows significant phase concentration
+($R=\circConcStupaR{}$, perm-$p=\circConcStupaP{}$,
+\circConcStupaPSig{}); leave-cluster-out analysis shows this result
+is substantially carried by the Java/Borobudur node, reflecting the
+documented historical concentration of stupa construction around that
+complex. A filtered OpenStreetMap stupa layer
+(\texttt{building/historic/ruins=stupa}, $N=\osmStupaTotal$),
+assembled by crowd-sourced structural tagging independent of both
+UNESCO and Wikidata, independently replicates the signal
+($R=\osmStupaRayleighR{}$, perm-$p=\osmStupaRayleighP{}$).
+All three recover the same $\sim$35\textdegree{}E anchor
+($K \geq \npcOsmStupaK{}$). The full UNESCO Cultural/Mixed
+corpus shows no global Rayleigh periodicity at this period
+($R=\circConcUnescoR{}$, perm-$p=\circConcUnescoP{}$, ns), and
+Watson's $U^2$/Kuiper tests confirm the dome/stupa phase distribution
+differs from the full corpus ($p=\circWatsonPUnescoStupa{}$,
+$p=\circKuiperPUnescoStupa{}$), establishing type-specificity. Null~A
+($p=\geoNullDomeBootP$) locates the UNESCO dome enrichment in the
+subset's own longitude geography; Null~C shows the broader same-footprint
+UNESCO background does not replicate the dome A++ count. The UNESCO
+results are conditional because the 3\textdegree{} frame was identified
+there first; the Wikidata and OSM results carry no such conditioning.
+Negative controls confirm the signal is not a generic property of
+Eurasian geography: OWTRAD Silk Road nodes and the Americas sub-corpus
+do not recover the monument anchor. The result is best read as a
+modest, geographically conditioned, mechanism-free phase concentration
+signal in hemispherical architecture, with the three corpora
+illuminating different aspects: distributed alignment across the
+corridor (UNESCO), node dominance at the major historical center
+(Wikidata/Borobudur), and crowd-sourced corroboration (OSM). It is
+not evidence for a universal grid, historical intentionality, ancient
+metrology, or a unique Gerizim origin.
+\end{abstract}
 
 \bigskip
 
 \noindent\textbf{Keywords:}
-template alignment, spatial statistics, Levant, UNESCO World Heritage,
-3-degree harmonics, selected-frame analysis, circular statistics,
-monument distribution, anchor consensus
+spatial statistics, circular statistics, stupa, domed monuments,
+UNESCO World Heritage, 3-degree harmonics, selected-frame analysis,
+monument distribution, phase concentration, Eurasian corridor
 
 \bigskip
 

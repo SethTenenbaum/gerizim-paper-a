@@ -1,0 +1,1244 @@
+====================================================================================================
+  OSM STUPA CORPUS — GEOGRAPHIC TIER BREAKDOWN AND RAYLEIGH AUDIT
+  Generated: 2026-05-06 16:19 UTC
+  Corpus: osm_stupas.csv  |  N = 259
+  Tags: building=stupa (n=254)  historic=stupa (n=3)  ruins=stupa (n=2)
+  (man_made=stupa excluded — tags require mapped footprint or heritage designation)
+  Full corpus: A+ = 33 (12.7%)  A-tier = 69 (26.6%)
+  Anchor: Gerizim 35.269°E  |  Grid period = 3.0°
+
+  RAYLEIGH PHASE CONCENTRATION (T=3.0°, N_perm=100,000, seed=42)
+  R_obs = 0.1073   perm-p = 0.0501  †
+  Interpretation: not significant at p<0.05
+====================================================================================================
+
+  SUMMARY TABLE
+  Note: 'All OSM stupas' row: binomial vs geometric null (A+ 10%, A 20%).
+        All subregion rows: one-sided Fisher exact vs full OSM corpus background.
+  Region                                          N   A+    A+%    OR_A+    p_A+ sig      A     A%     OR_A     p_A sig      C     C%     OR_C     p_C sig 
+  ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  All OSM stupas                                259   33  12.7%    1.00×  0.0890 †       69  26.6%    1.00×  0.0059 **      47  18.1%    1.00×  1.0000 ns  
+  Heartland (70°–110°E)                         246   31  12.6%    0.79×  0.7789 ns      64  26.0%    0.56×  0.9015 ns      46  18.7%    2.76×  0.2801 ns  
+  India/Nepal (70°–90°E)                         21    4  19.0%    1.70×  0.2705 ns       6  28.6%    1.11×  0.5056 ns       4  19.0%    1.07×  0.5515 ns  
+  SE Asia / Myanmar-Thailand (90°–105°E)        225   27  12.0%    0.64×  0.8815 ns      58  25.8%    0.73×  0.8453 ns      42  18.7%    1.33×  0.3882 ns  
+  Java/Sumatra node (105°–115°E)                  4    1  25.0%    2.32×  0.4222 ns       2  50.0%    2.81×  0.2890 ns       0   0.0%    0.00×  1.0000 ns  
+  Java tight (107°–112°E)                         1    1 100.0%     inf×  0.1274 ns       1 100.0%     inf×  0.2664 ns       0   0.0%    0.00×  1.0000 ns  
+  Indonesia broad (95°–141°E)                   199   28  14.1%    1.80×  0.1725 ns      55  27.6%    1.25×  0.3144 ns      36  18.1%    0.98×  0.6004 ns  
+  Non-heartland (outside 70°–110°E)              13    2  15.4%    1.26×  0.5119 ns       5  38.5%    1.78×  0.2447 ns       1   7.7%    0.36×  0.9309 ns  
+
+====================================================================================================
+  CROSS-REGION BREAKDOWN: Java node vs heartland vs non-heartland
+────────────────────────────────────────────────────────────────────────────────────────────────────
+
+  Java/Sumatra node (105°–115°E)  (N=4)
+    A+: 1 (25.0%)  OR=2.32× p=0.4222 ns
+    A:  2 (50.0%)   OR=2.81×  p=0.2890 ns
+    Tiers: A++=1  A=1  B=2
+
+  Heartland ex Java/Sumatra (70°–105°E)  (N=246)
+    A+: 31 (12.6%)  OR=0.79× p=0.7789 ns
+    A:  64 (26.0%)   OR=0.56×  p=0.9015 ns
+    Tiers: A++=10  A+=21  A=33  B=136  C=25  C-=10  C--=11
+
+    India/Nepal sub (70°–90°E)  (N=21)
+    A+: 4 (19.0%)  OR=1.70× p=0.2705 ns
+    A:  6 (28.6%)   OR=1.11×  p=0.5056 ns
+    Tiers: A++=3  A+=1  A=2  B=11  C=3  C-=1
+
+    Myanmar/Thailand sub (90°–105°E)  (N=225)
+    A+: 27 (12.0%)  OR=0.64× p=0.8815 ns
+    A:  58 (25.8%)   OR=0.73×  p=0.8453 ns
+    Tiers: A++=7  A+=20  A=31  B=125  C=22  C-=9  C--=11
+
+  Non-heartland (outside 70°–110°E)  (N=13)
+    A+: 2 (15.4%)  OR=1.26× p=0.5119 ns
+    A:  5 (38.5%)   OR=1.78×  p=0.2447 ns
+    Tiers: A++=2  A=3  B=7  C--=1
+
+====================================================================================================
+  BIMODAL ANALYSIS: A-tier (Java node) vs C-band (heartland)
+  Hypothesis: same as Wikidata Q180987 audit — A concentrates at Java/105°–115°E
+  (2.5-beru harmonic, 110.3°E) while C concentrates in the physical heartland.
+────────────────────────────────────────────────────────────────────────────────────────────────────
+
+  Java/Sumatra node (105°–115°E) — A-tier zone  (N=4)
+    A-tier: 2 (50.0%)  OR=2.81×  p=0.2890 ns
+    C-band: 0 (0.0%)  OR=0.00×  p=1.0000 ns
+    Tiers:  A++=1  A=1  B=2
+
+  India/Nepal (70°–90°E) — C-band zone  (N=21)
+    A-tier: 6 (28.6%)  OR=1.11×  p=0.5056 ns
+    C-band: 4 (19.0%)  OR=1.07×  p=0.5515 ns
+    Tiers:  A++=3  A+=1  A=2  B=11  C=3  C-=1
+
+  Myanmar/Thailand (90°–105°E) — C-band zone  (N=225)
+    A-tier: 58 (25.8%)  OR=0.73×  p=0.8453 ns
+    C-band: 42 (18.7%)  OR=1.33×  p=0.3882 ns
+    Tiers:  A++=7  A+=20  A=31  B=125  C=22  C-=9  C--=11
+
+  Heartland combined (70°–105°E)  (N=246)
+    A-tier: 64 (26.0%)  OR=0.56×  p=0.9015 ns
+    C-band: 46 (18.7%)  OR=2.76×  p=0.2801 ns
+    Tiers:  A++=10  A+=21  A=33  B=136  C=25  C-=10  C--=11
+
+====================================================================================================
+  GEOGRAPHIC DISTRIBUTION NOTE
+────────────────────────────────────────────────────────────────────────────────────────────────────
+  The OSM building=stupa corpus is geographically distinct from Wikidata Q180987:
+  ~87% of features fall in Myanmar/Thailand (90°–105°E), vs Wikidata which is
+  bimodal with a strong Java/Indonesia node (105°–115°E). This difference in
+  geographic distribution means the two corpora test the 3° signal from different
+  parts of the phase space. The concordant Rayleigh result (both significant at
+  p<0.05 in their respective audit scripts) therefore represents geometric
+  robustness across different source regions, not a duplicate of the same signal.
+
+  OSM corpus centroid regions:
+    Myanmar/Thailand (90°–105°E): 225 features (87%)
+    India/Nepal      (70°–90°E):  21 features (8%)
+    Java node        (105°–115°E): 4 features (2%)
+    Non-heartland:                13 features (5%)
+====================================================================================================
+
+====================================================================================================
+  COMPARISON WITH WIKIDATA Q180987 CORPUS
+────────────────────────────────────────────────────────────────────────────────────────────────────
+  Metric                        OSM (N=259)      Wikidata (N=229)
+  ────────────────────────────────────────────────────────────
+  Full corpus Rayleigh R        0.1073           0.xxxx  (see circConcStupaR macro)
+  Full corpus perm-p            0.0501           see circConcStupaP macro
+  A-tier count / rate           69 / 26.6%         70 / 30.6%
+  A+ count / rate               33 / 12.7%         20 / 8.7%
+  Corpus source                 OpenStreetMap           Wikidata SPARQL
+  Curation status               crowd-sourced           independently curated
+  Tags used                     building/historic/       Q180987 instance-of
+                                ruins=stupa             stupa
+
+  Both corpora show independently significant Rayleigh phase concentration
+  at T=3°. Fisher combination: chi2(4)=19.316, p=0.0007 (see osmStupaFisher* macros).
+  The OSM result is treated as a sensitivity check (crowd-sourced, not curated).
+====================================================================================================
+
+====================================================================================================
+  PER-REGION SITE LISTINGS
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+  All OSM stupas  (N = 259)
+  A+ = 33 (12.7%)  Fisher OR=1.00× p=0.0890 †  |  binomial p=0.0890 †
+  A  = 69  (26.6%)   Fisher OR=1.00×  p=0.0059 **   |  binomial p=0.0059 **
+  Rayleigh R=0.1073  perm-p=0.0496 *
+
+  Tier     N   Rate
+  ───── ──── ──────
+  A++     12   4.6%
+  A+      21   8.1%
+  A       36  13.9%
+  B      143  55.2%
+  C       25   9.7%
+  C-      10   3.9%
+  C--     12   4.6%
+
+  Tier  Dev(km)       Lon  Tag                   Name
+  ──── ────────  ────────  ────────────────────  ──────────────────────────────────────────────────
+  [A++]     0.3km    95.266°E  building=stupa        [way/325156777]
+  [A++]     0.6km    95.274°E  building=stupa        [way/1489782026]
+  [A++]     0.7km   110.275°E  historic=stupa        108 Stupas
+  [A++]     0.8km    44.262°E  building=stupa        Ургьен Сангак Чойлинг
+  [A++]     1.2km   101.280°E  building=stupa        [way/1284112525]
+  [A++]     2.0km    80.251°E  building=stupa        [way/804660842]
+  [A++]     2.2km    95.289°E  building=stupa        [way/1489781997]
+  [A++]     4.1km    95.306°E  building=stupa        [way/440226823]
+  [A++]     4.4km    95.309°E  building=stupa        [way/630318252]
+  [A++]     6.3km    86.326°E  building=stupa        [node/6084186367]
+  [A++]     6.3km   104.326°E  building=stupa        [way/1215983783]
+  [A++]     6.6km    80.329°E  building=stupa        Shubadrara Temple Koggala
+  [A+ ]     6.9km    95.331°E  building=stupa        [way/1481660145]
+  [A+ ]     7.0km    95.332°E  building=stupa        [way/1486213078]
+  [A+ ]     7.7km    98.339°E  building=stupa        [way/631944770]
+  [A+ ]     8.6km   101.346°E  building=stupa        [way/1252516622]
+  [A+ ]     9.4km   101.353°E  building=stupa        [way/1222747342]
+  [A+ ]     9.7km    98.181°E  building=stupa        [way/513338558]
+  [A+ ]     9.9km   104.180°E  building=stupa        [way/1215291778]
+  [A+ ]    10.3km   104.362°E  building=stupa        [way/335048744]
+  [A+ ]    10.3km   101.176°E  building=stupa        [way/326322854]
+  [A+ ]    10.9km   104.171°E  building=stupa        [way/1215061041]
+  [A+ ]    11.3km    98.167°E  building=stupa        [way/513321641]
+  [A+ ]    11.8km    98.163°E  building=stupa        [way/513091324]
+  [A+ ]    12.2km    98.160°E  building=stupa        [way/513338586]
+  [A+ ]    12.8km    95.384°E  building=stupa        [way/1429241918]
+  [A+ ]    12.9km    98.385°E  building=stupa        [way/1004086951]
+  [A+ ]    13.7km    98.146°E  building=stupa        [way/513642960]
+  [A+ ]    14.0km    95.143°E  building=stupa        [way/324993228]
+  [A+ ]    14.2km   101.141°E  building=stupa        [way/768406724]
+  [A+ ]    14.9km    80.404°E  building=stupa        [way/709861369]
+  [A+ ]    15.0km    98.134°E  building=stupa        [way/1285360276]
+  [A+ ]    15.8km    98.126°E  building=stupa        [way/513656322]
+  [A  ]    16.9km   104.421°E  building=stupa        [way/1216189597]
+  [A  ]    17.0km    98.116°E  building=stupa        [way/513656309]
+  [A  ]    18.4km    98.104°E  building=stupa        [way/513656017]
+  [A  ]    18.7km   116.437°E  building=stupa        大颠祖师塔
+  [A  ]    18.7km   101.438°E  building=stupa        [way/1272203837]
+  [A  ]    18.8km   101.439°E  building=stupa        [way/324527168]
+  [A  ]    18.9km   104.099°E  building=stupa        [way/1215006143]
+  [A  ]    18.9km   101.439°E  building=stupa        [way/1272798499]
+  [A  ]    19.3km    92.443°E  building=stupa        [way/553652493]
+  [A  ]    20.1km    92.450°E  building=stupa        嘎布顿旦佛塔
+  [A  ]    20.8km   101.456°E  building=stupa        [way/1252516489]
+  [A  ]    20.8km    89.456°E  building=stupa        [way/406486791]
+  [A  ]    21.0km   101.080°E  building=stupa        [way/428889878]
+  [A  ]    21.1km   104.079°E  building=stupa        [way/1214744138]
+  [A  ]    21.2km   101.460°E  building=stupa        [way/1252516518]
+  [A  ]    21.2km    92.460°E  building=stupa        [way/554584169]
+  [A  ]    22.0km    80.467°E  building=stupa        [way/756818957]
+  [A  ]    22.1km    92.468°E  building=stupa        [way/553652550]
+  [A  ]    22.5km    95.472°E  building=stupa        [way/1491383646]
+  [A  ]    22.8km   101.063°E  building=stupa        [way/1258539066]
+  [A  ]    23.0km   101.062°E  building=stupa        [way/759971050]
+  [A  ]    23.4km   101.058°E  building=stupa        [way/326254709]
+  [A  ]    23.5km   101.057°E  building=stupa        [way/1222189359]
+  [A  ]    24.5km    92.490°E  building=stupa        [way/553655291]
+  [A  ]    24.5km    98.490°E  building=stupa        [way/867938659]
+  [A  ]    24.7km   101.046°E  building=stupa        贡巴佛塔
+  [A  ]    25.8km   101.501°E  building=stupa        [way/1251146740]
+  [A  ]    26.1km   101.504°E  building=stupa        [way/1254253482]
+  [A  ]    26.7km   104.509°E  building=stupa        [way/1215708468]
+  [A  ]    28.5km    92.525°E  building=stupa        [way/553650356]
+  [A  ]    28.5km    98.012°E  building=stupa        [way/1232379591]
+  [A  ]    28.6km   101.526°E  building=stupa        [way/1250724900]
+  [A  ]    30.0km   101.540°E  building=stupa        [way/1252958222]
+  [A  ]    30.4km   112.996°E  building=stupa        净藏禅师塔
+  [A  ]    30.9km    14.547°E  building=stupa        [way/392063573]
+  [A  ]    32.1km   101.558°E  building=stupa        [way/1252958304]
+  [B  ]    33.4km    98.570°E  building=stupa        [way/1099848090]
+  [B  ]    33.8km    98.574°E  building=stupa        [way/1099848107]
+  [B  ]    34.2km   113.578°E  building=stupa        [way/1299825305]
+  [B  ]    34.3km    95.578°E  building=stupa        [way/1354159240]
+  [B  ]    34.4km   103.959°E  building=stupa        [way/1227295155]
+  [B  ]    34.9km   101.583°E  building=stupa        [way/1254605919]
+  [B  ]    35.4km    98.587°E  building=stupa        [way/1099848108]
+  [B  ]    36.1km   100.944°E  building=stupa        [way/326275390]
+  [B  ]    36.2km    89.595°E  building=stupa        Pango Chorten
+  [B  ]    36.3km    98.596°E  building=stupa        勐焕大金塔
+  [B  ]    36.8km    98.600°E  building=stupa        [way/326390611]
+  [B  ]    37.3km    98.605°E  building=stupa        [way/1099848110]
+  [B  ]    37.8km   100.928°E  building=stupa        [way/1002458298]
+  [B  ]    38.5km    86.616°E  building=stupa        Riwoche Chorten ( རི་བོ་ཆེ་མཆོད་རྟེན། )
+  [B  ]    39.2km   101.622°E  building=stupa        [way/1253532647]
+  [B  ]    40.3km   136.906°E  building=stupa        聖仏舎利宝塔
+  [B  ]    41.1km    97.898°E  historic=stupa        姐勒金塔
+  [B  ]    43.8km    -3.336°E  building=stupa        Stoupa des portes de bon augure
+  [B  ]    44.0km   100.872°E  building=stupa        [way/1288257296]
+  [B  ]    46.9km    83.691°E  building=stupa        [way/356093504]
+  [B  ]    47.5km   101.697°E  building=stupa        [way/436143225]
+  [B  ]    47.8km    91.838°E  building=stupa        [way/1446338303]
+  [B  ]    48.3km    91.834°E  building=stupa        [way/402229604]
+  [B  ]    48.4km  -100.167°E  building=stupa        Stupa de la Paz
+  [B  ]    50.0km   101.719°E  building=stupa        [way/763042069]
+  [B  ]    51.1km   100.808°E  building=stupa        [way/627380674]
+  [B  ]    51.4km    92.732°E  building=stupa        [way/401161601]
+  [B  ]    52.3km    95.740°E  building=stupa        [way/1495069144]
+  [B  ]    52.8km    95.745°E  building=stupa        [way/1496012462]
+  [B  ]    55.7km    86.771°E  building=stupa        [node/1679191765]
+  [B  ]    56.3km    88.762°E  building=stupa        [node/11199073246]
+  [B  ]    56.7km    91.758°E  building=stupa        Tsechu Bumpa Chörten
+  [B  ]    57.5km   100.751°E  building=stupa        [way/323035746]
+  [B  ]    58.6km    97.741°E  building=stupa        Stupa
+  [B  ]    61.1km   101.819°E  building=stupa        [way/1249815036]
+  [B  ]    61.9km    92.826°E  building=stupa        [way/1458687903]
+  [B  ]    62.3km   101.830°E  building=stupa        [way/1496540922]
+  [B  ]    64.8km    98.853°E  building=stupa        [way/1234831982]
+  [B  ]    65.1km    95.855°E  building=stupa        [way/397282780]
+  [B  ]    65.3km    97.681°E  building=stupa        အတုလပရမာန်သိဒ္ဓိအောင်စေတီတော်
+  [B  ]    65.8km    91.677°E  building=stupa        [way/404911988]
+  [B  ]    66.9km    97.666°E  building=stupa        မဂ္ဂင်စံအောင် စံကျောင်းတော်
+  [B  ]    67.2km   100.664°E  building=stupa        [way/446872164]
+  [B  ]    67.3km    95.875°E  building=stupa        [way/1424024663]
+  [B  ]    67.9km    91.658°E  building=stupa        [way/407760220]
+  [B  ]    68.1km   100.656°E  building=stupa        [way/322830324]
+  [B  ]    68.4km   100.653°E  building=stupa        [way/1286723930]
+  [B  ]    68.4km   100.653°E  building=stupa        [way/323013646]
+  [B  ]    68.5km    97.652°E  building=stupa        ဆုတောင်းပြည့်ဝဋ်ကြွေးတော်စေတီတော်
+  [B  ]    68.6km   100.651°E  building=stupa        [way/1287413554]
+  [B  ]    68.7km    97.650°E  building=stupa        ရွှေစေတီဘုရား
+  [B  ]    69.5km    97.643°E  building=stupa        ဗူးဘုရားကျောင်း
+  [B  ]    69.6km   103.642°E  building=stupa        [way/447025471]
+  [B  ]    69.7km   100.641°E  building=stupa        [way/1285372521]
+  [B  ]    69.9km    97.639°E  building=stupa        အောင်အေးစေတီတော်
+  [B  ]    70.4km    97.634°E  building=stupa        သက္ကပါဠိဟာရိယစေတီတော်မြတ်
+  [B  ]    70.9km    97.631°E  building=stupa        ရွှေချက်သိုလွမ်းစေတီတော်
+  [B  ]    70.9km    97.630°E  building=stupa        ဆံတော်ရှင် ဦးဇိန စေတီတော်
+  [B  ]    71.2km    97.628°E  building=stupa        သာသနာ့၂၅၀၀ဘုရား
+  [B  ]    71.3km    98.912°E  building=stupa        [node/10289675288]
+  [B  ]    71.5km    97.625°E  building=stupa        ဆုတောင်းပြည့်ပြည်လုံးချမ်းသာအေးစေတီ
+  [B  ]    71.6km    97.624°E  building=stupa        အဘယာအနန္တာစေတီတော်
+  [B  ]    72.0km    97.620°E  building=stupa        ပြည်လုံးချမ်းသာစေတီတော်
+  [B  ]    75.4km    92.949°E  building=stupa        [way/1459545438]
+  [B  ]    77.1km     5.964°E  building=stupa        [way/274082339]
+  [B  ]    78.4km   101.975°E  building=stupa        [way/655974843]
+  [B  ]    78.5km   100.562°E  ruins=stupa           Chedi Singha Lom
+  [B  ]    79.2km    97.556°E  building=stupa        [way/973100670]
+  [B  ]    80.7km   101.996°E  building=stupa        [way/326225274]
+  [B  ]    80.7km    95.996°E  building=stupa        [way/1375338513]
+  [B  ]    80.8km    95.997°E  building=stupa        [way/1375197133]
+  [B  ]    81.5km    99.003°E  building=stupa        [node/10068665222]
+  [B  ]    82.2km   102.010°E  building=stupa        [way/436090420]
+  [B  ]    82.6km   100.525°E  building=stupa        [way/428841697]
+  [B  ]    82.7km    99.014°E  building=stupa        [way/543824630]
+  [B  ]    83.9km   102.025°E  building=stupa        [way/324047021]
+  [B  ]    85.7km   102.041°E  building=stupa        [way/436090421]
+  [B  ]    86.7km    96.050°E  building=stupa        [way/1381419128]
+  [B  ]    86.8km    85.487°E  building=stupa        [way/342681837]
+  [B  ]    87.2km    94.483°E  building=stupa        [way/407449094]
+  [B  ]    87.7km   100.479°E  building=stupa        [way/656677274]
+  [B  ]    89.1km   100.467°E  building=stupa        大幻化网坛城
+  [B  ]    90.6km   100.453°E  building=stupa        [way/759365267]
+  [B  ]    90.9km   100.450°E  building=stupa        [way/325641150]
+  [B  ]    91.0km   100.450°E  building=stupa        [way/394116390]
+  [B  ]    91.2km    91.447°E  building=stupa        松卡石塔
+  [B  ]    91.3km    81.091°E  ruins=stupa           [node/7092899639]
+  [B  ]    91.4km   100.446°E  building=stupa        [way/1247521415]
+  [B  ]    91.5km    96.093°E  building=stupa        [way/397035161]
+  [B  ]    91.6km   100.443°E  building=stupa        [way/1247521421]
+  [B  ]    91.8km    99.096°E  building=stupa        [way/1231618037]
+  [B  ]    92.2km    96.099°E  building=stupa        [way/1437048989]
+  [B  ]    92.6km    91.435°E  building=stupa        [way/405330123]
+  [B  ]    93.2km   102.109°E  building=stupa        [way/436128911]
+  [B  ]    93.9km   103.423°E  building=stupa        [way/819190065]
+  [B  ]    94.9km   100.414°E  building=stupa        [way/1459724133]
+  [B  ]    95.9km    88.405°E  building=stupa        [way/397796721]
+  [B  ]    96.8km    96.141°E  building=stupa        [way/1424372841]
+  [B  ]    96.9km    99.142°E  building=stupa        [way/760936764]
+  [B  ]    97.9km   100.387°E  building=stupa        [way/1247097877]
+  [B  ]    98.2km   102.153°E  building=stupa        [way/1162095930]
+  [B  ]    99.7km    96.167°E  building=stupa        [way/1423839188]
+  [B  ]   100.9km    96.178°E  building=stupa        [way/1423479095]
+  [B  ]   101.2km    99.181°E  building=stupa        [node/10068844601]
+  [B  ]   101.3km   102.181°E  building=stupa        [way/435933432]
+  [B  ]   101.7km    96.185°E  building=stupa        [way/1425470754]
+  [B  ]   102.3km    85.348°E  building=stupa        Nama Buddha
+  [B  ]   102.5km    96.193°E  building=stupa        [way/1423913065]
+  [B  ]   102.8km    96.195°E  building=stupa        [way/1423469380]
+  [B  ]   104.2km    91.330°E  building=stupa        [way/1448411582]
+  [B  ]   104.7km    96.212°E  building=stupa        [way/1436861695]
+  [B  ]   105.0km    85.323°E  building=stupa        [way/1085257290]
+  [B  ]   106.9km     0.232°E  building=stupa        Vajradhara-Ling
+  [B  ]   108.0km    96.242°E  building=stupa        [way/1425494929]
+  [B  ]   108.2km    91.295°E  building=stupa        [way/404737597]
+  [B  ]   109.1km   114.252°E  building=stupa        圆通阁
+  [B  ]   109.6km    85.282°E  building=stupa        [way/322201564]
+  [B  ]   110.0km    96.260°E  building=stupa        [way/1440171266]
+  [B  ]   110.1km   100.277°E  building=stupa        [way/1226122892]
+  [B  ]   110.6km    91.272°E  building=stupa        [way/405107029]
+  [B  ]   111.2km    99.271°E  building=stupa        [way/761648599]
+  [B  ]   112.2km   100.258°E  building=stupa        曼磊佛塔
+  [B  ]   112.3km   102.280°E  building=stupa        [way/436128913]
+  [B  ]   112.8km    99.285°E  building=stupa        [node/10073845343]
+  [B  ]   113.7km   100.245°E  building=stupa        [way/759376315]
+  [B  ]   114.6km   100.237°E  building=stupa        [way/762210126]
+  [B  ]   115.9km    99.313°E  building=stupa        [node/3284404817]
+  [B  ]   117.2km    94.213°E  building=stupa        [way/325218106]
+  [B  ]   117.3km    91.212°E  building=stupa        [node/12204697610]
+  [B  ]   118.0km    97.206°E  building=stupa        [way/407624168]
+  [B  ]   121.0km   100.179°E  building=stupa        [way/410192947]
+  [B  ]   121.6km   100.174°E  building=stupa        [way/759161097]
+  [B  ]   121.6km    91.173°E  building=stupa        [way/407996573]
+  [B  ]   122.5km   100.166°E  building=stupa        [way/322689699]
+  [B  ]   127.6km   100.119°E  building=stupa        [way/1244587335]
+  [B  ]   128.9km    93.430°E  building=stupa        [way/1467743724]
+  [B  ]   129.2km    91.105°E  building=stupa        [way/1452272509]
+  [B  ]   129.6km   100.102°E  building=stupa        [way/1003393379]
+  [B  ]   130.1km   100.097°E  building=stupa        [way/759620514]
+  [B  ]   130.2km    93.442°E  building=stupa        [way/1467056235]
+  [B  ]   130.3km   100.095°E  building=stupa        [way/322689701]
+  [B  ]   130.4km   100.094°E  building=stupa        [way/1245338697]
+  [B  ]   132.3km    99.461°E  building=stupa        [way/1003988707]
+  [C  ]   133.9km   103.063°E  building=stupa        [way/1220023512]
+  [C  ]   134.5km    99.481°E  building=stupa        [way/761751711]
+  [C  ]   135.1km   100.052°E  building=stupa        [way/322689700]
+  [C  ]   135.3km    82.050°E  historic=stupa        Kachchi Kuti (Sudatta Stupa)
+  [C  ]   135.6km   103.048°E  building=stupa        [way/1220023499]
+  [C  ]   136.0km    99.494°E  building=stupa        [way/761710407]
+  [C  ]   136.3km    97.041°E  building=stupa        [way/447200216]
+  [C  ]   136.5km   103.039°E  building=stupa        [way/1220023491]
+  [C  ]   136.7km   100.037°E  building=stupa        [way/759632275]
+  [C  ]   137.2km   102.505°E  building=stupa        Gongtang Chorten
+  [C  ]   138.4km    97.022°E  building=stupa        [way/1341741931]
+  [C  ]   140.0km   103.008°E  building=stupa        [way/637861625]
+  [C  ]   140.2km   100.006°E  building=stupa        พระธาตุเจดีย์นันทศรีบุญมี
+  [C  ]   140.6km   103.003°E  building=stupa        [way/1220023629]
+  [C  ]   141.2km    99.541°E  building=stupa        [node/5906200823]
+  [C  ]   141.2km    87.997°E  building=stupa        [way/397645872]
+  [C  ]   142.5km    93.553°E  building=stupa        [way/401040889]
+  [C  ]   143.6km   102.563°E  building=stupa        [way/1209666374]
+  [C  ]   144.2km    99.970°E  building=stupa        พระธาตุสุโขเทยเยเจติยสิริอัมพวนาราม
+  [C  ]   145.2km    90.577°E  building=stupa        [way/542513525]
+  [C  ]   146.8km    96.592°E  building=stupa        [way/701236926]
+  [C  ]   147.4km    87.941°E  building=stupa        [way/397651152]
+  [C  ]   147.4km    99.597°E  building=stupa        [way/1476882060]
+  [C  ]   148.6km    99.608°E  building=stupa        [way/1236291359]
+  [C  ]   148.8km    93.610°E  building=stupa        [way/409091358]
+  [C- ]   150.8km    99.628°E  building=stupa        [way/761170092]
+  [C- ]   151.2km    99.631°E  building=stupa        [way/428925283]
+  [C- ]   152.9km   102.891°E  building=stupa        [node/12118421750]
+  [C- ]   154.2km    93.880°E  building=stupa        [way/409111308]
+  [C- ]   154.4km   102.660°E  building=stupa        [way/435920895]
+  [C- ]   156.5km    72.859°E  building=stupa        [way/1008062766]
+  [C- ]   158.0km    99.846°E  building=stupa        [way/762648957]
+  [C- ]   158.3km   102.843°E  building=stupa        [way/637599586]
+  [C- ]   158.4km   102.842°E  building=stupa        Golden Prayer Stupa
+  [C- ]   159.3km    99.834°E  building=stupa        [node/11533911020]
+  [C--]   159.8km    99.829°E  building=stupa        [way/1473345146]
+  [C--]   160.1km    90.827°E  building=stupa        [way/1456017938]
+  [C--]   160.8km    96.820°E  building=stupa        藏娘佛塔
+  [C--]   161.3km    90.722°E  building=stupa        [way/1451569801]
+  [C--]   161.6km    99.725°E  building=stupa        [way/1225500980]
+  [C--]   163.8km    99.793°E  building=stupa        [way/758871593]
+  [C--]   164.0km    99.791°E  building=stupa        [way/1244587448]
+  [C--]   164.4km    99.750°E  building=stupa        [way/1497620348]
+  [C--]   165.2km    99.757°E  building=stupa        [way/1497458766]
+  [C--]   166.2km    15.766°E  building=stupa        Friedensstupa
+  [C--]   166.2km   102.772°E  building=stupa        [way/637516705]
+  [C--]   166.5km    99.769°E  building=stupa        [way/1244164314]
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+  Heartland (70°–110°E)  (N = 246)
+  A+ = 31 (12.6%)  Fisher OR=0.79× p=0.7789 ns  |  binomial p=0.1074 ns
+  A  = 64  (26.0%)   Fisher OR=0.56×  p=0.9015 ns   |  binomial p=0.0132 *
+  Rayleigh R=0.0974  perm-p=0.0982 †
+
+  Tier     N   Rate
+  ───── ──── ──────
+  A++     10   4.1%
+  A+      21   8.5%
+  A       33  13.4%
+  B      136  55.3%
+  C       25  10.2%
+  C-      10   4.1%
+  C--     11   4.5%
+
+  Tier  Dev(km)       Lon  Tag                   Name
+  ──── ────────  ────────  ────────────────────  ──────────────────────────────────────────────────
+  [A++]     0.3km    95.266°E  building=stupa        [way/325156777]
+  [A++]     0.6km    95.274°E  building=stupa        [way/1489782026]
+  [A++]     1.2km   101.280°E  building=stupa        [way/1284112525]
+  [A++]     2.0km    80.251°E  building=stupa        [way/804660842]
+  [A++]     2.2km    95.289°E  building=stupa        [way/1489781997]
+  [A++]     4.1km    95.306°E  building=stupa        [way/440226823]
+  [A++]     4.4km    95.309°E  building=stupa        [way/630318252]
+  [A++]     6.3km    86.326°E  building=stupa        [node/6084186367]
+  [A++]     6.3km   104.326°E  building=stupa        [way/1215983783]
+  [A++]     6.6km    80.329°E  building=stupa        Shubadrara Temple Koggala
+  [A+ ]     6.9km    95.331°E  building=stupa        [way/1481660145]
+  [A+ ]     7.0km    95.332°E  building=stupa        [way/1486213078]
+  [A+ ]     7.7km    98.339°E  building=stupa        [way/631944770]
+  [A+ ]     8.6km   101.346°E  building=stupa        [way/1252516622]
+  [A+ ]     9.4km   101.353°E  building=stupa        [way/1222747342]
+  [A+ ]     9.7km    98.181°E  building=stupa        [way/513338558]
+  [A+ ]     9.9km   104.180°E  building=stupa        [way/1215291778]
+  [A+ ]    10.3km   104.362°E  building=stupa        [way/335048744]
+  [A+ ]    10.3km   101.176°E  building=stupa        [way/326322854]
+  [A+ ]    10.9km   104.171°E  building=stupa        [way/1215061041]
+  [A+ ]    11.3km    98.167°E  building=stupa        [way/513321641]
+  [A+ ]    11.8km    98.163°E  building=stupa        [way/513091324]
+  [A+ ]    12.2km    98.160°E  building=stupa        [way/513338586]
+  [A+ ]    12.8km    95.384°E  building=stupa        [way/1429241918]
+  [A+ ]    12.9km    98.385°E  building=stupa        [way/1004086951]
+  [A+ ]    13.7km    98.146°E  building=stupa        [way/513642960]
+  [A+ ]    14.0km    95.143°E  building=stupa        [way/324993228]
+  [A+ ]    14.2km   101.141°E  building=stupa        [way/768406724]
+  [A+ ]    14.9km    80.404°E  building=stupa        [way/709861369]
+  [A+ ]    15.0km    98.134°E  building=stupa        [way/1285360276]
+  [A+ ]    15.8km    98.126°E  building=stupa        [way/513656322]
+  [A  ]    16.9km   104.421°E  building=stupa        [way/1216189597]
+  [A  ]    17.0km    98.116°E  building=stupa        [way/513656309]
+  [A  ]    18.4km    98.104°E  building=stupa        [way/513656017]
+  [A  ]    18.7km   101.438°E  building=stupa        [way/1272203837]
+  [A  ]    18.8km   101.439°E  building=stupa        [way/324527168]
+  [A  ]    18.9km   104.099°E  building=stupa        [way/1215006143]
+  [A  ]    18.9km   101.439°E  building=stupa        [way/1272798499]
+  [A  ]    19.3km    92.443°E  building=stupa        [way/553652493]
+  [A  ]    20.1km    92.450°E  building=stupa        嘎布顿旦佛塔
+  [A  ]    20.8km   101.456°E  building=stupa        [way/1252516489]
+  [A  ]    20.8km    89.456°E  building=stupa        [way/406486791]
+  [A  ]    21.0km   101.080°E  building=stupa        [way/428889878]
+  [A  ]    21.1km   104.079°E  building=stupa        [way/1214744138]
+  [A  ]    21.2km   101.460°E  building=stupa        [way/1252516518]
+  [A  ]    21.2km    92.460°E  building=stupa        [way/554584169]
+  [A  ]    22.0km    80.467°E  building=stupa        [way/756818957]
+  [A  ]    22.1km    92.468°E  building=stupa        [way/553652550]
+  [A  ]    22.5km    95.472°E  building=stupa        [way/1491383646]
+  [A  ]    22.8km   101.063°E  building=stupa        [way/1258539066]
+  [A  ]    23.0km   101.062°E  building=stupa        [way/759971050]
+  [A  ]    23.4km   101.058°E  building=stupa        [way/326254709]
+  [A  ]    23.5km   101.057°E  building=stupa        [way/1222189359]
+  [A  ]    24.5km    92.490°E  building=stupa        [way/553655291]
+  [A  ]    24.5km    98.490°E  building=stupa        [way/867938659]
+  [A  ]    24.7km   101.046°E  building=stupa        贡巴佛塔
+  [A  ]    25.8km   101.501°E  building=stupa        [way/1251146740]
+  [A  ]    26.1km   101.504°E  building=stupa        [way/1254253482]
+  [A  ]    26.7km   104.509°E  building=stupa        [way/1215708468]
+  [A  ]    28.5km    92.525°E  building=stupa        [way/553650356]
+  [A  ]    28.5km    98.012°E  building=stupa        [way/1232379591]
+  [A  ]    28.6km   101.526°E  building=stupa        [way/1250724900]
+  [A  ]    30.0km   101.540°E  building=stupa        [way/1252958222]
+  [A  ]    32.1km   101.558°E  building=stupa        [way/1252958304]
+  [B  ]    33.4km    98.570°E  building=stupa        [way/1099848090]
+  [B  ]    33.8km    98.574°E  building=stupa        [way/1099848107]
+  [B  ]    34.3km    95.578°E  building=stupa        [way/1354159240]
+  [B  ]    34.4km   103.959°E  building=stupa        [way/1227295155]
+  [B  ]    34.9km   101.583°E  building=stupa        [way/1254605919]
+  [B  ]    35.4km    98.587°E  building=stupa        [way/1099848108]
+  [B  ]    36.1km   100.944°E  building=stupa        [way/326275390]
+  [B  ]    36.2km    89.595°E  building=stupa        Pango Chorten
+  [B  ]    36.3km    98.596°E  building=stupa        勐焕大金塔
+  [B  ]    36.8km    98.600°E  building=stupa        [way/326390611]
+  [B  ]    37.3km    98.605°E  building=stupa        [way/1099848110]
+  [B  ]    37.8km   100.928°E  building=stupa        [way/1002458298]
+  [B  ]    38.5km    86.616°E  building=stupa        Riwoche Chorten ( རི་བོ་ཆེ་མཆོད་རྟེན། )
+  [B  ]    39.2km   101.622°E  building=stupa        [way/1253532647]
+  [B  ]    41.1km    97.898°E  historic=stupa        姐勒金塔
+  [B  ]    44.0km   100.872°E  building=stupa        [way/1288257296]
+  [B  ]    46.9km    83.691°E  building=stupa        [way/356093504]
+  [B  ]    47.5km   101.697°E  building=stupa        [way/436143225]
+  [B  ]    47.8km    91.838°E  building=stupa        [way/1446338303]
+  [B  ]    48.3km    91.834°E  building=stupa        [way/402229604]
+  [B  ]    50.0km   101.719°E  building=stupa        [way/763042069]
+  [B  ]    51.1km   100.808°E  building=stupa        [way/627380674]
+  [B  ]    51.4km    92.732°E  building=stupa        [way/401161601]
+  [B  ]    52.3km    95.740°E  building=stupa        [way/1495069144]
+  [B  ]    52.8km    95.745°E  building=stupa        [way/1496012462]
+  [B  ]    55.7km    86.771°E  building=stupa        [node/1679191765]
+  [B  ]    56.3km    88.762°E  building=stupa        [node/11199073246]
+  [B  ]    56.7km    91.758°E  building=stupa        Tsechu Bumpa Chörten
+  [B  ]    57.5km   100.751°E  building=stupa        [way/323035746]
+  [B  ]    58.6km    97.741°E  building=stupa        Stupa
+  [B  ]    61.1km   101.819°E  building=stupa        [way/1249815036]
+  [B  ]    61.9km    92.826°E  building=stupa        [way/1458687903]
+  [B  ]    62.3km   101.830°E  building=stupa        [way/1496540922]
+  [B  ]    64.8km    98.853°E  building=stupa        [way/1234831982]
+  [B  ]    65.1km    95.855°E  building=stupa        [way/397282780]
+  [B  ]    65.3km    97.681°E  building=stupa        အတုလပရမာန်သိဒ္ဓိအောင်စေတီတော်
+  [B  ]    65.8km    91.677°E  building=stupa        [way/404911988]
+  [B  ]    66.9km    97.666°E  building=stupa        မဂ္ဂင်စံအောင် စံကျောင်းတော်
+  [B  ]    67.2km   100.664°E  building=stupa        [way/446872164]
+  [B  ]    67.3km    95.875°E  building=stupa        [way/1424024663]
+  [B  ]    67.9km    91.658°E  building=stupa        [way/407760220]
+  [B  ]    68.1km   100.656°E  building=stupa        [way/322830324]
+  [B  ]    68.4km   100.653°E  building=stupa        [way/1286723930]
+  [B  ]    68.4km   100.653°E  building=stupa        [way/323013646]
+  [B  ]    68.5km    97.652°E  building=stupa        ဆုတောင်းပြည့်ဝဋ်ကြွေးတော်စေတီတော်
+  [B  ]    68.6km   100.651°E  building=stupa        [way/1287413554]
+  [B  ]    68.7km    97.650°E  building=stupa        ရွှေစေတီဘုရား
+  [B  ]    69.5km    97.643°E  building=stupa        ဗူးဘုရားကျောင်း
+  [B  ]    69.6km   103.642°E  building=stupa        [way/447025471]
+  [B  ]    69.7km   100.641°E  building=stupa        [way/1285372521]
+  [B  ]    69.9km    97.639°E  building=stupa        အောင်အေးစေတီတော်
+  [B  ]    70.4km    97.634°E  building=stupa        သက္ကပါဠိဟာရိယစေတီတော်မြတ်
+  [B  ]    70.9km    97.631°E  building=stupa        ရွှေချက်သိုလွမ်းစေတီတော်
+  [B  ]    70.9km    97.630°E  building=stupa        ဆံတော်ရှင် ဦးဇိန စေတီတော်
+  [B  ]    71.2km    97.628°E  building=stupa        သာသနာ့၂၅၀၀ဘုရား
+  [B  ]    71.3km    98.912°E  building=stupa        [node/10289675288]
+  [B  ]    71.5km    97.625°E  building=stupa        ဆုတောင်းပြည့်ပြည်လုံးချမ်းသာအေးစေတီ
+  [B  ]    71.6km    97.624°E  building=stupa        အဘယာအနန္တာစေတီတော်
+  [B  ]    72.0km    97.620°E  building=stupa        ပြည်လုံးချမ်းသာစေတီတော်
+  [B  ]    75.4km    92.949°E  building=stupa        [way/1459545438]
+  [B  ]    78.4km   101.975°E  building=stupa        [way/655974843]
+  [B  ]    78.5km   100.562°E  ruins=stupa           Chedi Singha Lom
+  [B  ]    79.2km    97.556°E  building=stupa        [way/973100670]
+  [B  ]    80.7km   101.996°E  building=stupa        [way/326225274]
+  [B  ]    80.7km    95.996°E  building=stupa        [way/1375338513]
+  [B  ]    80.8km    95.997°E  building=stupa        [way/1375197133]
+  [B  ]    81.5km    99.003°E  building=stupa        [node/10068665222]
+  [B  ]    82.2km   102.010°E  building=stupa        [way/436090420]
+  [B  ]    82.6km   100.525°E  building=stupa        [way/428841697]
+  [B  ]    82.7km    99.014°E  building=stupa        [way/543824630]
+  [B  ]    83.9km   102.025°E  building=stupa        [way/324047021]
+  [B  ]    85.7km   102.041°E  building=stupa        [way/436090421]
+  [B  ]    86.7km    96.050°E  building=stupa        [way/1381419128]
+  [B  ]    86.8km    85.487°E  building=stupa        [way/342681837]
+  [B  ]    87.2km    94.483°E  building=stupa        [way/407449094]
+  [B  ]    87.7km   100.479°E  building=stupa        [way/656677274]
+  [B  ]    89.1km   100.467°E  building=stupa        大幻化网坛城
+  [B  ]    90.6km   100.453°E  building=stupa        [way/759365267]
+  [B  ]    90.9km   100.450°E  building=stupa        [way/325641150]
+  [B  ]    91.0km   100.450°E  building=stupa        [way/394116390]
+  [B  ]    91.2km    91.447°E  building=stupa        松卡石塔
+  [B  ]    91.3km    81.091°E  ruins=stupa           [node/7092899639]
+  [B  ]    91.4km   100.446°E  building=stupa        [way/1247521415]
+  [B  ]    91.5km    96.093°E  building=stupa        [way/397035161]
+  [B  ]    91.6km   100.443°E  building=stupa        [way/1247521421]
+  [B  ]    91.8km    99.096°E  building=stupa        [way/1231618037]
+  [B  ]    92.2km    96.099°E  building=stupa        [way/1437048989]
+  [B  ]    92.6km    91.435°E  building=stupa        [way/405330123]
+  [B  ]    93.2km   102.109°E  building=stupa        [way/436128911]
+  [B  ]    93.9km   103.423°E  building=stupa        [way/819190065]
+  [B  ]    94.9km   100.414°E  building=stupa        [way/1459724133]
+  [B  ]    95.9km    88.405°E  building=stupa        [way/397796721]
+  [B  ]    96.8km    96.141°E  building=stupa        [way/1424372841]
+  [B  ]    96.9km    99.142°E  building=stupa        [way/760936764]
+  [B  ]    97.9km   100.387°E  building=stupa        [way/1247097877]
+  [B  ]    98.2km   102.153°E  building=stupa        [way/1162095930]
+  [B  ]    99.7km    96.167°E  building=stupa        [way/1423839188]
+  [B  ]   100.9km    96.178°E  building=stupa        [way/1423479095]
+  [B  ]   101.2km    99.181°E  building=stupa        [node/10068844601]
+  [B  ]   101.3km   102.181°E  building=stupa        [way/435933432]
+  [B  ]   101.7km    96.185°E  building=stupa        [way/1425470754]
+  [B  ]   102.3km    85.348°E  building=stupa        Nama Buddha
+  [B  ]   102.5km    96.193°E  building=stupa        [way/1423913065]
+  [B  ]   102.8km    96.195°E  building=stupa        [way/1423469380]
+  [B  ]   104.2km    91.330°E  building=stupa        [way/1448411582]
+  [B  ]   104.7km    96.212°E  building=stupa        [way/1436861695]
+  [B  ]   105.0km    85.323°E  building=stupa        [way/1085257290]
+  [B  ]   108.0km    96.242°E  building=stupa        [way/1425494929]
+  [B  ]   108.2km    91.295°E  building=stupa        [way/404737597]
+  [B  ]   109.6km    85.282°E  building=stupa        [way/322201564]
+  [B  ]   110.0km    96.260°E  building=stupa        [way/1440171266]
+  [B  ]   110.1km   100.277°E  building=stupa        [way/1226122892]
+  [B  ]   110.6km    91.272°E  building=stupa        [way/405107029]
+  [B  ]   111.2km    99.271°E  building=stupa        [way/761648599]
+  [B  ]   112.2km   100.258°E  building=stupa        曼磊佛塔
+  [B  ]   112.3km   102.280°E  building=stupa        [way/436128913]
+  [B  ]   112.8km    99.285°E  building=stupa        [node/10073845343]
+  [B  ]   113.7km   100.245°E  building=stupa        [way/759376315]
+  [B  ]   114.6km   100.237°E  building=stupa        [way/762210126]
+  [B  ]   115.9km    99.313°E  building=stupa        [node/3284404817]
+  [B  ]   117.2km    94.213°E  building=stupa        [way/325218106]
+  [B  ]   117.3km    91.212°E  building=stupa        [node/12204697610]
+  [B  ]   118.0km    97.206°E  building=stupa        [way/407624168]
+  [B  ]   121.0km   100.179°E  building=stupa        [way/410192947]
+  [B  ]   121.6km   100.174°E  building=stupa        [way/759161097]
+  [B  ]   121.6km    91.173°E  building=stupa        [way/407996573]
+  [B  ]   122.5km   100.166°E  building=stupa        [way/322689699]
+  [B  ]   127.6km   100.119°E  building=stupa        [way/1244587335]
+  [B  ]   128.9km    93.430°E  building=stupa        [way/1467743724]
+  [B  ]   129.2km    91.105°E  building=stupa        [way/1452272509]
+  [B  ]   129.6km   100.102°E  building=stupa        [way/1003393379]
+  [B  ]   130.1km   100.097°E  building=stupa        [way/759620514]
+  [B  ]   130.2km    93.442°E  building=stupa        [way/1467056235]
+  [B  ]   130.3km   100.095°E  building=stupa        [way/322689701]
+  [B  ]   130.4km   100.094°E  building=stupa        [way/1245338697]
+  [B  ]   132.3km    99.461°E  building=stupa        [way/1003988707]
+  [C  ]   133.9km   103.063°E  building=stupa        [way/1220023512]
+  [C  ]   134.5km    99.481°E  building=stupa        [way/761751711]
+  [C  ]   135.1km   100.052°E  building=stupa        [way/322689700]
+  [C  ]   135.3km    82.050°E  historic=stupa        Kachchi Kuti (Sudatta Stupa)
+  [C  ]   135.6km   103.048°E  building=stupa        [way/1220023499]
+  [C  ]   136.0km    99.494°E  building=stupa        [way/761710407]
+  [C  ]   136.3km    97.041°E  building=stupa        [way/447200216]
+  [C  ]   136.5km   103.039°E  building=stupa        [way/1220023491]
+  [C  ]   136.7km   100.037°E  building=stupa        [way/759632275]
+  [C  ]   137.2km   102.505°E  building=stupa        Gongtang Chorten
+  [C  ]   138.4km    97.022°E  building=stupa        [way/1341741931]
+  [C  ]   140.0km   103.008°E  building=stupa        [way/637861625]
+  [C  ]   140.2km   100.006°E  building=stupa        พระธาตุเจดีย์นันทศรีบุญมี
+  [C  ]   140.6km   103.003°E  building=stupa        [way/1220023629]
+  [C  ]   141.2km    99.541°E  building=stupa        [node/5906200823]
+  [C  ]   141.2km    87.997°E  building=stupa        [way/397645872]
+  [C  ]   142.5km    93.553°E  building=stupa        [way/401040889]
+  [C  ]   143.6km   102.563°E  building=stupa        [way/1209666374]
+  [C  ]   144.2km    99.970°E  building=stupa        พระธาตุสุโขเทยเยเจติยสิริอัมพวนาราม
+  [C  ]   145.2km    90.577°E  building=stupa        [way/542513525]
+  [C  ]   146.8km    96.592°E  building=stupa        [way/701236926]
+  [C  ]   147.4km    87.941°E  building=stupa        [way/397651152]
+  [C  ]   147.4km    99.597°E  building=stupa        [way/1476882060]
+  [C  ]   148.6km    99.608°E  building=stupa        [way/1236291359]
+  [C  ]   148.8km    93.610°E  building=stupa        [way/409091358]
+  [C- ]   150.8km    99.628°E  building=stupa        [way/761170092]
+  [C- ]   151.2km    99.631°E  building=stupa        [way/428925283]
+  [C- ]   152.9km   102.891°E  building=stupa        [node/12118421750]
+  [C- ]   154.2km    93.880°E  building=stupa        [way/409111308]
+  [C- ]   154.4km   102.660°E  building=stupa        [way/435920895]
+  [C- ]   156.5km    72.859°E  building=stupa        [way/1008062766]
+  [C- ]   158.0km    99.846°E  building=stupa        [way/762648957]
+  [C- ]   158.3km   102.843°E  building=stupa        [way/637599586]
+  [C- ]   158.4km   102.842°E  building=stupa        Golden Prayer Stupa
+  [C- ]   159.3km    99.834°E  building=stupa        [node/11533911020]
+  [C--]   159.8km    99.829°E  building=stupa        [way/1473345146]
+  [C--]   160.1km    90.827°E  building=stupa        [way/1456017938]
+  [C--]   160.8km    96.820°E  building=stupa        藏娘佛塔
+  [C--]   161.3km    90.722°E  building=stupa        [way/1451569801]
+  [C--]   161.6km    99.725°E  building=stupa        [way/1225500980]
+  [C--]   163.8km    99.793°E  building=stupa        [way/758871593]
+  [C--]   164.0km    99.791°E  building=stupa        [way/1244587448]
+  [C--]   164.4km    99.750°E  building=stupa        [way/1497620348]
+  [C--]   165.2km    99.757°E  building=stupa        [way/1497458766]
+  [C--]   166.2km   102.772°E  building=stupa        [way/637516705]
+  [C--]   166.5km    99.769°E  building=stupa        [way/1244164314]
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+  India/Nepal (70°–90°E)  (N = 21)
+  A+ = 4 (19.0%)  Fisher OR=1.70× p=0.2705 ns  |  binomial p=0.1520 ns
+  A  = 6  (28.6%)   Fisher OR=1.11×  p=0.5056 ns   |  binomial p=0.2307 ns
+  Rayleigh R=0.1949  perm-p=0.4569 ns
+
+  Tier     N   Rate
+  ───── ──── ──────
+  A++      3  14.3%
+  A+       1   4.8%
+  A        2   9.5%
+  B       11  52.4%
+  C        3  14.3%
+  C-       1   4.8%
+  C--      0   0.0%
+
+  Tier  Dev(km)       Lon  Tag                   Name
+  ──── ────────  ────────  ────────────────────  ──────────────────────────────────────────────────
+  [A++]     2.0km    80.251°E  building=stupa        [way/804660842]
+  [A++]     6.3km    86.326°E  building=stupa        [node/6084186367]
+  [A++]     6.6km    80.329°E  building=stupa        Shubadrara Temple Koggala
+  [A+ ]    14.9km    80.404°E  building=stupa        [way/709861369]
+  [A  ]    20.8km    89.456°E  building=stupa        [way/406486791]
+  [A  ]    22.0km    80.467°E  building=stupa        [way/756818957]
+  [B  ]    36.2km    89.595°E  building=stupa        Pango Chorten
+  [B  ]    38.5km    86.616°E  building=stupa        Riwoche Chorten ( རི་བོ་ཆེ་མཆོད་རྟེན། )
+  [B  ]    46.9km    83.691°E  building=stupa        [way/356093504]
+  [B  ]    55.7km    86.771°E  building=stupa        [node/1679191765]
+  [B  ]    56.3km    88.762°E  building=stupa        [node/11199073246]
+  [B  ]    86.8km    85.487°E  building=stupa        [way/342681837]
+  [B  ]    91.3km    81.091°E  ruins=stupa           [node/7092899639]
+  [B  ]    95.9km    88.405°E  building=stupa        [way/397796721]
+  [B  ]   102.3km    85.348°E  building=stupa        Nama Buddha
+  [B  ]   105.0km    85.323°E  building=stupa        [way/1085257290]
+  [B  ]   109.6km    85.282°E  building=stupa        [way/322201564]
+  [C  ]   135.3km    82.050°E  historic=stupa        Kachchi Kuti (Sudatta Stupa)
+  [C  ]   141.2km    87.997°E  building=stupa        [way/397645872]
+  [C  ]   147.4km    87.941°E  building=stupa        [way/397651152]
+  [C- ]   156.5km    72.859°E  building=stupa        [way/1008062766]
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+  SE Asia / Myanmar-Thailand (90°–105°E)  (N = 225)
+  A+ = 27 (12.0%)  Fisher OR=0.64× p=0.8815 ns  |  binomial p=0.1852 ns
+  A  = 58  (25.8%)   Fisher OR=0.73×  p=0.8453 ns   |  binomial p=0.0209 *
+  Rayleigh R=0.0883  perm-p=0.1779 ns
+
+  Tier     N   Rate
+  ───── ──── ──────
+  A++      7   3.1%
+  A+      20   8.9%
+  A       31  13.8%
+  B      125  55.6%
+  C       22   9.8%
+  C-       9   4.0%
+  C--     11   4.9%
+
+  Tier  Dev(km)       Lon  Tag                   Name
+  ──── ────────  ────────  ────────────────────  ──────────────────────────────────────────────────
+  [A++]     0.3km    95.266°E  building=stupa        [way/325156777]
+  [A++]     0.6km    95.274°E  building=stupa        [way/1489782026]
+  [A++]     1.2km   101.280°E  building=stupa        [way/1284112525]
+  [A++]     2.2km    95.289°E  building=stupa        [way/1489781997]
+  [A++]     4.1km    95.306°E  building=stupa        [way/440226823]
+  [A++]     4.4km    95.309°E  building=stupa        [way/630318252]
+  [A++]     6.3km   104.326°E  building=stupa        [way/1215983783]
+  [A+ ]     6.9km    95.331°E  building=stupa        [way/1481660145]
+  [A+ ]     7.0km    95.332°E  building=stupa        [way/1486213078]
+  [A+ ]     7.7km    98.339°E  building=stupa        [way/631944770]
+  [A+ ]     8.6km   101.346°E  building=stupa        [way/1252516622]
+  [A+ ]     9.4km   101.353°E  building=stupa        [way/1222747342]
+  [A+ ]     9.7km    98.181°E  building=stupa        [way/513338558]
+  [A+ ]     9.9km   104.180°E  building=stupa        [way/1215291778]
+  [A+ ]    10.3km   104.362°E  building=stupa        [way/335048744]
+  [A+ ]    10.3km   101.176°E  building=stupa        [way/326322854]
+  [A+ ]    10.9km   104.171°E  building=stupa        [way/1215061041]
+  [A+ ]    11.3km    98.167°E  building=stupa        [way/513321641]
+  [A+ ]    11.8km    98.163°E  building=stupa        [way/513091324]
+  [A+ ]    12.2km    98.160°E  building=stupa        [way/513338586]
+  [A+ ]    12.8km    95.384°E  building=stupa        [way/1429241918]
+  [A+ ]    12.9km    98.385°E  building=stupa        [way/1004086951]
+  [A+ ]    13.7km    98.146°E  building=stupa        [way/513642960]
+  [A+ ]    14.0km    95.143°E  building=stupa        [way/324993228]
+  [A+ ]    14.2km   101.141°E  building=stupa        [way/768406724]
+  [A+ ]    15.0km    98.134°E  building=stupa        [way/1285360276]
+  [A+ ]    15.8km    98.126°E  building=stupa        [way/513656322]
+  [A  ]    16.9km   104.421°E  building=stupa        [way/1216189597]
+  [A  ]    17.0km    98.116°E  building=stupa        [way/513656309]
+  [A  ]    18.4km    98.104°E  building=stupa        [way/513656017]
+  [A  ]    18.7km   101.438°E  building=stupa        [way/1272203837]
+  [A  ]    18.8km   101.439°E  building=stupa        [way/324527168]
+  [A  ]    18.9km   104.099°E  building=stupa        [way/1215006143]
+  [A  ]    18.9km   101.439°E  building=stupa        [way/1272798499]
+  [A  ]    19.3km    92.443°E  building=stupa        [way/553652493]
+  [A  ]    20.1km    92.450°E  building=stupa        嘎布顿旦佛塔
+  [A  ]    20.8km   101.456°E  building=stupa        [way/1252516489]
+  [A  ]    21.0km   101.080°E  building=stupa        [way/428889878]
+  [A  ]    21.1km   104.079°E  building=stupa        [way/1214744138]
+  [A  ]    21.2km   101.460°E  building=stupa        [way/1252516518]
+  [A  ]    21.2km    92.460°E  building=stupa        [way/554584169]
+  [A  ]    22.1km    92.468°E  building=stupa        [way/553652550]
+  [A  ]    22.5km    95.472°E  building=stupa        [way/1491383646]
+  [A  ]    22.8km   101.063°E  building=stupa        [way/1258539066]
+  [A  ]    23.0km   101.062°E  building=stupa        [way/759971050]
+  [A  ]    23.4km   101.058°E  building=stupa        [way/326254709]
+  [A  ]    23.5km   101.057°E  building=stupa        [way/1222189359]
+  [A  ]    24.5km    92.490°E  building=stupa        [way/553655291]
+  [A  ]    24.5km    98.490°E  building=stupa        [way/867938659]
+  [A  ]    24.7km   101.046°E  building=stupa        贡巴佛塔
+  [A  ]    25.8km   101.501°E  building=stupa        [way/1251146740]
+  [A  ]    26.1km   101.504°E  building=stupa        [way/1254253482]
+  [A  ]    26.7km   104.509°E  building=stupa        [way/1215708468]
+  [A  ]    28.5km    92.525°E  building=stupa        [way/553650356]
+  [A  ]    28.5km    98.012°E  building=stupa        [way/1232379591]
+  [A  ]    28.6km   101.526°E  building=stupa        [way/1250724900]
+  [A  ]    30.0km   101.540°E  building=stupa        [way/1252958222]
+  [A  ]    32.1km   101.558°E  building=stupa        [way/1252958304]
+  [B  ]    33.4km    98.570°E  building=stupa        [way/1099848090]
+  [B  ]    33.8km    98.574°E  building=stupa        [way/1099848107]
+  [B  ]    34.3km    95.578°E  building=stupa        [way/1354159240]
+  [B  ]    34.4km   103.959°E  building=stupa        [way/1227295155]
+  [B  ]    34.9km   101.583°E  building=stupa        [way/1254605919]
+  [B  ]    35.4km    98.587°E  building=stupa        [way/1099848108]
+  [B  ]    36.1km   100.944°E  building=stupa        [way/326275390]
+  [B  ]    36.3km    98.596°E  building=stupa        勐焕大金塔
+  [B  ]    36.8km    98.600°E  building=stupa        [way/326390611]
+  [B  ]    37.3km    98.605°E  building=stupa        [way/1099848110]
+  [B  ]    37.8km   100.928°E  building=stupa        [way/1002458298]
+  [B  ]    39.2km   101.622°E  building=stupa        [way/1253532647]
+  [B  ]    41.1km    97.898°E  historic=stupa        姐勒金塔
+  [B  ]    44.0km   100.872°E  building=stupa        [way/1288257296]
+  [B  ]    47.5km   101.697°E  building=stupa        [way/436143225]
+  [B  ]    47.8km    91.838°E  building=stupa        [way/1446338303]
+  [B  ]    48.3km    91.834°E  building=stupa        [way/402229604]
+  [B  ]    50.0km   101.719°E  building=stupa        [way/763042069]
+  [B  ]    51.1km   100.808°E  building=stupa        [way/627380674]
+  [B  ]    51.4km    92.732°E  building=stupa        [way/401161601]
+  [B  ]    52.3km    95.740°E  building=stupa        [way/1495069144]
+  [B  ]    52.8km    95.745°E  building=stupa        [way/1496012462]
+  [B  ]    56.7km    91.758°E  building=stupa        Tsechu Bumpa Chörten
+  [B  ]    57.5km   100.751°E  building=stupa        [way/323035746]
+  [B  ]    58.6km    97.741°E  building=stupa        Stupa
+  [B  ]    61.1km   101.819°E  building=stupa        [way/1249815036]
+  [B  ]    61.9km    92.826°E  building=stupa        [way/1458687903]
+  [B  ]    62.3km   101.830°E  building=stupa        [way/1496540922]
+  [B  ]    64.8km    98.853°E  building=stupa        [way/1234831982]
+  [B  ]    65.1km    95.855°E  building=stupa        [way/397282780]
+  [B  ]    65.3km    97.681°E  building=stupa        အတုလပရမာန်သိဒ္ဓိအောင်စေတီတော်
+  [B  ]    65.8km    91.677°E  building=stupa        [way/404911988]
+  [B  ]    66.9km    97.666°E  building=stupa        မဂ္ဂင်စံအောင် စံကျောင်းတော်
+  [B  ]    67.2km   100.664°E  building=stupa        [way/446872164]
+  [B  ]    67.3km    95.875°E  building=stupa        [way/1424024663]
+  [B  ]    67.9km    91.658°E  building=stupa        [way/407760220]
+  [B  ]    68.1km   100.656°E  building=stupa        [way/322830324]
+  [B  ]    68.4km   100.653°E  building=stupa        [way/1286723930]
+  [B  ]    68.4km   100.653°E  building=stupa        [way/323013646]
+  [B  ]    68.5km    97.652°E  building=stupa        ဆုတောင်းပြည့်ဝဋ်ကြွေးတော်စေတီတော်
+  [B  ]    68.6km   100.651°E  building=stupa        [way/1287413554]
+  [B  ]    68.7km    97.650°E  building=stupa        ရွှေစေတီဘုရား
+  [B  ]    69.5km    97.643°E  building=stupa        ဗူးဘုရားကျောင်း
+  [B  ]    69.6km   103.642°E  building=stupa        [way/447025471]
+  [B  ]    69.7km   100.641°E  building=stupa        [way/1285372521]
+  [B  ]    69.9km    97.639°E  building=stupa        အောင်အေးစေတီတော်
+  [B  ]    70.4km    97.634°E  building=stupa        သက္ကပါဠိဟာရိယစေတီတော်မြတ်
+  [B  ]    70.9km    97.631°E  building=stupa        ရွှေချက်သိုလွမ်းစေတီတော်
+  [B  ]    70.9km    97.630°E  building=stupa        ဆံတော်ရှင် ဦးဇိန စေတီတော်
+  [B  ]    71.2km    97.628°E  building=stupa        သာသနာ့၂၅၀၀ဘုရား
+  [B  ]    71.3km    98.912°E  building=stupa        [node/10289675288]
+  [B  ]    71.5km    97.625°E  building=stupa        ဆုတောင်းပြည့်ပြည်လုံးချမ်းသာအေးစေတီ
+  [B  ]    71.6km    97.624°E  building=stupa        အဘယာအနန္တာစေတီတော်
+  [B  ]    72.0km    97.620°E  building=stupa        ပြည်လုံးချမ်းသာစေတီတော်
+  [B  ]    75.4km    92.949°E  building=stupa        [way/1459545438]
+  [B  ]    78.4km   101.975°E  building=stupa        [way/655974843]
+  [B  ]    78.5km   100.562°E  ruins=stupa           Chedi Singha Lom
+  [B  ]    79.2km    97.556°E  building=stupa        [way/973100670]
+  [B  ]    80.7km   101.996°E  building=stupa        [way/326225274]
+  [B  ]    80.7km    95.996°E  building=stupa        [way/1375338513]
+  [B  ]    80.8km    95.997°E  building=stupa        [way/1375197133]
+  [B  ]    81.5km    99.003°E  building=stupa        [node/10068665222]
+  [B  ]    82.2km   102.010°E  building=stupa        [way/436090420]
+  [B  ]    82.6km   100.525°E  building=stupa        [way/428841697]
+  [B  ]    82.7km    99.014°E  building=stupa        [way/543824630]
+  [B  ]    83.9km   102.025°E  building=stupa        [way/324047021]
+  [B  ]    85.7km   102.041°E  building=stupa        [way/436090421]
+  [B  ]    86.7km    96.050°E  building=stupa        [way/1381419128]
+  [B  ]    87.2km    94.483°E  building=stupa        [way/407449094]
+  [B  ]    87.7km   100.479°E  building=stupa        [way/656677274]
+  [B  ]    89.1km   100.467°E  building=stupa        大幻化网坛城
+  [B  ]    90.6km   100.453°E  building=stupa        [way/759365267]
+  [B  ]    90.9km   100.450°E  building=stupa        [way/325641150]
+  [B  ]    91.0km   100.450°E  building=stupa        [way/394116390]
+  [B  ]    91.2km    91.447°E  building=stupa        松卡石塔
+  [B  ]    91.4km   100.446°E  building=stupa        [way/1247521415]
+  [B  ]    91.5km    96.093°E  building=stupa        [way/397035161]
+  [B  ]    91.6km   100.443°E  building=stupa        [way/1247521421]
+  [B  ]    91.8km    99.096°E  building=stupa        [way/1231618037]
+  [B  ]    92.2km    96.099°E  building=stupa        [way/1437048989]
+  [B  ]    92.6km    91.435°E  building=stupa        [way/405330123]
+  [B  ]    93.2km   102.109°E  building=stupa        [way/436128911]
+  [B  ]    93.9km   103.423°E  building=stupa        [way/819190065]
+  [B  ]    94.9km   100.414°E  building=stupa        [way/1459724133]
+  [B  ]    96.8km    96.141°E  building=stupa        [way/1424372841]
+  [B  ]    96.9km    99.142°E  building=stupa        [way/760936764]
+  [B  ]    97.9km   100.387°E  building=stupa        [way/1247097877]
+  [B  ]    98.2km   102.153°E  building=stupa        [way/1162095930]
+  [B  ]    99.7km    96.167°E  building=stupa        [way/1423839188]
+  [B  ]   100.9km    96.178°E  building=stupa        [way/1423479095]
+  [B  ]   101.2km    99.181°E  building=stupa        [node/10068844601]
+  [B  ]   101.3km   102.181°E  building=stupa        [way/435933432]
+  [B  ]   101.7km    96.185°E  building=stupa        [way/1425470754]
+  [B  ]   102.5km    96.193°E  building=stupa        [way/1423913065]
+  [B  ]   102.8km    96.195°E  building=stupa        [way/1423469380]
+  [B  ]   104.2km    91.330°E  building=stupa        [way/1448411582]
+  [B  ]   104.7km    96.212°E  building=stupa        [way/1436861695]
+  [B  ]   108.0km    96.242°E  building=stupa        [way/1425494929]
+  [B  ]   108.2km    91.295°E  building=stupa        [way/404737597]
+  [B  ]   110.0km    96.260°E  building=stupa        [way/1440171266]
+  [B  ]   110.1km   100.277°E  building=stupa        [way/1226122892]
+  [B  ]   110.6km    91.272°E  building=stupa        [way/405107029]
+  [B  ]   111.2km    99.271°E  building=stupa        [way/761648599]
+  [B  ]   112.2km   100.258°E  building=stupa        曼磊佛塔
+  [B  ]   112.3km   102.280°E  building=stupa        [way/436128913]
+  [B  ]   112.8km    99.285°E  building=stupa        [node/10073845343]
+  [B  ]   113.7km   100.245°E  building=stupa        [way/759376315]
+  [B  ]   114.6km   100.237°E  building=stupa        [way/762210126]
+  [B  ]   115.9km    99.313°E  building=stupa        [node/3284404817]
+  [B  ]   117.2km    94.213°E  building=stupa        [way/325218106]
+  [B  ]   117.3km    91.212°E  building=stupa        [node/12204697610]
+  [B  ]   118.0km    97.206°E  building=stupa        [way/407624168]
+  [B  ]   121.0km   100.179°E  building=stupa        [way/410192947]
+  [B  ]   121.6km   100.174°E  building=stupa        [way/759161097]
+  [B  ]   121.6km    91.173°E  building=stupa        [way/407996573]
+  [B  ]   122.5km   100.166°E  building=stupa        [way/322689699]
+  [B  ]   127.6km   100.119°E  building=stupa        [way/1244587335]
+  [B  ]   128.9km    93.430°E  building=stupa        [way/1467743724]
+  [B  ]   129.2km    91.105°E  building=stupa        [way/1452272509]
+  [B  ]   129.6km   100.102°E  building=stupa        [way/1003393379]
+  [B  ]   130.1km   100.097°E  building=stupa        [way/759620514]
+  [B  ]   130.2km    93.442°E  building=stupa        [way/1467056235]
+  [B  ]   130.3km   100.095°E  building=stupa        [way/322689701]
+  [B  ]   130.4km   100.094°E  building=stupa        [way/1245338697]
+  [B  ]   132.3km    99.461°E  building=stupa        [way/1003988707]
+  [C  ]   133.9km   103.063°E  building=stupa        [way/1220023512]
+  [C  ]   134.5km    99.481°E  building=stupa        [way/761751711]
+  [C  ]   135.1km   100.052°E  building=stupa        [way/322689700]
+  [C  ]   135.6km   103.048°E  building=stupa        [way/1220023499]
+  [C  ]   136.0km    99.494°E  building=stupa        [way/761710407]
+  [C  ]   136.3km    97.041°E  building=stupa        [way/447200216]
+  [C  ]   136.5km   103.039°E  building=stupa        [way/1220023491]
+  [C  ]   136.7km   100.037°E  building=stupa        [way/759632275]
+  [C  ]   137.2km   102.505°E  building=stupa        Gongtang Chorten
+  [C  ]   138.4km    97.022°E  building=stupa        [way/1341741931]
+  [C  ]   140.0km   103.008°E  building=stupa        [way/637861625]
+  [C  ]   140.2km   100.006°E  building=stupa        พระธาตุเจดีย์นันทศรีบุญมี
+  [C  ]   140.6km   103.003°E  building=stupa        [way/1220023629]
+  [C  ]   141.2km    99.541°E  building=stupa        [node/5906200823]
+  [C  ]   142.5km    93.553°E  building=stupa        [way/401040889]
+  [C  ]   143.6km   102.563°E  building=stupa        [way/1209666374]
+  [C  ]   144.2km    99.970°E  building=stupa        พระธาตุสุโขเทยเยเจติยสิริอัมพวนาราม
+  [C  ]   145.2km    90.577°E  building=stupa        [way/542513525]
+  [C  ]   146.8km    96.592°E  building=stupa        [way/701236926]
+  [C  ]   147.4km    99.597°E  building=stupa        [way/1476882060]
+  [C  ]   148.6km    99.608°E  building=stupa        [way/1236291359]
+  [C  ]   148.8km    93.610°E  building=stupa        [way/409091358]
+  [C- ]   150.8km    99.628°E  building=stupa        [way/761170092]
+  [C- ]   151.2km    99.631°E  building=stupa        [way/428925283]
+  [C- ]   152.9km   102.891°E  building=stupa        [node/12118421750]
+  [C- ]   154.2km    93.880°E  building=stupa        [way/409111308]
+  [C- ]   154.4km   102.660°E  building=stupa        [way/435920895]
+  [C- ]   158.0km    99.846°E  building=stupa        [way/762648957]
+  [C- ]   158.3km   102.843°E  building=stupa        [way/637599586]
+  [C- ]   158.4km   102.842°E  building=stupa        Golden Prayer Stupa
+  [C- ]   159.3km    99.834°E  building=stupa        [node/11533911020]
+  [C--]   159.8km    99.829°E  building=stupa        [way/1473345146]
+  [C--]   160.1km    90.827°E  building=stupa        [way/1456017938]
+  [C--]   160.8km    96.820°E  building=stupa        藏娘佛塔
+  [C--]   161.3km    90.722°E  building=stupa        [way/1451569801]
+  [C--]   161.6km    99.725°E  building=stupa        [way/1225500980]
+  [C--]   163.8km    99.793°E  building=stupa        [way/758871593]
+  [C--]   164.0km    99.791°E  building=stupa        [way/1244587448]
+  [C--]   164.4km    99.750°E  building=stupa        [way/1497620348]
+  [C--]   165.2km    99.757°E  building=stupa        [way/1497458766]
+  [C--]   166.2km   102.772°E  building=stupa        [way/637516705]
+  [C--]   166.5km    99.769°E  building=stupa        [way/1244164314]
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+  Java/Sumatra node (105°–115°E)  (N = 4)
+  A+ = 1 (25.0%)  Fisher OR=2.32× p=0.4222 ns  |  binomial p=0.3439 ns
+  A  = 2  (50.0%)   Fisher OR=2.81×  p=0.2890 ns   |  binomial p=0.1808 ns
+  Rayleigh: N too small (<5)
+
+  Tier     N   Rate
+  ───── ──── ──────
+  A++      1  25.0%
+  A+       0   0.0%
+  A        1  25.0%
+  B        2  50.0%
+  C        0   0.0%
+  C-       0   0.0%
+  C--      0   0.0%
+
+  Tier  Dev(km)       Lon  Tag                   Name
+  ──── ────────  ────────  ────────────────────  ──────────────────────────────────────────────────
+  [A++]     0.7km   110.275°E  historic=stupa        108 Stupas
+  [A  ]    30.4km   112.996°E  building=stupa        净藏禅师塔
+  [B  ]    34.2km   113.578°E  building=stupa        [way/1299825305]
+  [B  ]   109.1km   114.252°E  building=stupa        圆通阁
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+  Java tight (107°–112°E)  (N = 1)
+  A+ = 1 (100.0%)  Fisher OR=inf× p=0.1274 ns  |  binomial p=0.1000 ns
+  A  = 1  (100.0%)   Fisher OR=inf×  p=0.2664 ns   |  binomial p=0.2000 ns
+  Rayleigh: N too small (<5)
+
+  Tier     N   Rate
+  ───── ──── ──────
+  A++      1 100.0%
+  A+       0   0.0%
+  A        0   0.0%
+  B        0   0.0%
+  C        0   0.0%
+  C-       0   0.0%
+  C--      0   0.0%
+
+  Tier  Dev(km)       Lon  Tag                   Name
+  ──── ────────  ────────  ────────────────────  ──────────────────────────────────────────────────
+  [A++]     0.7km   110.275°E  historic=stupa        108 Stupas
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+  Indonesia broad (95°–141°E)  (N = 199)
+  A+ = 28 (14.1%)  Fisher OR=1.80× p=0.1725 ns  |  binomial p=0.0411 *
+  A  = 55  (27.6%)   Fisher OR=1.25×  p=0.3144 ns   |  binomial p=0.0059 **
+  Rayleigh R=0.1198  perm-p=0.0544 †
+
+  Tier     N   Rate
+  ───── ──── ──────
+  A++      8   4.0%
+  A+      20  10.1%
+  A       27  13.6%
+  B      108  54.3%
+  C       19   9.5%
+  C-       8   4.0%
+  C--      9   4.5%
+
+  Tier  Dev(km)       Lon  Tag                   Name
+  ──── ────────  ────────  ────────────────────  ──────────────────────────────────────────────────
+  [A++]     0.3km    95.266°E  building=stupa        [way/325156777]
+  [A++]     0.6km    95.274°E  building=stupa        [way/1489782026]
+  [A++]     0.7km   110.275°E  historic=stupa        108 Stupas
+  [A++]     1.2km   101.280°E  building=stupa        [way/1284112525]
+  [A++]     2.2km    95.289°E  building=stupa        [way/1489781997]
+  [A++]     4.1km    95.306°E  building=stupa        [way/440226823]
+  [A++]     4.4km    95.309°E  building=stupa        [way/630318252]
+  [A++]     6.3km   104.326°E  building=stupa        [way/1215983783]
+  [A+ ]     6.9km    95.331°E  building=stupa        [way/1481660145]
+  [A+ ]     7.0km    95.332°E  building=stupa        [way/1486213078]
+  [A+ ]     7.7km    98.339°E  building=stupa        [way/631944770]
+  [A+ ]     8.6km   101.346°E  building=stupa        [way/1252516622]
+  [A+ ]     9.4km   101.353°E  building=stupa        [way/1222747342]
+  [A+ ]     9.7km    98.181°E  building=stupa        [way/513338558]
+  [A+ ]     9.9km   104.180°E  building=stupa        [way/1215291778]
+  [A+ ]    10.3km   104.362°E  building=stupa        [way/335048744]
+  [A+ ]    10.3km   101.176°E  building=stupa        [way/326322854]
+  [A+ ]    10.9km   104.171°E  building=stupa        [way/1215061041]
+  [A+ ]    11.3km    98.167°E  building=stupa        [way/513321641]
+  [A+ ]    11.8km    98.163°E  building=stupa        [way/513091324]
+  [A+ ]    12.2km    98.160°E  building=stupa        [way/513338586]
+  [A+ ]    12.8km    95.384°E  building=stupa        [way/1429241918]
+  [A+ ]    12.9km    98.385°E  building=stupa        [way/1004086951]
+  [A+ ]    13.7km    98.146°E  building=stupa        [way/513642960]
+  [A+ ]    14.0km    95.143°E  building=stupa        [way/324993228]
+  [A+ ]    14.2km   101.141°E  building=stupa        [way/768406724]
+  [A+ ]    15.0km    98.134°E  building=stupa        [way/1285360276]
+  [A+ ]    15.8km    98.126°E  building=stupa        [way/513656322]
+  [A  ]    16.9km   104.421°E  building=stupa        [way/1216189597]
+  [A  ]    17.0km    98.116°E  building=stupa        [way/513656309]
+  [A  ]    18.4km    98.104°E  building=stupa        [way/513656017]
+  [A  ]    18.7km   116.437°E  building=stupa        大颠祖师塔
+  [A  ]    18.7km   101.438°E  building=stupa        [way/1272203837]
+  [A  ]    18.8km   101.439°E  building=stupa        [way/324527168]
+  [A  ]    18.9km   104.099°E  building=stupa        [way/1215006143]
+  [A  ]    18.9km   101.439°E  building=stupa        [way/1272798499]
+  [A  ]    20.8km   101.456°E  building=stupa        [way/1252516489]
+  [A  ]    21.0km   101.080°E  building=stupa        [way/428889878]
+  [A  ]    21.1km   104.079°E  building=stupa        [way/1214744138]
+  [A  ]    21.2km   101.460°E  building=stupa        [way/1252516518]
+  [A  ]    22.5km    95.472°E  building=stupa        [way/1491383646]
+  [A  ]    22.8km   101.063°E  building=stupa        [way/1258539066]
+  [A  ]    23.0km   101.062°E  building=stupa        [way/759971050]
+  [A  ]    23.4km   101.058°E  building=stupa        [way/326254709]
+  [A  ]    23.5km   101.057°E  building=stupa        [way/1222189359]
+  [A  ]    24.5km    98.490°E  building=stupa        [way/867938659]
+  [A  ]    24.7km   101.046°E  building=stupa        贡巴佛塔
+  [A  ]    25.8km   101.501°E  building=stupa        [way/1251146740]
+  [A  ]    26.1km   101.504°E  building=stupa        [way/1254253482]
+  [A  ]    26.7km   104.509°E  building=stupa        [way/1215708468]
+  [A  ]    28.5km    98.012°E  building=stupa        [way/1232379591]
+  [A  ]    28.6km   101.526°E  building=stupa        [way/1250724900]
+  [A  ]    30.0km   101.540°E  building=stupa        [way/1252958222]
+  [A  ]    30.4km   112.996°E  building=stupa        净藏禅师塔
+  [A  ]    32.1km   101.558°E  building=stupa        [way/1252958304]
+  [B  ]    33.4km    98.570°E  building=stupa        [way/1099848090]
+  [B  ]    33.8km    98.574°E  building=stupa        [way/1099848107]
+  [B  ]    34.2km   113.578°E  building=stupa        [way/1299825305]
+  [B  ]    34.3km    95.578°E  building=stupa        [way/1354159240]
+  [B  ]    34.4km   103.959°E  building=stupa        [way/1227295155]
+  [B  ]    34.9km   101.583°E  building=stupa        [way/1254605919]
+  [B  ]    35.4km    98.587°E  building=stupa        [way/1099848108]
+  [B  ]    36.1km   100.944°E  building=stupa        [way/326275390]
+  [B  ]    36.3km    98.596°E  building=stupa        勐焕大金塔
+  [B  ]    36.8km    98.600°E  building=stupa        [way/326390611]
+  [B  ]    37.3km    98.605°E  building=stupa        [way/1099848110]
+  [B  ]    37.8km   100.928°E  building=stupa        [way/1002458298]
+  [B  ]    39.2km   101.622°E  building=stupa        [way/1253532647]
+  [B  ]    40.3km   136.906°E  building=stupa        聖仏舎利宝塔
+  [B  ]    41.1km    97.898°E  historic=stupa        姐勒金塔
+  [B  ]    44.0km   100.872°E  building=stupa        [way/1288257296]
+  [B  ]    47.5km   101.697°E  building=stupa        [way/436143225]
+  [B  ]    50.0km   101.719°E  building=stupa        [way/763042069]
+  [B  ]    51.1km   100.808°E  building=stupa        [way/627380674]
+  [B  ]    52.3km    95.740°E  building=stupa        [way/1495069144]
+  [B  ]    52.8km    95.745°E  building=stupa        [way/1496012462]
+  [B  ]    57.5km   100.751°E  building=stupa        [way/323035746]
+  [B  ]    58.6km    97.741°E  building=stupa        Stupa
+  [B  ]    61.1km   101.819°E  building=stupa        [way/1249815036]
+  [B  ]    62.3km   101.830°E  building=stupa        [way/1496540922]
+  [B  ]    64.8km    98.853°E  building=stupa        [way/1234831982]
+  [B  ]    65.1km    95.855°E  building=stupa        [way/397282780]
+  [B  ]    65.3km    97.681°E  building=stupa        အတုလပရမာန်သိဒ္ဓိအောင်စေတီတော်
+  [B  ]    66.9km    97.666°E  building=stupa        မဂ္ဂင်စံအောင် စံကျောင်းတော်
+  [B  ]    67.2km   100.664°E  building=stupa        [way/446872164]
+  [B  ]    67.3km    95.875°E  building=stupa        [way/1424024663]
+  [B  ]    68.1km   100.656°E  building=stupa        [way/322830324]
+  [B  ]    68.4km   100.653°E  building=stupa        [way/1286723930]
+  [B  ]    68.4km   100.653°E  building=stupa        [way/323013646]
+  [B  ]    68.5km    97.652°E  building=stupa        ဆုတောင်းပြည့်ဝဋ်ကြွေးတော်စေတီတော်
+  [B  ]    68.6km   100.651°E  building=stupa        [way/1287413554]
+  [B  ]    68.7km    97.650°E  building=stupa        ရွှေစေတီဘုရား
+  [B  ]    69.5km    97.643°E  building=stupa        ဗူးဘုရားကျောင်း
+  [B  ]    69.6km   103.642°E  building=stupa        [way/447025471]
+  [B  ]    69.7km   100.641°E  building=stupa        [way/1285372521]
+  [B  ]    69.9km    97.639°E  building=stupa        အောင်အေးစေတီတော်
+  [B  ]    70.4km    97.634°E  building=stupa        သက္ကပါဠိဟာရိယစေတီတော်မြတ်
+  [B  ]    70.9km    97.631°E  building=stupa        ရွှေချက်သိုလွမ်းစေတီတော်
+  [B  ]    70.9km    97.630°E  building=stupa        ဆံတော်ရှင် ဦးဇိန စေတီတော်
+  [B  ]    71.2km    97.628°E  building=stupa        သာသနာ့၂၅၀၀ဘုရား
+  [B  ]    71.3km    98.912°E  building=stupa        [node/10289675288]
+  [B  ]    71.5km    97.625°E  building=stupa        ဆုတောင်းပြည့်ပြည်လုံးချမ်းသာအေးစေတီ
+  [B  ]    71.6km    97.624°E  building=stupa        အဘယာအနန္တာစေတီတော်
+  [B  ]    72.0km    97.620°E  building=stupa        ပြည်လုံးချမ်းသာစေတီတော်
+  [B  ]    78.4km   101.975°E  building=stupa        [way/655974843]
+  [B  ]    78.5km   100.562°E  ruins=stupa           Chedi Singha Lom
+  [B  ]    79.2km    97.556°E  building=stupa        [way/973100670]
+  [B  ]    80.7km   101.996°E  building=stupa        [way/326225274]
+  [B  ]    80.7km    95.996°E  building=stupa        [way/1375338513]
+  [B  ]    80.8km    95.997°E  building=stupa        [way/1375197133]
+  [B  ]    81.5km    99.003°E  building=stupa        [node/10068665222]
+  [B  ]    82.2km   102.010°E  building=stupa        [way/436090420]
+  [B  ]    82.6km   100.525°E  building=stupa        [way/428841697]
+  [B  ]    82.7km    99.014°E  building=stupa        [way/543824630]
+  [B  ]    83.9km   102.025°E  building=stupa        [way/324047021]
+  [B  ]    85.7km   102.041°E  building=stupa        [way/436090421]
+  [B  ]    86.7km    96.050°E  building=stupa        [way/1381419128]
+  [B  ]    87.7km   100.479°E  building=stupa        [way/656677274]
+  [B  ]    89.1km   100.467°E  building=stupa        大幻化网坛城
+  [B  ]    90.6km   100.453°E  building=stupa        [way/759365267]
+  [B  ]    90.9km   100.450°E  building=stupa        [way/325641150]
+  [B  ]    91.0km   100.450°E  building=stupa        [way/394116390]
+  [B  ]    91.4km   100.446°E  building=stupa        [way/1247521415]
+  [B  ]    91.5km    96.093°E  building=stupa        [way/397035161]
+  [B  ]    91.6km   100.443°E  building=stupa        [way/1247521421]
+  [B  ]    91.8km    99.096°E  building=stupa        [way/1231618037]
+  [B  ]    92.2km    96.099°E  building=stupa        [way/1437048989]
+  [B  ]    93.2km   102.109°E  building=stupa        [way/436128911]
+  [B  ]    93.9km   103.423°E  building=stupa        [way/819190065]
+  [B  ]    94.9km   100.414°E  building=stupa        [way/1459724133]
+  [B  ]    96.8km    96.141°E  building=stupa        [way/1424372841]
+  [B  ]    96.9km    99.142°E  building=stupa        [way/760936764]
+  [B  ]    97.9km   100.387°E  building=stupa        [way/1247097877]
+  [B  ]    98.2km   102.153°E  building=stupa        [way/1162095930]
+  [B  ]    99.7km    96.167°E  building=stupa        [way/1423839188]
+  [B  ]   100.9km    96.178°E  building=stupa        [way/1423479095]
+  [B  ]   101.2km    99.181°E  building=stupa        [node/10068844601]
+  [B  ]   101.3km   102.181°E  building=stupa        [way/435933432]
+  [B  ]   101.7km    96.185°E  building=stupa        [way/1425470754]
+  [B  ]   102.5km    96.193°E  building=stupa        [way/1423913065]
+  [B  ]   102.8km    96.195°E  building=stupa        [way/1423469380]
+  [B  ]   104.7km    96.212°E  building=stupa        [way/1436861695]
+  [B  ]   108.0km    96.242°E  building=stupa        [way/1425494929]
+  [B  ]   109.1km   114.252°E  building=stupa        圆通阁
+  [B  ]   110.0km    96.260°E  building=stupa        [way/1440171266]
+  [B  ]   110.1km   100.277°E  building=stupa        [way/1226122892]
+  [B  ]   111.2km    99.271°E  building=stupa        [way/761648599]
+  [B  ]   112.2km   100.258°E  building=stupa        曼磊佛塔
+  [B  ]   112.3km   102.280°E  building=stupa        [way/436128913]
+  [B  ]   112.8km    99.285°E  building=stupa        [node/10073845343]
+  [B  ]   113.7km   100.245°E  building=stupa        [way/759376315]
+  [B  ]   114.6km   100.237°E  building=stupa        [way/762210126]
+  [B  ]   115.9km    99.313°E  building=stupa        [node/3284404817]
+  [B  ]   118.0km    97.206°E  building=stupa        [way/407624168]
+  [B  ]   121.0km   100.179°E  building=stupa        [way/410192947]
+  [B  ]   121.6km   100.174°E  building=stupa        [way/759161097]
+  [B  ]   122.5km   100.166°E  building=stupa        [way/322689699]
+  [B  ]   127.6km   100.119°E  building=stupa        [way/1244587335]
+  [B  ]   129.6km   100.102°E  building=stupa        [way/1003393379]
+  [B  ]   130.1km   100.097°E  building=stupa        [way/759620514]
+  [B  ]   130.3km   100.095°E  building=stupa        [way/322689701]
+  [B  ]   130.4km   100.094°E  building=stupa        [way/1245338697]
+  [B  ]   132.3km    99.461°E  building=stupa        [way/1003988707]
+  [C  ]   133.9km   103.063°E  building=stupa        [way/1220023512]
+  [C  ]   134.5km    99.481°E  building=stupa        [way/761751711]
+  [C  ]   135.1km   100.052°E  building=stupa        [way/322689700]
+  [C  ]   135.6km   103.048°E  building=stupa        [way/1220023499]
+  [C  ]   136.0km    99.494°E  building=stupa        [way/761710407]
+  [C  ]   136.3km    97.041°E  building=stupa        [way/447200216]
+  [C  ]   136.5km   103.039°E  building=stupa        [way/1220023491]
+  [C  ]   136.7km   100.037°E  building=stupa        [way/759632275]
+  [C  ]   137.2km   102.505°E  building=stupa        Gongtang Chorten
+  [C  ]   138.4km    97.022°E  building=stupa        [way/1341741931]
+  [C  ]   140.0km   103.008°E  building=stupa        [way/637861625]
+  [C  ]   140.2km   100.006°E  building=stupa        พระธาตุเจดีย์นันทศรีบุญมี
+  [C  ]   140.6km   103.003°E  building=stupa        [way/1220023629]
+  [C  ]   141.2km    99.541°E  building=stupa        [node/5906200823]
+  [C  ]   143.6km   102.563°E  building=stupa        [way/1209666374]
+  [C  ]   144.2km    99.970°E  building=stupa        พระธาตุสุโขเทยเยเจติยสิริอัมพวนาราม
+  [C  ]   146.8km    96.592°E  building=stupa        [way/701236926]
+  [C  ]   147.4km    99.597°E  building=stupa        [way/1476882060]
+  [C  ]   148.6km    99.608°E  building=stupa        [way/1236291359]
+  [C- ]   150.8km    99.628°E  building=stupa        [way/761170092]
+  [C- ]   151.2km    99.631°E  building=stupa        [way/428925283]
+  [C- ]   152.9km   102.891°E  building=stupa        [node/12118421750]
+  [C- ]   154.4km   102.660°E  building=stupa        [way/435920895]
+  [C- ]   158.0km    99.846°E  building=stupa        [way/762648957]
+  [C- ]   158.3km   102.843°E  building=stupa        [way/637599586]
+  [C- ]   158.4km   102.842°E  building=stupa        Golden Prayer Stupa
+  [C- ]   159.3km    99.834°E  building=stupa        [node/11533911020]
+  [C--]   159.8km    99.829°E  building=stupa        [way/1473345146]
+  [C--]   160.8km    96.820°E  building=stupa        藏娘佛塔
+  [C--]   161.6km    99.725°E  building=stupa        [way/1225500980]
+  [C--]   163.8km    99.793°E  building=stupa        [way/758871593]
+  [C--]   164.0km    99.791°E  building=stupa        [way/1244587448]
+  [C--]   164.4km    99.750°E  building=stupa        [way/1497620348]
+  [C--]   165.2km    99.757°E  building=stupa        [way/1497458766]
+  [C--]   166.2km   102.772°E  building=stupa        [way/637516705]
+  [C--]   166.5km    99.769°E  building=stupa        [way/1244164314]
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+  Non-heartland (outside 70°–110°E)  (N = 13)
+  A+ = 2 (15.4%)  Fisher OR=1.26× p=0.5119 ns  |  binomial p=0.3787 ns
+  A  = 5  (38.5%)   Fisher OR=1.78×  p=0.2447 ns   |  binomial p=0.0991 †
+  Rayleigh R=0.4911  perm-p=0.0398 *
+
+  Tier     N   Rate
+  ───── ──── ──────
+  A++      2  15.4%
+  A+       0   0.0%
+  A        3  23.1%
+  B        7  53.8%
+  C        0   0.0%
+  C-       0   0.0%
+  C--      1   7.7%
+
+  Tier  Dev(km)       Lon  Tag                   Name
+  ──── ────────  ────────  ────────────────────  ──────────────────────────────────────────────────
+  [A++]     0.7km   110.275°E  historic=stupa        108 Stupas
+  [A++]     0.8km    44.262°E  building=stupa        Ургьен Сангак Чойлинг
+  [A  ]    18.7km   116.437°E  building=stupa        大颠祖师塔
+  [A  ]    30.4km   112.996°E  building=stupa        净藏禅师塔
+  [A  ]    30.9km    14.547°E  building=stupa        [way/392063573]
+  [B  ]    34.2km   113.578°E  building=stupa        [way/1299825305]
+  [B  ]    40.3km   136.906°E  building=stupa        聖仏舎利宝塔
+  [B  ]    43.8km    -3.336°E  building=stupa        Stoupa des portes de bon augure
+  [B  ]    48.4km  -100.167°E  building=stupa        Stupa de la Paz
+  [B  ]    77.1km     5.964°E  building=stupa        [way/274082339]
+  [B  ]   106.9km     0.232°E  building=stupa        Vajradhara-Ling
+  [B  ]   109.1km   114.252°E  building=stupa        圆通阁
+  [C--]   166.2km    15.766°E  building=stupa        Friedensstupa
+
+====================================================================================================

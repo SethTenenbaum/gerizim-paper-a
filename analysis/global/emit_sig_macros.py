@@ -122,8 +122,23 @@ EXPLICIT_P_KEYS = {
     "multiscaleJointMaxP", "multiscaleAllNearNodeP", "multiscaleConvergenceP",
     # Americas
     "AmericasOneSidedP", "AmericasTwoSidedP",
+    # Circular two-sample tests (Dome vs Stupa and UNESCO full vs Stupa)
+    "circConcDomeP", "circConcStupaP", "circConcFisherP",
+    "circConcUnescoP", "circConcUnescoStupaFisherP",
+    "circTwoSampWatsonP", "circTwoSampKuiperP",
+    "circWatsonPUnescoStupa", "circKuiperPUnescoStupa",
+    "circXcorrP", "circWWp",
     # FDR q-values for the BH test family
     "FDRqTestOne", "FDRqTestTwo", "FDRqTestThree",
+    # Period-sweep dissociation table (Rayleigh vs binomial at 4 candidate periods)
+    "sweepRayleighPTwoFour", "sweepRayleighSigTwoFour", "sweepRayleighRTwoFour",
+    "sweepRayleighPThreeZero", "sweepRayleighSigThreeZero", "sweepRayleighRThreeZero",
+    "sweepRayleighPThreeFive", "sweepRayleighSigThreeFive", "sweepRayleighRThreeFive",
+    "sweepRayleighPThreeSix", "sweepRayleighSigThreeSix", "sweepRayleighRThreeSix",
+    "sweepHitsTwoFour", "sweepExpectedTwoFour", "sweepBinomPTwoFour", "sweepBinomSigTwoFour",
+    "sweepHitsThreeZero", "sweepExpectedThreeZero", "sweepBinomPThreeZero", "sweepBinomSigThreeZero",
+    "sweepHitsThreeFive", "sweepExpectedThreeFive", "sweepBinomPThreeFive", "sweepBinomSigThreeFive",
+    "sweepHitsThreeSix", "sweepExpectedThreeSix", "sweepBinomPThreeSix", "sweepBinomSigThreeSix",
     # Unit sweep / slope tests
     "sweepEightDomeP", "sweepEightFullP",
     "permSlopeCanonBestJoint", "permSlopeCanonRank",
@@ -190,6 +205,22 @@ def main():
 
     # Write back to store so downstream scripts can read them
     store.write_many(sig_macros)
+
+    # ── Display-string macros for p-values that round to 0.0 ─────────────────
+    # When a p-value is stored as 0.0 (i.e. none of N_PERM permutations
+    # exceeded the observed statistic), the raw macro would render as "0.0"
+    # in prose, which is unacceptable.  We emit a companion *Disp macro that
+    # contains the correct LaTeX display string.
+    DISPLAY_OVERRIDES = {
+        # key in results.json  -> LaTeX display string
+        "geoFisherAP": r"{<}0.001",
+    }
+    disp_macros = {}
+    for key, disp_str in DISPLAY_OVERRIDES.items():
+        macro_name = _sanitize_macro_name(key) + "Disp"
+        disp_macros[macro_name] = disp_str
+        print(f"  \\newcommand{{\\{macro_name}}}{{{disp_str}}}  % display override for {key}")
+    store.write_many(disp_macros)
 
     print()
     print(f"  ✓ {len(sig_macros)} significance-label macros emitted.")

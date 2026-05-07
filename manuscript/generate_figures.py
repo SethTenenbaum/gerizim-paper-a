@@ -499,96 +499,105 @@ def make_unitsweep():
 #  FIGURE 4: Null C — restricted geographic draw  (fig:null_c)
 # ══════════════════════════════════════════════════════════════════════════════
 def make_null_c():
-    """Bootstrap distributions for Null C at three window widths (±2°, ±5°, ±10°).
+    """3×3 bootstrap distributions for Null C.
 
-    Null C asks: do dome sites outperform OTHER monuments at the same longitudes?
-    For each window W, pool every full-corpus site within ±W° of any dome site,
-    then bootstrap N_dome draws to build the expected A+ distribution.
-    This figure uses the raw Test 2 dome/stupa population (N=90), matching the
-    primary Null C prose and macros. Context-validated robustness is reported
-    separately in the text.
+    Rows = tier thresholds (A, A+, A++).
+    Columns = geographic window widths (±2°, ±5°, ±10°).
+
+    Each cell: bootstrap distribution of tier-count draws from all full-corpus
+    sites within ±W° of any dome site longitude, vs. observed dome count.
     """
-    from scipy.stats import binomtest as _binomtest
+    from lib.beru import TIER_APP, P_NULL_APP, TIER_APLUS, P_NULL_AP, TIER_A_MAX, P_NULL_A
+
+    TIERS = [
+        ("A",   TIER_A_MAX, P_NULL_A),
+        ("A+",  TIER_APLUS, P_NULL_AP),
+        ("A++", TIER_APP,   P_NULL_APP),
+    ]
+    windows = [2.0, 5.0, 10.0]
+    win_labels = ["±2°", "±5°", "±10°"]
 
     rng = np.random.default_rng(42)
 
     dome_sites = [s for s in cultural if is_dome_site_raw(s)]
     dome_lons  = np.array([s.longitude for s in dome_sites])
     N_dome     = len(dome_lons)
-    obs_ap     = sum(beru_dev(s.longitude) <= TIER_APLUS for s in dome_sites)
-
     all_lons_arr = np.array([s["lon"] for s in sites])
 
-    windows = [2.0, 5.0, 10.0]
-    labels  = ["±2°", "±5°", "±10°"]
+    # Pre-compute observed count for each tier
+    obs_by_tier = {}
+    for tlabel, thresh, _ in TIERS:
+        arc = np.abs(dome_lons - GERIZIM) / BERU
+        dev = np.abs(arc - np.round(arc / 0.1) * 0.1)
+        obs_by_tier[tlabel] = int(np.sum(dev <= thresh))
 
-    fig, axes = plt.subplots(1, 3, figsize=(11, 4.2), sharey=False)
+    fig, axes = plt.subplots(3, 3, figsize=(13, 11), sharey=False)
     fig.suptitle(
-        "Null C — restricted geographic draw: dome sites vs. same-longitude corpus",
+        "Null C — restricted geographic draw: dome sites vs. same-longitude corpus\n"
+        "(rows: tier threshold  ·  columns: geographic window)",
         fontsize=11, y=1.01,
     )
 
-    for ax, W, lbl in zip(axes, windows, labels):
-        # Build pool: corpus sites within ±W° of any dome longitude
-        mask = np.zeros(len(all_lons_arr), dtype=bool)
-        for dlon in dome_lons:
-            mask |= np.abs(all_lons_arr - dlon) <= W
-        pool = all_lons_arr[mask]
-        N_pool = len(pool)
+    for row_i, (tlabel, thresh, p_null_rate) in enumerate(TIERS):
+        obs_ap = obs_by_tier[tlabel]
+        for col_j, (W, wlbl) in enumerate(zip(windows, win_labels)):
+            ax = axes[row_i][col_j]
 
-        # Bootstrap: draw N_dome from pool, count A+ each time
-        draws = rng.choice(pool, size=(_N_PERMS_NULL_C, N_dome), replace=True)
-        arc   = np.abs(draws - GERIZIM) / BERU
-        devs  = np.abs(arc - np.round(arc / 0.1) * 0.1)
-        boot_ap = (devs <= TIER_APLUS).sum(axis=1).astype(int)
+            # Build pool
+            mask = np.zeros(len(all_lons_arr), dtype=bool)
+            for dlon in dome_lons:
+                mask |= np.abs(all_lons_arr - dlon) <= W
+            pool   = all_lons_arr[mask]
+            N_pool = len(pool)
 
-        p_val  = float(np.mean(boot_ap >= obs_ap))
-        mean_b = float(boot_ap.mean())
-        std_b  = float(boot_ap.std())
-        z_val  = (obs_ap - mean_b) / std_b if std_b > 0 else 0.0
+            # Bootstrap
+            draws = rng.choice(pool, size=(_N_PERMS_NULL_C, N_dome), replace=True)
+            arc   = np.abs(draws - GERIZIM) / BERU
+            devs  = np.abs(arc - np.round(arc / 0.1) * 0.1)
+            boot  = (devs <= thresh).sum(axis=1).astype(int)
 
-        # Histogram of bootstrap distribution
-        max_ap = max(boot_ap.max(), obs_ap) + 1
-        bins   = np.arange(0, max_ap + 2) - 0.5
-        counts, edges = np.histogram(boot_ap, bins=bins)
-        bar_centers = 0.5 * (edges[:-1] + edges[1:])
+            p_val  = float(np.mean(boot >= obs_ap))
+            mean_b = float(boot.mean())
+            std_b  = float(boot.std())
+            z_val  = (obs_ap - mean_b) / std_b if std_b > 0 else 0.0
 
-        ax.bar(bar_centers, counts / _N_PERMS_NULL_C * 100,
-               width=0.8, color=C_PRIMARY, alpha=0.75,
-               edgecolor="white", linewidth=0.5, zorder=3,
-               label="Bootstrap\ndistribution")
+            # Histogram
+            max_ap = max(boot.max(), obs_ap) + 1
+            bins   = np.arange(0, max_ap + 2) - 0.5
+            counts, edges = np.histogram(boot, bins=bins)
+            bar_centers = 0.5 * (edges[:-1] + edges[1:])
 
-        # Mean line
-        ax.axvline(mean_b, color=C_NULL, linewidth=1.5, linestyle="--",
-                   zorder=4, label=f"Mean = {mean_b:.1f}")
+            ax.bar(bar_centers, counts / _N_PERMS_NULL_C * 100,
+                   width=0.8, color=C_PRIMARY, alpha=0.75,
+                   edgecolor="white", linewidth=0.5, zorder=3)
+            ax.axvline(mean_b, color=C_NULL, linewidth=1.5, linestyle="--", zorder=4,
+                       label=f"Mean = {mean_b:.1f}")
+            ax.axvline(obs_ap, color=C_HIGHLIGHT, linewidth=2.0, linestyle="-", zorder=5,
+                       label=f"Obs = {obs_ap}")
 
-        # Observed line
-        ax.axvline(obs_ap, color=C_HIGHLIGHT, linewidth=2.0, linestyle="-",
-                   zorder=5, label=f"Observed = {obs_ap}")
+            # Tail shading
+            tail_x = bar_centers[bar_centers >= obs_ap - 0.5]
+            tail_y = counts[bar_centers >= obs_ap - 0.5] / _N_PERMS_NULL_C * 100
+            if len(tail_x):
+                ax.bar(tail_x, tail_y, width=0.8, color=C_HIGHLIGHT, alpha=0.35,
+                       edgecolor="none", zorder=4)
 
-        # Shade the tail (≥ observed)
-        tail_x = bar_centers[bar_centers >= obs_ap - 0.5]
-        tail_y = counts[bar_centers >= obs_ap - 0.5] / _N_PERMS_NULL_C * 100
-        if len(tail_x):
-            ax.bar(tail_x, tail_y, width=0.8,
-                   color=C_HIGHLIGHT, alpha=0.35,
-                   edgecolor="none", zorder=4)
+            sig_lbl = "***" if p_val < 0.001 else "**" if p_val < 0.01 else "*" if p_val < 0.05 else "ns"
+            ax.text(0.97, 0.97,
+                    f"pool N={N_pool}\nZ={z_val:.2f}\np={p_val:.4f} {sig_lbl}",
+                    transform=ax.transAxes, fontsize=7.5, ha="right", va="top",
+                    bbox=dict(boxstyle="round,pad=0.3", facecolor="#f5f5f5",
+                              edgecolor="#cccccc", alpha=0.9))
 
-        # Stats annotation
-        sig_lbl = "***" if p_val < 0.001 else "**" if p_val < 0.01 else "*" if p_val < 0.05 else "ns"
-        ax.text(0.97, 0.97,
-                f"N pool = {N_pool}\nZ = {z_val:.2f}\np = {p_val:.4f}  {sig_lbl}",
-                transform=ax.transAxes,
-                fontsize=8, ha="right", va="top",
-                bbox=dict(boxstyle="round,pad=0.35", facecolor="#f5f5f5",
-                          edgecolor="#cccccc", alpha=0.9))
-
-        ax.set_title(f"Window {lbl}  (pool N = {N_pool})", fontsize=10)
-        ax.set_xlabel("A+ sites in bootstrap draw", fontsize=9)
-        ax.set_ylabel("Frequency (%)" if ax is axes[0] else "", fontsize=9)
-        ax.legend(loc="lower right", fontsize=7.5, framealpha=0.85,
-                  bbox_to_anchor=(1, 0.58), bbox_transform=ax.transAxes)
-        ax.set_xlim(-0.5, max(max_ap, obs_ap + 1) + 0.5)
+            # Axis labels
+            title = f"Tier {tlabel}  ·  Window {wlbl}"
+            ax.set_title(title, fontsize=9)
+            if col_j == 0:
+                ax.set_ylabel(f"Tier {tlabel}\nFrequency (%)", fontsize=8)
+            if row_i == 2:
+                ax.set_xlabel("Sites in bootstrap draw", fontsize=8)
+            ax.legend(loc="upper left", fontsize=7, framealpha=0.8)
+            ax.set_xlim(-0.5, max(max_ap, obs_ap + 1) + 0.5)
 
     fig.tight_layout()
     outpath = OUTDIR / "fig_null_c.pdf"
