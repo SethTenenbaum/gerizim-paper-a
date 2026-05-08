@@ -172,33 +172,15 @@ def main() -> None:
         f"\\newcommand{{\\moundsPASig}}{{{sig(res_a.pvalue)}}}",
     ]
 
+    # Print to stdout so reproduce_all_macros.sh can collect via grep
+    for m in macros:
+        print(m)
+
     MACRO_OUT.parent.mkdir(parents=True, exist_ok=True)
     with open(MACRO_OUT, "w") as f:
         f.write("% Mounds geographic control macros — auto-generated\n")
         f.write("\n".join(macros) + "\n")
-    print(f"\nMacros written → {MACRO_OUT}")
-
-    # Append to generated_macros.tex if not already present
-    gm = ROOT / "manuscript" / "generated_macros.tex"
-    if gm.exists():
-        content = gm.read_text()
-        if "\\moundsN" not in content:
-            with open(gm, "a") as f:
-                f.write("\n% ── Mounds geographic control ──────────────────\n")
-                f.write("\n".join(macros) + "\n")
-            print(f"Macros appended → {gm}")
-        else:
-            # Replace existing block
-            import re
-            block = "\n% ── Mounds geographic control ──────────────────\n" + "\n".join(macros) + "\n"
-            content = re.sub(
-                r"% ── Mounds geographic control ──.*?(?=\n%|\Z)",
-                lambda m: block.rstrip(),
-                content,
-                flags=re.DOTALL,
-            )
-            gm.write_text(content)
-            print(f"Macros updated → {gm}")
+    print(f"\nMacros written → {MACRO_OUT}", file=__import__('sys').stderr)
 
 if __name__ == "__main__":
     main()

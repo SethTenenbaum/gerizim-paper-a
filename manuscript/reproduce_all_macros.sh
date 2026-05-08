@@ -110,6 +110,7 @@ if [ "${1:-}" != "--full" ]; then
         analysis/unesco/dome_footprint_window_sensitivity.py   # → geoNullDomeTwoDeg*, geoNullDomeTenDeg*
         analysis/unesco/stupa_coordinate_perturbation.py       # → stupaCoordPerturb*
         analysis/unesco/americas_directional_test.py           # → AmericasN, AmericasApCount, AmericasOneSidedP, AmericasDirectional
+        analysis/americas/mounds_geo_control.py                 # → moundsN, moundsNApp/Ap/A, moundsRate*, moundsP*, moundsSig*
         analysis/unesco/wikidata_q180987_stupa_audit.py        # → wikiStupaTotal, wikiStupaATierCount/Rate/Enrich/BinomP, wikiStupaPermZ/P, wikiStupaAp*, wikiStupaJava*, wikiStupaCluster*, named-site dev_km
         analysis/unesco/multiscale_combined_p.py               # → multiscaleDomeCombinedP, multiscaleJointMaxP, multiscaleNaturalKm, etc.
         # ── Simulation (slow — writes simDomePermP etc.) ──────────────────

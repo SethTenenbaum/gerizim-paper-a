@@ -363,9 +363,9 @@ half-period ($1.5\degr$), calibrated to bracket the empirical natural
 proximity scales of the corpora under study: the OWTRAD Silk Road
 network (\naturalNullPctOwtrad\%), the UNESCO dome subset (\naturalNullPctDome\%), the full UNESCO
 Cultural/Mixed corpus (\naturalNullPctFull\%), and the Wikidata stupa corpus (\naturalNullPctWiki\%).\footnote{These values are the peak-enrichment null rates from the multiscale window sweep
-  (\texttt{analysis/unesco/multiscale\_combined\_p.py}); a standalone
+  (\texttt{analysis/\allowbreak{}unesco/\allowbreak{}multiscale\_combined\_p.py}); a standalone
   reproduction is provided in
-  \texttt{supplementary/audit/tier\_calibration\_audit.py}.}
+  \texttt{supplementary/\allowbreak{}audit/\allowbreak{}tier\_calibration\_audit.py}.}
 Each threshold corresponds to a geometric null rate $p_0 = 2d/T$:
 
 \begin{center}
@@ -824,7 +824,8 @@ on a uniform $0.01\degr$ grid (\anchorSweepNanchors{} anchors), recording
 the A$+$ count ($p_0 = \NullRateAp{}$ geometric null) for the full UNESCO
 corpus at each anchor. The observed Levantine peak (\GerizimSweepAp{}
 A$+$ hits) falls at the \anchorSweepPctile{}th percentile of the global
-distribution (top \anchorSweepTopOnePct\% of all trial anchors).
+distribution; Jerusalem (\JerusalemSweepPctile{}th percentile) also
+places in the top \anchorSweepTopPct\% of all trial anchors, confirming the result is not specific to the exact Gerizim longitude.
 A max-statistic permutation test (\anchorMaxPermNperms{} uniform-null
 draws) then corrects for having selected the best of
 \anchorSweepNanchors{} anchors; the resulting discovery-corrected
