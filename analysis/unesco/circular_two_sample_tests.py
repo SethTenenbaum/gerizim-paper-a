@@ -45,7 +45,7 @@ _ROOT = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(_ROOT))
 
 from data.unesco_corpus import load_corpus
-from lib.dome_filter import is_dome_site
+from lib.dome_filter import is_dome_site_raw as is_dome_site
 from lib.results_store import ResultsStore
 
 _CFG   = json.loads((_ROOT / "config.json").read_text())

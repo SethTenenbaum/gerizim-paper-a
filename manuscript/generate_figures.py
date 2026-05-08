@@ -73,7 +73,7 @@ OUTDIR.mkdir(exist_ok=True)
 # Color palette — muted, color-blind friendly
 C_PRIMARY   = "#2c6fbb"  # deep blue
 C_HIGHLIGHT = "#d62728"  # red accent for shaded tier
-C_NULL      = "#888888"  # grey for null baseline
+C_NULL      = "#888888"  # gray for null baseline
 C_DOME      = "#e6550d"  # orange for dome sub-population
 C_FULL      = "#2c6fbb"  # blue for full corpus
 C_COHORT    = ["#1b7837", "#5aae61", "#a6dba0", "#d9f0d3", "#e7e1ef"]
@@ -299,7 +299,7 @@ def make_temporal():
     x = np.arange(len(labels))
     width = 0.38
 
-    # A++ bars (darker/primary highlight colour)
+    # A++ bars (darker/primary highlight color)
     C_APP = "#c0392b"
     bars_app = ax.bar(x - width/2, rates_app, width=width,
                       color=[C_APP if p < 0.05 else "#e8a09a" for p in pvals_app],
@@ -611,16 +611,16 @@ def make_null_c():
 #                                   (fig:geo_trail)
 # ══════════════════════════════════════════════════════════════════════════════
 def make_geo_trail():
-    """Eurasian map showing tier-coloured UNESCO dome sites and Wikidata stupas.
+    """Eurasian map showing tier-colored UNESCO dome sites and Wikidata stupas.
 
     Focuses on the Buddhist transmission corridor from the Levant through
-    the Silk Road to Java/SE Asia.  Sites are coloured by harmonic tier;
+    the Silk Road to Java/SE Asia.  Sites are colored by harmonic tier;
     approximate Silk Road overland and maritime routes are drawn as reference.
 
-    Tier colour scheme:
-      A++ / A+  → crimson   (≤11 km from harmonic)
-      A         → orange    (≤21 km from harmonic)
-      B         → grey
+    Tier color scheme:
+      A++ / A+  → crimson   (≤16.6 km from harmonic)
+      A         → orange    (≤33 km from harmonic)
+      B         → gray
       C / C-    → steel-blue (inter-harmonic band)
 
     Markers:
@@ -633,7 +633,7 @@ def make_geo_trail():
 
     from lib.dome_filter import is_dome_site_raw as _is_dome_raw
 
-    # ── Tier colour / size lookup ─────────────────────────────────────────────
+    # ── Tier color / size lookup ──────────────────────────────────────────────
     def _tier_style(t):
         if t in ("A++", "A+"):
             return "#c0392b", 55, 1.0
@@ -675,6 +675,23 @@ def make_geo_trail():
             clr, sz, alpha = _tier_style(t)
             wiki_rows.append((lon, lat, t, clr, sz, alpha, name))
 
+    # ── Load OSM stupa CSV ────────────────────────────────────────────────────
+    _OSM_CSV = PROJECT_ROOT / "data" / "store" / "unesco" / "osm_stupas.csv"
+    osm_rows = []
+    with open(_OSM_CSV, newline="", encoding="utf-8") as fh:
+        reader = csv.DictReader(row for row in fh if not row.startswith("#"))
+        for rec in reader:
+            try:
+                lat = float(rec["lat"])
+                lon = float(rec["lon"])
+                name = rec.get("name", "")
+            except (ValueError, KeyError):
+                continue
+            d = beru_dev(lon)
+            t = tier(d)
+            clr, sz, alpha = _tier_style(t)
+            osm_rows.append((lon, lat, t, clr, sz, alpha, name))
+
     # ── Silk Road routes ──────────────────────────────────────────────────────
     # Overland: OWTRAD route network (Ciolek 2004+; tmcZCAm1000, tmcIRa0100,
     #   tmcCNm1000, tmcKGa0100d).  Each edge is an attested segment.
@@ -698,7 +715,7 @@ def make_geo_trail():
     ax.add_feature(cfeature.BORDERS,   linewidth=0.25, edgecolor="#bbbbbb",
                    linestyle=":", zorder=1)
 
-    # Harmonic grid lines (every 3° from Gerizim, within view)
+    # Harmonic grid lines (every 3° from the Levantine corridor phase, within view)
     for k in range(-15, 40):
         hlon = GERIZIM + k * 3.0
         if -5 <= hlon <= 145:
@@ -706,9 +723,9 @@ def make_geo_trail():
                     color="#aaaaaa", linewidth=0.9, linestyle="--",
                     alpha=0.85, zorder=2)
 
-    # Highlighted harmonic lines: Gerizim anchor and Java node
+    # Highlight the fixed zero-phase longitude only.
     java_lon = GERIZIM + 25 * 3.0   # 2.5-beru = harmonic #25
-    for hlon in [GERIZIM, java_lon]:
+    for hlon in [GERIZIM]:
         ax.plot([hlon, hlon], [-14, 60], transform=ccrs.PlateCarree(),
                 color="#7f8c8d", linewidth=1.2, linestyle="-",
                 alpha=0.8, zorder=3)
@@ -759,30 +776,34 @@ def make_geo_trail():
                            s=sz * 0.75, c=clr, alpha=alpha, marker="^",
                            edgecolors="white" if sz >= 28 else "none",
                            linewidths=0.5, zorder=5 if t in ("A++","A+") else 4)
+        for lon, lat, t, clr, sz, alpha, _ in osm_rows:
+            if t in priority_tiers:
+                ax.scatter(lon, lat, transform=ccrs.PlateCarree(),
+                           s=sz * 0.55, c=clr, alpha=alpha * 0.75, marker="D",
+                           edgecolors="none",
+                           linewidths=0.4, zorder=5 if t in ("A++","A+") else 4)
 
-    # Annotate key A+ sites
+    # Annotate only the fixed zero-phase longitude; site labels are omitted
+    # to keep the visual framing statistical rather than causal.
     # Each entry: (lon, lat, label, ha, dx, dy)
     _annotations = [
-        (GERIZIM,  32.2,  "Mt. Gerizim\n(anchor)",             "left",   2.0,  1.5),
-        (107.3,    34.3,  "Silk Roads\n(Chang\u2019an)",        "center", 0.0,  2.5),
-        (110.2,    -7.55, "Borobudur\n(Java node, 110.3°E)",   "left",   2.0,  1.0),
-        (83.276,   27.47, "Lumbini",                           "center", 0.0,  2.5),
+        (GERIZIM,  32.2,  "∼35.25°E", "left", 2.0,  1.5),
     ]
     for lon, lat, label, ha, dx, dy in _annotations:
         ax.annotate(label,
                     xy=(lon, lat), xytext=(lon + dx, lat + dy),
                     transform=ccrs.PlateCarree(),
-                    fontsize=7, color="#333333", ha=ha,
-                    arrowprops=dict(arrowstyle="-", color="#888888", lw=0.7),
+                    fontsize=7.5, color="#111111", ha=ha,
+                    arrowprops=dict(arrowstyle="-", color="#111111", lw=0.9),
                     clip_on=True)
 
     # ── Legend ────────────────────────────────────────────────────────────────
     from matplotlib.lines import Line2D
     tier_handles = [
         Line2D([0],[0], marker="o", color="w", markerfacecolor="#c0392b",
-               markersize=8, label="Tier A$^{+}$/A$^{++}$  (≤11 km)"),
+               markersize=8, label="Tier A$^{+}$/A$^{++}$  (≤16.6 km)"),
         Line2D([0],[0], marker="o", color="w", markerfacecolor="#e67e22",
-               markersize=6, label="Tier A  (≤21 km)"),
+               markersize=6, label="Tier A  (≤33 km)"),
         Line2D([0],[0], marker="o", color="w", markerfacecolor="#aaaaaa",
                markersize=5, label="Tier B"),
         Line2D([0],[0], marker="o", color="w", markerfacecolor="#3498db",
@@ -791,8 +812,9 @@ def make_geo_trail():
                markersize=6, label="○ UNESCO dome/stupa"),
         Line2D([0],[0], marker="^", color="w", markerfacecolor="#555555",
                markersize=6, label="△ Wikidata Q180987 stupa"),
+        Line2D([0],[0], marker="D", color="w", markerfacecolor="#555555",
+               markersize=5, label="◇ OSM stupa (crowd-sourced)"),
         Line2D([0],[0], color="#8e44ad", linewidth=1.0, alpha=0.5, label="Overland network (OWTRAD)"),
-        # Line2D([0],[0], color="#4a235a", linewidth=2.0, label="Overland trunk route"),
         Line2D([0],[0], color="#16a085", linewidth=1.4, linestyle="--",
                label="Maritime Silk Road"),
     ]
@@ -802,8 +824,8 @@ def make_geo_trail():
               handletextpad=0.4, borderpad=0.5, columnspacing=0.8)
 
     ax.set_title(
-        "Silk Roads corridor — UNESCO dome/stupa and Wikidata Q180987 stupa tier distribution\n"
-        "Circles = UNESCO ($N=90$); triangles = Wikidata ($N=229$).  "
+        "Silk Roads corridor — UNESCO dome/stupa, Wikidata Q180987, and OSM stupa tier distribution\n"
+        "Circles = UNESCO ($N=90$); triangles = Wikidata ($N=229$); diamonds = OSM ($N=259$).  "
         "Dashed grid: 3° harmonics.  Crimson = A$^{+}$, orange = A-tier.",
         fontsize=8.5, pad=5,
     )
@@ -824,14 +846,14 @@ def make_supp_global_tiers():
     Q180987 stupas classified into harmonic tiers A/A+/A++ (near harmonic) and
     C/C-/C-- (near inter-harmonic midpoint).  Silk Road routes shown as reference.
 
-    Tier colour scheme:
+    Tier color scheme:
       A++  → deep red      (≤5 km from harmonic)
       A+   → crimson       (≤11 km from harmonic)
       A    → orange        (≤21 km from harmonic)
       C    → light blue    (≤21 km from midpoint)
       C-   → medium blue   (≤11 km from midpoint)
       C--  → deep blue     (≤5 km from midpoint)
-      B    → light grey    (remainder, shown small)
+      B    → light gray    (remainder, shown small)
     """
     import cartopy.crs as ccrs
     import cartopy.feature as cfeature
@@ -910,7 +932,7 @@ def make_supp_global_tiers():
     ax.add_feature(cfeature.BORDERS,   linewidth=0.2,  edgecolor="#cccccc",
                    linestyle=":", zorder=1)
 
-    # Harmonic grid lines: every 3° from Gerizim, all longitudes
+    # Harmonic grid lines: every 3° from the Levantine corridor phase, all longitudes
     for k in range(-60, 61):
         hlon = GERIZIM + k * 3.0
         if -180 <= hlon <= 180:
@@ -918,7 +940,7 @@ def make_supp_global_tiers():
                     color="#e0e0e0", linewidth=0.4, linestyle="--",
                     alpha=0.5, zorder=2)
 
-    # Gerizim anchor meridian highlighted
+    # Levantine corridor-phase meridian highlighted
     ax.plot([GERIZIM, GERIZIM], [-85, 85], transform=ccrs.PlateCarree(),
             color="#7f8c8d", linewidth=1.0, linestyle="-", alpha=0.7, zorder=3)
 
@@ -1043,7 +1065,7 @@ def make_supp_global_tiers():
         "UNESCO cultural sites and Wikidata Q180987 stupas\n"
         f"UNESCO A-tiers: $N={n_un_a}$;  C-tiers: $N={n_un_c}$.  "
         f"Wikidata A-tiers: $N={n_wiki_a}$;  C-tiers: $N={n_wiki_c}$.  "
-        "Dashed grid: 3° harmonics from Gerizim anchor.",
+        "Dashed grid: 3° harmonics from ~35.25°E corridor phase.",
         fontsize=8.5, pad=6,
     )
 
@@ -1086,7 +1108,7 @@ def _removed_make_supp_silkroad_ac_tiers():
       UNESCO non-dome sites    → square  (■)
       Wikidata Q180987 stupas  → triangle (▲)
 
-    Tier colour scheme (same as make_supp_global_tiers):
+    Tier color scheme (same as make_supp_global_tiers):
       A++  → deep red   (#922b21)
       A+   → crimson    (#c0392b)
       A    → orange     (#e67e22)
@@ -1166,7 +1188,7 @@ def _removed_make_supp_silkroad_ac_tiers():
     ax.add_feature(cfeature.BORDERS,   linewidth=0.25, edgecolor="#bbbbbb",
                    linestyle=":", zorder=1)
 
-    # Harmonic grid lines (every 3° from Gerizim, within view)
+    # Harmonic grid lines (every 3° from the Levantine corridor phase, within view)
     for k in range(-15, 40):
         hlon = GERIZIM + k * 3.0
         if -5 <= hlon <= 145:
@@ -1174,7 +1196,7 @@ def _removed_make_supp_silkroad_ac_tiers():
                     color="#dddddd", linewidth=0.5, linestyle="--",
                     alpha=0.6, zorder=2)
 
-    # Gerizim anchor and Java node meridians
+    # Levantine corridor phase and Java node meridians
     java_lon = GERIZIM + 25 * 3.0
     for hlon in [GERIZIM, java_lon]:
         ax.plot([hlon, hlon], [-14, 60], transform=ccrs.PlateCarree(),

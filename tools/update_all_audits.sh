@@ -78,8 +78,14 @@ python3 tools/generate_audit_stupa_q180987_geo.py
 echo "  [13/14] Tier-threshold sensitivity audit..."
 python3 tools/generate_audit_tier_sensitivity.py
 
-echo "  [14/14] OSM stupa corpus audit (building/historic/ruins=stupa, man_made excluded)..."
+echo "  [14/15] OSM stupa corpus audit (building/historic/ruins=stupa, man_made excluded)..."
 python3 tools/generate_audit_osm_stupa.py
+
+echo "  [15/16] Period sweep dissociation audit (full Table 1 sweep, 46 periods)..."
+python3 tools/generate_audit_period_sweep.py
+
+echo "  [16/16] Null B uniform random draw audit..."
+python3 tools/generate_audit_null_b.py
 
 echo ""
 echo "  Done.  Files written to supplementary/audit/"

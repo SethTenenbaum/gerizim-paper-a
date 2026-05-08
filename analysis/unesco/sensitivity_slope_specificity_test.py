@@ -67,7 +67,7 @@ from scipy.stats import binomtest
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from data.unesco_corpus import load_corpus, cultural_sites_with_coords
 from lib.beru import TIER_APP, TIER_APLUS, TIER_A_MAX, GERIZIM, BERU
-from lib.dome_filter import is_dome_site, UNAMBIGUOUS_KEYWORDS, FORM_KEYWORD_RES
+from lib.dome_filter import is_dome_site_raw as is_dome_site, UNAMBIGUOUS_KEYWORDS, FORM_KEYWORD_RES
 from lib.results_store import ResultsStore
 
 # Import evo corpus loader — defined as a function in the evolution test script.

@@ -42,7 +42,7 @@ _ROOT = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(_ROOT))
 
 from data.unesco_corpus import load_corpus
-from lib.dome_filter    import is_dome_site
+from lib.dome_filter    import is_dome_site_raw as is_dome_site
 from lib.beru           import (
     deviation as beru_deviation,
     P_NULL_APP, P_NULL_AP, P_NULL_A,
@@ -124,6 +124,12 @@ def sig_stars(p):
     if p < 0.05:  return "*"
     if p < 0.10:  return "~"
     return "ns"
+
+def fmt_p_macro(p):
+    """Return a LaTeX-safe p-value display string for generated macros."""
+    if p < 0.001:
+        return r"{<}0.001"
+    return round(p, 5)
 
 tiers = [
     ("A++", TIER_APP_DEG,   P_NULL_APP),
@@ -210,7 +216,7 @@ for (cname, ckey), (tlabel, tkey) in [
 for (tlabel, tkey) in _tier_keys:
     chi2_f, p_f = results[("Fisher", tlabel)]
     macros[f"geoFisher{tkey}Chi"]  = round(chi2_f, 3)
-    macros[f"geoFisher{tkey}P"]    = round(p_f,    5)
+    macros[f"geoFisher{tkey}P"]    = fmt_p_macro(p_f)
     macros[f"geoFisher{tkey}Sig"]  = sig_stars(p_f)
 
 print()

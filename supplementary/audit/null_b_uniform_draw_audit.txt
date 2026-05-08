@@ -1,0 +1,44 @@
+[unesco_corpus] Loaded 1248 sites, 1248 with extended descriptions
+
+================================================================================
+  NULL B: UNIFORM RANDOM DRAW  (global longitude, no clustering assumed)
+  UNESCO dome/stupa corpus  N = 90  |  anchor = 35.269°E  |  T = 3.0°
+  Permutations: 100,000  |  Draw range: [−180°, +180°]  |  seed = 42
+  Thresholds — A++: ±0.060°  A+: ±0.150°  A: ±0.300°
+  Geometric null rates — A++: 0.04  A+: 0.10  A: 0.20
+================================================================================
+
+  Observed hit counts:
+    A++ (0.060°) : 11/90  (12.2%  vs  null 4%)
+    A+  (0.150°) : 18/90  (20.0%  vs  null 10%)
+    A   (0.300°) : 29/90  (32.2%  vs  null 20%)
+
+  Tier    Obs    Mean     SD       Z         p   Sig
+  ────────────────────────────────────────────────────
+  A++      11    3.60   1.86    3.99     0.001    **
+  A+       18    9.00   2.85    3.16     0.003    **
+  A        29   18.02   3.79    2.90     0.004    **
+
+  Interpretation:
+    Null A (ns): enrichment is consistent with dome-site geography;
+                 resampling the observed dome longitudes reproduces
+                 the hit count — the clustering carries the signal.
+    Null B (above): a globally uniform random draw of the same N
+                 would rarely produce this many harmonic-proximate
+                 sites — the count is globally atypical regardless
+                 of geographic conditioning.
+    These answer orthogonal questions and are not contradictory.
+================================================================================
+
+  Macros written → /Users/sethtenenbaum/gerizim-paper-a/analysis/unesco/null_b_uniform_draw_macros.tex
+  Macros updated → /Users/sethtenenbaum/gerizim-paper-a/manuscript/generated_macros.tex
+
+────────────────────────────────────────────────────────────────────────────────
+Generated : Fri May 08 01:32:30 UTC 2026
+Script    : tools/generate_audit_null_b.py
+Source    : analysis/unesco/null_b_uniform_draw.py
+Note      : Null B complements Null A (within-dome bootstrap).
+            Null A (ns) — hit count reproducible from dome geography.
+            Null B (**) — hit count not reproducible from uniform random.
+            The two nulls address orthogonal questions; see manuscript
+            Section 5.3 (Negative Controls) and Section 6.2 (Discussion).

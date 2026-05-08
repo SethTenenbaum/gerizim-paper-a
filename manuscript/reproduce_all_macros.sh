@@ -396,6 +396,10 @@ echo "─── GROUP 29: Dome Geographic-Concentration Null (may take ~2 minute
 python3 analysis/unesco/dome_geographic_concentration_test.py 2>&1 | tail -40
 echo ""
 
+echo "─── GROUP 29a: Null B — Uniform Random Draw (may take ~1 minute) ───"
+python3 analysis/unesco/null_b_uniform_draw.py 2>&1 | tail -20
+echo ""
+
 echo "─── GROUP 29b: Stupa Geographic-Concentration Null (may take ~2 minutes) ───"
 python3 analysis/unesco/stupa_geographic_concentration_test.py 2>&1 | tail -40
 echo ""
