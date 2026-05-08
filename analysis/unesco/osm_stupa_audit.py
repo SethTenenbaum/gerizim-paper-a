@@ -207,6 +207,11 @@ n_ruins     = tag_counts.get("ruins=stupa", 0)
 store.write("osmStupaTotal",       N_osm)
 store.write("osmStupaRayleighR",   round(R_obs_osm, 4))
 store.write("osmStupaRayleighP",   round(rayleigh_p_osm, 4))
+_rayleigh_sig = ("***" if rayleigh_p_osm < 0.001 else
+                 "**"  if rayleigh_p_osm < 0.01  else
+                 "*"   if rayleigh_p_osm < 0.05  else
+                 r"$^\dagger$" if rayleigh_p_osm < 0.10 else "ns")
+store.write("osmStupaRayleighSig", _rayleigh_sig)
 store.write("osmStupaATierCount",  int(n_a))
 store.write("osmStupaATierRate",   round(rate_a, 1))
 store.write("osmStupaATierBinomP", round(p_a_tier, 4))
@@ -259,6 +264,7 @@ macros = [
     ("osmStupaTotal",              N_osm),
     ("osmStupaRayleighR",          f"{R_obs_osm:.4f}"),
     ("osmStupaRayleighP",          f"{rayleigh_p_osm:.4f}"),
+    ("osmStupaRayleighSig",        _rayleigh_sig),
     ("osmStupaATierCount",         n_a),
     ("osmStupaATierRate",          f"{rate_a:.1f}"),
     ("osmStupaATierBinomP",        f"{p_a_tier:.4f}"),

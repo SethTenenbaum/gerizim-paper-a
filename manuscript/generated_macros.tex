@@ -1,4 +1,4 @@
-% Generated macros -- 2026-05-07T18:38:28Z
+% Generated macros -- 2026-05-08T05:01:40Z
 % Source: bash manuscript/reproduce_all_macros.sh
 % IMPORTANT: values are computed fresh each run -- do NOT hardcode
 
@@ -1284,6 +1284,10 @@
   \newcommand{\multiscaleJointMaxP}{0.01232}
   \newcommand{\multiscaleJointMaxNullPct}{20.2}
   \newcommand{\multiscaleJointMaxKm}{29}
+  \newcommand{\naturalNullPctOwtrad}{2.6}
+  \newcommand{\naturalNullPctDome}{3.6}
+  \newcommand{\naturalNullPctFull}{10.2}
+  \newcommand{\naturalNullPctWiki}{20.2}
 
 % --- analysis/unesco/simulation_null_model.py
   \newcommand{\simNperms}{100{,}000}        % number of permutations in null model
@@ -1572,6 +1576,7 @@
   \newcommand{\osmStupaTotal}{259}
   \newcommand{\osmStupaRayleighR}{0.1073}
   \newcommand{\osmStupaRayleighP}{0.0355}
+  \newcommand{\osmStupaRayleighSig}{*}
   \newcommand{\osmStupaATierCount}{70}
   \newcommand{\osmStupaATierRate}{27.0}
   \newcommand{\osmStupaATierBinomP}{0.0039}
@@ -1652,7 +1657,7 @@
   \newcommand{\geoFisherAppP}{0.0053}
   \newcommand{\geoFisherAppSig}{**}
   \newcommand{\geoFisherApChi}{24.017}
-  \newcommand{\geoFisherApP}{0.00052}
+  \newcommand{\geoFisherApP}{{<}0.001}
   \newcommand{\geoFisherApSig}{***}
   \newcommand{\geoFisherAChi}{39.661}
   \newcommand{\geoFisherAP}{{<}0.001}
@@ -1984,52 +1989,3 @@
   \newcommand{\wikiStupaATierBinomPSig}{***}  % auto sig label
   \newcommand{\geoFisherAPDisp}{{<}0.001}  % display override for geoFisherAP
 
-
-% ── Mounds geographic control ──────────────────
-\newcommand{\moundsN}{236}
-\newcommand{\moundsNApp}{1}
-\newcommand{\moundsNAp}{11}
-\newcommand{\moundsNA}{45}
-\newcommand{\moundsRateApp}{0.4}
-\newcommand{\moundsRateAp}{4.7}
-\newcommand{\moundsRateA}{19.1}
-\newcommand{\moundsPApp}{1.00}
-\newcommand{\moundsPAp}{1.00}
-\newcommand{\moundsPA}{0.66}
-\newcommand{\moundsPAppSig}{ns}
-\newcommand{\moundsPApSig}{ns}
-\newcommand{\moundsPASig}{ns}
-
-
-
-
-
-% ── Null B: uniform random draw ────────────────────────────────
-\newcommand{\geoNullBUniformPApp}{0.001}
-\newcommand{\geoNullBUniformPAp}{0.003}
-\newcommand{\geoNullBUniformPA}{0.004}
-\newcommand{\geoNullBUniformZApp}{3.99}
-\newcommand{\geoNullBUniformZAp}{3.16}
-\newcommand{\geoNullBUniformZA}{2.90}
-\newcommand{\geoNullBUniformSigApp}{**}
-\newcommand{\geoNullBUniformSigAp}{**}
-\newcommand{\geoNullBUniformSigA}{**}
-\newcommand{\geoNullBUniformMeanApp}{3.60}
-\newcommand{\geoNullBUniformMeanAp}{9.00}
-\newcommand{\geoNullBUniformMeanA}{18.02}
-
-% ── Null D: geographic clustering null ─────────────────────────
-\newcommand{\clusterNullObsSigma}{49.17}
-\newcommand{\clusterNullObsNN}{1.14}
-\newcommand{\clusterNullNullMeanSigma}{103.2}
-\newcommand{\clusterNullNullMeanNN}{2.02}
-\newcommand{\clusterNullNullSDSigma}{4.95}
-\newcommand{\clusterNullNullSDNN}{0.18}
-\newcommand{\clusterNullZSigma}{-10.93}
-\newcommand{\clusterNullZNN}{-5.01}
-\newcommand{\clusterNullPSigma}{$<$0.00001}
-\newcommand{\clusterNullPNN}{$<$0.00001}
-\newcommand{\clusterNullSigSigma}{***}
-\newcommand{\clusterNullSigNN}{***}
-\newcommand{\clusterNullN}{90}
-\newcommand{\clusterNullNperms}{100000}

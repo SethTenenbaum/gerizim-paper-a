@@ -232,6 +232,12 @@ def main():
         print(f"  \\newcommand{{\\geoNullDomeRestrictedP{tag}}}{{{r['p']:.4f}}}")
         print(f"  \\newcommand{{\\geoNullDomeRestrictedMean{tag}}}{{{r['mean']:.4f}}}")
 
+    # Null C Bonferroni parameters (k = number of window widths tested)
+    null_c_k = len([2.0, 5.0, 10.0])
+    null_c_alpha_adj = 0.05 / null_c_k
+    print(f"  \\newcommand{{\\nullBBonfK}}{{{null_c_k}}}")
+    print(f"  \\newcommand{{\\nullBBonfAlpha}}{{{null_c_alpha_adj:.4f}}}")
+
     # Corridor diagnostic
     print(f"  \\newcommand{{\\domeEurasianFraction}}{{{eurasian:.0f}}}")
     print(f"  \\newcommand{{\\fullCorpusEurasianFraction}}{{{full_e:.0f}}}")
@@ -254,6 +260,8 @@ def main():
         store_data[f"geoNullDomeRestrictedN{tag}"]    = float(r["n_pool"])
         store_data[f"geoNullDomeRestrictedP{tag}"]    = r["p"]
         store_data[f"geoNullDomeRestrictedMean{tag}"] = r["mean"]
+    store_data["nullBBonfK"]     = float(null_c_k)
+    store_data["nullBBonfAlpha"] = null_c_alpha_adj
     ResultsStore().write_many(store_data)
     print("\nResults written to data/store/results.json")
 

@@ -389,6 +389,12 @@ print(f"  \\newcommand{{\\multiscaleConvergenceP}}{{{p_convergence:.5f}}}")
 print(f"  \\newcommand{{\\multiscaleJointMaxP}}{{{p_joint_max:.5f}}}")
 print(f"  \\newcommand{{\\multiscaleJointMaxNullPct}}{{{joint_max_null_pct:.1f}}}")
 print(f"  \\newcommand{{\\multiscaleJointMaxKm}}{{{joint_max_km:.0f}}}")
+# Per-corpus natural scale macros (used in tier calibration prose)
+print(f"  % Per-corpus peak null rates (used in tier calibration text)")
+print(f"  \\newcommand{{\\naturalNullPctOwtrad}}{{{NULL_RATES[owtrad_peak_idx]*100:.1f}}}")
+print(f"  \\newcommand{{\\naturalNullPctDome}}{{{NULL_RATES[dome_peak_idx]*100:.1f}}}")
+print(f"  \\newcommand{{\\naturalNullPctFull}}{{{NULL_RATES[full_peak_idx]*100:.1f}}}")
+print(f"  \\newcommand{{\\naturalNullPctWiki}}{{{NULL_RATES[wiki_peak_idx]*100:.1f}}}")
 
 # ── Write to results store ────────────────────────────────────────────────────
 ResultsStore().write_many({
@@ -413,4 +419,9 @@ ResultsStore().write_many({
     "multiscaleJointMaxP":          round(p_joint_max, 5),
     "multiscaleJointMaxNullPct":    round(joint_max_null_pct, 1),
     "multiscaleJointMaxKm":         round(joint_max_km, 0),
+    # Per-corpus natural scale (used in tier calibration prose)
+    "naturalNullPctOwtrad":         round(NULL_RATES[owtrad_peak_idx] * 100, 1),
+    "naturalNullPctDome":           round(NULL_RATES[dome_peak_idx]   * 100, 1),
+    "naturalNullPctFull":           round(NULL_RATES[full_peak_idx]   * 100, 1),
+    "naturalNullPctWiki":           round(NULL_RATES[wiki_peak_idx]   * 100, 1),
 })
