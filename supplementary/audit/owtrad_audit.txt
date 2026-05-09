@@ -1,19 +1,19 @@
 OWTRAD SILK ROAD HARMONIC ALIGNMENT AUDIT
-Generated : Tue Apr 28 22:42:54 UTC 2026
+Generated : Sat May 09 00:32:42 UTC 2026
 Script    : tools/generate_audit_owtrad.py
 Source    : Ciolek, T.M. (2004+). OWTRAD Project. www.ciolek.com/OWTRAD/
 Data      : data/store/silk_road/owtrad_routes.csv  (1946 edges)
           : data/store/silk_road/owtrad_nodes.csv   (1674 raw nodes, 1674 deduplicated)
 Anchor    : Gerizim  35.269°E  |  BERU = 30.0°
-Thresholds: A++ ≤ 0.0016 beru (5.3 km)  |  A+ ≤ 0.00321 beru (10.7 km)  |  A ≤ 0.00642 beru (21.4 km)
-Null rates: A++ 0.0320  |  A+ 0.0642  |  A 0.1284  (geometric, uniform longitude)
+Thresholds: A++ ≤ 0.002 beru (6.7 km)  |  A+ ≤ 0.005 beru (16.6 km)  |  A ≤ 0.01 beru (33.3 km)
+Null rates: A++ 0.0400  |  A+ 0.1000  |  A 0.2000  (geometric, uniform longitude)
 Perms     : 100,000  (seed 42)  |  Bonferroni k = 4
 ────────────────────────────────────────────────────────────────────────────────────────────────────
 POPULATION SIZES
 
   Deduplicated vertices          : 1674
   Route edges                    : 1946
-  Degree-weighted vertex list    : 3498  (each city repeated by its edge count)
+  Degree-weighted vertex list    : 3892  (each edge contributes both endpoint longitudes; = 2 × edges)
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────
 BINOMIAL TEST RESULTS  (one-tailed, H0: uniform longitude)
@@ -21,23 +21,23 @@ BINOMIAL TEST RESULTS  (one-tailed, H0: uniform longitude)
   Population: Deduplicated vertices  (N = 1674)
   Tier      Obs    Rate    Null   Enrich       Z     p (raw)  sig    p (Bonf k=4)  sig
   ──────────────────────────────────────────────────────────────────────────────────────
-  A++        72   4.3%   3.2%    1.34x    2.56      0.0084   **          0.0335  *
-  A+        114   6.8%   6.4%    1.06x    0.65      0.2708   ns         1.0000  ns
-  A         242  14.5%  12.8%    1.13x    1.98      0.0276    *                  —
+  A++        84   5.0%   4.0%    1.25x    2.13      0.0224    *          0.0894  ~
+  A+        190  11.4%  10.0%    1.14x    1.84      0.0377    *         0.1509  ns
+  A         362  21.6%  20.0%    1.08x    1.66      0.0524    ~                  —
 
   Population: Route edge midpoints  (N = 1946)
   Tier      Obs    Rate    Null   Enrich       Z     p (raw)  sig    p (Bonf k=4)  sig
   ──────────────────────────────────────────────────────────────────────────────────────
-  A++        74   3.8%   3.2%    1.19x    1.51      0.0769    ~         0.3074  ns
-  A+        136   7.0%   6.4%    1.09x    1.02      0.1640   ns         0.6560  ns
-  A         272  14.0%  12.8%    1.09x    1.50      0.0726    ~                  —
+  A++        90   4.6%   4.0%    1.16x    1.41      0.0908    ~         0.3633  ns
+  A+        215  11.0%  10.0%    1.10x    1.54      0.0679    ~         0.2715  ns
+  A         420  21.6%  20.0%    1.08x    1.75      0.0439    *                  —
 
-  Population: Degree-weighted vertices  (N = 3498)
+  Population: Degree-weighted vertices  (N = 3892)
   Tier      Obs    Rate    Null   Enrich       Z     p (raw)  sig    p (Bonf k=4)  sig
   ──────────────────────────────────────────────────────────────────────────────────────
-  A++       156   4.5%   3.2%    1.39x    4.23      0.0000  ***        0.0001  ***
-  A+        250   7.1%   6.4%    1.11x    1.75      0.0445    *         0.1778  ns
-  A         530  15.2%  12.8%    1.18x    4.09      0.0000  ***                  —
+  A++       211   5.4%   4.0%    1.36x    4.53      0.0000  ***        0.0000  ***
+  A+        457  11.7%  10.0%    1.17x    3.62      0.0002  ***        0.0009  ***
+  A         886  22.8%  20.0%    1.14x    4.31      0.0000  ***                  —
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────
 PHASE-SHIFT PERMUTATION TEST  (vertices, N_perms = 100,000)
@@ -47,8 +47,8 @@ PHASE-SHIFT PERMUTATION TEST  (vertices, N_perms = 100,000)
 
   Tier   Observed   Null mean ± SD          p          sig
   ────────────────────────────────────────────────────────────
-  A++          72    53.62 ±  7.58          0.0116  *
-  A+          114   107.54 ± 11.07          0.3101  ns
+  A++          84    67.03 ±  8.37          0.0203  *
+  A+          190   167.44 ± 14.21          0.0516  ~
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────
 NODE-LABEL PERMUTATION TEST  (edge midpoints, N_perms = 100,000)
@@ -58,8 +58,8 @@ NODE-LABEL PERMUTATION TEST  (edge midpoints, N_perms = 100,000)
 
   Tier   Observed   Null mean ± SD          p          sig
   ────────────────────────────────────────────────────────────
-  A++          74    57.86 ±  7.39          0.0204  *
-  A+          136   114.77 ± 10.24          0.0236  *
+  A++          90    70.03 ±  8.06          0.0097  **
+  A+          215   176.63 ± 12.47          0.0016  **
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────
 CLUSTER ASYMMETRY TEST  (degree-weighted, Mann-Whitney one-tailed)
@@ -67,10 +67,10 @@ CLUSTER ASYMMETRY TEST  (degree-weighted, Mann-Whitney one-tailed)
   Harmonics bearing at least one A++ vertex vs harmonics without one.
   Tests whether A++-bearing harmonics are more heavily trafficked.
 
-  A++ harmonics   : 25   mean connectivity = 110.4 edges/harmonic
-  Non-A++ harmonics: 16   mean connectivity = 46.1 edges/harmonic
-  Ratio           : 2.40x
-  Mann-Whitney p  : 0.0003  ***
+  A++ harmonics   : 30   mean connectivity = 102.7 edges/harmonic
+  Non-A++ harmonics: 11   mean connectivity = 38.0 edges/harmonic
+  Ratio           : 2.70x
+  Mann-Whitney p  : 0.0007  ***
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────
 A++ AND A+ DEDUPLICATED VERTICES  (sorted by deviation, tightest first)
@@ -149,18 +149,18 @@ A++ AND A+ DEDUPLICATED VERTICES  (sorted by deviation, tightest first)
   A++    Sofia                                 23.3167  42.6833     0.001589       5.29     3  BG
   A++    loc10-tmc020719                      104.3167  10.5333     0.001589       5.29     2  KH
   A++    Tingzhou                             116.3167  25.8667     0.001590       5.29     0  CN
-  A+     Delhi                                 77.2170  28.6670     0.001733       5.77     7  IN
-  A+     loc277-tmc060409                      92.2167  47.4167     0.001743       5.81     0  MN
-  A+     loc501-tmc060409                     125.2167  49.1833     0.001743       5.81     0  CN
-  A+     loc433-tmc060409                     116.2167  35.9000     0.001743       5.81     2  CN
-  A+     Semipalatinsk                         80.2167  50.4667     0.001744       5.81     2  CN
-  A+     Manas                                 86.2167  44.3000     0.001744       5.81     3  CN
-  A+     sealoc19-tmc050418                    80.3230  10.1589     0.001800       5.99     2  IN
-  A+     Gerrha                                50.2144  25.6431     0.001819       6.06     3  SA
-  A+     Birjand                               59.2144  32.8739     0.001820       6.06     2  IR
-  A+     sealoc09-tmc050503                    20.2129  38.0360     0.001870       6.23     4  GR
-  A+     frk07-tmc050521                       29.3261  37.8072     0.001903       6.34     3  TR
-  A+     Adana                                 35.3289  37.0167     0.001997       6.65     7  TR
+  A++    Delhi                                 77.2170  28.6670     0.001733       5.77     7  IN
+  A++    loc277-tmc060409                      92.2167  47.4167     0.001743       5.81     0  MN
+  A++    loc501-tmc060409                     125.2167  49.1833     0.001743       5.81     0  CN
+  A++    loc433-tmc060409                     116.2167  35.9000     0.001743       5.81     2  CN
+  A++    Semipalatinsk                         80.2167  50.4667     0.001744       5.81     2  CN
+  A++    Manas                                 86.2167  44.3000     0.001744       5.81     3  CN
+  A++    sealoc19-tmc050418                    80.3230  10.1589     0.001800       5.99     2  IN
+  A++    Gerrha                                50.2144  25.6431     0.001819       6.06     3  SA
+  A++    Birjand                               59.2144  32.8739     0.001820       6.06     2  IR
+  A++    sealoc09-tmc050503                    20.2129  38.0360     0.001870       6.23     4  GR
+  A++    frk07-tmc050521                       29.3261  37.8072     0.001903       6.34     3  TR
+  A++    Adana                                 35.3289  37.0167     0.001997       6.65     7  TR
   A+     San'a                                 44.2067  15.3547     0.002077       6.92     2  YE
   A+     Luqi                                 110.2056  28.1997     0.002115       7.04     2  CN
   A+     loc42-tmc050521                       26.3325  39.7900     0.002117       7.05     2  TR
@@ -191,7 +191,83 @@ A++ AND A+ DEDUPLICATED VERTICES  (sorted by deviation, tightest first)
   A+     Chenqi                               110.1786  27.9986     0.003013      10.03     2  CN
   A+     Kufen                                 59.1763  37.6691     0.003088      10.28     2  TM
   A+     Yongcheng                            116.3642  33.9361     0.003173      10.57     0  CN
+  A+     loc06-tmc020719                      101.3667  14.0500     0.003256      10.84     1  TH
+  A+     loc15-tmc040123                       65.3667  40.1500     0.003256      10.84     2  UZ
+  A+     Dayakhatyn                            62.3667  40.0833     0.003257      10.84     2  TM
+  A+     Hodal                                 77.3670  27.8670     0.003267      10.88     2  IN
+  A+     loc06-tmc050503                       26.1700  40.8956     0.003300      10.99     2  GR
+  A+     loc24-tmc040425                       77.3684  41.5159     0.003314      11.04     2  KG
+  A+     Gaizhou                              122.3686  40.3942     0.003320      11.06     0  CN
+  A+     Sayda                                 35.3689  33.5631     0.003330      11.09     1  LB
+  A+     Juyong                               119.1667  31.9333     0.003410      11.36     2  CN
+  A+     loc351-tmc060409                      95.1667  50.2500     0.003410      11.36     0  RU
+  A+     Dargan                                62.1667  40.4833     0.003410      11.36     2  TM
+  A+     Merv                                  62.1667  37.6167     0.003411      11.36    10  TM
+  A+     loc02-tmc010201                       59.1667  42.3167     0.003411      11.36     2  TM
+  A+     Khyber Pass                           71.1667  34.0833     0.003411      11.36     2  PK
+  A+     Pali (2)                              89.1667  27.7500     0.003411      11.36     2  CN
+  A+     Shouyang                             113.1661  37.8864     0.003430      11.42     2  CN
+  A+     loc26-tmc040123                       50.3733  35.0094     0.003478      11.58     2  IR
+  A+     loc448-tmc060409                     110.1639  20.3300     0.003503      11.67     0  CN
+  A+     Baoji                                107.1581  34.3831     0.003698      12.31     4  CN
+  A+     loc20-tmc070101                       56.3811  36.3622     0.003737      12.44     2  IR
+  A+     loc09-tmc050521                       29.1567  40.4331     0.003743      12.47     3  TR
+  A+     Chah Horun                            62.1563  39.3249     0.003758      12.51     2  TM
+  A+     loc02-tmc050521                       26.3831  40.9181     0.003803      12.67     2  GR
+  A+     Malatya                               38.3833  38.4333     0.003810      12.69     2  TR
+  A+     loc15-tmc060612                      101.3833  21.8500     0.003810      12.69     2  CN
+  A+     Yuli                                  86.3833  41.5000     0.003811      12.69     3  CN
+  A+     Caffa                                 35.3833  45.0333     0.003811      12.69     2  TR
+  A+     Fuqing                               119.1533  25.3275     0.003857      12.84     0  CN
+  A+     Amasra                                32.3867  41.7450     0.003923      13.06     2  TR
+  A+     Sinop                                 35.1500  42.0167     0.003967      13.21     5  TR
+  A+     loc05-tmc040128                       86.1500  41.7333     0.003967      13.21     2  CN
+  A+     Daofu                                101.1500  31.0000     0.003967      13.21     2  CN
+  A+     loc444-tmc060409                     110.1500  22.6333     0.003967      13.21     0  CN
+  A+     frk03-tmc050518                       47.1500  40.6172     0.003967      13.21     3  AZ
+  A+     loc04-tmc020719                      104.1500  13.7500     0.003967      13.21     2  KH
+  A+     Pexin                                116.3892  39.9128     0.004006      13.34     3  CN
+  A+     Fengxiang                            107.3900  34.5242     0.004033      13.43     2  CN
+  A+     Wuzhi                                113.3900  35.0956     0.004033      13.43     2  CN
+  A+     Huai'an                              119.1442  33.5039     0.004160      13.85     2  CN
+  A+     Baghdad                               44.3939  33.3386     0.004163      13.86    11  IQ
+  A+     Foucheng                             116.1425  37.8681     0.004217      14.04     2  CN
+  A+     Pashan                                62.1422  37.8441     0.004225      14.07     2  TM
+  A+     Zhuch-eng                            119.3975  35.9947     0.004283      14.26     2  CN
+  A+     Lanxiang                             116.1400  39.7319     0.004300      14.32     2  CN
+  A+     loc286-tmc060409                     107.1400  40.8847     0.004300      14.32     0  CN
+  A+     loc497-tmc060409                     131.1394  46.7217     0.004320      14.39     0  CN
+  A+     Ergiri                                20.1389  40.0758     0.004337      14.44     2  AL
+  A+     Deyang                               104.4000  31.1333     0.004367      14.54     2  CN
+  A+     Yingde                               113.4000  24.1667     0.004367      14.54     2  CN
+  A+     loc422-tmc060409                     113.4000  30.3833     0.004367      14.54     0  CN
+  A+     Canakkale                             26.4000  40.1500     0.004367      14.54     3  TR
+  A+     loc441-tmc060409                     110.4000  24.5000     0.004367      14.54     0  CN
+  A+     loc05-tmc040922                       68.4000  39.9667     0.004367      14.54     2  UZ
+  A+     loc053-tmc060409                      95.4000  41.5500     0.004367      14.54     0  CN
+  A+     Rabat Serob                           62.1380  38.2047     0.004367      14.54     2  TM
+  A+     loc369-tmc060409                     119.4011  41.2400     0.004403      14.66     0  CN
+  A+     Yuanling                             110.4022  28.4486     0.004440      14.79     2  CN
+  A+     loc021-tmc060409                      95.1333  30.1333     0.004522      15.06     0  CN
+  A+     Kobadian                              68.1333  37.5833     0.004523      15.06     2  TJ
+  A+     Shartuz                               68.1333  37.2667     0.004523      15.06     3  TJ
+  A+     loc41-tmc050521                       26.4047  39.6011     0.004523      15.06     2  TR
+  A+     Bhimbar                               74.1330  32.9830     0.004533      15.10     3  PK
+  A+     loc06-tmc070101                       53.4064  35.5753     0.004580      15.25     2  IR
+  A+     Tarkhan                               62.1311  38.2972     0.004597      15.31     2  TM
+  A+     Hurmuzfarra                           62.1303  37.9231     0.004623      15.39     2  TM
+  A+     Horgars Pass                          80.4083  44.2333     0.004644      15.47     2  CN
+  A+     Donghai                              119.1289  34.5817     0.004670      15.55     2  CN
+  A+     Ghazni                                68.4167  33.5500     0.004922      16.39     2  AF
+  A+     Hungliuyuan                           95.4167  41.0667     0.004922      16.39     2  CN
+  A+     loc412-tmc060409                     107.4167  30.3333     0.004923      16.39     0  CN
+  A+     Rabat Suran                           62.1212  38.5381     0.004925      16.40     2  TM
+  A+     Talas                                 71.4170  42.8330     0.004933      16.43     4  KZ
+  A+     Hormuz                                56.4170  27.0830     0.004933      16.43     4  IR
+  A+     Batman                                41.1206  37.8828     0.004947      16.47     2  TR
+  A+     Ganyu                                119.1192  34.8364     0.004993      16.63     2  CN
+  A+     Rabat Takhiria                        62.4189  40.0106     0.004998      16.64     2  TM
 
-  Total A++ vertices: 72
-  Total A+  vertices: 42
+  Total A++ vertices: 84
+  Total A+  vertices: 106
 ────────────────────────────────────────────────────────────────────────────────────────────────────

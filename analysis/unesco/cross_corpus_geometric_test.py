@@ -129,7 +129,7 @@ def fmt_p_macro(p):
     """Return a LaTeX-safe p-value display string for generated macros."""
     if p < 0.001:
         return r"{<}0.001"
-    return round(p, 5)
+    return round(p, 3)
 
 tiers = [
     ("A++", TIER_APP_DEG,   P_NULL_APP),
@@ -218,6 +218,17 @@ for (tlabel, tkey) in _tier_keys:
     macros[f"geoFisher{tkey}Chi"]  = round(chi2_f, 3)
     macros[f"geoFisher{tkey}P"]    = fmt_p_macro(p_f)
     macros[f"geoFisher{tkey}Sig"]  = sig_stars(p_f)
+
+# ── Non-circular two-corpus Fisher (Wiki + OSM only) ─────────────────────────
+_nc_corpora = ["Wikidata stupas", "OSM stupas"]
+for (tlabel, tkey) in _tier_keys:
+    ps_nc = [results[(cname, tlabel)][2] for cname in _nc_corpora]
+    chi2_nc = -2.0 * sum(np.log(max(p, 1e-15)) for p in ps_nc)
+    p_nc    = float(chi2.sf(chi2_nc, df=2 * len(ps_nc)))
+    macros[f"geoFisherNc{tkey}Chi"] = round(chi2_nc, 3)
+    macros[f"geoFisherNc{tkey}P"]   = fmt_p_macro(p_nc)
+    macros[f"geoFisherNc{tkey}Sig"] = sig_stars(p_nc)
+    print(f"  Non-circ Fisher Tier {tlabel}: χ²(4)={chi2_nc:.3f}, p={p_nc:.5f} {sig_stars(p_nc)}")
 
 print()
 print(SEP)

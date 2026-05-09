@@ -126,7 +126,7 @@ if [ "${1:-}" != "--full" ]; then
         analysis/unesco/dome_geographic_concentration_test.py  # → geoNullDomeBootP/Z/Mean, geoNullDomeRestrictedP/Z/Mean/N, nullBBonfK/Alpha, domeEurasianFraction
         analysis/unesco/stupa_geographic_concentration_test.py # → stupaGeoBootP/Z/Mean, stupaRegionP/Z/N, stupaGeoRestrictedP/Z/N (GROUP 29b)
         analysis/unesco/osm_stupa_audit.py                    # → osmStupaTotal, osmStupaRayleighR/P, osmStupaATierCount, etc. (GROUP 29d)
-        analysis/unesco/cross_corpus_geometric_test.py        # → geoDome/Wiki/OsmApp/Ap/A N/Hits/Exp/Enr/P/Sig, geoFisherApp/Ap/A Chi/P/Sig (PRIMARY)
+        analysis/unesco/cross_corpus_geometric_test.py        # → geoDome/Wiki/OsmApp/Ap/A N/Hits/Exp/Enr/P/Sig, geoFisherApp/Ap/A Chi/P/Sig, geoFisherNcApp/Ap/A Chi/P/Sig (PRIMARY)
         analysis/unesco/dome_founding_stratification.py        # → domeStratNfs, domeStratNnfs, domeStratF/NfsAp/Rate/Enrich/P, domeStratFisherOR/P
         # ── Geographic concentration robustness ───────────────────────────
         analysis/unesco/region_conditioned_permutation.py    # → regionCondPermP/Z/Obs/Mean/Std/Nregions/Nperms (GROUP 35)

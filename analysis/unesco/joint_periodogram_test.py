@@ -12,21 +12,30 @@ NARRATIVE
 ---------
   The central claim of this analysis is:
 
-    (A) Three independently assembled MONUMENT corpora (UNESCO all, UNESCO
-        dome subset, Wikidata stupas) spontaneously recover the SAME 3°
-        anchor — placing a grid line within 0.02° of 35°E — with K = 0.986
-        and perm-p = 0.012.
+    (A) Two NON-NESTED monument corpora (UNESCO dome/stupa subset and
+        Wikidata Q180987 stupas) recover the same 3° anchor at T=3°.
+        Neither is nested within the other. This is the primary NPC result
+        and feeds manuscript Table 3 "Primary non-nested" row via macros
+        npcDomeStupaK / npcDomeStupaPermP. See console output for values.
 
-    (B) A fourth corpus (OWTRAD Silk Road trade nodes), assembled on
+        Conservative row (UNESCO full + Wikidata Stupa, macro: npcTwoK /
+        npcTwoPermP) is also reported; it uses the broadest possible UNESCO
+        corpus at the cost of specificity.
+
+        Note: the 3-corpus result (UNESCO all + dome subset + Wikidata
+        stupas) is also reported but is NOT the primary claim — the dome
+        subset is nested within UNESCO Cultural/Mixed, so that trio
+        effectively double-counts the dome sites' phase contribution.
+        Its K and p are shown for completeness only.
+
+    (B) A contrast corpus (OWTRAD Silk Road trade nodes), assembled on
         entirely different principles (routes, not monument density), does
-        NOT share the anchor.  At T=3° OWTRAD's own Rayleigh R = 0.031
-        (p = 0.21), and its preferred anchor sits 0.7° away from the
-        monument consensus.  When OWTRAD is added to the NPC test the
-        consensus weakens to K = 0.771 (p = 0.092, ns).
+        NOT share the anchor at T=3°. See console output for current
+        R, perm-p, and anchor-offset values.
 
-    Together (A) and (B) establish that the 3° / 35°E alignment is a
-    property of MONUMENTAL geography, not of Eurasian longitude distribution
-    in general, and is cross-corpus recoverable within the monument domain.
+    Together (A) and (B) show that the 3°/35°E alignment is a property
+    of non-nested monument geography, not of Eurasian longitude
+    distribution in general.
 
 PROBLEM WITH PRIOR APPROACHES
 ------------------------------
@@ -72,7 +81,11 @@ NULL DISTRIBUTION — Phase randomization (fully vectorized)
 
   Two p-values:
     • global-max: p = P(max_T K_null ≥ max_T K_obs)   [search-corrected]
-    • fixed T=3°: p = P(K_null(3°) ≥ K_obs(3°))       [pre-specified only]
+    • fixed T=3°: p = P(K_null(3°) ≥ K_obs(3°))       [frame-conditional;
+        T=3° was selected from the dome corpus's own period sweep, so this
+        p-value is not unconditionally pre-specified — it is pre-specified
+        for the non-dome corpora (Wikidata, OSM) but circular for the dome
+        corpus itself. See manuscript Limitations §period-selection.]
 
 DIAGNOSTICS
 -----------
@@ -187,7 +200,15 @@ AUX_CORPORA = {
 # ── 2. Phasor helpers ─────────────────────────────────────────────────────────
 
 def mean_phasor_vec(lons: np.ndarray, periods: np.ndarray) -> np.ndarray:
-    """Return complex mean phasor Z_c(T) for each period. Shape: (len(periods),)"""
+    """Return complex mean phasor Z_c(T) for each period. Shape: (len(periods),)
+
+    Phase is computed as 2π × lon / T, which is equivalent to using anchor
+    λ₀ = 0°E. The recovered anchor (arg(Z) × T / 2π mod T) is the best-fit
+    phase offset relative to 0°E; the nearest grid line to any target longitude
+    (e.g. 35°E) is then computed post-hoc as φ + round((target - φ)/T) × T.
+    The phase-randomisation null rotates each corpus's phasor independently,
+    so the null distribution is invariant to the choice of λ₀.
+    """
     a = 2.0 * np.pi * lons[:, None] / periods[None, :]   # (N, P)
     return np.mean(np.exp(1j * a), axis=0)                # (P,)
 
@@ -203,9 +224,18 @@ for name, lons in CORPORA.items():
     phasors_obs[name] = mean_phasor_vec(lons, periods)
 
 # Unit phasors: direction only, magnitude discarded
+# NOTE: when a corpus's R_c(T) is very small the unit phasor direction is
+# essentially a noise vector — it casts an equal vote in K(T) but the
+# direction carries little information.  A warning is printed for any
+# corpus with R < 0.05 at T=3° so this is visible in the console output.
 unit_phasors = {}  # name -> complex array (N_periods,), |Ẑ_c| = 1
 for name, Z in phasors_obs.items():
     mag = np.abs(Z)
+    r_at_3 = float(mag[idx_3])
+    if r_at_3 < 0.05:
+        print(f"  WARNING: {name} has R(3°) = {r_at_3:.4f} < 0.05 — "
+              f"unit phasor direction at T=3° is near-random; "
+              f"NPC vote for this corpus carries little directional information.")
     mag = np.where(mag < 1e-15, 1e-15, mag)   # guard against zero
     unit_phasors[name] = Z / mag
 
@@ -249,11 +279,12 @@ for name, Z in phasors_obs.items():
 # Rotate each corpus's UNIT phasor by independent θ_c ~ U(0,2π) per draw.
 # Preserves each corpus's R_c(T) at every T; destroys inter-corpus alignment.
 # Shape: (N_PERM, C, N_periods)
-
-rng = np.random.default_rng(SEED)
+#
+# Dedicated RNG so section order changes cannot silently alter primary p-values.
+rng_primary = np.random.default_rng(SEED)
 
 unit_mat = np.stack(list(unit_phasors.values()), axis=0)   # (C, N_periods)
-theta    = rng.uniform(0.0, 2.0 * np.pi, size=(N_PERM, N_CORPORA, 1))
+theta    = rng_primary.uniform(0.0, 2.0 * np.pi, size=(N_PERM, N_CORPORA, 1))
 rotated  = unit_mat[np.newaxis, :, :] * np.exp(1j * theta) # (N_PERM, C, N_periods)
 K_null   = np.abs(rotated.sum(axis=1)) / N_CORPORA         # (N_PERM, N_periods)
 
@@ -275,9 +306,8 @@ def phase_diff_deg(name_a: str, name_b: str, T: float) -> float:
     idx = int(np.argmin(np.abs(periods - T)))
     a1  = float(np.angle(unit_phasors[name_a][idx]))
     a2  = float(np.angle(unit_phasors[name_b][idx]))
-    diff = abs(a1 - a2) % (2.0 * np.pi)
-    if diff > np.pi:
-        diff = 2.0 * np.pi - diff
+    # correct wraparound: map difference into (-π, π] before converting
+    diff = abs(((a1 - a2) + np.pi) % (2.0 * np.pi) - np.pi)
     return diff * T / (2.0 * np.pi)   # convert to longitude degrees
 
 # ── 7. Three-corpus NPC (monument corpora only, pre-primary result) ───────────
@@ -297,7 +327,8 @@ K3_mon, phi3_mon = npc_fixed_T(monument_units, 3.0)
 
 # phase-rand null for 3-corpus test at fixed T=3°
 unit_mat_mon = np.stack([unit_phasors[n][idx_3] for n in monument_names])  # (3,) complex
-theta_mon    = rng.uniform(0, 2*np.pi, size=(N_PERM, 3))
+rng_mon      = np.random.default_rng(SEED + 20)
+theta_mon    = rng_mon.uniform(0, 2*np.pi, size=(N_PERM, 3))
 K_null_mon   = np.abs((unit_mat_mon[None,:] * np.exp(1j*theta_mon)).sum(axis=1)) / 3
 p3_mon       = float(np.mean(K_null_mon >= K3_mon))
 
@@ -313,7 +344,8 @@ dome_stupa_units  = [unit_phasors[n] for n in dome_stupa_names]
 K3_ds, phi3_ds = npc_fixed_T(dome_stupa_units, 3.0)
 
 unit_mat_ds = np.stack([unit_phasors[n][idx_3] for n in dome_stupa_names])
-theta_ds    = rng.uniform(0, 2*np.pi, size=(N_PERM, 2))
+rng_ds      = np.random.default_rng(SEED + 21)
+theta_ds    = rng_ds.uniform(0, 2*np.pi, size=(N_PERM, 2))
 K_null_ds   = np.abs((unit_mat_ds[None,:] * np.exp(1j*theta_ds)).sum(axis=1)) / 2
 p3_ds       = float(np.mean(K_null_ds >= K3_ds))
 gl_ds_35    = phi3_ds + round((35.0 - phi3_ds) / 3.0) * 3.0
@@ -326,7 +358,8 @@ two_units    = [unit_phasors[n] for n in two_names]
 K3_two, phi3_two = npc_fixed_T(two_units, 3.0)
 
 unit_mat_two = np.stack([unit_phasors[n][idx_3] for n in two_names])  # (2,) complex
-theta_two    = rng.uniform(0, 2*np.pi, size=(N_PERM, 2))
+rng_two      = np.random.default_rng(SEED + 22)
+theta_two    = rng_two.uniform(0, 2*np.pi, size=(N_PERM, 2))
 K_null_two   = np.abs((unit_mat_two[None,:] * np.exp(1j*theta_two)).sum(axis=1)) / 2
 p3_two       = float(np.mean(K_null_two >= K3_two))
 
@@ -382,23 +415,17 @@ K_un_ow, phi_un_ow, p_un_ow = two_corpus_npc(
 )
 gl_un_ow_35 = phi_un_ow + round((35.0 - phi_un_ow) / 3.0) * 3.0
 
-# (iv) UNESCO (full) × UNESCO-Americas × Wikidata Stupa — 3-corpus NEGATIVE
-# CONTROL. Mirrors the 3-corpus monument primary (UNESCO + Dome + Stupa),
-# substituting the Americas geographic-control sub-corpus for the dome subset.
-# Tests whether ANY 3-corpus NPC including UNESCO and Wikidata recovers
-# concordance, or whether concordance specifically requires the dome subset.
-rng_neg4 = np.random.default_rng(SEED + 4)
-u_un_neg = mean_unit_phasor_at_T(lons_unesco,   3.0)
-u_am_neg = mean_unit_phasor_at_T(lons_americas, 3.0)
-u_st_neg = mean_unit_phasor_at_T(lons_stupa,    3.0)
-trip_neg = np.stack([u_un_neg, u_am_neg, u_st_neg])
-s_neg    = trip_neg.sum()
-K_neg3   = abs(s_neg) / 3.0
-phi_neg3 = (float(np.angle(s_neg)) * 3.0 / (2.0 * np.pi)) % 3.0
-th_neg3  = rng_neg4.uniform(0, 2 * np.pi, size=(N_PERM, 3))
-K_null_neg3 = np.abs((trip_neg[None, :] * np.exp(1j * th_neg3)).sum(axis=1)) / 3.0
-p_neg3   = float(np.mean(K_null_neg3 >= K_neg3))
-gl_neg3_35 = phi_neg3 + round((35.0 - phi_neg3) / 3.0) * 3.0
+# (iv) Americas × Wikidata Stupa — 3-corpus-equivalent non-nested NEGATIVE
+# CONTROL. Uses only Americas (geographic control) + Wikidata Stupa, without
+# UNESCO full. This is structurally equivalent to the primary Dome+Stupa
+# non-nested pair, substituting the Americas geographic-control sub-corpus
+# for the dome subset. UNESCO full is excluded to avoid nestedness (Americas
+# ⊂ UNESCO). Tests whether geographic-control + Stupa recovers concordance.
+rng_neg4    = np.random.default_rng(SEED + 4)
+K_neg3, phi_neg3, p_neg3 = two_corpus_npc(
+    lons_americas, lons_stupa, 3.0, rng_neg4
+)
+gl_neg3_35 = phi_neg3 + int((35.0 - phi_neg3) / 3.0 + 0.5) * 3.0
 
 # ── 7d. OSM stupa NPC rows (sensitivity check) ───────────────────────────────
 # The OSM corpus (building/historic/ruins=stupa) is assembled by a completely
@@ -441,9 +468,10 @@ gl_osm3_35 = phi_osm3 + round((35.0 - phi_osm3) / 3.0) * 3.0
 # ── 8. OWTRAD isolated signal at T=3° ────────────────────────────────────────
 R_owtrad_3   = float(np.abs(phasors_obs["OWTRAD"][idx_3]))
 phi_owtrad_3 = corpus_anchor("OWTRAD", 3.0)
-# Rayleigh p for OWTRAD alone
+# Rayleigh p for OWTRAD alone — dedicated RNG
 N_ow = len(lons_owtrad)
-phases_ow_null = rng.uniform(0, 2*np.pi, size=(N_PERM, N_ow))
+rng_owtrad   = np.random.default_rng(SEED + 23)
+phases_ow_null = rng_owtrad.uniform(0, 2*np.pi, size=(N_PERM, N_ow))
 R_ow_null      = np.abs(np.mean(np.exp(1j * phases_ow_null), axis=1))
 p_rayleigh_ow  = float(np.mean(R_ow_null >= R_owtrad_3))
 
@@ -470,26 +498,27 @@ for name in monument_names:
           f"{a:>+8.3f}°    {gl:>+8.3f}°E          {35-gl:>+5.2f}°")
 
 print(f"""
-  NPC consensus (3 corpora):
+  NPC consensus (3 corpora, includes nested dome subset — completeness only):
     K(3°) = {K3_mon:.4f}   anchor φ = {phi3_mon:+.3f}°
     nearest grid line to 35°E: {gl_mon_35:.3f}°E  (Δ = {35-gl_mon_35:+.3f}°)
     perm-p (fixed T=3°, {N_PERM:,} draws) = {p3_mon:.5f}  {sig_stars(p3_mon)}
-  → All three monument corpora independently recover the same anchor,
-    placing a grid line within {abs(35-gl_mon_35):.2f}° of 35°E.
+  → NOTE: dome subset is nested within UNESCO full; trio double-counts
+    dome sites. Shown for completeness; NOT the primary claim.
 
-  PRIMARY (non-nested 2-corpus NPC: UNESCO + Wikidata Stupa):
-    K(3°) = {K3_two:.4f}   anchor φ = {phi3_two:+.3f}°
-    nearest grid line to 35°E: {gl_two_35:.3f}°E  (Δ = {35-gl_two_35:+.3f}°)
-    perm-p (fixed T=3°, {N_PERM:,} draws) = {p3_two:.5f}  {sig_stars(p3_two)}
-  → Conservative non-nested concordance between externally curated UNESCO
-    Cultural/Mixed corpus and externally curated Wikidata Q180987 stupas.
-
-  THEORETICALLY MOTIVATED (non-nested 2-corpus NPC: Dome subset + Wikidata Stupa):
+  PRIMARY (non-nested 2-corpus NPC: Dome subset + Wikidata Stupa):
     K(3°) = {K3_ds:.4f}   anchor φ = {phi3_ds:+.3f}°
     nearest grid line to 35°E: {gl_ds_35:.3f}°E  (Δ = {35-gl_ds_35:+.3f}°)
     perm-p (fixed T=3°, {N_PERM:,} draws) = {p3_ds:.5f}  {sig_stars(p3_ds)}
-  → Morphologically comparable non-nested corpora: UNESCO domed monuments
-    and Wikidata Q180987 stupas. Neither is nested within the other.
+  → Primary non-nested pair: UNESCO dome/stupa subset and Wikidata Q180987
+    stupas. Neither is nested within the other. Matches manuscript Table 3
+    "Primary non-nested" row (macro: npcDomeStupaK / npcDomeStupaPermP).
+
+  CONSERVATIVE (non-nested 2-corpus NPC: UNESCO full + Wikidata Stupa):
+    K(3°) = {K3_two:.4f}   anchor φ = {phi3_two:+.3f}°
+    nearest grid line to 35°E: {gl_two_35:.3f}°E  (Δ = {35-gl_two_35:+.3f}°)
+    perm-p (fixed T=3°, {N_PERM:,} draws) = {p3_two:.5f}  {sig_stars(p3_two)}
+  → Broadest corpus pair (maximises N at cost of corpus specificity).
+    Matches manuscript Table 3 "Conservative" row (macro: npcTwoK / npcTwoPermP).
 """)
 
 # ── Part A2: Sub-corpus negative-control NPCs ─────────────────────────────────
@@ -499,12 +528,12 @@ print(f"""PART A2 — SUB-CORPUS NEGATIVE-CONTROL NPCs  (2-corpus, T = 3°)
   {'UNESCO-Eurasia × UNESCO-Americas':<35} {len(lons_eurasia):>5} {len(lons_americas):>5}  {K_eu_am:>6.4f}  {35-gl_eu_am_35:>+5.2f}°  {p_eu_am:>9.5f}  {sig_stars(p_eu_am):>4}
   {'UNESCO (full)  × UNESCO-Americas':<35} {len(lons_unesco):>5} {len(lons_americas):>5}  {K_un_am:>6.4f}  {35-gl_un_am_35:>+5.2f}°  {p_un_am:>9.5f}  {sig_stars(p_un_am):>4}
   {'UNESCO (full)  × OWTRAD nodes   ':<35} {len(lons_unesco):>5} {len(lons_owtrad):>5}  {K_un_ow:>6.4f}  {35-gl_un_ow_35:>+5.2f}°  {p_un_ow:>9.5f}  {sig_stars(p_un_ow):>4}
-  {'UNESCO + Americas + Stupa (3-c) ':<35} {len(lons_unesco):>5} {len(lons_americas)+len(lons_stupa):>5}  {K_neg3:>6.4f}  {35-gl_neg3_35:>+5.2f}°  {p_neg3:>9.5f}  {sig_stars(p_neg3):>4}
-  → Sub-corpus controls outside the monument signal (Americas) and on a
-    different corpus type (OWTRAD trade routes) for comparison with the
-    primary UNESCO + Wikidata Stupa NPC. The 3-corpus negative control
-    substitutes the Americas geographic-control sub-corpus for the dome
-    subset in the 3-corpus monument primary.
+  {'Americas × Wikidata Stupa (neg)  ':<35} {len(lons_americas):>5} {len(lons_stupa):>5}  {K_neg3:>6.4f}  {35-gl_neg3_35:>+5.2f}°  {p_neg3:>9.5f}  {sig_stars(p_neg3):>4}
+  → 'Americas × Stupa' is the structurally equivalent non-nested negative
+    control for the primary 'Dome × Stupa' pair: same 2-corpus non-nested
+    structure, geographic control replaces dome subset. UNESCO full excluded
+    to avoid nestedness (Americas ⊂ UNESCO). Feeds macro npcNegThreeK /
+    npcNegThreePermP used in manuscript Table 3 "Neg. control" row.
 """)
 
 # ── Part A3: OSM stupa NPC sensitivity rows ───────────────────────────────────

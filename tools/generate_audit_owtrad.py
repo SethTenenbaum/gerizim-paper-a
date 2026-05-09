@@ -131,12 +131,14 @@ def main():
         degree[e["node1"]] += 1
         degree[e["node2"]] += 1
 
-    # Degree-weighted vertex list (each city repeated by its degree)
+    # name_to_lon still needed for cluster asymmetry and node-label permutation
     name_to_lon = {n["name"]: n["lon"] for n in nodes}
-    dw_lons = np.array([
-        lon for name, lon in name_to_lon.items()
-        for _ in range(max(degree.get(name, 0), 1))
-    ])
+
+    # Degree-weighted vertex list — each edge contributes both endpoint longitudes
+    # (= 2 × n_edges = 3892). This matches owtrad_route_alignment.py exactly:
+    # each directed edge is an independent route segment; a city connecting six
+    # routes contributes six endpoint counts, one per traversal event.
+    dw_lons = np.array([lon for e in edges for lon in (e["lon1"], e["lon2"])])
     n_dw = len(dw_lons)
     dw_devs = _beru_devs_np(dw_lons)
 
@@ -267,7 +269,7 @@ def main():
     L()
     L(f"  Deduplicated vertices          : {n_verts}")
     L(f"  Route edges                    : {n_edges}")
-    L(f"  Degree-weighted vertex list    : {n_dw}  (each city repeated by its edge count)")
+    L(f"  Degree-weighted vertex list    : {n_dw}  (each edge contributes both endpoint longitudes; = 2 × edges)")
     L()
     HR()
 

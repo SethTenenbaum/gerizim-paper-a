@@ -1,6 +1,18 @@
 # Changelog
 
-### v1.6.0 — 2026-05-01
+### v1.6.1 — 2026-05-09
+
+#### Manuscript edits (`reframed_paper.tex`)
+- Replaced hardcoded null rates (`null 4\%`, `null 10\%`, `null 20\%`) in mounds control passage with `\NullRateApp{}`, `\NullRateAp{}`, `\NullRateA{}` macros.
+- Replaced hardcoded Americas A+ rate (`9.7\%`) with `\AmericasApRate{}` macro.
+- Replaced hardcoded corpus A++ hit-rate calibration values (`2.6\%`, `3.6\%`, `10.2\%`, `20.2\%`) with `\naturalNullPctOwtrad{}` etc. macros.
+- Replaced hardcoded Bonferroni alpha (`0.0167`) with `\nullBBonfAlpha{}` macro (both occurrences).
+
+#### Audit file (`supplementary/audit/owtrad_audit.txt`) + generator (`tools/generate_audit_owtrad.py`)
+- **Stale audit regenerated**: previous audit was generated with older tier thresholds (A++ = 0.048°, null 3.2%) not matching the current config (A++ = 0.06°, null 4%). Regenerated with current config.
+- **Degree-weighting method unified**: audit generator now uses the same 2×edges method as `analysis/global/owtrad_route_alignment.py` (N=3892, each edge contributes both endpoint longitudes), eliminating an N discrepancy (was 3498 using node-degree repetition). Results are unchanged in direction and significance. Audit description updated accordingly.
+
+
 **DOI:** [10.5281/zenodo.19938283](https://doi.org/10.5281/zenodo.19938283)
 
 #### Manuscript revisions
