@@ -282,7 +282,7 @@ bash manuscript/reproduce_all_macros.sh --full   # slow: reruns all analysis scr
 | Extended descriptions | Scraped from individual UNESCO site pages | 1,248 entries |
 | Wikidata Q180987 stupa corpus | [query.wikidata.org](https://query.wikidata.org) (`instance of: stupa`, with P625) | 229 sites |
 | OSM stupa layer | OpenStreetMap via Overpass API (`building/historic/ruins=stupa`) | 259 sites |
-| OWTRAD Silk Road network | [ciolek.com/owtrad](http://www.ciolek.com/owtrad.html) (Ciolek 2004) | 1,946 edges, 1,674 nodes |
+| OWTRAD Silk Road network | [ciolek.com/owtrad](http://www.ciolek.com/owtrad.html) (Ciolek 2004) | 1,946 edges, 1,674 deduplicated endpoints (3,892 degree-weighted) |
 
 The UNESCO XML is included in `data/store/unesco/unesco.xml`. To refresh
 the extended descriptions cache, run `python3 data/scripts/fetch_extended.py`
