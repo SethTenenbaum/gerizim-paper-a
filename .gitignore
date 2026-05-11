@@ -26,6 +26,9 @@ env/
 .vscode/
 .idea/
 
+# Claude Code
+CLAUDE.md
+
 # Distribution
 *.egg-info/
 dist/
