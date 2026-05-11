@@ -1,5 +1,36 @@
 # Changelog
 
+### v1.7.0 — 2026-05-11
+
+#### Manuscript reframing
+- **Two-stage observational workflow** introduced: exploratory stage (UNESCO corpus) and validation stage (Wikidata Q180987 stupa corpus) are now explicitly separated and framed as sequential rather than simultaneous.
+- **Abstract and introduction rewritten** to lead with the validation result: the external Q180987 stupa corpus independently recovers significant Rayleigh phase concentration at T=3° without researcher control over membership.
+- **Evidentiary claim clarified**: concentration belongs to dome/stupa architecture specifically, not the full UNESCO corpus; Watson and Kuiper two-sample tests confirm the corpora have detectably different phase distributions.
+- Researcher degrees of freedom in the UNESCO keyword filter are now acknowledged explicitly; Q180987 corpus positioned as the direct answer to that concern.
+- Degrees promoted as the primary tier key; metrological table column removed.
+- Canonical primary manuscript renamed from `reframed_paper.tex` → `paper_a_primary.tex`; old manuscript versions archived to `manuscript/archive/`.
+
+#### New analyses
+- **`analysis/unesco/joint_periodogram_test.py`** — NPC joint periodogram combining UNESCO and Q180987 corpora.
+- **`analysis/unesco/circular_two_sample_tests.py`** — Watson and Kuiper two-sample circular tests comparing UNESCO vs Q180987 phase distributions.
+- **`analysis/unesco/cross_corpus_geometric_test.py`** — geometric cross-corpus alignment test.
+- **`analysis/unesco/fortification_negative_control.py`** — fortification/military site negative control confirming signal specificity.
+- **`analysis/unesco/dome_clustering_null.py`** and **`null_b_*.py`** — Null B (uniform-draw, toroidal-shift) clustering baselines.
+- **`analysis/unesco/multiscale_combined_p.py`** — multiscale combined p-value framework.
+- **`analysis/unesco/period_sweep_dissociation.py`** and **`periodogram_test.py`** — period-sweep dissociation and formal periodogram test.
+- **`analysis/global/anchored_periodicity_test.py`**, **`clustered_control_sweep.py`**, **`comprehensive_tier_audit.py`**, **`tier_threshold_audit.py`** — expanded global anchor and tier robustness tests.
+- **`analysis/americas/mounds_geo_control.py`** — Americas mounds geographic control.
+
+#### Figures
+- New figures: `fig_devhist`, `fig_period_sweep` — period sweep and deviation histogram.
+- Existing figures (`fig_geo_trail`, `fig_null_c`, `fig_owtrad_tiers`, `fig_temporal`, `fig_unitsweep`) regenerated from updated pipeline.
+
+#### Housekeeping
+- `CITATION.cff` version bumped to v1.7.0 / 2026-05-11.
+- `manuscript/archive/` contents cleaned up (recoverable from git history).
+
+---
+
 ### v1.6.1 — 2026-05-09
 
 #### Manuscript edits (`reframed_paper.tex`)
