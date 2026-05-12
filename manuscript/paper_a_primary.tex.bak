@@ -62,8 +62,8 @@ ORCID: \href{https://orcid.org/0009-0008-5797-2498}{0009-0008-5797-2498}.}\\
   \item Geometric-null binomial is the test matched to harmonic-proximity hypotheses.
   \item Rayleigh concentration and binomial proximity enrichment can dissociate.
   \item Dissociation demonstrated on the UNESCO dome/stupa corpus ($N=\circTwoSampNDome{}$).
-  \item Worked example: Wiki+OSM Fisher $\chi^2(4)=\geoFisherNcAChi{}$, $p\geoFisherNcAP{}$, T3, excluding domes.
-  \item Anchor-sweep diagnostic on UNESCO corpus: max-statistic $p = \anchorMaxPermP{}$ (marginal).
+  \item Worked example: Wiki+OSM Fisher $\chi^2(4)=\geoFisherNcAChi{}$, $p\geoFisherNcAP{}$, Tier~A, excluding domes.
+  \item Max statistic anchor sweep correction yields marginal $p = \anchorMaxPermP{}$.
 \end{itemize}
 
 \bigskip
@@ -89,16 +89,13 @@ corpus-level proximity enrichment. The result is invariant within the band, so a
 longitude on the same grid within ${\pm}\AppThreshDeg\degr$ of this phase, including
 Jerusalem and Mount Gerizim at $\GerizimLon\degr$E, produces identical proximity
 counts. The two-corpus combination that excludes the dome corpus (Wikidata + OSM) gives
-$\chi^2(4) = \geoFisherNcAChi{}$, $p\geoFisherNcAP{}$ at T3 (threshold $\pm 0.10 \times T$).
-A max-statistic permutation test over \anchorSweepNanchors{} trial longitudes applied
-to the UNESCO corpus yields $p = \anchorMaxPermP{}$ (marginal), indicating that the
-Levantine corridor phase is not a strongly exceptional anchor within the UNESCO corpus
-once the 36,000-anchor search is accounted for. This test is a diagnostic on the UNESCO
-corpus only; no equivalent anchor sweep was run on Wikidata or OSM, whose results are
-simply frame-conditional on the anchor identified in the dome sweep. Following
-\citet{silva2020statistical}, all results are treated as statistical descriptions of
-spatial structure; questions of mechanism and historical transmission require independent
-evidence.
+$\chi^2(4) = \geoFisherNcAChi{}$, $p\geoFisherNcAP{}$ at Tier~A (threshold $\pm 0.10 \times T$).
+A correction based on a max statistic sweep over \anchorSweepNanchors{} trial longitudes
+yields $p = \anchorMaxPermP{}$ after anchor correction (marginal), indicating that
+results conditional on the chosen frame cannot be treated as unconditional; the marginal
+corrected $p$ raises the possibility that anchor selection is doing meaningful work in the result. Following \citet{silva2020statistical}, all results are treated as
+statistical descriptions of spatial structure; questions of mechanism and historical
+transmission require independent evidence.
 \end{abstract}
 
 \bigskip
@@ -254,14 +251,14 @@ Table~\ref{tab:rayleigh_vs_binom} illustrates the dissociation
 concretely ($N = \circTwoSampNDome{}$). The full sweep of 46 candidate periods
 (1.5\degr{} to 6.0\degr{} in 0.1\degr{} steps) is available in the
 supplementary audit; four representative periods are shown here to
-illustrate the qualitatively distinct outcomes. Both tests use the T3 threshold
+illustrate the qualitatively distinct outcomes. Both tests use the Tier-A threshold
 ($\pm 0.10 \times T$, geometric null $p_0 = \NullRateA{}$; tiers defined in
-Section~\ref{sec:tiers}); finer-threshold tiers (T2, T1) are reported
+Section~\ref{sec:tiers}); finer-threshold tiers (A$+$, A$++$) are reported
 in the primary results.
 
 \begin{table}[ht]
 \centering
-\caption{Rayleigh concentration vs.\ T3 binomial proximity
+\caption{Rayleigh concentration vs.\ Tier~A binomial proximity
 enrichment at four representative periods drawn from a full sweep of
 46 candidate periods (1.5\degr{} to 6.0\degr{} in 0.1\degr{} steps;
 complete sweep tables in supplementary audit). These four periods
@@ -269,13 +266,13 @@ span the full range of dissociation outcomes, including three periods
 with significant Rayleigh concentration but no proximity enrichment, and
 one period with proximity enrichment but non-significant Rayleigh concentration.
 UNESCO dome corpus ($N = \circTwoSampNDome{}$, corridor phase ${\sim}35.25\degr$E).
-T3 threshold $= 0.10 \times T$; geometric null $p_0 = \NullRateA{}$.
+Tier-A threshold $= 0.10 \times T$; geometric null $p_0 = \NullRateA{}$.
 Sig symbols: $^{*}p < 0.05$, $^{**}p < 0.01$, ns = not significant.}
 \label{tab:rayleigh_vs_binom}
 \small
 \begin{tabular}{rlcrrrl}
 \toprule
-Period & Rayleigh $p$ & Sig & T3 hits & Expected
+Period & Rayleigh $p$ & Sig & Tier-A hits & Expected
        & Binom.\ $p$ & Sig \\
 \midrule
 $2.4\degr$ & \sweepRayleighPTwoFour{}  & \sweepRayleighSigTwoFour{}
@@ -323,8 +320,8 @@ primary period for the cross-corpus analysis in Section~\ref{sec:results}.
 The dissociation also appears in the full UNESCO cultural corpus ($N = 1{,}011$
 sites with coordinates, including non-dome cultural sites). At $T = 3\degr$,
 Rayleigh remains non-significant ($p = 0.60$), while binomial proximity
-enrichment is significant across all three tier thresholds (T3:
-$p = 0.025$; T2: $p = 0.001$; T1: $p = 0.010$).
+enrichment is significant across all three tier thresholds (Tier~A:
+$p = 0.025$; Tier~A$^+$: $p = 0.001$; Tier~A$^{++}$: $p = 0.010$).
 Because this corpus includes the dome sites that motivated the period, it does
 not constitute independent validation. It does show that the dissociation
 between Rayleigh and binomial results is not an artifact of the restricted dome
@@ -384,7 +381,7 @@ generic corridor artifact: the anchor sweep places the Levantine phase
 at only the \anchorSweepPctile{}th percentile of all \anchorSweepNanchors{}
 trial longitudes (Section~\ref{sec:results}), and the UNESCO Americas
 sub-corpus shows no proximity enrichment at the Levantine phase
-(T2 rate below the geometric null).
+(A$+$ rate below the geometric null).
 
 The two null models reported in Section~\ref{sec:results}
 (Null~A: within-dome bootstrap; Null~B: same-footprint UNESCO background,
@@ -398,11 +395,12 @@ We define three proximity thresholds as round fractions of the $T/2$
 half-period ($1.5\degr$), calibrated to bracket the empirical natural
 proximity scales of the corpora under study: the Old World Trade Routes
 (OWTRAD; \citealt{ciolek2004owtrad}) Silk Road network (\naturalNullPctOwtrad\%), the UNESCO dome subset (\naturalNullPctDome\%), the full UNESCO
-Cultural/Mixed corpus (\naturalNullPctFull\%), and the Wikidata stupa corpus (\naturalNullPctWiki\%)
-(peak-enrichment null rates from the multiscale window sweep; reproduction in
-\texttt{supplementary/audit/tier\_calibration\_audit.py}).
+Cultural/Mixed corpus (\naturalNullPctFull\%), and the Wikidata stupa corpus (\naturalNullPctWiki\%).\footnote{These values are the peak-enrichment null rates from the multiscale window sweep
+  (\texttt{analysis/\allowbreak{}unesco/\allowbreak{}multiscale\_combined\_p.py}); a standalone
+  reproduction is provided in
+  \texttt{supplementary/\allowbreak{}audit/\allowbreak{}tier\_calibration\_audit.py}.}
 Each threshold corresponds to a geometric null rate $p_0 = 2d/T$
-(T1 denotes the finest, strictest threshold; T3 the most lenient):
+(A$++$ denotes the finest, strictest threshold; A the most lenient):
 
 \begin{center}
 \small
@@ -410,9 +408,9 @@ Each threshold corresponds to a geometric null rate $p_0 = 2d/T$
 \toprule
 Tier & Threshold & Geometric null $p_0$ \\
 \midrule
-T1 & $\delta \leq \AppThreshDeg\degr$ ($\lesssim \AppThreshKm$~km equatorial) & \NullRateApp \\
-T2  & $\delta \leq \ApThreshDeg\degr$  ($\lesssim \ApThreshKm$~km)             & \NullRateAp  \\
-T3  & $\delta \leq \ATierThreshDeg\degr$ ($\lesssim \ATierThreshKm$~km)        & \NullRateA   \\
+A$++$ & $\delta \leq \AppThreshDeg\degr$ ($\lesssim \AppThreshKm$~km equatorial) & \NullRateApp \\
+A$+$  & $\delta \leq \ApThreshDeg\degr$  ($\lesssim \ApThreshKm$~km)             & \NullRateAp  \\
+A     & $\delta \leq \ATierThreshDeg\degr$ ($\lesssim \ATierThreshKm$~km)        & \NullRateA   \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -467,8 +465,9 @@ keyword-matched population.
 All \textit{instance-of: stupa} (Q180987) items in the Wikidata
 knowledge base, extracted via SPARQL query on the
 \textit{instance-of: stupa} property. The corpus is
-geographically concentrated in the Java/Sumatra node, roughly from
-${\sim}105\degr$E to ${\sim}115\degr$E \citep{miksic1990borobudur}.
+geographically dominated by the Java/Sumatra node, roughly from
+${\sim}105\degr$E to ${\sim}115\degr$E, reflecting the documented historical density
+of stupa construction around Borobudur \citep{miksic1990borobudur}.
 
 \textbf{OSM stupa layer ($N = \osmStupaTotal{}$).}
 OpenStreetMap features with tags \texttt{building=stupa},
@@ -531,21 +530,21 @@ for the independence caveat.}
 \toprule
 Tier & Corpus & $N$ & Hits & Exp & Fold & $p_\mathrm{binom}$ & Sig \\
 \midrule
-\multirow{5}{*}{T1 ($p_0{=}\NullRateApp{}$)}
+\multirow{5}{*}{A$++$ ($p_0{=}\NullRateApp{}$)}
   & UNESCO domes    & \geoDomeAppN{} & \geoDomeAppHits{} & \geoDomeAppExp{} & \geoDomeAppEnr{}$\times$ & \geoDomeAppP{} & \geoDomeAppSig{} \\
   & Wikidata stupas & \geoWikiAppN{} & \geoWikiAppHits{} & \geoWikiAppExp{} & \geoWikiAppEnr{}$\times$ & \geoWikiAppP{} & \geoWikiAppSig{} \\
   & OSM stupas      & \geoOsmAppN{}  & \geoOsmAppHits{}  & \geoOsmAppExp{}  & \geoOsmAppEnr{}$\times$  & \geoOsmAppP{}  & \geoOsmAppSig{} \\
   & \multicolumn{7}{l}{\textit{All-3 Fisher $\chi^2(6) = \geoFisherAppChi{}$, nominal $p = \geoFisherAppP{}$}} \\
   & \multicolumn{7}{l}{\textit{Dome-excl.\ combined (Wiki+OSM) $\chi^2(4) = \geoFisherNcAppChi{}$, $p = \geoFisherNcAppP{}$, \geoFisherNcAppSig{}}} \\
 \midrule
-\multirow{5}{*}{T2 ($p_0{=}\NullRateAp{}$)}
+\multirow{5}{*}{A$+$ ($p_0{=}\NullRateAp{}$)}
   & UNESCO domes    & \geoDomeApN{}  & \geoDomeApHits{}  & \geoDomeApExp{}  & \geoDomeApEnr{}$\times$  & \geoDomeApP{}  & \geoDomeApSig{} \\
   & Wikidata stupas & \geoWikiApN{}  & \geoWikiApHits{}  & \geoWikiApExp{}  & \geoWikiApEnr{}$\times$  & \geoWikiApP{}  & \geoWikiApSig{} \\
   & OSM stupas      & \geoOsmApN{}   & \geoOsmApHits{}   & \geoOsmApExp{}   & \geoOsmApEnr{}$\times$   & \geoOsmApP{}   & \geoOsmApSig{} \\
   & \multicolumn{7}{l}{\textit{All-3 Fisher $\chi^2(6) = \geoFisherApChi{}$, nominal $p = \geoFisherApP{}$}} \\
   & \multicolumn{7}{l}{\textit{Dome-excl.\ combined (Wiki+OSM) $\chi^2(4) = \geoFisherNcApChi{}$, $p = \geoFisherNcApP{}$, \geoFisherNcApSig{}}} \\
 \midrule
-\multirow{5}{*}{T3 ($p_0{=}\NullRateA{}$)}
+\multirow{5}{*}{A ($p_0{=}\NullRateA{}$)}
   & UNESCO domes    & \geoDomeAN{}   & \geoDomeAHits{}   & \geoDomeAExp{}   & \geoDomeAEnr{}$\times$   & \geoDomeAP{}   & \geoDomeASig{} \\
   & Wikidata stupas & \geoWikiAN{}   & \geoWikiAHits{}   & \geoWikiAExp{}   & \geoWikiAEnr{}$\times$   & \geoWikiAP{}   & \geoWikiASig{} \\
   & OSM stupas      & \geoOsmAN{}    & \geoOsmAHits{}    & \geoOsmAExp{}    & \geoOsmAEnr{}$\times$    & \geoOsmAP{}    & \geoOsmASig{} \\
@@ -559,13 +558,15 @@ In the worked example, all three corpora exceed the geometric null at every tier
 despite substantially different geographic footprints and assembly
 processes. Fisher combinations are reported as cross-corpus consistency
 summaries (see Section~\ref{sec:framework} for the independence caveat).
-The UNESCO T1 result shows the
-largest individual fold-enrichment ($\geoDomeAppEnr{}\times$); Wikidata and OSM T1 results
-are individually non-significant. The two-corpus combination restricted to Wikidata and OSM
+The UNESCO A$++$ result shows the
+largest individual fold-enrichment ($\geoDomeAppEnr{}\times$), reflecting the
+distributed character of that corpus; Wikidata and OSM A$++$ results
+are individually non-significant, reflecting cluster-level rather than
+individual-site precision. The two-corpus combination restricted to Wikidata and OSM
 (``Dome-excl.\ combined'') yields
-$\chi^2(4) = \geoFisherNcAChi{}$, $p \geoFisherNcAP{}$ at T3 and $\chi^2(4) = \geoFisherNcApChi{}$,
-$p = \geoFisherNcApP{}$ at T2; the T1 two-corpus combination is
-non-significant ($p = \geoFisherNcAppP{}$). The all-three-corpus T3 Fisher
+$\chi^2(4) = \geoFisherNcAChi{}$, $p \geoFisherNcAP{}$ at Tier~A and $\chi^2(4) = \geoFisherNcApChi{}$,
+$p = \geoFisherNcApP{}$ at Tier~A$+$; the Tier~A$++$ two-corpus combination is
+non-significant ($p = \geoFisherNcAppP{}$). The all-three-corpus Tier~A Fisher
 combination ($p \geoFisherAPDisp{}$) includes the dome corpus, which motivated
 the period, and provides a less conservative cross-corpus summary than the dome-excluded combination.
 All $p$-values are frame-conditional proximity-enrichment measures for the
@@ -575,7 +576,12 @@ spatial structure, not evidence of historical placement. The $3\degr$ period
 emerged as the dominant proximity peak in the dome corpus sweep
 (Section~\ref{sec:rayleigh_vs_binom}); the three-corpus analysis
 is the methodological demonstration that the same statistical pattern appears
-consistently across independently assembled datasets at this period.
+consistently across independently assembled datasets at this period. A correction
+based on a max statistic sweep (\anchorMaxPermNperms{} permutations over
+\anchorSweepNanchors{} trial anchors) yields $p = \anchorMaxPermP{}$ after anchor
+correction ($z = \anchorMaxPermZ{}$, marginal), indicating that results conditional
+on the fixed frame should not be treated as unconditional; full details are in
+Section~\ref{sec:discussion}.
 
 \subsection{Supplementary Rayleigh Phase Concentration}
 
@@ -616,30 +622,23 @@ OSM stupa layer      & \osmStupaTotal{} & \osmStupaRayleighR{} & \osmStupaRaylei
 \end{tabular}
 \end{table}
 
-\subsection{Route-Network Contrast, Negative Controls, and Scope}
+\subsection{Negative Controls and Scope}
 
-\textbf{OWTRAD Silk Road route-network contrast.}
-The OWTRAD Silk Road route network (\npcNOwtrad{} nodes, \NOwtradEdges{} route segments)
-is included as an exploratory contrast. It is not a negative control: the Silk Road
-network occupies the same geographic range as the monument corpora, and proximity
-enrichment cannot be assumed absent without testing. Two binomial
-proximity tests are distinguished by their sampling unit. The per-segment midpoint
-test uses one longitude per route segment (non-deduplicated), weighting each segment
-equally regardless of how many edges meet at a hub; this test is non-significant at
-both tiers (T1: $p = \pOwtradMidApp{}$, ns; T2: $p = \pOwtradMidAp{}$, ns). The
-degree-weighted node test weights each node by its degree centrality (the number of
-incident route edges), as a proxy for hub importance; this test is significant at both
-tiers (T1: $p = \pOwtradDegWApp{}$; T2: $p = \pOwtradDegWAp{}$). The degree-weighted
-result is itself an unexplained positive finding: Eurasia spans roughly $180°$ of
-longitude and the result cannot be explained simply by noting that both trade hubs
-and monuments are located there; the question is why both concentrate near the same
-specific $3°$ harmonic within that space. This result therefore does not function as
-a negative control and is not explained by any mechanism available in these data; it is discussed further in Section~\ref{sec:discussion}. The NPC directional test does not
-independently recover the monument phase ($K = \npcNegUnOwK{}$, perm-$p =
-\npcNegUnOwPermP{}$, ns), indicating that the route-segment phase distribution as a
-whole does not share the monument mean phase direction.
+The OWTRAD Silk Road route network ($N = \npcNOwtrad{}$ nodes) does
+not independently recover the monument phase in the Normalized Phasor
+Consensus (NPC) test ($K = |\bar{u}_A \cdot \bar{u}_B|$, where
+$\bar{u}_c$ is the normalized mean phasor of corpus $c$; $K=1$
+indicates identical phase direction, $K=0$ orthogonal; full derivation
+in Section~\ref{sec:anchor_concordance}; $K = \npcNegUnOwK{}$,
+perm-$p = \npcNegUnOwPermP{}$, ns). Using the \NOwtradEdges{} edge midpoints as the proximity sample
+(one value per route segment, non-deduplicated) is the most
+conservative representation of the network; the binomial test is
+non-significant at both tiers (A$++$: $p = \pOwtradMidApp{}$,
+ns; A$+$: $p = \pOwtradMidAp{}$, ns). The route network therefore
+shows no enrichment under either the directional or the per-segment
+proximity test when each segment is counted once.
 
-The UNESCO Americas sub-corpus ($N = \npcNAmericas{}$) shows T2
+The UNESCO Americas sub-corpus ($N = \npcNAmericas{}$) shows A$+$
 rate of \AmericasApRate\%, below the \NullRateAp{} geometric null, indicating
 no proximity enrichment at the ${\sim}35.25\degr$E Levantine corridor
 phase in the Western Hemisphere.
@@ -655,11 +654,11 @@ any connection to the ${\sim}35.25\degr$E Levantine corridor phase.
 At the $3\degr$ period and ${\sim}35.25\degr$E Levantine corridor phase
 the mounds corpus shows
 no proximity enrichment at any tier:
-T1: \moundsNApp{}/\moundsN{} (\moundsRateApp{}\%, null \NullRateApp{},
+A$++$: \moundsNApp{}/\moundsN{} (\moundsRateApp{}\%, null \NullRateApp{},
 $p = \moundsPApp{}$, \moundsPAppSig{});
-T2: \moundsNAp{}/\moundsN{} (\moundsRateAp{}\%, null \NullRateAp{},
+A$+$: \moundsNAp{}/\moundsN{} (\moundsRateAp{}\%, null \NullRateAp{},
 $p = \moundsPAp{}$, \moundsPApSig{});
-T3: \moundsNA{}/\moundsN{} (\moundsRateA{}\%, null \NullRateA{},
+A: \moundsNA{}/\moundsN{} (\moundsRateA{}\%, null \NullRateA{},
 $p = \moundsPA{}$, \moundsPASig{}).
 All three tiers are at or below the geometric null.
 This supports the methodological illustration that the Eurasian
@@ -684,13 +683,14 @@ $p = \geoNullDomeRestrictedPfive{}$; the ${\pm}10\degr$ window gives
 $p = \geoNullDomeRestrictedPten{}$. All three windows survive
 Bonferroni correction ($\alpha_\mathrm{adj} = \nullBBonfAlpha{}$),
 illustrating subset-specific enrichment within the shared geography
-across all window choices. A within-dome bootstrap (Null~A,
+across all window choices.\footnote{A within-dome bootstrap (Null~A,
 \simNperms{} trials) resamples from the dome sites' own longitude
 distribution; its expected hit rate is defined by the same geography
 carrying the proximity enrichment, so it cannot serve as a
-discriminating comparison. The observed T1 count is non-significant
-under this null ($p = \geoNullDomeBootP{}$, ns), consistent with the
-enrichment being localized to dome-site geography.
+discriminating comparison. The observed A$++$ count is non-significant
+under this null ($p = \geoNullDomeBootP{}$, ns), consistent with the pattern being
+localized to dome-site geography rather than an artifact of the
+comparison procedure.}
 
 \subsection{Anchor Concordance}
 \label{sec:anchor_concordance}
@@ -733,7 +733,9 @@ geographic or route-network controls.
 \begin{table}[ht]
 \centering
 \caption{Selected NPC anchor-concordance configurations at
-$T = 3\degr$ (\simNperms{} permutation draws).
+$T = 3\degr$ (\simNperms{} permutation draws). High $K$ with non-significant two-corpus perm-$p$ reflects limited
+statistical power with only two corpora; three independently assembled
+corpora converging on the same phase is rare under the permutation null.
 The ``Conservative'' row pairs the broadest possible corpus (full UNESCO Cultural/Mixed)
 with the Wikidata stupa corpus, maximizing denominator size at the cost of corpus specificity.
 Negative controls (the final three rows) indicate $K$ is not a generic Eurasian
@@ -764,14 +766,12 @@ ${\sim}35.25\degr$E Levantine corridor phase. Circles = UNESCO
 dome/stupa ($N = \circTwoSampNDome{}$, keyword-matched); triangles =
 Wikidata Q180987 stupa ($N = \npcNStupa{}$);
 diamonds = OSM stupa ($N = \osmStupaTotal{}$, crowd-sourced). Color
-indicates harmonic proximity tier: crimson = T2 or better
-($\leq$\ApThreshKm~km), orange = T3 ($\leq$\ATierThreshKm~km),
-gray = outside T3. The dark meridian marks the fixed
-${\sim}35.25\degr$E corridor phase. Teal dashed lines show the maritime
-Silk Road route layer, digitised from harbour attestations in
-\citet{hansen2012silk}, \citet{sen2014silk}, and \citet{tomber2008indo}.
-All results are conditional on the fixed corridor-phase frame.
-Map projection: Mercator (WGS\,84). Base map: Natural Earth (public domain,
+indicates harmonic proximity tier: crimson = Tier A$^{+}$ or better
+($\leq$\ApThreshKm~km), orange = Tier~A ($\leq$\ATierThreshKm~km),
+gray/blue = B/C-band. The dark meridian marks the fixed
+${\sim}35.25\degr$E corridor phase. All results are conditional on the
+fixed corridor-phase frame. Map projection: equirectangular
+(geographic coordinates, WGS\,84). Base map: Natural Earth (public domain,
 \url{https://www.naturalearthdata.com/}, accessed 1~March~2025).}
 \label{fig:geo_trail}
 \end{figure}
@@ -813,11 +813,11 @@ or cultural context.
 The three-corpus worked example finds consistent directional excess
 over the geometric null at the fixed $3\degr$ period and ${\sim}35.25\degr$E
 Levantine corridor phase. The dome-excluded two-corpus combination (Wikidata + OSM) yields a Fisher
-combination of $\chi^2(4) = \geoFisherNcAChi{}$, $p \geoFisherNcAP{}$ at T3;
-the all-three-corpus result (Fisher $p \geoFisherAPDisp{}$ at T3)
+combination of $\chi^2(4) = \geoFisherNcAChi{}$, $p \geoFisherNcAP{}$ at Tier~A;
+the all-three-corpus result (Fisher $p \geoFisherAPDisp{}$ at Tier~A)
 includes the dome corpus and provides a less conservative cross-corpus summary than the dome-excluded combination.
 All results are frame-conditional proximity-enrichment measures (see Limitations). The UNESCO corpus is
-the most geographically distributed result, with T3 sites spanning the full
+the most geographically distributed result, with A-tier sites spanning the full
 Eurasian corridor.
 
 Null~B (same-footprint restricted draw) provides the
@@ -855,18 +855,28 @@ Levant to Java; Wikidata is dominated by the Java/Sumatra node; OSM
 coverage reflects crowd-sourced mapping density across South and
 Southeast Asia. No single shared geographic cluster explains enrichment in all three corpora simultaneously.
 
-The Wikidata result is dominated by the Java/Borobudur geographic cluster
+The Wikidata result reflects the documented geographic concentration
+of stupa construction at the Java/Borobudur node
 \citep{miksic1990borobudur}: that cluster's position on a $3\degr$
 harmonic is precisely the proximity structure the geometric-null test
 is designed to detect, and the geographic concentration is part of the
 documented corpus pattern rather than a confound to be removed.
-Declustering is not applied (see Section~\ref{sec:framework}).
-The relevant check is cross-corpus: the corpus overlap audit finds
+Sites near one another in this corpus are near one another because
+that is where Buddhist communities built stupas over centuries; they
+represent a genuine place-specific building tradition, not duplicate
+observations of a single spatial event. No standard archaeological
+spatial analysis discards sites on the grounds that a community built
+more than one structure in the same locale.
+Removing the Java/Sumatra cluster would require applying the same logic
+to every regional node, including the Levant, Sri Lanka, and mainland Southeast Asia.
+At that point no corpus survives; the same arbitrary-threshold problem
+that motivates retaining all clusters (Section~\ref{sec:framework}) applies
+here. The relevant check is cross-corpus: the corpus overlap audit finds
 only one near-coincident pair between Wikidata and OSM, so the OSM enrichment is not
 a restatement of the same Borobudur sites under a different label.
 The OSM result, assembled by a process with no relationship to UNESCO
 or Wikidata curation, shows the same directional excess
-($p = \geoOsmAP{}$ at T3) and the same phase concordance with
+($p = \geoOsmAP{}$ at Tier~A) and the same phase concordance with
 Wikidata ($K = \npcOsmStupaK{}$) in the worked example.
 Figure~\ref{fig:geo_trail}
 shows all three corpora mapped against the $3\degr$ harmonic grid.
@@ -876,21 +886,22 @@ between statistical structure and archaeological explanation.
 Significance tests evaluate evidence against a null model;
 archaeological explanation is developed from evidence independent of
 the orientations themselves, including the wider archaeological record
-and socio-historical context. The statistical pattern reported here is
-a spatial description of three independently assembled corpora; no
-mechanism or historical explanation is offered.
-An additional positive finding complicates interpretation: weighting
+and socio-historical context. The statistical pattern illustrated here
+is compatible with several mechanisms. These include geographic
+channeling by trade routes and river systems following the Eurasian
+corridor, cultural diffusion patterns concentrating stupa construction
+at historically dominant nodes \citep{sen2014silk}, and selection
+effects in the UNESCO inscription process.
+An exploratory positive finding is consistent with this: weighting
 OWTRAD nodes by degree centrality (the number of route edges incident
 to each node, as a proxy for hub importance) finds that the most
-network-central Silk Road cities also fall near the $3\degr$ harmonic
-grid more often than the uniform null predicts. This is an unexplained
-result in its own right. It cannot be set aside by noting that both
-monuments and trade hubs are located in Eurasia: Eurasia spans roughly
-$180°$ of longitude, and the finding concerns proximity to a
-\emph{specific} $3°$ harmonic within that space. Whether the monument
-result and the OWTRAD result are statistically independent or share
-some common structure cannot be determined from these data; this
-remains a target for future work.
+network-central cities fall near the $3\degr$ harmonic grid more
+often than the uniform null predicts. If major route hubs and
+hemispherical monuments are both concentrated along the same interior
+Eurasian corridor, the harmonic proximity of each would be a shared
+consequence of corridor geography rather than an independent proximity
+result; disentangling these requires a geographic control outside the
+corridor, which remains a target for future work.
 Historical interpretations involving deliberate placement would
 additionally require evidence for pre-modern continental longitude
 determination at sub-degree precision
@@ -926,20 +937,16 @@ published code.
 \noindent\textbf{Anchor-sweep correction.}
 The frame-conditional tests (Table~\ref{tab:cross_corpus_geo}) ask
 whether proximity enrichment is present across corpora given the fixed
-frame. As a separate diagnostic on the UNESCO corpus, a max-statistic
-permutation test over \anchorSweepNanchors{} trial longitudes asks whether
-the Levantine corridor phase is an unusually exceptional anchor within
-that corpus after accounting for the anchor search. The corrected
-$p = \anchorMaxPermP{}$ ($z = \anchorMaxPermZ{}$, marginal) indicates
-it is not strongly exceptional: the Levantine phase falls near the center
-of the null distribution of best-anchor counts from uniformly random data.
-This test was computed on the UNESCO corpus only; no anchor sweep was
-conducted on Wikidata or OSM, so no equivalent correction applies to
-those corpora. The Wikidata and OSM results are simply frame-conditional
-on the anchor identified in the dome sweep. The frame-conditional
-$p$-values quantify enrichment given the fixed frame; they do not
-quantify how exceptional that frame is within the UNESCO corpus, which
-is what the anchor-sweep diagnostic addresses.
+frame. The anchor-sweep correction asks a harder question: is this
+anchor globally exceptional after correcting for the best of
+\anchorSweepNanchors{} trial longitudes? The corrected $p = \anchorMaxPermP{}$
+($z = \anchorMaxPermZ{}$, marginal) quantifies what the evidence would
+look like under an unconstrained global search. The marginal corrected $p$
+is a genuine limitation on the unconditional case: it is consistent with
+the anchor having been selected, implicitly or explicitly, from a region of
+longitude space that produces favorable proximity counts. The frame-conditional
+$p$-values quantify enrichment given the fixed frame; they do not quantify how
+exceptional that frame is.
 
 \section{Conclusion}
 \label{sec:conclusion}
@@ -960,20 +967,16 @@ $3\degr$ period and ${\sim}35.25\degr$E Levantine corridor phase.
 Two qualifications contextualize these results, both detailed in the
 Limitations section. The period emerged from the dome corpus sweep;
 the Wikidata+OSM combination ($\chi^2(4) = \geoFisherNcAChi{}$,
-$p \geoFisherNcAP{}$ at T3) is the primary cross-corpus check
-precisely because it excludes that corpus. A separate anchor-sweep
-diagnostic on the UNESCO corpus ($p = \anchorMaxPermP{}$) shows that
-the Levantine corridor phase is not strongly exceptional within that
-corpus once the 36,000-anchor search is accounted for; this test
-applies only to the UNESCO corpus and does not modify the
-frame-conditional Wikidata+OSM result.
+$p \geoFisherNcAP{}$ at Tier~A) is the primary cross-corpus check
+precisely because it excludes that corpus. The anchor-sweep-corrected
+$p = \anchorMaxPermP{}$ quantifies what the evidence looks like under
+an unconstrained global search, which is a harder question than the
+frame-conditional one and is answered separately.
 
 Following \citet{silva2020statistical}, the worked example is best read
 as a descriptive spatial exercise. This paper is a methods contribution:
-it introduces and validates the geometric-null binomial framework, demonstrates
-that Rayleigh concentration and geometric-null binomial proximity
-can dissociate within the same corpus while each statistic remains
-useful for its own question, and uses three hemispherical-monument corpora as a worked example to
+it introduces and validates the geometric-null binomial framework, and
+uses three hemispherical-monument corpora as a worked example to
 illustrate how the method behaves on real data. No confirmatory
 historical judgement is made, and none is possible from these results
 alone. The statistics report corpus-level proximity enrichment under a
@@ -985,7 +988,11 @@ disproportionately close to a $3\degr$ harmonic grid'' and ``sites were
 placed with knowledge of that grid'' lies outside the scope of any
 purely statistical test; such claims require independent archaeological
 and socio-historical evidence that proximity statistics cannot supply.
-It also provides a reproducible open-data
+
+The paper's contribution is the explicit demonstration
+that Rayleigh concentration and geometric-null binomial proximity
+can dissociate within the same corpus, while each statistic remains
+useful for its own question. It also provides a reproducible open-data
 example that future comparative work can evaluate.
 
 All data, code, and audit files are openly available at Zenodo
@@ -1010,10 +1017,6 @@ Cambridge University Press.
 \bibitem[Freeman(1976)]{freeman1976}
 Freeman, P.~R. (1976). A Bayesian analysis of the megalithic yard.
 \textit{J.\ R.\ Stat.\ Soc.\ A}, 139(1), 20 to 35.
-
-\bibitem[Hansen(2012)]{hansen2012silk}
-Hansen, V. (2012). \textit{The Silk Road: A New History}.
-Oxford University Press.
 
 \bibitem[Hunger \& Steele(2019)]{hunger2019mul}
 Hunger, H. \& Steele, J. (2019).
@@ -1054,17 +1057,14 @@ Schuster, A. (1898). On the investigation of hidden periodicities with
 application to a supposed 26 day period of meteorological phenomena.
 \textit{Terrestrial Magnetism}, 3(1), 13 to 41.
 
+\bibitem[Sen(2014)]{sen2014silk}
+Sen, T. (2014). The spread of Buddhism. In B.~Z.~Kedar \&
+M.~E.~Wiesner-Hanks (Eds.), \textit{The Cambridge World History},
+Vol.~5 (pp.~447 to 479). Cambridge University Press.
+
 \bibitem[Silva(2020)]{silva2020statistical}
 Silva, F. (2020). A probabilistic framework for structural orientations
 in skyscape archaeology. \textit{J.\ Archaeol.\ Sci.}, 118, 105138.
-
-\bibitem[Sen(2014)]{sen2014silk}
-Sen, T. (2014). \textit{Buddhism, Diplomacy, and Trade: The Realignment
-of India--China Relations, 600--1400}. Rowman \& Littlefield.
-
-\bibitem[Tomber(2008)]{tomber2008indo}
-Tomber, R. (2008). \textit{Indo-Roman Trade: From Pots to Pepper}.
-Duckworth.
 
 \bibitem[Tenenbaum(2026)]{tenenbaum2026audit}
 Tenenbaum, S. (2026). \textit{Longitude Quantization in the UNESCO

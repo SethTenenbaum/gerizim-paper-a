@@ -801,13 +801,11 @@ def make_geo_trail():
     from matplotlib.lines import Line2D
     tier_handles = [
         Line2D([0],[0], marker="o", color="w", markerfacecolor="#c0392b",
-               markersize=8, label="Tier A$^{+}$/A$^{++}$  (≤16.6 km)"),
+               markersize=8, label="T1/T2  (≤16.6 km)"),
         Line2D([0],[0], marker="o", color="w", markerfacecolor="#e67e22",
-               markersize=6, label="Tier A  (≤33 km)"),
+               markersize=6, label="T3  (≤33 km)"),
         Line2D([0],[0], marker="o", color="w", markerfacecolor="#aaaaaa",
-               markersize=5, label="Tier B"),
-        Line2D([0],[0], marker="o", color="w", markerfacecolor="#3498db",
-               markersize=5, label="C-band (inter-harmonic)"),
+               markersize=5, label="Outside T3"),
         Line2D([0],[0], marker="o", color="w", markerfacecolor="#555555",
                markersize=6, label="○ UNESCO dome/stupa"),
         Line2D([0],[0], marker="^", color="w", markerfacecolor="#555555",
@@ -826,7 +824,7 @@ def make_geo_trail():
     ax.set_title(
         "Silk Roads corridor — UNESCO dome/stupa, Wikidata Q180987, and OSM stupa tier distribution\n"
         "Circles = UNESCO ($N=90$); triangles = Wikidata ($N=229$); diamonds = OSM ($N=259$).  "
-        "Dashed grid: 3° harmonics.  Crimson = A$^{+}$, orange = A-tier.",
+        "Dashed grid: 3° harmonics.  Crimson = T2 or better, orange = T3.",
         fontsize=8.5, pad=5,
     )
 
