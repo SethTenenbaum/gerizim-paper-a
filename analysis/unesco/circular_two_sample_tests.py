@@ -394,6 +394,39 @@ macros = {
     "circKuiperPUnescoStupa":   round(p_kuiper_us,  4),
 }
 
+# ── Full-corpus binomial tier p-values at T=3° (for dissociation paragraph) ──
+# These are cited in §2.2 "The dissociation also appears in the full UNESCO
+# cultural corpus (N=1011)..." as macro-driven statistics.
+from scipy.stats import binomtest as _binomtest_fc
+_ANCHOR_FC = _CFG["anchors"]["gerizim"]["longitude"]
+
+def _fc_dev(lon):
+    arc = (lon - _ANCHOR_FC) % 3.0
+    return min(arc, 3.0 - arc)
+
+_fc_lons = lons_unesco   # N=1011 full Cultural/Mixed corpus
+_fc_N    = len(_fc_lons)
+
+_fc_thresholds = {
+    "App": 0.06,   # T1: ±0.06° → p0=4%
+    "Ap":  0.15,   # T2: ±0.15° → p0=10%
+    "A":   0.30,   # T3: ±0.30° → p0=20%
+}
+_fc_macros = {}
+for _tier_label, _thresh in _fc_thresholds.items():
+    _null  = 2 * _thresh / 3.0
+    _hits  = sum(1 for lon in _fc_lons if _fc_dev(lon) <= _thresh)
+    _p_val = _binomtest_fc(_hits, _fc_N, _null, alternative='greater').pvalue
+    _fc_macros[f"fullCorpusBinom{_tier_label}Hits"] = _hits
+    _fc_macros[f"fullCorpusBinom{_tier_label}P"]    = round(_p_val, 4)
+
+macros.update(_fc_macros)
+
+print()
+print("  FULL-CORPUS BINOMIAL TIER P-VALUES (dissociation §2.2)")
+for k, v in _fc_macros.items():
+    print(f"  \\newcommand{{\\{k}}}{{{v}}}")
+
 # ── Period-sweep vs binomial dissociation table macros ────────────────────────
 from scipy.stats import binomtest as _binomtest
 
