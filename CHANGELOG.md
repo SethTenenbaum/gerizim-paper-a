@@ -54,7 +54,7 @@
 - **Degree-weighting method unified**: audit generator now uses the same 2×edges method as `analysis/global/owtrad_route_alignment.py` (N=3892, each edge contributes both endpoint longitudes), eliminating an N discrepancy (was 3498 using node-degree repetition). Results are unchanged in direction and significance. Audit description updated accordingly.
 
 
-**DOI:** [10.5281/zenodo.20123709](https://doi.org/10.5281/zenodo.20123709)
+**DOI:** [10.5281/zenodo.20307054](https://doi.org/10.5281/zenodo.20307054)
 
 #### Manuscript revisions
 - **Statistical reporting tightened:** removed tautological p-value statement in Test B; clarified anchor-correction language in Test E.
@@ -115,7 +115,7 @@
 ---
 
 ### v1.4.0 — 2026-04-27
-**DOI:** [10.5281/zenodo.20123709](https://doi.org/10.5281/zenodo.20123709)
+**DOI:** [10.5281/zenodo.20307054](https://doi.org/10.5281/zenodo.20307054)
 
 #### OWTRAD Silk Road analysis
 - **Expanded OWTRAD network** from 842 to 1,946 route edges and 1,674 unique

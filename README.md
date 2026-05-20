@@ -5,7 +5,7 @@
 Seth Tenenbaum · Independent Scholar
 ORCID: [0009-0008-5797-2498](https://orcid.org/0009-0008-5797-2498)
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20123709.svg)](https://doi.org/10.5281/zenodo.20123709)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20307054.svg)](https://doi.org/10.5281/zenodo.20307054)
 
 ---
 
@@ -329,7 +329,7 @@ If you use this code or data, please cite:
 
 > Tenenbaum, S. (2026). A Geometric-Null Binomial Framework for Harmonic
 > Longitude Proximity Testing in Monument Distributions.
-> https://doi.org/10.5281/zenodo.20123709
+> https://doi.org/10.5281/zenodo.20307054
 
 ## Contact
 
