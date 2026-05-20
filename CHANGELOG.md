@@ -1,5 +1,15 @@
 # Changelog
 
+### v1.8.0 — 2026-05-20
+
+#### Manuscript revision
+- Abstract rewritten to foreground the methodological contribution and position the three-corpus worked example as illustration.
+- Language throughout revised for precision: "demonstrates/finds/explains" replaced with "reports/shows/describes" consistently.
+- Declustering rationale reframed: the target of description is the observed operational corpus; geographic clustering is documented, not removed or down-weighted.
+- Framing tightened throughout to distinguish statistical description of coordinate distributions from claims about historical placement or causation.
+- Negative-control descriptions revised to "descriptive boundary cases."
+- Null B and anchor concordance sections revised for clarity.
+
 ### v1.7.0 — 2026-05-11
 
 #### Manuscript reframing
