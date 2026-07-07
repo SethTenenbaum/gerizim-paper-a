@@ -1,6 +1,6 @@
 # A Geometric-Null Binomial Framework for Harmonic Longitude Proximity Testing in Monument Distributions
 
-**Paper A — Primary UNESCO Analysis** · `v1.7.0`
+**Paper A: Primary UNESCO Analysis** · `v1.7.0`
 
 Seth Tenenbaum · Independent Scholar
 ORCID: [0009-0008-5797-2498](https://orcid.org/0009-0008-5797-2498)
@@ -13,28 +13,30 @@ ORCID: [0009-0008-5797-2498](https://orcid.org/0009-0008-5797-2498)
 
 This repository contains the manuscript, analysis code, and data for
 "A Geometric-Null Binomial Framework for Harmonic Longitude Proximity Testing
-in Monument Distributions" — a statistical methods paper addressing a
+in Monument Distributions," a statistical methods paper addressing a
 test–hypothesis mismatch in spatial periodicity analysis.
 
 The Rayleigh statistic measures mean phase concentration at period *T*, whereas
 a repeated-line grid hypothesis predicts thresholded proximity to any harmonic
-longitude — two summaries that can dissociate within the same corpus. This paper
+longitude. These two summaries can dissociate within the same corpus. This paper
 develops the matched test: the geometric-null binomial framework. A period sweep
-of the UNESCO dome/stupa corpus (*N* = 90) demonstrates the dissociation
+of the UNESCO dome/stupa corpus (*N* = 90) shows the dissociation
 empirically. Applied to three hemispherical-monument corpora at the 3° period
-and ~35.25°E Levantine corridor phase, the framework finds consistent
-corpus-level proximity enrichment. The dome-excluded two-corpus combination
-(Wikidata + OSM) gives χ²(4) significant at Tier A. A max-statistic
-anchor-sweep correction confirms the frame-conditional results should not be
-treated as frame-free results. Following Silva (2020), all results are treated
-as statistical description of spatial structure.
+and ~35.25°E Levantine corridor phase, the analysis reports a corpus-level
+proximity pattern in the observed coordinate data. The dome-excluded two-corpus
+combination (Wikidata + OSM) gives χ²(4) significant at T3. The max-statistic
+anchor-sweep result is a boundary condition: the Levantine phase is not treated
+as an unconditional discovery from the UNESCO corpus after anchor-search
+correction, while the cross-corpus results remain frame-conditional diagnostics.
+Following Silva (2020), all results are treated as statistical description. The
+analysis does not explain site location.
 
 ## Repository Structure
 
 ```
 gerizim-paper-a/
 ├── manuscript/
-│   ├── paper_a_primary.tex           # LaTeX source (JAS Reports target)
+│   ├── paper_a_primary.tex           # LaTeX source (journal-neutral manuscript)
 │   ├── paper_a_primary.pdf           # Compiled PDF
 │   ├── shared_content.tex            # Shared body content
 │   ├── generated_macros.tex          # All pipeline-emitted LaTeX macros
@@ -48,7 +50,7 @@ gerizim-paper-a/
 │   ├── unesco/                       # Primary UNESCO corpus tests
 │   │   ├── period_sweep_dissociation.py           # Rayleigh vs binomial dissociation sweep
 │   │   ├── spherical_monument_raw_sweep.py        # Dome enrichment (primary)
-│   │   ├── spherical_monument_test.py             # Dome enrichment (context-validated)
+│   │   ├── spherical_monument_test.py             # Dome enrichment (context-filtered)
 │   │   ├── cluster_asymmetry_test.py              # Phase-split cluster asymmetry
 │   │   ├── temporal_gradient_test.py              # Temporal gradient
 │   │   ├── deep_temporal_analysis.py              # Sequential inscription analysis
@@ -61,7 +63,7 @@ gerizim-paper-a/
 │   │   ├── harmonic_density_attractor_test.py     # Harmonic density attractor
 │   │   ├── unesco_buddhist_heritage_test.py       # Buddhist heritage keyword test
 │   │   ├── tumulus_dome_evolution_raw_sweep.py    # Mound→dome morphological test
-│   │   ├── tumulus_dome_evolution_test.py         # Mound→dome evolution (validated)
+│   │   ├── tumulus_dome_evolution_test.py         # Mound→dome evolution context filter
 │   │   ├── unit_sweep_fill.py                     # Unit sensitivity sweep
 │   │   ├── unit_sweep_montecarlo.py               # Monte Carlo unit sweep
 │   │   ├── tier_logsweep_sensitivity.py           # Log-scale threshold sweep
@@ -118,7 +120,7 @@ gerizim-paper-a/
 │   ├── scripts/
 │   │   ├── unesco_corpus.py                # Canonical UNESCO data loader
 │   │   ├── fetch_extended.py               # Fetch extended descriptions from UNESCO
-│   │   ├── fetch_wikidata_q180987.py       # Fetch / validate Wikidata Q180987 stupa corpus
+│   │   ├── fetch_wikidata_q180987.py       # Fetch / audit Wikidata Q180987 stupa corpus
 │   │   ├── fetch_osm_stupas.py             # Fetch OSM stupa features via Overpass API
 │   │   └── fetch_owtrad_silk_road.py       # Download and parse OWTRAD route datasets
 │   └── store/
@@ -135,7 +137,7 @@ gerizim-paper-a/
 │       │   ├── owtrad_tier_report.txt      # Tier analysis report
 │       │   ├── maritime_routes.csv         # Curated maritime Silk Road polylines
 │       │   └── overland_trunk.csv          # Curated overland trunk route
-│       └── wikidata/                       # (empty — P1435 corpus removed in v1.2.0)
+│       └── wikidata/                       # (empty; P1435 corpus removed in v1.2.0)
 │
 ├── supplementary/
 │   ├── audit/                        # Keyword-classification and tier audit files
@@ -302,11 +304,11 @@ Licence (ODbL 1.0).
 
 ## Manuscript
 
-The manuscript targets *Journal of Archaeological Science: Reports* (JAS Reports).
+The manuscript is journal-neutral and is not currently framed for a specific venue.
 
 - **Source:** `manuscript/paper_a_primary.tex`
 - **Compiled PDF:** `manuscript/paper_a_primary.pdf`
-- **Macros:** `manuscript/generated_macros.tex` — pipeline-emitted numerical values, annotated with the script that produced each value
+- **Macros:** `manuscript/generated_macros.tex`, pipeline-emitted numerical values annotated with the script that produced each value
 
 All statistical results are embedded as LaTeX macros imported from
 `generated_macros.tex`. The PDF can be compiled without running any code,
@@ -333,4 +335,4 @@ If you use this code or data, please cite:
 
 ## Contact
 
-Seth Tenenbaum — sethtenenbaum1@gmail.com
+Seth Tenenbaum: sethtenenbaum1@gmail.com
